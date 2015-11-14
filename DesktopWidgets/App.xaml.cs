@@ -9,6 +9,7 @@ namespace DesktopWidgets
     public partial class App : Application
     {
         private static bool SuccessfullyLoaded;
+        public static HelperWindow HelperWindow;
 
         public App()
         {
@@ -18,6 +19,8 @@ namespace DesktopWidgets
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            HelperWindow = new HelperWindow();
 
             SuccessfullyLoaded = true;
         }

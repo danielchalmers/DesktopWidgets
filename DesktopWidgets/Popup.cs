@@ -14,7 +14,10 @@ namespace DesktopWidgets
         {
             try
             {
-                return MessageBox.Show(text, Resources.AppName, button, image, defaultButton);
+                App.HelperWindow.Show();
+                var msg = MessageBox.Show(App.HelperWindow, text, Resources.AppName, button, image, defaultButton);
+                App.HelperWindow.Hide();
+                return msg;
             }
             catch
             {
