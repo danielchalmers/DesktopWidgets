@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -7,7 +6,7 @@ using DesktopWidgets.Commands;
 
 namespace DesktopWidgets.ViewModel
 {
-    public abstract class WidgetViewModelBase : INotifyPropertyChanged
+    public abstract class WidgetViewModelBase : ViewModelBase
     {
         private readonly DispatcherTimer OnTopForceTimer;
         private readonly WidgetSettings Settings;
@@ -47,13 +46,6 @@ namespace DesktopWidgets.ViewModel
 
         public ICommand MouseDownCommand { get; private set; }
         public ICommand LocationChangedCommand { get; private set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void RaisePropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
 
         private void MouseDown(object parameter)
         {

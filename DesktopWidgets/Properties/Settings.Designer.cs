@@ -70,5 +70,29 @@ namespace DesktopWidgets.Properties {
                 this["OptionsIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("550")]
+        public double ManageWidgetsHeight {
+            get {
+                return ((double)(this["ManageWidgetsHeight"]));
+            }
+            set {
+                this["ManageWidgetsHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public double ManageWidgetsWidth {
+            get {
+                return ((double)(this["ManageWidgetsWidth"]));
+            }
+            set {
+                this["ManageWidgetsWidth"] = value;
+            }
+        }
     }
 }

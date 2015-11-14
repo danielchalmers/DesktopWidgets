@@ -118,11 +118,17 @@
     </Compile>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Converters.cs" />
+    <Compile Include="ManageWidgets.xaml.cs">
+      <DependentUpon>ManageWidgets.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <Compile Include="OptionsPages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyView.xaml.cs">
+      <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="OptionsPages\Advanced.xaml.cs">
       <DependentUpon>Advanced.xaml</DependentUpon>
@@ -134,6 +140,8 @@
     <Compile Include="UserControls\Clock.xaml.cs">
       <DependentUpon>Clock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\WidgetView.xaml.cs">
       <DependentUpon>WidgetView.xaml</DependentUpon>
     </Compile>
@@ -181,11 +189,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ManageWidgets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Options.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="OptionsPages\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PropertyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

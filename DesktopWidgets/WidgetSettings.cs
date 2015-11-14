@@ -36,6 +36,11 @@ namespace DesktopWidgets
         public bool BorderEnabled { get; set; } = true;
         public bool SnapToScreenEdges { get; set; } = true;
         //public bool AnimationEase { get; set; } = true;
+
+        public override string ToString()
+        {
+            return WidgetHelper.GetWidgetName(Guid);
+        }
     }
 
     public class WidgetClockSettings : WidgetSettings

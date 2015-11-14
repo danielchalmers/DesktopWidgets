@@ -51,7 +51,7 @@ namespace DesktopWidgets
 
             foreach (var settings in WidgetCfg.Widgets.Where(x => !x.Disabled))
             {
-                var widgetView = new WidgetView();
+                var widgetView = new WidgetView(settings.Guid);
 
                 if (settings is WidgetClockSettings)
                 {
@@ -91,14 +91,19 @@ namespace DesktopWidgets
                 Current.Shutdown();
         }
 
-        private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
+        private void menuItemManageWidgets_OnClick(object sender, RoutedEventArgs e)
         {
-            Current.Shutdown();
+            new ManageWidgets().Show();
         }
 
         private void menuItemOptions_OnClick(object sender, RoutedEventArgs e)
         {
             new Options().ShowDialog();
+        }
+
+        private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Current.Shutdown();
         }
     }
 }

@@ -57,4 +57,33 @@ namespace DesktopWidgets
             throw new NotImplementedException();
         }
     }
+
+    public class SelectedWidgetToEnableDisableNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var settings = value as WidgetSettings;
+            if (settings == null)
+                return Binding.DoNothing;
+            return settings.Disabled ? "Enable" : "Disable";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class NotNullToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value != null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
