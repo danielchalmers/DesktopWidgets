@@ -34,6 +34,7 @@ namespace DesktopWidgets
         public bool OnTop { get; set; } = true;
         public bool ForceOnTop { get; set; } = true;
         public bool BorderEnabled { get; set; } = true;
+        public bool SnapToScreenEdges { get; set; } = true;
         //public bool AnimationEase { get; set; } = true;
     }
 

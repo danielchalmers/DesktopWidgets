@@ -105,6 +105,7 @@
     <Compile Include="ViewModel\WidgetViewModelBase.cs" />
     <Compile Include="WidgetSettings.cs" />
     <Compile Include="WidgetHelper.cs" />
+    <Compile Include="WindowHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

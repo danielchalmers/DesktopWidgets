@@ -17,6 +17,7 @@ namespace DesktopWidgets.ViewModel
         protected WidgetViewModelBase(Guid guid)
         {
             MouseDownCommand = new DelegateCommand(MouseDown);
+            LocationChangedCommand = new DelegateCommand(LocationChanged);
             Settings = WidgetHelper.GetWidgetSettingsFromGuid(guid);
             if (Settings.ForceOnTop)
             {
@@ -45,6 +46,7 @@ namespace DesktopWidgets.ViewModel
         }
 
         public ICommand MouseDownCommand { get; private set; }
+        public ICommand LocationChangedCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,6 +59,12 @@ namespace DesktopWidgets.ViewModel
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
                 (parameter as Window).DragMove();
+        }
+
+        private void LocationChanged(object parameter)
+        {
+            if (Settings.SnapToScreenEdges)
+                (parameter as Window).SnapToScreenEdges();
         }
     }
 }

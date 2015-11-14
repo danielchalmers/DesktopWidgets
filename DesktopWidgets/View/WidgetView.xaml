@@ -13,6 +13,10 @@
             <command:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="LocationChanged">
+            <command:EventToCommand Command="{Binding LocationChangedCommand, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
         <local:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
