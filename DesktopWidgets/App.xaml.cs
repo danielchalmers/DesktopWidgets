@@ -1,5 +1,10 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Threading;
+using DesktopWidgets.UserControls;
+using DesktopWidgets.View;
+using DesktopWidgets.ViewModel;
 using Hardcodet.Wpf.TaskbarNotification;
 
 namespace DesktopWidgets
@@ -12,6 +17,8 @@ namespace DesktopWidgets
         private static bool SuccessfullyLoaded;
         public static HelperWindow HelperWindow;
         public static TaskbarIcon TrayIcon;
+        public static WidgetConfig WidgetCfg;
+        public static ObservableCollection<WidgetView> WidgetViews;
 
         public App()
         {
@@ -24,9 +31,37 @@ namespace DesktopWidgets
 
             HelperWindow = new HelperWindow();
             SettingsHelper.UpgradeSettings();
+            SettingsHelper.LoadSettings();
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
 
+            LoadWidgets();
+
             SuccessfullyLoaded = true;
+        }
+
+        private static void LoadWidgets()
+        {
+            if (WidgetViews != null)
+                foreach (var view in WidgetViews)
+                    view.Close();
+            WidgetViews = new ObservableCollection<WidgetView>();
+
+            if (WidgetCfg == null)
+                WidgetCfg = new WidgetConfig {Widgets = new ObservableCollection<WidgetSettings>()};
+
+            foreach (var settings in WidgetCfg.Widgets.Where(x => !x.Disabled))
+            {
+                var widgetView = new WidgetView();
+
+                if (settings is WidgetClockSettings)
+                {
+                    widgetView.DataContext = new ClockViewModel(settings.Guid);
+                    widgetView.MainContentContainer.Child = new Clock();
+                }
+
+                widgetView.Show();
+                WidgetViews.Add(widgetView);
+            }
         }
 
         protected override void OnExit(ExitEventArgs e)

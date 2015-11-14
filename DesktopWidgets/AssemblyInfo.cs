@@ -13,7 +13,10 @@ namespace DesktopWidgets
         public static Version Version { get; } = Assembly.GetExecutingAssembly().GetName().Version;
         public static string Copyright { get; } = GetAssemblyAttribute<AssemblyCopyrightAttribute>(a => a.Copyright);
         public static string Title { get; } = GetAssemblyAttribute<AssemblyTitleAttribute>(a => a.Title);
-        public static string Description { get; } = GetAssemblyAttribute<AssemblyDescriptionAttribute>(a => a.Description);
+
+        public static string Description { get; } =
+            GetAssemblyAttribute<AssemblyDescriptionAttribute>(a => a.Description);
+
         public static string Guid { get; } = GetAssemblyAttribute<GuidAttribute>(a => a.Value);
 
         private static string GetAssemblyAttribute<T>(Func<T, string> value)

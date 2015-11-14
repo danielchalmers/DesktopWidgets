@@ -2,6 +2,7 @@
 
 using System.Windows;
 using DesktopWidgets.Properties;
+using Newtonsoft.Json;
 
 #endregion
 
@@ -20,8 +21,17 @@ namespace DesktopWidgets
             }
         }
 
+        public static void LoadSettings()
+        {
+            App.WidgetCfg = JsonConvert.DeserializeObject<WidgetConfig>(Settings.Default.Widgets,
+                new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
+        }
+
         public static void SaveSettings()
         {
+            Settings.Default.Widgets = JsonConvert.SerializeObject(App.WidgetCfg,
+                new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
+
             Settings.Default.Save();
         }
 
