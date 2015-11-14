@@ -21,6 +21,7 @@ namespace DesktopWidgets
             base.OnStartup(e);
 
             HelperWindow = new HelperWindow();
+            SettingsHelper.UpgradeSettings();
 
             SuccessfullyLoaded = true;
         }
@@ -30,6 +31,8 @@ namespace DesktopWidgets
             try
             {
                 base.OnExit(e);
+
+                SettingsHelper.SaveSettings();
             }
             catch
             {
