@@ -95,5 +95,10 @@ namespace DesktopWidgets
         {
             Current.Shutdown();
         }
+
+        private void menuItemOptions_OnClick(object sender, RoutedEventArgs e)
+        {
+            new Options().ShowDialog();
+        }
     }
 }

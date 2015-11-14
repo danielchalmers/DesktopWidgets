@@ -1,0 +1,107 @@
+﻿<Window x:Class="DesktopWidgets.Options" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopWidgets" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:p="clr-namespace:DesktopWidgets.Properties" mc:Ignorable="d" Title="Options" Width="600"
+        Height="500"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="OptionsStyle">
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                    <Setter Property="Margin" Value="0,10,0,5" />
+                    <Setter Property="Padding" Value="0" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Height" Value="23" />
+                </Style>
+                <Style TargetType="xctk:ColorPicker">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Height" Value="Auto" />
+                </Style>
+                <Style TargetType="CheckBox">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="special">
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="Margin" Value="0,10,0,5" />
+                            <Setter Property="Padding" Value="0" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="Slider">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="AutoToolTipPlacement" Value="TopLeft" />
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="6,-6,6,-6" />
+                    <Setter Property="Height" Value="23" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="15" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="NavBar" Grid.Column="1" Grid.Row="1" SelectionChanged="NavBar_OnSelectionChanged"
+                 SelectedIndex="{Binding Path=OptionsIndex, Source={x:Static p:Settings.Default}}">
+            <ListBox.Resources>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="15,0,15,0" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Height" Value="48" />
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+
+        <ScrollViewer Grid.Column="3" Grid.Row="1" VerticalScrollBarVisibility="Visible">
+            <Frame x:Name="OptionsFrame" NavigationUIVisibility="Hidden" Style="{StaticResource OptionsStyle}"
+                   LoadCompleted="frame_LoadCompleted" Margin="0,-10,10,0" />
+        </ScrollViewer>
+
+        <Grid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" IsDefault="True" />
+            <Button Grid.Column="3" Content="Cancel" Click="btnCancel_Click"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsCancel="True" />
+        </Grid>
+    </Grid>
+</Window>

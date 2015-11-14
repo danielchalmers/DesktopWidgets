@@ -1,0 +1,21 @@
+﻿<Page x:Class="DesktopWidgets.OptionsPages.About"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
+      xmlns:properties="clr-namespace:DesktopWidgets.Properties"
+      mc:Ignorable="d"
+      Title="About">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="10,10,10,0" Grid.Row="0"
+                   Text="{x:Static properties:Resources.AppName}" FontSize="24" />
+        <TextBox Grid.Row="1" x:Name="txtDescription" Background="Transparent" BorderThickness="0" IsReadOnly="True"
+                 TextWrapping="Wrap" Height="Auto" />
+    </Grid>
+</Page>

@@ -6,6 +6,8 @@
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Application.Resources>
         <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
+            <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
+            <Separator />
             <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
         </x:Array>
         <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />

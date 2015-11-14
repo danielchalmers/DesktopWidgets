@@ -1,0 +1,11 @@
+﻿{0} ({1}).
+
+
+Links & Credit:
+ Issues: {2}
+ Changelog: {3}
+
+ Icon made by Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+
+
+{4}

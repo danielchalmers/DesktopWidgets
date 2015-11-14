@@ -61,11 +61,48 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} ({1}).
+        ///
+        ///
+        ///Links &amp; Credit:
+        /// Issues: {2}
+        /// Changelog: {3}
+        ///
+        /// Icon made by Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+        ///
+        ///
+        ///{4}.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DesktopWidgets.
         /// </summary>
         public static string AppName {
             get {
                 return ResourceManager.GetString("AppName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets/commits.
+        /// </summary>
+        public static string GitHubCommits {
+            get {
+                return ResourceManager.GetString("GitHubCommits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets/issues.
+        /// </summary>
+        public static string GitHubIssues {
+            get {
+                return ResourceManager.GetString("GitHubIssues", resourceCulture);
             }
         }
     }

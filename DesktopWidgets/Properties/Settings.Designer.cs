@@ -46,5 +46,29 @@ namespace DesktopWidgets.Properties {
                 this["Widgets"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableAdvancedMode {
+            get {
+                return ((bool)(this["EnableAdvancedMode"]));
+            }
+            set {
+                this["EnableAdvancedMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int OptionsIndex {
+            get {
+                return ((int)(this["OptionsIndex"]));
+            }
+            set {
+                this["OptionsIndex"] = value;
+            }
+        }
     }
 }

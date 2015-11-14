@@ -117,7 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="About" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\About.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="AppName" xml:space="preserve">
     <value>DesktopWidgets</value>
+  </data>
+  <data name="GitHubCommits" xml:space="preserve">
+    <value>https://github.com/danielchalmers/DesktopWidgets/commits</value>
+  </data>
+  <data name="GitHubIssues" xml:space="preserve">
+    <value>https://github.com/danielchalmers/DesktopWidgets/issues</value>
   </data>
 </root>
