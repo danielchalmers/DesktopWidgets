@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace DesktopWidgets
 {
@@ -10,6 +11,7 @@ namespace DesktopWidgets
     {
         private static bool SuccessfullyLoaded;
         public static HelperWindow HelperWindow;
+        public static TaskbarIcon TrayIcon;
 
         public App()
         {
@@ -22,6 +24,7 @@ namespace DesktopWidgets
 
             HelperWindow = new HelperWindow();
             SettingsHelper.UpgradeSettings();
+            TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
 
             SuccessfullyLoaded = true;
         }
@@ -51,6 +54,11 @@ namespace DesktopWidgets
             e.Handled = true;
             if (!SuccessfullyLoaded)
                 Current.Shutdown();
+        }
+
+        private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Current.Shutdown();
         }
     }
 }
