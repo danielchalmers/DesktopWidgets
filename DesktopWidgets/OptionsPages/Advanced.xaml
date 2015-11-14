@@ -9,7 +9,7 @@
       mc:Ignorable="d"
       Title="Advanced">
 
-    <xctk:PropertyGrid AutoGenerateProperties="true"
+    <xctk:PropertyGrid Margin="0,10,0,0" AutoGenerateProperties="true"
                        SelectedObject="{Binding Source={x:Static properties:Settings.Default}}"
                        IsCategorized="False"
                        ShowSortOptions="False" ShowSummary="False" ShowTitle="False" ShowSearchBox="True"
