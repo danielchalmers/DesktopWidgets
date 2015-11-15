@@ -16,6 +16,7 @@ namespace DesktopWidgets
         public Thickness Padding { get; set; } = new Thickness(2);
         //public Point ScreenDpi = new Point(96, 96);
         public string Name { get; set; } = "";
+        public bool ShowName { get; set; } = true;
         public bool Disabled { get; set; } = false;
         public Guid Guid { get; set; } = Guid.NewGuid();
         public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");

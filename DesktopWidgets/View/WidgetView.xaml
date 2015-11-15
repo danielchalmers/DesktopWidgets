@@ -20,6 +20,9 @@
     </i:Interaction.Triggers>
     <Window.Resources>
         <local:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
+        <local:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
+        <local:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
+        <local:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -50,9 +53,29 @@
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
             <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
+        <Style x:Key="NameTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Text" Value="{Binding Settings.Name}" />
+            <Setter Property="Visibility">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
+                        <Binding Path="Settings.Name"
+                                 Converter="{StaticResource StringToIsNotNullOrWhiteSpaceConverter}" />
+                        <Binding Path="Settings.ShowName" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderStyle}" />
+    <StackPanel>
+        <TextBlock Style="{StaticResource NameTextBlockStyle}" />
+        <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderStyle}" />
+    </StackPanel>
 </Window>
