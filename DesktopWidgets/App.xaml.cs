@@ -58,6 +58,11 @@ namespace DesktopWidgets
                     widgetView.DataContext = new TimeClockViewModel(settings.Guid);
                     widgetView.MainContentContainer.Child = new Clock();
                 }
+                if (settings is WidgetCountdownClockSettings)
+                {
+                    widgetView.DataContext = new CountdownClockViewModel(settings.Guid);
+                    widgetView.MainContentContainer.Child = new CountdownClock();
+                }
 
                 widgetView.Show();
                 WidgetViews.Add(widgetView);

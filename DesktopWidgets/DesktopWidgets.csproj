@@ -137,9 +137,13 @@
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsHelper.cs" />
+    <Compile Include="UserControls\CountdownClock.xaml.cs">
+      <DependentUpon>CountdownClock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Clock.xaml.cs">
       <DependentUpon>Clock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\CountdownClockViewModel.cs" />
     <Compile Include="ViewModel\TimeClockViewModel.cs" />
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
     <Compile Include="ViewModel\SelectItemViewModel.cs" />
@@ -215,6 +219,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="OptionsPages\General.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\CountdownClock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

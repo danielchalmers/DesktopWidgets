@@ -86,4 +86,35 @@ namespace DesktopWidgets
             throw new NotImplementedException();
         }
     }
+
+    public class DateTimeToCountdownText : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                if (value[0] == null || value[1] == null)
+                    return Binding.DoNothing;
+                var val = System.Convert.ToDateTime(value[0]);
+                var settings = value[1] as WidgetCountdownClockSettings;
+                if (settings == null)
+                    return Binding.DoNothing;
+
+                var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
+                var ts = settings.EndDateTime - val;
+                return ts.TotalSeconds > 0
+                    ? ts.ToString(format)
+                    : TimeSpan.FromSeconds(0).ToString(format);
+            }
+            catch
+            {
+                return Binding.DoNothing;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
