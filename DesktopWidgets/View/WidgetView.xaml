@@ -40,22 +40,19 @@
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
-            <Setter Property="Padding" Value="{Binding Settings.Padding}" />
             <Setter Property="CornerRadius" Value="4" />
             <Setter Property="BorderThickness"
                     Value="{Binding Settings.BorderEnabled, Converter={StaticResource BooleanToThicknessConverter}}" />
+        </Style>
+        <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
+            <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
+            <Setter Property="FontSize" Value="{Binding Settings.FontSize}" />
+            <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
+            <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
     </Window.Resources>
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderStyle}">
-        <Border.Resources>
-            <Style TargetType="{x:Type UserControl}">
-                <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
-                <Setter Property="FontSize" Value="{Binding Settings.FontSize}" />
-                <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
-            </Style>
-        </Border.Resources>
-    </Border>
+    <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderStyle}" />
 </Window>

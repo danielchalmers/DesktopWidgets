@@ -13,7 +13,7 @@ namespace DesktopWidgets
 
     public class WidgetSettings
     {
-        public Thickness Padding = new Thickness(2);
+        public Thickness Padding { get; set; } = new Thickness(2);
         //public Point ScreenDpi = new Point(96, 96);
         public string Name { get; set; } = "";
         public bool Disabled { get; set; } = false;

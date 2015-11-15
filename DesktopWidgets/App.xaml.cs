@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using DesktopWidgets.UserControls;
 using DesktopWidgets.View;
@@ -52,17 +53,24 @@ namespace DesktopWidgets
             foreach (var settings in WidgetCfg.Widgets.Where(x => !x.Disabled))
             {
                 var widgetView = new WidgetView(settings.Guid);
+                var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
+                UserControl userControl = null;
+                object dataContext = null;
 
                 if (settings is WidgetTimeClockSettings)
                 {
-                    widgetView.DataContext = new TimeClockViewModel(settings.Guid);
-                    widgetView.MainContentContainer.Child = new Clock();
+                    dataContext = new TimeClockViewModel(settings.Guid);
+                    userControl = new Clock();
                 }
                 if (settings is WidgetCountdownClockSettings)
                 {
-                    widgetView.DataContext = new CountdownClockViewModel(settings.Guid);
-                    widgetView.MainContentContainer.Child = new CountdownClock();
+                    dataContext = new CountdownClockViewModel(settings.Guid);
+                    userControl = new CountdownClock();
                 }
+
+                userControl.Style = userControlStyle;
+                widgetView.DataContext = dataContext;
+                widgetView.MainContentContainer.Child = userControl;
 
                 widgetView.Show();
                 WidgetViews.Add(widgetView);
