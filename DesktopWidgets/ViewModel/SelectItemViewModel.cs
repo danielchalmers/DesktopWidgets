@@ -16,7 +16,7 @@ namespace DesktopWidgets.ViewModel
             OKCommand = new DelegateCommand(OK);
         }
 
-        private ObservableCollection<object> ItemsList { get; set; }
+        public ObservableCollection<object> ItemsList { get; set; }
         public ICommand OKCommand { get; set; }
 
         public object SelectedItem

@@ -5,19 +5,18 @@ namespace DesktopWidgets.ViewModel
 {
     public class ClockViewModel : WidgetViewModelBase
     {
+        private readonly WidgetClockSettings _settings;
         private DateTime _currentTime;
 
         public ClockViewModel(Guid guid) : base(guid)
         {
-            Settings = WidgetHelper.GetWidgetSettingsFromGuid(guid) as WidgetClockSettings;
-            if (Settings == null)
+            _settings = WidgetHelper.GetWidgetSettingsFromGuid(guid) as WidgetClockSettings;
+            if (_settings == null)
                 return;
-            var clockTimer = new DispatcherTimer {Interval = Settings.TickInterval};
+            var clockTimer = new DispatcherTimer {Interval = _settings.TickInterval};
             clockTimer.Tick += delegate { CurrentTime = DateTime.Now; };
             clockTimer.Start();
         }
-
-        public WidgetClockSettings Settings { get; }
 
         public DateTime CurrentTime
         {

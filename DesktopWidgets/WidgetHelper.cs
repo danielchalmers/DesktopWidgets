@@ -41,7 +41,7 @@ namespace DesktopWidgets
             switch (type)
             {
                 case "Clock":
-                    newWidget = new WidgetClockSettings();
+                    newWidget = new WidgetTimeClockSettings();
                     break;
                 default:
                     newWidget = new WidgetSettings();

@@ -53,9 +53,9 @@ namespace DesktopWidgets
             {
                 var widgetView = new WidgetView(settings.Guid);
 
-                if (settings is WidgetClockSettings)
+                if (settings is WidgetTimeClockSettings)
                 {
-                    widgetView.DataContext = new ClockViewModel(settings.Guid);
+                    widgetView.DataContext = new TimeClockViewModel(settings.Guid);
                     widgetView.MainContentContainer.Child = new Clock();
                 }
 

@@ -140,6 +140,7 @@
     <Compile Include="UserControls\Clock.xaml.cs">
       <DependentUpon>Clock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\TimeClockViewModel.cs" />
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
     <Compile Include="ViewModel\SelectItemViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
