@@ -59,7 +59,7 @@ namespace DesktopWidgets.ViewModel
 
         private void NewWidget(object parameter)
         {
-            WidgetHelper.NewWidget("Clock"); // placeholder.
+            WidgetHelper.NewWidget();
         }
 
         private void EditWidget(object parameter)

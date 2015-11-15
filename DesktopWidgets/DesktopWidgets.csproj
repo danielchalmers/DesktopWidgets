@@ -141,7 +141,11 @@
       <DependentUpon>Clock.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
+    <Compile Include="ViewModel\SelectItemViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\SelectItem.xaml.cs">
+      <DependentUpon>SelectItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WidgetView.xaml.cs">
       <DependentUpon>WidgetView.xaml</DependentUpon>
     </Compile>
@@ -214,6 +218,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Clock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SelectItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

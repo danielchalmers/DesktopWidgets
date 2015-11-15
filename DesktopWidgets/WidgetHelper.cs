@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using DesktopWidgets.View;
@@ -7,6 +8,8 @@ namespace DesktopWidgets
 {
     public static class WidgetHelper
     {
+        public static readonly List<string> WidgetNames = new List<string> {"Clock"};
+
         public static WidgetSettings GetWidgetSettingsFromGuid(Guid guid)
         {
             return App.WidgetCfg.Widgets.First(v => v.Guid == guid);
@@ -25,7 +28,14 @@ namespace DesktopWidgets
             return $"{name}";
         }
 
-        public static void NewWidget(string type)
+        public static void NewWidget()
+        {
+            var dialog = new SelectItem(WidgetNames);
+            dialog.ShowDialog();
+            AddWidget((string) dialog.SelectedItem);
+        }
+
+        public static void AddWidget(string type)
         {
             WidgetSettings newWidget;
             switch (type)
