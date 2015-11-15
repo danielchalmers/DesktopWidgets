@@ -47,7 +47,7 @@ namespace DesktopWidgets
     public class WidgetClockSettings : WidgetSettings
     {
         public TimeSpan TickInterval { get; set; } = TimeSpan.FromMilliseconds(100);
-        public string TimeFormat { get; set; }
+        public string TimeFormat { get; set; } = "hh:mm:ss";
     }
 
     public class WidgetTimeClockSettings : WidgetClockSettings
@@ -56,11 +56,6 @@ namespace DesktopWidgets
 
     public class WidgetCountdownClockSettings : WidgetClockSettings
     {
-        public WidgetCountdownClockSettings()
-        {
-            TimeFormat = "hh:mm:ss";
-        }
-
         public DateTime EndDateTime { get; set; } = DateTime.Now;
     }
 }
