@@ -9,7 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         mc:Ignorable="d"
-        Title="Manage Sidebars"
+        Title="Manage Widgets"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsHeight, Mode=TwoWay}"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsWidth, Mode=TwoWay}"
         MinHeight="482" MinWidth="535"
