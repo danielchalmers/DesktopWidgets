@@ -58,4 +58,12 @@ namespace DesktopWidgets
     {
         public DateTime EndDateTime { get; set; } = DateTime.Now;
     }
+
+    public class WidgetStopwatchClockSettings : WidgetClockSettings
+    {
+        public WidgetStopwatchClockSettings()
+        {
+            TimeFormat = "mm:ss.fff";
+        }
+    }
 }

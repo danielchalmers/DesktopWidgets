@@ -157,4 +157,47 @@ namespace DesktopWidgets
             throw new NotImplementedException();
         }
     }
+
+    public class BoolToStartStopTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((bool) value) ? "Stop" : "Start";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DateTimeToElapsedTimeTextConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                if (value[0] == null || value[1] == null)
+                    return Binding.DoNothing;
+                var currentTime = System.Convert.ToDateTime(value[0]);
+                var startTime = System.Convert.ToDateTime(value[1]);
+                var settings = value[2] as WidgetStopwatchClockSettings;
+                if (settings == null)
+                    return Binding.DoNothing;
+
+                var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
+                var ts = startTime - currentTime;
+                return ts.ToString(format);
+            }
+            catch
+            {
+                return Binding.DoNothing;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

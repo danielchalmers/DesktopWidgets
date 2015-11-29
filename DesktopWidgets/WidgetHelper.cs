@@ -8,7 +8,7 @@ namespace DesktopWidgets
 {
     public static class WidgetHelper
     {
-        public static readonly List<string> WidgetNames = new List<string> {"Clock", "Countdown Clock"};
+        public static readonly List<string> WidgetNames = new List<string> {"Clock", "Countdown Clock", "Stopwatch"};
 
         public static WidgetSettings GetWidgetSettingsFromGuid(Guid guid)
         {
@@ -45,6 +45,9 @@ namespace DesktopWidgets
                     break;
                 case "Countdown Clock":
                     newWidget = new WidgetCountdownClockSettings();
+                    break;
+                case "Stopwatch":
+                    newWidget = new WidgetStopwatchClockSettings();
                     break;
                 default:
                     newWidget = new WidgetSettings();

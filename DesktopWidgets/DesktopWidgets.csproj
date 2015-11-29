@@ -137,12 +137,16 @@
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsHelper.cs" />
+    <Compile Include="UserControls\StopwatchClock.xaml.cs">
+      <DependentUpon>StopwatchClock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\CountdownClock.xaml.cs">
       <DependentUpon>CountdownClock.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Clock.xaml.cs">
       <DependentUpon>Clock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\StopwatchClockViewModel.cs" />
     <Compile Include="ViewModel\CountdownClockViewModel.cs" />
     <Compile Include="ViewModel\TimeClockViewModel.cs" />
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
@@ -219,6 +223,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="OptionsPages\General.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\StopwatchClock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -67,6 +67,11 @@ namespace DesktopWidgets
                     dataContext = new CountdownClockViewModel(settings.Guid);
                     userControl = new CountdownClock();
                 }
+                if (settings is WidgetStopwatchClockSettings)
+                {
+                    dataContext = new StopwatchClockViewModel(settings.Guid);
+                    userControl = new StopwatchClock();
+                }
 
                 userControl.Style = userControlStyle;
                 widgetView.DataContext = dataContext;
