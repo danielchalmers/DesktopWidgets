@@ -27,6 +27,8 @@ namespace DesktopWidgets
         public double BorderOpacity { get; set; } = 1;
         public double Width { get; set; } = double.NaN;
         public double Height { get; set; } = double.NaN;
+        public double Left { get; set; } = double.NaN;
+        public double Top { get; set; } = double.NaN;
         //public int ShowDelay { get; set; } = 0;
         //public int HideDelay { get; set; } = 0;
         //public int AnimationTime { get; set; } = 150;
