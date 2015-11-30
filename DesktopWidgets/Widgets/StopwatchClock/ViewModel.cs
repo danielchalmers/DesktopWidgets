@@ -13,15 +13,13 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         private DateTime _startTime;
 
-        public ViewModel(WidgetId id) : base(id)
+        public ViewModel(WidgetId id) : base(id, false)
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
             StartStopCommand = new DelegateCommand(StartStop);
-            StartTime = DateTime.Now;
-            CurrentTime = DateTime.Now;
-            Stop();
+            StartTime = CurrentTime;
         }
 
         public Settings Settings { get; }
@@ -63,10 +61,10 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         private void Start()
         {
-            CurrentTime = DateTime.Now;
             StartTime = DateTime.Now;
-            StartClockUpdateTimer();
+            UpdateCurrentTime();
             IsRunning = true;
+            StartClockUpdateTimer();
         }
 
         private void Stop()

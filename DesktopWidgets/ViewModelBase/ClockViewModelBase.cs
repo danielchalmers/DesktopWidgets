@@ -11,14 +11,16 @@ namespace DesktopWidgets.ViewModelBase
         private readonly WidgetClockSettingsBase _settings;
         private DateTime _currentTime;
 
-        public ClockViewModelBase(WidgetId id) : base(id)
+        public ClockViewModelBase(WidgetId id, bool startTicking = true) : base(id)
         {
             _settings = id.GetSettings() as WidgetClockSettingsBase;
             if (_settings == null)
                 return;
             _clockUpdateTimer = new DispatcherTimer {Interval = _settings.TickInterval};
-            _clockUpdateTimer.Tick += delegate { CurrentTime = DateTime.Now; };
-            StartClockUpdateTimer();
+            _clockUpdateTimer.Tick += (sender, args) => UpdateCurrentTime();
+            UpdateCurrentTime();
+            if (startTicking)
+                StartClockUpdateTimer();
         }
 
         public DateTime CurrentTime
@@ -32,6 +34,11 @@ namespace DesktopWidgets.ViewModelBase
                     RaisePropertyChanged(nameof(CurrentTime));
                 }
             }
+        }
+
+        public void UpdateCurrentTime()
+        {
+            CurrentTime = DateTime.Now;
         }
 
         public void StartClockUpdateTimer()
