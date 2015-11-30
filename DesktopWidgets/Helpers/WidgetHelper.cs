@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using DesktopWidgets.Classes;
 using DesktopWidgets.View;
 using DesktopWidgets.Widgets.TimeClock;
@@ -11,7 +13,12 @@ namespace DesktopWidgets.Helpers
 {
     public static class WidgetHelper
     {
-        public static readonly List<string> WidgetNames = new List<string> {"Clock", "Countdown Clock", "Stopwatch"};
+        private static readonly List<string> AvailableWidgets = new List<string>
+        {
+            Metadata.FriendlyName,
+            Widgets.CountdownClock.Metadata.FriendlyName,
+            Widgets.StopwatchClock.Metadata.FriendlyName
+        };
 
         public static WidgetSettings GetWidgetSettingsFromGuid(Guid guid)
         {
@@ -33,33 +40,33 @@ namespace DesktopWidgets.Helpers
 
         public static void NewWidget()
         {
-            var dialog = new SelectItem(WidgetNames);
+            var dialog =
+                new SelectItem(AvailableWidgets);
             dialog.ShowDialog();
             AddWidget((string) dialog.SelectedItem);
         }
 
-        public static void AddWidget(string type)
+        private static void AddWidget(string type)
         {
             WidgetSettings newWidget;
             switch (type)
             {
-                case "Clock":
+                case Metadata.FriendlyName:
                     newWidget = new Settings();
                     break;
-                case "Countdown Clock":
+                case Widgets.CountdownClock.Metadata.FriendlyName:
                     newWidget = new Widgets.CountdownClock.Settings();
                     break;
-                case "Stopwatch":
+                case Widgets.StopwatchClock.Metadata.FriendlyName:
                     newWidget = new Widgets.StopwatchClock.Settings();
                     break;
                 default:
-                    newWidget = new WidgetSettings();
-                    break;
+                    return;
             }
             App.WidgetsSettingsStore.Widgets.Add(newWidget);
         }
 
-        public static void DisableWidget(Guid guid)
+        private static void DisableWidget(Guid guid)
         {
             var settings = GetWidgetSettingsFromGuid(guid);
             if (settings.Disabled)
@@ -70,7 +77,7 @@ namespace DesktopWidgets.Helpers
             //App.WidgetViews.Remove(view);
         }
 
-        public static void EnableWidget(Guid guid)
+        private static void EnableWidget(Guid guid)
         {
             var settings = GetWidgetSettingsFromGuid(guid);
             if (!settings.Disabled)
@@ -102,6 +109,55 @@ namespace DesktopWidgets.Helpers
         public static void EditWidget(Guid guid)
         {
             new PropertyView(GetWidgetSettingsFromGuid(guid)).ShowDialog();
+        }
+
+        public static void LoadWidgets()
+        {
+            if (App.WidgetViews != null)
+                foreach (var view in App.WidgetViews)
+                    view.Close();
+            App.WidgetViews = new ObservableCollection<WidgetView>();
+
+            if (App.WidgetsSettingsStore == null)
+                App.WidgetsSettingsStore = new WidgetsSettingsStore
+                {
+                    Widgets = new ObservableCollection<WidgetSettings>()
+                };
+
+            foreach (var settings in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled))
+            {
+                var widgetView = new WidgetView(settings.Guid);
+                var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
+                UserControl userControl;
+                object dataContext;
+
+                if (settings is Settings)
+                {
+                    dataContext = new Widgets.TimeClock.ViewModel(settings.Guid);
+                    userControl = new ControlView();
+                }
+                else if (settings is Widgets.CountdownClock.Settings)
+                {
+                    dataContext = new Widgets.CountdownClock.ViewModel(settings.Guid);
+                    userControl = new Widgets.CountdownClock.ControlView();
+                }
+                else if (settings is Widgets.StopwatchClock.Settings)
+                {
+                    dataContext = new Widgets.StopwatchClock.ViewModel(settings.Guid);
+                    userControl = new Widgets.StopwatchClock.ControlView();
+                }
+                else
+                {
+                    continue;
+                }
+
+                userControl.Style = userControlStyle;
+                widgetView.DataContext = dataContext;
+                widgetView.MainContentContainer.Child = userControl;
+                App.WidgetViews.Add(widgetView);
+
+                widgetView.Show();
+            }
         }
     }
 }

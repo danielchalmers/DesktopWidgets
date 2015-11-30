@@ -30,22 +30,6 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public sealed class BooleanToVisibilityConverter : BooleanConverter<Visibility>
-    {
-        public BooleanToVisibilityConverter() :
-            base(Visibility.Visible, Visibility.Collapsed)
-        {
-        }
-    }
-
-    public sealed class BooleanToInverseConverter : BooleanConverter<bool>
-    {
-        public BooleanToInverseConverter() :
-            base(false, true)
-        {
-        }
-    }
-
     public class BooleanToThicknessConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
