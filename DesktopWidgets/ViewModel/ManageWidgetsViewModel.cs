@@ -66,18 +66,18 @@ namespace DesktopWidgets.ViewModel
 
         private void EditWidget(object parameter)
         {
-            WidgetHelper.EditWidget(SelectedWidget.ID);
+            SelectedWidget.ID.Edit();
         }
 
         private void DisableWidget(object parameter)
         {
-            WidgetHelper.ToggleWidgetEnabled(SelectedWidget.ID);
+            SelectedWidget.ID.ToggleEnable();
             DeselectAll();
         }
 
         private void RemoveWidget(object parameter)
         {
-            WidgetHelper.RemoveWidget(SelectedWidget.ID, true);
+            SelectedWidget.ID.Remove(true);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         public ViewModel(WidgetId id) : base(id)
         {
-            Settings = WidgetHelper.GetWidgetSettingsFromId(id) as Settings;
+            Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
             StartStopCommand = new DelegateCommand(StartStop);

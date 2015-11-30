@@ -35,7 +35,7 @@ namespace DesktopWidgets.Classes
 
         public override string ToString()
         {
-            return WidgetHelper.GetWidgetName(ID);
+            return ID.GetName();
         }
     }
 }

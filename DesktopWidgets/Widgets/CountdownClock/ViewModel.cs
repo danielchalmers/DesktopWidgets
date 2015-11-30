@@ -8,7 +8,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
     {
         public ViewModel(WidgetId guid) : base(guid)
         {
-            Settings = WidgetHelper.GetWidgetSettingsFromId(guid) as Settings;
+            Settings = guid.GetSettings() as Settings;
             if (Settings == null)
                 return;
         }

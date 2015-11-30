@@ -13,7 +13,7 @@ namespace DesktopWidgets.ViewModelBase
 
         public ClockViewModelBase(WidgetId id) : base(id)
         {
-            _settings = WidgetHelper.GetWidgetSettingsFromId(id) as WidgetClockSettingsBase;
+            _settings = id.GetSettings() as WidgetClockSettingsBase;
             if (_settings == null)
                 return;
             _clockUpdateTimer = new DispatcherTimer {Interval = _settings.TickInterval};

@@ -19,7 +19,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             MouseDownCommand = new DelegateCommand(MouseDown);
             LocationChangedCommand = new DelegateCommand(LocationChanged);
-            Settings = WidgetHelper.GetWidgetSettingsFromId(id);
+            Settings = id.GetSettings();
             if (Settings.ForceOnTop)
             {
                 OnTopForceTimer = new DispatcherTimer();
