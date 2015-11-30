@@ -49,13 +49,13 @@ namespace DesktopWidgets.Windows
             foreach (var be in _pages.SelectMany(BindingOperations.GetSourceUpdatingBindings))
                 be.UpdateSource();
             Settings.Default.Save();
-            DialogResult = true;
+            Close();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Settings.Default.Reload();
-            DialogResult = true;
+            Close();
         }
 
         private void frame_LoadCompleted(object sender, NavigationEventArgs e)
