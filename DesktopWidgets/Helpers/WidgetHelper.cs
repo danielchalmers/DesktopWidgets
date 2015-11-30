@@ -16,7 +16,8 @@ namespace DesktopWidgets.Helpers
         {
             Metadata.FriendlyName,
             Widgets.CountdownClock.Metadata.FriendlyName,
-            Widgets.StopwatchClock.Metadata.FriendlyName
+            Widgets.StopwatchClock.Metadata.FriendlyName,
+            Widgets.Weather.Metadata.FriendlyName
         };
 
         public static WidgetSettings GetSettings(this WidgetId id)
@@ -58,6 +59,9 @@ namespace DesktopWidgets.Helpers
                     break;
                 case Widgets.StopwatchClock.Metadata.FriendlyName:
                     newWidget = new Widgets.StopwatchClock.Settings();
+                    break;
+                case Widgets.Weather.Metadata.FriendlyName:
+                    newWidget = new Widgets.Weather.Settings();
                     break;
                 default:
                     return;
@@ -134,6 +138,11 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.StopwatchClock.ViewModel(id);
                 userControl = new Widgets.StopwatchClock.ControlView();
+            }
+            else if (settings is Widgets.Weather.Settings)
+            {
+                dataContext = new Widgets.Weather.ViewModel(id);
+                userControl = new Widgets.Weather.ControlView();
             }
             else
             {

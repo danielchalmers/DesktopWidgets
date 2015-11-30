@@ -116,6 +116,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\Enumerations.cs" />
+    <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
     <Compile Include="Classes\WidgetClockSettingsBase.cs" />
     <Compile Include="Classes\WidgetID.cs" />
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
@@ -126,6 +128,12 @@
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
     <Compile Include="Widgets\StopwatchClock\Metadata.cs" />
     <Compile Include="Widgets\StopwatchClock\Settings.cs" />
+    <Compile Include="Widgets\Weather\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Weather\Metadata.cs" />
+    <Compile Include="Widgets\Weather\Settings.cs" />
+    <Compile Include="Widgets\Weather\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\Metadata.cs" />
     <Compile Include="Widgets\TimeClock\Settings.cs" />
     <Compile Include="Windows\ManageWidgets.xaml.cs">
@@ -196,6 +204,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -208,6 +217,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Widgets\Weather\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\HelperWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
