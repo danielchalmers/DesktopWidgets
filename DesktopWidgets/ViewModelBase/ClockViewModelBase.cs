@@ -11,9 +11,9 @@ namespace DesktopWidgets.ViewModelBase
         private readonly WidgetClockSettingsBase _settings;
         private DateTime _currentTime;
 
-        public ClockViewModelBase(Guid guid) : base(guid)
+        public ClockViewModelBase(WidgetId id) : base(id)
         {
-            _settings = WidgetHelper.GetWidgetSettingsFromGuid(guid) as WidgetClockSettingsBase;
+            _settings = WidgetHelper.GetWidgetSettingsFromId(id) as WidgetClockSettingsBase;
             if (_settings == null)
                 return;
             _clockUpdateTimer = new DispatcherTimer {Interval = _settings.TickInterval};

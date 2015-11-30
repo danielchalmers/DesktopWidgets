@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.View
 {
@@ -8,12 +8,12 @@ namespace DesktopWidgets.View
     /// </summary>
     public partial class WidgetView : Window
     {
-        public Guid Guid;
+        public WidgetId ID;
 
-        public WidgetView(Guid guid)
+        public WidgetView(WidgetId id)
         {
             InitializeComponent();
-            Guid = guid;
+            ID = id;
         }
     }
 }

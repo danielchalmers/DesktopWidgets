@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using DesktopWidgets.Helpers;
 
@@ -12,7 +11,7 @@ namespace DesktopWidgets.Classes
         public string Name { get; set; } = "";
         public bool ShowName { get; set; } = true;
         public bool Disabled { get; set; } = false;
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public WidgetId ID { get; set; } = new WidgetId();
         public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");
         public Color TextColor { get; set; } = Colors.Black;
         public Color BackgroundColor { get; set; } = Colors.White;
@@ -36,7 +35,7 @@ namespace DesktopWidgets.Classes
 
         public override string ToString()
         {
-            return WidgetHelper.GetWidgetName(Guid);
+            return WidgetHelper.GetWidgetName(ID);
         }
     }
 }

@@ -15,11 +15,11 @@ namespace DesktopWidgets.ViewModelBase
 
         private bool _onTop;
 
-        protected WidgetViewModelBase(Guid guid)
+        protected WidgetViewModelBase(WidgetId id)
         {
             MouseDownCommand = new DelegateCommand(MouseDown);
             LocationChangedCommand = new DelegateCommand(LocationChanged);
-            Settings = WidgetHelper.GetWidgetSettingsFromGuid(guid);
+            Settings = WidgetHelper.GetWidgetSettingsFromId(id);
             if (Settings.ForceOnTop)
             {
                 OnTopForceTimer = new DispatcherTimer();

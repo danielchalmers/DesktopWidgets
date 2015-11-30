@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Commands;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
@@ -12,9 +13,9 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         private DateTime _startTime;
 
-        public ViewModel(Guid guid) : base(guid)
+        public ViewModel(WidgetId id) : base(id)
         {
-            Settings = WidgetHelper.GetWidgetSettingsFromGuid(guid) as Settings;
+            Settings = WidgetHelper.GetWidgetSettingsFromId(id) as Settings;
             if (Settings == null)
                 return;
             StartStopCommand = new DelegateCommand(StartStop);

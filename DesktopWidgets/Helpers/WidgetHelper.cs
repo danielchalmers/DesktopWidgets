@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -20,19 +19,19 @@ namespace DesktopWidgets.Helpers
             Widgets.StopwatchClock.Metadata.FriendlyName
         };
 
-        public static WidgetSettings GetWidgetSettingsFromGuid(Guid guid)
+        public static WidgetSettings GetWidgetSettingsFromId(WidgetId id)
         {
-            return App.WidgetsSettingsStore.Widgets.First(v => v.Guid == guid);
+            return App.WidgetsSettingsStore.Widgets.First(v => v.ID == id);
         }
 
-        public static WidgetView GetWidgetViewFromGuid(Guid guid)
+        public static WidgetView GetWidgetViewFromId(WidgetId id)
         {
-            return App.WidgetViews.First(v => v.Guid == guid);
+            return App.WidgetViews.First(v => v.ID == id);
         }
 
-        public static string GetWidgetName(Guid guid)
+        public static string GetWidgetName(WidgetId id)
         {
-            var settings = GetWidgetSettingsFromGuid(guid);
+            var settings = GetWidgetSettingsFromId(id);
             var index = App.WidgetsSettingsStore.Widgets.IndexOf(settings);
             var name = (settings.Name == "" ? $"Widget {index + 1}" : settings.Name);
             return $"{name}";
@@ -64,76 +63,76 @@ namespace DesktopWidgets.Helpers
                     return;
             }
             App.WidgetsSettingsStore.Widgets.Add(newWidget);
-            LoadWidget(newWidget.Guid);
+            LoadWidget(newWidget.ID);
         }
 
-        private static void DisableWidget(Guid guid)
+        private static void DisableWidget(WidgetId id)
         {
-            var settings = GetWidgetSettingsFromGuid(guid);
+            var settings = GetWidgetSettingsFromId(id);
             if (settings.Disabled)
                 return;
             settings.Disabled = true;
-            var view = GetWidgetViewFromGuid(guid);
+            var view = GetWidgetViewFromId(id);
             view.Close();
             App.WidgetViews.Remove(view);
         }
 
-        private static void EnableWidget(Guid guid)
+        private static void EnableWidget(WidgetId id)
         {
-            var settings = GetWidgetSettingsFromGuid(guid);
+            var settings = GetWidgetSettingsFromId(id);
             if (!settings.Disabled)
                 return;
             settings.Disabled = false;
-            LoadWidget(guid);
+            LoadWidget(id);
         }
 
-        public static void ToggleWidgetEnabled(Guid guid)
+        public static void ToggleWidgetEnabled(WidgetId id)
         {
-            if (GetWidgetSettingsFromGuid(guid).Disabled)
-                EnableWidget(guid);
+            if (GetWidgetSettingsFromId(id).Disabled)
+                EnableWidget(id);
             else
-                DisableWidget(guid);
+                DisableWidget(id);
         }
 
-        public static void RemoveWidget(Guid guid, bool msg = false)
+        public static void RemoveWidget(WidgetId id, bool msg = false)
         {
             if (msg && Popup.Show("Are you sure you want to delete this widget?\n\nThis cannot be undone.",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
 
-            var view = GetWidgetViewFromGuid(guid);
-            var settings = GetWidgetSettingsFromGuid(guid);
+            var view = GetWidgetViewFromId(id);
+            var settings = GetWidgetSettingsFromId(id);
             view.Close();
             App.WidgetsSettingsStore.Widgets.Remove(settings);
             App.WidgetViews.Remove(view);
         }
 
-        public static void EditWidget(Guid guid)
+        public static void EditWidget(WidgetId id)
         {
-            new PropertyView(GetWidgetSettingsFromGuid(guid)).ShowDialog();
+            new PropertyView(GetWidgetSettingsFromId(id)).ShowDialog();
         }
 
-        public static void LoadWidget(Guid guid)
+        public static void LoadWidget(WidgetId id)
         {
-            var settings = GetWidgetSettingsFromGuid(guid);
-            var widgetView = new WidgetView(guid);
-            var userControlStyle = (Style)widgetView.FindResource("UserControlStyle");
+            var settings = GetWidgetSettingsFromId(id);
+            var widgetView = new WidgetView(id);
+            var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
             UserControl userControl;
             object dataContext;
 
             if (settings is Settings)
             {
-                dataContext = new Widgets.TimeClock.ViewModel(guid);
+                dataContext = new Widgets.TimeClock.ViewModel(id);
                 userControl = new ControlView();
             }
             else if (settings is Widgets.CountdownClock.Settings)
             {
-                dataContext = new Widgets.CountdownClock.ViewModel(guid);
+                dataContext = new Widgets.CountdownClock.ViewModel(id);
                 userControl = new Widgets.CountdownClock.ControlView();
             }
             else if (settings is Widgets.StopwatchClock.Settings)
             {
-                dataContext = new Widgets.StopwatchClock.ViewModel(guid);
+                dataContext = new Widgets.StopwatchClock.ViewModel(id);
                 userControl = new Widgets.StopwatchClock.ControlView();
             }
             else
@@ -163,8 +162,8 @@ namespace DesktopWidgets.Helpers
                 };
 
             foreach (
-                var guid in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.Guid))
-                LoadWidget(guid);
+                var id in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.ID))
+                LoadWidget(id);
         }
     }
 }

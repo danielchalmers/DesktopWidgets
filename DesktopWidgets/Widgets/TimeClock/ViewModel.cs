@@ -1,4 +1,4 @@
-﻿using System;
+﻿using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
 
@@ -6,9 +6,9 @@ namespace DesktopWidgets.Widgets.TimeClock
 {
     public class ViewModel : ClockViewModelBase
     {
-        public ViewModel(Guid guid) : base(guid)
+        public ViewModel(WidgetId id) : base(id)
         {
-            Settings = WidgetHelper.GetWidgetSettingsFromGuid(guid) as Settings;
+            Settings = WidgetHelper.GetWidgetSettingsFromId(id) as Settings;
             if (Settings == null)
                 return;
         }
