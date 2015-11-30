@@ -5,13 +5,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:properties="clr-namespace:DesktopWidgets.Properties"
+        xmlns:viewModel="clr-namespace:DesktopWidgets.ViewModel"
+        xmlns:viewModelBase="clr-namespace:DesktopWidgets.ViewModelBase"
         mc:Ignorable="d"
         Title="Properties"
         ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
         Width="500" Height="550">
-
-    <xctk:PropertyGrid Margin="0,10,0,0" x:Name="PropertyGrid" AutoGenerateProperties="true"
-                       IsCategorized="False"
-                       ShowSortOptions="False" ShowSummary="False" ShowTitle="False" ShowSearchBox="True"
-                       Background="{x:Static SystemColors.WindowBrush}" />
+    <Window.DataContext>
+        <viewModelBase:DialogViewModelBase />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <xctk:PropertyGrid Grid.Row="0" Margin="0,10,0,0" x:Name="PropertyGrid" AutoGenerateProperties="true"
+                           IsCategorized="False"
+                           ShowSortOptions="False" ShowSummary="False" ShowTitle="False" ShowSearchBox="True"
+                           Background="{x:Static SystemColors.WindowBrush}" />
+        <Button Grid.Row="1" Content="OK" Margin="15" Width="75" Height="23" HorizontalAlignment="Right"
+                Command="{Binding Close}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+    </Grid>
 </Window>

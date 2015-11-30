@@ -71,7 +71,7 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Column="1" Content="OK" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" IsDefault="True" IsCancel="True" Command="{Binding CloseCommand}"
+                    VerticalAlignment="Stretch" IsDefault="True" IsCancel="True" Command="{Binding Close}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </Grid>
     </Grid>

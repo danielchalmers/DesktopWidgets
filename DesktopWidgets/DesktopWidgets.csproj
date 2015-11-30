@@ -121,6 +121,7 @@
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Classes\Converters.cs" />
+    <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
     <Compile Include="Widgets\StopwatchClock\Metadata.cs" />

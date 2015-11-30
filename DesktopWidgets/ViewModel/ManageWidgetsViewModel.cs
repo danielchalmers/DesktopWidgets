@@ -1,20 +1,19 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Commands;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.ViewModelBase;
 
 namespace DesktopWidgets.ViewModel
 {
-    public class ManageWidgetsViewModel : ViewModelBase.ViewModelBase
+    public class ManageWidgetsViewModel : DialogViewModelBase
     {
         private WidgetSettings _selectedWidget;
 
         public ManageWidgetsViewModel()
         {
             WidgetList = App.WidgetsSettingsStore.Widgets;
-            CloseCommand = new DelegateCommand(Close);
             DeselectAllCommand = new DelegateCommand(DeselectAll);
             NewWidgetCommand = new DelegateCommand(NewWidget);
             EditWidgetCommand = new DelegateCommand(EditWidget);
@@ -37,8 +36,6 @@ namespace DesktopWidgets.ViewModel
             }
         }
 
-        public ICommand CloseCommand { get; private set; }
-
         public ICommand DeselectAllCommand { get; private set; }
 
         public ICommand NewWidgetCommand { get; private set; }
@@ -48,11 +45,6 @@ namespace DesktopWidgets.ViewModel
         public ICommand DisableWidgetCommand { get; private set; }
 
         public ICommand RemoveWidgetCommand { get; private set; }
-
-        private void Close(object parameter)
-        {
-            (parameter as Window).Close();
-        }
 
         private void DeselectAll(object parameter = null)
         {
