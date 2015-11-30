@@ -2,6 +2,6 @@
 {
     public static class Metadata
     {
-        public const string FriendlyName = "Countdown Clock";
+        public const string FriendlyName = "Countdown";
     }
 }
