@@ -72,10 +72,10 @@ namespace DesktopWidgets.Helpers
             var settings = GetWidgetSettingsFromGuid(guid);
             if (settings.Disabled)
                 return;
-            //var view = GetWidgetViewFromGuid(guid);
             settings.Disabled = true;
-            //view.Close();
-            //App.WidgetViews.Remove(view);
+            var view = GetWidgetViewFromGuid(guid);
+            view.Close();
+            App.WidgetViews.Remove(view);
         }
 
         private static void EnableWidget(Guid guid)
@@ -84,6 +84,7 @@ namespace DesktopWidgets.Helpers
             if (!settings.Disabled)
                 return;
             settings.Disabled = false;
+            LoadWidget(guid);
         }
 
         public static void ToggleWidgetEnabled(Guid guid)
