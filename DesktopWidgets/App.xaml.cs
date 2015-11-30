@@ -73,7 +73,7 @@ namespace DesktopWidgets
 
         private void menuItemOptions_OnClick(object sender, RoutedEventArgs e)
         {
-            new Options().ShowDialog();
+            new Options().Show();
         }
 
         private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
