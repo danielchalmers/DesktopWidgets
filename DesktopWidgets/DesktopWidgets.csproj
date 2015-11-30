@@ -116,18 +116,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\WidgetClockSettingsBase.cs" />
+    <Compile Include="Classes\WidgetsSettingsStore.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Converters.cs" />
-    <Compile Include="ManageWidgets.xaml.cs">
+    <Compile Include="Classes\Converters.cs" />
+    <Compile Include="Widgets\CountdownClock\Settings.cs" />
+    <Compile Include="Widgets\StopwatchClock\Settings.cs" />
+    <Compile Include="Widgets\TimeClock\Settings.cs" />
+    <Compile Include="Windows\ManageWidgets.xaml.cs">
       <DependentUpon>ManageWidgets.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Options.xaml.cs">
+    <Compile Include="Windows\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <Compile Include="OptionsPages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PropertyView.xaml.cs">
+    <Compile Include="Windows\PropertyView.xaml.cs">
       <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="OptionsPages\Advanced.xaml.cs">
@@ -136,40 +141,40 @@
     <Compile Include="OptionsPages\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsHelper.cs" />
-    <Compile Include="UserControls\StopwatchClock.xaml.cs">
-      <DependentUpon>StopwatchClock.xaml</DependentUpon>
+    <Compile Include="Helpers\SettingsHelper.cs" />
+    <Compile Include="Widgets\StopwatchClock\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\CountdownClock.xaml.cs">
-      <DependentUpon>CountdownClock.xaml</DependentUpon>
+    <Compile Include="Widgets\CountdownClock\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Clock.xaml.cs">
-      <DependentUpon>Clock.xaml</DependentUpon>
+    <Compile Include="Widgets\TimeClock\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\StopwatchClockViewModel.cs" />
-    <Compile Include="ViewModel\CountdownClockViewModel.cs" />
-    <Compile Include="ViewModel\TimeClockViewModel.cs" />
+    <Compile Include="Widgets\StopwatchClock\ViewModel.cs" />
+    <Compile Include="Widgets\CountdownClock\ViewModel.cs" />
+    <Compile Include="Widgets\TimeClock\ViewModel.cs" />
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
     <Compile Include="ViewModel\SelectItemViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModelBase\ViewModelBase.cs" />
     <Compile Include="View\SelectItem.xaml.cs">
       <DependentUpon>SelectItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WidgetView.xaml.cs">
       <DependentUpon>WidgetView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\ClockViewModel.cs" />
-    <Compile Include="ViewModel\WidgetViewModelBase.cs" />
-    <Compile Include="WidgetSettings.cs" />
-    <Compile Include="WidgetHelper.cs" />
-    <Compile Include="WindowHelper.cs" />
+    <Compile Include="ViewModelBase\ClockViewModelBase.cs" />
+    <Compile Include="ViewModelBase\WidgetViewModelBase.cs" />
+    <Compile Include="Classes\WidgetSettings.cs" />
+    <Compile Include="Helpers\WidgetHelper.cs" />
+    <Compile Include="Helpers\WindowHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="HelperWindow.xaml.cs">
+    <Compile Include="Classes\AssemblyInfo.cs" />
+    <Compile Include="Windows\HelperWindow.xaml.cs">
       <DependentUpon>HelperWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Popup.cs" />
+    <Compile Include="Classes\Popup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -198,15 +203,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="HelperWindow.xaml">
+    <Page Include="Windows\HelperWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ManageWidgets.xaml">
+    <Page Include="Windows\ManageWidgets.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Options.xaml">
+    <Page Include="Windows\Options.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -214,7 +219,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PropertyView.xaml">
+    <Page Include="Windows\PropertyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -226,15 +231,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\StopwatchClock.xaml">
+    <Page Include="Widgets\StopwatchClock\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\CountdownClock.xaml">
+    <Page Include="Widgets\CountdownClock\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Clock.xaml">
+    <Page Include="Widgets\TimeClock\ControlView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,9 +255,7 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\About.txt" />
   </ItemGroup>

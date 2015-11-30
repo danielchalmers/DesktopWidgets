@@ -3,9 +3,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using DesktopWidgets.UserControls;
+using DesktopWidgets.Classes;
+using DesktopWidgets.Helpers;
 using DesktopWidgets.View;
-using DesktopWidgets.ViewModel;
+using DesktopWidgets.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 
 namespace DesktopWidgets
@@ -18,7 +19,7 @@ namespace DesktopWidgets
         private static bool SuccessfullyLoaded;
         public static HelperWindow HelperWindow;
         public static TaskbarIcon TrayIcon;
-        public static WidgetConfig WidgetCfg;
+        public static WidgetsSettingsStore WidgetsSettingsStore;
         public static ObservableCollection<WidgetView> WidgetViews;
 
         public App()
@@ -47,30 +48,30 @@ namespace DesktopWidgets
                     view.Close();
             WidgetViews = new ObservableCollection<WidgetView>();
 
-            if (WidgetCfg == null)
-                WidgetCfg = new WidgetConfig {Widgets = new ObservableCollection<WidgetSettings>()};
+            if (WidgetsSettingsStore == null)
+                WidgetsSettingsStore = new WidgetsSettingsStore {Widgets = new ObservableCollection<WidgetSettings>()};
 
-            foreach (var settings in WidgetCfg.Widgets.Where(x => !x.Disabled))
+            foreach (var settings in WidgetsSettingsStore.Widgets.Where(x => !x.Disabled))
             {
                 var widgetView = new WidgetView(settings.Guid);
                 var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
                 UserControl userControl = null;
                 object dataContext = null;
 
-                if (settings is WidgetTimeClockSettings)
+                if (settings is Widgets.TimeClock.Settings)
                 {
-                    dataContext = new TimeClockViewModel(settings.Guid);
-                    userControl = new Clock();
+                    dataContext = new Widgets.TimeClock.ViewModel(settings.Guid);
+                    userControl = new Widgets.TimeClock.ControlView();
                 }
-                if (settings is WidgetCountdownClockSettings)
+                if (settings is Widgets.CountdownClock.Settings)
                 {
-                    dataContext = new CountdownClockViewModel(settings.Guid);
-                    userControl = new CountdownClock();
+                    dataContext = new Widgets.CountdownClock.ViewModel(settings.Guid);
+                    userControl = new Widgets.CountdownClock.ControlView();
                 }
-                if (settings is WidgetStopwatchClockSettings)
+                if (settings is Widgets.StopwatchClock.Settings)
                 {
-                    dataContext = new StopwatchClockViewModel(settings.Guid);
-                    userControl = new StopwatchClock();
+                    dataContext = new Widgets.StopwatchClock.ViewModel(settings.Guid);
+                    userControl = new Widgets.StopwatchClock.ControlView();
                 }
 
                 userControl.Style = userControlStyle;

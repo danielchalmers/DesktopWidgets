@@ -6,7 +6,7 @@ using DesktopWidgets.Commands;
 
 namespace DesktopWidgets.ViewModel
 {
-    public class SelectItemViewModel : ViewModelBase
+    public class SelectItemViewModel : ViewModelBase.ViewModelBase
     {
         private object _selectedItem;
 

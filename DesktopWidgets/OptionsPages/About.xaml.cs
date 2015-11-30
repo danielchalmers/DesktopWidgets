@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Windows.Controls;
+using DesktopWidgets.Classes;
 
 #endregion
 

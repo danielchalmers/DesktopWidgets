@@ -7,6 +7,7 @@
         xmlns:viewModel="clr-namespace:DesktopWidgets.ViewModel"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:classes="clr-namespace:DesktopWidgets.Classes"
         mc:Ignorable="d"
         Left="{Binding Settings.Left, Mode=TwoWay}"
         Top="{Binding Settings.Top, Mode=TwoWay}">
@@ -21,10 +22,10 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
-        <local:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
-        <local:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
-        <local:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
-        <local:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
+        <classes:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
+        <classes:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
+        <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
+        <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />

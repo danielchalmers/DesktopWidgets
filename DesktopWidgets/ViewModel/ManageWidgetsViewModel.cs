@@ -1,17 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Commands;
+using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.ViewModel
 {
-    public class ManageWidgetsViewModel : ViewModelBase
+    public class ManageWidgetsViewModel : ViewModelBase.ViewModelBase
     {
         private WidgetSettings _selectedWidget;
 
         public ManageWidgetsViewModel()
         {
-            WidgetList = App.WidgetCfg.Widgets;
+            WidgetList = App.WidgetsSettingsStore.Widgets;
             CloseCommand = new DelegateCommand(Close);
             DeselectAllCommand = new DelegateCommand(DeselectAll);
             NewWidgetCommand = new DelegateCommand(NewWidget);
