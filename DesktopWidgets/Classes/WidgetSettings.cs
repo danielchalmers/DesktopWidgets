@@ -20,6 +20,10 @@ namespace DesktopWidgets.Classes
         public double BorderOpacity { get; set; } = 1;
         public double Width { get; set; } = double.NaN;
         public double Height { get; set; } = double.NaN;
+        public double MinWidth { get; set; } = double.NaN;
+        public double MinHeight { get; set; } = double.NaN;
+        public double MaxWidth { get; set; } = double.NaN;
+        public double MaxHeight { get; set; } = double.NaN;
         public double Left { get; set; } = double.NaN;
         public double Top { get; set; } = double.NaN;
         //public int ShowDelay { get; set; } = 0;
@@ -32,6 +36,7 @@ namespace DesktopWidgets.Classes
         public bool BorderEnabled { get; set; } = true;
         public bool SnapToScreenEdges { get; set; } = true;
         //public bool AnimationEase { get; set; } = true;
+        public SizeToContent SizeToContentMode { get; set; } = SizeToContent.WidthAndHeight;
 
         public override string ToString()
         {

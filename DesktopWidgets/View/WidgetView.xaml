@@ -8,9 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
-        mc:Ignorable="d"
-        Left="{Binding Settings.Left, Mode=TwoWay}"
-        Top="{Binding Settings.Top, Mode=TwoWay}">
+        mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseDown">
             <command:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}"
@@ -38,10 +36,16 @@
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AllowsTransparency" Value="True" />
-            <Setter Property="SizeToContent" Value="WidthAndHeight" />
             <Setter Property="Width" Value="{Binding Settings.Width}" />
             <Setter Property="Height" Value="{Binding Settings.Height}" />
             <Setter Property="Topmost" Value="{Binding Settings.OnTop}" />
+            <Setter Property="Left" Value="{Binding Settings.Left, Mode=TwoWay}" />
+            <Setter Property="Top" Value="{Binding Settings.Top, Mode=TwoWay}" />
+            <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
+            <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
+            <Setter Property="MaxWidth" Value="{Binding Settings.MaxWidth}" />
+            <Setter Property="MaxHeight" Value="{Binding Settings.MaxHeight}" />
+            <Setter Property="SizeToContent" Value="{Binding Settings.SizeToContentMode}" />
         </Style>
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
