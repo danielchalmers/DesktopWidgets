@@ -64,6 +64,7 @@ namespace DesktopWidgets.Helpers
                     return;
             }
             App.WidgetsSettingsStore.Widgets.Add(newWidget);
+            LoadWidget(newWidget.Guid);
         }
 
         private static void DisableWidget(Guid guid)
@@ -111,6 +112,42 @@ namespace DesktopWidgets.Helpers
             new PropertyView(GetWidgetSettingsFromGuid(guid)).ShowDialog();
         }
 
+        public static void LoadWidget(Guid guid)
+        {
+            var settings = GetWidgetSettingsFromGuid(guid);
+            var widgetView = new WidgetView(guid);
+            var userControlStyle = (Style)widgetView.FindResource("UserControlStyle");
+            UserControl userControl;
+            object dataContext;
+
+            if (settings is Settings)
+            {
+                dataContext = new Widgets.TimeClock.ViewModel(guid);
+                userControl = new ControlView();
+            }
+            else if (settings is Widgets.CountdownClock.Settings)
+            {
+                dataContext = new Widgets.CountdownClock.ViewModel(guid);
+                userControl = new Widgets.CountdownClock.ControlView();
+            }
+            else if (settings is Widgets.StopwatchClock.Settings)
+            {
+                dataContext = new Widgets.StopwatchClock.ViewModel(guid);
+                userControl = new Widgets.StopwatchClock.ControlView();
+            }
+            else
+            {
+                return;
+            }
+
+            userControl.Style = userControlStyle;
+            widgetView.DataContext = dataContext;
+            widgetView.MainContentContainer.Child = userControl;
+            App.WidgetViews.Add(widgetView);
+
+            widgetView.Show();
+        }
+
         public static void LoadWidgets()
         {
             if (App.WidgetViews != null)
@@ -124,40 +161,9 @@ namespace DesktopWidgets.Helpers
                     Widgets = new ObservableCollection<WidgetSettings>()
                 };
 
-            foreach (var settings in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled))
-            {
-                var widgetView = new WidgetView(settings.Guid);
-                var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
-                UserControl userControl;
-                object dataContext;
-
-                if (settings is Settings)
-                {
-                    dataContext = new Widgets.TimeClock.ViewModel(settings.Guid);
-                    userControl = new ControlView();
-                }
-                else if (settings is Widgets.CountdownClock.Settings)
-                {
-                    dataContext = new Widgets.CountdownClock.ViewModel(settings.Guid);
-                    userControl = new Widgets.CountdownClock.ControlView();
-                }
-                else if (settings is Widgets.StopwatchClock.Settings)
-                {
-                    dataContext = new Widgets.StopwatchClock.ViewModel(settings.Guid);
-                    userControl = new Widgets.StopwatchClock.ControlView();
-                }
-                else
-                {
-                    continue;
-                }
-
-                userControl.Style = userControlStyle;
-                widgetView.DataContext = dataContext;
-                widgetView.MainContentContainer.Child = userControl;
-                App.WidgetViews.Add(widgetView);
-
-                widgetView.Show();
-            }
+            foreach (
+                var guid in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.Guid))
+                LoadWidget(guid);
         }
     }
 }
