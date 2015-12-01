@@ -187,6 +187,7 @@ namespace DesktopWidgets.Helpers
                 {
                     Widgets = new ObservableCollection<WidgetSettings>()
                 };
+            App.WidgetsSettingsStore.Widgets.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
 
             foreach (
                 var id in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.ID))

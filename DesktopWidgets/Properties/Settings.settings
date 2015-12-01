@@ -22,5 +22,8 @@
     <Setting Name="ManageWidgetsWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
+    <Setting Name="SaveDelay" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:30</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

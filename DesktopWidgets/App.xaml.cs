@@ -3,9 +3,11 @@ using System.Windows;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Properties;
 using DesktopWidgets.View;
 using DesktopWidgets.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Win32;
 
 namespace DesktopWidgets
 {
@@ -19,6 +21,7 @@ namespace DesktopWidgets
         public static TaskbarIcon TrayIcon;
         public static WidgetsSettingsStore WidgetsSettingsStore;
         public static ObservableCollection<WidgetView> WidgetViews;
+        public static SaveTimer SaveTimer;
 
         public App()
         {
@@ -35,6 +38,8 @@ namespace DesktopWidgets
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
 
             WidgetHelper.LoadWidgets();
+
+            SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
 
             SuccessfullyLoaded = true;
         }

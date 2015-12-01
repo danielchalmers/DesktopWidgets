@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Classes\Enumerations.cs" />
     <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
+    <Compile Include="Classes\SaveTimer.cs" />
     <Compile Include="Classes\WidgetClockSettingsBase.cs" />
     <Compile Include="Classes\WidgetID.cs" />
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
