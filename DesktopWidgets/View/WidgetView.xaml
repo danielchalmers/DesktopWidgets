@@ -37,6 +37,7 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="SizeToContent" Value="WidthAndHeight" />
+            <Setter Property="ShowInTaskbar" Value="False" />
             <Setter Property="Topmost" Value="{Binding Settings.OnTop}" />
             <Setter Property="Left" Value="{Binding Settings.Left, Mode=TwoWay}" />
             <Setter Property="Top" Value="{Binding Settings.Top, Mode=TwoWay}" />
