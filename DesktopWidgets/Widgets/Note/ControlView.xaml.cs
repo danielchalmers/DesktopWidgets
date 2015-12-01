@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DesktopWidgets.Widgets.Notes
+namespace DesktopWidgets.Widgets.Note
 {
     /// <summary>
     ///     Interaction logic for ControlView.xaml

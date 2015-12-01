@@ -2,7 +2,7 @@
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
 
-namespace DesktopWidgets.Widgets.Notes
+namespace DesktopWidgets.Widgets.Note
 {
     public class ViewModel : WidgetViewModelBase
     {

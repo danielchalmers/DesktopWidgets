@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using DesktopWidgets.Classes;
 
-namespace DesktopWidgets.Widgets.Notes
+namespace DesktopWidgets.Widgets.Note
 {
     public class Settings : WidgetSettings
     {

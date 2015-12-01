@@ -19,7 +19,7 @@ namespace DesktopWidgets.Helpers
             Widgets.StopwatchClock.Metadata.FriendlyName,
             Widgets.Weather.Metadata.FriendlyName,
             Widgets.Search.Metadata.FriendlyName,
-            Widgets.Notes.Metadata.FriendlyName
+            Widgets.Note.Metadata.FriendlyName
         };
 
         public static WidgetSettings GetSettings(this WidgetId id)
@@ -68,8 +68,8 @@ namespace DesktopWidgets.Helpers
                 case Widgets.Search.Metadata.FriendlyName:
                     newWidget = new Widgets.Search.Settings();
                     break;
-                case Widgets.Notes.Metadata.FriendlyName:
-                    newWidget = new Widgets.Notes.Settings();
+                case Widgets.Note.Metadata.FriendlyName:
+                    newWidget = new Widgets.Note.Settings();
                     break;
                 default:
                     return;
@@ -157,10 +157,10 @@ namespace DesktopWidgets.Helpers
                 dataContext = new Widgets.Search.ViewModel(id);
                 userControl = new Widgets.Search.ControlView();
             }
-            else if (settings is Widgets.Notes.Settings)
+            else if (settings is Widgets.Note.Settings)
             {
-                dataContext = new Widgets.Notes.ViewModel(id);
-                userControl = new Widgets.Notes.ControlView();
+                dataContext = new Widgets.Note.ViewModel(id);
+                userControl = new Widgets.Note.ControlView();
             }
             else
             {
