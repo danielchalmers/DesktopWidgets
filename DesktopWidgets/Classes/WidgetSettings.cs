@@ -36,7 +36,6 @@ namespace DesktopWidgets.Classes
         public bool BorderEnabled { get; set; } = true;
         public bool SnapToScreenEdges { get; set; } = true;
         //public bool AnimationEase { get; set; } = true;
-        public SizeToContent SizeToContentMode { get; set; } = SizeToContent.WidthAndHeight;
 
         public override string ToString()
         {

@@ -8,7 +8,6 @@ namespace DesktopWidgets.Widgets.Search
         public Settings()
         {
             Width = 150;
-            SizeToContentMode = SizeToContent.Height;
         }
 
         public string BaseUrl { get; set; }

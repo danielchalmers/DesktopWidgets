@@ -7,7 +7,6 @@ namespace DesktopWidgets.Widgets.Notes
     {
         public Settings()
         {
-            SizeToContentMode = SizeToContent.Manual;
             Width = 160;
             Height = 200;
         }
