@@ -134,6 +134,12 @@
     <Compile Include="Widgets\Search\Metadata.cs" />
     <Compile Include="Widgets\Search\Settings.cs" />
     <Compile Include="Widgets\Search\ViewModel.cs" />
+    <Compile Include="Widgets\Notes\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Notes\Metadata.cs" />
+    <Compile Include="Widgets\Notes\Settings.cs" />
+    <Compile Include="Widgets\Notes\ViewModel.cs" />
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
@@ -224,6 +230,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Widgets\Search\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Notes\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
