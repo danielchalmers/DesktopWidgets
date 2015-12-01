@@ -40,6 +40,7 @@ namespace DesktopWidgets
             WidgetHelper.LoadWidgets();
 
             SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
+            SystemEvents.SessionEnding += (sender, args) => SettingsHelper.SaveSettings();
 
             SuccessfullyLoaded = true;
         }
