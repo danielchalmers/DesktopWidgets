@@ -11,7 +11,7 @@ namespace DesktopWidgets.Classes
         public string Name { get; set; } = "";
         public bool ShowName { get; set; } = true;
         public bool Disabled { get; set; } = false;
-        public WidgetId ID { get; set; } = new WidgetId();
+        public WidgetId ID { get; } = new WidgetId();
         public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");
         public Color TextColor { get; set; } = Colors.Black;
         public Color BackgroundColor { get; set; } = Colors.White;
