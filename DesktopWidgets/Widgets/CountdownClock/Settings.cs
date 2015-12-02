@@ -5,6 +5,6 @@ namespace DesktopWidgets.Widgets.CountdownClock
 {
     public class Settings : WidgetClockSettingsBase
     {
-        public DateTime EndDateTime { get; } = DateTime.Now;
+        public DateTime EndDateTime { get; set; } = DateTime.Now;
     }
 }
