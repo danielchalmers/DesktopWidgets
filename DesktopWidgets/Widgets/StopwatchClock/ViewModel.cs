@@ -69,6 +69,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         private void Stop()
         {
+            UpdateCurrentTime();
             IsRunning = false;
             StopClockUpdateTimer();
         }
