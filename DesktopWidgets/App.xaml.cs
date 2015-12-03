@@ -69,7 +69,7 @@ namespace DesktopWidgets
                 MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
             if (!SuccessfullyLoaded)
-                Current.Shutdown();
+                AppHelper.ShutdownApplication();
         }
 
         private void menuItemManageWidgets_OnClick(object sender, RoutedEventArgs e)
@@ -84,7 +84,7 @@ namespace DesktopWidgets
 
         private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
         {
-            Current.Shutdown();
+            AppHelper.ShutdownApplication();
         }
     }
 }

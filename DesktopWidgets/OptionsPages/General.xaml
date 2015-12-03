@@ -8,6 +8,11 @@
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" Title="General">
     <StackPanel>
+        <TextBlock Text="Run on Startup:" />
+        <CheckBox
+            IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=RunOnStartup, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
+            ToolTip="Run at Windows Startup" />
+
         <TextBlock Text="Enable Advanced Mode:" />
         <CheckBox
             IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />

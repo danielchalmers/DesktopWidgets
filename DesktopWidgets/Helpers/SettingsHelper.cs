@@ -34,6 +34,8 @@ namespace DesktopWidgets.Helpers
                 new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
 
             Settings.Default.Save();
+
+            RegistryHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
         }
 
         public static void ResetSettings(bool msg = true)
