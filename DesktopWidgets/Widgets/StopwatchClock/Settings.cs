@@ -7,6 +7,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
         public Settings()
         {
             TimeFormat = "mm:ss.fff";
+            UpdateInterval = 10;
         }
     }
 }

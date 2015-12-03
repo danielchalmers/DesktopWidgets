@@ -4,7 +4,7 @@ namespace DesktopWidgets.Classes
 {
     public class WidgetClockSettingsBase : WidgetSettings
     {
-        public TimeSpan TickInterval { get; set; } = TimeSpan.FromMilliseconds(100);
+        public int UpdateInterval { get; set; } = -1;
         public string TimeFormat { get; set; } = "hh:mm:ss";
     }
 }

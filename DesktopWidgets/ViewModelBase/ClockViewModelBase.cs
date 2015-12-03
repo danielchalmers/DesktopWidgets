@@ -16,7 +16,7 @@ namespace DesktopWidgets.ViewModelBase
             _settings = id.GetSettings() as WidgetClockSettingsBase;
             if (_settings == null)
                 return;
-            _clockUpdateTimer = new DispatcherTimer {Interval = _settings.TickInterval};
+            _clockUpdateTimer = new DispatcherTimer();
             _clockUpdateTimer.Tick += (sender, args) => UpdateCurrentTime();
             UpdateCurrentTime();
             if (startTicking)
@@ -36,13 +36,28 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
+        private void SyncClockUpdateInterval()
+        {
+            var newTime = _settings.UpdateInterval > 0
+                ? _settings.UpdateInterval
+                : (1000 - DateTime.Now.Millisecond);
+            _clockUpdateTimer.Interval = TimeSpan.FromMilliseconds(newTime);
+            if (_clockUpdateTimer.IsEnabled)
+            {
+                _clockUpdateTimer.Stop();
+                _clockUpdateTimer.Start();
+            }
+        }
+
         public void UpdateCurrentTime()
         {
             CurrentTime = DateTime.Now;
+            SyncClockUpdateInterval();
         }
 
         public void StartClockUpdateTimer()
         {
+            SyncClockUpdateInterval();
             _clockUpdateTimer.Start();
         }
 
