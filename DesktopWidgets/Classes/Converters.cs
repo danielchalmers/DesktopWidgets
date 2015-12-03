@@ -104,6 +104,34 @@ namespace DesktopWidgets.Classes
         }
     }
 
+    public class DateTimeToFormattedText : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                if (value[0] == null || value[1] == null)
+                    return Binding.DoNothing;
+                var val = System.Convert.ToDateTime(value[0]);
+                var settings = value[1] as Widgets.TimeClock.Settings;
+                if (settings == null)
+                    return Binding.DoNothing;
+
+                var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
+                return val.ToString(format);
+            }
+            catch
+            {
+                return Binding.DoNothing;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class MultiBooleanToVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
