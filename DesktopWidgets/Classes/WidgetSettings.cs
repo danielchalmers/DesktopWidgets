@@ -32,7 +32,7 @@ namespace DesktopWidgets.Classes
         //public int Monitor { get; set; } = -1;
         public int FontSize { get; set; } = 16;
         public bool OnTop { get; set; } = true;
-        public bool ForceOnTop { get; set; } = true;
+        public bool ForceOnTop { get; set; } = false;
         public bool BorderEnabled { get; set; } = true;
         public bool SnapToScreenEdges { get; set; } = true;
         //public bool AnimationEase { get; set; } = true;
