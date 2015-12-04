@@ -42,7 +42,7 @@ namespace DesktopWidgets.Classes
         public ScreenDockAlignment DockAlignment { get; set; } = ScreenDockAlignment.Center;
         public int MouseBounds { get; set; } = 8;
         public bool StretchBounds { get; set; } = false;
-        public AnimationType AnimationType { get; set; } = AnimationType.Slide;
+        public AnimationType AnimationType { get; set; } = AnimationType.Fade;
         public bool IgnoreCorners { get; set; } = false;
         public Key HotKey { get; set; } = Key.Tab;
         public ModifierKeys HotKeyModifiers { get; set; } = ModifierKeys.Control | ModifierKeys.Alt;
