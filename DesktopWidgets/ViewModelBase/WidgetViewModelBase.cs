@@ -39,6 +39,7 @@ namespace DesktopWidgets.ViewModelBase
             Opacity = 0;
             MouseDownCommand = new DelegateCommand(MouseDown);
             LocationChangedCommand = new DelegateCommand(LocationChanged);
+            ClosingCommand = new DelegateCommand(OnClosing);
             _settings = id.GetSettings();
             if (_settings.ForceOnTop)
             {
@@ -163,6 +164,7 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
+        public ICommand ClosingCommand { get; private set; }
         public ICommand MouseDownCommand { get; private set; }
         public ICommand LocationChangedCommand { get; private set; }
 
@@ -299,6 +301,11 @@ namespace DesktopWidgets.ViewModelBase
                         : monitorRect.Bottom - ActualHeight;
                 }
             }
+        }
+
+        private void OnClosing(object parameter)
+        {
+            _mouseChecker.Stop();
         }
 
         private void MouseDown(object parameter)

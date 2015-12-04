@@ -22,6 +22,10 @@
             <command:EventToCommand Command="{Binding LocationChangedCommand, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="Closing">
+            <command:EventToCommand Command="{Binding ClosingCommand, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
         <classes:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
