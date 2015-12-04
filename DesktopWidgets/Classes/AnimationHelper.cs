@@ -55,6 +55,9 @@ namespace DesktopWidgets.Classes
 
             switch (settings.DockPosition)
             {
+                default:
+                    view.RenderTransformOrigin = new Point(0.5, 0.5);
+                    break;
                 case ScreenDockPosition.Left:
                     view.RenderTransformOrigin = new Point(0, 1);
                     break;
