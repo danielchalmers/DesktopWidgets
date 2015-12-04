@@ -154,5 +154,17 @@ namespace DesktopWidgets.Properties {
                 this["IntroDuration"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IgnoreFullscreenWindows {
+            get {
+                return ((bool)(this["IgnoreFullscreenWindows"]));
+            }
+            set {
+                this["IgnoreFullscreenWindows"] = value;
+            }
+        }
     }
 }

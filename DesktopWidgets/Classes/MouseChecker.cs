@@ -186,6 +186,14 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            if (FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
+            {
+                _showTimer.Stop();
+                _hideTimer.Stop();
+                Hide(false, true);
+                return;
+            }
+
             if (_settings.OpenMode == OpenMode.AlwaysOpen || KeepOpen)
             {
                 Show();
@@ -241,8 +249,7 @@ namespace DesktopWidgets.Classes
 
         public void Hide(bool animate = true, bool checkHideStatus = false)
         {
-            if (_view.AnimationRunning || !_view.IsVisible ||
-                (_settings.OpenMode == OpenMode.AlwaysOpen && !_settings.Disabled))
+            if (_view.AnimationRunning || !_view.IsVisible)
                 return;
             if (checkHideStatus && !IsHideable())
                 return;

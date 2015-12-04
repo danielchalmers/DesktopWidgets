@@ -99,6 +99,7 @@
     <Compile Include="Classes\DelayedAction.cs" />
     <Compile Include="Classes\Enumerations.cs" />
     <Compile Include="Classes\EnumUtilities.cs" />
+    <Compile Include="Classes\FullScreenHelper.cs" />
     <Compile Include="Classes\MouseChecker.cs" />
     <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
     <Compile Include="Classes\SaveTimer.cs" />
@@ -106,6 +107,9 @@
     <Compile Include="Classes\WidgetClockSettingsBase.cs" />
     <Compile Include="Classes\WidgetID.cs" />
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
+    <Compile Include="Classes\Win32App.cs" />
+    <Compile Include="Classes\Win32RECT.cs" />
+    <Compile Include="Classes\WindowHelper.cs" />
     <Compile Include="Classes\WindowUtilities.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Classes\Converters.cs" />
