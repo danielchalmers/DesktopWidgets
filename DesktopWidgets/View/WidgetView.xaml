@@ -8,7 +8,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        classes:SizeObserver.Observe="True"
+        classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
+        classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
+        Opacity="{Binding Opacity, Mode=TwoWay}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseDown">
             <command:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}"
@@ -36,19 +40,19 @@
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AllowsTransparency" Value="True" />
-            <Setter Property="SizeToContent" Value="WidthAndHeight" />
             <Setter Property="ShowInTaskbar" Value="False" />
+            <Setter Property="SizeToContent" Value="WidthAndHeight" />
             <Setter Property="Topmost" Value="{Binding Settings.OnTop}" />
-            <Setter Property="Left" Value="{Binding Settings.Left, Mode=TwoWay}" />
-            <Setter Property="Top" Value="{Binding Settings.Top, Mode=TwoWay}" />
+            <Setter Property="Left" Value="{Binding Left, Mode=TwoWay}" />
+            <Setter Property="Top" Value="{Binding Top, Mode=TwoWay}" />
         </Style>
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
             <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
             <Setter Property="MaxWidth" Value="{Binding Settings.MaxWidth}" />
             <Setter Property="MaxHeight" Value="{Binding Settings.MaxHeight}" />
-            <Setter Property="Width" Value="{Binding Settings.Width}" />
-            <Setter Property="Height" Value="{Binding Settings.Height}" />
+            <Setter Property="Width" Value="{Binding Width}" />
+            <Setter Property="Height" Value="{Binding Height}" />
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
             <Setter Property="CornerRadius" Value="4" />

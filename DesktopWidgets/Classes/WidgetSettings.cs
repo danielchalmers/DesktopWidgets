@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using DesktopWidgets.Helpers;
 
@@ -26,16 +27,25 @@ namespace DesktopWidgets.Classes
         public double MaxHeight { get; set; } = double.NaN;
         public double Left { get; set; } = double.NaN;
         public double Top { get; set; } = double.NaN;
-        //public int ShowDelay { get; set; } = 0;
-        //public int HideDelay { get; set; } = 0;
-        //public int AnimationTime { get; set; } = 150;
-        //public int Monitor { get; set; } = -1;
+        public int ShowDelay { get; set; } = 0;
+        public int HideDelay { get; set; } = 0;
+        public int AnimationTime { get; set; } = 150;
+        public int Monitor { get; set; } = -1;
         public int FontSize { get; set; } = 16;
         public bool OnTop { get; set; } = true;
         public bool ForceOnTop { get; set; } = false;
         public bool BorderEnabled { get; set; } = true;
         public bool SnapToScreenEdges { get; set; } = true;
-        //public bool AnimationEase { get; set; } = true;
+        public bool AnimationEase { get; set; } = true;
+        public OpenMode OpenMode { get; set; } = OpenMode.AlwaysOpen;
+        public ScreenDockPosition DockPosition { get; set; } = ScreenDockPosition.None;
+        public ScreenDockAlignment DockAlignment { get; set; } = ScreenDockAlignment.Center;
+        public int MouseBounds { get; set; } = 8;
+        public bool StretchBounds { get; set; } = false;
+        public AnimationType AnimationType { get; set; } = AnimationType.Slide;
+        public bool IgnoreCorners { get; set; } = false;
+        public Key HotKey { get; set; } = Key.Tab;
+        public ModifierKeys HotKeyModifiers { get; set; } = ModifierKeys.Control | ModifierKeys.Alt;
 
         public override string ToString()
         {

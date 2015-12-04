@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using DesktopWidgets.Classes;
+using DesktopWidgets.ViewModelBase;
 
 namespace DesktopWidgets.View
 {
@@ -8,12 +9,18 @@ namespace DesktopWidgets.View
     /// </summary>
     public partial class WidgetView : Window
     {
-        public WidgetId ID;
-
         public WidgetView(WidgetId id)
         {
             InitializeComponent();
-            ID = id;
+            Id = id;
+        }
+
+        public WidgetId Id { get; private set; }
+        public bool AnimationRunning { get; set; } = false;
+
+        public void UpdateUi()
+        {
+            ((WidgetViewModelBase) DataContext).UpdateUi();
         }
     }
 }

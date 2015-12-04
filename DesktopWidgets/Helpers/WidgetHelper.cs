@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using DesktopWidgets.Classes;
 using DesktopWidgets.View;
+using DesktopWidgets.ViewModelBase;
 using DesktopWidgets.Widgets.TimeClock;
 using DesktopWidgets.Windows;
 
@@ -29,7 +30,7 @@ namespace DesktopWidgets.Helpers
 
         public static WidgetView GetView(this WidgetId id)
         {
-            return App.WidgetViews.First(v => v.ID == id);
+            return App.WidgetViews.First(v => v.Id == id);
         }
 
         public static string GetName(this WidgetId id)
@@ -122,6 +123,7 @@ namespace DesktopWidgets.Helpers
         public static void Edit(this WidgetId id)
         {
             new PropertyView(id.GetSettings()).ShowDialog();
+            id.GetView().UpdateUi();
         }
 
         public static void LoadView(this WidgetId id)
@@ -130,7 +132,9 @@ namespace DesktopWidgets.Helpers
             var widgetView = new WidgetView(id);
             var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
             UserControl userControl;
-            object dataContext;
+            WidgetViewModelBase dataContext;
+
+            App.WidgetViews.Add(widgetView);
 
             if (settings is Settings)
             {
@@ -170,7 +174,6 @@ namespace DesktopWidgets.Helpers
             userControl.Style = userControlStyle;
             widgetView.DataContext = dataContext;
             widgetView.MainContentContainer.Child = userControl;
-            App.WidgetViews.Add(widgetView);
 
             widgetView.Show();
         }

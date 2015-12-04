@@ -54,6 +54,14 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NHotkey, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHotkey.1.2.1\lib\net20\NHotkey.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHotkey.Wpf, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHotkey.Wpf.1.2.1\lib\net35\NHotkey.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -87,15 +95,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\AnimationHelper.cs" />
+    <Compile Include="Classes\DelayedAction.cs" />
     <Compile Include="Classes\Enumerations.cs" />
+    <Compile Include="Classes\EnumUtilities.cs" />
+    <Compile Include="Classes\MouseChecker.cs" />
     <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
     <Compile Include="Classes\SaveTimer.cs" />
+    <Compile Include="Classes\SizeObserver.cs" />
     <Compile Include="Classes\WidgetClockSettingsBase.cs" />
     <Compile Include="Classes\WidgetID.cs" />
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
+    <Compile Include="Classes\WindowUtilities.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
+    <Compile Include="Helpers\MonitorHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />

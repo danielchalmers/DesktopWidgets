@@ -118,5 +118,41 @@ namespace DesktopWidgets.Properties {
                 this["RunOnStartup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int MouseBoundsPollingInterval {
+            get {
+                return ((int)(this["MouseBoundsPollingInterval"]));
+            }
+            set {
+                this["MouseBoundsPollingInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public int CornerSize {
+            get {
+                return ((int)(this["CornerSize"]));
+            }
+            set {
+                this["CornerSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3000")]
+        public int IntroDuration {
+            get {
+                return ((int)(this["IntroDuration"]));
+            }
+            set {
+                this["IntroDuration"] = value;
+            }
+        }
     }
 }
