@@ -139,6 +139,12 @@
     <Compile Include="Widgets\PictureFrame\Metadata.cs" />
     <Compile Include="Widgets\PictureFrame\Settings.cs" />
     <Compile Include="Widgets\PictureFrame\ViewModel.cs" />
+    <Compile Include="Widgets\PictureSlideshow\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\PictureSlideshow\Metadata.cs" />
+    <Compile Include="Widgets\PictureSlideshow\Settings.cs" />
+    <Compile Include="Widgets\PictureSlideshow\ViewModel.cs" />
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
@@ -237,6 +243,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\PictureFrame\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\PictureSlideshow\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

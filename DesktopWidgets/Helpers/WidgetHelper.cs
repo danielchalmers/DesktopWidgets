@@ -21,7 +21,8 @@ namespace DesktopWidgets.Helpers
             Widgets.Weather.Metadata.FriendlyName,
             Widgets.Search.Metadata.FriendlyName,
             Widgets.Note.Metadata.FriendlyName,
-            Widgets.PictureFrame.Metadata.FriendlyName
+            Widgets.PictureFrame.Metadata.FriendlyName,
+            Widgets.PictureSlideshow.Metadata.FriendlyName
         };
 
         public static WidgetSettings GetSettings(this WidgetId id)
@@ -75,6 +76,9 @@ namespace DesktopWidgets.Helpers
                     break;
                 case Widgets.PictureFrame.Metadata.FriendlyName:
                     newWidget = new Widgets.PictureFrame.Settings();
+                    break;
+                case Widgets.PictureSlideshow.Metadata.FriendlyName:
+                    newWidget = new Widgets.PictureSlideshow.Settings();
                     break;
                 default:
                     return;
@@ -174,6 +178,11 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.PictureFrame.ViewModel(id);
                 userControl = new Widgets.PictureFrame.ControlView();
+            }
+            else if (settings is Widgets.PictureSlideshow.Settings)
+            {
+                dataContext = new Widgets.PictureSlideshow.ViewModel(id);
+                userControl = new Widgets.PictureSlideshow.ControlView();
             }
             else
             {
