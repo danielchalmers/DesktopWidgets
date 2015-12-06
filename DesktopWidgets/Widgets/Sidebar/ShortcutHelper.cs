@@ -1,0 +1,292 @@
+﻿#region
+
+using System;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using DesktopWidgets.Classes;
+using DesktopWidgets.Helpers;
+using DesktopWidgets.Properties;
+
+#endregion
+
+namespace DesktopWidgets.Widgets.Sidebar
+{
+    public static class ShortcutHelper
+    {
+        public static string GetName(Shortcut shortcut)
+            => string.IsNullOrWhiteSpace(shortcut.Name) ? shortcut.Path : shortcut.Name;
+
+        private static string GetNameFromPath(string path)
+        {
+            var root = Path.GetPathRoot(path);
+            if (path == root)
+                return root;
+            if (File.Exists(path))
+                return Path.GetFileNameWithoutExtension(path);
+            return path;
+        }
+
+        public static void ProcessFile(this ViewModel viewModel, string filepath, string name = "", bool msg = true)
+        {
+            if (Properties.Settings.Default.ParseShortcutFiles && Path.GetExtension(filepath) == ".lnk")
+                filepath = FileSystemHelper.GetShortcutTargetFile(filepath);
+            viewModel.Add(new Shortcut
+            {
+                Name = name == "" ? GetNameFromPath(filepath) : name,
+                Path = filepath
+            }, msg);
+        }
+
+        public static void ProcessFiles(this ViewModel viewModel, string[] files, bool msg = true)
+        {
+            if (files.Length >= 5 && msg &&
+                Popup.Show($"You are attempting to add {files.Length} shortcuts. Are you sure?",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                return;
+            foreach (var file in files)
+                viewModel.ProcessFile(file);
+        }
+
+        public static void Add(this ViewModel viewModel, Shortcut shortcut, bool msg = true)
+        {
+            // If shortcut path already exists, ask user if they are sure.
+            if (msg && viewModel.Settings.Shortcuts.Any(x => x.Path == shortcut.Path))
+                if (
+                    Popup.Show(
+                        $"You are attempting to add a shortcut that already exists. Are you sure?\n\n\"{GetName(shortcut)}\"",
+                        MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                    return;
+            // Add new shortcut.
+            viewModel.Settings.Shortcuts.Add(shortcut);
+        }
+
+        public static void OpenFolder(this Shortcut shortcut)
+        {
+            ProcessHelper.OpenFolder(shortcut.Path);
+        }
+
+        public static void SetupDefaults(this ViewModel viewModel, Action Intro)
+        {
+            var mode = viewModel.Settings.UseDefaults;
+            if (mode == 0)
+                return;
+            viewModel.Settings.UseDefaults = 0;
+
+            viewModel.Reset();
+
+            if (mode == 1)
+            {
+                viewModel.Add(new Shortcut
+                {
+                    Name = "Help",
+                    Path = Resources.Website,
+                    SpecialType = "Help"
+                }, false);
+                viewModel.Add(new Shortcut
+                {
+                    Name = "File Explorer",
+                    Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe"
+                }, false);
+                viewModel.Add(new Shortcut
+                {
+                    Name = "Notepad",
+                    Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\notepad.exe"
+                }, false);
+                viewModel.Add(new Shortcut
+                {
+                    Name = "Calculator",
+                    Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe"
+                }, false);
+                viewModel.Add(new Shortcut
+                {
+                    Name = "Command Prompt",
+                    Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe"
+                }, false);
+            }
+            else if (mode == 2)
+            {
+                try
+                {
+                    foreach (
+                        var file in
+                            Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                                               Resources.TaskBarPath)
+                                .Where(file => Path.GetFileName(file) != "desktop.ini"))
+                        viewModel.ProcessFile(file, Path.GetFileNameWithoutExtension(file), false);
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+            Intro();
+        }
+
+        public static void Reload(this ViewModel viewModel)
+        {
+            if (Popup.Show("Are you sure you want to reload all shortcuts?",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                return;
+            var shortcutList = viewModel.Settings.Shortcuts.ToList();
+            viewModel.Settings.Shortcuts.Clear();
+            foreach (var shortcut in shortcutList)
+                if (shortcut.SpecialType == string.Empty)
+                    viewModel.ProcessFile(shortcut.Path, shortcut.Name, false);
+                else
+                    viewModel.Add(shortcut, false);
+            viewModel.ClearIconCache();
+        }
+
+        public static void New(this ViewModel viewModel)
+        {
+            var dialog = new ShortcutProperties();
+            dialog.ShowDialog();
+            if (string.IsNullOrWhiteSpace(dialog.NewShortcut?.Path))
+                return;
+            if (!File.Exists(dialog.NewShortcut.Path) && !Directory.Exists(dialog.NewShortcut.Path) &&
+                !LinkHelper.IsHyperlink(dialog.NewShortcut.Path))
+                if (Popup.Show(
+                    $"That path does not exist. Do you want to add this shortcut anyway?\n\n\"{GetName(dialog.NewShortcut)}\"",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
+                    return;
+            viewModel.Add(dialog.NewShortcut);
+        }
+
+        public static void ClearIconCache(this ViewModel viewModel)
+        {
+            if (Properties.Settings.Default.UseIconCache)
+                foreach (var t in viewModel.Settings.Shortcuts)
+                    viewModel.IconCache.Remove(t.Path);
+            else
+                viewModel.IconCache.Clear();
+        }
+
+        public static void Refresh(this ViewModel viewModel)
+        {
+            viewModel.UpdateUi();
+        }
+
+        public static void ForceRefresh(this ViewModel viewModel)
+        {
+            viewModel.ClearIconCache();
+            viewModel.Refresh();
+        }
+
+        public static void Execute(this ViewModel viewModel, Shortcut shortcut, bool hide = true)
+        {
+            if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
+                viewModel.HideUI();
+            if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path) || LinkHelper.IsHyperlink(shortcut.Path))
+            {
+                ProcessHelper.Launch(shortcut.Path, shortcut.Args, shortcut.StartInFolder, shortcut.WindowStyle);
+            }
+            else
+            {
+                if (Popup.Show(
+                    $"This file does not exist. Do you wish to remove this shortcut?\n\n\"{GetName(shortcut)}\"",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                    return;
+                viewModel.Remove(shortcut);
+            }
+        }
+
+        public static void OpenProperties(this ViewModel viewModel, Shortcut shortcut)
+        {
+            var dialog = new ShortcutProperties(shortcut);
+            dialog.ShowDialog();
+            if (dialog.NewShortcut == null)
+                return;
+            viewModel.Settings.Shortcuts[viewModel.Settings.Shortcuts.IndexOf(shortcut)] = dialog.NewShortcut;
+        }
+
+        public static void Remove(this ViewModel viewModel, Shortcut shortcut, bool msg = false)
+        {
+            if (msg &&
+                Popup.Show($"Are you sure you want to delete this shortcut?\n\n\"{GetName(shortcut)}\"",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                return;
+            viewModel.Settings.Shortcuts.Remove(shortcut);
+        }
+
+        public static void Reset(this ViewModel viewModel, bool msg = false)
+        {
+            if (msg &&
+                Popup.Show("Are you sure you want to delete all shortcuts? This cannot be undone.",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                return;
+            viewModel.Settings.Shortcuts.Clear();
+        }
+
+        public static void PopulateListBox(this ViewModel viewModel, ref ListBox listBox)
+        {
+            listBox.Items.Clear();
+            foreach (var shortcut in viewModel.Settings.Shortcuts)
+                listBox.Items.Add(shortcut.Name);
+        }
+
+        public static void MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
+        {
+            var index = viewModel.Settings.Shortcuts.IndexOf(shortcut);
+            if (toEnd)
+            {
+                viewModel.Settings.Shortcuts.Swap(index, 0);
+            }
+            else
+            {
+                if (index == 0)
+                    viewModel.MoveDown(shortcut, true);
+                else
+                    viewModel.Settings.Shortcuts.Swap(index, index - 1);
+            }
+        }
+
+        public static void MoveDown(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
+        {
+            var index = viewModel.Settings.Shortcuts.IndexOf(shortcut);
+            if (toEnd)
+            {
+                viewModel.Settings.Shortcuts.Swap(index, viewModel.Settings.Shortcuts.Count - 1);
+            }
+            else
+            {
+                if (viewModel.Settings.Shortcuts.Count - 1 < index + 1)
+                    viewModel.MoveUp(shortcut, true);
+                else
+                    viewModel.Settings.Shortcuts.Swap(index, index + 1);
+            }
+        }
+
+        private static ImageSource GetShortcutIcon(Shortcut shortcut)
+        {
+            try
+            {
+                if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path))
+                    return IconHelper.GetPathIcon(shortcut.Path);
+                if (shortcut.SpecialType == "Help")
+                    return SystemIcons.Information.ToImageSource();
+                if (LinkHelper.IsHyperlink(shortcut.Path))
+                    return IconUtilities.Extract("shell32.dll", 13, true).ToImageSource();
+            }
+            catch
+            {
+                // ignored
+            }
+            return SystemIcons.Error.ToImageSource();
+        }
+
+        public static ImageSource GetShortcutIcon(this Shortcut shortcut, ViewModel viewModel)
+        {
+            if (!Properties.Settings.Default.UseIconCache)
+                return GetShortcutIcon(shortcut);
+
+            if (!viewModel.IconCache.ContainsKey(shortcut.Path))
+                viewModel.IconCache.Add(shortcut.Path, GetShortcutIcon(shortcut));
+            return viewModel.IconCache[shortcut.Path];
+        }
+    }
+}

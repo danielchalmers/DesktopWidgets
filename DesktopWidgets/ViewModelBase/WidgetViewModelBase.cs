@@ -21,6 +21,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private double _height;
 
+        private bool _isContextMenuOpen;
+
         private double _left;
 
         private bool _onTop;
@@ -167,6 +169,19 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand ClosingCommand { get; private set; }
         public ICommand MouseDownCommand { get; private set; }
         public ICommand LocationChangedCommand { get; private set; }
+
+        public bool IsContextMenuOpen
+        {
+            get { return _isContextMenuOpen; }
+            set
+            {
+                if (_isContextMenuOpen != value)
+                {
+                    _isContextMenuOpen = value;
+                    RaisePropertyChanged(nameof(IsContextMenuOpen));
+                }
+            }
+        }
 
         private void ReloadHotKeys()
         {

@@ -50,6 +50,7 @@
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -100,6 +101,8 @@
     <Compile Include="Classes\Enumerations.cs" />
     <Compile Include="Classes\EnumUtilities.cs" />
     <Compile Include="Classes\FullScreenHelper.cs" />
+    <Compile Include="Classes\IconUtilities.cs" />
+    <Compile Include="Classes\ListUtilities.cs" />
     <Compile Include="Classes\MouseChecker.cs" />
     <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
     <Compile Include="Classes\SaveTimer.cs" />
@@ -114,11 +117,23 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
+    <Compile Include="Helpers\FileSystemHelper.cs" />
+    <Compile Include="Helpers\IconHelper.cs" />
+    <Compile Include="Helpers\LinkHelper.cs" />
     <Compile Include="Helpers\MonitorHelper.cs" />
+    <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
+    <Compile Include="Widgets\Sidebar\ManageShortcuts.xaml.cs">
+      <DependentUpon>ManageShortcuts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Sidebar\Shortcut.cs" />
+    <Compile Include="Widgets\Sidebar\ShortcutHelper.cs" />
+    <Compile Include="Widgets\Sidebar\ShortcutProperties.xaml.cs">
+      <DependentUpon>ShortcutProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Widgets\StopwatchClock\Metadata.cs" />
     <Compile Include="Widgets\StopwatchClock\Settings.cs" />
     <Compile Include="Widgets\Search\ControlView.xaml.cs">
@@ -145,6 +160,12 @@
     <Compile Include="Widgets\PictureSlideshow\Metadata.cs" />
     <Compile Include="Widgets\PictureSlideshow\Settings.cs" />
     <Compile Include="Widgets\PictureSlideshow\ViewModel.cs" />
+    <Compile Include="Widgets\Sidebar\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Sidebar\Metadata.cs" />
+    <Compile Include="Widgets\Sidebar\Settings.cs" />
+    <Compile Include="Widgets\Sidebar\ViewModel.cs" />
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
@@ -250,6 +271,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Widgets\Sidebar\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Sidebar\ManageShortcuts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Sidebar\ShortcutProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Widgets\Weather\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -306,7 +339,17 @@
   <ItemGroup>
     <Resource Include="icon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\About.txt" />
   </ItemGroup>

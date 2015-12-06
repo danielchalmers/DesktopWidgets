@@ -1,0 +1,212 @@
+﻿<UserControl x:Class="DesktopWidgets.Widgets.Sidebar.ControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d"
+
+             AllowDrop="False">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Drop">
+            <command:EventToCommand Command="{Binding Drop}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <Duration x:Key="ButtonAnimationDuration">0:0:0.050</Duration>
+        <Color x:Key="ButtonColor">Transparent</Color>
+        <Color x:Key="ButtonHoverColor">#E8E8E8</Color>
+        <Color x:Key="ButtonMouseDownColor">#D8D8D8</Color>
+        <Color x:Key="ButtonTextColor">Black</Color>
+        <SolidColorBrush x:Key="ButtonBrush" Color="{StaticResource ButtonColor}" />
+        <SolidColorBrush x:Key="ButtonTextBrush" Color="{StaticResource ButtonTextColor}" />
+
+        <classes:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
+        <classes:ShowIconContentToVisibilityConverter x:Key="ShowIconContentToVisibilityConverter" />
+        <classes:ShowTextContentToVisibilityConverter x:Key="ShowTextContentToVisibilityConverter" />
+        <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
+        <classes:ShortcutToImageConverter x:Key="ShortcutToImageConverter" />
+        <classes:IconScalingModeToBitmapScalingModeConverter x:Key="IconScalingModeToBitmapScalingModeConverter" />
+        <classes:IconPositionTextToDockConverter x:Key="IconPositionTextToDockConverter" />
+        <classes:IconPositionIconToDockConverter x:Key="IconPositionIconToDockConverter" />
+        <classes:ShortcutToToolTipConverter x:Key="ShortcutToToolTipConverter" />
+        <classes:PositionToOrientationConverter x:Key="PositionToOrientationConverter" />
+        <classes:SettingsToVerticalAlignmentConverter x:Key="SettingsToVerticalAlignmentConverter" />
+        <classes:SettingsToHorizontalAlignmentConverter x:Key="SettingsToHorizontalAlignmentConverter" />
+        <classes:TextToVisibilityConverter x:Key="TextToVisibilityConverter" />
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="StyleTextBlock">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Left" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="FontSize"
+                    Value="{Binding Path=DataContext.Settings.FontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Setter Property="FontFamily"
+                    Value="{Binding Path=DataContext.Settings.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Setter Property="Visibility"
+                    Value="{Binding Path=DataContext.Settings.ShortcutContentMode, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ShowTextContentToVisibilityConverter}}" />
+            <Setter Property="DockPanel.Dock"
+                    Value="{Binding Path=DataContext.Settings.IconPosition, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource IconPositionTextToDockConverter}}" />
+        </Style>
+        <Style TargetType="{x:Type Image}" x:Key="StyleImage">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Stretch" Value="UniformToFill" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="Height"
+                    Value="{Binding Path=DataContext.Settings.ButtonHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Setter Property="Visibility"
+                    Value="{Binding Path=DataContext.Settings.ShortcutContentMode, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ShowIconContentToVisibilityConverter}}" />
+            <Setter Property="RenderOptions.BitmapScalingMode"
+                    Value="{Binding Path=DataContext.Settings.IconScalingMode, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource IconScalingModeToBitmapScalingModeConverter}}" />
+            <Setter Property="DockPanel.Dock"
+                    Value="{Binding Path=DataContext.Settings.IconPosition, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource IconPositionIconToDockConverter}}" />
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="StyleButton">
+            <Setter Property="Background" Value="{StaticResource ButtonBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource ButtonTextBrush}" />
+            <Setter Property="AllowDrop"
+                    Value="{Binding Path=DataContext.Settings.AllowDropFiles, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Setter Property="Margin" Value="4,1,4,1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonDown">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="{StaticResource ButtonMouseDownColor}"
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.PreviewMouseLeftButtonUp">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="{StaticResource ButtonHoverColor}"
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="{StaticResource ButtonHoverColor}"
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Button.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation To="{StaticResource ButtonColor}"
+                                            Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="SidebarMenuItems">
+            <MenuItem Header="New Shortcut..." Command="{Binding NewShortcut}" />
+            <MenuItem Header="Manage Shortcuts..." Command="{Binding ManageShortcut}" />
+            <Separator />
+            <MenuItem Header="Refresh" Command="{Binding Refresh}" />
+        </x:Array>
+    </UserControl.Resources>
+    <UserControl.ContextMenu>
+        <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
+            <ContextMenu.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
+                    <Separator />
+                    <CollectionContainer Collection="{StaticResource MainMenuItems}" />
+                </CompositeCollection>
+            </ContextMenu.ItemsSource>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <ScrollViewer
+        VerticalScrollBarVisibility="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}"
+        HorizontalScrollBarVisibility="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}">
+        <ItemsControl AllowDrop="True" Margin="1" ItemsSource="{Binding Path=Settings.Shortcuts}"
+                      VerticalAlignment="{Binding Path=., Converter={StaticResource SettingsToVerticalAlignmentConverter}}"
+                      HorizontalAlignment="{Binding Path=., Converter={StaticResource SettingsToHorizontalAlignmentConverter}}"
+                      Focusable="False">
+            <ItemsControl.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.ItemsSource>
+                        <CompositeCollection>
+                            <MenuItem Header="Edit..." Command="{Binding ShortcutEdit}" />
+                            <Separator />
+                            <MenuItem Header="Move Up" Command="{Binding ShortcutMoveUp}" />
+                            <MenuItem Header="Move Down" Command="{Binding ShortcutMoveDown}" />
+                            <Separator />
+                            <MenuItem Header="Remove..." Command="{Binding ShortcutRemove}" />
+                            <Separator />
+                            <MenuItem Header="Open Folder" Command="{Binding ShortcutOpenFolder}" />
+                            <Separator />
+                            <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
+                            <Separator />
+                            <CollectionContainer Collection="{StaticResource MainMenuItems}" />
+                        </CompositeCollection>
+                    </ContextMenu.ItemsSource>
+                </ContextMenu>
+            </ItemsControl.ContextMenu>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Style="{StaticResource StyleButton}"
+                            Command="{Binding DataContext.ShortcutExecute, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                            CommandParameter="{Binding Path=.}"
+                            ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                <command:EventToCommand
+                                    Command="{Binding DataContext.ShortcutPreviewMouseLeftButtonUp, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DockPanel LastChildFill="True">
+                            <Image Style="{StaticResource StyleImage}">
+                                <Image.Source>
+                                    <MultiBinding Converter="{StaticResource ShortcutToImageConverter}">
+                                        <Binding Path="." />
+                                        <Binding Path="DataContext"
+                                                 RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}" />
+                                    </MultiBinding>
+                                </Image.Source>
+                            </Image>
+                            <TextBlock Text="{Binding Path=Name}" Style="{StaticResource StyleTextBlock}" />
+                        </DockPanel>
+                        <Button.ToolTip>
+                            <MultiBinding Converter="{StaticResource ShortcutToToolTipConverter}">
+                                <Binding Path="." />
+                                <Binding Path="DataContext.Settings"
+                                         RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}" />
+                            </MultiBinding>
+                        </Button.ToolTip>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel
+                        Orientation="{Binding Path=DataContext.Settings, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource PositionToOrientationConverter}}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </ScrollViewer>
+</UserControl>

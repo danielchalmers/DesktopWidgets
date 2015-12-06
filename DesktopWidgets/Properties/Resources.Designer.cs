@@ -123,5 +123,23 @@ namespace DesktopWidgets.Properties {
                 return ResourceManager.GetString("OpenWeatherMapDomain", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar.
+        /// </summary>
+        public static string TaskBarPath {
+            get {
+                return ResourceManager.GetString("TaskBarPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://danielchalmers.github.io/DesktopWidgets/.
+        /// </summary>
+        public static string Website {
+            get {
+                return ResourceManager.GetString("Website", resourceCulture);
+            }
+        }
     }
 }

@@ -22,7 +22,8 @@ namespace DesktopWidgets.Helpers
             Widgets.Search.Metadata.FriendlyName,
             Widgets.Note.Metadata.FriendlyName,
             Widgets.PictureFrame.Metadata.FriendlyName,
-            Widgets.PictureSlideshow.Metadata.FriendlyName
+            Widgets.PictureSlideshow.Metadata.FriendlyName,
+            Widgets.Sidebar.Metadata.FriendlyName
         };
 
         public static WidgetSettings GetSettings(this WidgetId id)
@@ -34,6 +35,11 @@ namespace DesktopWidgets.Helpers
         {
             return App.WidgetViews.First(v => v.Id == id);
         }
+
+        //public static WidgetViewModelBase GetViewModel(this WidgetId id)
+        //{
+        //    return App.WidgetViews.First(v => v.Id == id).DataContext as WidgetViewModelBase;
+        //}
 
         public static string GetName(this WidgetId id)
         {
@@ -79,6 +85,9 @@ namespace DesktopWidgets.Helpers
                     break;
                 case Widgets.PictureSlideshow.Metadata.FriendlyName:
                     newWidget = new Widgets.PictureSlideshow.Settings();
+                    break;
+                case Widgets.Sidebar.Metadata.FriendlyName:
+                    newWidget = new Widgets.Sidebar.Settings();
                     break;
                 default:
                     return;
@@ -183,6 +192,11 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.PictureSlideshow.ViewModel(id);
                 userControl = new Widgets.PictureSlideshow.ControlView();
+            }
+            else if (settings is Widgets.Sidebar.Settings)
+            {
+                dataContext = new Widgets.Sidebar.ViewModel(id);
+                userControl = new Widgets.Sidebar.ControlView();
             }
             else
             {

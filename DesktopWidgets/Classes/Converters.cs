@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
-using DesktopWidgets.Widgets.CountdownClock;
+using System.Windows.Media;
+using DesktopWidgets.Helpers;
+using DesktopWidgets.Widgets.Sidebar;
+using Settings = DesktopWidgets.Widgets.CountdownClock.Settings;
 
 namespace DesktopWidgets.Classes
 {
@@ -209,6 +213,389 @@ namespace DesktopWidgets.Classes
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class InvertBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var booleanValue = (bool) value;
+            return !booleanValue;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var booleanValue = (bool) value;
+            return !booleanValue;
+        }
+    }
+
+    public class OneHundredConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var newValue = (double) value;
+            return newValue*100;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var newValue = (double) value;
+            return newValue/100;
+        }
+    }
+
+    public class BorderColorToThicknessConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var newValue = (Color) value;
+            return newValue == Colors.Transparent ? new Thickness(0) : new Thickness(1);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ShowIconContentToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var newValue = (ShortcutContentMode) value;
+            return (newValue == ShortcutContentMode.Icon || newValue == ShortcutContentMode.Both)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ShowTextContentToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var newValue = (ShortcutContentMode) value;
+            return (newValue == ShortcutContentMode.Text || newValue == ShortcutContentMode.Both)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ScrollBarVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((ScrollBarVisibility) value).ToWindowsScrollBarVisibility();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ShortcutToImageConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var shortcut = value[0] as Shortcut;
+            var viewModel = value[1] as Widgets.Sidebar.ViewModel;
+            if (viewModel == null || shortcut == null)
+                return Binding.DoNothing;
+
+            return shortcut.GetShortcutIcon(viewModel);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IconScalingModeToBitmapScalingModeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return ((ImageScalingMode) value).ToBitmapScalingMode();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IconPositionTextToDockConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((IconPosition) value)
+            {
+                default:
+                case IconPosition.Right:
+                    return Dock.Left;
+                case IconPosition.Left:
+                    return Dock.Right;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IconPositionIconToDockConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            switch ((IconPosition) value)
+            {
+                default:
+                case IconPosition.Left:
+                    return Dock.Left;
+                case IconPosition.Right:
+                    return Dock.Right;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ShortcutToToolTipConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var shortcut = value[0] as Shortcut;
+            var val = value[1] as Widgets.Sidebar.Settings;
+            if (val == null || shortcut == null)
+                return Binding.DoNothing;
+
+            switch (val.ToolTipType)
+            {
+                case ToolTipType.Name:
+                    return shortcut.Name;
+                case ToolTipType.Path:
+                    return shortcut.Path;
+                case ToolTipType.Both:
+                    return $"{shortcut.Name}\n{shortcut.Path}";
+                default:
+                    return null;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class TextToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as string;
+            if (val == null)
+                return Binding.DoNothing;
+            return string.IsNullOrWhiteSpace(val) ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class PositionToOrientationConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            switch (val.ShortcutOrientation)
+            {
+                default:
+                case ShortcutOrientation.Auto:
+                    return val.DockPosition.IsVertical()
+                        ? Orientation.Horizontal
+                        : Orientation.Vertical;
+                case ShortcutOrientation.Horizontal:
+                    return Orientation.Horizontal;
+                case ShortcutOrientation.Vertical:
+                    return Orientation.Vertical;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToMinWidthConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return (val.DockPosition.IsHorizontal() ? val.ButtonHeight : val.ButtonHeight*4);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToMinHeightConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return (val.DockPosition.IsVertical() ? val.ButtonHeight : val.ButtonHeight*4);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToMaxWidthConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return (val.DockPosition.IsVertical()
+                ? MonitorHelper.GetMonitorBounds(val.Monitor).Width -
+                  (val.IgnoreCorners ? (Properties.Settings.Default.CornerSize*2) : 0)
+                : double.NaN);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToMaxHeightConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return (val.DockPosition.IsHorizontal()
+                ? MonitorHelper.GetMonitorBounds(val.Monitor).Height -
+                  (val.IgnoreCorners ? (Properties.Settings.Default.CornerSize*2) : 0)
+                : double.NaN);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToVerticalAlignmentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return val.DockPosition.IsHorizontal() ? val.ButtonAlignment.ToVerticalAlignment() : VerticalAlignment.Top;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToHorizontalAlignmentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return val.DockPosition.IsVertical()
+                ? val.ButtonAlignment.ToHorizontalAlignment()
+                : HorizontalAlignment.Stretch;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SettingsToTitleConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var settings = value as Widgets.Sidebar.Settings;
+            if (settings == null)
+                return Binding.DoNothing;
+            return settings.ID.GetName();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ShortcutToManageNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var shortcut = value as Shortcut;
+            if (shortcut == null)
+                return Binding.DoNothing;
+            return $"{shortcut.Name} ({shortcut.Path}{(shortcut.Args == "" ? "" : $", {shortcut.Args}")})";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class SelectedItemsToEnableDisableNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var val = value as Widgets.Sidebar.Settings;
+            if (val == null)
+                return Binding.DoNothing;
+            return val.Disabled ? "Enable" : "Disable";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
