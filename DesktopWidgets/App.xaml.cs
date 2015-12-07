@@ -39,7 +39,7 @@ namespace DesktopWidgets
             SettingsHelper.LoadSettings();
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
 
-            WidgetHelper.LoadWidgets();
+            WidgetHelper.LoadWidgetViews();
 
             if (Settings.Default.UpdateCheckIntervalMinutes > 0)
             {

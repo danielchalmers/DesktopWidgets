@@ -210,19 +210,12 @@ namespace DesktopWidgets.Helpers
             widgetView.Show();
         }
 
-        public static void LoadWidgets()
+        public static void LoadWidgetViews()
         {
             if (App.WidgetViews != null)
                 foreach (var view in App.WidgetViews)
                     view.Close();
             App.WidgetViews = new ObservableCollection<WidgetView>();
-
-            if (App.WidgetsSettingsStore == null)
-                App.WidgetsSettingsStore = new WidgetsSettingsStore
-                {
-                    Widgets = new ObservableCollection<WidgetSettings>()
-                };
-            App.WidgetsSettingsStore.Widgets.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
 
             foreach (
                 var id in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.ID))
