@@ -194,36 +194,12 @@ namespace DesktopWidgets.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ParseShortcutFiles {
-            get {
-                return ((bool)(this["ParseShortcutFiles"]));
-            }
-            set {
-                this["ParseShortcutFiles"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool LaunchProcessAsync {
             get {
                 return ((bool)(this["LaunchProcessAsync"]));
             }
             set {
                 this["LaunchProcessAsync"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseIconCache {
-            get {
-                return ((bool)(this["UseIconCache"]));
-            }
-            set {
-                this["UseIconCache"] = value;
             }
         }
         

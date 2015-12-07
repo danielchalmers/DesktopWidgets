@@ -32,7 +32,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void ProcessFile(this ViewModel viewModel, string filepath, string name = "", bool msg = true)
         {
-            if (Properties.Settings.Default.ParseShortcutFiles && Path.GetExtension(filepath) == ".lnk")
+            if (viewModel.Settings.ParseShortcutFiles && Path.GetExtension(filepath) == ".lnk")
                 filepath = FileSystemHelper.GetShortcutTargetFile(filepath);
             viewModel.Add(new Shortcut
             {
@@ -159,7 +159,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void ClearIconCache(this ViewModel viewModel)
         {
-            if (Properties.Settings.Default.UseIconCache)
+            if (viewModel.Settings.UseIconCache)
                 foreach (var t in viewModel.Settings.Shortcuts)
                     viewModel.IconCache.Remove(t.Path);
             else
@@ -281,7 +281,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static ImageSource GetShortcutIcon(this Shortcut shortcut, ViewModel viewModel)
         {
-            if (!Properties.Settings.Default.UseIconCache)
+            if (!viewModel.Settings.UseIconCache)
                 return GetShortcutIcon(shortcut);
 
             if (!viewModel.IconCache.ContainsKey(shortcut.Path))

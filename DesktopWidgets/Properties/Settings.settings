@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="MustUpgrade" Type="System.Boolean" Scope="User">
@@ -46,13 +44,7 @@
     <Setting Name="ManageShortcutsWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
-    <Setting Name="ParseShortcutFiles" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="LaunchProcessAsync" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="UseIconCache" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UpdateDays" Type="System.String" Scope="User">

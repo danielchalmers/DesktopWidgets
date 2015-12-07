@@ -17,5 +17,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public bool HideOnExecute { get; set; } = true;
         public bool AllowDropFiles { get; set; } = true;
         public int UseDefaults { get; set; } = 0;
+        public bool ParseShortcutFiles { get; set; } = true;
+        public bool UseIconCache { get; set; } = true;
     }
 }
