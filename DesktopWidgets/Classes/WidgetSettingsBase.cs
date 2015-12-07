@@ -51,6 +51,7 @@ namespace DesktopWidgets.Classes
         public int CornerSize { get; set; } = 16;
         public int IntroDuration { get; set; } = 3000;
         public bool Unclickable { get; set; } = false;
+        public bool DragToMove { get; set; } = true;
 
         public override string ToString()
         {

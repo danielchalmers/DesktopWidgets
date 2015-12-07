@@ -325,7 +325,7 @@ namespace DesktopWidgets.ViewModelBase
 
         private void OnMouseDownExecute(Window window)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && _settings.DockPosition == ScreenDockPosition.None)
+            if (Mouse.LeftButton == MouseButtonState.Pressed && _settings.DockPosition == ScreenDockPosition.None && _settings.DragToMove)
                 window.DragMove();
         }
 
