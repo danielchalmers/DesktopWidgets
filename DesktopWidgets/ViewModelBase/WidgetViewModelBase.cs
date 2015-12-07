@@ -4,7 +4,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.Properties;
 using GalaSoft.MvvmLight.Command;
 using NHotkey;
 using NHotkey.Wpf;
@@ -219,7 +218,7 @@ namespace DesktopWidgets.ViewModelBase
 
             _mouseChecker.KeepOpen = true;
             _mouseChecker.Show();
-            DelayedAction.RunAction(Settings.Default.IntroDuration, () =>
+            DelayedAction.RunAction(_settings.IntroDuration, () =>
             {
                 _mouseChecker.KeepOpen = false;
                 _mouseChecker.Hide(checkHideStatus: true);
@@ -267,7 +266,7 @@ namespace DesktopWidgets.ViewModelBase
                     {
                         case ScreenDockAlignment.Top:
                             newTop = monitorRect.Top +
-                                     (_settings.IgnoreCorners ? (Settings.Default.CornerSize*2) : 0);
+                                     (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
                             break;
                         default:
                         case ScreenDockAlignment.Center:
@@ -275,7 +274,7 @@ namespace DesktopWidgets.ViewModelBase
                             break;
                         case ScreenDockAlignment.Bottom:
                             newTop = (monitorRect.Bottom - ActualHeight) -
-                                     (_settings.IgnoreCorners ? (Settings.Default.CornerSize*2) : 0);
+                                     (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
                             break;
                         case ScreenDockAlignment.Stretch:
                             Height = monitorRect.Height;
@@ -295,7 +294,7 @@ namespace DesktopWidgets.ViewModelBase
                     {
                         case ScreenDockAlignment.Top:
                             newLeft = monitorRect.Left +
-                                      (_settings.IgnoreCorners ? (Settings.Default.CornerSize*2) : 0);
+                                      (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
                             break;
                         default:
                         case ScreenDockAlignment.Center:
@@ -303,7 +302,7 @@ namespace DesktopWidgets.ViewModelBase
                             break;
                         case ScreenDockAlignment.Bottom:
                             newLeft = (monitorRect.Right - ActualWidth) -
-                                      (_settings.IgnoreCorners ? (Settings.Default.CornerSize*2) : 0);
+                                      (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
                             break;
                         case ScreenDockAlignment.Stretch:
                             Width = monitorRect.Width;

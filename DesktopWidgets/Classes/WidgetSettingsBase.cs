@@ -48,6 +48,8 @@ namespace DesktopWidgets.Classes
         public ModifierKeys HotKeyModifiers { get; set; }
         public bool ActivateOnShow { get; set; } = true;
         public int ForceOnTopInterval { get; set; } = 500;
+        public int CornerSize { get; set; } = 16;
+        public int IntroDuration { get; set; } = 3000;
 
         public override string ToString()
         {

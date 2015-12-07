@@ -485,7 +485,7 @@ namespace DesktopWidgets.Classes
                 return Binding.DoNothing;
             return (val.DockPosition.IsVertical()
                 ? MonitorHelper.GetMonitorBounds(val.Monitor).Width -
-                  (val.IgnoreCorners ? (Properties.Settings.Default.CornerSize*2) : 0)
+                  (val.IgnoreCorners ? (val.CornerSize*2) : 0)
                 : double.NaN);
         }
 
@@ -504,7 +504,7 @@ namespace DesktopWidgets.Classes
                 return Binding.DoNothing;
             return (val.DockPosition.IsHorizontal()
                 ? MonitorHelper.GetMonitorBounds(val.Monitor).Height -
-                  (val.IgnoreCorners ? (Properties.Settings.Default.CornerSize*2) : 0)
+                  (val.IgnoreCorners ? (val.CornerSize*2) : 0)
                 : double.NaN);
         }
 

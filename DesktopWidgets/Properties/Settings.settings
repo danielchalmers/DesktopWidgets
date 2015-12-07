@@ -31,12 +31,6 @@
     <Setting Name="MouseBoundsPollingInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="CornerSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">16</Value>
-    </Setting>
-    <Setting Name="IntroDuration" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3000</Value>
-    </Setting>
     <Setting Name="IgnoreFullscreenWindows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
