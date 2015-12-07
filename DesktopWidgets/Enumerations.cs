@@ -1,4 +1,4 @@
-﻿namespace DesktopWidgets.Classes
+﻿namespace DesktopWidgets
 {
     public enum TemperatureUnitType
     {
@@ -92,5 +92,11 @@
         Auto,
         Vertical,
         Horizontal
+    };
+
+    public enum UpdateBranch
+    {
+        Stable,
+        Beta
     };
 }

@@ -12,6 +12,14 @@
         <CheckBox
             IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=RunOnStartup, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
             ToolTip="Run at Windows Startup" />
+        
+        <TextBlock Text="Check For Updates:" />
+        <CheckBox IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=CheckForUpdates, Mode=TwoWay}"
+                  ToolTip="Check for Updates automatically" />
+        
+        <TextBlock Text="Silent Auto-Update:" />
+        <CheckBox IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdate, Mode=TwoWay}"
+                  ToolTip="Automatically update application without confirmation dialogs" />
 
         <TextBlock Text="Enable Advanced Mode:" />
         <CheckBox

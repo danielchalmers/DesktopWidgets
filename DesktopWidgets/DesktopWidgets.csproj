@@ -65,6 +65,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -97,16 +98,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\AnimationHelper.cs" />
+    <Compile Include="Classes\ChangelogDownloader.cs" />
     <Compile Include="Classes\DelayedAction.cs" />
-    <Compile Include="Classes\Enumerations.cs" />
+    <Compile Include="Enumerations.cs" />
     <Compile Include="Classes\EnumUtilities.cs" />
     <Compile Include="Classes\FullScreenHelper.cs" />
+    <Compile Include="Classes\GitHubApiCommits.cs" />
     <Compile Include="Classes\IconUtilities.cs" />
     <Compile Include="Classes\ListUtilities.cs" />
     <Compile Include="Classes\MouseChecker.cs" />
     <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
     <Compile Include="Classes\SaveTimer.cs" />
     <Compile Include="Classes\SizeObserver.cs" />
+    <Compile Include="Classes\TaskScheduler.cs" />
     <Compile Include="Classes\WidgetClockSettingsBase.cs" />
     <Compile Include="Classes\WidgetID.cs" />
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
@@ -123,6 +127,7 @@
     <Compile Include="Helpers\MonitorHelper.cs" />
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
+    <Compile Include="Helpers\UpdateHelper.cs" />
     <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
@@ -219,6 +224,9 @@
     <Compile Include="Classes\WidgetSettings.cs" />
     <Compile Include="Helpers\WidgetHelper.cs" />
     <Compile Include="Helpers\WindowHelper.cs" />
+    <Compile Include="Windows\UpdatePrompt.xaml.cs">
+      <DependentUpon>UpdatePrompt.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AssemblyInfo.cs" />
@@ -248,6 +256,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
@@ -334,6 +343,10 @@
     <Page Include="View\WidgetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdatePrompt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

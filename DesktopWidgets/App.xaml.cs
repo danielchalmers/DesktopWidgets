@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
@@ -22,6 +23,7 @@ namespace DesktopWidgets
         public static WidgetsSettingsStore WidgetsSettingsStore;
         public static ObservableCollection<WidgetView> WidgetViews;
         public static SaveTimer SaveTimer;
+        public static TaskScheduler UpdateScheduler;
 
         public App()
         {
@@ -39,10 +41,26 @@ namespace DesktopWidgets
 
             WidgetHelper.LoadWidgets();
 
+            if (Settings.Default.UpdateCheckIntervalMinutes > 0)
+            {
+                UpdateScheduler = new TaskScheduler();
+                UpdateScheduler.ScheduleTask(() =>
+                    UpdateHelper.CheckForUpdatesAsync(true),
+                    (Settings.Default.CheckForUpdates && UpdateHelper.IsUpdateable),
+                    TimeSpan.FromMinutes(Settings.Default.UpdateCheckIntervalMinutes));
+                UpdateScheduler.Start();
+            }
+
             SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
             SystemEvents.SessionEnding += (sender, args) => SettingsHelper.SaveSettings();
 
             SuccessfullyLoaded = true;
+
+            DelayedAction.RunAction(15000, delegate
+            {
+                if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalDays > 30)
+                    UpdateScheduler?.RunTick();
+            });
         }
 
         protected override void OnExit(ExitEventArgs e)

@@ -89,6 +89,15 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://api.github.com/repos/danielchalmers/DesktopWidgets/commits.
+        /// </summary>
+        public static string GitHubApiCommits {
+            get {
+                return ResourceManager.GetString("GitHubApiCommits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets/commits.
         /// </summary>
         public static string GitHubCommits {
