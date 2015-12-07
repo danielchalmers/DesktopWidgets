@@ -9,7 +9,7 @@
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d"
 
-             AllowDrop="False">
+             AllowDrop="True">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Drop">
             <command:EventToCommand Command="{Binding Drop}" PassEventArgsToCommand="True" />

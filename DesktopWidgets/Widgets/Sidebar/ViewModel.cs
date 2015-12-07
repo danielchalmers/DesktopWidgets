@@ -18,7 +18,7 @@ namespace DesktopWidgets.Widgets.Sidebar
                 return;
             IconCache = new Dictionary<string, ImageSource>();
 
-            Drop = new RelayCommand<DragEventArgs>(DropExecute);
+            Drop = new RelayCommand<System.Windows.DragEventArgs>(DropExecute);
             Refresh = new RelayCommand(RefreshExecute);
             NewShortcut = new RelayCommand(NewShortcutExecute);
             ManageShortcut = new RelayCommand(ManageShortcutsExecute);
@@ -53,7 +53,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private Shortcut SelectedShortcut { get; set; }
 
-        private void DropExecute(DragEventArgs e)
+        private void DropExecute(System.Windows.DragEventArgs e)
         {
             if (Settings.AllowDropFiles && e.Data.GetDataPresent(DataFormats.FileDrop))
                 this.ProcessFiles((string[]) e.Data.GetData(DataFormats.FileDrop));
