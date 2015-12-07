@@ -46,6 +46,7 @@ namespace DesktopWidgets.Classes
         public bool IgnoreCorners { get; set; } = false;
         public Key HotKey { get; set; } = Key.Tab;
         public ModifierKeys HotKeyModifiers { get; set; } = ModifierKeys.Control | ModifierKeys.Alt;
+        public bool ActivateOnShow { get; set; } = true;
 
         public override string ToString()
         {
