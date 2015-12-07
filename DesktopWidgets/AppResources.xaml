@@ -9,6 +9,8 @@
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
         <Separator />
+        <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick" />
+        <Separator />
         <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
     </x:Array>
     <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />

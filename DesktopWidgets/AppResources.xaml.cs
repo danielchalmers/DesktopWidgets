@@ -21,6 +21,11 @@ namespace DesktopWidgets
             new Options().Show();
         }
 
+        private void menuItemCheckForUpdates_OnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateHelper.CheckForUpdatesAsync(false);
+        }
+
         private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
         {
             AppHelper.ShutdownApplication();
