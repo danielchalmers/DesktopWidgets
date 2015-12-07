@@ -44,8 +44,8 @@ namespace DesktopWidgets.Classes
         public bool StretchBounds { get; set; } = false;
         public AnimationType AnimationType { get; set; } = AnimationType.Fade;
         public bool IgnoreCorners { get; set; } = false;
-        public Key HotKey { get; set; } = Key.Tab;
-        public ModifierKeys HotKeyModifiers { get; set; } = ModifierKeys.Control | ModifierKeys.Alt;
+        public Key HotKey { get; set; } = Key.CapsLock;
+        public ModifierKeys HotKeyModifiers { get; set; }
         public bool ActivateOnShow { get; set; } = true;
         public int ForceOnTopInterval { get; set; } = 500;
 
