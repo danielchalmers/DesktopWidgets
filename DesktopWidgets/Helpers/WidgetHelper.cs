@@ -24,7 +24,7 @@ namespace DesktopWidgets.Helpers
             Widgets.PictureFrame.Metadata.FriendlyName,
             Widgets.PictureSlideshow.Metadata.FriendlyName,
             Widgets.Sidebar.Metadata.FriendlyName
-        };
+        }.OrderBy(x => x).ToList();
 
         public static WidgetSettings GetSettings(this WidgetId id)
         {
