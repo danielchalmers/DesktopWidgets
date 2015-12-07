@@ -28,12 +28,12 @@ namespace DesktopWidgets.Helpers
 
         public static WidgetSettingsBase GetSettings(this WidgetId id)
         {
-            return App.WidgetsSettingsStore.Widgets.First(v => v.Identifier == id);
+            return App.WidgetsSettingsStore.Widgets.FirstOrDefault(v => v.Identifier == id);
         }
 
         public static WidgetView GetView(this WidgetId id)
         {
-            return App.WidgetViews.First(v => v.Id == id);
+            return App.WidgetViews.FirstOrDefault(v => v.Id == id);
         }
 
         //public static WidgetViewModelBase GetViewModel(this WidgetId id)
@@ -130,17 +130,20 @@ namespace DesktopWidgets.Helpers
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
 
-            var view = id.GetView();
             var settings = id.GetSettings();
-            view.Close();
             App.WidgetsSettingsStore.Widgets.Remove(settings);
-            App.WidgetViews.Remove(view);
+            var view = id.GetView();
+            if(view != null)
+            {
+                view.Close();
+                App.WidgetViews.Remove(view);
+            }
         }
 
         public static void Edit(this WidgetId id)
         {
             new PropertyView(id.GetSettings()).ShowDialog();
-            id.GetView().UpdateUi();
+            id.GetView()?.UpdateUi();
         }
 
         public static void LoadView(this WidgetId id)
