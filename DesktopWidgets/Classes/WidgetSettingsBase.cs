@@ -50,6 +50,7 @@ namespace DesktopWidgets.Classes
         public int ForceOnTopInterval { get; set; } = 500;
         public int CornerSize { get; set; } = 16;
         public int IntroDuration { get; set; } = 3000;
+        public bool Unclickable { get; set; } = false;
 
         public override string ToString()
         {

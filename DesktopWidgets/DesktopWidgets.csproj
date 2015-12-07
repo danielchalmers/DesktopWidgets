@@ -155,7 +155,7 @@
     <Compile Include="Classes\WidgetsSettingsStore.cs" />
     <Compile Include="Classes\Win32App.cs" />
     <Compile Include="Classes\Win32RECT.cs" />
-    <Compile Include="Classes\WindowHelper.cs" />
+    <Compile Include="Helpers\Win32Helper.cs" />
     <Compile Include="Classes\WindowUtilities.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Helpers\AppHelper.cs" />

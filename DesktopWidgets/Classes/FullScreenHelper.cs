@@ -9,7 +9,7 @@ namespace DesktopWidgets.Classes
         public static bool DoesMonitorHaveFullscreenApp(Screen screen)
         {
             return !Settings.Default.IgnoreFullscreenWindows &&
-                   WindowHelper.GetForegroundApp()
+                   Win32Helper.GetForegroundApp()
                        .IsFullScreen(screen);
         }
 
