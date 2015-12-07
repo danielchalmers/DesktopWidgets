@@ -89,20 +89,5 @@ namespace DesktopWidgets
             if (!SuccessfullyLoaded)
                 AppHelper.ShutdownApplication();
         }
-
-        private void menuItemManageWidgets_OnClick(object sender, RoutedEventArgs e)
-        {
-            new ManageWidgets().Show();
-        }
-
-        private void menuItemOptions_OnClick(object sender, RoutedEventArgs e)
-        {
-            new Options().Show();
-        }
-
-        private void menuItemExit_OnClick(object sender, RoutedEventArgs e)
-        {
-            AppHelper.ShutdownApplication();
-        }
     }
 }

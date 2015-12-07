@@ -5,15 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d1p1:Ignorable="d"
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
     <Application.Resources>
-        <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
-            <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
-            <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
-            <Separator />
-            <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
-        </x:Array>
-        <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
-        <tb:TaskbarIcon x:Key="TrayIcon" IconSource="Icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
-                        ContextMenu="{StaticResource MainContextMenu}" />
-
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="AppResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
