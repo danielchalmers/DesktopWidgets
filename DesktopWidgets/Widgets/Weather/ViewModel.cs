@@ -25,7 +25,9 @@ namespace DesktopWidgets.Widgets.Weather
             if (Settings == null)
                 return;
             UpdateTimer = new DispatcherTimer();
-            UpdateTimer.Interval = Settings.RefreshInterval;
+            UpdateTimer.Interval = Settings.RefreshInterval.TotalMinutes < 30
+                ? TimeSpan.FromMinutes(30)
+                : Settings.RefreshInterval;
             UpdateTimer.Tick += UpdateWeather;
             UpdateTimer.Start();
             if (Settings.ZipCode == 0)
