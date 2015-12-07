@@ -3,7 +3,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.Sidebar
 {
-    public class Settings : WidgetSettings
+    public class Settings : WidgetSettingsBase
     {
         public ObservableCollection<Shortcut> Shortcuts { get; set; }
         public IconPosition IconPosition { get; set; } = IconPosition.Left;

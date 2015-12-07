@@ -26,9 +26,9 @@ namespace DesktopWidgets.Helpers
             Widgets.Sidebar.Metadata.FriendlyName
         }.OrderBy(x => x).ToList();
 
-        public static WidgetSettings GetSettings(this WidgetId id)
+        public static WidgetSettingsBase GetSettings(this WidgetId id)
         {
-            return App.WidgetsSettingsStore.Widgets.First(v => v.ID == id);
+            return App.WidgetsSettingsStore.Widgets.First(v => v.Identifier == id);
         }
 
         public static WidgetView GetView(this WidgetId id)
@@ -59,7 +59,7 @@ namespace DesktopWidgets.Helpers
 
         private static void AddNewWidget(string type)
         {
-            WidgetSettings newWidget;
+            WidgetSettingsBase newWidget;
             switch (type)
             {
                 case Metadata.FriendlyName:
@@ -93,7 +93,7 @@ namespace DesktopWidgets.Helpers
                     return;
             }
             App.WidgetsSettingsStore.Widgets.Add(newWidget);
-            newWidget.ID.LoadView();
+            newWidget.Identifier.LoadView();
         }
 
         private static void Disable(this WidgetId id)
@@ -218,7 +218,8 @@ namespace DesktopWidgets.Helpers
             App.WidgetViews = new ObservableCollection<WidgetView>();
 
             foreach (
-                var id in App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.ID))
+                var id in
+                    App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.Identifier))
                 id.LoadView();
         }
     }

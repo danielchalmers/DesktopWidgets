@@ -1,9 +1,8 @@
-﻿using System.Windows;
-using DesktopWidgets.Classes;
+﻿using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.Search
 {
-    public class Settings : WidgetSettings
+    public class Settings : WidgetSettingsBase
     {
         public Settings()
         {

@@ -15,21 +15,21 @@
         Opacity="{Binding Opacity, Mode=TwoWay}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="MouseDown">
-            <command:EventToCommand Command="{Binding MouseDownCommand, Mode=OneWay}"
+            <command:EventToCommand Command="{Binding MouseDown, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </i:EventTrigger>
         <i:EventTrigger EventName="LocationChanged">
-            <command:EventToCommand Command="{Binding LocationChangedCommand, Mode=OneWay}"
+            <command:EventToCommand Command="{Binding LocationChanged, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </i:EventTrigger>
         <i:EventTrigger EventName="Closing">
-            <command:EventToCommand Command="{Binding ClosingCommand, Mode=OneWay}"
+            <command:EventToCommand Command="{Binding Closing, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
-        <classes:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
-        <classes:MultiBooleanToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
+        <classes:BoolToThicknessConverter x:Key="BooleanToThicknessConverter" />
+        <classes:MultiBoolToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
         <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
         <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
 

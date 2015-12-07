@@ -12,9 +12,9 @@ using Settings = DesktopWidgets.Widgets.CountdownClock.Settings;
 
 namespace DesktopWidgets.Classes
 {
-    public class BooleanConverter<T> : IValueConverter
+    public class BoolConverter<T> : IValueConverter
     {
-        protected BooleanConverter(T trueValue, T falseValue)
+        protected BoolConverter(T trueValue, T falseValue)
         {
             True = trueValue;
             False = falseValue;
@@ -34,7 +34,7 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class BooleanToThicknessConverter : IValueConverter
+    public class BoolToThicknessConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -52,7 +52,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var settings = value as WidgetSettings;
+            var settings = value as WidgetSettingsBase;
             if (settings == null)
                 return Binding.DoNothing;
             return settings.Disabled ? "Enable" : "Disable";
@@ -136,7 +136,7 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class MultiBooleanToVisibilityConverter : IMultiValueConverter
+    public class MultiBoolToVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -222,14 +222,12 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var booleanValue = (bool) value;
-            return !booleanValue;
+            return !((bool) value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var booleanValue = (bool) value;
-            return !booleanValue;
+            return !((bool) value);
         }
     }
 
@@ -237,14 +235,12 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var newValue = (double) value;
-            return newValue*100;
+            return ((double) value)*100;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var newValue = (double) value;
-            return newValue/100;
+            return ((double) value)/100;
         }
     }
 
@@ -252,8 +248,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var newValue = (Color) value;
-            return newValue == Colors.Transparent ? new Thickness(0) : new Thickness(1);
+            return (Color) value == Colors.Transparent ? new Thickness(0) : new Thickness(1);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -560,7 +555,7 @@ namespace DesktopWidgets.Classes
             var settings = value as Widgets.Sidebar.Settings;
             if (settings == null)
                 return Binding.DoNothing;
-            return settings.ID.GetName();
+            return settings.Identifier.GetName();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -601,7 +596,7 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class BooleanToCollapsedVisibilityConverter : IValueConverter
+    public class BoolToCollapsedVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

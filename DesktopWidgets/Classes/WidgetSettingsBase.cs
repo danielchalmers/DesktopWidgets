@@ -5,14 +5,14 @@ using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Classes
 {
-    public class WidgetSettings
+    public class WidgetSettingsBase
     {
         public Thickness Padding { get; set; } = new Thickness(2);
         //public Point ScreenDpi = new Point(96, 96);
         public string Name { get; set; } = "";
         public bool ShowName { get; set; } = true;
         public bool Disabled { get; set; } = false;
-        public WidgetId ID { get; } = new WidgetId();
+        public WidgetId Identifier { get; } = new WidgetId();
         public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");
         public Color TextColor { get; set; } = Colors.Black;
         public Color BackgroundColor { get; set; } = Colors.White;
@@ -49,7 +49,7 @@ namespace DesktopWidgets.Classes
 
         public override string ToString()
         {
-            return ID.GetName();
+            return Identifier.GetName();
         }
     }
 }

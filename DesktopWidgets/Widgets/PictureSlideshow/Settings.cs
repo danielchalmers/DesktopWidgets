@@ -3,7 +3,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.PictureSlideshow
 {
-    public class Settings : WidgetSettings
+    public class Settings : WidgetSettingsBase
     {
         public Settings()
         {

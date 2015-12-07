@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace DesktopWidgets.Classes
+﻿namespace DesktopWidgets.Classes
 {
-    public class WidgetClockSettingsBase : WidgetSettings
+    public class WidgetClockSettingsBase : WidgetSettingsBase
     {
         public int UpdateInterval { get; set; } = -1;
         public string TimeFormat { get; set; } = "hh:mm:ss";

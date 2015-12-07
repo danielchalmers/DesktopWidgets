@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 using DesktopWidgets.Classes;
-using DesktopWidgets.Commands;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
+using GalaSoft.MvvmLight.Command;
 
 namespace DesktopWidgets.Widgets.StopwatchClock
 {
@@ -18,7 +18,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
-            StartStopCommand = new DelegateCommand(StartStop);
+            StartStopCommand = new RelayCommand(StartStop);
             StartTime = CurrentTime;
         }
 
@@ -51,7 +51,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
             }
         }
 
-        private void StartStop(object parameter = null)
+        private void StartStop()
         {
             if (IsRunning)
                 Stop();

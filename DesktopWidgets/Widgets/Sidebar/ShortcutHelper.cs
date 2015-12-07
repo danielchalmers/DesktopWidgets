@@ -274,8 +274,12 @@ namespace DesktopWidgets.Widgets.Sidebar
                     try
                     {
                         var taskbarPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                   Resources.TaskBarPath;
-                        defaults.AddRange(Directory.GetFiles(taskbarPath).Where(file => Path.GetFileName(file) != "desktop.ini").Select(file => new Shortcut {Path = file, Name = Path.GetFileNameWithoutExtension(file)}));
+                                          Resources.TaskBarPath;
+                        defaults.AddRange(
+                            Directory.GetFiles(taskbarPath)
+                                .Where(file => Path.GetFileName(file) != "desktop.ini")
+                                .Select(
+                                    file => new Shortcut {Path = file, Name = Path.GetFileNameWithoutExtension(file)}));
                     }
                     catch
                     {

@@ -14,9 +14,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         private readonly DispatcherTimer _changeTimer;
 
         private readonly List<string> _filePathList;
+        private readonly Random _random;
         private string _imageUrl;
         private int _index;
-        private readonly Random _random;
 
         public ViewModel(WidgetId id) : base(id)
         {

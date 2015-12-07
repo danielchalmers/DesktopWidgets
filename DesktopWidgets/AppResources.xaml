@@ -14,6 +14,6 @@
         <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
     </x:Array>
     <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
-    <tb:TaskbarIcon x:Key="TrayIcon" IconSource="Icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
+    <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
                     ContextMenu="{StaticResource MainContextMenu}" />
 </ResourceDictionary>

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
 using GalaSoft.MvvmLight.Command;
+using DataFormats = System.Windows.Forms.DataFormats;
 
 namespace DesktopWidgets.Widgets.Sidebar
 {
@@ -19,12 +20,12 @@ namespace DesktopWidgets.Widgets.Sidebar
                 return;
             IconCache = new Dictionary<string, ImageSource>();
 
-            Drop = new RelayCommand<System.Windows.DragEventArgs>(DropExecute);
+            Drop = new RelayCommand<DragEventArgs>(DropExecute);
             Refresh = new RelayCommand(RefreshExecute);
             NewShortcut = new RelayCommand(NewShortcutExecute);
             ManageShortcut = new RelayCommand(ManageShortcutsExecute);
 
-            ShortcutPreviewMouseLeftButtonUp = new RelayCommand<Shortcut>(SetFocus);
+            ShortcutFocus = new RelayCommand<Shortcut>(ShortcutFocusExecute);
 
             ShortcutEdit = new RelayCommand(ShortcutEditExecute);
             ShortcutMoveUp = new RelayCommand(ShortcutMoveUpExecute);
@@ -35,7 +36,8 @@ namespace DesktopWidgets.Widgets.Sidebar
 
             if (Settings.DefaultShortcutsMode != DefaultShortcutsMode.DontChange)
             {
-                Settings.Shortcuts = new ObservableCollection<Shortcut>(ShortcutHelper.GetDefaultShortcuts(Settings.DefaultShortcutsMode));
+                Settings.Shortcuts =
+                    new ObservableCollection<Shortcut>(ShortcutHelper.GetDefaultShortcuts(Settings.DefaultShortcutsMode));
                 Settings.DefaultShortcutsMode = DefaultShortcutsMode.DontChange;
             }
         }
@@ -47,7 +49,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ICommand Refresh { get; set; }
         public ICommand Drop { get; set; }
 
-        public ICommand ShortcutPreviewMouseLeftButtonUp { get; set; }
+        public ICommand ShortcutFocus { get; set; }
 
         public ICommand ShortcutEdit { get; set; }
         public ICommand ShortcutMoveUp { get; set; }
@@ -60,20 +62,20 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private Shortcut SelectedShortcut { get; set; }
 
-        private void DropExecute(System.Windows.DragEventArgs e)
+        private void DropExecute(DragEventArgs e)
         {
             if (Settings.AllowDropFiles && e.Data.GetDataPresent(DataFormats.FileDrop))
                 this.ProcessFiles((string[]) e.Data.GetData(DataFormats.FileDrop));
         }
 
-        private void SetFocus(Shortcut shortcut)
+        private void ShortcutFocusExecute(Shortcut shortcut)
         {
             SelectedShortcut = shortcut;
         }
 
         private void ShortcutExecuteExecute(Shortcut shortcut)
         {
-            SetFocus(shortcut);
+            ShortcutFocusExecute(shortcut);
             this.Execute(SelectedShortcut, !Keyboard.Modifiers.HasFlag(ModifierKeys.Shift));
         }
 

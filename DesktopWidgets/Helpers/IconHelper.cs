@@ -14,10 +14,9 @@ namespace DesktopWidgets.Helpers
 {
     internal class IconHelper
     {
-        //Constants flags for SHGetFileInfo 
         private const uint SHGFI_ICON = 0x100;
-        private const uint SHGFI_LARGEICON = 0x0; // 'Large icon
-        //Import SHGetFileInfo function
+        private const uint SHGFI_LARGEICON = 0x0;
+
         [DllImport("shell32.dll")]
         private static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi,
             uint cbSizeFileInfo, uint uFlags);

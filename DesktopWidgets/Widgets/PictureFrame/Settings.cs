@@ -2,7 +2,7 @@
 
 namespace DesktopWidgets.Widgets.PictureFrame
 {
-    public class Settings : WidgetSettings
+    public class Settings : WidgetSettingsBase
     {
         public Settings()
         {

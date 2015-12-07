@@ -1,22 +1,21 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using DesktopWidgets.Commands;
+using GalaSoft.MvvmLight.Command;
 
 namespace DesktopWidgets.ViewModelBase
 {
-    public class DialogViewModelBase : ViewModelBase
+    public class DialogViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
         public DialogViewModelBase()
         {
-            Close = new DelegateCommand(CloseExecute);
+            Close = new RelayCommand<Window>(CloseExecute);
         }
 
         public ICommand Close { get; set; }
 
-        private static void CloseExecute(object parameter)
+        private static void CloseExecute(Window window)
         {
-            var window = parameter as Window;
-            window?.Close();
+            window.Close();
         }
     }
 }

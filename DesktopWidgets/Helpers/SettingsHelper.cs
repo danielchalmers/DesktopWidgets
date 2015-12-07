@@ -37,7 +37,7 @@ namespace DesktopWidgets.Helpers
                 JsonConvert.DeserializeObject<WidgetsSettingsStore>(Settings.Default.Widgets, JsonSerializerSettings) ??
                 new WidgetsSettingsStore
                 {
-                    Widgets = new ObservableCollection<WidgetSettings>()
+                    Widgets = new ObservableCollection<WidgetSettingsBase>()
                 };
             App.WidgetsSettingsStore.Widgets.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
         }
@@ -93,7 +93,7 @@ namespace DesktopWidgets.Helpers
                     foreach (
                         var id in
                             JsonConvert.DeserializeObject<WidgetsSettingsStore>(dialog.InputData, JsonSerializerSettings)
-                                .Widgets.Select(x => x.ID.Guid))
+                                .Widgets.Select(x => x.Identifier.Guid))
                     {
                     }
                 }

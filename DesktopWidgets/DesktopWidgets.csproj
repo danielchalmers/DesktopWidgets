@@ -123,6 +123,7 @@
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\AnimationHelper.cs" />
+    <Compile Include="Classes\AppInitHelper.cs" />
     <Compile Include="Classes\ChangelogDownloader.cs" />
     <Compile Include="Classes\DelayedAction.cs" />
     <Compile Include="Enumerations.cs" />
@@ -143,7 +144,6 @@
     <Compile Include="Classes\Win32RECT.cs" />
     <Compile Include="Classes\WindowHelper.cs" />
     <Compile Include="Classes\WindowUtilities.cs" />
-    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Helpers\FileSystemHelper.cs" />
@@ -240,7 +240,6 @@
     <Compile Include="Widgets\TimeClock\ViewModel.cs" />
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
     <Compile Include="ViewModel\SelectItemViewModel.cs" />
-    <Compile Include="ViewModelBase\ViewModelBase.cs" />
     <Compile Include="View\SelectItem.xaml.cs">
       <DependentUpon>SelectItem.xaml</DependentUpon>
     </Compile>
@@ -249,7 +248,7 @@
     </Compile>
     <Compile Include="ViewModelBase\ClockViewModelBase.cs" />
     <Compile Include="ViewModelBase\WidgetViewModelBase.cs" />
-    <Compile Include="Classes\WidgetSettings.cs" />
+    <Compile Include="Classes\WidgetSettingsBase.cs" />
     <Compile Include="Helpers\WidgetHelper.cs" />
     <Compile Include="Helpers\WindowHelper.cs" />
     <Compile Include="Windows\UpdatePrompt.xaml.cs">

@@ -18,7 +18,7 @@ namespace DesktopWidgets.Classes
         private readonly DispatcherTimer _hideTimer;
         private readonly WidgetId _id;
         private readonly DispatcherTimer _mouseCheckTimer;
-        private readonly WidgetSettings _settings;
+        private readonly WidgetSettingsBase _settings;
         private readonly DispatcherTimer _showTimer;
         private readonly WidgetView _view;
         private readonly WidgetViewModelBase _viewModel;

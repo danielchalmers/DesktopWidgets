@@ -3,19 +3,19 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
-using DesktopWidgets.Commands;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
+using GalaSoft.MvvmLight.Command;
 using NHotkey;
 using NHotkey.Wpf;
 
 namespace DesktopWidgets.ViewModelBase
 {
-    public abstract class WidgetViewModelBase : ViewModelBase
+    public abstract class WidgetViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
         private readonly MouseChecker _mouseChecker;
         private readonly DispatcherTimer _onTopForceTimer;
-        private readonly WidgetSettings _settings;
+        private readonly WidgetSettingsBase _settings;
         private double _actualHeight;
         private double _actualWidth;
 
@@ -39,9 +39,9 @@ namespace DesktopWidgets.ViewModelBase
         protected WidgetViewModelBase(WidgetId id)
         {
             Opacity = 0;
-            MouseDownCommand = new DelegateCommand(MouseDown);
-            LocationChangedCommand = new DelegateCommand(LocationChanged);
-            ClosingCommand = new DelegateCommand(OnClosing);
+            MouseDown = new RelayCommand<Window>(OnMouseDownExecute);
+            LocationChanged = new RelayCommand<Window>(OnLocationChangedExecute);
+            Closing = new RelayCommand<Window>(OnClosingExecute);
             _settings = id.GetSettings();
             if (_settings.ForceOnTop)
             {
@@ -166,9 +166,9 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
-        public ICommand ClosingCommand { get; private set; }
-        public ICommand MouseDownCommand { get; private set; }
-        public ICommand LocationChangedCommand { get; private set; }
+        public ICommand Closing { get; private set; }
+        public ICommand MouseDown { get; private set; }
+        public ICommand LocationChanged { get; private set; }
 
         public bool IsContextMenuOpen
         {
@@ -318,21 +318,21 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
-        private void OnClosing(object parameter)
+        private void OnClosingExecute(Window window)
         {
             _mouseChecker.Stop();
         }
 
-        private void MouseDown(object parameter)
+        private void OnMouseDownExecute(Window window)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed && _settings.DockPosition == ScreenDockPosition.None)
-                (parameter as Window).DragMove();
+                window.DragMove();
         }
 
-        private void LocationChanged(object parameter)
+        private void OnLocationChangedExecute(Window window)
         {
             if (_settings.SnapToScreenEdges)
-                (parameter as Window).SnapToScreenEdges();
+                window.SnapToScreenEdges();
         }
     }
 }

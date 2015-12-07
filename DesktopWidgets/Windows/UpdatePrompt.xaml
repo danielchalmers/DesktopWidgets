@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         Width="450" Height="400">
     <Window.Resources>
-        <classes:BooleanToCollapsedVisibilityConverter x:Key="BooleanToCollapsedVisibilityConverter" />
+        <classes:BoolToCollapsedVisibilityConverter x:Key="BooleanToCollapsedVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

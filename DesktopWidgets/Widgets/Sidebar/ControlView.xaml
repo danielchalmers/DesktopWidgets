@@ -24,7 +24,7 @@
         <SolidColorBrush x:Key="ButtonBrush" Color="{StaticResource ButtonColor}" />
         <SolidColorBrush x:Key="ButtonTextBrush" Color="{StaticResource ButtonTextColor}" />
 
-        <classes:BooleanToThicknessConverter x:Key="BooleanToThicknessConverter" />
+        <classes:BoolToThicknessConverter x:Key="BooleanToThicknessConverter" />
         <classes:ShowIconContentToVisibilityConverter x:Key="ShowIconContentToVisibilityConverter" />
         <classes:ShowTextContentToVisibilityConverter x:Key="ShowTextContentToVisibilityConverter" />
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
@@ -175,7 +175,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseEnter">
                                 <command:EventToCommand
-                                    Command="{Binding DataContext.ShortcutPreviewMouseLeftButtonUp, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                     CommandParameter="{Binding}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
