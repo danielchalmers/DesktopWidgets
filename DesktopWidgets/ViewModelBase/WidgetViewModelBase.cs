@@ -189,7 +189,6 @@ namespace DesktopWidgets.ViewModelBase
             {
                 if (_settings.OpenMode == OpenMode.Keyboard || _settings.OpenMode == OpenMode.MouseAndKeyboard)
                 {
-                    HotkeyManager.Current.Remove("Show");
                     HotkeyManager.Current.AddOrReplace("Show", _settings.HotKey, _settings.HotKeyModifiers, OnHotKey);
                 }
             }
@@ -200,7 +199,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private void OnHotKey(object sender, HotkeyEventArgs e)
         {
-            ShowIntro();
+            if(e.Name == "Show")
+                ShowIntro();
             e.Handled = true;
         }
 
