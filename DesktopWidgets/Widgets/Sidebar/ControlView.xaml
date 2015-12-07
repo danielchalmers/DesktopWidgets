@@ -173,7 +173,7 @@
                             CommandParameter="{Binding Path=.}"
                             ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}">
                         <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:EventTrigger EventName="MouseEnter">
                                 <command:EventToCommand
                                     Command="{Binding DataContext.ShortcutPreviewMouseLeftButtonUp, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                     CommandParameter="{Binding}" />
