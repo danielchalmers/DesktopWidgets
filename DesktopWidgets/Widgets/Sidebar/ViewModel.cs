@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -31,6 +32,12 @@ namespace DesktopWidgets.Widgets.Sidebar
             ShortcutRemove = new RelayCommand(ShortcutRemoveExecute);
             ShortcutOpenFolder = new RelayCommand(ShortcutOpenFolderExecute);
             ShortcutExecute = new RelayCommand<Shortcut>(ShortcutExecuteExecute);
+
+            if (Settings.DefaultShortcutsMode != DefaultShortcutsMode.DontChange)
+            {
+                Settings.Shortcuts = new ObservableCollection<Shortcut>(ShortcutHelper.GetDefaultShortcuts(Settings.DefaultShortcutsMode));
+                Settings.DefaultShortcutsMode = DefaultShortcutsMode.DontChange;
+            }
         }
 
         public Settings Settings { get; }

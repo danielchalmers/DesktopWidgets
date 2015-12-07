@@ -5,7 +5,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 {
     public class Settings : WidgetSettings
     {
-        public ObservableCollection<Shortcut> Shortcuts { get; set; } = new ObservableCollection<Shortcut>();
+        public ObservableCollection<Shortcut> Shortcuts { get; set; }
         public IconPosition IconPosition { get; set; } = IconPosition.Left;
         public ToolTipType ToolTipType { get; set; } = ToolTipType.None;
         public ShortcutAlignment ButtonAlignment { get; set; } = ShortcutAlignment.Center;
@@ -16,7 +16,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public int ButtonHeight { get; set; } = 32;
         public bool HideOnExecute { get; set; } = true;
         public bool AllowDropFiles { get; set; } = true;
-        public int UseDefaults { get; set; } = 0;
+        public DefaultShortcutsMode DefaultShortcutsMode { get; set; } = DefaultShortcutsMode.Preset;
         public bool ParseShortcutFiles { get; set; } = true;
         public bool UseIconCache { get; set; } = true;
     }

@@ -99,4 +99,11 @@
         Stable,
         Beta
     };
+
+    public enum DefaultShortcutsMode
+    {
+        DontChange,
+        Preset,
+        Taskbar
+    };
 }

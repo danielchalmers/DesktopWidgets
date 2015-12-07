@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -67,63 +68,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void OpenFolder(this Shortcut shortcut)
         {
             ProcessHelper.OpenFolder(shortcut.Path);
-        }
-
-        public static void SetupDefaults(this ViewModel viewModel, Action Intro)
-        {
-            var mode = viewModel.Settings.UseDefaults;
-            if (mode == 0)
-                return;
-            viewModel.Settings.UseDefaults = 0;
-
-            viewModel.Reset();
-
-            if (mode == 1)
-            {
-                viewModel.Add(new Shortcut
-                {
-                    Name = "Help",
-                    Path = Resources.Website,
-                    SpecialType = "Help"
-                }, false);
-                viewModel.Add(new Shortcut
-                {
-                    Name = "File Explorer",
-                    Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe"
-                }, false);
-                viewModel.Add(new Shortcut
-                {
-                    Name = "Notepad",
-                    Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\notepad.exe"
-                }, false);
-                viewModel.Add(new Shortcut
-                {
-                    Name = "Calculator",
-                    Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe"
-                }, false);
-                viewModel.Add(new Shortcut
-                {
-                    Name = "Command Prompt",
-                    Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe"
-                }, false);
-            }
-            else if (mode == 2)
-            {
-                try
-                {
-                    foreach (
-                        var file in
-                            Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                               Resources.TaskBarPath)
-                                .Where(file => Path.GetFileName(file) != "desktop.ini"))
-                        viewModel.ProcessFile(file, Path.GetFileNameWithoutExtension(file), false);
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
-            Intro();
         }
 
         public static void Reload(this ViewModel viewModel)
@@ -287,6 +231,60 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (!viewModel.IconCache.ContainsKey(shortcut.Path))
                 viewModel.IconCache.Add(shortcut.Path, GetShortcutIcon(shortcut));
             return viewModel.IconCache[shortcut.Path];
+        }
+
+        public static IEnumerable<Shortcut> GetDefaultShortcuts(DefaultShortcutsMode mode)
+        {
+            var defaults = new List<Shortcut>();
+
+            switch (mode)
+            {
+                default:
+                case DefaultShortcutsMode.DontChange:
+                    break;
+                case DefaultShortcutsMode.Preset:
+                    defaults.Add(new Shortcut
+                    {
+                        Name = "Help",
+                        Path = Resources.Website,
+                        SpecialType = "Help"
+                    });
+                    defaults.Add(new Shortcut
+                    {
+                        Name = "File Explorer",
+                        Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe"
+                    });
+                    defaults.Add(new Shortcut
+                    {
+                        Name = "Notepad",
+                        Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\notepad.exe"
+                    });
+                    defaults.Add(new Shortcut
+                    {
+                        Name = "Calculator",
+                        Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe"
+                    });
+                    defaults.Add(new Shortcut
+                    {
+                        Name = "Command Prompt",
+                        Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe"
+                    });
+                    break;
+                case DefaultShortcutsMode.Taskbar:
+                    try
+                    {
+                        var taskbarPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                                   Resources.TaskBarPath;
+                        defaults.AddRange(Directory.GetFiles(taskbarPath).Where(file => Path.GetFileName(file) != "desktop.ini").Select(file => new Shortcut {Path = file, Name = Path.GetFileNameWithoutExtension(file)}));
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
+                    break;
+            }
+
+            return defaults;
         }
     }
 }
