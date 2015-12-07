@@ -47,6 +47,7 @@ namespace DesktopWidgets.Classes
         public Key HotKey { get; set; } = Key.Tab;
         public ModifierKeys HotKeyModifiers { get; set; } = ModifierKeys.Control | ModifierKeys.Alt;
         public bool ActivateOnShow { get; set; } = true;
+        public int ForceOnTopInterval { get; set; } = 500;
 
         public override string ToString()
         {

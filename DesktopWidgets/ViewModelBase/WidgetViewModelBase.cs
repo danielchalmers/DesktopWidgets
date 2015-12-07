@@ -43,10 +43,11 @@ namespace DesktopWidgets.ViewModelBase
             LocationChanged = new RelayCommand<Window>(OnLocationChangedExecute);
             Closing = new RelayCommand<Window>(OnClosingExecute);
             _settings = id.GetSettings();
-            if (_settings.ForceOnTop)
+            OnTop = _settings.OnTop;
+            if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
             {
                 _onTopForceTimer = new DispatcherTimer();
-                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(100);
+                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
                 _onTopForceTimer.Tick += delegate
                 {
                     OnTop = false;
