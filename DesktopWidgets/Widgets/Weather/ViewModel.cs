@@ -14,6 +14,8 @@ namespace DesktopWidgets.Widgets.Weather
         private string _description;
         private string _iconUrl;
 
+        private bool _showHelp;
+
         private double _temperature;
         public DispatcherTimer UpdateTimer;
 
@@ -26,10 +28,30 @@ namespace DesktopWidgets.Widgets.Weather
             UpdateTimer.Interval = Settings.RefreshInterval;
             UpdateTimer.Tick += UpdateWeather;
             UpdateTimer.Start();
-            UpdateWeather();
+            if (Settings.ZipCode == 0)
+            {
+                ShowHelp = true;
+            }
+            else
+            {
+                UpdateWeather();
+            }
         }
 
         public Settings Settings { get; }
+
+        public bool ShowHelp
+        {
+            get { return _showHelp; }
+            set
+            {
+                if (_showHelp != value)
+                {
+                    _showHelp = value;
+                    RaisePropertyChanged(nameof(ShowHelp));
+                }
+            }
+        }
 
 
         public double Temperature

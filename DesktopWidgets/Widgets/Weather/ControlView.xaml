@@ -3,26 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:classes="clr-namespace:DesktopWidgets.Classes"
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <classes:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter" />
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
-        <Image Source="{Binding IconUrl}" Width="50" Height="50"
-               Visibility="{Binding Settings.ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        <StackPanel Margin="5">
-            <StackPanel.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="TextAlignment" Value="Center" />
-                </Style>
-            </StackPanel.Resources>
-            <TextBlock
-                Visibility="{Binding Settings.ShowTemperature, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Run Text="{Binding Temperature}" />
-                <Run Text="°" />
-            </TextBlock>
-            <TextBlock Text="{Binding Description}"
-                       Visibility="{Binding Settings.ShowDescription, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    <Grid>
+        <TextBlock Text="Enter a zip code" TextAlignment="Center"
+                   Visibility="{Binding ShowHelp, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <StackPanel Orientation="Horizontal"
+                    Visibility="{Binding ShowHelp, Converter={StaticResource BoolToCollapsedVisibilityConverter}}">
+            <Image Source="{Binding IconUrl}" Width="50" Height="50"
+                   Visibility="{Binding Settings.ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <StackPanel Margin="5">
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="TextAlignment" Value="Center" />
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock
+                    Visibility="{Binding Settings.ShowTemperature, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Run Text="{Binding Temperature}" />
+                    <Run Text="°" />
+                </TextBlock>
+                <TextBlock Text="{Binding Description}"
+                           Visibility="{Binding Settings.ShowDescription, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </UserControl>
