@@ -41,6 +41,10 @@
         <SolidColorBrush x:Key="WindowBorderBrush" Color="{Binding Settings.BorderColor}"
                          Opacity="{Binding Settings.BorderOpacity}" />
 
+        <SolidColorBrush x:Key="NameBackgroundBrush" Color="{Binding Settings.NameBackgroundColor}"
+                         Opacity="{Binding Settings.NameBackgroundOpacity}" />
+        <SolidColorBrush x:Key="NameForegroundBrush" Color="{Binding Settings.NameTextColor}" />
+
         <Style x:Key="WidgetWindowStyle" TargetType="{x:Type Window}">
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="ResizeMode" Value="NoResize" />
@@ -76,11 +80,12 @@
             <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="NameTextBlockStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontFamily" Value="{Binding Settings.NameFontFamily}" />
+            <Setter Property="FontSize" Value="{Binding Settings.NameFontSize}" />
+            <Setter Property="FontWeight" Value="{Binding Settings.NameFontWeight}" />
+            <Setter Property="TextAlignment" Value="{Binding Settings.NameAlignment}" />
+            <Setter Property="Background" Value="{StaticResource NameBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
             <Setter Property="Text" Value="{Binding Settings.Name}" />
             <Setter Property="Visibility">
                 <Setter.Value>

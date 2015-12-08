@@ -54,6 +54,13 @@ namespace DesktopWidgets.Classes
         public bool DragToMove { get; set; } = true;
         public string BackgroundImagePath { get; set; }
         public double BackgroundImageOpacity { get; set; } = 1.0;
+        public FontFamily NameFontFamily { get; set; } = new FontFamily("Segoe UI");
+        public FontWeight NameFontWeight { get; set; } = FontWeights.Bold;
+        public int NameFontSize { get; set; } = 14;
+        public Color NameTextColor { get; set; } = Colors.Black;
+        public Color NameBackgroundColor { get; set; } = Colors.White;
+        public double NameBackgroundOpacity { get; set; } = 1;
+        public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
 
         public override string ToString()
         {
