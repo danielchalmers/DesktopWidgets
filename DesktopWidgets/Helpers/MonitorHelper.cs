@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
@@ -14,8 +15,12 @@ namespace DesktopWidgets.Helpers
         {
             if (index == -1 || Screen.AllScreens.Length < index)
                 index = GetPrimaryIndex();
-            var workingArea = Screen.AllScreens[index].WorkingArea;
-            return new Rect(workingArea.X, workingArea.Y, workingArea.Width, workingArea.Height);
+            return Screen.AllScreens[index].WorkingArea.ToRect();
+        }
+
+        public static IEnumerable<Rect> GetAllMonitorBounds()
+        {
+            return Screen.AllScreens.Select(x => x.WorkingArea.ToRect());
         }
 
         public static int GetPrimaryIndex()

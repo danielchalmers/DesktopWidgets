@@ -332,7 +332,7 @@ namespace DesktopWidgets.ViewModelBase
         private void OnLocationChangedExecute(Window window)
         {
             if (_settings.SnapToScreenEdges)
-                window.SnapToScreenEdges();
+                window.Snap();
         }
     }
 }
