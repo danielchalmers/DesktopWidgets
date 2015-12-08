@@ -11,8 +11,19 @@ namespace DesktopWidgets.Widgets.CountdownClock
             Settings = guid.GetSettings() as Settings;
             if (Settings == null)
                 return;
+            TickAction = OnTickAction;
         }
 
         public Settings Settings { get; }
+
+        private void OnTickAction()
+        {
+            if (CurrentTime >= Settings.EndDateTime && Settings.LastEndDateTime != Settings.EndDateTime)
+            {
+                Settings.LastEndDateTime = Settings.EndDateTime;
+
+                SoundHelper.PlaySound(Settings.EndSoundPath, Settings.EndSoundVolume);
+            }
+        }
     }
 }

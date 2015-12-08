@@ -10,6 +10,7 @@ namespace DesktopWidgets.ViewModelBase
         private readonly DispatcherTimer _clockUpdateTimer;
         private readonly WidgetClockSettingsBase _settings;
         private DateTime _currentTime;
+        public Action TickAction;
 
         public ClockViewModelBase(WidgetId id, bool startTicking = true) : base(id)
         {
@@ -52,6 +53,7 @@ namespace DesktopWidgets.ViewModelBase
         public void UpdateCurrentTime()
         {
             CurrentTime = DateTime.Now;
+            TickAction?.Invoke();
             SyncClockUpdateInterval();
         }
 
