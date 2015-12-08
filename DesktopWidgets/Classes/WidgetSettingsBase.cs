@@ -52,6 +52,8 @@ namespace DesktopWidgets.Classes
         public int IntroDuration { get; set; } = 3000;
         public bool Unclickable { get; set; } = false;
         public bool DragToMove { get; set; } = true;
+        public string BackgroundImagePath { get; set; }
+        public double BackgroundImageOpacity { get; set; } = 1.0;
 
         public override string ToString()
         {

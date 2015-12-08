@@ -35,6 +35,8 @@
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
+        <ImageBrush x:Key="WindowBackgroundImageBrush" ImageSource="{Binding Settings.BackgroundImagePath}"
+                    Opacity="{Binding Settings.BackgroundImageOpacity}" />
         <SolidColorBrush x:Key="WindowForegroundBrush" Color="{Binding Settings.TextColor}" />
         <SolidColorBrush x:Key="WindowBorderBrush" Color="{Binding Settings.BorderColor}"
                          Opacity="{Binding Settings.BorderOpacity}" />
@@ -52,19 +54,20 @@
             <Setter Property="Top" Value="{Binding Top, Mode=TwoWay}" />
         </Style>
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
+            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="BorderThickness"
+                    Value="{Binding Settings.BorderEnabled, Converter={StaticResource BooleanToThicknessConverter}}" />
+        </Style>
+        <Style x:Key="WidgetBorderContainerStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{StaticResource WindowBackgroundImageBrush}" />
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
             <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
             <Setter Property="MaxWidth" Value="{Binding Settings.MaxWidth}" />
             <Setter Property="MaxHeight" Value="{Binding Settings.MaxHeight}" />
             <Setter Property="Width" Value="{Binding Width}" />
             <Setter Property="Height" Value="{Binding Height}" />
-            <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
-            <Setter Property="CornerRadius" Value="4" />
-            <Setter Property="BorderThickness"
-                    Value="{Binding Settings.BorderEnabled, Converter={StaticResource BooleanToThicknessConverter}}" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
@@ -95,6 +98,8 @@
     </Window.Style>
     <StackPanel>
         <TextBlock Style="{StaticResource NameTextBlockStyle}" />
-        <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderStyle}" />
+        <Border Style="{StaticResource WidgetBorderStyle}">
+            <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}" />
+        </Border>
     </StackPanel>
 </Window>
