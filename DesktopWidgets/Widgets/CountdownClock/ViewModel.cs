@@ -22,7 +22,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
             {
                 Settings.LastEndDateTime = Settings.EndDateTime;
 
-                SoundHelper.PlaySound(Settings.EndSoundPath, Settings.EndSoundVolume);
+                SoundHelper.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
             }
         }
     }
