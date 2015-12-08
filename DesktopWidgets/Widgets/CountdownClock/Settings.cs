@@ -14,5 +14,6 @@ namespace DesktopWidgets.Widgets.CountdownClock
         public DateTime LastEndDateTime { get; set; } = DateTime.Now;
         public string EndSoundPath { get; set; }
         public double EndSoundVolume { get; set; } = 1;
+        public bool EndContinueCounting { get; set; } = false;
     }
 }

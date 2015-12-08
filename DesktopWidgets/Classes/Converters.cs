@@ -92,7 +92,7 @@ namespace DesktopWidgets.Classes
 
                 var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
                 var ts = settings.EndDateTime - val;
-                return ts.TotalSeconds > 0
+                return ts.TotalSeconds > 0 || settings.EndContinueCounting
                     ? ts.ToString(format)
                     : TimeSpan.FromSeconds(0).ToString(format);
             }
