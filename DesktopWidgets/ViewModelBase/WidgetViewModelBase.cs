@@ -54,6 +54,8 @@ namespace DesktopWidgets.ViewModelBase
                 };
                 _onTopForceTimer.Start();
             }
+            if (!App.Arguments.Contains("-systemstartup"))
+                QueueIntro = true;
             _mouseChecker = new MouseChecker(id, this);
             _mouseChecker.Start();
         }
