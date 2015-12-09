@@ -62,6 +62,8 @@ namespace DesktopWidgets.Classes
         public double NameBackgroundOpacity { get; set; } = 1;
         public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
         public bool ShowIntro { get; set; } = true;
+        public bool MoveHotkeys { get; set; } = true;
+        public int MoveDistance { get; set; } = 5;
 
         public override string ToString()
         {

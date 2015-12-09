@@ -26,6 +26,9 @@
             <command:EventToCommand Command="{Binding Closing, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="KeyDown">
+            <command:EventToCommand Command="{Binding KeyDown, Mode=OneWay}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
         <classes:BoolToThicknessConverter x:Key="BooleanToThicknessConverter" />

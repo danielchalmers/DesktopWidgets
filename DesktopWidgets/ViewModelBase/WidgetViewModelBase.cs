@@ -41,6 +41,7 @@ namespace DesktopWidgets.ViewModelBase
             MouseDown = new RelayCommand<Window>(OnMouseDownExecute);
             LocationChanged = new RelayCommand<Window>(OnLocationChangedExecute);
             Closing = new RelayCommand<Window>(OnClosingExecute);
+            KeyDown = new RelayCommand<KeyEventArgs>(OnKeyDownExecute);
             _settings = id.GetSettings();
             OnTop = _settings.OnTop;
             if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
@@ -171,6 +172,7 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand Closing { get; private set; }
         public ICommand MouseDown { get; private set; }
         public ICommand LocationChanged { get; private set; }
+        public ICommand KeyDown { get; private set; }
 
         public bool IsContextMenuOpen
         {
@@ -335,6 +337,28 @@ namespace DesktopWidgets.ViewModelBase
         {
             if (_settings.SnapToScreenEdges)
                 window.Snap();
+        }
+
+        private void OnKeyDownExecute(KeyEventArgs e)
+        {
+            if (_settings.MoveHotkeys)
+            {
+                switch (e.Key)
+                {
+                    case Key.Up:
+                        Top -= _settings.MoveDistance;
+                        break;
+                    case Key.Down:
+                        Top += _settings.MoveDistance;
+                        break;
+                    case Key.Left:
+                        Left -= _settings.MoveDistance;
+                        break;
+                    case Key.Right:
+                        Left += _settings.MoveDistance;
+                        break;
+                }
+            }
         }
     }
 }
