@@ -34,8 +34,20 @@ namespace DesktopWidgets.View
         {
             base.OnSourceInitialized(e);
             var hwnd = new WindowInteropHelper(this).Handle;
+            var widgetSrc = HwndSource.FromHwnd(hwnd);
+
+            widgetSrc?.AddHook(WndProc);
+
             if (Settings.Unclickable)
                 Win32Helper.SetWindowExTransparent(hwnd);
+        }
+
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == SingleInstanceHelper.WM_SHOWAPP)
+                ((WidgetViewModelBase) DataContext).ShowIntro();
+
+            return IntPtr.Zero;
         }
     }
 }

@@ -1,4 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Deployment.Application;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
@@ -15,12 +20,14 @@ namespace DesktopWidgets
     public partial class App : Application
     {
         public static bool SuccessfullyLoaded;
+        public static Mutex AppMutex;
         public static HelperWindow HelperWindow;
         public static TaskbarIcon TrayIcon;
         public static WidgetsSettingsStore WidgetsSettingsStore;
         public static ObservableCollection<WidgetView> WidgetViews;
         public static SaveTimer SaveTimer;
         public static TaskScheduler UpdateScheduler;
+        public static List<string> Arguments;
 
         public App()
         {
@@ -30,6 +37,14 @@ namespace DesktopWidgets
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            if (ApplicationDeployment.IsNetworkDeployed &&
+                AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null &&
+                AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
+                Arguments =
+                    AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData[0].Split(',').ToList();
+            else
+                Arguments = e.Args.ToList();
 
             AppInitHelper.Initialize();
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");

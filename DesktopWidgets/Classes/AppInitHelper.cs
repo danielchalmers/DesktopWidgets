@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
@@ -13,6 +14,8 @@ namespace DesktopWidgets.Classes
             App.HelperWindow = new HelperWindow();
             SettingsHelper.UpgradeSettings();
             SettingsHelper.LoadSettings();
+            if (IsAppAlreadyRunning())
+                return;
 
             WidgetHelper.LoadWidgetViews();
 
@@ -24,6 +27,20 @@ namespace DesktopWidgets.Classes
             App.SuccessfullyLoaded = true;
 
             CheckForUpdatesDelayed();
+        }
+
+        private static bool IsAppAlreadyRunning()
+        {
+            bool isNewInstance;
+            App.AppMutex = new Mutex(true, AssemblyInfo.Guid, out isNewInstance);
+            if (App.Arguments.Contains("-restarting") || App.Arguments.Contains("-multiinstance") ||
+                Settings.Default.AllowMultiInstance || isNewInstance)
+            {
+                return false;
+            }
+            SingleInstanceHelper.ShowFirstInstance();
+            AppHelper.ShutdownApplication();
+            return true;
         }
 
         private static void StartScheduledTasks()
