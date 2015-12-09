@@ -1,6 +1,7 @@
 ﻿#region
 
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,37 +17,57 @@ namespace DesktopWidgets.Windows
     /// <summary>
     ///     Interaction logic for Options.xaml
     /// </summary>
-    public partial class Options : Window
+    public partial class Options : Window, INotifyPropertyChanged
     {
-        private readonly List<Page> _pages;
+        private Page _currentPage;
 
         public Options()
         {
             InitializeComponent();
 
-            _pages = new List<Page>();
-            LoadPages();
+            Pages = new ObservableCollection<Page>();
+            AddPages();
+            if (Pages.Count > 0)
+                CurrentPage = Pages[0];
 
             Settings.Default.Save();
+
+            DataContext = this;
         }
 
-        private void LoadPages()
+        public ObservableCollection<Page> Pages { get; }
+
+        public Page CurrentPage
         {
-            _pages.Add(new General());
-            if (Settings.Default.EnableAdvancedMode)
-                _pages.Add(new Advanced());
-            _pages.Add(new About());
-            for (var i = 0; i < _pages.Count; i++)
-                NavBar.Items.Add(new ListBoxItem
+            get { return _currentPage; }
+            set
+            {
+                if (!Equals(_currentPage, value))
                 {
-                    Content = _pages[i].Title,
-                    Tag = i
-                });
+                    _currentPage = value;
+                    RaisePropertyChanged(nameof(CurrentPage));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string prop)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        private void AddPages()
+        {
+            Pages.Add(new General());
+            if (Settings.Default.EnableAdvancedMode)
+                Pages.Add(new Advanced());
+            Pages.Add(new About());
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var be in _pages.SelectMany(BindingOperations.GetSourceUpdatingBindings))
+            foreach (var be in Pages.SelectMany(BindingOperations.GetSourceUpdatingBindings))
                 be.UpdateSource();
             Settings.Default.Save();
             Close();
@@ -60,15 +81,10 @@ namespace DesktopWidgets.Windows
 
         private void frame_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            var content = OptionsFrame.Content as FrameworkElement;
+            var content = (sender as Frame).Content as FrameworkElement;
             if (content == null)
                 return;
             content.Style = (Style) FindResource("OptionsStyle");
-        }
-
-        private void NavBar_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OptionsFrame.Navigate(_pages[NavBar.SelectedIndex]);
         }
     }
 }
