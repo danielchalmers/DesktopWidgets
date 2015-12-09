@@ -208,7 +208,7 @@ namespace DesktopWidgets.ViewModelBase
 
         public void ShowIntro()
         {
-            if (_settings.OpenMode == OpenMode.AlwaysOpen)
+            if (_settings.OpenMode == OpenMode.AlwaysOpen || !_settings.ShowIntro)
                 return;
 
             if (Opacity < 1)

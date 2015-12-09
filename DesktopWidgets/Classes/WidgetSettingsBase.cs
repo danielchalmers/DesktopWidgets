@@ -61,6 +61,7 @@ namespace DesktopWidgets.Classes
         public Color NameBackgroundColor { get; set; } = Colors.White;
         public double NameBackgroundOpacity { get; set; } = 1;
         public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
+        public bool ShowIntro { get; set; } = true;
 
         public override string ToString()
         {
