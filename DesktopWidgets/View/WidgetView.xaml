@@ -35,7 +35,8 @@
         <classes:MultiBoolToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
         <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
         <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
-
+        <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter"/>
+        
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
         <ImageBrush x:Key="WindowBackgroundImageBrush" ImageSource="{Binding Settings.BackgroundImagePath}"
@@ -107,7 +108,18 @@
     <StackPanel>
         <TextBlock Style="{StaticResource NameTextBlockStyle}" />
         <Border Style="{StaticResource WidgetBorderStyle}">
-            <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}" />
+            <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}" >
+                <Border.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit..." Command="{Binding EditWidget}"/>
+                        <Separator/>
+                        <MenuItem Header="Reload" Command="{Binding ReloadWidget}"/>
+                        <MenuItem Header="{Binding Settings.Disabled, Converter={StaticResource BoolToEnableDisableNameConverter}}" Command="{Binding ToggleEnableWidget}"/>
+                        <Separator/>
+                        <MenuItem Header="Manage All..." Command="{Binding ManageAllWidgets}"/>
+                    </ContextMenu>
+                </Border.ContextMenu>
+            </Border>
         </Border>
     </StackPanel>
 </Window>

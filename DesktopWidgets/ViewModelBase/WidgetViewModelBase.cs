@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight.Command;
 using NHotkey;
 using NHotkey.Wpf;
@@ -15,6 +16,7 @@ namespace DesktopWidgets.ViewModelBase
         private readonly MouseChecker _mouseChecker;
         private readonly DispatcherTimer _onTopForceTimer;
         private readonly WidgetSettingsBase _settings;
+        private readonly WidgetId _id;
         private double _actualHeight;
         private double _actualWidth;
 
@@ -38,11 +40,16 @@ namespace DesktopWidgets.ViewModelBase
         protected WidgetViewModelBase(WidgetId id)
         {
             Opacity = 0;
+            _id = id;
+            _settings = id.GetSettings();
             MouseDown = new RelayCommand<Window>(OnMouseDownExecute);
             LocationChanged = new RelayCommand<Window>(OnLocationChangedExecute);
             Closing = new RelayCommand<Window>(OnClosingExecute);
             KeyDown = new RelayCommand<KeyEventArgs>(OnKeyDownExecute);
-            _settings = id.GetSettings();
+            EditWidget = new RelayCommand(EditWidgetExecute);
+            ReloadWidget = new RelayCommand(ReloadWidgetExecute);
+            ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
+            ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
             OnTop = _settings.OnTop;
             if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
             {
@@ -173,6 +180,10 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand MouseDown { get; private set; }
         public ICommand LocationChanged { get; private set; }
         public ICommand KeyDown { get; private set; }
+        public ICommand EditWidget { get; private set; }
+        public ICommand ReloadWidget { get; private set; }
+        public ICommand ToggleEnableWidget { get; private set; }
+        public ICommand ManageAllWidgets { get; private set; }
 
         public bool IsContextMenuOpen
         {
@@ -359,6 +370,27 @@ namespace DesktopWidgets.ViewModelBase
                         break;
                 }
             }
+        }
+
+        private void EditWidgetExecute()
+        {
+            _id.Edit();
+        }
+
+        private void ReloadWidgetExecute()
+        {
+            _id.ToggleEnable();
+            _id.ToggleEnable();
+        }
+
+        private void ToggleEnableWidgetExecute()
+        {
+            _id.ToggleEnable();
+        }
+
+        private void ManageAllWidgetsExecute()
+        {
+            new ManageWidgets().Show();
         }
     }
 }
