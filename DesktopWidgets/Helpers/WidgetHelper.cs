@@ -225,5 +225,11 @@ namespace DesktopWidgets.Helpers
                     App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.Identifier))
                 id.LoadView();
         }
+
+        public static void ShowAllWidgetIntros()
+        {
+            foreach (var view in App.WidgetViews)
+                (view.DataContext as WidgetViewModelBase).ShowIntro();
+        }
     }
 }

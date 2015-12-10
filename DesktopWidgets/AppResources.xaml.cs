@@ -30,5 +30,10 @@ namespace DesktopWidgets
         {
             AppHelper.ShutdownApplication();
         }
+
+        private void TrayIcon_OnTrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            WidgetHelper.ShowAllWidgetIntros();
+        }
     }
 }
