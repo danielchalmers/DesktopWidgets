@@ -142,10 +142,19 @@
     <ScrollViewer
         VerticalScrollBarVisibility="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}"
         HorizontalScrollBarVisibility="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}">
-        <ItemsControl AllowDrop="True" ItemsSource="{Binding Path=Settings.Shortcuts}"
-                      VerticalAlignment="{Binding Path=., Converter={StaticResource SettingsToVerticalAlignmentConverter}}"
-                      HorizontalAlignment="{Binding Path=., Converter={StaticResource SettingsToHorizontalAlignmentConverter}}"
-                      Focusable="False">
+        <ItemsControl AllowDrop="True" ItemsSource="{Binding Path=Settings.Shortcuts}" Focusable="False">
+            <ItemsControl.HorizontalAlignment>
+                <MultiBinding Converter="{StaticResource SettingsToHorizontalAlignmentConverter}">
+                    <Binding Path="Settings.DockPosition" />
+                    <Binding Path="Settings.ButtonAlignment" />
+                </MultiBinding>
+            </ItemsControl.HorizontalAlignment>
+            <ItemsControl.VerticalAlignment>
+                <MultiBinding Converter="{StaticResource SettingsToVerticalAlignmentConverter}">
+                    <Binding Path="Settings.DockPosition" />
+                    <Binding Path="Settings.ButtonAlignment" />
+                </MultiBinding>
+            </ItemsControl.VerticalAlignment>
             <ItemsControl.ContextMenu>
                 <ContextMenu>
                     <ContextMenu.ItemsSource>

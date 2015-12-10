@@ -514,35 +514,47 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class SettingsToVerticalAlignmentConverter : IValueConverter
+    public class SettingsToHorizontalAlignmentConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
+            try
+            {
+                var dockPosition = (ScreenDockPosition) value[0];
+                var shortcutAlignment = (ShortcutAlignment) value[1];
+                return dockPosition.IsVertical()
+                    ? shortcutAlignment.ToHorizontalAlignment()
+                    : HorizontalAlignment.Stretch;
+            }
+            catch
+            {
                 return Binding.DoNothing;
-            return val.DockPosition.IsHorizontal() ? val.ButtonAlignment.ToVerticalAlignment() : VerticalAlignment.Top;
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
     }
 
-    public class SettingsToHorizontalAlignmentConverter : IValueConverter
+    public class SettingsToVerticalAlignmentConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
+            try
+            {
+                var dockPosition = (ScreenDockPosition) value[0];
+                var shortcutAlignment = (ShortcutAlignment) value[1];
+                return dockPosition.IsHorizontal() ? shortcutAlignment.ToVerticalAlignment() : VerticalAlignment.Top;
+            }
+            catch
+            {
                 return Binding.DoNothing;
-            return val.DockPosition.IsVertical()
-                ? val.ButtonAlignment.ToHorizontalAlignment()
-                : HorizontalAlignment.Stretch;
+            }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
