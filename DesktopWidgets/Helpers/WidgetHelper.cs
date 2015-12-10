@@ -46,7 +46,7 @@ namespace DesktopWidgets.Helpers
             var settings = id.GetSettings();
             var index = App.WidgetsSettingsStore.Widgets.IndexOf(settings);
             var name = (settings.Name == "" ? $"Widget {index + 1}" : settings.Name);
-            return $"{name}";
+            return $"{name} ({id.GetFriendlyName()})";
         }
 
         public static void NewWidget()
@@ -57,41 +57,78 @@ namespace DesktopWidgets.Helpers
             AddNewWidget((string) dialog.SelectedItem);
         }
 
-        private static void AddNewWidget(string type)
+        private static string GetFriendlyName(this WidgetId id)
         {
-            WidgetSettingsBase newWidget;
-            switch (type)
+            var settings = id.GetSettings();
+            if (settings is Settings)
+            {
+                return Metadata.FriendlyName;
+            }
+            if (settings is Widgets.CountdownClock.Settings)
+            {
+                return Widgets.CountdownClock.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.StopwatchClock.Settings)
+            {
+                return Widgets.StopwatchClock.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.Weather.Settings)
+            {
+                return Widgets.Weather.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.Search.Settings)
+            {
+                return Widgets.Search.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.Note.Settings)
+            {
+                return Widgets.Note.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.PictureFrame.Settings)
+            {
+                return Widgets.PictureFrame.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.PictureSlideshow.Settings)
+            {
+                return Widgets.PictureSlideshow.Metadata.FriendlyName;
+            }
+            if (settings is Widgets.Sidebar.Settings)
+            {
+                return Widgets.Sidebar.Metadata.FriendlyName;
+            }
+            return string.Empty;
+        }
+
+        private static WidgetSettingsBase GetNewSettingsFromFriendlyName(string name)
+        {
+            switch (name)
             {
                 case Metadata.FriendlyName:
-                    newWidget = new Settings();
-                    break;
+                    return new Settings();
                 case Widgets.CountdownClock.Metadata.FriendlyName:
-                    newWidget = new Widgets.CountdownClock.Settings();
-                    break;
+                    return new Widgets.CountdownClock.Settings();
                 case Widgets.StopwatchClock.Metadata.FriendlyName:
-                    newWidget = new Widgets.StopwatchClock.Settings();
-                    break;
+                    return new Widgets.StopwatchClock.Settings();
                 case Widgets.Weather.Metadata.FriendlyName:
-                    newWidget = new Widgets.Weather.Settings();
-                    break;
+                    return new Widgets.Weather.Settings();
                 case Widgets.Search.Metadata.FriendlyName:
-                    newWidget = new Widgets.Search.Settings();
-                    break;
+                    return new Widgets.Search.Settings();
                 case Widgets.Note.Metadata.FriendlyName:
-                    newWidget = new Widgets.Note.Settings();
-                    break;
+                    return new Widgets.Note.Settings();
                 case Widgets.PictureFrame.Metadata.FriendlyName:
-                    newWidget = new Widgets.PictureFrame.Settings();
-                    break;
+                    return new Widgets.PictureFrame.Settings();
                 case Widgets.PictureSlideshow.Metadata.FriendlyName:
-                    newWidget = new Widgets.PictureSlideshow.Settings();
-                    break;
+                    return new Widgets.PictureSlideshow.Settings();
                 case Widgets.Sidebar.Metadata.FriendlyName:
-                    newWidget = new Widgets.Sidebar.Settings();
-                    break;
+                    return new Widgets.Sidebar.Settings();
                 default:
-                    return;
+                    return null;
             }
+        }
+
+        private static void AddNewWidget(string type)
+        {
+            var newWidget = GetNewSettingsFromFriendlyName(type);
             App.WidgetsSettingsStore.Widgets.Add(newWidget);
             newWidget.Identifier.LoadView();
         }
@@ -133,7 +170,7 @@ namespace DesktopWidgets.Helpers
             var settings = id.GetSettings();
             App.WidgetsSettingsStore.Widgets.Remove(settings);
             var view = id.GetView();
-            if(view != null)
+            if (view != null)
             {
                 view.Close();
                 App.WidgetViews.Remove(view);
