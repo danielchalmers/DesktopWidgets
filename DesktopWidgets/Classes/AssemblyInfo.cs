@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Deployment.Application;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -10,7 +11,10 @@ namespace DesktopWidgets.Classes
 {
     internal static class AssemblyInfo
     {
-        public static Version Version { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+        public static Version Version { get; } = (ApplicationDeployment.IsNetworkDeployed
+            ? ApplicationDeployment.CurrentDeployment.CurrentVersion
+            : Assembly.GetExecutingAssembly().GetName().Version);
+
         public static string Copyright { get; } = GetAssemblyAttribute<AssemblyCopyrightAttribute>(a => a.Copyright);
         public static string Title { get; } = GetAssemblyAttribute<AssemblyTitleAttribute>(a => a.Title);
 
