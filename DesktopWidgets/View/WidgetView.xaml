@@ -111,7 +111,7 @@
         <Border Style="{StaticResource WidgetBorderStyle}">
             <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}" >
                 <Border.ContextMenu>
-                    <ContextMenu Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <ContextMenu Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}" IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                         <MenuItem Header="Edit..." Command="{Binding EditWidget}"/>
                         <Separator/>
                         <MenuItem Header="Reload" Command="{Binding ReloadWidget}"/>
