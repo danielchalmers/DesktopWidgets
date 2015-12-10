@@ -15,27 +15,52 @@ namespace DesktopWidgets.Helpers
             var bounds = new List<Rect> {SystemParameters.WorkArea};
             bounds.AddRange(MonitorHelper.GetAllMonitorBounds());
             bounds.AddRange(App.WidgetViews.Where(x => !x.Equals(window)).Select(view => view.GetBounds()));
-
             var windowRect = window.GetBounds();
-            foreach (var rect in bounds)
-            {
-                if (Math.Abs(rect.Left - windowRect.Left) <= margin)
-                    window.Left = rect.Left;
-                else if (Math.Abs(rect.Right - windowRect.Left) <= margin)
-                    window.Left = rect.Right;
-                else if (Math.Abs(rect.Left - windowRect.Right) <= margin)
-                    window.Left = rect.Left - window.ActualWidth;
-                else if (Math.Abs(windowRect.Left + windowRect.Width - rect.Left - rect.Width) <= margin)
-                    window.Left = rect.Left + rect.Width - windowRect.Width;
 
-                if (Math.Abs(rect.Top - windowRect.Top) <= margin)
-                    window.Top = rect.Top;
-                else if (Math.Abs(rect.Bottom - windowRect.Top) <= margin)
-                    window.Top = rect.Bottom;
-                else if (Math.Abs(rect.Top - windowRect.Bottom) <= margin)
-                    window.Top = rect.Top - window.ActualHeight;
-                else if (Math.Abs(windowRect.Top + windowRect.Height - rect.Top - rect.Height) <= margin)
-                    window.Top = rect.Top + rect.Height - windowRect.Height;
+            var horizontal = new List<double>();
+            horizontal.AddRange(bounds.Select(x => x.Left));
+            horizontal.AddRange(bounds.Select(x => x.Right));
+            var vertical = new List<double>();
+            vertical.AddRange(bounds.Select(x => x.Top));
+            vertical.AddRange(bounds.Select(x => x.Bottom));
+
+            var newLeft = double.NaN;
+            var newTop = double.NaN;
+
+            foreach (var rect in horizontal.Distinct())
+            {
+                if (Math.Abs(rect - windowRect.Left) <= margin)
+                    newLeft = rect;
+                else if (Math.Abs(rect - windowRect.Right) <= margin)
+                    newLeft = rect - windowRect.Width;
+                else if (Math.Abs(rect - windowRect.Left) <= margin)
+                    newLeft = rect;
+                else if (Math.Abs(rect - windowRect.Right) <= margin)
+                    newLeft = rect - windowRect.Width;
+
+                if (!double.IsNaN(newLeft))
+                {
+                    window.Left = newLeft;
+                    break;
+                }
+            }
+
+            foreach (var rect in vertical.Distinct())
+            {
+                if (Math.Abs(rect - windowRect.Top) <= margin)
+                    newTop = rect;
+                else if (Math.Abs(rect - windowRect.Bottom) <= margin)
+                    newTop = rect - windowRect.Height;
+                else if (Math.Abs(rect - windowRect.Top) <= margin)
+                    newTop = rect;
+                else if (Math.Abs(rect - windowRect.Bottom) <= margin)
+                    newTop = rect - windowRect.Height;
+
+                if (!double.IsNaN(newTop))
+                {
+                    window.Top = newTop;
+                    break;
+                }
             }
         }
     }
