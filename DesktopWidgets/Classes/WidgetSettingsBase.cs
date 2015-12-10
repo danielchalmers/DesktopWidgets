@@ -64,6 +64,7 @@ namespace DesktopWidgets.Classes
         public bool ShowIntro { get; set; } = true;
         public bool MoveHotkeys { get; set; } = true;
         public int MoveDistance { get; set; } = 5;
+        public bool ShowContextMenu { get; set; } = true;
 
         public override string ToString()
         {

@@ -36,6 +36,7 @@
         <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
         <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
         <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -110,7 +111,7 @@
         <Border Style="{StaticResource WidgetBorderStyle}">
             <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}" >
                 <Border.ContextMenu>
-                    <ContextMenu>
+                    <ContextMenu Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <MenuItem Header="Edit..." Command="{Binding EditWidget}"/>
                         <Separator/>
                         <MenuItem Header="Reload" Command="{Binding ReloadWidget}"/>
