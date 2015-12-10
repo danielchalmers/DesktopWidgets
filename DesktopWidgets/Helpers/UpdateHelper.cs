@@ -110,7 +110,7 @@ namespace DesktopWidgets.Helpers
                 {
                     if (!auto)
                         Popup.Show(
-                            "There are no new updates available.");
+                            $"You have the latest version. ({AssemblyInfo.Version})");
                 }
             }
             catch (Exception)
