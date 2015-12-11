@@ -22,12 +22,6 @@
         <ComboBox ItemsSource="{Binding OpenModeItems}"
                   SelectedItem="{Binding Settings.OpenMode, UpdateSourceTrigger=Explicit}" />
 
-        <TextBlock Text="Width:" />
-        <TextBox Text="{Binding Settings.Width, UpdateSourceTrigger=Explicit}" />
-
-        <TextBlock Text="Height:" />
-        <TextBox Text="{Binding Settings.Height, UpdateSourceTrigger=Explicit}" />
-
         <TextBlock Text="Show Delay:" />
         <TextBox Text="{Binding Settings.ShowDelay, UpdateSourceTrigger=Explicit}" />
 
@@ -78,6 +72,12 @@
         <TextBlock Text="Background Image Opacity:" />
         <Slider
             Value="{Binding Settings.BackgroundImageOpacity, Converter={StaticResource OneHundredConverter}, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Width:" />
+        <TextBox Text="{Binding Settings.Width, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Height:" />
+        <TextBox Text="{Binding Settings.Height, UpdateSourceTrigger=Explicit}" />
 
         <TextBlock Text="Animation Time:" />
         <TextBox Text="{Binding Settings.AnimationTime, UpdateSourceTrigger=Explicit}" />
