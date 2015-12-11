@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-      mc:Ignorable="d" Title="General">
+      mc:Ignorable="d" Title="Global">
     <StackPanel>
         <TextBlock Text="Run on Startup:" />
         <CheckBox

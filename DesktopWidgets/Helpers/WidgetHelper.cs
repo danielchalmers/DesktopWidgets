@@ -99,6 +99,48 @@ namespace DesktopWidgets.Helpers
             return string.Empty;
         }
 
+        public static List<Page> GetOptionsPages(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            if (settings is Settings)
+            {
+                return Metadata.OptionsPages;
+            }
+            if (settings is Widgets.CountdownClock.Settings)
+            {
+                return Widgets.CountdownClock.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.StopwatchClock.Settings)
+            {
+                return Widgets.StopwatchClock.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.Weather.Settings)
+            {
+                return Widgets.Weather.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.Search.Settings)
+            {
+                return Widgets.Search.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.Note.Settings)
+            {
+                return Widgets.Note.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.PictureFrame.Settings)
+            {
+                return Widgets.PictureFrame.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.PictureSlideshow.Settings)
+            {
+                return Widgets.PictureSlideshow.Metadata.OptionsPages;
+            }
+            if (settings is Widgets.Sidebar.Settings)
+            {
+                return Widgets.Sidebar.Metadata.OptionsPages;
+            }
+            return new List<Page>();
+        }
+
         private static WidgetSettingsBase GetNewSettingsFromFriendlyName(string name)
         {
             switch (name)
@@ -179,7 +221,7 @@ namespace DesktopWidgets.Helpers
 
         public static void Edit(this WidgetId id)
         {
-            new PropertyView(id.GetSettings()).ShowDialog();
+            new Options(id).ShowDialog();
             id.GetView()?.UpdateUi();
         }
 

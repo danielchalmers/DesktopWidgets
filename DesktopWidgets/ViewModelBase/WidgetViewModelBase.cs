@@ -13,10 +13,10 @@ namespace DesktopWidgets.ViewModelBase
 {
     public abstract class WidgetViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
+        private readonly WidgetId _id;
         private readonly MouseChecker _mouseChecker;
         private readonly DispatcherTimer _onTopForceTimer;
         private readonly WidgetSettingsBase _settings;
-        private readonly WidgetId _id;
         private double _actualHeight;
         private double _actualWidth;
 
@@ -214,7 +214,7 @@ namespace DesktopWidgets.ViewModelBase
 
         private void OnHotKey(object sender, HotkeyEventArgs e)
         {
-            if(e.Name == "Show")
+            if (e.Name == "Show")
                 ShowIntro();
             e.Handled = true;
         }
@@ -340,7 +340,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private void OnMouseDownExecute(Window window)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && _settings.DockPosition == ScreenDockPosition.None && _settings.DragToMove)
+            if (Mouse.LeftButton == MouseButtonState.Pressed && _settings.DockPosition == ScreenDockPosition.None &&
+                _settings.DragToMove)
                 window.DragMove();
         }
 

@@ -1,0 +1,42 @@
+﻿<Page x:Class="DesktopWidgets.Widgets.Sidebar.OptionsPages.Style"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
+      xmlns:p="clr-namespace:DesktopWidgets.Properties"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      mc:Ignorable="d" Title="Style">
+    <StackPanel>
+        <TextBlock Text="Icon Position:" />
+        <ComboBox ItemsSource="{Binding IconPositionItems}"
+                  SelectedItem="{Binding Settings.IconPosition, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Tooltip Type:" />
+        <ComboBox ItemsSource="{Binding ToolTipTypeItems}"
+                  SelectedItem="{Binding Settings.ToolTipType, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Shortcut Content Mode:" />
+        <ComboBox ItemsSource="{Binding ShortcutContentModeItems}"
+                  SelectedItem="{Binding Settings.ShortcutContentMode, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Shortcut Alignment:" />
+        <ComboBox ItemsSource="{Binding ButtonAlignmentItems}"
+                  SelectedItem="{Binding Settings.ButtonAlignment, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Shortcut Orientation:" />
+        <ComboBox ItemsSource="{Binding ShortcutOrientationItems}"
+                  SelectedItem="{Binding Settings.ShortcutOrientation, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Scrollbar Visibility:" />
+        <ComboBox ItemsSource="{Binding ScrollBarVisibilityItems}"
+                  SelectedItem="{Binding Settings.ScrollBarVisibility, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Icon Scaling Mode:" />
+        <ComboBox ItemsSource="{Binding IconScalingModeItems}"
+                  SelectedItem="{Binding Settings.IconScalingMode, UpdateSourceTrigger=Explicit}" />
+
+        <TextBlock Text="Shortcut Height:" />
+        <TextBox Text="{Binding Settings.ButtonHeight, UpdateSourceTrigger=Explicit}" />
+    </StackPanel>
+</Page>
