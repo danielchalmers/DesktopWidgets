@@ -156,7 +156,7 @@
                 </MultiBinding>
             </ItemsControl.VerticalAlignment>
             <ItemsControl.ContextMenu>
-                <ContextMenu>
+                <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                     <ContextMenu.ItemsSource>
                         <CompositeCollection>
                             <MenuItem Header="Edit..." Command="{Binding ShortcutEdit}" />
