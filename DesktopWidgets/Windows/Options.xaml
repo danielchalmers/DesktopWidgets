@@ -71,7 +71,8 @@
         </Grid.RowDefinitions>
 
         <ListBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding CurrentPage, Mode=TwoWay}"
-                 ItemsSource="{Binding Pages}">
+                 ItemsSource="{Binding Pages}"
+                 SelectedIndex="{Binding Path=OptionsIndex, Source={x:Static p:Settings.Default}}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="5" />
