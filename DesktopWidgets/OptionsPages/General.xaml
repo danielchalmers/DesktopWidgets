@@ -7,22 +7,19 @@
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" Title="General">
-    <StackPanel>
-        <TextBlock Text="Run on Startup:" />
-        <CheckBox
-            IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=RunOnStartup, Mode=TwoWay, UpdateSourceTrigger=Explicit}"
-            ToolTip="Run at Windows Startup" />
-
-        <TextBlock Text="Check For Updates:" />
-        <CheckBox IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=CheckForUpdates, Mode=TwoWay}"
-                  ToolTip="Check for Updates automatically" />
-
-        <TextBlock Text="Silent Auto-Update:" />
-        <CheckBox IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoUpdate, Mode=TwoWay}"
-                  ToolTip="Automatically update application without confirmation dialogs" />
-
-        <TextBlock Text="Enable Advanced Mode:" />
-        <CheckBox
-            IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Mode=TwoWay, UpdateSourceTrigger=Explicit}" />
-    </StackPanel>
+    <xctk:PropertyGrid
+        SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
+        IsCategorized="False"
+        ShowSortOptions="False"
+        ShowSummary="False"
+        ShowTitle="False"
+        AutoGenerateProperties="False"
+        Background="{x:Static SystemColors.WindowBrush}">
+        <xctk:PropertyGrid.PropertyDefinitions>
+            <xctk:PropertyDefinition TargetProperties="RunOnStartup" />
+            <xctk:PropertyDefinition TargetProperties="CheckForUpdates" />
+            <xctk:PropertyDefinition TargetProperties="AutoUpdate" />
+            <xctk:PropertyDefinition TargetProperties="EnableAdvancedMode" />
+        </xctk:PropertyGrid.PropertyDefinitions>
+    </xctk:PropertyGrid>
 </Page>

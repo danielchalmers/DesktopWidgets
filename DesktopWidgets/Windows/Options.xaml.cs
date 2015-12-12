@@ -6,7 +6,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Navigation;
 using DesktopWidgets.OptionsPages;
 using DesktopWidgets.Properties;
 
@@ -70,14 +69,6 @@ namespace DesktopWidgets.Windows
         {
             Settings.Default.Reload();
             Close();
-        }
-
-        private void frame_LoadCompleted(object sender, NavigationEventArgs e)
-        {
-            var content = (sender as Frame).Content as FrameworkElement;
-            if (content == null)
-                return;
-            content.Style = (Style) FindResource("OptionsStyle");
         }
     }
 }

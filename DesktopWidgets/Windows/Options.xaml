@@ -8,56 +8,6 @@
         Width="600" Height="550"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <Style x:Key="OptionsStyle">
-            <Style.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                    <Setter Property="Margin" Value="0,10,0,5" />
-                    <Setter Property="Padding" Value="0" />
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="Height" Value="23" />
-                </Style>
-                <Style TargetType="xctk:ColorPicker">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="Height" Value="Auto" />
-                </Style>
-                <Style TargetType="CheckBox">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="">
-                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="special">
-                            <Setter Property="Margin" Value="0,10,0,5" />
-                            <Setter Property="Padding" Value="0" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-                <Style TargetType="Slider">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="AutoToolTipPlacement" Value="TopLeft" />
-                    <Setter Property="Minimum" Value="0" />
-                    <Setter Property="Maximum" Value="100" />
-                </Style>
-                <Style TargetType="ComboBox">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="Padding" Value="6,-6,6,-6" />
-                    <Setter Property="Height" Value="23" />
-                </Style>
-            </Style.Resources>
-        </Style>
-    </Window.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15" />
@@ -88,8 +38,7 @@
         </ListBox>
 
         <ScrollViewer Grid.Column="3" Grid.Row="1" VerticalScrollBarVisibility="Visible">
-            <Frame NavigationUIVisibility="Hidden" LoadCompleted="frame_LoadCompleted" Margin="0,-10,10,0"
-                   Content="{Binding CurrentPage}" />
+            <Frame NavigationUIVisibility="Hidden" Margin="0,0,10,0" Content="{Binding CurrentPage}" />
         </ScrollViewer>
 
         <Grid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Margin="15">
