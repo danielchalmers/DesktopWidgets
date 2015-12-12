@@ -213,6 +213,12 @@
     <Compile Include="Widgets\Sidebar\Metadata.cs" />
     <Compile Include="Widgets\Sidebar\Settings.cs" />
     <Compile Include="Widgets\Sidebar\ViewModel.cs" />
+    <Compile Include="Widgets\Calculator\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\Calculator\Metadata.cs" />
+    <Compile Include="Widgets\Calculator\Settings.cs" />
+    <Compile Include="Widgets\Calculator\ViewModel.cs" />
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
@@ -338,6 +344,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\Sidebar\ShortcutProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\Calculator\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
