@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="MustUpgrade" Type="System.Boolean" Scope="User">
@@ -12,9 +10,6 @@
     </Setting>
     <Setting Name="EnableAdvancedMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="OptionsIndex" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ManageWidgetsHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">550</Value>
@@ -69,6 +64,12 @@
     </Setting>
     <Setting Name="AllowMultiInstance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OptionsWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">750</Value>
+    </Setting>
+    <Setting Name="OptionsHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">600</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -3,9 +3,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopWidgets" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:p="clr-namespace:DesktopWidgets.Properties" mc:Ignorable="d" Title="Options" Width="600"
-        Height="500"
-        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        xmlns:p="clr-namespace:DesktopWidgets.Properties" mc:Ignorable="d"
+        Title="Options"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=OptionsWidth, Mode=TwoWay}"
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=OptionsHeight, Mode=TwoWay}"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="OptionsStyle">
             <Style.Resources>
@@ -71,8 +74,7 @@
         </Grid.RowDefinitions>
 
         <ListBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding CurrentPage, Mode=TwoWay}"
-                 ItemsSource="{Binding Pages}"
-                 SelectedIndex="{Binding Path=OptionsIndex, Source={x:Static p:Settings.Default}}">
+                 ItemsSource="{Binding Pages}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="5" />

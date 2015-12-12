@@ -1,4 +1,5 @@
-﻿using DesktopWidgets.Classes;
+﻿using System.ComponentModel;
+using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.Note
 {
@@ -10,6 +11,7 @@ namespace DesktopWidgets.Widgets.Note
             Height = 200;
         }
 
+        [DisplayName("Saved Text")]
         public string Text { get; set; }
     }
 }

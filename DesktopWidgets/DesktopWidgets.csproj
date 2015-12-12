@@ -170,53 +170,14 @@
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
-    <Compile Include="OptionsPages\WidgetOptionsPagesBase.xaml.cs">
-      <DependentUpon>WidgetOptionsPagesBase.xaml</DependentUpon>
+    <Compile Include="OptionsPages\PropertyView.xaml.cs">
+      <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
-    <Compile Include="WidgetBase\OptionsPages\Advanced.xaml.cs">
-      <DependentUpon>Advanced.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
-    <Compile Include="Widgets\CountdownClock\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\CountdownClock\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
-    <Compile Include="Widgets\Note\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\Note\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\PictureFrame\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\PictureFrame\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\PictureSlideshow\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\PictureSlideshow\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\Search\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\Search\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\Sidebar\ManageShortcuts.xaml.cs">
       <DependentUpon>ManageShortcuts.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\Sidebar\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\Sidebar\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
     </Compile>
     <Compile Include="Widgets\Sidebar\Shortcut.cs" />
     <Compile Include="Widgets\Sidebar\ShortcutHelper.cs" />
@@ -224,12 +185,6 @@
       <DependentUpon>ShortcutProperties.xaml</DependentUpon>
     </Compile>
     <Compile Include="Widgets\StopwatchClock\Metadata.cs" />
-    <Compile Include="Widgets\StopwatchClock\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\StopwatchClock\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\StopwatchClock\Settings.cs" />
     <Compile Include="Widgets\Search\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
@@ -261,22 +216,10 @@
     <Compile Include="Widgets\Sidebar\Metadata.cs" />
     <Compile Include="Widgets\Sidebar\Settings.cs" />
     <Compile Include="Widgets\Sidebar\ViewModel.cs" />
-    <Compile Include="Widgets\TimeClock\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\TimeClock\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Widgets\Weather\Metadata.cs" />
-    <Compile Include="Widgets\Weather\OptionsPages\General.xaml.cs">
-      <DependentUpon>General.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Widgets\Weather\OptionsPages\Style.xaml.cs">
-      <DependentUpon>Style.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\Weather\Settings.cs" />
     <Compile Include="Widgets\Weather\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\Metadata.cs" />
@@ -373,45 +316,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OptionsPages\WidgetOptionsPagesBase.xaml">
+    <Page Include="OptionsPages\PropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WidgetBase\OptionsPages\Advanced.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Widgets\CountdownClock\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\CountdownClock\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Note\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Note\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\PictureFrame\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\PictureFrame\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\PictureSlideshow\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\PictureSlideshow\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\Search\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -429,14 +336,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Widgets\Search\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Search\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Widgets\Sidebar\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -445,43 +344,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Widgets\Sidebar\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Sidebar\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Widgets\Sidebar\ShortcutProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Widgets\StopwatchClock\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\StopwatchClock\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\TimeClock\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\TimeClock\OptionsPages\Style.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Widgets\Weather\ControlView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Weather\OptionsPages\General.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Weather\OptionsPages\Style.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

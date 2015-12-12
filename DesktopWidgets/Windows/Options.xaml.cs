@@ -12,7 +12,6 @@ using System.Windows.Navigation;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.OptionsPages;
-using Advanced = DesktopWidgets.WidgetBase.OptionsPages.Advanced;
 
 #endregion
 
@@ -36,8 +35,7 @@ namespace DesktopWidgets.Windows
             AddPages();
             foreach (var page in Pages)
                 page.DataContext = this;
-            if (Pages.Count > 0)
-                CurrentPage = Pages[0];
+            CurrentPage = id == null ? Pages[0] : Pages[1];
 
             OpenModeItems = Enum.GetValues(typeof (OpenMode));
             AnimationTypeItems = Enum.GetValues(typeof (AnimationType));
@@ -101,30 +99,10 @@ namespace DesktopWidgets.Windows
         {
             Pages.Add(new General());
 
-            if (_id != null)
-            {
-                foreach (var page in _id.GetOptionsPages())
-                {
-                    var stackPanel = page.Content as StackPanel;
-                    switch (page.Title)
-                    {
-                        case "General":
-                            stackPanel.Children.Add(
-                                (UIElement) Application.Current.Resources["WidgetOptionsGeneralBase"]);
-                            break;
-                        case "Style":
-                            stackPanel.Children.Add((UIElement) Application.Current.Resources["WidgetOptionsStyleBase"]);
-                            break;
-                    }
-                    page.Content = stackPanel;
-                    Pages.Add(page);
-                }
-                if (Properties.Settings.Default.EnableAdvancedMode)
-                    Pages.Add(new Advanced(_id.GetSettings()));
-            }
+            Pages.Add(new OptionsPages.PropertyView(_id.GetSettings(), _id.GetName()));
 
             if (Properties.Settings.Default.EnableAdvancedMode)
-                Pages.Add(new OptionsPages.Advanced());
+                Pages.Add(new Advanced());
             Pages.Add(new About());
         }
 

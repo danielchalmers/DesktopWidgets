@@ -1,4 +1,5 @@
-﻿using DesktopWidgets.Classes;
+﻿using System.ComponentModel;
+using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.Search
 {
@@ -9,6 +10,8 @@ namespace DesktopWidgets.Widgets.Search
             Width = 150;
         }
 
+        [Category("General")]
+        [DisplayName("Base URL")]
         public string BaseUrl { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DesktopWidgets.Classes;
+﻿using System.ComponentModel;
+using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.PictureFrame
 {
@@ -10,6 +11,8 @@ namespace DesktopWidgets.Widgets.PictureFrame
             Height = 216;
         }
 
+        [Category("General")]
+        [DisplayName("Image Path")]
         public string ImageUrl { get; set; }
     }
 }
