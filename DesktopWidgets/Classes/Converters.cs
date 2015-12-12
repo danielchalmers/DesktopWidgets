@@ -612,7 +612,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? "Enable" : "Disable";
+            return (bool) value ? "Enable" : "Disable";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -620,7 +620,7 @@ namespace DesktopWidgets.Classes
             throw new NotImplementedException();
         }
     }
-    
+
     public class BoolToCollapsedVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

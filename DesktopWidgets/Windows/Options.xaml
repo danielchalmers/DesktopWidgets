@@ -5,9 +5,8 @@
         xmlns:local="clr-namespace:DesktopWidgets" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:DesktopWidgets.Properties" mc:Ignorable="d"
         Title="Options"
-        Width="{Binding Source={x:Static p:Settings.Default}, Path=OptionsWidth, Mode=TwoWay}"
-        Height="{Binding Source={x:Static p:Settings.Default}, Path=OptionsHeight, Mode=TwoWay}"
-        ResizeMode="CanResize"
+        Width="600" Height="550"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="OptionsStyle">
@@ -74,7 +73,8 @@
         </Grid.RowDefinitions>
 
         <ListBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding CurrentPage, Mode=TwoWay}"
-                 ItemsSource="{Binding Pages}">
+                 ItemsSource="{Binding Pages}"
+                 SelectedIndex="{Binding Source={x:Static p:Settings.Default}, Path=OptionsIndex, Mode=TwoWay}">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="5" />

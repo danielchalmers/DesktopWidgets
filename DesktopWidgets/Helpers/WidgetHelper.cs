@@ -179,7 +179,7 @@ namespace DesktopWidgets.Helpers
 
         public static void Edit(this WidgetId id)
         {
-            new Options(id).ShowDialog();
+            new EditWidget(id).ShowDialog();
             id.GetView()?.UpdateUi();
         }
 

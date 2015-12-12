@@ -170,9 +170,6 @@
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
-    <Compile Include="OptionsPages\PropertyView.xaml.cs">
-      <DependentUpon>PropertyView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
@@ -224,6 +221,9 @@
     <Compile Include="Widgets\Weather\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\Metadata.cs" />
     <Compile Include="Widgets\TimeClock\Settings.cs" />
+    <Compile Include="Windows\EditWidget.xaml.cs">
+      <DependentUpon>EditWidget.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
@@ -235,9 +235,6 @@
     </Compile>
     <Compile Include="OptionsPages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\PropertyView.xaml.cs">
-      <DependentUpon>PropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="OptionsPages\Advanced.xaml.cs">
       <DependentUpon>Advanced.xaml</DependentUpon>
@@ -316,10 +313,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OptionsPages\PropertyView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Widgets\Search\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -352,6 +345,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\EditWidget.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\HelperWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -369,10 +366,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="OptionsPages\About.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Windows\PropertyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

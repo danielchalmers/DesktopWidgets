@@ -1,5 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="MustUpgrade" Type="System.Boolean" Scope="User">
@@ -65,11 +67,14 @@
     <Setting Name="AllowMultiInstance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="OptionsWidth" Type="System.Double" Scope="User">
+    <Setting Name="EditWidgetWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">750</Value>
     </Setting>
-    <Setting Name="OptionsHeight" Type="System.Double" Scope="User">
+    <Setting Name="EditWidgetHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="OptionsIndex" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>
