@@ -174,6 +174,9 @@
       <DependentUpon>WidgetOptionsPagesBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
+    <Compile Include="WidgetBase\OptionsPages\Advanced.xaml.cs">
+      <DependentUpon>Advanced.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\OptionsPages\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
@@ -371,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OptionsPages\WidgetOptionsPagesBase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WidgetBase\OptionsPages\Advanced.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

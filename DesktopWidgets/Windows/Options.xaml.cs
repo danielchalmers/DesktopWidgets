@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.OptionsPages;
+using Advanced = DesktopWidgets.WidgetBase.OptionsPages.Advanced;
 
 #endregion
 
@@ -118,10 +119,12 @@ namespace DesktopWidgets.Windows
                     page.Content = stackPanel;
                     Pages.Add(page);
                 }
+                if (Properties.Settings.Default.EnableAdvancedMode)
+                    Pages.Add(new Advanced(_id.GetSettings()));
             }
 
             if (Properties.Settings.Default.EnableAdvancedMode)
-                Pages.Add(new Advanced());
+                Pages.Add(new OptionsPages.Advanced());
             Pages.Add(new About());
         }
 
