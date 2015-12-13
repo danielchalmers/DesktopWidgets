@@ -305,5 +305,17 @@ namespace DesktopWidgets.Properties {
                 this["OptionsIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public double EditWidgetNameColumnWidth {
+            get {
+                return ((double)(this["EditWidgetNameColumnWidth"]));
+            }
+            set {
+                this["EditWidgetNameColumnWidth"] = value;
+            }
+        }
     }
 }
