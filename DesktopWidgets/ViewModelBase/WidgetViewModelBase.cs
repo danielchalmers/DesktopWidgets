@@ -65,6 +65,7 @@ namespace DesktopWidgets.ViewModelBase
             if (!App.Arguments.Contains("-systemstartup"))
                 QueueIntro = true;
             _mouseChecker = new MouseChecker(id, this);
+            UpdateUi();
             _mouseChecker.Start();
         }
 
