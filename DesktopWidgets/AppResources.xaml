@@ -15,7 +15,7 @@
         <Separator />
         <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
     </x:Array>
-    <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="WidgetMenuItems">
+    <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
         <Separator />
         <MenuItem Header="Reload" Command="{Binding ReloadWidget}" />
@@ -23,8 +23,8 @@
             Header="{Binding Settings.Disabled, Converter={StaticResource BoolToEnableDisableNameConverter}}"
             Command="{Binding ToggleEnableWidget}" />
         <Separator />
-        <MenuItem Header="Manage All..." Command="{Binding ManageAllWidgets}" />
-    </x:Array>
+        <CollectionContainer Collection="{StaticResource MainMenuItems}" />
+    </CompositeCollection>
     <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
     <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
                     ContextMenu="{StaticResource MainContextMenu}"
