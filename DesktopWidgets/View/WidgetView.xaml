@@ -71,12 +71,14 @@
         </Style>
         <Style x:Key="WidgetBorderContainerStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundImageBrush}" />
+            <Setter Property="Width" Value="{Binding Width}" />
+            <Setter Property="Height" Value="{Binding Height}" />
+        </Style>
+        <Style x:Key="GlobalContainerStyle" TargetType="{x:Type StackPanel}">
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
             <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
             <Setter Property="MaxWidth" Value="{Binding MaxWidth}" />
             <Setter Property="MaxHeight" Value="{Binding MaxHeight}" />
-            <Setter Property="Width" Value="{Binding Width}" />
-            <Setter Property="Height" Value="{Binding Height}" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
@@ -106,7 +108,7 @@
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <StackPanel>
+    <StackPanel Style="{StaticResource GlobalContainerStyle}">
         <TextBlock Style="{StaticResource NameTextBlockStyle}" />
         <Border Style="{StaticResource WidgetBorderStyle}">
             <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}">
