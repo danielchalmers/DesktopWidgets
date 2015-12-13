@@ -16,7 +16,7 @@ namespace DesktopWidgets.ViewModelBase
         private readonly WidgetId _id;
         private readonly DispatcherTimer _introTimer;
         private readonly MouseChecker _mouseChecker;
-        private readonly DispatcherTimer _onTopForceTimer;
+        private DispatcherTimer _onTopForceTimer;
         private readonly WidgetSettingsBase _settings;
         private double _actualHeight;
         private double _actualWidth;
@@ -52,17 +52,6 @@ namespace DesktopWidgets.ViewModelBase
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
             _introTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(_settings.IntroDuration)};
-            if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
-            {
-                _onTopForceTimer = new DispatcherTimer();
-                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
-                _onTopForceTimer.Tick += delegate
-                {
-                    OnTop = false;
-                    OnTop = true;
-                };
-                _onTopForceTimer.Start();
-            }
             if (!App.Arguments.Contains("-systemstartup"))
                 QueueIntro = true;
             _mouseChecker = new MouseChecker(id, this);
@@ -295,14 +284,37 @@ namespace DesktopWidgets.ViewModelBase
             _mouseChecker.Hide();
         }
 
+        private void UpdateTimers()
+        {
+            _mouseChecker.UpdateIntervals();
+            _mouseChecker.Stop();
+            _mouseChecker.Start();
+            if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
+            {
+                if (_onTopForceTimer == null)
+                {
+                    _onTopForceTimer = new DispatcherTimer();
+                    _onTopForceTimer.Tick += delegate
+                    {
+                        OnTop = false;
+                        OnTop = true;
+                    };
+                }
+                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
+                if (_onTopForceTimer.IsEnabled)
+                {
+                    _onTopForceTimer.Stop();
+                    _onTopForceTimer.Start();
+                }
+            }
+        }
+
         public void UpdateUi()
         {
             OnTop = _settings.OnTop;
             UpdatePosition();
+            UpdateTimers();
             ReloadHotKeys();
-            _mouseChecker.UpdateIntervals();
-            _mouseChecker.Stop();
-            _mouseChecker.Start();
         }
 
         private void UpdatePosition()
