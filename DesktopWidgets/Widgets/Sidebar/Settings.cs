@@ -30,10 +30,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ShortcutContentMode ShortcutContentMode { get; set; } = ShortcutContentMode.Both;
 
         [Category("Style")]
-        [DisplayName("Scrollbar Visibility")]
-        public ScrollBarVisibility ScrollBarVisibility { get; set; } = ScrollBarVisibility.Auto;
-
-        [Category("Style")]
         [DisplayName("Shortcut Orientation")]
         public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Auto;
 

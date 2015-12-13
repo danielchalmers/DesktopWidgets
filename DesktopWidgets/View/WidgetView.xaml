@@ -37,6 +37,7 @@
         <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
         <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -74,11 +75,15 @@
             <Setter Property="Width" Value="{Binding Width}" />
             <Setter Property="Height" Value="{Binding Height}" />
         </Style>
-        <Style x:Key="GlobalContainerStyle" TargetType="{x:Type StackPanel}">
+        <Style x:Key="ScrollViewerContainerStyle" TargetType="{x:Type ScrollViewer}">
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
             <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
             <Setter Property="MaxWidth" Value="{Binding MaxWidth}" />
             <Setter Property="MaxHeight" Value="{Binding MaxHeight}" />
+            <Setter Property="VerticalScrollBarVisibility"
+                    Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
+            <Setter Property="HorizontalScrollBarVisibility"
+                    Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
@@ -108,10 +113,11 @@
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <StackPanel Style="{StaticResource GlobalContainerStyle}">
+    <StackPanel>
         <TextBlock Style="{StaticResource NameTextBlockStyle}" />
         <Border Style="{StaticResource WidgetBorderStyle}">
-            <Border x:Name="MainContentContainer" Style="{StaticResource WidgetBorderContainerStyle}">
+            <Border Style="{StaticResource WidgetBorderContainerStyle}">
+                <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}" />
                 <Border.ContextMenu>
                     <ContextMenu
                         Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"

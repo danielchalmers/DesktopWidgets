@@ -232,6 +232,10 @@ namespace DesktopWidgets.Classes
         [DisplayName("Automatically Decide Max Size")]
         public bool AutoMaxSize { get; set; } = true;
 
+        [Category("Style")]
+        [DisplayName("Scrollbar Visibility")]
+        public ScrollBarVisibility ScrollBarVisibility { get; set; } = ScrollBarVisibility.Auto;
+
         public override string ToString()
         {
             return Identifier.GetName();
