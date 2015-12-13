@@ -280,5 +280,11 @@ namespace DesktopWidgets.Helpers
             foreach (var view in App.WidgetViews)
                 (view.DataContext as WidgetViewModelBase).ShowIntro();
         }
+
+        public static void RefreshWidgets()
+        {
+            foreach (var view in App.WidgetViews)
+                view.UpdateUi();
+        }
     }
 }

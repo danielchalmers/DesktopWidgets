@@ -11,6 +11,7 @@ using DesktopWidgets.Helpers;
 using DesktopWidgets.View;
 using DesktopWidgets.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Win32;
 
 namespace DesktopWidgets
 {
@@ -48,6 +49,8 @@ namespace DesktopWidgets
 
             AppInitHelper.Initialize();
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
+
+            SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
         }
 
         protected override void OnExit(ExitEventArgs e)
