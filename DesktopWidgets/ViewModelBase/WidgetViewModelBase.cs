@@ -14,6 +14,7 @@ namespace DesktopWidgets.ViewModelBase
     public abstract class WidgetViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
         private readonly WidgetId _id;
+        private readonly DispatcherTimer _introTimer;
         private readonly MouseChecker _mouseChecker;
         private readonly DispatcherTimer _onTopForceTimer;
         private readonly WidgetSettingsBase _settings;
@@ -50,6 +51,7 @@ namespace DesktopWidgets.ViewModelBase
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
+            _introTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(_settings.IntroDuration)};
             if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
             {
                 _onTopForceTimer = new DispatcherTimer();
@@ -257,13 +259,30 @@ namespace DesktopWidgets.ViewModelBase
             }
             QueueIntro = false;
 
-            _mouseChecker.KeepOpen = true;
-            _mouseChecker.Show();
-            DelayedAction.RunAction(_settings.IntroDuration, () =>
+            _introTimer.Stop();
+            if (_mouseChecker.KeepOpenForIntro)
             {
-                _mouseChecker.KeepOpen = false;
+                _mouseChecker.KeepOpenForIntro = false;
                 _mouseChecker.Hide(checkHideStatus: true);
-            });
+                _introTimer.Tick += delegate
+                {
+                    _introTimer.Stop();
+                    _mouseChecker.KeepOpenForIntro = true;
+                    _mouseChecker.Show();
+                };
+            }
+            else
+            {
+                _mouseChecker.KeepOpenForIntro = true;
+                _mouseChecker.Show();
+                _introTimer.Tick += delegate
+                {
+                    _introTimer.Stop();
+                    _mouseChecker.KeepOpenForIntro = false;
+                    _mouseChecker.Hide(checkHideStatus: true);
+                };
+            }
+            _introTimer.Start();
         }
 
         public void ShowUI()

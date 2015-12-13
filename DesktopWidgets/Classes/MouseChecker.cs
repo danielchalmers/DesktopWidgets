@@ -22,7 +22,7 @@ namespace DesktopWidgets.Classes
         private readonly DispatcherTimer _showTimer;
         private readonly WidgetView _view;
         private readonly WidgetViewModelBase _viewModel;
-        public bool KeepOpen;
+        public bool KeepOpenForIntro;
 
         public MouseChecker(WidgetId id, WidgetViewModelBase viewModel)
         {
@@ -194,7 +194,7 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (_settings.OpenMode == OpenMode.AlwaysOpen || KeepOpen)
+            if (_settings.OpenMode == OpenMode.AlwaysOpen || KeepOpenForIntro)
             {
                 Show();
                 return;
@@ -253,7 +253,7 @@ namespace DesktopWidgets.Classes
                 return;
             if (checkHideStatus && !IsHideable())
                 return;
-            KeepOpen = false;
+            KeepOpenForIntro = false;
             if (animate && _settings.AnimationTime != 0)
                 _view.AnimateSize(AnimationMode.Hide);
             else
