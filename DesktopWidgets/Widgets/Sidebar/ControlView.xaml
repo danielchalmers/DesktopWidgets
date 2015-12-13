@@ -123,21 +123,17 @@
         <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="SidebarMenuItems">
             <MenuItem Header="New Shortcut..." Command="{Binding NewShortcut}" />
             <MenuItem Header="Manage Shortcuts..." Command="{Binding ManageShortcut}" />
-            <Separator />
-            <MenuItem Header="Refresh" Command="{Binding Refresh}" />
         </x:Array>
-    </UserControl.Resources>
-    <UserControl.ContextMenu>
-        <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
+        <ContextMenu x:Key="WidgetContextMenu" IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
             <ContextMenu.ItemsSource>
                 <CompositeCollection>
                     <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
                     <Separator />
-                    <CollectionContainer Collection="{StaticResource MainMenuItems}" />
+                    <CollectionContainer Collection="{StaticResource WidgetMenuItems}" />
                 </CompositeCollection>
             </ContextMenu.ItemsSource>
         </ContextMenu>
-    </UserControl.ContextMenu>
+    </UserControl.Resources>
     <ItemsControl AllowDrop="True" ItemsSource="{Binding Path=Settings.Shortcuts}" Focusable="False">
         <ItemsControl.HorizontalAlignment>
             <MultiBinding Converter="{StaticResource SettingsToHorizontalAlignmentConverter}">
@@ -166,7 +162,7 @@
                         <Separator />
                         <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
                         <Separator />
-                        <CollectionContainer Collection="{StaticResource MainMenuItems}" />
+                        <CollectionContainer Collection="{StaticResource WidgetMenuItems}" />
                     </CompositeCollection>
                 </ContextMenu.ItemsSource>
             </ContextMenu>

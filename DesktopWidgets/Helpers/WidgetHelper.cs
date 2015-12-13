@@ -259,6 +259,10 @@ namespace DesktopWidgets.Helpers
             widgetView.DataContext = dataContext;
             widgetView.MainContentContainer.Content = userControl;
 
+            widgetView.MainContentContainer.ContextMenu =
+                (ContextMenu)
+                    (userControl.TryFindResource("WidgetContextMenu") ?? widgetView.TryFindResource("WidgetContextMenu"));
+
             widgetView.Show();
         }
 
