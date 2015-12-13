@@ -50,7 +50,6 @@ namespace DesktopWidgets.ViewModelBase
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
-            OnTop = _settings.OnTop;
             if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
             {
                 _onTopForceTimer = new DispatcherTimer();
@@ -279,6 +278,7 @@ namespace DesktopWidgets.ViewModelBase
 
         public void UpdateUi()
         {
+            OnTop = _settings.OnTop;
             UpdatePosition();
             ReloadHotKeys();
             _mouseChecker.UpdateIntervals();
