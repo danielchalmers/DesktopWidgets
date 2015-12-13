@@ -13,7 +13,8 @@ namespace DesktopWidgets.Classes
 {
     public static class AnimationHelper
     {
-        public static void AnimateSize(this WidgetView view, AnimationMode animationMode)
+        public static void AnimateSize(this WidgetView view, AnimationMode animationMode, Action astartAction = null,
+            Action aendAction = null)
         {
             var settings = view.Id.GetSettings();
 
@@ -21,12 +22,14 @@ namespace DesktopWidgets.Classes
             {
                 if (animationMode == AnimationMode.Show)
                     view.Show();
+                astartAction?.Invoke();
                 view.AnimationRunning = true;
             };
             Action finishAction = delegate
             {
                 if (animationMode == AnimationMode.Hide)
                     view.Hide();
+                aendAction?.Invoke();
                 view.AnimationRunning = false;
             };
 
