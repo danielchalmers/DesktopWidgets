@@ -228,6 +228,10 @@ namespace DesktopWidgets.Classes
         [DisplayName("Show Context Menu")]
         public bool ShowContextMenu { get; set; } = true;
 
+        [Category("Size")]
+        [DisplayName("Automatically Decide Max Size")]
+        public bool AutoMaxSize { get; set; } = true;
+
         public override string ToString()
         {
             return Identifier.GetName();

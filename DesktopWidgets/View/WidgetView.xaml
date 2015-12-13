@@ -73,8 +73,8 @@
             <Setter Property="Background" Value="{StaticResource WindowBackgroundImageBrush}" />
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
             <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
-            <Setter Property="MaxWidth" Value="{Binding Settings.MaxWidth}" />
-            <Setter Property="MaxHeight" Value="{Binding Settings.MaxHeight}" />
+            <Setter Property="MaxWidth" Value="{Binding MaxWidth}" />
+            <Setter Property="MaxHeight" Value="{Binding MaxHeight}" />
             <Setter Property="Width" Value="{Binding Width}" />
             <Setter Property="Height" Value="{Binding Height}" />
         </Style>

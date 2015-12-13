@@ -124,6 +124,32 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
+        public double MaxWidth
+        {
+            get { return _settings.AutoMaxSize ? MonitorHelper.GetMonitorBounds(_settings.Monitor).Width : _settings.MaxWidth; }
+            set
+            {
+                if (_settings.MaxWidth != value)
+                {
+                    _settings.MaxWidth = value;
+                    RaisePropertyChanged(nameof(MaxWidth));
+                }
+            }
+        }
+
+        public double MaxHeight
+        {
+            get { return _settings.AutoMaxSize ? MonitorHelper.GetMonitorBounds(_settings.Monitor).Height : _settings.MaxHeight; }
+            set
+            {
+                if (_settings.MaxHeight != value)
+                {
+                    _settings.MaxHeight = value;
+                    RaisePropertyChanged(nameof(MaxHeight));
+                }
+            }
+        }
+
         public double ActualWidth
         {
             get { return _actualWidth; }
