@@ -73,6 +73,7 @@
             <Setter Property="Background" Value="{StaticResource WindowBackgroundImageBrush}" />
             <Setter Property="Width" Value="{Binding Width}" />
             <Setter Property="Height" Value="{Binding Height}" />
+            <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="ScrollViewerContainerStyle" TargetType="{x:Type ScrollViewer}">
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
@@ -88,7 +89,6 @@
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
             <Setter Property="FontSize" Value="{Binding Settings.FontSize}" />
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
-            <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="NameTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="{Binding Settings.NameFontFamily}" />
