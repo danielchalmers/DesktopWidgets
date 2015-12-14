@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -235,6 +236,10 @@ namespace DesktopWidgets.Classes
         [Category("Style")]
         [DisplayName("Scrollbar Visibility")]
         public ScrollBarVisibility ScrollBarVisibility { get; set; } = ScrollBarVisibility.Auto;
+
+        [Category("Behavior")]
+        [DisplayName("Custom Mouse Detection Bounds")]
+        public Rect CustomMouseDetectionBounds { get; set; } = new Rect();
 
         public override string ToString()
         {

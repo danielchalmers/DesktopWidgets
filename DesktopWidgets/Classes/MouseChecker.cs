@@ -74,7 +74,9 @@ namespace DesktopWidgets.Classes
         {
             // Return is mouse in correct bounds to show sidebar.
             Rect checkBounds;
-            if (_settings.DockPosition == ScreenDockPosition.None)
+            if (_settings.CustomMouseDetectionBounds.Width > 0 && _settings.CustomMouseDetectionBounds.Height > 0)
+                checkBounds = _settings.CustomMouseDetectionBounds;
+            else if (_settings.DockPosition == ScreenDockPosition.None)
             {
                 checkBounds = _view.GetBounds();
                 checkBounds = new Rect(checkBounds.Left - _settings.MouseBounds, checkBounds.Top - _settings.MouseBounds,
