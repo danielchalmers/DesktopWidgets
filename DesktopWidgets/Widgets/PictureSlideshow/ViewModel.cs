@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
@@ -29,7 +30,10 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             _changeTimer.Interval = Settings.ChangeInterval;
             _changeTimer.Tick += (sender, args) => NextImage();
             _changeTimer.Start();
+            UpdateFileList(false, false);
             NextImage();
+            if (Settings.Recursive)
+                UpdateFileList(Settings.Recursive, true);
         }
 
         public Settings Settings { get; }
@@ -47,27 +51,33 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             }
         }
 
-        private void UpdateFileList()
+        private void UpdateFileList(bool recursive, bool async)
         {
             if (string.IsNullOrWhiteSpace(Settings.RootPath) || !Directory.Exists(Settings.RootPath))
                 return;
-            var filters = Settings.FileFilterExtension.Split('|');
-            _filePathList.Clear();
-            foreach (
-                var file in
-                    Directory.EnumerateFiles(Settings.RootPath, "*.*",
-                        Settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+            Action getFiles = delegate
             {
-                var fileInfo = new FileInfo(file);
-                if (!filters.Contains(fileInfo.Extension.ToLower()) || fileInfo.Length > Settings.FileFilterSize)
-                    continue;
-                _filePathList.Add(file);
-            }
+                var filters = Settings.FileFilterExtension.Split('|');
+                _filePathList.Clear();
+                foreach (
+                    var file in
+                        Directory.EnumerateFiles(Settings.RootPath, "*.*",
+                            recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+                {
+                    var fileInfo = new FileInfo(file);
+                    if (!filters.Contains(fileInfo.Extension.ToLower()) || fileInfo.Length > Settings.FileFilterSize)
+                        continue;
+                    _filePathList.Add(file);
+                }
+            };
+            if (async)
+                new Task(getFiles).Start();
+            else
+                getFiles();
         }
 
         private void NextImage()
         {
-            UpdateFileList();
             if (_filePathList.Count == 0)
                 return;
             string newImagePath;
