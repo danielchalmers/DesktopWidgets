@@ -27,9 +27,6 @@ namespace DesktopWidgets.ViewModelBase
 
         private double _left;
 
-        private bool _onTop;
-
-
         private double _opacity;
 
         private double _top;
@@ -185,19 +182,6 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
-        public bool OnTop
-        {
-            get { return _onTop; }
-            set
-            {
-                if (_onTop != value)
-                {
-                    _onTop = value;
-                    RaisePropertyChanged(nameof(OnTop));
-                }
-            }
-        }
-
         public ICommand Closing { get; private set; }
         public ICommand MouseDown { get; private set; }
         public ICommand LocationChanged { get; private set; }
@@ -306,8 +290,8 @@ namespace DesktopWidgets.ViewModelBase
                     _onTopForceTimer = new DispatcherTimer();
                     _onTopForceTimer.Tick += delegate
                     {
-                        OnTop = false;
-                        OnTop = true;
+                        _settings.OnTop = false;
+                        _settings.OnTop = true;
                     };
                 }
                 _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
@@ -321,7 +305,6 @@ namespace DesktopWidgets.ViewModelBase
 
         public void UpdateUi()
         {
-            OnTop = _settings.OnTop;
             UpdatePosition();
             UpdateTimers();
             ReloadHotKeys();
