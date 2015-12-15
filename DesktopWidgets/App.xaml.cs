@@ -50,7 +50,13 @@ namespace DesktopWidgets
             AppInitHelper.Initialize();
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
 
+            SystemEvents.SessionEnding += SystemEvents_OnSessionEnding;
             SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
+        }
+
+        private void SystemEvents_OnSessionEnding(object sender, SessionEndingEventArgs e)
+        {
+            AppHelper.ShutdownApplication();
         }
 
         protected override void OnExit(ExitEventArgs e)
