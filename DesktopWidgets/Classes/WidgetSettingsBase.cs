@@ -241,6 +241,10 @@ namespace DesktopWidgets.Classes
         [DisplayName("Custom Mouse Detection Bounds")]
         public Rect CustomMouseDetectionBounds { get; set; } = new Rect();
 
+        [Category("Dock")]
+        [DisplayName("Dock Offset")]
+        public Point DockOffset { get; set; } = new Point();
+
         public override string ToString()
         {
             return Identifier.GetName();

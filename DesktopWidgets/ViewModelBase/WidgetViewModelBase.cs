@@ -319,12 +319,16 @@ namespace DesktopWidgets.ViewModelBase
 
         private void UpdatePosition()
         {
-            Width = _settings.Width;
-            Height = _settings.Height;
+            var newLeft = double.NaN;
+            var newTop = double.NaN;
+            var newWidth = double.NaN;
+            var newHeight = double.NaN;
+            newWidth = _settings.Width;
+            newHeight = _settings.Height;
             if (_settings.DockPosition == ScreenDockPosition.None)
             {
-                Left = _settings.Left;
-                Top = _settings.Top;
+                newLeft = _settings.Left;
+                newTop = _settings.Top;
             }
             else
             {
@@ -334,7 +338,6 @@ namespace DesktopWidgets.ViewModelBase
 
                 if (horizontal)
                 {
-                    double newTop;
                     switch (_settings.DockAlignment)
                     {
                         case ScreenDockAlignment.Top:
@@ -350,19 +353,17 @@ namespace DesktopWidgets.ViewModelBase
                                      (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
                             break;
                         case ScreenDockAlignment.Stretch:
-                            Height = monitorRect.Height;
+                            newHeight = monitorRect.Height;
                             newTop = monitorRect.Top;
                             break;
                     }
-                    Top = newTop;
-                    Width = _settings.Width > _settings.MinWidth ? _settings.Width : _settings.MinWidth;
-                    Left = _settings.DockPosition == ScreenDockPosition.Left
+                    newWidth = _settings.Width > _settings.MinWidth ? _settings.Width : _settings.MinWidth;
+                    newLeft = _settings.DockPosition == ScreenDockPosition.Left
                         ? monitorRect.Left
                         : monitorRect.Right - ActualWidth;
                 }
                 else
                 {
-                    double newLeft;
                     switch (_settings.DockAlignment)
                     {
                         case ScreenDockAlignment.Top:
@@ -378,17 +379,22 @@ namespace DesktopWidgets.ViewModelBase
                                       (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
                             break;
                         case ScreenDockAlignment.Stretch:
-                            Width = monitorRect.Width;
+                            newWidth = monitorRect.Width;
                             newLeft = monitorRect.Left;
                             break;
                     }
-                    Left = newLeft;
-                    Height = _settings.Width > _settings.MinHeight ? _settings.Width : _settings.MinHeight;
-                    Top = _settings.DockPosition == ScreenDockPosition.Top
+                    newHeight = _settings.Width > _settings.MinHeight ? _settings.Width : _settings.MinHeight;
+                    newTop = _settings.DockPosition == ScreenDockPosition.Top
                         ? monitorRect.Top
                         : monitorRect.Bottom - ActualHeight;
                 }
+                newLeft += _settings.DockOffset.X;
+                newTop += _settings.DockOffset.Y;
             }
+            Left = newLeft;
+            Top = newTop;
+            Width = newWidth;
+            Height = newHeight;
         }
 
         private void OnClosingExecute(Window window)
