@@ -51,6 +51,11 @@ namespace DesktopWidgets.ViewModelBase
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
+
+            WidgetBringToFront = new RelayCommand<Window>(WidgetBringToFrontExecute);
+            WidgetDockPosition = new RelayCommand<ScreenDockPosition>(WidgetDockPositionExecute);
+            WidgetDockAlignment = new RelayCommand<ScreenDockAlignment>(WidgetDockAlignmentExecute);
+
             _introTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(_settings.IntroDuration)};
             if (!App.Arguments.Contains("-systemstartup"))
                 QueueIntro = true;
@@ -201,6 +206,11 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand ReloadWidget { get; private set; }
         public ICommand ToggleEnableWidget { get; private set; }
         public ICommand ManageAllWidgets { get; private set; }
+
+        public ICommand WidgetBringToFront { get; private set; }
+
+        public ICommand WidgetDockPosition { get; private set; }
+        public ICommand WidgetDockAlignment { get; private set; }
 
         public bool IsContextMenuOpen
         {
@@ -456,6 +466,23 @@ namespace DesktopWidgets.ViewModelBase
         private void ManageAllWidgetsExecute()
         {
             new ManageWidgets().Show();
+        }
+
+        private void WidgetBringToFrontExecute(Window window)
+        {
+            window.BringIntoView();
+        }
+
+        private void WidgetDockPositionExecute(ScreenDockPosition screenDockPosition)
+        {
+            _settings.DockPosition = screenDockPosition;
+            UpdatePosition();
+        }
+
+        private void WidgetDockAlignmentExecute(ScreenDockAlignment screenDockAlignment)
+        {
+            _settings.DockAlignment = screenDockAlignment;
+            UpdatePosition();
         }
     }
 }
