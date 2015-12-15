@@ -188,6 +188,9 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            if (_settings.Ignore00XY && (Control.MousePosition.X == 0 || Control.MousePosition.Y == 0))
+                return;
+
             if (FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
             {
                 _showTimer.Stop();

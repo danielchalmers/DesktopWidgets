@@ -245,6 +245,10 @@ namespace DesktopWidgets.Classes
         [DisplayName("Dock Offset")]
         public Point DockOffset { get; set; } = new Point();
 
+        [Category("Behavior")]
+        [DisplayName("Ignore 0,0 Cursor Position")]
+        public bool Ignore00XY { get; set; } = true;
+
         public override string ToString()
         {
             return Identifier.GetName();
