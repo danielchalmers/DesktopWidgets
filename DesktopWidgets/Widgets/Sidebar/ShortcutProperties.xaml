@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        mc:Ignorable="d" Title="Shortcut Properties" SizeToContent="Height" Width="300" ResizeMode="NoResize"
+        mc:Ignorable="d" Title="Shortcut Properties" SizeToContent="Height" Width="350" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
