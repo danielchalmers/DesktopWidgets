@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 using Microsoft.Win32;
 
 #endregion
@@ -21,7 +22,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             InitializeComponent();
             Title = shortcut == null ? "New Shortcut" : "Edit Shortcut";
-            cbWindowStyle.ItemsSource = Enum.GetValues(typeof (ProcessWindowStyle));
+            cbWindowStyle.ItemsSource = Enum.GetValues(typeof(ProcessWindowStyle));
+            cbHotkey.ItemsSource = Enum.GetValues(typeof(Key));
+            cbHotkeyModifier.ItemsSource = Enum.GetValues(typeof(ModifierKeys));
 
             if (shortcut == null)
                 NewShortcut = new Shortcut();

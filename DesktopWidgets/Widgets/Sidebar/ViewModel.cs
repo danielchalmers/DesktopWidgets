@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -7,6 +9,8 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
 using GalaSoft.MvvmLight.Command;
+using NHotkey;
+using NHotkey.Wpf;
 using DataFormats = System.Windows.Forms.DataFormats;
 
 namespace DesktopWidgets.Widgets.Sidebar
@@ -40,6 +44,42 @@ namespace DesktopWidgets.Widgets.Sidebar
                     new ObservableCollection<Shortcut>(ShortcutHelper.GetDefaultShortcuts(Settings.DefaultShortcutsMode));
                 Settings.DefaultShortcutsMode = DefaultShortcutsMode.DontChange;
             }
+            ReloadShortcutHotkeys();
+        }
+
+        public override void UpdateUi()
+        {
+            base.UpdateUi();
+            ReloadShortcutHotkeys();
+        }
+
+        private void ReloadShortcutHotkeys()
+        {
+            if (Settings?.Shortcuts == null)
+                return;
+            foreach (var shortcut in Settings.Shortcuts.Where(x => x.HotKey != Key.None))
+                ReloadShortcutHotKey(shortcut);
+        }
+
+        public void ReloadShortcutHotKey(Shortcut shortcut)
+        {
+            HotkeyManager.Current.AddOrReplace($"Shortcut\\{shortcut.Guid}\\Execute", shortcut.HotKey,
+                shortcut.HotKeyModifiers, OnShortcutHotKey);
+        }
+
+        private void OnShortcutHotKey(object sender, HotkeyEventArgs e)
+        {
+            var nameSplit = e.Name.Split('\\');
+            if (nameSplit.Length >= 1 && nameSplit[0] == "Shortcut")
+            {
+                if (nameSplit.Length >= 3 && nameSplit[2] == "Execute")
+                {
+                    var shortcut = Settings.Shortcuts.FirstOrDefault(x => x.Guid.ToString() == nameSplit[1]);
+                    if(shortcut != null)
+                        this.Execute(shortcut, false);
+                }
+            }
+            e.Handled = true;
         }
 
         public Settings Settings { get; }

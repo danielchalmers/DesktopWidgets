@@ -303,7 +303,7 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
-        public void UpdateUi()
+        public virtual void UpdateUi()
         {
             UpdatePosition();
             UpdateTimers();

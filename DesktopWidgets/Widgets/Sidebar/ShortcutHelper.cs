@@ -146,6 +146,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (dialog.NewShortcut == null)
                 return;
             viewModel.Settings.Shortcuts[viewModel.Settings.Shortcuts.IndexOf(shortcut)] = dialog.NewShortcut;
+            viewModel.ReloadShortcutHotKey(dialog.NewShortcut);
         }
 
         public static void Remove(this ViewModel viewModel, Shortcut shortcut, bool msg = false)

@@ -22,6 +22,8 @@
                 <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                 <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                 <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
+                <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
+                <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
@@ -61,6 +63,14 @@
             <ComboBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
                       x:Name="cbWindowStyle" VerticalAlignment="Center"
                       SelectedItem="{Binding Path=WindowStyle, Mode=TwoWay}" />
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Hotkey:" />
+            <ComboBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch"
+                      x:Name="cbHotkey" VerticalAlignment="Center"
+                      SelectedItem="{Binding Path=HotKey, Mode=TwoWay}" />
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Hotkey Modifier:" />
+            <ComboBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch"
+                      x:Name="cbHotkeyModifier" VerticalAlignment="Center"
+                      SelectedItem="{Binding Path=HotKeyModifiers, Mode=TwoWay}" />
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="1" Margin="0,0,15,15">
