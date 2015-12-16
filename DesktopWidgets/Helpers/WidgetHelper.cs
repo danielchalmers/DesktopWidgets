@@ -257,7 +257,7 @@ namespace DesktopWidgets.Helpers
 
             userControl.Style = userControlStyle;
             widgetView.DataContext = dataContext;
-            widgetView.MainContentContainer.Content = userControl;
+            widgetView.MainContentContainer.Child = userControl;
 
             widgetView.MainContentContainer.ContextMenu =
                 (ContextMenu)

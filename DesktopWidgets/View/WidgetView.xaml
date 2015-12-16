@@ -14,10 +14,6 @@
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
         Opacity="{Binding Opacity, Mode=TwoWay}">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="PreviewMouseDown">
-            <command:EventToCommand Command="{Binding MouseDown, Mode=OneWay}"
-                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-        </i:EventTrigger>
         <i:EventTrigger EventName="LocationChanged">
             <command:EventToCommand Command="{Binding LocationChanged, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
@@ -25,9 +21,6 @@
         <i:EventTrigger EventName="Closing">
             <command:EventToCommand Command="{Binding Closing, Mode=OneWay}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-        </i:EventTrigger>
-        <i:EventTrigger EventName="PreviewKeyDown">
-            <command:EventToCommand Command="{Binding KeyDown, Mode=OneWay}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
@@ -116,10 +109,25 @@
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
     <StackPanel>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseDown">
+                <command:EventToCommand Command="{Binding MouseDown, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <TextBlock Style="{StaticResource NameTextBlockStyle}" />
         <Border Style="{StaticResource WidgetBorderStyle}">
             <Border Style="{StaticResource WidgetBorderContainerStyle}">
-                <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}" />
+                <ScrollViewer Style="{StaticResource ScrollViewerContainerStyle}" >
+                    <Border x:Name="MainContentContainer">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <command:EventToCommand Command="{Binding MouseDown, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Border>
+                </ScrollViewer>
             </Border>
         </Border>
     </StackPanel>
