@@ -48,7 +48,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public DefaultShortcutsMode DefaultShortcutsMode { get; set; } = DefaultShortcutsMode.Preset;
 
         [DisplayName("Parse Shortcut Files")]
-        public bool ParseShortcutFiles { get; set; } = true;
+        public bool ParseShortcutFiles { get; set; } = false;
 
         [DisplayName("Enable Icon Cache")]
         public bool UseIconCache { get; set; } = true;
