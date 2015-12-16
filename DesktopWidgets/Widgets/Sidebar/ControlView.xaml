@@ -7,6 +7,7 @@
              xmlns:classes="clr-namespace:DesktopWidgets.Classes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:sidebar="clr-namespace:DesktopWidgets.Widgets.Sidebar"
              mc:Ignorable="d"
 
              AllowDrop="True">
@@ -122,6 +123,7 @@
         </Style>
         <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="SidebarMenuItems">
             <MenuItem Header="New Shortcut..." Command="{Binding NewShortcut}" />
+            <MenuItem Header="New Separator..." Command="{Binding NewSeparator}" />
             <MenuItem Header="Manage Shortcuts..." Command="{Binding ManageShortcut}" />
         </x:Array>
         <ContextMenu x:Key="WidgetContextMenu" IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
@@ -167,19 +169,12 @@
                 </ContextMenu.ItemsSource>
             </ContextMenu>
         </ItemsControl.ContextMenu>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
+        <ItemsControl.Resources>
+            <DataTemplate x:Key="ShortcutTemplate" DataType="{x:Type sidebar:Shortcut}">
                 <Button Style="{StaticResource StyleButton}"
                         Command="{Binding DataContext.ShortcutExecute, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                         CommandParameter="{Binding Path=.}"
                         ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDown">
-                            <command:EventToCommand
-                                Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
                     <DockPanel LastChildFill="True">
                         <Image Style="{StaticResource StyleImage}">
                             <Image.Source>
@@ -200,6 +195,32 @@
                         </MultiBinding>
                     </Button.ToolTip>
                 </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="SeparatorTemplate" DataType="{x:Type sidebar:Shortcut}">
+                <Border Height="2" Background="Gray" CornerRadius="4" Margin="1,0,1,0"/>
+            </DataTemplate>
+        </ItemsControl.Resources>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type sidebar:Shortcut}">
+                <ContentControl Content="{Binding}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDown">
+                            <command:EventToCommand
+                                Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ContentControl.Style>
+                        <Style TargetType="{x:Type ContentControl}">
+                            <Setter Property="ContentTemplate" Value="{StaticResource ShortcutTemplate}" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SpecialType}" Value="Separator">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource SeparatorTemplate}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemsPanel>

@@ -27,6 +27,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             Drop = new RelayCommand<DragEventArgs>(DropExecute);
             Refresh = new RelayCommand(RefreshExecute);
             NewShortcut = new RelayCommand(NewShortcutExecute);
+            NewSeparator = new RelayCommand(NewSeparatorExecute);
             ManageShortcut = new RelayCommand(ManageShortcutsExecute);
 
             ShortcutFocus = new RelayCommand<Shortcut>(ShortcutFocusExecute);
@@ -97,6 +98,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ICommand ShortcutRemove { get; set; }
         public ICommand ShortcutOpenFolder { get; set; }
         public ICommand NewShortcut { get; set; }
+        public ICommand NewSeparator { get; set; }
         public ICommand ManageShortcut { get; set; }
         public ICommand ShortcutExecute { get; set; }
 
@@ -149,6 +151,11 @@ namespace DesktopWidgets.Widgets.Sidebar
             this.New();
         }
 
+        private void NewSeparatorExecute()
+        {
+            this.NewSeparator();
+        }
+        
         private void ManageShortcutsExecute()
         {
             var dialog = new ManageShortcuts(this);
