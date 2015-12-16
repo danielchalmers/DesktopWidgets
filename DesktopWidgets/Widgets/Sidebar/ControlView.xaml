@@ -174,7 +174,7 @@
                         CommandParameter="{Binding Path=.}"
                         ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseEnter">
+                        <i:EventTrigger EventName="MouseDown">
                             <command:EventToCommand
                                 Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                 CommandParameter="{Binding}" />
