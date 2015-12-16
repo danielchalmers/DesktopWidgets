@@ -583,7 +583,7 @@ namespace DesktopWidgets.Classes
             var shortcut = value as Shortcut;
             if (shortcut == null)
                 return Binding.DoNothing;
-            return $"{shortcut.Name} ({shortcut.Path}{(shortcut.Args == "" ? "" : $", {shortcut.Args}")})";
+            return $"{shortcut.Name}{((string.IsNullOrWhiteSpace(shortcut.Path) && string.IsNullOrWhiteSpace(shortcut.Args)) ? "" : (($"{shortcut.Path}{(shortcut.Args == "" ? "" : $", {shortcut.Args}")}")))}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
