@@ -26,6 +26,9 @@ namespace DesktopWidgets.Classes
 
             App.SuccessfullyLoaded = true;
 
+            if (!App.Arguments.Contains("-systemstartup") && App.WidgetsSettingsStore.Widgets.Count == 0)
+                new ManageWidgets().Show();
+
             CheckForUpdatesDelayed();
         }
 
