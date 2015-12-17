@@ -37,11 +37,6 @@ namespace DesktopWidgets.Helpers
             return App.WidgetViews.FirstOrDefault(v => v.Id == id);
         }
 
-        //public static WidgetViewModelBase GetViewModel(this WidgetId id)
-        //{
-        //    return App.WidgetViews.First(v => v.Id == id).DataContext as WidgetViewModelBase;
-        //}
-
         public static string GetName(this WidgetId id)
         {
             var settings = id.GetSettings();
@@ -133,6 +128,72 @@ namespace DesktopWidgets.Helpers
             }
         }
 
+        public static void LoadView(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            UserControl userControl;
+            WidgetViewModelBase dataContext;
+
+            if (settings is Settings)
+            {
+                dataContext = new Widgets.TimeClock.ViewModel(id);
+                userControl = new ControlView();
+            }
+            else if (settings is Widgets.CountdownClock.Settings)
+            {
+                dataContext = new Widgets.CountdownClock.ViewModel(id);
+                userControl = new Widgets.CountdownClock.ControlView();
+            }
+            else if (settings is Widgets.StopwatchClock.Settings)
+            {
+                dataContext = new Widgets.StopwatchClock.ViewModel(id);
+                userControl = new Widgets.StopwatchClock.ControlView();
+            }
+            else if (settings is Widgets.Weather.Settings)
+            {
+                dataContext = new Widgets.Weather.ViewModel(id);
+                userControl = new Widgets.Weather.ControlView();
+            }
+            else if (settings is Widgets.Search.Settings)
+            {
+                dataContext = new Widgets.Search.ViewModel(id);
+                userControl = new Widgets.Search.ControlView();
+            }
+            else if (settings is Widgets.Note.Settings)
+            {
+                dataContext = new Widgets.Note.ViewModel(id);
+                userControl = new Widgets.Note.ControlView();
+            }
+            else if (settings is Widgets.PictureFrame.Settings)
+            {
+                dataContext = new Widgets.PictureFrame.ViewModel(id);
+                userControl = new Widgets.PictureFrame.ControlView();
+            }
+            else if (settings is Widgets.PictureSlideshow.Settings)
+            {
+                dataContext = new Widgets.PictureSlideshow.ViewModel(id);
+                userControl = new Widgets.PictureSlideshow.ControlView();
+            }
+            else if (settings is Widgets.Sidebar.Settings)
+            {
+                dataContext = new Widgets.Sidebar.ViewModel(id);
+                userControl = new Widgets.Sidebar.ControlView();
+            }
+            else if (settings is Widgets.Calculator.Settings)
+            {
+                dataContext = new Widgets.Calculator.ViewModel(id);
+                userControl = new Widgets.Calculator.ControlView();
+            }
+            else
+            {
+                return;
+            }
+
+            var widgetView = new WidgetView(id, dataContext, userControl);
+            App.WidgetViews.Add(widgetView);
+            widgetView.Show();
+        }
+
         private static void AddNewWidget(string type)
         {
             var newWidget = GetNewSettingsFromFriendlyName(type);
@@ -190,82 +251,6 @@ namespace DesktopWidgets.Helpers
             id.GetView()?.UpdateUi();
         }
 
-        public static void LoadView(this WidgetId id)
-        {
-            var settings = id.GetSettings();
-            var widgetView = new WidgetView(id);
-            var userControlStyle = (Style) widgetView.FindResource("UserControlStyle");
-            UserControl userControl;
-            WidgetViewModelBase dataContext;
-
-            App.WidgetViews.Add(widgetView);
-
-            if (settings is Settings)
-            {
-                dataContext = new Widgets.TimeClock.ViewModel(id);
-                userControl = new ControlView();
-            }
-            else if (settings is Widgets.CountdownClock.Settings)
-            {
-                dataContext = new Widgets.CountdownClock.ViewModel(id);
-                userControl = new Widgets.CountdownClock.ControlView();
-            }
-            else if (settings is Widgets.StopwatchClock.Settings)
-            {
-                dataContext = new Widgets.StopwatchClock.ViewModel(id);
-                userControl = new Widgets.StopwatchClock.ControlView();
-            }
-            else if (settings is Widgets.Weather.Settings)
-            {
-                dataContext = new Widgets.Weather.ViewModel(id);
-                userControl = new Widgets.Weather.ControlView();
-            }
-            else if (settings is Widgets.Search.Settings)
-            {
-                dataContext = new Widgets.Search.ViewModel(id);
-                userControl = new Widgets.Search.ControlView();
-            }
-            else if (settings is Widgets.Note.Settings)
-            {
-                dataContext = new Widgets.Note.ViewModel(id);
-                userControl = new Widgets.Note.ControlView();
-            }
-            else if (settings is Widgets.PictureFrame.Settings)
-            {
-                dataContext = new Widgets.PictureFrame.ViewModel(id);
-                userControl = new Widgets.PictureFrame.ControlView();
-            }
-            else if (settings is Widgets.PictureSlideshow.Settings)
-            {
-                dataContext = new Widgets.PictureSlideshow.ViewModel(id);
-                userControl = new Widgets.PictureSlideshow.ControlView();
-            }
-            else if (settings is Widgets.Sidebar.Settings)
-            {
-                dataContext = new Widgets.Sidebar.ViewModel(id);
-                userControl = new Widgets.Sidebar.ControlView();
-            }
-            else if (settings is Widgets.Calculator.Settings)
-            {
-                dataContext = new Widgets.Calculator.ViewModel(id);
-                userControl = new Widgets.Calculator.ControlView();
-            }
-            else
-            {
-                return;
-            }
-
-            userControl.Style = userControlStyle;
-            widgetView.DataContext = dataContext;
-            widgetView.MainContentContainer.Child = userControl;
-
-            widgetView.MainContentContainer.ContextMenu =
-                (ContextMenu)
-                    (userControl.TryFindResource("WidgetContextMenu") ?? widgetView.TryFindResource("WidgetContextMenu"));
-
-            widgetView.Show();
-        }
-
         public static void LoadWidgetViews()
         {
             if (App.WidgetViews != null)
@@ -282,7 +267,7 @@ namespace DesktopWidgets.Helpers
         public static void ShowAllWidgetIntros()
         {
             foreach (var view in App.WidgetViews)
-                (view.DataContext as WidgetViewModelBase).ShowIntro();
+                view.ShowIntro();
         }
 
         public static void RefreshWidgets()

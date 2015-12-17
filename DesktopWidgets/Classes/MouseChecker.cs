@@ -7,7 +7,6 @@ using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.View;
-using DesktopWidgets.ViewModelBase;
 
 #endregion
 
@@ -16,20 +15,16 @@ namespace DesktopWidgets.Classes
     public class MouseChecker
     {
         private readonly DispatcherTimer _hideTimer;
-        private readonly WidgetId _id;
         private readonly DispatcherTimer _mouseCheckTimer;
         private readonly WidgetSettingsBase _settings;
         private readonly DispatcherTimer _showTimer;
         private readonly WidgetView _view;
-        private readonly WidgetViewModelBase _viewModel;
         public bool KeepOpenForIntro;
 
-        public MouseChecker(WidgetId id, WidgetViewModelBase viewModel)
+        public MouseChecker(WidgetView view, WidgetSettingsBase settings)
         {
-            _id = id;
-            _view = id.GetView();
-            _viewModel = viewModel;
-            _settings = id.GetSettings();
+            _view = view;
+            _settings = settings;
             // Setup mouse checker, hide, show timers
             _mouseCheckTimer = new DispatcherTimer();
             _hideTimer = new DispatcherTimer();
@@ -50,7 +45,7 @@ namespace DesktopWidgets.Classes
             UpdateIntervals();
         }
 
-        public Point GetMouseLocation()
+        private Point GetMouseLocation()
             => new Point(Control.MousePosition.X, Control.MousePosition.Y);
 
         public void UpdateIntervals()
@@ -173,18 +168,18 @@ namespace DesktopWidgets.Classes
             return checkBounds.Contains(GetMouseLocation());
         }
 
-        public void Update()
+        private void Update()
         {
             // Show or hide window based on mouse position.
 
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
-            if (_viewModel.Opacity < 1)
+            if (_view.Opacity < 1)
             {
                 Hide(false);
                 _view.UpdateUi();
-                _viewModel.Opacity = 1;
+                _view.Opacity = 1;
                 return;
             }
 
@@ -205,9 +200,9 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (_viewModel.QueueIntro)
+            if (_view.QueueIntro)
             {
-                _viewModel.ShowIntro();
+                _view.ShowIntro();
                 return;
             }
 
@@ -233,7 +228,7 @@ namespace DesktopWidgets.Classes
 
         private bool IsHideable()
         {
-            return !_view.IsMouseOver && _view.IsVisible && !IsMouseInWindowBounds() && !_viewModel.IsContextMenuOpen;
+            return !_view.IsMouseOver && _view.IsVisible && !IsMouseInWindowBounds() && !_view.IsContextMenuOpen;
         }
 
         private bool IsShowable()

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -48,11 +47,26 @@ namespace DesktopWidgets.Widgets.Sidebar
             ReloadShortcutHotkeys();
         }
 
-        public override void UpdateUi()
-        {
-            base.UpdateUi();
-            ReloadShortcutHotkeys();
-        }
+        public Settings Settings { get; }
+
+        public Dictionary<string, ImageSource> IconCache { get; set; }
+
+        public ICommand Refresh { get; set; }
+        public ICommand Drop { get; set; }
+
+        public ICommand ShortcutFocus { get; set; }
+
+        public ICommand ShortcutEdit { get; set; }
+        public ICommand ShortcutMoveUp { get; set; }
+        public ICommand ShortcutMoveDown { get; set; }
+        public ICommand ShortcutRemove { get; set; }
+        public ICommand ShortcutOpenFolder { get; set; }
+        public ICommand NewShortcut { get; set; }
+        public ICommand NewSeparator { get; set; }
+        public ICommand ManageShortcut { get; set; }
+        public ICommand ShortcutExecute { get; set; }
+
+        private Shortcut SelectedShortcut { get; set; }
 
         private void ReloadShortcutHotkeys()
         {
@@ -76,33 +90,12 @@ namespace DesktopWidgets.Widgets.Sidebar
                 if (nameSplit.Length >= 3 && nameSplit[2] == "Execute")
                 {
                     var shortcut = Settings.Shortcuts.FirstOrDefault(x => x.Guid.ToString() == nameSplit[1]);
-                    if(shortcut != null)
+                    if (shortcut != null)
                         this.Execute(shortcut, false);
                 }
             }
             e.Handled = true;
         }
-
-        public Settings Settings { get; }
-
-        public Dictionary<string, ImageSource> IconCache { get; set; }
-
-        public ICommand Refresh { get; set; }
-        public ICommand Drop { get; set; }
-
-        public ICommand ShortcutFocus { get; set; }
-
-        public ICommand ShortcutEdit { get; set; }
-        public ICommand ShortcutMoveUp { get; set; }
-        public ICommand ShortcutMoveDown { get; set; }
-        public ICommand ShortcutRemove { get; set; }
-        public ICommand ShortcutOpenFolder { get; set; }
-        public ICommand NewShortcut { get; set; }
-        public ICommand NewSeparator { get; set; }
-        public ICommand ManageShortcut { get; set; }
-        public ICommand ShortcutExecute { get; set; }
-
-        private Shortcut SelectedShortcut { get; set; }
 
         private void DropExecute(DragEventArgs e)
         {
@@ -155,7 +148,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             this.NewSeparator();
         }
-        
+
         private void ManageShortcutsExecute()
         {
             var dialog = new ManageShortcuts(this);

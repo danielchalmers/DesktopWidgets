@@ -103,7 +103,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void NewSeparator(this ViewModel viewModel)
         {
-            viewModel.Add(new Shortcut { Name = "Separator", SpecialType = "Separator" }, false);
+            viewModel.Add(new Shortcut {Name = "Separator", SpecialType = "Separator"}, false);
         }
 
         public static void ClearIconCache(this ViewModel viewModel)
@@ -115,21 +115,16 @@ namespace DesktopWidgets.Widgets.Sidebar
                 viewModel.IconCache.Clear();
         }
 
-        public static void Refresh(this ViewModel viewModel)
-        {
-            viewModel.UpdateUi();
-        }
-
         public static void ForceRefresh(this ViewModel viewModel)
         {
             viewModel.ClearIconCache();
-            viewModel.Refresh();
+            //viewModel.Refresh();
         }
 
         public static void Execute(this ViewModel viewModel, Shortcut shortcut, bool hide = true)
         {
             if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
-                viewModel.HideUI();
+                viewModel._id.GetView().HideUI();
             if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path) || LinkHelper.IsHyperlink(shortcut.Path))
             {
                 ProcessHelper.Launch(shortcut.Path, shortcut.Args, shortcut.StartInFolder, shortcut.WindowStyle);

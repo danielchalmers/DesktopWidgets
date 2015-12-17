@@ -21,6 +21,7 @@
     <Window.Resources>
         <classes:SelectedWidgetToEnableDisableNameConverter x:Key="SelectedWidgetToEnableDisableNameConverter" />
         <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
+        <classes:WidgetToNameConverter x:Key="WidgetToNameConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -40,6 +41,11 @@
                                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=., Converter={StaticResource WidgetToNameConverter}}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,15,15,15">
             <StackPanel.Resources>

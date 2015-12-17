@@ -7,7 +7,7 @@ using File = System.IO.File;
 
 namespace DesktopWidgets.Helpers
 {
-    public class FileSystemHelper
+    internal static class FileSystemHelper
     {
         public static string GetShortcutTargetFile(string path)
         {

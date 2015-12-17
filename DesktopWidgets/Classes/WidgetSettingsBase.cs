@@ -1,9 +1,7 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Classes
 {
@@ -248,10 +246,5 @@ namespace DesktopWidgets.Classes
         [Category("Behavior")]
         [DisplayName("Ignore 0,0 Cursor Position")]
         public bool Ignore00XY { get; set; } = true;
-
-        public override string ToString()
-        {
-            return Identifier.GetName();
-        }
     }
 }

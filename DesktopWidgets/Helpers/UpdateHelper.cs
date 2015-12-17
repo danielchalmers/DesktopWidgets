@@ -8,7 +8,7 @@ using DesktopWidgets.Windows;
 
 namespace DesktopWidgets.Helpers
 {
-    internal class UpdateHelper
+    internal static class UpdateHelper
     {
         public static bool IsUpdateable => ApplicationDeployment.IsNetworkDeployed;
         private static Version ForgetUpdateVersion => Settings.Default.ForgetUpdateVersion ?? new Version(0, 0, 0, 0);

@@ -6,27 +6,27 @@ using System.Collections.Generic;
 
 namespace DesktopWidgets.Classes
 {
-    public class Author
+    public abstract class Author
     {
         public string name { get; set; }
         public string email { get; set; }
         public string date { get; set; }
     }
 
-    public class Committer
+    public abstract class Committer
     {
         public string name { get; set; }
         public string email { get; set; }
         public string date { get; set; }
     }
 
-    public class Tree
+    public abstract class Tree
     {
         public string sha { get; set; }
         public string url { get; set; }
     }
 
-    public class Commit
+    public abstract class Commit
     {
         public Author author { get; set; }
         public Committer committer { get; set; }
@@ -36,7 +36,7 @@ namespace DesktopWidgets.Classes
         public int comment_count { get; set; }
     }
 
-    public class Author2
+    public abstract class Author2
     {
         public string login { get; set; }
         public int id { get; set; }
@@ -57,7 +57,7 @@ namespace DesktopWidgets.Classes
         public bool site_admin { get; set; }
     }
 
-    public class Committer2
+    public abstract class Committer2
     {
         public string login { get; set; }
         public int id { get; set; }
@@ -78,14 +78,14 @@ namespace DesktopWidgets.Classes
         public bool site_admin { get; set; }
     }
 
-    public class Parent
+    public abstract class Parent
     {
         public string sha { get; set; }
         public string url { get; set; }
         public string html_url { get; set; }
     }
 
-    public class GitHubApiCommitsRootObject
+    public abstract class GitHubApiCommitsRootObject
     {
         public string sha { get; set; }
         public Commit commit { get; set; }

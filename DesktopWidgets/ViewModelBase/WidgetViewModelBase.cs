@@ -1,49 +1,28 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight.Command;
-using NHotkey;
-using NHotkey.Wpf;
 
 namespace DesktopWidgets.ViewModelBase
 {
     public abstract class WidgetViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
-        private readonly WidgetId _id;
-        private readonly DispatcherTimer _introTimer;
-        private readonly MouseChecker _mouseChecker;
-        private DispatcherTimer _onTopForceTimer;
-        private readonly WidgetSettingsBase _settings;
+        public readonly WidgetId _id;
+        private readonly WidgetSettingsBase Settings;
         private double _actualHeight;
         private double _actualWidth;
 
-        private double _height;
-
         private bool _isContextMenuOpen;
 
-        private double _left;
-
         private double _opacity;
-
-        private double _top;
-
-        private double _width;
-
-        public bool QueueIntro;
 
         protected WidgetViewModelBase(WidgetId id)
         {
             Opacity = 0;
             _id = id;
-            _settings = id.GetSettings();
-            MouseDown = new RelayCommand<Window>(OnMouseDownExecute);
-            LocationChanged = new RelayCommand<Window>(OnLocationChangedExecute);
-            Closing = new RelayCommand<Window>(OnClosingExecute);
-            KeyDown = new RelayCommand<KeyEventArgs>(OnKeyDownExecute);
+            Settings = id.GetSettings();
             EditWidget = new RelayCommand(EditWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
@@ -52,25 +31,17 @@ namespace DesktopWidgets.ViewModelBase
             WidgetBringToFront = new RelayCommand<Window>(WidgetBringToFrontExecute);
             WidgetDockPosition = new RelayCommand<ScreenDockPosition>(WidgetDockPositionExecute);
             WidgetDockAlignment = new RelayCommand<ScreenDockAlignment>(WidgetDockAlignmentExecute);
-
-            _introTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(_settings.IntroDuration)};
-            if (!App.Arguments.Contains("-systemstartup"))
-                QueueIntro = true;
-            _mouseChecker = new MouseChecker(id, this);
-            UpdateUi();
-            _mouseChecker.Start();
         }
 
         public double Left
         {
-            get { return _left; }
+            get { return GetLeft(); }
             set
             {
-                if (_left != value)
+                if (Settings.Left != value)
                 {
-                    _left = value;
-                    if (_settings.DockPosition == ScreenDockPosition.None)
-                        _settings.Left = value;
+                    if (Settings.DockPosition == ScreenDockPosition.None)
+                        Settings.Left = value;
                     RaisePropertyChanged(nameof(Left));
                 }
             }
@@ -78,14 +49,13 @@ namespace DesktopWidgets.ViewModelBase
 
         public double Top
         {
-            get { return _top; }
+            get { return GetTop(); }
             set
             {
-                if (_top != value)
+                if (Settings.Top != value)
                 {
-                    _top = value;
-                    if (_settings.DockPosition == ScreenDockPosition.None)
-                        _settings.Top = value;
+                    if (Settings.DockPosition == ScreenDockPosition.None)
+                        Settings.Top = value;
                     RaisePropertyChanged(nameof(Top));
                 }
             }
@@ -93,38 +63,27 @@ namespace DesktopWidgets.ViewModelBase
 
         public double Width
         {
-            get { return _width; }
-            set
-            {
-                if (_width != value)
-                {
-                    _width = value;
-                    RaisePropertyChanged(nameof(Width));
-                }
-            }
+            get { return GetWidth(); }
         }
 
         public double Height
         {
-            get { return _height; }
-            set
-            {
-                if (_height != value)
-                {
-                    _height = value;
-                    RaisePropertyChanged(nameof(Height));
-                }
-            }
+            get { return GetHeight(); }
         }
 
         public double MaxWidth
         {
-            get { return _settings.AutoMaxSize ? MonitorHelper.GetMonitorBounds(_settings.Monitor).Width : _settings.MaxWidth; }
+            get
+            {
+                return Settings.AutoMaxSize
+                    ? MonitorHelper.GetMonitorBounds(Settings.Monitor).Width
+                    : Settings.MaxWidth;
+            }
             set
             {
-                if (_settings.MaxWidth != value)
+                if (Settings.MaxWidth != value)
                 {
-                    _settings.MaxWidth = value;
+                    Settings.MaxWidth = value;
                     RaisePropertyChanged(nameof(MaxWidth));
                 }
             }
@@ -132,12 +91,17 @@ namespace DesktopWidgets.ViewModelBase
 
         public double MaxHeight
         {
-            get { return _settings.AutoMaxSize ? MonitorHelper.GetMonitorBounds(_settings.Monitor).Height : _settings.MaxHeight; }
+            get
+            {
+                return Settings.AutoMaxSize
+                    ? MonitorHelper.GetMonitorBounds(Settings.Monitor).Height
+                    : Settings.MaxHeight;
+            }
             set
             {
-                if (_settings.MaxHeight != value)
+                if (Settings.MaxHeight != value)
                 {
-                    _settings.MaxHeight = value;
+                    Settings.MaxHeight = value;
                     RaisePropertyChanged(nameof(MaxHeight));
                 }
             }
@@ -182,10 +146,6 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
-        public ICommand Closing { get; private set; }
-        public ICommand MouseDown { get; private set; }
-        public ICommand LocationChanged { get; private set; }
-        public ICommand KeyDown { get; private set; }
         public ICommand EditWidget { get; private set; }
         public ICommand ReloadWidget { get; private set; }
         public ICommand ToggleEnableWidget { get; private set; }
@@ -209,159 +169,32 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
-        private void ReloadHotKeys()
-        {
-            try
-            {
-                if (_settings.OpenMode == OpenMode.Keyboard || _settings.OpenMode == OpenMode.MouseAndKeyboard)
-                {
-                    HotkeyManager.Current.AddOrReplace("Show", _settings.HotKey, _settings.HotKeyModifiers, OnHotKey);
-                }
-            }
-            catch (HotkeyAlreadyRegisteredException)
-            {
-            }
-        }
-
-        private void OnHotKey(object sender, HotkeyEventArgs e)
-        {
-            if (e.Name == "Show")
-                ShowIntro();
-            e.Handled = true;
-        }
-
-        public void ShowIntro()
-        {
-            if (_settings.OpenMode == OpenMode.AlwaysOpen || !_settings.ShowIntro)
-                return;
-
-            if (Opacity < 1)
-            {
-                QueueIntro = true;
-                return;
-            }
-            QueueIntro = false;
-
-            _introTimer.Stop();
-            if (_mouseChecker.KeepOpenForIntro)
-            {
-                _mouseChecker.KeepOpenForIntro = false;
-                _mouseChecker.Hide(checkHideStatus: true);
-                _introTimer.Tick += delegate
-                {
-                    _introTimer.Stop();
-                    _mouseChecker.KeepOpenForIntro = true;
-                    _mouseChecker.Show();
-                };
-            }
-            else
-            {
-                _mouseChecker.KeepOpenForIntro = true;
-                _mouseChecker.Show();
-                _introTimer.Tick += delegate
-                {
-                    _introTimer.Stop();
-                    _mouseChecker.KeepOpenForIntro = false;
-                    _mouseChecker.Hide(checkHideStatus: true);
-                };
-            }
-            _introTimer.Start();
-        }
-
-        public void ShowUI()
-        {
-            _mouseChecker.Show();
-        }
-
-        public void HideUI()
-        {
-            _mouseChecker.Hide();
-        }
-
-        private void UpdateTimers()
-        {
-            _mouseChecker.UpdateIntervals();
-            _mouseChecker.Stop();
-            _mouseChecker.Start();
-            if (_settings.ForceOnTop && _settings.ForceOnTopInterval > 0)
-            {
-                if (_onTopForceTimer == null)
-                {
-                    _onTopForceTimer = new DispatcherTimer();
-                    _onTopForceTimer.Tick += delegate
-                    {
-                        _settings.OnTop = false;
-                        _settings.OnTop = true;
-                    };
-                }
-                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
-                if (_onTopForceTimer.IsEnabled)
-                {
-                    _onTopForceTimer.Stop();
-                    _onTopForceTimer.Start();
-                }
-            }
-        }
-
-        public virtual void UpdateUi()
-        {
-            UpdatePosition();
-            UpdateTimers();
-            ReloadHotKeys();
-        }
-
-        private void UpdatePosition()
+        private double GetLeft()
         {
             var newLeft = double.NaN;
-            var newTop = double.NaN;
-            var newWidth = double.NaN;
-            var newHeight = double.NaN;
-            newWidth = _settings.Width;
-            newHeight = _settings.Height;
-            if (_settings.DockPosition == ScreenDockPosition.None)
+            if (Settings.DockPosition == ScreenDockPosition.None)
             {
-                newLeft = _settings.Left;
-                newTop = _settings.Top;
+                newLeft = Settings.Left;
             }
             else
             {
-                var horizontal = _settings.DockPosition.IsHorizontal();
+                var horizontal = Settings.DockPosition.IsHorizontal();
                 var monitorRect =
-                    MonitorHelper.GetMonitorBounds(_settings.Monitor);
+                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
 
                 if (horizontal)
                 {
-                    switch (_settings.DockAlignment)
-                    {
-                        case ScreenDockAlignment.Top:
-                            newTop = monitorRect.Top +
-                                     (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
-                            break;
-                        default:
-                        case ScreenDockAlignment.Center:
-                            newTop = monitorRect.Top + (monitorRect.Height/2) - (ActualHeight/2);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            newTop = (monitorRect.Bottom - ActualHeight) -
-                                     (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
-                            break;
-                        case ScreenDockAlignment.Stretch:
-                            newHeight = monitorRect.Height;
-                            newTop = monitorRect.Top;
-                            break;
-                    }
-                    newWidth = _settings.Width > _settings.MinWidth ? _settings.Width : _settings.MinWidth;
-                    newLeft = _settings.DockPosition == ScreenDockPosition.Left
+                    newLeft = Settings.DockPosition == ScreenDockPosition.Left
                         ? monitorRect.Left
                         : monitorRect.Right - ActualWidth;
                 }
                 else
                 {
-                    switch (_settings.DockAlignment)
+                    switch (Settings.DockAlignment)
                     {
                         case ScreenDockAlignment.Top:
                             newLeft = monitorRect.Left +
-                                      (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
+                                      (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
                             break;
                         default:
                         case ScreenDockAlignment.Center:
@@ -369,65 +202,147 @@ namespace DesktopWidgets.ViewModelBase
                             break;
                         case ScreenDockAlignment.Bottom:
                             newLeft = (monitorRect.Right - ActualWidth) -
-                                      (_settings.IgnoreCorners ? (_settings.CornerSize*2) : 0);
+                                      (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
                             break;
                         case ScreenDockAlignment.Stretch:
-                            newWidth = monitorRect.Width;
                             newLeft = monitorRect.Left;
                             break;
                     }
-                    newHeight = _settings.Width > _settings.MinHeight ? _settings.Width : _settings.MinHeight;
-                    newTop = _settings.DockPosition == ScreenDockPosition.Top
+                }
+                newLeft += Settings.DockOffset.X;
+            }
+            return newLeft;
+        }
+
+        private double GetTop()
+        {
+            var newTop = double.NaN;
+            if (Settings.DockPosition == ScreenDockPosition.None)
+            {
+                newTop = Settings.Top;
+            }
+            else
+            {
+                var horizontal = Settings.DockPosition.IsHorizontal();
+                var monitorRect =
+                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
+
+                if (horizontal)
+                {
+                    switch (Settings.DockAlignment)
+                    {
+                        case ScreenDockAlignment.Top:
+                            newTop = monitorRect.Top +
+                                     (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
+                            break;
+                        default:
+                        case ScreenDockAlignment.Center:
+                            newTop = monitorRect.Top + (monitorRect.Height/2) - (ActualHeight/2);
+                            break;
+                        case ScreenDockAlignment.Bottom:
+                            newTop = (monitorRect.Bottom - ActualHeight) -
+                                     (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
+                            break;
+                        case ScreenDockAlignment.Stretch:
+                            newTop = monitorRect.Top;
+                            break;
+                    }
+                }
+                else
+                {
+                    newTop = Settings.DockPosition == ScreenDockPosition.Top
                         ? monitorRect.Top
                         : monitorRect.Bottom - ActualHeight;
                 }
-                newLeft += _settings.DockOffset.X;
-                newTop += _settings.DockOffset.Y;
+                newTop += Settings.DockOffset.Y;
             }
-            Left = newLeft;
-            Top = newTop;
-            Width = newWidth;
-            Height = newHeight;
+            return newTop;
         }
 
-        private void OnClosingExecute(Window window)
+        private double GetWidth()
         {
-            _mouseChecker.Stop();
-        }
-
-        private void OnMouseDownExecute(Window window)
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && _settings.DockPosition == ScreenDockPosition.None &&
-                _settings.DragToMove)
-                window.DragMove();
-        }
-
-        private void OnLocationChangedExecute(Window window)
-        {
-            if (_settings.SnapToScreenEdges)
-                window.Snap();
-        }
-
-        private void OnKeyDownExecute(KeyEventArgs e)
-        {
-            if (_settings.MoveHotkeys)
+            var newWidth = double.NaN;
+            newWidth = Settings.Width;
+            if (Settings.DockPosition == ScreenDockPosition.None)
             {
-                switch (e.Key)
+            }
+            else
+            {
+                var horizontal = Settings.DockPosition.IsHorizontal();
+                var monitorRect =
+                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
+
+                if (horizontal)
                 {
-                    case Key.Up:
-                        Top -= _settings.MoveDistance;
-                        break;
-                    case Key.Down:
-                        Top += _settings.MoveDistance;
-                        break;
-                    case Key.Left:
-                        Left -= _settings.MoveDistance;
-                        break;
-                    case Key.Right:
-                        Left += _settings.MoveDistance;
-                        break;
+                    switch (Settings.DockAlignment)
+                    {
+                        case ScreenDockAlignment.Top:
+                            break;
+                        default:
+                        case ScreenDockAlignment.Center:
+                            break;
+                        case ScreenDockAlignment.Bottom:
+                            break;
+                        case ScreenDockAlignment.Stretch:
+                            break;
+                    }
+                    newWidth = Settings.Width > Settings.MinWidth ? Settings.Width : Settings.MinWidth;
+                }
+                else
+                {
+                    switch (Settings.DockAlignment)
+                    {
+                        case ScreenDockAlignment.Top:
+                            break;
+                        default:
+                        case ScreenDockAlignment.Center:
+                            break;
+                        case ScreenDockAlignment.Bottom:
+                            break;
+                        case ScreenDockAlignment.Stretch:
+                            newWidth = monitorRect.Width;
+                            break;
+                    }
                 }
             }
+            return newWidth;
+        }
+
+        private double GetHeight()
+        {
+            var newHeight = double.NaN;
+            newHeight = Settings.Height;
+            if (Settings.DockPosition == ScreenDockPosition.None)
+            {
+            }
+            else
+            {
+                var horizontal = Settings.DockPosition.IsHorizontal();
+                var monitorRect =
+                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
+
+                if (horizontal)
+                {
+                    switch (Settings.DockAlignment)
+                    {
+                        case ScreenDockAlignment.Top:
+                            break;
+                        default:
+                        case ScreenDockAlignment.Center:
+                            break;
+                        case ScreenDockAlignment.Bottom:
+                            break;
+                        case ScreenDockAlignment.Stretch:
+                            newHeight = monitorRect.Height;
+                            break;
+                    }
+                }
+                else
+                {
+                    newHeight = Settings.Width > Settings.MinHeight ? Settings.Width : Settings.MinHeight;
+                }
+            }
+            return newHeight;
         }
 
         private void EditWidgetExecute()
@@ -458,14 +373,14 @@ namespace DesktopWidgets.ViewModelBase
 
         private void WidgetDockPositionExecute(ScreenDockPosition screenDockPosition)
         {
-            _settings.DockPosition = screenDockPosition;
-            UpdatePosition();
+            Settings.DockPosition = screenDockPosition;
+            //UpdatePosition();
         }
 
         private void WidgetDockAlignmentExecute(ScreenDockAlignment screenDockAlignment)
         {
-            _settings.DockAlignment = screenDockAlignment;
-            UpdatePosition();
+            Settings.DockAlignment = screenDockAlignment;
+            //UpdatePosition();
         }
     }
 }

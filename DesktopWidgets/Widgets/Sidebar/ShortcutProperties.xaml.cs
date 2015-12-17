@@ -22,9 +22,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             InitializeComponent();
             Title = shortcut == null ? "New Shortcut" : "Edit Shortcut";
-            cbWindowStyle.ItemsSource = Enum.GetValues(typeof(ProcessWindowStyle));
-            cbHotkey.ItemsSource = Enum.GetValues(typeof(Key));
-            cbHotkeyModifier.ItemsSource = Enum.GetValues(typeof(ModifierKeys));
+            cbWindowStyle.ItemsSource = Enum.GetValues(typeof (ProcessWindowStyle));
+            cbHotkey.ItemsSource = Enum.GetValues(typeof (Key));
+            cbHotkeyModifier.ItemsSource = Enum.GetValues(typeof (ModifierKeys));
 
             if (shortcut == null)
                 NewShortcut = new Shortcut();

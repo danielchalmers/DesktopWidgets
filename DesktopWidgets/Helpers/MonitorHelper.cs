@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DesktopWidgets.Helpers
 {
-    internal class MonitorHelper
+    internal static class MonitorHelper
     {
         public static Rect GetMonitorBounds(int index)
         {

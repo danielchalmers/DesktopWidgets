@@ -3,7 +3,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -15,14 +14,6 @@ namespace DesktopWidgets.Classes
 {
     internal static class IconUtilities
     {
-        [DllImport("gdi32.dll", SetLastError = true)]
-        private static extern bool DeleteObject(IntPtr hObject);
-
-        [DllImport("Shell32.dll", EntryPoint = "ExtractIconExW", CharSet = CharSet.Unicode, ExactSpelling = true,
-            CallingConvention = CallingConvention.StdCall)]
-        private static extern int ExtractIconEx(string sFile, int iIndex, out IntPtr piLargeVersion,
-            out IntPtr piSmallVersion, int amountIcons);
-
         public static ImageSource ToImageSource(this Icon icon)
         {
             var bitmap = icon.ToBitmap();
@@ -34,7 +25,7 @@ namespace DesktopWidgets.Classes
                 Int32Rect.Empty,
                 BitmapSizeOptions.FromEmptyOptions());
 
-            if (!DeleteObject(hBitmap))
+            if (!NativeMethods.DeleteObject(hBitmap))
             {
                 throw new Win32Exception();
             }
@@ -46,7 +37,7 @@ namespace DesktopWidgets.Classes
         {
             IntPtr large;
             IntPtr small;
-            ExtractIconEx(file, number, out large, out small, 1);
+            NativeMethods.ExtractIconEx(file, number, out large, out small, 1);
             try
             {
                 return Icon.FromHandle(largeIcon ? large : small);

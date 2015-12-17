@@ -32,8 +32,8 @@
                            ShowSummary="False"
                            ShowTitle="False"
                            ShowSearchBox="True"
-                           ShowAdvancedOptions="False" 
-                           NameColumnWidth="{Binding Source={x:Static p:Settings.Default}, Path=EditWidgetNameColumnWidth, Mode=TwoWay}"/>
+                           ShowAdvancedOptions="False"
+                           NameColumnWidth="{Binding Source={x:Static p:Settings.Default}, Path=EditWidgetNameColumnWidth, Mode=TwoWay}" />
         <Button Grid.Row="1" Content="OK" Margin="15" Width="75" Height="23" HorizontalAlignment="Right"
                 Command="{Binding Close}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"

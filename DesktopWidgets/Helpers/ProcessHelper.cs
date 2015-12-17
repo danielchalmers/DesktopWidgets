@@ -9,7 +9,7 @@ using DesktopWidgets.Properties;
 
 namespace DesktopWidgets.Helpers
 {
-    internal class ProcessHelper
+    internal static class ProcessHelper
     {
         public static void Launch(string path, string args = "", string startIn = "",
             ProcessWindowStyle style = ProcessWindowStyle.Normal)

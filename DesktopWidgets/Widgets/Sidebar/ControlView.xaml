@@ -197,7 +197,7 @@
                 </Button>
             </DataTemplate>
             <DataTemplate x:Key="SeparatorTemplate" DataType="{x:Type sidebar:Shortcut}">
-                <Border Height="2" Background="Gray" CornerRadius="4" Margin="1,0,1,0"/>
+                <Border Height="2" Background="Gray" CornerRadius="4" Margin="1,0,1,0" />
             </DataTemplate>
         </ItemsControl.Resources>
         <ItemsControl.ItemTemplate>

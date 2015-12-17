@@ -1,6 +1,6 @@
 ﻿namespace DesktopWidgets.Helpers
 {
-    internal class LinkHelper
+    internal static class LinkHelper
     {
         public static bool IsHyperlink(string link)
         {

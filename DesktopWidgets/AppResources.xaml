@@ -19,21 +19,30 @@
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
         <Separator />
         <MenuItem Header="Bring To Front" Command="{Binding WidgetBringToFront}" />
-        <MenuItem Header="Drag to Move" IsChecked="{Binding Settings.DragToMove}" IsCheckable="True"/>
-        <MenuItem Header="Stay On Top" IsChecked="{Binding Settings.OnTop}" IsCheckable="True"/>
+        <MenuItem Header="Drag to Move" IsChecked="{Binding Settings.DragToMove}" IsCheckable="True" />
+        <MenuItem Header="Stay On Top" IsChecked="{Binding Settings.OnTop}" IsCheckable="True" />
         <MenuItem Header="Dock">
-            <MenuItem Header="None" Command="{Binding WidgetDockPosition}" CommandParameter="{x:Static local:ScreenDockPosition.None}" />
+            <MenuItem Header="None" Command="{Binding WidgetDockPosition}"
+                      CommandParameter="{x:Static local:ScreenDockPosition.None}" />
             <MenuItem Header="Position">
-                <MenuItem Header="Left" Command="{Binding WidgetDockPosition}" CommandParameter="{x:Static local:ScreenDockPosition.Left}" />
-                <MenuItem Header="Right" Command="{Binding WidgetDockPosition}" CommandParameter="{x:Static local:ScreenDockPosition.Right}" />
-                <MenuItem Header="Top" Command="{Binding WidgetDockPosition}" CommandParameter="{x:Static local:ScreenDockPosition.Top}" />
-                <MenuItem Header="Bottom" Command="{Binding WidgetDockPosition}" CommandParameter="{x:Static local:ScreenDockPosition.Bottom}" />
+                <MenuItem Header="Left" Command="{Binding WidgetDockPosition}"
+                          CommandParameter="{x:Static local:ScreenDockPosition.Left}" />
+                <MenuItem Header="Right" Command="{Binding WidgetDockPosition}"
+                          CommandParameter="{x:Static local:ScreenDockPosition.Right}" />
+                <MenuItem Header="Top" Command="{Binding WidgetDockPosition}"
+                          CommandParameter="{x:Static local:ScreenDockPosition.Top}" />
+                <MenuItem Header="Bottom" Command="{Binding WidgetDockPosition}"
+                          CommandParameter="{x:Static local:ScreenDockPosition.Bottom}" />
             </MenuItem>
             <MenuItem Header="Alignment">
-                <MenuItem Header="Center" Command="{Binding WidgetDockAlignment}" CommandParameter="{x:Static local:ScreenDockAlignment.Center}" />
-                <MenuItem Header="Top" Command="{Binding WidgetDockAlignment}" CommandParameter="{x:Static local:ScreenDockAlignment.Top}" />
-                <MenuItem Header="Bottom" Command="{Binding WidgetDockAlignment}" CommandParameter="{x:Static local:ScreenDockAlignment.Bottom}" />
-                <MenuItem Header="Stretch" Command="{Binding WidgetDockAlignment}" CommandParameter="{x:Static local:ScreenDockAlignment.Stretch}" /> 
+                <MenuItem Header="Center" Command="{Binding WidgetDockAlignment}"
+                          CommandParameter="{x:Static local:ScreenDockAlignment.Center}" />
+                <MenuItem Header="Top" Command="{Binding WidgetDockAlignment}"
+                          CommandParameter="{x:Static local:ScreenDockAlignment.Top}" />
+                <MenuItem Header="Bottom" Command="{Binding WidgetDockAlignment}"
+                          CommandParameter="{x:Static local:ScreenDockAlignment.Bottom}" />
+                <MenuItem Header="Stretch" Command="{Binding WidgetDockAlignment}"
+                          CommandParameter="{x:Static local:ScreenDockAlignment.Stretch}" />
             </MenuItem>
         </MenuItem>
         <Separator />

@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Widgets.Sidebar;
 using Settings = DesktopWidgets.Widgets.CountdownClock.Settings;
@@ -244,19 +243,6 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class BorderColorToThicknessConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (Color) value == Colors.Transparent ? new Thickness(0) : new Thickness(1);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class ShowIconContentToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -444,76 +430,6 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class SettingsToMinWidthConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
-                return Binding.DoNothing;
-            return (val.DockPosition.IsHorizontal() ? val.ButtonHeight : val.ButtonHeight*4);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class SettingsToMinHeightConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
-                return Binding.DoNothing;
-            return (val.DockPosition.IsVertical() ? val.ButtonHeight : val.ButtonHeight*4);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class SettingsToMaxWidthConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
-                return Binding.DoNothing;
-            return (val.DockPosition.IsVertical()
-                ? MonitorHelper.GetMonitorBounds(val.Monitor).Width -
-                  (val.IgnoreCorners ? (val.CornerSize*2) : 0)
-                : double.NaN);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class SettingsToMaxHeightConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
-                return Binding.DoNothing;
-            return (val.DockPosition.IsHorizontal()
-                ? MonitorHelper.GetMonitorBounds(val.Monitor).Height -
-                  (val.IgnoreCorners ? (val.CornerSize*2) : 0)
-                : double.NaN);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class SettingsToHorizontalAlignmentConverter : IMultiValueConverter
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
@@ -560,22 +476,6 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class SettingsToTitleConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var settings = value as Widgets.Sidebar.Settings;
-            if (settings == null)
-                return Binding.DoNothing;
-            return settings.Identifier.GetName();
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class ShortcutToManageNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -583,23 +483,8 @@ namespace DesktopWidgets.Classes
             var shortcut = value as Shortcut;
             if (shortcut == null)
                 return Binding.DoNothing;
-            return $"{shortcut.Name}{((string.IsNullOrWhiteSpace(shortcut.Path) && string.IsNullOrWhiteSpace(shortcut.Args)) ? "" : (($"{shortcut.Path}{(shortcut.Args == "" ? "" : $", {shortcut.Args}")}")))}";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class SelectedItemsToEnableDisableNameConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var val = value as Widgets.Sidebar.Settings;
-            if (val == null)
-                return Binding.DoNothing;
-            return val.Disabled ? "Enable" : "Disable";
+            return
+                $"{shortcut.Name}{((string.IsNullOrWhiteSpace(shortcut.Path) && string.IsNullOrWhiteSpace(shortcut.Args)) ? "" : (($"{shortcut.Path}{(shortcut.Args == "" ? "" : $", {shortcut.Args}")}")))}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -626,6 +511,19 @@ namespace DesktopWidgets.Classes
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool) value ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class WidgetToNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (value as WidgetSettingsBase).Identifier.GetName();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

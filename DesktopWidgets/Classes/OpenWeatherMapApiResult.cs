@@ -2,13 +2,13 @@
 
 namespace DesktopWidgets.Classes
 {
-    public class Coord
+    public abstract class Coord
     {
         public double lon { get; set; }
         public double lat { get; set; }
     }
 
-    public class Weather
+    public abstract class Weather
     {
         public int id { get; set; }
         public string main { get; set; }
@@ -16,7 +16,7 @@ namespace DesktopWidgets.Classes
         public string icon { get; set; }
     }
 
-    public class Main
+    public abstract class Main
     {
         public double temp { get; set; }
         public double pressure { get; set; }
@@ -27,23 +27,23 @@ namespace DesktopWidgets.Classes
         public double grnd_level { get; set; }
     }
 
-    public class Wind
+    public abstract class Wind
     {
         public double speed { get; set; }
         public double deg { get; set; }
     }
 
-    public class Rain
+    public abstract class Rain
     {
         public double __invalid_name__3h { get; set; }
     }
 
-    public class Clouds
+    public abstract class Clouds
     {
         public int all { get; set; }
     }
 
-    public class Sys
+    public abstract class Sys
     {
         public double message { get; set; }
         public string country { get; set; }
@@ -51,7 +51,7 @@ namespace DesktopWidgets.Classes
         public int sunset { get; set; }
     }
 
-    public class OpenWeatherMapApiResult
+    public abstract class OpenWeatherMapApiResult
     {
         public Coord coord { get; set; }
         public List<Weather> weather { get; set; }

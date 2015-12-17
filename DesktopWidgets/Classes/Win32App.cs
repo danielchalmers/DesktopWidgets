@@ -2,7 +2,6 @@
 
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -12,36 +11,27 @@ namespace DesktopWidgets.Classes
 {
     public class Win32App
     {
+        private const int WS_EX_TRANSPARENT = 0x00000020;
+        private const int GWL_EXSTYLE = (-20);
+
         public Win32App(IntPtr value)
         {
-            hWnd = value;
+            hwnd = value;
         }
 
-        private IntPtr hWnd { get; }
-
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern int GetWindowRect(IntPtr hWnd, out Win32Rect rc);
-
-        [DllImport("user32.dll")]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetDesktopWindow();
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetShellWindow();
+        private IntPtr hwnd { get; }
 
         public string GetTitle()
         {
             const int nChars = 256;
             var builder = new StringBuilder(nChars);
-            return GetWindowText(hWnd, builder, nChars) > 0 ? builder.ToString() : null;
+            return NativeMethods.GetWindowText(hwnd, builder, nChars) > 0 ? builder.ToString() : null;
         }
 
         public Win32Rect GetBounds()
         {
             Win32Rect appBounds;
-            GetWindowRect(hWnd, out appBounds);
+            NativeMethods.GetWindowRect(hwnd, out appBounds);
             return appBounds;
         }
 
@@ -54,10 +44,7 @@ namespace DesktopWidgets.Classes
 
         public bool IsFullScreen()
         {
-            var fullscreen = false;
-            foreach (var screen in Screen.AllScreens.Where(IsFullScreen))
-                fullscreen = true;
-            return fullscreen;
+            return Screen.AllScreens.Any(IsFullScreen);
         }
 
         public bool IsFullScreen(Screen screen)
@@ -68,7 +55,13 @@ namespace DesktopWidgets.Classes
                 Top = screen.Bounds.Top,
                 Right = screen.Bounds.Right,
                 Bottom = screen.Bounds.Bottom
-            }) && !(hWnd.Equals(GetDesktopWindow()) || hWnd.Equals(GetShellWindow()));
+            }) && !(hwnd.Equals(NativeMethods.GetDesktopWindow()) || hwnd.Equals(NativeMethods.GetShellWindow()));
+        }
+
+        public void SetWindowExTransparent()
+        {
+            var extendedStyle = NativeMethods.GetWindowLong(hwnd, GWL_EXSTYLE);
+            NativeMethods.SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
     }
 }
