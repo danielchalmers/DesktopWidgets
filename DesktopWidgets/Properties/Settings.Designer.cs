@@ -317,5 +317,17 @@ namespace DesktopWidgets.Properties {
                 this["PropertyGridNameColumnWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShortcutPropertiesIsExpanded {
+            get {
+                return ((bool)(this["ShortcutPropertiesIsExpanded"]));
+            }
+            set {
+                this["ShortcutPropertiesIsExpanded"] = value;
+            }
+        }
     }
 }
