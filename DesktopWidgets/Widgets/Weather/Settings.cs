@@ -10,9 +10,11 @@ namespace DesktopWidgets.Widgets.Weather
         [DisplayName("Unit Type")]
         public TemperatureUnitType UnitType { get; set; }
 
+        [Category("General")]
         [DisplayName("Refresh Interval")]
         public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromHours(1);
 
+        [Category("General")]
         [DisplayName("Zip Code")]
         public int ZipCode { get; set; }
 

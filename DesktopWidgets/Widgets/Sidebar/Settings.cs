@@ -18,7 +18,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ToolTipType ToolTipType { get; set; } = ToolTipType.None;
 
         [Category("Shortcut Style")]
-        [DisplayName("Shortcut Alignment")]
+        [DisplayName("Alignment")]
         public ShortcutAlignment ButtonAlignment { get; set; } = ShortcutAlignment.Center;
 
         [Category("Shortcut Style")]
@@ -26,30 +26,33 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ImageScalingMode IconScalingMode { get; set; } = ImageScalingMode.LowQuality;
 
         [Category("Shortcut Style")]
-        [DisplayName("Shortcut Content Mode")]
+        [DisplayName("Content Mode")]
         public ShortcutContentMode ShortcutContentMode { get; set; } = ShortcutContentMode.Both;
 
         [Category("Style")]
-        [DisplayName("Shortcut Orientation")]
+        [DisplayName("Orientation")]
         public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Auto;
 
         [Category("Shortcut Style")]
-        [DisplayName("Shortcut Height")]
+        [DisplayName("Height")]
         public int ButtonHeight { get; set; } = 32;
 
-        [Category("Behavior")]
+        [Category("Behavior (Hideable)")]
         [DisplayName("Hide on Shortcut Launch")]
         public bool HideOnExecute { get; set; } = true;
 
+        [Category("General")]
         [DisplayName("Allow Drag Drop Files")]
         public bool AllowDropFiles { get; set; } = true;
 
         [DisplayName("Default Shortcuts Mode")]
         public DefaultShortcutsMode DefaultShortcutsMode { get; set; } = DefaultShortcutsMode.Preset;
 
+        [Category("General")]
         [DisplayName("Parse Shortcut Files")]
         public bool ParseShortcutFiles { get; set; } = false;
 
+        [Category("General")]
         [DisplayName("Enable Icon Cache")]
         public bool UseIconCache { get; set; } = true;
     }

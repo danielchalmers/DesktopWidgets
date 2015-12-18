@@ -25,7 +25,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         public double FileFilterSize { get; set; } = 1024000;
 
         [Category("General")]
-        [DisplayName("Next Image Delay")]
+        [DisplayName("Next Image Interval")]
         public TimeSpan ChangeInterval { get; set; } = TimeSpan.FromSeconds(15);
 
         [Category("General")]
