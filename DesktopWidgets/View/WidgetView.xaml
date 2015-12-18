@@ -47,6 +47,7 @@
             <Setter Property="Topmost" Value="{Binding Settings.OnTop}" />
             <Setter Property="Left" Value="{Binding Left, Mode=TwoWay}" />
             <Setter Property="Top" Value="{Binding Top, Mode=TwoWay}" />
+            <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
@@ -54,10 +55,12 @@
             <Setter Property="CornerRadius" Value="4" />
             <Setter Property="BorderThickness"
                     Value="{Binding Settings.BorderEnabled, Converter={StaticResource BooleanToThicknessConverter}}" />
+            <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="WidgetBorderContainerStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundImageBrush}" />
             <Setter Property="Margin" Value="{Binding Settings.Padding}" />
+            <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="ScrollViewerContainerStyle" TargetType="{x:Type ScrollViewer}">
             <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
@@ -66,11 +69,13 @@
                     Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
             <Setter Property="HorizontalScrollBarVisibility"
                     Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
+            <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
             <Setter Property="FontSize" Value="{Binding Settings.FontSize}" />
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
+            <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="NameTextBlockStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="{Binding Settings.NameFontFamily}" />
@@ -89,6 +94,7 @@
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Focusable" Value="False" />
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
