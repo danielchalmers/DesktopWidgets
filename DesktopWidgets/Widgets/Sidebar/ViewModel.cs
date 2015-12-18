@@ -78,8 +78,14 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public void ReloadShortcutHotKey(Shortcut shortcut)
         {
-            HotkeyManager.Current.AddOrReplace($"Shortcut\\{shortcut.Guid}\\Execute", shortcut.HotKey,
+            try
+            {
+                HotkeyManager.Current.AddOrReplace($"Shortcut\\{shortcut.Guid}\\Execute", shortcut.HotKey,
                 shortcut.HotKeyModifiers, OnShortcutHotKey);
+            }
+            catch (HotkeyAlreadyRegisteredException)
+            {
+            }
         }
 
         private void OnShortcutHotKey(object sender, HotkeyEventArgs e)
