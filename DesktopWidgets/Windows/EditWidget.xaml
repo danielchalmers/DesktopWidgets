@@ -23,8 +23,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid x:Name="PropertyGrid"
-                           Margin="0,10,0,0"/>
+        <xctk:PropertyGrid x:Name="PropertyGrid"/>
         <Button Grid.Row="1" Content="OK" Margin="15" Width="75" Height="23" HorizontalAlignment="Right"
                 Command="{Binding Close}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
