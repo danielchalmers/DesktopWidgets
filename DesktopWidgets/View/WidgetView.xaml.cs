@@ -41,10 +41,11 @@ namespace DesktopWidgets.View
                 QueueIntro = true;
 
             userControl.Style = (Style) FindResource("UserControlStyle");
-            MainContentContainer.Child = userControl;
+            MainContentContainer.Content = userControl;
             MainContentContainer.ContextMenu =
                 (ContextMenu)
                     (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
+            userControl.MouseDown += OnMouseDown;
 
             DataContext = viewModel;
 

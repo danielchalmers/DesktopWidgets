@@ -531,4 +531,23 @@ namespace DesktopWidgets.Classes
             throw new NotImplementedException();
         }
     }
+
+    public class MaxSizeConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || value.Length < 2)
+                return Binding.DoNothing;
+            var baseAmount = (double)value[0];
+            var total = value.ToList().GetRange(1, value.Length - 3).Select(x => (double)x).Sum();
+            if ((bool) value[value.Length - 1])
+                total += (double)value[value.Length - 2];
+            return baseAmount - total;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
