@@ -2,7 +2,7 @@
 using System.Windows;
 using DesktopWidgets.ViewModel;
 
-namespace DesktopWidgets.View
+namespace DesktopWidgets.Windows
 {
     /// <summary>
     ///     Interaction logic for SelectItem.xaml
@@ -19,5 +19,10 @@ namespace DesktopWidgets.View
         }
 
         public object SelectedItem => ViewModel.SelectedItem;
+
+        private void btnOK_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

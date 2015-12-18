@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using DesktopWidgets.ViewModelBase;
 
 namespace DesktopWidgets.ViewModel
 {
-    public class SelectItemViewModel : DialogViewModelBase
+    public class SelectItemViewModel : GalaSoft.MvvmLight.ViewModelBase
     {
         private object _selectedItem;
 

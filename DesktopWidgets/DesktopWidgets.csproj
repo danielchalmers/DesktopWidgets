@@ -171,7 +171,6 @@
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
-    <Compile Include="ViewModelBase\DialogViewModelBase.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
     <Compile Include="Widgets\Sidebar\ManageShortcuts.xaml.cs">
@@ -264,7 +263,7 @@
     <Compile Include="Widgets\TimeClock\ViewModel.cs" />
     <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
     <Compile Include="ViewModel\SelectItemViewModel.cs" />
-    <Compile Include="View\SelectItem.xaml.cs">
+    <Compile Include="Windows\SelectItem.xaml.cs">
       <DependentUpon>SelectItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WidgetView.xaml.cs">
@@ -400,7 +399,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SelectItem.xaml">
+    <Page Include="Windows\SelectItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

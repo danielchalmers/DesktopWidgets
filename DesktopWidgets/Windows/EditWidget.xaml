@@ -15,18 +15,13 @@
         MinHeight="300"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <viewModelBase:DialogViewModelBase />
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid x:Name="PropertyGrid"/>
+        <xctk:PropertyGrid x:Name="PropertyGrid" />
         <Button Grid.Row="1" Content="OK" Margin="15" Width="75" Height="23" HorizontalAlignment="Right"
-                Command="{Binding Close}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                IsDefault="True" IsCancel="True" />
+                IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
     </Grid>
 </Window>

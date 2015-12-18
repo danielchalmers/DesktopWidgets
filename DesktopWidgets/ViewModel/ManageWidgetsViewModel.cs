@@ -1,27 +1,22 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
 using GalaSoft.MvvmLight.Command;
 
 namespace DesktopWidgets.ViewModel
 {
-    public class ManageWidgetsViewModel : DialogViewModelBase
+    public class ManageWidgetsViewModel : GalaSoft.MvvmLight.ViewModelBase
     {
         private WidgetSettingsBase _selectedWidget;
 
         public ManageWidgetsViewModel()
         {
-            WidgetList = App.WidgetsSettingsStore.Widgets;
-            DeselectAllCommand = new RelayCommand(DeselectAll);
-            NewWidgetCommand = new RelayCommand(NewWidget);
-            EditWidgetCommand = new RelayCommand(EditWidget);
-            DisableWidgetCommand = new RelayCommand(DisableWidget);
-            RemoveWidgetCommand = new RelayCommand(RemoveWidget);
+            DeselectAll = new RelayCommand(DeselectAllExecute);
+            NewWidget = new RelayCommand(NewWidgetExecute);
+            EditWidget = new RelayCommand(EditWidgetExecute);
+            DisableWidget = new RelayCommand(DisableWidgetExecute);
+            RemoveWidget = new RelayCommand(RemoveWidgetExecute);
         }
-
-        public ObservableCollection<WidgetSettingsBase> WidgetList { get; set; }
 
         public WidgetSettingsBase SelectedWidget
         {
@@ -36,38 +31,38 @@ namespace DesktopWidgets.ViewModel
             }
         }
 
-        public ICommand DeselectAllCommand { get; private set; }
+        public ICommand DeselectAll { get; private set; }
 
-        public ICommand NewWidgetCommand { get; private set; }
+        public ICommand NewWidget { get; private set; }
 
-        public ICommand EditWidgetCommand { get; private set; }
+        public ICommand EditWidget { get; private set; }
 
-        public ICommand DisableWidgetCommand { get; private set; }
+        public ICommand DisableWidget { get; private set; }
 
-        public ICommand RemoveWidgetCommand { get; private set; }
+        public ICommand RemoveWidget { get; private set; }
 
-        private void DeselectAll()
+        private void DeselectAllExecute()
         {
             SelectedWidget = null;
         }
 
-        private void NewWidget()
+        private void NewWidgetExecute()
         {
             WidgetHelper.NewWidget();
         }
 
-        private void EditWidget()
+        private void EditWidgetExecute()
         {
             SelectedWidget.Identifier.Edit();
         }
 
-        private void DisableWidget()
+        private void DisableWidgetExecute()
         {
             SelectedWidget.Identifier.ToggleEnable();
-            DeselectAll();
+            DeselectAllExecute();
         }
 
-        private void RemoveWidget()
+        private void RemoveWidgetExecute()
         {
             SelectedWidget.Identifier.Remove(true);
         }

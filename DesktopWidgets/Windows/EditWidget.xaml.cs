@@ -15,5 +15,10 @@ namespace DesktopWidgets.Windows
             Title = $"Edit {id.GetName()}";
             PropertyGrid.SelectedObject = id.GetSettings();
         }
+
+        private void btnOK_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+        }
     }
 }

@@ -34,10 +34,11 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="15" ItemsSource="{Binding WidgetList}" SelectedItem="{Binding SelectedWidget}">
+        <ListBox Margin="15" ItemsSource="{Binding Path=Widgets, Source={x:Static local:App.WidgetsSettingsStore}}"
+                 SelectedItem="{Binding SelectedWidget}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDown">
-                    <command:EventToCommand Command="{Binding DeselectAllCommand}"
+                    <command:EventToCommand Command="{Binding DeselectAll}"
                                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
@@ -59,12 +60,12 @@
                             Value="{Binding SelectedWidget, Converter={StaticResource NotNullToBoolConverter}}" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="New..." Command="{Binding NewWidgetCommand}" IsEnabled="True" />
-            <Button Content="Edit..." Command="{Binding EditWidgetCommand}" />
+            <Button Content="New..." Command="{Binding NewWidget}" IsEnabled="True" />
+            <Button Content="Edit..." Command="{Binding EditWidget}" />
             <Button
                 Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
-                Command="{Binding DisableWidgetCommand}" />
-            <Button Content="Remove..." Command="{Binding RemoveWidgetCommand}" />
+                Command="{Binding DisableWidget}" />
+            <Button Content="Remove..." Command="{Binding RemoveWidget}" />
         </StackPanel>
 
         <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">
