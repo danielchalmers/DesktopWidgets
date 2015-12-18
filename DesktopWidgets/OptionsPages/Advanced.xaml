@@ -34,8 +34,6 @@
         <xctk:PropertyGrid Grid.Row="2"
                            AutoGenerateProperties="true"
                            SelectedObject="{Binding Source={x:Static properties:Settings.Default}}"
-                           IsCategorized="False"
-                           ShowSortOptions="False" ShowSummary="False" ShowTitle="False"
-                           Background="{x:Static SystemColors.WindowBrush}" />
+                           IsCategorized="False"/>
     </Grid>
 </Page>

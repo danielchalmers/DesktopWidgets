@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DesktopWidgets.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="MustUpgrade" Type="System.Boolean" Scope="User">
@@ -76,7 +74,7 @@
     <Setting Name="OptionsIndex" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="EditWidgetNameColumnWidth" Type="System.Double" Scope="User">
+    <Setting Name="PropertyGridNameColumnWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
   </Settings>

@@ -5,8 +5,18 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     xmlns:p="clr-namespace:DesktopWidgets.Properties"
-                    xmlns:classes="clr-namespace:DesktopWidgets.Classes">
+                    xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
+    <Style TargetType="{x:Type xctk:PropertyGrid}">
+        <Setter Property="IsCategorized" Value="True"/>
+        <Setter Property="ShowSortOptions" Value="True"/>
+        <Setter Property="ShowSummary" Value="False"/>
+        <Setter Property="ShowTitle" Value="False"/>
+        <Setter Property="ShowAdvancedOptions" Value="False"/>
+        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}"/>
+        <Setter Property="NameColumnWidth" Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}"/>
+    </Style>
     <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />

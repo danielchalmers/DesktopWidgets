@@ -309,12 +309,12 @@ namespace DesktopWidgets.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("200")]
-        public double EditWidgetNameColumnWidth {
+        public double PropertyGridNameColumnWidth {
             get {
-                return ((double)(this["EditWidgetNameColumnWidth"]));
+                return ((double)(this["PropertyGridNameColumnWidth"]));
             }
             set {
-                this["EditWidgetNameColumnWidth"] = value;
+                this["PropertyGridNameColumnWidth"] = value;
             }
         }
     }
