@@ -197,12 +197,12 @@
                 </Button>
             </DataTemplate>
             <DataTemplate x:Key="SeparatorTemplate" DataType="{x:Type sidebar:Shortcut}">
-                <Border Height="2" Background="Gray" CornerRadius="4" Margin="1,0,1,0" />
+                <Border Height="2" Background="Gray" CornerRadius="4" Margin="1,0,1,0" Focusable="False" />
             </DataTemplate>
         </ItemsControl.Resources>
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type sidebar:Shortcut}">
-                <ContentControl Content="{Binding}">
+                <ContentControl Content="{Binding}" Focusable="False">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
                             <command:EventToCommand
