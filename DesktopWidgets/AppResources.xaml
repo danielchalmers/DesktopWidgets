@@ -28,7 +28,6 @@
     <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
         <Separator />
-        <MenuItem Header="Bring To Front" Command="{Binding WidgetBringToFront}" />
         <MenuItem Header="Drag to Move" IsChecked="{Binding Settings.DragToMove}" IsCheckable="True" />
         <MenuItem Header="Stay On Top" IsChecked="{Binding Settings.OnTop}" IsCheckable="True" />
         <MenuItem Header="Dock">

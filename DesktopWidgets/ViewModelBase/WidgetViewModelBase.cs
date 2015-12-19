@@ -28,7 +28,6 @@ namespace DesktopWidgets.ViewModelBase
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
 
-            WidgetBringToFront = new RelayCommand<Window>(WidgetBringToFrontExecute);
             WidgetDockPosition = new RelayCommand<ScreenDockPosition>(WidgetDockPositionExecute);
             WidgetDockAlignment = new RelayCommand<ScreenDockAlignment>(WidgetDockAlignmentExecute);
         }
@@ -150,8 +149,6 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand ReloadWidget { get; private set; }
         public ICommand ToggleEnableWidget { get; private set; }
         public ICommand ManageAllWidgets { get; private set; }
-
-        public ICommand WidgetBringToFront { get; private set; }
 
         public ICommand WidgetDockPosition { get; private set; }
         public ICommand WidgetDockAlignment { get; private set; }
@@ -360,11 +357,6 @@ namespace DesktopWidgets.ViewModelBase
         private void ManageAllWidgetsExecute()
         {
             new ManageWidgets().Show();
-        }
-
-        private void WidgetBringToFrontExecute(Window window)
-        {
-            window.BringIntoView();
         }
 
         private void WidgetDockPositionExecute(ScreenDockPosition screenDockPosition)
