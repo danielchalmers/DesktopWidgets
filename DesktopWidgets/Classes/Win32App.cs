@@ -55,7 +55,21 @@ namespace DesktopWidgets.Classes
                 Top = screen.Bounds.Top,
                 Right = screen.Bounds.Right,
                 Bottom = screen.Bounds.Bottom
-            }) && !(hwnd.Equals(NativeMethods.GetDesktopWindow()) || hwnd.Equals(NativeMethods.GetShellWindow()));
+            }) && !IsShell();
+        }
+
+        public bool IsShell()
+        {
+            const int maxChars = 256;
+            var className = new StringBuilder(maxChars);
+
+            if (NativeMethods.GetClassName(hwnd, className, maxChars) > 0)
+            {
+                var cName = className.ToString();
+                return (cName == "Progman" || cName == "WorkerW" || hwnd.Equals(NativeMethods.GetDesktopWindow()) ||
+                        hwnd.Equals(NativeMethods.GetShellWindow()));
+            }
+            return false;
         }
 
         public void SetWindowExTransparent()

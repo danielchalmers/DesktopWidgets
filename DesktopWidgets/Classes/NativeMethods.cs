@@ -51,5 +51,8 @@ namespace DesktopWidgets.Classes
 
         [DllImport("user32.dll")]
         internal static extern IntPtr GetForegroundWindow();
+        
+        [DllImport("user32.dll")]
+        internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
     }
 }
