@@ -68,6 +68,7 @@
                         <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                         <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                         <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
+                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Start in:" />
                     <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
@@ -75,16 +76,19 @@
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Arguments:" />
                     <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
                              VerticalAlignment="Center" Text="{Binding Path=Args, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Window Style:" />
-                    <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch"
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Icon Path:" />
+                    <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
+                             VerticalAlignment="Center" Text="{Binding Path=IconPath, Mode=TwoWay}" />
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Window Style:" />
+                    <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch"
                               x:Name="cbWindowStyle" VerticalAlignment="Center"
                               SelectedItem="{Binding Path=WindowStyle, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Hotkey:" />
-                    <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch"
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Hotkey:" />
+                    <ComboBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
                               x:Name="cbHotkey" VerticalAlignment="Center"
                               SelectedItem="{Binding Path=HotKey, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Hotkey Modifier:" />
-                    <ComboBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
+                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Hotkey Modifier:" />
+                    <ComboBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch"
                               x:Name="cbHotkeyModifier" VerticalAlignment="Center"
                               SelectedItem="{Binding Path=HotKeyModifiers, Mode=TwoWay}" />
                 </Grid>

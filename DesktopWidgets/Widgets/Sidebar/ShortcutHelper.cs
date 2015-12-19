@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
@@ -210,6 +211,15 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             try
             {
+                if(!string.IsNullOrWhiteSpace(shortcut.IconPath) && File.Exists(shortcut.IconPath))
+                {
+                    var bmi = new BitmapImage();
+                    bmi.BeginInit();
+                    bmi.CacheOption = BitmapCacheOption.OnLoad;
+                    bmi.UriSource = new Uri(shortcut.IconPath, UriKind.Absolute);
+                    bmi.EndInit();
+                    return bmi;
+                }
                 if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path))
                     return IconHelper.GetPathIcon(shortcut.Path);
                 if (shortcut.SpecialType == "Help")
