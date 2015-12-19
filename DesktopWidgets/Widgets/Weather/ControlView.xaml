@@ -29,6 +29,19 @@
                 </TextBlock>
                 <TextBlock Text="{Binding Description}"
                            Visibility="{Binding Settings.ShowDescription, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <StackPanel Orientation="Horizontal"
+                            Visibility="{Binding Settings.ShowTempMinMax, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock>
+                        <Run Text="Min:" />
+                        <Run Text="{Binding TemperatureMin}" />
+                        <Run Text="°" />
+                    </TextBlock>
+                    <TextBlock Margin="5,0,0,0">
+                        <Run Text="Max:" />
+                        <Run Text="{Binding TemperatureMax}" />
+                        <Run Text="°" />
+                    </TextBlock>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

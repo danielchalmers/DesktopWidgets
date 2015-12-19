@@ -69,6 +69,34 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
+        private double _temperatureMin;
+        public double TemperatureMin
+        {
+            get { return _temperatureMin; }
+            set
+            {
+                if (_temperatureMin != value)
+                {
+                    _temperatureMin = value;
+                    RaisePropertyChanged(nameof(TemperatureMin));
+                }
+            }
+        }
+
+        private double _temperatureMax;
+        public double TemperatureMax
+        {
+            get { return _temperatureMax; }
+            set
+            {
+                if (_temperatureMax != value)
+                {
+                    _temperatureMax = value;
+                    RaisePropertyChanged(nameof(TemperatureMax));
+                }
+            }
+        }
+
         public string Description
         {
             get { return _description; }
@@ -123,6 +151,8 @@ namespace DesktopWidgets.Widgets.Weather
 
             Temperature = data.main.temp;
             Description = data.weather[0].description;
+            TemperatureMin = data.main.temp_min;
+            TemperatureMax = data.main.temp_max;
             IconUrl = $"{Resources.OpenWeatherMapDomain}img/w/{data.weather[0].icon}.png";
         }
     }
