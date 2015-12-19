@@ -18,6 +18,20 @@
         </Grid.RowDefinitions>
         <ListBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding ItemsList}"
                  SelectedItem="{Binding SelectedItem}" />
-        <Button Grid.Column="1" Grid.Row="1" Content="OK" Width="75" Height="23" Margin="15" Click="btnOK_OnClick" />
+
+        <Grid Grid.Column="0" Grid.Row="1" Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" IsDefault="True" />
+            <Button Grid.Column="3" Content="Cancel" Click="btnCancel_Click" IsCancel="True" />
+        </Grid>
     </Grid>
 </Window>

@@ -20,9 +20,14 @@ namespace DesktopWidgets.Windows
 
         public object SelectedItem { get; private set; }
 
-        private void btnOK_OnClick(object sender, RoutedEventArgs e)
+        private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             SelectedItem = ViewModel.SelectedItem;
+            DialogResult = true;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
             DialogResult = true;
         }
     }
