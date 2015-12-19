@@ -269,8 +269,6 @@ namespace DesktopWidgets.ViewModelBase
             else
             {
                 var horizontal = Settings.DockPosition.IsHorizontal();
-                var monitorRect =
-                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
 
                 if (horizontal)
                 {
@@ -300,7 +298,7 @@ namespace DesktopWidgets.ViewModelBase
                         case ScreenDockAlignment.Bottom:
                             break;
                         case ScreenDockAlignment.Stretch:
-                            newWidth = monitorRect.Width;
+                            newWidth = MaxWidth;
                             break;
                     }
                 }
@@ -318,8 +316,6 @@ namespace DesktopWidgets.ViewModelBase
             else
             {
                 var horizontal = Settings.DockPosition.IsHorizontal();
-                var monitorRect =
-                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
 
                 if (horizontal)
                 {
@@ -333,7 +329,7 @@ namespace DesktopWidgets.ViewModelBase
                         case ScreenDockAlignment.Bottom:
                             break;
                         case ScreenDockAlignment.Stretch:
-                            newHeight = monitorRect.Height;
+                            newHeight = MaxHeight;
                             break;
                     }
                 }
