@@ -6,7 +6,8 @@
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     xmlns:p="clr-namespace:DesktopWidgets.Properties"
                     xmlns:classes="clr-namespace:DesktopWidgets.Classes"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
     <Style TargetType="{x:Type xctk:PropertyGrid}">
         <Setter Property="IsCategorized" Value="True"/>
@@ -21,7 +22,8 @@
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
         <Separator />
-        <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick" />
+        <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick"
+                  IsEnabled="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}}" />
         <Separator />
         <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
     </x:Array>
