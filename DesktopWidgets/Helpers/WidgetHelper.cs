@@ -50,6 +50,8 @@ namespace DesktopWidgets.Helpers
             var dialog =
                 new SelectItem(AvailableWidgets);
             dialog.ShowDialog();
+            if (dialog.SelectedItem == null)
+                return;
             AddNewWidget((string) dialog.SelectedItem);
         }
 

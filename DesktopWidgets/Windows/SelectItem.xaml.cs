@@ -18,10 +18,11 @@ namespace DesktopWidgets.Windows
             DataContext = ViewModel;
         }
 
-        public object SelectedItem => ViewModel.SelectedItem;
+        public object SelectedItem { get; private set; }
 
         private void btnOK_OnClick(object sender, RoutedEventArgs e)
         {
+            SelectedItem = ViewModel.SelectedItem;
             DialogResult = true;
         }
     }
