@@ -15,5 +15,10 @@ namespace DesktopWidgets.Windows
         {
             InitializeComponent();
         }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
