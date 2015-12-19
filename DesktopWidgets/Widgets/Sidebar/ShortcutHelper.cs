@@ -211,7 +211,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             try
             {
-                if(!string.IsNullOrWhiteSpace(shortcut.IconPath) && File.Exists(shortcut.IconPath))
+                if (!string.IsNullOrWhiteSpace(shortcut.IconPath) && File.Exists(shortcut.IconPath))
                 {
                     var bmi = new BitmapImage();
                     bmi.BeginInit();

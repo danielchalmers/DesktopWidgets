@@ -81,7 +81,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             try
             {
                 HotkeyManager.Current.AddOrReplace($"Shortcut\\{shortcut.Guid}\\Execute", shortcut.HotKey,
-                shortcut.HotKeyModifiers, OnShortcutHotKey);
+                    shortcut.HotKeyModifiers, OnShortcutHotKey);
             }
             catch (HotkeyAlreadyRegisteredException)
             {

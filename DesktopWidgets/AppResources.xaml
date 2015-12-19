@@ -10,13 +10,14 @@
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
     <Style TargetType="{x:Type xctk:PropertyGrid}">
-        <Setter Property="IsCategorized" Value="True"/>
-        <Setter Property="ShowSortOptions" Value="True"/>
-        <Setter Property="ShowSummary" Value="False"/>
-        <Setter Property="ShowTitle" Value="False"/>
-        <Setter Property="ShowAdvancedOptions" Value="False"/>
-        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}"/>
-        <Setter Property="NameColumnWidth" Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}"/>
+        <Setter Property="IsCategorized" Value="True" />
+        <Setter Property="ShowSortOptions" Value="True" />
+        <Setter Property="ShowSummary" Value="False" />
+        <Setter Property="ShowTitle" Value="False" />
+        <Setter Property="ShowAdvancedOptions" Value="False" />
+        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}" />
+        <Setter Property="NameColumnWidth"
+                Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
     </Style>
     <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />

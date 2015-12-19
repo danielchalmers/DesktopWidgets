@@ -17,6 +17,10 @@ namespace DesktopWidgets.Widgets.Weather
         private bool _showHelp;
 
         private double _temperature;
+
+        private double _temperatureMax;
+
+        private double _temperatureMin;
         public DispatcherTimer UpdateTimer;
 
         public ViewModel(WidgetId id) : base(id)
@@ -69,7 +73,6 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
-        private double _temperatureMin;
         public double TemperatureMin
         {
             get { return _temperatureMin; }
@@ -83,7 +86,6 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
-        private double _temperatureMax;
         public double TemperatureMax
         {
             get { return _temperatureMax; }
