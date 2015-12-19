@@ -75,7 +75,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             get
             {
-                return Settings.AutoMaxSize
+                return double.IsNaN(Settings.MaxWidth)
                     ? MonitorHelper.GetMonitorBounds(Settings.Monitor).Width
                     : Settings.MaxWidth;
             }
@@ -93,7 +93,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             get
             {
-                return Settings.AutoMaxSize
+                return double.IsNaN(Settings.MaxHeight)
                     ? MonitorHelper.GetMonitorBounds(Settings.Monitor).Height
                     : Settings.MaxHeight;
             }

@@ -219,21 +219,9 @@ namespace DesktopWidgets.Classes
         [DisplayName("Show Intro")]
         public bool ShowIntro { get; set; } = true;
 
-        [Category("Behavior")]
-        [DisplayName("Enable Move Hotkeys")]
-        public bool MoveHotkeys { get; set; } = true;
-
-        [Category("Behavior")]
-        [DisplayName("Move Hotkeys Distance (px)")]
-        public int MoveDistance { get; set; } = 5;
-
         [Category("Style")]
         [DisplayName("Show Context Menu")]
         public bool ShowContextMenu { get; set; } = true;
-
-        [Category("Style (Size)")]
-        [DisplayName("Automatically Decide Max Size")]
-        public bool AutoMaxSize { get; set; } = true;
 
         [Category("Style")]
         [DisplayName("Scrollbar Visibility")]

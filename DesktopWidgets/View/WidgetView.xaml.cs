@@ -187,28 +187,6 @@ namespace DesktopWidgets.View
                 DragMove();
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (Settings.MoveHotkeys)
-            {
-                switch (e.Key)
-                {
-                    case Key.Up:
-                        Top -= Settings.MoveDistance;
-                        break;
-                    case Key.Down:
-                        Top += Settings.MoveDistance;
-                        break;
-                    case Key.Left:
-                        Left -= Settings.MoveDistance;
-                        break;
-                    case Key.Right:
-                        Left += Settings.MoveDistance;
-                        break;
-                }
-            }
-        }
-
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
             _mouseChecker.Stop();
