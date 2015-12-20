@@ -151,6 +151,7 @@ namespace DesktopWidgets.View
 
         public void UpdateUi()
         {
+            ViewModel.UpdatePosition();
             UpdateTimers();
             ReloadHotKeys();
         }
