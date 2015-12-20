@@ -60,7 +60,7 @@ namespace DesktopWidgets.Classes
                     switch (settings.DockAlignment)
                     {
                         default:
-                            view.RenderTransformOrigin = new Point(0, 1);
+                            view.RenderTransformOrigin = new Point(0, 0);
                             twoAnimations = false;
                             break;
                         case ScreenDockAlignment.Top:
@@ -75,7 +75,7 @@ namespace DesktopWidgets.Classes
                     switch (settings.DockAlignment)
                     {
                         default:
-                            view.RenderTransformOrigin = new Point(1, 1);
+                            view.RenderTransformOrigin = new Point(0, 1);
                             twoAnimations = false;
                             break;
                         case ScreenDockAlignment.Top:
