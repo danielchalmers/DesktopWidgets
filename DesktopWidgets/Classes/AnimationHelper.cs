@@ -24,7 +24,6 @@ namespace DesktopWidgets.Classes
             {
                 default:
                     view.RenderTransformOrigin = new Point(0.5, 0.5);
-                    twoAnimations = false;
                     break;
                 case ScreenDockPosition.Left:
                     switch (settings.DockAlignment)
