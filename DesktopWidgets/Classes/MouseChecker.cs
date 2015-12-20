@@ -1,6 +1,8 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -68,68 +70,80 @@ namespace DesktopWidgets.Classes
         private bool IsMouseInMouseBounds()
         {
             // Return is mouse in correct bounds to show sidebar.
-            Rect checkBounds;
+            var checkBounds = new List<Rect>();
             if (_settings.CustomMouseDetectionBounds.Width > 0 && _settings.CustomMouseDetectionBounds.Height > 0)
-                checkBounds = _settings.CustomMouseDetectionBounds;
+            {
+                checkBounds.Add(_settings.CustomMouseDetectionBounds);
+            }
             else if (_settings.DockPosition == ScreenDockPosition.None)
             {
-                checkBounds = _view.GetBounds();
-                checkBounds = new Rect(checkBounds.Left - _settings.MouseBounds, checkBounds.Top - _settings.MouseBounds,
-                    checkBounds.Width + (_settings.MouseBounds*2), checkBounds.Height + (_settings.MouseBounds*2));
+                var viewBounds = _view.GetBounds();
+                checkBounds.Add(new Rect(viewBounds.Left - _settings.MouseBounds, viewBounds.Top - _settings.MouseBounds,
+                    viewBounds.Width + (_settings.MouseBounds*2), viewBounds.Height + (_settings.MouseBounds*2)));
             }
             else
             {
                 if (_settings.StretchBounds)
                 {
-                    checkBounds = MonitorHelper.GetMonitorBounds(_settings.Monitor);
-                    switch (_settings.DockPosition)
+                    var monitorBounds = MonitorHelper.GetMonitorBounds(_settings.Monitor);
+                    if (_settings.DockPosition == ScreenDockPosition.Left ||
+                        _settings.DockAlignment == ScreenDockAlignment.Top)
                     {
-                        case ScreenDockPosition.Left:
-                            checkBounds = new Rect(checkBounds.Left, checkBounds.Top, _settings.MouseBounds,
-                                checkBounds.Height);
-                            break;
-                        case ScreenDockPosition.Right:
-                            checkBounds = new Rect((checkBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
-                                checkBounds.Top, _settings.MouseBounds, checkBounds.Height);
-                            break;
-                        case ScreenDockPosition.Top:
-                            checkBounds = new Rect(checkBounds.Left, checkBounds.Top, checkBounds.Width,
-                                _settings.MouseBounds);
-                            break;
-                        case ScreenDockPosition.Bottom:
-                            checkBounds = new Rect(checkBounds.Left,
-                                (checkBounds.Top + _view.ActualHeight) - _settings.MouseBounds, checkBounds.Width,
-                                _settings.MouseBounds);
-                            break;
+                        checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, _settings.MouseBounds,
+                            monitorBounds.Height));
+                    }
+                    if (_settings.DockPosition == ScreenDockPosition.Right ||
+                        _settings.DockAlignment == ScreenDockAlignment.Bottom)
+                    {
+                        checkBounds.Add(new Rect((monitorBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
+                            monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
+                    }
+                    if (_settings.DockPosition == ScreenDockPosition.Top ||
+                        _settings.DockAlignment == ScreenDockAlignment.Top)
+                    {
+                        checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
+                            _settings.MouseBounds));
+                    }
+                    if (_settings.DockPosition == ScreenDockPosition.Bottom ||
+                        _settings.DockAlignment == ScreenDockAlignment.Bottom)
+                    {
+                        checkBounds.Add(new Rect(monitorBounds.Left,
+                            (monitorBounds.Top + _view.ActualHeight) - _settings.MouseBounds, monitorBounds.Width,
+                            _settings.MouseBounds));
                     }
                 }
                 else
                 {
-                    checkBounds = _view.GetBounds();
-                    switch (_settings.DockPosition)
+                    var viewBounds = _view.GetBounds();
+                    if (_settings.DockPosition == ScreenDockPosition.Left ||
+                        _settings.DockAlignment == ScreenDockAlignment.Top)
                     {
-                        case ScreenDockPosition.Left:
-                            checkBounds = new Rect(checkBounds.Left, checkBounds.Top, _settings.MouseBounds,
-                                checkBounds.Height);
-                            break;
-                        case ScreenDockPosition.Right:
-                            checkBounds = new Rect((checkBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
-                                checkBounds.Top, _settings.MouseBounds, checkBounds.Height);
-                            break;
-                        case ScreenDockPosition.Top:
-                            checkBounds = new Rect(checkBounds.Left, checkBounds.Top, checkBounds.Width,
-                                _settings.MouseBounds);
-                            break;
-                        case ScreenDockPosition.Bottom:
-                            checkBounds = new Rect(checkBounds.Left,
-                                (checkBounds.Top + _view.ActualHeight) - _settings.MouseBounds, checkBounds.Width,
-                                _settings.MouseBounds);
-                            break;
+                        checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
+                            viewBounds.Height));
+                    }
+                    if (_settings.DockPosition == ScreenDockPosition.Right ||
+                        _settings.DockAlignment == ScreenDockAlignment.Bottom)
+                    {
+                        checkBounds.Add(new Rect((viewBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
+                            viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
+                    }
+                    if (_settings.DockPosition == ScreenDockPosition.Top ||
+                        _settings.DockAlignment == ScreenDockAlignment.Top)
+                    {
+                        checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
+                            _settings.MouseBounds));
+                    }
+                    if (_settings.DockPosition == ScreenDockPosition.Bottom ||
+                        _settings.DockAlignment == ScreenDockAlignment.Bottom)
+                    {
+                        checkBounds.Add(new Rect(viewBounds.Left,
+                            (viewBounds.Top + _view.ActualHeight) - _settings.MouseBounds, viewBounds.Width,
+                            _settings.MouseBounds));
                     }
                 }
             }
 
-            return checkBounds.Contains(GetMouseLocation());
+            return checkBounds.Any(x => x.Contains(GetMouseLocation()));
         }
 
         private bool IsMouseInWindowBounds()
