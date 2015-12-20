@@ -12,7 +12,6 @@
         classes:SizeObserver.Observe="True"
         classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
-        Opacity="{Binding Opacity, Mode=TwoWay}"
         Closing="WidgetView_OnClosing"
         LocationChanged="WidgetView_OnLocationChanged">
     <Window.Resources>

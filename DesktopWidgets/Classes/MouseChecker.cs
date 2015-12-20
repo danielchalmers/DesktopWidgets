@@ -193,7 +193,6 @@ namespace DesktopWidgets.Classes
             {
                 Hide(false);
                 _view.UpdateUi();
-                _view.Opacity = 1;
                 return;
             }
 

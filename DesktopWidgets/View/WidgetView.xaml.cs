@@ -30,6 +30,7 @@ namespace DesktopWidgets.View
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
+            Opacity = 0;
             Id = id;
             Settings = id.GetSettings();
             ViewModel = viewModel;
@@ -48,7 +49,7 @@ namespace DesktopWidgets.View
             userControl.MouseDown += OnMouseDown;
 
             _mouseChecker = new MouseChecker(this, Settings);
-            UpdateUi();
+            UpdateUi(false);
             _mouseChecker.Start();
         }
 
@@ -147,7 +148,15 @@ namespace DesktopWidgets.View
         }
 
 
-        public void UpdateUi()
+        public void UpdateUi(bool resetOpacity = true)
+        {
+            if (Opacity < 1)
+                Refresh(resetOpacity);
+            else
+                this.AnimateSize(AnimationMode.Hide, null, () => Refresh());
+        }
+
+        private void Refresh(bool resetOpacity = true)
         {
             DataContext = null;
             DataContext = ViewModel;
@@ -157,6 +166,10 @@ namespace DesktopWidgets.View
             ViewModel.UpdatePosition();
             UpdateTimers();
             ReloadHotKeys();
+            if (Opacity == 1 && !_mouseChecker.KeepOpenForIntro)
+                ShowIntro();
+            if (resetOpacity)
+                Opacity = 1;
         }
 
         private void UpdateTimers()
