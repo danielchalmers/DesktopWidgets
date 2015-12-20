@@ -63,8 +63,8 @@ namespace DesktopWidgets.Classes
         {
             DelayedAction.RunAction(15000, delegate
             {
-                if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalDays > 30)
-                    App.UpdateScheduler?.RunTick();
+                //if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalDays > 30)
+                App.UpdateScheduler?.RunTick();
             });
         }
     }
