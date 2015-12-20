@@ -121,7 +121,7 @@ namespace DesktopWidgets.Helpers
                 {
                     if (!auto)
                         Popup.Show(
-                            $"You have the latest version. ({AssemblyInfo.Version})");
+                            $"You have the latest version ({AssemblyInfo.Version}).");
                 }
             }
             catch (Exception)
