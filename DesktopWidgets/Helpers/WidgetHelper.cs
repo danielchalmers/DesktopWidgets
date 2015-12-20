@@ -210,6 +210,8 @@ namespace DesktopWidgets.Helpers
                 return;
             settings.Disabled = true;
             var view = id.GetView();
+            if (view == null)
+                return;
             view.AnimateSize(AnimationMode.Hide, null, view.Close);
             App.WidgetViews.Remove(view);
         }

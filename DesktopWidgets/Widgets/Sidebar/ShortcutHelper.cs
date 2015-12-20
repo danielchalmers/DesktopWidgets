@@ -125,7 +125,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void Execute(this ViewModel viewModel, Shortcut shortcut, bool hide = true)
         {
             if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
-                viewModel._id.GetView().HideUI();
+                viewModel._id.GetView()?.HideUI();
             if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path) || LinkHelper.IsHyperlink(shortcut.Path))
             {
                 ProcessHelper.Launch(shortcut.Path, shortcut.Args, shortcut.StartInFolder, shortcut.WindowStyle);

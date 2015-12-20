@@ -361,13 +361,13 @@ namespace DesktopWidgets.ViewModelBase
         private void WidgetDockPositionExecute(ScreenDockPosition screenDockPosition)
         {
             Settings.DockPosition = screenDockPosition;
-            _id.GetView().UpdateUi();
+            _id.GetView()?.UpdateUi();
         }
 
         private void WidgetDockAlignmentExecute(ScreenDockAlignment screenDockAlignment)
         {
             Settings.DockAlignment = screenDockAlignment;
-            _id.GetView().UpdateUi();
+            _id.GetView()?.UpdateUi();
         }
 
         public void UpdatePosition()
