@@ -47,8 +47,6 @@ namespace DesktopWidgets.View
                     (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
             userControl.MouseDown += OnMouseDown;
 
-            DataContext = viewModel;
-
             _mouseChecker = new MouseChecker(this, Settings);
             UpdateUi();
             _mouseChecker.Start();
@@ -151,6 +149,11 @@ namespace DesktopWidgets.View
 
         public void UpdateUi()
         {
+            DataContext = null;
+            DataContext = ViewModel;
+            UpdateLayout();
+            ViewModel.UpdateSize();
+            UpdateLayout();
             ViewModel.UpdatePosition();
             UpdateTimers();
             ReloadHotKeys();

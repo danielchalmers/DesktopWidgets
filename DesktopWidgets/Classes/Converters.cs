@@ -139,7 +139,14 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.Cast<bool>().All(x => x) ? Visibility.Visible : Visibility.Collapsed;
+            try
+            {
+                return value.Cast<bool>().All(x => x) ? Visibility.Visible : Visibility.Collapsed;
+            }
+            catch
+            {
+                return Binding.DoNothing;
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -523,7 +530,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value as WidgetSettingsBase).Identifier.GetName();
+            return (value as WidgetSettingsBase)?.Identifier?.GetName();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -536,13 +543,18 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value.Length < 2)
+            try
+            {
+                var baseAmount = (double) value[0];
+                var total = value.ToList().GetRange(1, value.Length - 3).Select(x => (double) x).Sum();
+                if ((bool) value[value.Length - 1])
+                    total += (double) value[value.Length - 2];
+                return baseAmount - total;
+            }
+            catch
+            {
                 return Binding.DoNothing;
-            var baseAmount = (double) value[0];
-            var total = value.ToList().GetRange(1, value.Length - 3).Select(x => (double) x).Sum();
-            if ((bool) value[value.Length - 1])
-                total += (double) value[value.Length - 2];
-            return baseAmount - total;
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
