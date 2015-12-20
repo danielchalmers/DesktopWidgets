@@ -68,5 +68,6 @@
     <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
     <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
                     ContextMenu="{StaticResource MainContextMenu}"
-                    TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick" />
+                    TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick" TrayLeftMouseUp="TrayIcon_OnTrayLeftMouseUp"
+                    TrayBalloonTipClicked="TrayIcon_OnTrayBalloonTipClicked" />
 </ResourceDictionary>

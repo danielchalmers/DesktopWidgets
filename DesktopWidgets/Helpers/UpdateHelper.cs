@@ -5,6 +5,7 @@ using System.Deployment.Application;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace DesktopWidgets.Helpers
 {
@@ -80,31 +81,41 @@ namespace DesktopWidgets.Helpers
                     }
                     if (auto && info.AvailableVersion == ForgetUpdateVersion)
                         return;
-                    App.UpdateScheduler?.Stop();
 
-                    var updateDialog = new UpdatePrompt(info.AvailableVersion, info.IsUpdateRequired);
-                    updateDialog.ShowDialog();
-
-                    switch (updateDialog.SelectedUpdateMode)
+                    if (auto)
                     {
-                        case UpdatePrompt.UpdateMode.RemindNever:
-                            Settings.Default.ForgetUpdateVersion = info.AvailableVersion;
-                            break;
-                        case UpdatePrompt.UpdateMode.UpdateNow:
-                            try
-                            {
-                                ad.UpdateAsync();
-                            }
-                            catch (DeploymentDownloadException dde)
-                            {
-                                Popup.Show(
-                                    "Cannot download the latest version of this application.\n\nPlease check your network connection, or try again later.\n\nError: " +
-                                    dde);
-                            }
-                            break;
+                        App.UpdateWaiting = true;
+                        TrayIconHelper.ShowBalloon(
+                            $"An update is available ({info.AvailableVersion}).\nClick to view update details.", BalloonIcon.Info);
                     }
+                    else
+                    {
+                        App.UpdateScheduler?.Stop();
 
-                    App.UpdateScheduler?.Start();
+                        var updateDialog = new UpdatePrompt(info.AvailableVersion, info.IsUpdateRequired);
+                        updateDialog.ShowDialog();
+
+                        switch (updateDialog.SelectedUpdateMode)
+                        {
+                            case UpdatePrompt.UpdateMode.RemindNever:
+                                Settings.Default.ForgetUpdateVersion = info.AvailableVersion;
+                                break;
+                            case UpdatePrompt.UpdateMode.UpdateNow:
+                                try
+                                {
+                                    ad.UpdateAsync();
+                                }
+                                catch (DeploymentDownloadException dde)
+                                {
+                                    Popup.Show(
+                                        "Cannot download the latest version of this application.\n\nPlease check your network connection, or try again later.\n\nError: " +
+                                        dde);
+                                }
+                                break;
+                        }
+
+                        App.UpdateScheduler?.Start();
+                    }
                 }
                 else
                 {
@@ -117,6 +128,15 @@ namespace DesktopWidgets.Helpers
             {
                 if (!auto)
                     throw;
+            }
+        }
+
+        public static void HandleUpdate()
+        {
+            if (App.UpdateWaiting)
+            {
+                App.UpdateWaiting = false;
+                CheckForUpdatesAsync(false);
             }
         }
     }

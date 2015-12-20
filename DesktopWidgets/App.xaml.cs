@@ -23,12 +23,13 @@ namespace DesktopWidgets
         public static bool SuccessfullyLoaded;
         public static Mutex AppMutex;
         public static HelperWindow HelperWindow;
-        private static TaskbarIcon TrayIcon;
+        public static TaskbarIcon TrayIcon;
         public static WidgetsSettingsStore WidgetsSettingsStore;
         public static ObservableCollection<WidgetView> WidgetViews;
         public static SaveTimer SaveTimer;
         public static TaskScheduler UpdateScheduler;
         public static List<string> Arguments;
+        public static bool UpdateWaiting;
 
         public App()
         {

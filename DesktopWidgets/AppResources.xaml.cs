@@ -35,5 +35,15 @@ namespace DesktopWidgets
         {
             WidgetHelper.ShowAllWidgetIntros();
         }
+
+        private void TrayIcon_OnTrayLeftMouseUp(object sender, RoutedEventArgs e)
+        {
+            UpdateHelper.HandleUpdate();
+        }
+
+        private void TrayIcon_OnTrayBalloonTipClicked(object sender, RoutedEventArgs e)
+        {
+            UpdateHelper.HandleUpdate();
+        }
     }
 }
