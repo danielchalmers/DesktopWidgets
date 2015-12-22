@@ -9,7 +9,9 @@
       mc:Ignorable="d" Title="General">
     <xctk:PropertyGrid
         SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
-        AutoGenerateProperties="False">
+        AutoGenerateProperties="False"
+        IsCategorized="False"
+        ShowSortOptions="False">
         <xctk:PropertyGrid.PropertyDefinitions>
             <xctk:PropertyDefinition TargetProperties="RunOnStartup" />
             <xctk:PropertyDefinition TargetProperties="CheckForUpdates" />

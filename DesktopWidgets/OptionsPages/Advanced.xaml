@@ -33,7 +33,8 @@
 
         <xctk:PropertyGrid Grid.Row="2"
                            AutoGenerateProperties="true"
-                           SelectedObject="{Binding Source={x:Static properties:Settings.Default}}"
-                           IsCategorized="False" />
+                           IsCategorized="False"
+                           ShowSortOptions="False"
+                           SelectedObject="{Binding Source={x:Static properties:Settings.Default}}" />
     </Grid>
 </Page>
