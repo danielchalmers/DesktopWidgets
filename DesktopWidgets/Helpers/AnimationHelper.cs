@@ -14,19 +14,22 @@ namespace DesktopWidgets.Helpers
     public static class AnimationHelper
     {
         public static void Animate(this WidgetView view, AnimationMode animationMode, Action astartAction = null,
-            Action aendAction = null)
+            Action aendAction = null, ScreenDockPosition? dockPosition = null, ScreenDockAlignment? dockAlignment = null)
         {
             var settings = view.Id.GetSettings();
 
             var twoAnimations = true;
 
-            switch (settings.DockPosition)
+            var position = dockPosition ?? settings.DockPosition;
+            var alignment = dockAlignment ?? settings.DockAlignment;
+
+            switch (position)
             {
                 default:
                     view.RenderTransformOrigin = new Point(0.5, 0.5);
                     break;
                 case ScreenDockPosition.Left:
-                    switch (settings.DockAlignment)
+                    switch (alignment)
                     {
                         default:
                             view.RenderTransformOrigin = new Point(0, 0);
@@ -41,7 +44,7 @@ namespace DesktopWidgets.Helpers
                     }
                     break;
                 case ScreenDockPosition.Right:
-                    switch (settings.DockAlignment)
+                    switch (alignment)
                     {
                         default:
                             view.RenderTransformOrigin = new Point(1, 0);
@@ -56,7 +59,7 @@ namespace DesktopWidgets.Helpers
                     }
                     break;
                 case ScreenDockPosition.Top:
-                    switch (settings.DockAlignment)
+                    switch (alignment)
                     {
                         default:
                             view.RenderTransformOrigin = new Point(0, 0);
@@ -71,7 +74,7 @@ namespace DesktopWidgets.Helpers
                     }
                     break;
                 case ScreenDockPosition.Bottom:
-                    switch (settings.DockAlignment)
+                    switch (alignment)
                     {
                         default:
                             view.RenderTransformOrigin = new Point(0, 1);
@@ -160,7 +163,7 @@ namespace DesktopWidgets.Helpers
                     else
                     {
                         trans.BeginAnimation(
-                            settings.DockPosition.IsVertical()
+                            position.IsVertical()
                                 ? ScaleTransform.ScaleYProperty
                                 : ScaleTransform.ScaleXProperty, doubleAnimation);
                     }

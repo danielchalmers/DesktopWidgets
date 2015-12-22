@@ -148,12 +148,13 @@ namespace DesktopWidgets.View
         }
 
 
-        public void UpdateUi(bool resetOpacity = true)
+        public void UpdateUi(bool resetOpacity = true, ScreenDockPosition? dockPosition = null,
+            ScreenDockAlignment? dockAlignment = null)
         {
             if (Opacity < 1)
                 Refresh(resetOpacity);
             else
-                this.Animate(AnimationMode.Hide, null, () => Refresh());
+                this.Animate(AnimationMode.Hide, null, () => Refresh(), dockPosition, dockAlignment);
         }
 
         private void Refresh(bool resetOpacity = true)
