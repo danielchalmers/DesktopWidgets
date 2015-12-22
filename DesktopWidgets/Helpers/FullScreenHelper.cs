@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
     internal class FullScreenHelper
     {

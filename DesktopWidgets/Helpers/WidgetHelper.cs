@@ -212,7 +212,7 @@ namespace DesktopWidgets.Helpers
             var view = id.GetView();
             if (view == null)
                 return;
-            view.AnimateSize(AnimationMode.Hide, null, view.Close);
+            view.Animate(AnimationMode.Hide, null, view.Close);
             App.WidgetViews.Remove(view);
         }
 

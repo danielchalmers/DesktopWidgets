@@ -4,16 +4,16 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using DesktopWidgets.Helpers;
+using DesktopWidgets.Classes;
 using DesktopWidgets.View;
 
 #endregion
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
     public static class AnimationHelper
     {
-        public static void AnimateSize(this WidgetView view, AnimationMode animationMode, Action astartAction = null,
+        public static void Animate(this WidgetView view, AnimationMode animationMode, Action astartAction = null,
             Action aendAction = null)
         {
             var settings = view.Id.GetSettings();
@@ -87,8 +87,6 @@ namespace DesktopWidgets.Classes
                     break;
             }
 
-            var runCount = twoAnimations ? 2 : 1;
-
             Action startAction = delegate
             {
                 if (animationMode == AnimationMode.Show)
@@ -125,7 +123,6 @@ namespace DesktopWidgets.Classes
                         }
                         : null
             };
-            //doubleAnimation.Completed += (sender, args) => finishAction();
 
             // Start animation.
             startAction();

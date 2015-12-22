@@ -153,7 +153,7 @@ namespace DesktopWidgets.View
             if (Opacity < 1)
                 Refresh(resetOpacity);
             else
-                this.AnimateSize(AnimationMode.Hide, null, () => Refresh());
+                this.Animate(AnimationMode.Hide, null, () => Refresh());
         }
 
         private void Refresh(bool resetOpacity = true)

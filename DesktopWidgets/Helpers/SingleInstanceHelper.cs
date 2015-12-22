@@ -1,6 +1,7 @@
 ﻿using System;
+using DesktopWidgets.Classes;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
     public static class SingleInstanceHelper
     {

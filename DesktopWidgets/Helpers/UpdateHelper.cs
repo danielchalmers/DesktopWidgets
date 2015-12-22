@@ -86,7 +86,8 @@ namespace DesktopWidgets.Helpers
                     {
                         App.UpdateWaiting = true;
                         TrayIconHelper.ShowBalloon(
-                            $"An update is available ({info.AvailableVersion}).\nClick to view update details.", BalloonIcon.Info);
+                            $"An update is available ({info.AvailableVersion}).\nClick to view update details.",
+                            BalloonIcon.Info);
                     }
                     else
                     {

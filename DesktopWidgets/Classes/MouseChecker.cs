@@ -255,7 +255,7 @@ namespace DesktopWidgets.Classes
             if (_view.AnimationRunning || _view.IsVisible)
                 return;
             if (animate && _settings.AnimationTime != 0)
-                _view.AnimateSize(AnimationMode.Show);
+                _view.Animate(AnimationMode.Show);
             else
                 _view.Show();
         }
@@ -268,7 +268,7 @@ namespace DesktopWidgets.Classes
                 return;
             KeepOpenForIntro = false;
             if (animate && _settings.AnimationTime != 0)
-                _view.AnimateSize(AnimationMode.Hide);
+                _view.Animate(AnimationMode.Hide);
             else
                 _view.Hide();
         }

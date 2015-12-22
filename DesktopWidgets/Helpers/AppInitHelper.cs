@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
-using DesktopWidgets.Helpers;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
 using Microsoft.Win32;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
     public static class AppInitHelper
     {
