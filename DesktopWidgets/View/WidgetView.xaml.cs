@@ -165,6 +165,8 @@ namespace DesktopWidgets.View
             ViewModel.UpdateSize();
             UpdateLayout();
             ViewModel.UpdatePosition();
+            UpdateLayout();
+            ViewModel.UpdatePosition();
             UpdateTimers();
             ReloadHotKeys();
             if (Opacity == 1 && !_mouseChecker.KeepOpenForIntro)
