@@ -90,14 +90,20 @@ namespace DesktopWidgets.Helpers
             Action startAction = delegate
             {
                 if (animationMode == AnimationMode.Show)
+                {
                     view.Show();
+                    SoundHelper.PlaySoundAsync(settings.ShowSoundPath, settings.ShowSoundVolume);
+                }
                 astartAction?.Invoke();
                 view.AnimationRunning = true;
             };
             Action finishAction = delegate
             {
                 if (animationMode == AnimationMode.Hide)
+                {
                     view.Hide();
+                    SoundHelper.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
+                }
                 aendAction?.Invoke();
                 view.AnimationRunning = false;
             };

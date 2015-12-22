@@ -238,5 +238,21 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Ignore 0,0 Cursor Position")]
         public bool Ignore00XY { get; set; } = true;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Show Sound Path")]
+        public string ShowSoundPath { get; set; }
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Show Sound Volume")]
+        public double ShowSoundVolume { get; set; } = 1.0;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Hide Sound Path")]
+        public string HideSoundPath { get; set; }
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Hide Sound Volume")]
+        public double HideSoundVolume { get; set; } = 1.0;
     }
 }
