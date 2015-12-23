@@ -20,6 +20,12 @@ namespace DesktopWidgets.Helpers
             TypeNameHandling = TypeNameHandling.All
         };
 
+        public static object CloneObject(object obj)
+        {
+            return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj, JsonSerializerSettings),
+                JsonSerializerSettings);
+        }
+
         public static void UpgradeSettings()
         {
             // Upgrade settings from old version.

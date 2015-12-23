@@ -15,5 +15,10 @@ namespace DesktopWidgets.Classes
         }
 
         public Guid Guid { get; private set; }
+
+        public void GenerateNewGuid()
+        {
+            Guid = Guid.NewGuid();
+        }
     }
 }

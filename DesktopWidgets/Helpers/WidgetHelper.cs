@@ -203,6 +203,12 @@ namespace DesktopWidgets.Helpers
             newWidget.Identifier.LoadView();
         }
 
+        private static void AddNewWidget(WidgetSettingsBase settings)
+        {
+            App.WidgetsSettingsStore.Widgets.Add(settings);
+            settings.Identifier.LoadView();
+        }
+
         private static void Disable(this WidgetId id)
         {
             var settings = id.GetSettings();
@@ -281,6 +287,17 @@ namespace DesktopWidgets.Helpers
         {
             foreach (var view in App.WidgetViews)
                 view.UpdateUi();
+        }
+
+        public static WidgetId Clone(this WidgetId id)
+        {
+            var newWidget = SettingsHelper.CloneObject(id.GetSettings()) as WidgetSettingsBase;
+            if (newWidget != null)
+            {
+                newWidget.Identifier.GenerateNewGuid();
+                AddNewWidget(newWidget);
+            }
+            return newWidget?.Identifier;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace DesktopWidgets.ViewModel
             EditWidget = new RelayCommand(EditWidgetExecute);
             DisableWidget = new RelayCommand(DisableWidgetExecute);
             RemoveWidget = new RelayCommand(RemoveWidgetExecute);
+            CloneWidget = new RelayCommand(CloneWidgetExecute);
         }
 
         public WidgetSettingsBase SelectedWidget
@@ -41,6 +42,9 @@ namespace DesktopWidgets.ViewModel
 
         public ICommand RemoveWidget { get; private set; }
 
+        public ICommand CloneWidget { get; private set; }
+
+
         private void DeselectAllExecute()
         {
             SelectedWidget = null;
@@ -65,6 +69,12 @@ namespace DesktopWidgets.ViewModel
         private void RemoveWidgetExecute()
         {
             SelectedWidget.Identifier.Remove(true);
+        }
+
+        private void CloneWidgetExecute()
+        {
+            SelectedWidget.Identifier.Clone();
+            DeselectAllExecute();
         }
     }
 }

@@ -62,6 +62,7 @@
             </StackPanel.Resources>
             <Button Content="New..." Command="{Binding NewWidget}" IsEnabled="True" />
             <Button Content="Edit..." Command="{Binding EditWidget}" />
+            <Button Content="Clone" Command="{Binding CloneWidget}" />
             <Button
                 Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
                 Command="{Binding DisableWidget}" />
