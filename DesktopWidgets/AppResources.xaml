@@ -20,6 +20,7 @@
                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
     </Style>
     <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
+        <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
         <Separator />

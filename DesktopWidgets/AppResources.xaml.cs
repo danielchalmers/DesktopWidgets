@@ -45,5 +45,10 @@ namespace DesktopWidgets
         {
             UpdateHelper.HandleUpdate();
         }
+
+        private void menuItemNewWidget_OnClick(object sender, RoutedEventArgs e)
+        {
+            WidgetHelper.NewWidget();
+        }
     }
 }
