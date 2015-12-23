@@ -98,6 +98,11 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void AddToFileQueue(string path)
         {
+            var lastCheck = Settings.LastCheck;
+            Settings.LastCheck = DateTime.Now;
+            if (Settings.EnableTimeout)
+                if (DateTime.Now - lastCheck >= Settings.TimeoutDuration)
+                    return;
             _notificationQueue.Enqueue(path);
             HandleDirectoryChange();
         }

@@ -44,6 +44,17 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Mute Duration")]
         public TimeSpan MuteDuration { get; set; } = TimeSpan.FromHours(1);
 
+        [Category("General")]
+        [DisplayName("Timeout Duration")]
+        public TimeSpan TimeoutDuration { get; set; } = TimeSpan.FromMinutes(1);
+
+        [DisplayName("Last File Check")]
+        public DateTime LastCheck { get; set; } = DateTime.Now;
+
+        [Category("General")]
+        [DisplayName("Enable Timeout")]
+        public bool EnableTimeout { get; set; } = false;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On Event")]
         public bool OpenOnEvent { get; set; } = true;
