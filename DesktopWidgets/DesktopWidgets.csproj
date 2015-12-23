@@ -141,6 +141,7 @@
     <Compile Include="Classes\ChangelogDownloader.cs" />
     <Compile Include="Classes\DelayedAction.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
+    <Compile Include="Helpers\ConverterHelper.cs" />
     <Compile Include="Helpers\SingleInstanceHelper.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Classes\EnumUtilities.cs" />

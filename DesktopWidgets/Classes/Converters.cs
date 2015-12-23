@@ -24,11 +24,15 @@ namespace DesktopWidgets.Classes
 
         public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return value is bool && ((bool) value) ? True : False;
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return value is T && EqualityComparer<T>.Default.Equals((T) value, True);
         }
     }
@@ -37,6 +41,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var newValue = (bool) value;
             return newValue ? new Thickness(1) : new Thickness(0);
         }
@@ -51,9 +57,11 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var settings = value as WidgetSettingsBase;
             if (settings == null)
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             return settings.Disabled ? "Enable" : "Disable";
         }
 
@@ -80,14 +88,14 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
-                if (value[0] == null || value[1] == null)
-                    return Binding.DoNothing;
                 var val = System.Convert.ToDateTime(value[0]);
                 var settings = value[1] as Settings;
                 if (settings == null)
-                    return Binding.DoNothing;
+                    return DependencyProperty.UnsetValue;
 
                 var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
                 var ts = settings.EndDateTime - val;
@@ -97,7 +105,7 @@ namespace DesktopWidgets.Classes
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -111,21 +119,21 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
-                if (value[0] == null || value[1] == null)
-                    return Binding.DoNothing;
                 var val = System.Convert.ToDateTime(value[0]);
                 var settings = value[1] as Widgets.TimeClock.Settings;
                 if (settings == null)
-                    return Binding.DoNothing;
+                    return DependencyProperty.UnsetValue;
 
                 var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
                 return val.ToString(format);
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -139,13 +147,15 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
                 return value.Cast<bool>().All(x => x) ? Visibility.Visible : Visibility.Collapsed;
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -185,6 +195,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return ((bool) value) ? "Stop" : "Start";
         }
 
@@ -198,15 +210,15 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
-                if (value[0] == null || value[1] == null)
-                    return Binding.DoNothing;
                 var currentTime = System.Convert.ToDateTime(value[0]);
                 var startTime = System.Convert.ToDateTime(value[1]);
                 var settings = value[2] as Widgets.StopwatchClock.Settings;
                 if (settings == null)
-                    return Binding.DoNothing;
+                    return DependencyProperty.UnsetValue;
 
                 var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
                 var ts = startTime - currentTime;
@@ -214,7 +226,7 @@ namespace DesktopWidgets.Classes
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -224,36 +236,12 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class InvertBoolConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return !((bool) value);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return !((bool) value);
-        }
-    }
-
-    public class OneHundredConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((double) value)*100;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((double) value)/100;
-        }
-    }
-
     public class ShowIconContentToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var newValue = (ShortcutContentMode) value;
             return (newValue == ShortcutContentMode.Icon || newValue == ShortcutContentMode.Both)
                 ? Visibility.Visible
@@ -270,6 +258,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var newValue = (ShortcutContentMode) value;
             return (newValue == ShortcutContentMode.Text || newValue == ShortcutContentMode.Both)
                 ? Visibility.Visible
@@ -286,6 +276,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return ((ScrollBarVisibility) value).ToWindowsScrollBarVisibility();
         }
 
@@ -299,10 +291,12 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var shortcut = value[0] as Shortcut;
             var viewModel = value[1] as Widgets.Sidebar.ViewModel;
             if (viewModel == null || shortcut == null)
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
 
             return shortcut.GetShortcutIcon(viewModel);
         }
@@ -317,6 +311,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return ((ImageScalingMode) value).ToBitmapScalingMode();
         }
 
@@ -330,6 +326,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             switch ((IconPosition) value)
             {
                 default:
@@ -350,6 +348,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             switch ((IconPosition) value)
             {
                 default:
@@ -370,10 +370,12 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var shortcut = value[0] as Shortcut;
             var val = value[1] as Widgets.Sidebar.Settings;
             if (val == null || shortcut == null)
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
 
             switch (val.ToolTipType)
             {
@@ -398,9 +400,11 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var val = value as string;
             if (val == null)
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             return string.IsNullOrWhiteSpace(val) ? Visibility.Collapsed : Visibility.Visible;
         }
 
@@ -414,9 +418,11 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var val = value as Widgets.Sidebar.Settings;
             if (val == null)
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             switch (val.ShortcutOrientation)
             {
                 default:
@@ -441,6 +447,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
                 var dockPosition = (ScreenDockPosition) value[0];
@@ -451,7 +459,7 @@ namespace DesktopWidgets.Classes
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -465,6 +473,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
                 var dockPosition = (ScreenDockPosition) value[0];
@@ -473,7 +483,7 @@ namespace DesktopWidgets.Classes
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -487,9 +497,11 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             var shortcut = value as Shortcut;
             if (shortcut == null)
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             return
                 $"{shortcut.Name}{((string.IsNullOrWhiteSpace(shortcut.Path) && string.IsNullOrWhiteSpace(shortcut.Args)) ? "" : (($"{shortcut.Path}{(shortcut.Args == "" ? "" : $", {shortcut.Args}")}")))}";
         }
@@ -504,6 +516,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return (bool) value ? "Enable" : "Disable";
         }
 
@@ -517,6 +531,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return (bool) value ? Visibility.Collapsed : Visibility.Visible;
         }
 
@@ -530,6 +546,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return (value as WidgetSettingsBase)?.Identifier?.GetName();
         }
 
@@ -543,6 +561,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             try
             {
                 var baseAmount = (double) value[0];
@@ -553,7 +573,7 @@ namespace DesktopWidgets.Classes
             }
             catch
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
         }
 
@@ -567,6 +587,8 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
             return (bool) value ? "Less Options" : "More Options";
         }
 
