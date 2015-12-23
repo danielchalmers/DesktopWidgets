@@ -15,11 +15,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private bool _isContextMenuOpen;
 
-        private double _opacity;
-
         protected WidgetViewModelBase(WidgetId id)
         {
-            Opacity = 0;
             _id = id;
             Settings = id.GetSettings();
             EditWidget = new RelayCommand(EditWidgetExecute);
@@ -127,19 +124,6 @@ namespace DesktopWidgets.ViewModelBase
                 {
                     _actualHeight = value;
                     RaisePropertyChanged(nameof(ActualHeight));
-                }
-            }
-        }
-
-        public double Opacity
-        {
-            get { return _opacity; }
-            set
-            {
-                if (_opacity != value)
-                {
-                    _opacity = value;
-                    RaisePropertyChanged(nameof(Opacity));
                 }
             }
         }
@@ -362,7 +346,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             var previousPosition = Settings.DockPosition;
             Settings.DockPosition = screenDockPosition;
-            _id.GetView()?.UpdateUi(dockPosition: previousPosition);
+            _id.GetView()?.UpdateUi(previousPosition);
         }
 
         private void WidgetDockAlignmentExecute(ScreenDockAlignment screenDockAlignment)

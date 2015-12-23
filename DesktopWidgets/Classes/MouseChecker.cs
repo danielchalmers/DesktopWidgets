@@ -47,6 +47,8 @@ namespace DesktopWidgets.Classes
             UpdateIntervals();
         }
 
+        public bool IsRunning => _mouseCheckTimer.IsEnabled;
+
         private Point GetMouseLocation()
             => new Point(Control.MousePosition.X, Control.MousePosition.Y);
 
@@ -189,9 +191,10 @@ namespace DesktopWidgets.Classes
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
-            if (_view.Opacity < 1)
+            if (_view.NeedUpdate)
             {
-                Hide(false);
+                _view.NeedUpdate = false;
+                //Hide(false);
                 _view.UpdateUi();
                 return;
             }
@@ -257,7 +260,7 @@ namespace DesktopWidgets.Classes
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Show);
             else
-                _view.Show();
+                _view.ShowOpacity();
         }
 
         public void Hide(bool animate = true, bool checkHideStatus = false)
@@ -270,7 +273,7 @@ namespace DesktopWidgets.Classes
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Hide);
             else
-                _view.Hide();
+                _view.HideOpacity();
         }
     }
 }

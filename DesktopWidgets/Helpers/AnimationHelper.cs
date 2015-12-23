@@ -94,7 +94,7 @@ namespace DesktopWidgets.Helpers
             {
                 if (animationMode == AnimationMode.Show)
                 {
-                    view.Show();
+                    view.ShowOpacity();
                     SoundHelper.PlaySoundAsync(settings.ShowSoundPath, settings.ShowSoundVolume);
                 }
                 astartAction?.Invoke();
@@ -104,7 +104,7 @@ namespace DesktopWidgets.Helpers
             {
                 if (animationMode == AnimationMode.Hide)
                 {
-                    view.Hide();
+                    view.HideOpacity();
                     SoundHelper.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
                 }
                 aendAction?.Invoke();

@@ -24,13 +24,15 @@ namespace DesktopWidgets.View
         public readonly UserControl UserControl;
         public readonly WidgetViewModelBase ViewModel;
         private DispatcherTimer _onTopForceTimer;
+        public bool NeedUpdate;
 
         public bool QueueIntro;
 
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
-            Opacity = 0;
+            HideOpacity();
+            Visibility = Visibility.Visible;
             Id = id;
             Settings = id.GetSettings();
             ViewModel = viewModel;
@@ -49,7 +51,8 @@ namespace DesktopWidgets.View
             userControl.MouseDown += OnMouseDown;
 
             _mouseChecker = new MouseChecker(this, Settings);
-            UpdateUi(false);
+            NeedUpdate = true;
+            UpdateUi();
             _mouseChecker.Start();
         }
 
@@ -57,6 +60,8 @@ namespace DesktopWidgets.View
 
         public WidgetId Id { get; private set; }
         public bool AnimationRunning { get; set; } = false;
+
+        public new bool IsVisible => !(Opacity < 1);
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -90,7 +95,7 @@ namespace DesktopWidgets.View
             if (Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
                 return;
 
-            if (Opacity < 1)
+            if (!IsVisible)
             {
                 QueueIntro = true;
                 return;
@@ -148,18 +153,20 @@ namespace DesktopWidgets.View
         }
 
 
-        public void UpdateUi(bool resetOpacity = true, ScreenDockPosition? dockPosition = null,
+        public void UpdateUi(ScreenDockPosition? dockPosition = null,
             ScreenDockAlignment? dockAlignment = null)
         {
-            if (Opacity < 1)
-                Refresh(resetOpacity);
+            if (!IsVisible)
+                Refresh(false);
             else
-                this.Animate(AnimationMode.Hide, null, () => Refresh(), dockPosition, dockAlignment);
+                this.Animate(AnimationMode.Hide, null, () => Refresh(true), dockPosition, dockAlignment);
         }
 
-        private void Refresh(bool resetOpacity = true)
+        private void Refresh(bool showIntro)
         {
+            UpdateLayout();
             DataContext = null;
+            UpdateLayout();
             DataContext = ViewModel;
             UpdateLayout();
             ViewModel.UpdateSize();
@@ -167,19 +174,21 @@ namespace DesktopWidgets.View
             ViewModel.UpdatePosition();
             UpdateLayout();
             ViewModel.UpdatePosition();
+            UpdateLayout();
             UpdateTimers();
             ReloadHotKeys();
-            if (Opacity == 1 && !_mouseChecker.KeepOpenForIntro)
+            if (showIntro && !_mouseChecker.KeepOpenForIntro)
                 ShowIntro();
-            if (resetOpacity)
-                Opacity = 1;
         }
 
         private void UpdateTimers()
         {
             _mouseChecker.UpdateIntervals();
-            _mouseChecker.Stop();
-            _mouseChecker.Start();
+            if (_mouseChecker.IsRunning)
+            {
+                _mouseChecker.Stop();
+                _mouseChecker.Start();
+            }
             if (Settings.ForceOnTop && Settings.ForceOnTopInterval > 0)
             {
                 if (_onTopForceTimer == null)
@@ -216,6 +225,16 @@ namespace DesktopWidgets.View
         {
             if (Settings.SnapToScreenEdges)
                 this.Snap();
+        }
+
+        public void ShowOpacity()
+        {
+            Opacity = 1;
+        }
+
+        public void HideOpacity()
+        {
+            Opacity = 0;
         }
     }
 }
