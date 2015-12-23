@@ -6,9 +6,9 @@ namespace DesktopWidgets.Helpers
 {
     public static class ConverterHelper
     {
-        public static bool IsValueValid(IList<object> value)
+        public static bool IsValueValid(IList<object> value, bool allowNull = false)
         {
-            return value != null && value.All(x => x != DependencyProperty.UnsetValue && x != null);
+            return value != null && value.All(x => x != DependencyProperty.UnsetValue && (allowNull || x != null));
         }
 
         public static bool IsValueValid(object value)

@@ -136,6 +136,7 @@
     <Compile Include="AppResources.xaml.cs">
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Widgets\FolderWatcher\DirectoryWatcher.cs" />
     <Compile Include="Classes\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="Helpers\AppInitHelper.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Classes\DelayedAction.cs" />
     <Compile Include="Classes\NativeMethods.cs" />
     <Compile Include="Helpers\ConverterHelper.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\SingleInstanceHelper.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="Classes\EnumUtilities.cs" />
@@ -174,6 +176,12 @@
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />
+    <Compile Include="Widgets\FolderWatcher\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\FolderWatcher\Metadata.cs" />
+    <Compile Include="Widgets\FolderWatcher\Settings.cs" />
+    <Compile Include="Widgets\FolderWatcher\ViewModel.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
     <Compile Include="Widgets\Sidebar\ManageShortcuts.xaml.cs">
@@ -321,6 +329,10 @@
     <Page Include="AppResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Widgets\FolderWatcher\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\Search\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>

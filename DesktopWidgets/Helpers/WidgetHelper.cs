@@ -24,7 +24,8 @@ namespace DesktopWidgets.Helpers
             Widgets.PictureFrame.Metadata.FriendlyName,
             Widgets.PictureSlideshow.Metadata.FriendlyName,
             Widgets.Sidebar.Metadata.FriendlyName,
-            Widgets.Calculator.Metadata.FriendlyName
+            Widgets.Calculator.Metadata.FriendlyName,
+            Widgets.FolderWatcher.Metadata.FriendlyName
         }.OrderBy(x => x).ToList();
 
         public static WidgetSettingsBase GetSettings(this WidgetId id)
@@ -98,6 +99,10 @@ namespace DesktopWidgets.Helpers
             {
                 return Widgets.Calculator.Metadata.FriendlyName;
             }
+            if (settings is Widgets.FolderWatcher.Settings)
+            {
+                return Widgets.FolderWatcher.Metadata.FriendlyName;
+            }
             return string.Empty;
         }
 
@@ -125,6 +130,8 @@ namespace DesktopWidgets.Helpers
                     return new Widgets.Sidebar.Settings();
                 case Widgets.Calculator.Metadata.FriendlyName:
                     return new Widgets.Calculator.Settings();
+                case Widgets.FolderWatcher.Metadata.FriendlyName:
+                    return new Widgets.FolderWatcher.Settings();
                 default:
                     return null;
             }
@@ -185,6 +192,11 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.Calculator.ViewModel(id);
                 userControl = new Widgets.Calculator.ControlView();
+            }
+            else if (settings is Widgets.FolderWatcher.Settings)
+            {
+                dataContext = new Widgets.FolderWatcher.ViewModel(id);
+                userControl = new Widgets.FolderWatcher.ControlView();
             }
             else
             {

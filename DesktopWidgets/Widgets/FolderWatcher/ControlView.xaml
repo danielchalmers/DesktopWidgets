@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="DesktopWidgets.Widgets.FolderWatcher.ControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:desktopWidgets="clr-namespace:DesktopWidgets"
+             xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+             xmlns:p="clr-namespace:DesktopWidgets.Properties"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <classes:BooleanToCollapsedVisibilityConverter x:Key="BooleanToCollapsedVisibilityConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
+        <classes:FilePathToNameConverter x:Key="FilePathToNameConverter" />
+        <classes:BooleanToHiddenVisibilityConverter x:Key="BooleanToHiddenVisibilityConverter" />
+        <classes:InverseBoolOrFilePathToVisibilityConverter x:Key="InverseBoolOrFilePathToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Height" Value="30" />
+            </Style>
+        </Grid.Resources>
+
+        <TextBlock Grid.Row="0" Margin="15,15,15,0" TextTrimming="CharacterEllipsis"
+                   TextAlignment="Center"
+                   Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}"
+                   ToolTip="{Binding CurrentFilePath}"
+                   Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <Grid Grid.Row="1" Margin="15">
+            <Image Visibility="{Binding IsImage, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   Source="{Binding CurrentImage}" Stretch="Uniform" MaxWidth="{Binding Width}"
+                   MaxHeight="{Binding Height}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <command:EventToCommand Command="{Binding OpenFile}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <TextBlock
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock.Visibility>
+                    <MultiBinding Converter="{StaticResource InverseBoolOrFilePathToVisibilityConverter}">
+                        <Binding Path="IsImage" />
+                        <Binding Path="CurrentFilePath" />
+                    </MultiBinding>
+                </TextBlock.Visibility>
+                <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFilePath}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="RequestNavigate">
+                            <command:EventToCommand Command="{Binding OpenFile}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    Click here to open file
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <StackPanel Grid.Row="2">
+            <Button Command="{Binding Mute}"
+                    Visibility="{Binding Settings.ShowMute, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                    <Binding Path="Settings.MuteDuration" />
+                    <Binding Path="Settings.MuteEndTime" />
+                </MultiBinding>
+            </Button>
+            <Button Content="Dismiss" Command="{Binding Dismiss}"
+                    Visibility="{Binding Settings.ShowDismiss, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

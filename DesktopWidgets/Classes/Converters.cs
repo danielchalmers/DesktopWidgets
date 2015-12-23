@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -593,6 +594,89 @@ namespace DesktopWidgets.Classes
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BooleanToCollapsedVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            var val = (bool) value;
+            return val ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BooleanToHiddenVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            var val = (bool) value;
+            return val ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class TimeSpanToMuteTextConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            var timeSpan = (TimeSpan) value[0];
+            var muteEndTime = (DateTime) value[1];
+            return muteEndTime > DateTime.Now ? "Unmute" : $"Mute for {timeSpan.ToReadableString()}";
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class FilePathToNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            return Path.GetFileName((string) value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class InverseBoolOrFilePathToVisibilityConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value, true))
+                return DependencyProperty.UnsetValue;
+            var val1 = (bool) value[0];
+            var val2 = (string) value[1];
+            return val1 || (string.IsNullOrWhiteSpace(val2) || !File.Exists(val2))
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
