@@ -18,11 +18,11 @@ namespace DesktopWidgets.View
     /// </summary>
     public partial class WidgetView : Window
     {
-        private readonly DispatcherTimer _introTimer;
         private readonly MouseChecker _mouseChecker;
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
         public readonly WidgetViewModelBase ViewModel;
+        private DispatcherTimer _introTimer;
         private DispatcherTimer _onTopForceTimer;
         public bool NeedUpdate;
 
@@ -37,8 +37,6 @@ namespace DesktopWidgets.View
             Settings = id.GetSettings();
             ViewModel = viewModel;
             UserControl = userControl;
-
-            _introTimer = new DispatcherTimer();
 
             if (!App.Arguments.Contains("-systemstartup"))
                 QueueIntro = true;
@@ -95,40 +93,35 @@ namespace DesktopWidgets.View
             if (Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
                 return;
 
-            if (!IsVisible)
+            if (NeedUpdate)
             {
                 QueueIntro = true;
                 return;
             }
             QueueIntro = false;
 
+            if (_introTimer == null)
+            {
+                _introTimer = new DispatcherTimer();
+                _introTimer.Tick += delegate
+                {
+                    _introTimer.Stop();
+                    _mouseChecker.KeepOpenForIntro = false;
+                };
+            }
+
             _introTimer.Stop();
             _introTimer.Interval = TimeSpan.FromMilliseconds(duration == -1 ? Settings.IntroDuration : duration);
             if (_mouseChecker.KeepOpenForIntro && reversable)
             {
                 _mouseChecker.KeepOpenForIntro = false;
-                _mouseChecker.Hide(checkHideStatus: true);
-                if (duration != 0)
-                    _introTimer.Tick += delegate
-                    {
-                        _introTimer.Stop();
-                        _mouseChecker.KeepOpenForIntro = true;
-                        _mouseChecker.Show();
-                    };
             }
             else
             {
                 _mouseChecker.KeepOpenForIntro = true;
-                _mouseChecker.Show();
                 if (duration != 0)
-                    _introTimer.Tick += delegate
-                    {
-                        _introTimer.Stop();
-                        _mouseChecker.KeepOpenForIntro = false;
-                        _mouseChecker.Hide(checkHideStatus: true);
-                    };
+                    _introTimer.Start();
             }
-            _introTimer.Start();
         }
 
         public void ShowUI()
