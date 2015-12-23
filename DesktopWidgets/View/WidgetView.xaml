@@ -103,10 +103,10 @@
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}">
+    <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="OnMouseDown">
         <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
             <StackPanel>
-                <TextBlock x:Name="lblName" Style="{StaticResource NameTextBlockStyle}" MouseDown="OnMouseDown" />
+                <TextBlock x:Name="lblName" Style="{StaticResource NameTextBlockStyle}" />
                 <Border x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
                 <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}"
                               Width="{Binding Width}"
