@@ -16,64 +16,59 @@
         <classes:FilePathToNameConverter x:Key="FilePathToNameConverter" />
         <classes:BooleanToHiddenVisibilityConverter x:Key="BooleanToHiddenVisibilityConverter" />
         <classes:InverseBoolOrFilePathToVisibilityConverter x:Key="InverseBoolOrFilePathToVisibilityConverter" />
+
+        <Grid x:Key="FrameTop">
+            <TextBlock TextTrimming="CharacterEllipsis"
+                       TextAlignment="Center"
+                       Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}"
+                       ToolTip="{Binding CurrentFilePath}"
+                       Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
+        <Grid x:Key="FrameBottom">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Height" Value="30" />
+                    </Style>
+                </StackPanel.Resources>
+                <Button Command="{Binding Mute}"
+                        Visibility="{Binding Settings.ShowMute, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                        <Binding Path="Settings.MuteDuration" />
+                        <Binding Path="Settings.MuteEndTime" />
+                    </MultiBinding>
+                </Button>
+                <Button Content="Dismiss" Command="{Binding Dismiss}"
+                        Visibility="{Binding Settings.ShowDismiss, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </StackPanel>
+        </Grid>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.Resources>
-            <Style TargetType="Button">
-                <Setter Property="Height" Value="30" />
-            </Style>
-        </Grid.Resources>
-
-        <TextBlock Grid.Row="0" Margin="15,15,15,0" TextTrimming="CharacterEllipsis"
-                   TextAlignment="Center"
-                   Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}"
-                   ToolTip="{Binding CurrentFilePath}"
-                   Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
-        <Grid Grid.Row="1" Margin="15">
-            <Image Visibility="{Binding IsImage, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   Source="{Binding CurrentImage}" Stretch="Uniform" MaxWidth="{Binding Width}"
-                   MaxHeight="{Binding Height}">
+        <Image Visibility="{Binding IsImage, Converter={StaticResource BooleanToVisibilityConverter}}"
+               Source="{Binding CurrentImage}" Stretch="Uniform" MaxWidth="{Binding Width}"
+               MaxHeight="{Binding Height}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <command:EventToCommand Command="{Binding OpenFile}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Image>
+        <TextBlock
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock.Visibility>
+                <MultiBinding Converter="{StaticResource InverseBoolOrFilePathToVisibilityConverter}">
+                    <Binding Path="IsImage" />
+                    <Binding Path="CurrentFilePath" />
+                </MultiBinding>
+            </TextBlock.Visibility>
+            <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFilePath}">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                    <i:EventTrigger EventName="RequestNavigate">
                         <command:EventToCommand Command="{Binding OpenFile}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-            </Image>
-            <TextBlock
-                HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock.Visibility>
-                    <MultiBinding Converter="{StaticResource InverseBoolOrFilePathToVisibilityConverter}">
-                        <Binding Path="IsImage" />
-                        <Binding Path="CurrentFilePath" />
-                    </MultiBinding>
-                </TextBlock.Visibility>
-                <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFilePath}">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="RequestNavigate">
-                            <command:EventToCommand Command="{Binding OpenFile}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    Click here to open file
-                </Hyperlink>
-            </TextBlock>
-        </Grid>
-
-        <StackPanel Grid.Row="2">
-            <Button Command="{Binding Mute}"
-                    Visibility="{Binding Settings.ShowMute, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
-                    <Binding Path="Settings.MuteDuration" />
-                    <Binding Path="Settings.MuteEndTime" />
-                </MultiBinding>
-            </Button>
-            <Button Content="Dismiss" Command="{Binding Dismiss}"
-                    Visibility="{Binding Settings.ShowDismiss, Converter={StaticResource BooleanToVisibilityConverter}}" />
-        </StackPanel>
+                Click here to open file
+            </Hyperlink>
+        </TextBlock>
     </Grid>
 </UserControl>

@@ -48,6 +48,13 @@ namespace DesktopWidgets.View
                     (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
             userControl.MouseDown += OnMouseDown;
 
+            var frameTop = userControl.TryFindResource("FrameTop") as Grid;
+            if (frameTop != null)
+                FrameContainerTop.Child = frameTop;
+            var frameBottom = userControl.TryFindResource("FrameBottom") as Grid;
+            if (frameBottom != null)
+                FrameContainerBottom.Child = frameBottom;
+
             _mouseChecker = new MouseChecker(this, Settings);
             NeedUpdate = true;
             UpdateUi();
