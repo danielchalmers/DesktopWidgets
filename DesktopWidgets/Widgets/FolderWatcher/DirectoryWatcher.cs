@@ -35,6 +35,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (!_knownFilePaths.ContainsKey(folder))
                     _knownFilePaths.Add(folder, null);
                 var exclude = _settings.ExcludeFilter.Split('|');
+                if (string.IsNullOrWhiteSpace(_settings.IncludeFilter))
+                    _settings.IncludeFilter = "*.*";
                 var files = Directory.GetFiles(folder, _settings.IncludeFilter);
                 foreach (var file in files)
                 {
