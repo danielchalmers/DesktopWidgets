@@ -133,12 +133,14 @@ namespace DesktopWidgets.View
 
         public void ShowUI()
         {
-            _mouseChecker.Show();
+            if (Settings.OpenMode != OpenMode.AlwaysOpen)
+                _mouseChecker.Show();
         }
 
         public void HideUI()
         {
-            _mouseChecker.Hide();
+            if (Settings.OpenMode != OpenMode.AlwaysOpen)
+                _mouseChecker.Hide();
         }
 
         private void ReloadHotKeys()
