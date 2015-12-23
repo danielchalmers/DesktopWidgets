@@ -241,84 +241,18 @@ namespace DesktopWidgets.ViewModelBase
 
         private double GetWidth()
         {
-            var newWidth = double.NaN;
-            newWidth = Settings.Width;
-            if (Settings.DockPosition == ScreenDockPosition.None)
-            {
-            }
-            else
-            {
-                var horizontal = Settings.DockPosition.IsHorizontal();
-
-                if (horizontal)
-                {
-                    switch (Settings.DockAlignment)
-                    {
-                        case ScreenDockAlignment.Top:
-                            break;
-                        default:
-                        case ScreenDockAlignment.Center:
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            break;
-                        case ScreenDockAlignment.Stretch:
-                            break;
-                    }
-                    newWidth = Settings.Width > Settings.MinWidth ? Settings.Width : Settings.MinWidth;
-                }
-                else
-                {
-                    switch (Settings.DockAlignment)
-                    {
-                        case ScreenDockAlignment.Top:
-                            break;
-                        default:
-                        case ScreenDockAlignment.Center:
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            break;
-                        case ScreenDockAlignment.Stretch:
-                            newWidth = MaxWidth;
-                            break;
-                    }
-                }
-            }
-            return newWidth;
+            return Settings.DockPosition != ScreenDockPosition.None && Settings.DockPosition.IsVertical() &&
+                   Settings.DockAlignment == ScreenDockAlignment.Stretch
+                ? MaxWidth
+                : Settings.Width;
         }
 
         private double GetHeight()
         {
-            var newHeight = double.NaN;
-            newHeight = Settings.Height;
-            if (Settings.DockPosition == ScreenDockPosition.None)
-            {
-            }
-            else
-            {
-                var horizontal = Settings.DockPosition.IsHorizontal();
-
-                if (horizontal)
-                {
-                    switch (Settings.DockAlignment)
-                    {
-                        case ScreenDockAlignment.Top:
-                            break;
-                        default:
-                        case ScreenDockAlignment.Center:
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            break;
-                        case ScreenDockAlignment.Stretch:
-                            newHeight = MaxHeight;
-                            break;
-                    }
-                }
-                else
-                {
-                    newHeight = Settings.Width > Settings.MinHeight ? Settings.Width : Settings.MinHeight;
-                }
-            }
-            return newHeight;
+            return Settings.DockPosition != ScreenDockPosition.None && Settings.DockPosition.IsHorizontal() &&
+                   Settings.DockAlignment == ScreenDockAlignment.Stretch
+                ? MaxHeight
+                : Settings.Height;
         }
 
         private void EditWidgetExecute()
