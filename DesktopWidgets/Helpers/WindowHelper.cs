@@ -14,7 +14,8 @@ namespace DesktopWidgets.Helpers
 
             var bounds = new List<Rect> {SystemParameters.WorkArea};
             bounds.AddRange(MonitorHelper.GetAllMonitorBounds());
-            bounds.AddRange(App.WidgetViews.Where(x => !x.Equals(window)).Select(view => view.GetBounds()));
+            bounds.AddRange(
+                App.WidgetViews.Where(x => !x.Settings.Disabled && !x.Equals(window)).Select(view => view.GetBounds()));
             var windowRect = window.GetBounds();
 
             var horizontal = new List<double>();
