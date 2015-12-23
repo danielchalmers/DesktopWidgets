@@ -4,7 +4,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.CountdownClock
 {
-    public class Settings : WidgetClockSettingsBase
+    public class Settings : WidgetClockSettingsBase, IEventWidget
     {
         public Settings()
         {
@@ -29,5 +29,17 @@ namespace DesktopWidgets.Widgets.CountdownClock
         [Category("Style")]
         [DisplayName("Continue Counting")]
         public bool EndContinueCounting { get; set; } = false;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Open On Event")]
+        public bool OpenOnEvent { get; set; } = true;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Stay Open On Event")]
+        public bool OpenOnEventStay { get; set; } = false;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Open On Event Duration")]
+        public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

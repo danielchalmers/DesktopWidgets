@@ -136,6 +136,7 @@
     <Compile Include="AppResources.xaml.cs">
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="Helpers\AppInitHelper.cs" />
     <Compile Include="Classes\ChangelogDownloader.cs" />

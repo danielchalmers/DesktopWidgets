@@ -21,9 +21,16 @@ namespace DesktopWidgets.Widgets.CountdownClock
             if (CurrentTime >= Settings.EndDateTime && Settings.LastEndDateTime != Settings.EndDateTime)
             {
                 Settings.LastEndDateTime = Settings.EndDateTime;
-
-                SoundHelper.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
+                OnEndAction();
             }
+        }
+
+        private void OnEndAction()
+        {
+            SoundHelper.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
+            if (Settings.OpenOnEvent)
+                Settings.Identifier.GetView()
+                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
         }
     }
 }
