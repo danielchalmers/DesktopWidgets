@@ -107,7 +107,7 @@
         <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
             <StackPanel>
                 <TextBlock x:Name="lblName" Style="{StaticResource NameTextBlockStyle}" MouseDown="OnMouseDown" />
-                <Border x:Name="FrameContainerTop" Margin="5" />
+                <Border x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
                 <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}"
                               Width="{Binding Width}"
                               Height="{Binding Height}">
@@ -134,7 +134,7 @@
                         </MultiBinding>
                     </ScrollViewer.MaxHeight>
                 </ScrollViewer>
-                <Border x:Name="FrameContainerBottom" Margin="5" />
+                <Border x:Name="FrameContainerBottom" Visibility="Collapsed" Margin="5" />
             </StackPanel>
         </Border>
     </Border>

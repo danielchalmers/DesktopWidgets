@@ -50,10 +50,16 @@ namespace DesktopWidgets.View
 
             var frameTop = userControl.TryFindResource("FrameTop") as Grid;
             if (frameTop != null)
+            {
                 FrameContainerTop.Child = frameTop;
+                FrameContainerTop.Visibility = Visibility.Visible;
+            }
             var frameBottom = userControl.TryFindResource("FrameBottom") as Grid;
             if (frameBottom != null)
+            {
                 FrameContainerBottom.Child = frameBottom;
+                FrameContainerBottom.Visibility = Visibility.Visible;
+            }
 
             _mouseChecker = new MouseChecker(this, Settings);
             NeedUpdate = true;
