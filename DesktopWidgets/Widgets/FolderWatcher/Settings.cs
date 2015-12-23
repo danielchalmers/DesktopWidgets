@@ -6,6 +6,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 {
     public class Settings : WidgetSettingsBase, IEventWidget
     {
+        public Settings()
+        {
+            Width = 384;
+            Height = 216;
+        }
+
         [Category("General")]
         [DisplayName("Folder Check Interval")]
         public TimeSpan FolderCheckInterval { get; set; } = TimeSpan.FromMilliseconds(500);
