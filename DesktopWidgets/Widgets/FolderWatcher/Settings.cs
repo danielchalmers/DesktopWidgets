@@ -34,10 +34,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show Dismiss")]
         public bool ShowDismiss { get; set; } = true;
 
-        [Category("Style")]
-        [DisplayName("Replace Existing File")]
-        public bool NotificationReplaceExisting { get; set; } = false;
-
         [DisplayName("Mute End Time")]
         public DateTime MuteEndTime { get; set; } = DateTime.Now;
 
