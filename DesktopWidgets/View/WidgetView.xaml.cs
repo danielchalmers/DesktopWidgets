@@ -242,7 +242,7 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
         {
-            if (Settings.SnapToScreenEdges && Settings.DockPosition != ScreenDockPosition.None)
+            if (Settings.SnapToScreenEdges && Settings.DockPosition == ScreenDockPosition.None)
                 this.Snap();
         }
 
