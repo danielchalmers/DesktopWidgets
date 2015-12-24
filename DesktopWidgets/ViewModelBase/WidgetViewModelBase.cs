@@ -13,7 +13,15 @@ namespace DesktopWidgets.ViewModelBase
         private double _actualHeight;
         private double _actualWidth;
 
+        private double _height;
+
         private bool _isContextMenuOpen;
+
+        private double _left;
+
+        private double _top;
+
+        private double _width;
 
         protected WidgetViewModelBase(WidgetId id)
         {
@@ -30,13 +38,14 @@ namespace DesktopWidgets.ViewModelBase
 
         public double Left
         {
-            get { return GetLeft(); }
+            get { return _left; }
             set
             {
-                if (Settings.Left != value)
+                if (_left != value)
                 {
                     if (Settings.DockPosition == ScreenDockPosition.None)
                         Settings.Left = value;
+                    _left = value;
                     RaisePropertyChanged(nameof(Left));
                 }
             }
@@ -44,13 +53,14 @@ namespace DesktopWidgets.ViewModelBase
 
         public double Top
         {
-            get { return GetTop(); }
+            get { return _top; }
             set
             {
-                if (Settings.Top != value)
+                if (_top != value)
                 {
                     if (Settings.DockPosition == ScreenDockPosition.None)
                         Settings.Top = value;
+                    _top = value;
                     RaisePropertyChanged(nameof(Top));
                 }
             }
@@ -58,12 +68,28 @@ namespace DesktopWidgets.ViewModelBase
 
         public double Width
         {
-            get { return GetWidth(); }
+            get { return _width; }
+            set
+            {
+                if (_width != value)
+                {
+                    _width = value;
+                    RaisePropertyChanged(nameof(Width));
+                }
+            }
         }
 
         public double Height
         {
-            get { return GetHeight(); }
+            get { return _height; }
+            set
+            {
+                if (_height != value)
+                {
+                    _height = value;
+                    RaisePropertyChanged(nameof(Height));
+                }
+            }
         }
 
         public double MaxWidth
@@ -107,7 +133,7 @@ namespace DesktopWidgets.ViewModelBase
             get { return _actualWidth; }
             set
             {
-                if (_actualWidth != value)
+                if (_actualWidth != value && !double.IsNaN(value) && value > 0)
                 {
                     _actualWidth = value;
                     RaisePropertyChanged(nameof(ActualWidth));
@@ -120,7 +146,7 @@ namespace DesktopWidgets.ViewModelBase
             get { return _actualHeight; }
             set
             {
-                if (_actualHeight != value)
+                if (_actualHeight != value && !double.IsNaN(value) && value > 0)
                 {
                     _actualHeight = value;
                     RaisePropertyChanged(nameof(ActualHeight));
@@ -151,6 +177,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private double GetLeft()
         {
+            //if (double.IsNaN(ActualWidth) || ActualWidth < 1)
+            //    return double.NaN;
             var newLeft = double.NaN;
             if (Settings.DockPosition == ScreenDockPosition.None)
             {
@@ -196,6 +224,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private double GetTop()
         {
+            //if (double.IsNaN(ActualHeight) || ActualHeight < 1)
+            //    return double.NaN;
             var newTop = double.NaN;
             if (Settings.DockPosition == ScreenDockPosition.None)
             {
@@ -280,7 +310,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             var previousPosition = Settings.DockPosition;
             Settings.DockPosition = screenDockPosition;
-            _id.GetView()?.UpdateUi(previousPosition);
+            _id.GetView()?.UpdateUi(dockPosition: previousPosition);
         }
 
         private void WidgetDockAlignmentExecute(ScreenDockAlignment screenDockAlignment)
@@ -292,14 +322,14 @@ namespace DesktopWidgets.ViewModelBase
 
         public void UpdatePosition()
         {
-            RaisePropertyChanged(nameof(Left));
-            RaisePropertyChanged(nameof(Top));
+            Left = GetLeft();
+            Top = GetTop();
         }
 
         public void UpdateSize()
         {
-            RaisePropertyChanged(nameof(Width));
-            RaisePropertyChanged(nameof(Height));
+            Width = GetWidth();
+            Height = GetHeight();
         }
     }
 }

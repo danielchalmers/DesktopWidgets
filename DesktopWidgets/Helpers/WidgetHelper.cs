@@ -273,7 +273,7 @@ namespace DesktopWidgets.Helpers
             var previousDockPosition = settings.DockPosition;
             var previousDockAlignment = settings.DockAlignment;
             new EditWidget(id).ShowDialog();
-            id.GetView()?.UpdateUi(previousDockPosition, previousDockAlignment);
+            id.GetView()?.UpdateUi(dockPosition: previousDockPosition, dockAlignment: previousDockAlignment);
         }
 
         public static void LoadWidgetViews()

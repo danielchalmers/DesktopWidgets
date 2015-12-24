@@ -24,7 +24,7 @@ namespace DesktopWidgets.View
         public readonly WidgetViewModelBase ViewModel;
         private DispatcherTimer _introTimer;
         private DispatcherTimer _onTopForceTimer;
-        public bool NeedUpdate;
+        public bool IsRefreshRequired;
 
         public bool QueueIntro;
 
@@ -62,8 +62,8 @@ namespace DesktopWidgets.View
             }
 
             _mouseChecker = new MouseChecker(this, Settings);
-            NeedUpdate = true;
-            UpdateUi();
+            UpdateUi(true);
+            IsRefreshRequired = true;
             _mouseChecker.Start();
         }
 
@@ -106,7 +106,7 @@ namespace DesktopWidgets.View
             if (Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
                 return;
 
-            if (NeedUpdate)
+            if (IsRefreshRequired)
             {
                 QueueIntro = true;
                 return;
@@ -164,21 +164,25 @@ namespace DesktopWidgets.View
         }
 
 
-        public void UpdateUi(ScreenDockPosition? dockPosition = null,
+        public void UpdateUi(bool resetContext = true, bool updateNonUi = true, ScreenDockPosition? dockPosition = null,
             ScreenDockAlignment? dockAlignment = null)
         {
             if (!IsVisible)
-                Refresh(false);
+                Refresh(resetContext, updateNonUi, false);
             else
-                this.Animate(AnimationMode.Hide, null, () => Refresh(true), dockPosition, dockAlignment);
+                this.Animate(AnimationMode.Hide, null, () => Refresh(resetContext, updateNonUi, true), dockPosition,
+                    dockAlignment);
         }
 
-        private void Refresh(bool showIntro)
+        private void Refresh(bool resetContext, bool updateNonUi, bool showIntro)
         {
-            UpdateLayout();
-            DataContext = null;
-            UpdateLayout();
-            DataContext = ViewModel;
+            if (resetContext)
+            {
+                //UpdateLayout();
+                DataContext = null;
+                //UpdateLayout();
+                DataContext = ViewModel;
+            }
             UpdateLayout();
             ViewModel.UpdateSize();
             UpdateLayout();
@@ -186,8 +190,12 @@ namespace DesktopWidgets.View
             UpdateLayout();
             ViewModel.UpdatePosition();
             UpdateLayout();
-            UpdateTimers();
-            ReloadHotKeys();
+            if (updateNonUi)
+            {
+                UpdateTimers();
+                ReloadHotKeys();
+            }
+            IsRefreshRequired = false;
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
                 ShowIntro();
         }
