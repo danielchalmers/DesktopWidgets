@@ -216,6 +216,12 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            if (_settings.OpenMode == OpenMode.Hidden)
+            {
+                Hide();
+                return;
+            }
+
             if (_view.QueueIntro)
             {
                 _view.ShowIntro();

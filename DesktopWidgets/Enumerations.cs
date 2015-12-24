@@ -12,7 +12,8 @@
         AlwaysOpen,
         Mouse,
         Keyboard,
-        MouseAndKeyboard
+        MouseAndKeyboard,
+        Hidden
     }
 
     public enum ScreenDockPosition
