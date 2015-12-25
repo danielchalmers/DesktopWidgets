@@ -197,9 +197,6 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (_settings.Ignore00XY && (Control.MousePosition.X == 0 && Control.MousePosition.Y == 0))
-                return;
-
             if (FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
             {
                 _showTimer.Stop();
@@ -226,22 +223,25 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (IsShowable())
+            if (!(_settings.Ignore00XY && (Control.MousePosition.X == 0 && Control.MousePosition.Y == 0)))
             {
-                if (_showTimer.IsEnabled == false)
-                    _showTimer.Start();
-            }
-            else
-            {
-                _showTimer.Stop();
-                if (IsHideable())
+                if (IsShowable())
                 {
-                    if (_hideTimer.IsEnabled == false)
-                        _hideTimer.Start();
+                    if (_showTimer.IsEnabled == false)
+                        _showTimer.Start();
                 }
                 else
                 {
-                    _hideTimer.Stop();
+                    _showTimer.Stop();
+                    if (IsHideable())
+                    {
+                        if (_hideTimer.IsEnabled == false)
+                            _hideTimer.Start();
+                    }
+                    else
+                    {
+                        _hideTimer.Stop();
+                    }
                 }
             }
         }
