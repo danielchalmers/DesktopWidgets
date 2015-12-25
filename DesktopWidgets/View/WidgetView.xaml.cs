@@ -26,8 +26,6 @@ namespace DesktopWidgets.View
         private DispatcherTimer _onTopForceTimer;
         public bool IsRefreshRequired;
 
-        public bool QueueIntro;
-
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
@@ -37,9 +35,6 @@ namespace DesktopWidgets.View
             Settings = id.GetSettings();
             ViewModel = viewModel;
             UserControl = userControl;
-
-            if (!App.Arguments.Contains("-systemstartup"))
-                QueueIntro = true;
 
             userControl.Style = (Style) FindResource("UserControlStyle");
             MainContentContainer.Content = userControl;
@@ -64,6 +59,10 @@ namespace DesktopWidgets.View
             _mouseChecker = new MouseChecker(this, Settings);
             UpdateUi(true);
             IsRefreshRequired = true;
+
+            if (!App.Arguments.Contains("-systemstartup"))
+                _mouseChecker.QueueIntro = true;
+
             _mouseChecker.Start();
         }
 
@@ -103,15 +102,8 @@ namespace DesktopWidgets.View
 
         public void ShowIntro(int duration = -1, bool reversable = true)
         {
-            if (Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
+            if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
                 return;
-
-            if (IsRefreshRequired)
-            {
-                QueueIntro = true;
-                return;
-            }
-            QueueIntro = false;
 
             if (_introTimer == null)
             {

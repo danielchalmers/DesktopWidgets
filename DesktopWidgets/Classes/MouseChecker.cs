@@ -22,6 +22,7 @@ namespace DesktopWidgets.Classes
         private readonly DispatcherTimer _showTimer;
         private readonly WidgetView _view;
         public bool KeepOpenForIntro;
+        public bool QueueIntro;
 
         public MouseChecker(WidgetView view, WidgetSettingsBase settings)
         {
@@ -197,6 +198,13 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            var showIntro = false;
+            if (QueueIntro)
+            {
+                showIntro = true;
+                QueueIntro = false;
+            }
+
             if (FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
             {
                 _showTimer.Stop();
@@ -217,7 +225,7 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (_view.QueueIntro)
+            if (showIntro)
             {
                 _view.ShowIntro();
                 return;
