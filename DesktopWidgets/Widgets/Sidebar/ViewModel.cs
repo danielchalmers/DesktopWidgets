@@ -96,7 +96,9 @@ namespace DesktopWidgets.Widgets.Sidebar
                 if (nameSplit.Length >= 3 && nameSplit[2] == "Execute")
                 {
                     var shortcut = Settings.Shortcuts.FirstOrDefault(x => x.Guid.ToString() == nameSplit[1]);
-                    if (shortcut != null)
+                    if (shortcut != null &&
+                        (shortcut.HotKeyFullscreenActivation ||
+                         !FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.Monitor)))
                         this.Execute(shortcut, false);
                 }
             }

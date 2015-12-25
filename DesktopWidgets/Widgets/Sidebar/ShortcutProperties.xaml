@@ -69,6 +69,7 @@
                         <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                         <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                         <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
+                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Start in:" />
                     <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
@@ -91,6 +92,9 @@
                     <ComboBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch"
                               x:Name="cbHotkeyModifier" VerticalAlignment="Center"
                               SelectedItem="{Binding Path=HotKeyModifiers, Mode=TwoWay}" />
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Hotkey If Fullscreen:" />
+                    <CheckBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                              IsChecked="{Binding Path=HotKeyFullscreenActivation, Mode=TwoWay}" />
                 </Grid>
             </Expander>
         </Grid>

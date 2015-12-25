@@ -19,6 +19,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ProcessWindowStyle WindowStyle { get; set; } = ProcessWindowStyle.Normal;
         public Key HotKey { get; set; } = Key.None;
         public ModifierKeys HotKeyModifiers { get; set; } = ModifierKeys.None;
+        public bool HotKeyFullscreenActivation { get; set; } = false;
         public string IconPath { get; set; } = "";
 
         public object Clone()
