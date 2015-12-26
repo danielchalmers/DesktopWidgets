@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 
 namespace DesktopWidgets.Classes
@@ -70,6 +71,62 @@ namespace DesktopWidgets.Classes
                 case ImageScalingMode.NearestNeighbor:
                     return BitmapScalingMode.NearestNeighbor;
             }
+        }
+
+        public static double ConvertHorizontalPadding(this ScreenDockPosition screenDockPosition, ScreenDockAlignment
+            screenDockAlignment, double padding)
+        {
+            if (screenDockPosition.IsHorizontal())
+            {
+                if (screenDockPosition == ScreenDockPosition.Left)
+                {
+                    return padding;
+                }
+                else if (screenDockPosition == ScreenDockPosition.Right)
+                {
+                    return -padding;
+                }
+            }
+            else
+            {
+                if (screenDockAlignment == ScreenDockAlignment.Top)
+                {
+                    return padding;
+                }
+                else if (screenDockAlignment == ScreenDockAlignment.Bottom)
+                {
+                    return -padding;
+                }
+            }
+            return 0;
+        }
+
+        public static double ConvertVerticalPadding(this ScreenDockPosition screenDockPosition,
+            ScreenDockAlignment screenDockAlignment, double padding)
+        {
+            if (screenDockPosition.IsVertical())
+            {
+                if (screenDockPosition == ScreenDockPosition.Top)
+                {
+                    return padding;
+                }
+                else if (screenDockPosition == ScreenDockPosition.Bottom)
+                {
+                    return -padding;
+                }
+            }
+            else
+            {
+                if (screenDockAlignment == ScreenDockAlignment.Top)
+                {
+                    return padding;
+                }
+                else if (screenDockAlignment == ScreenDockAlignment.Bottom)
+                {
+                    return -padding;
+                }
+            }
+            return 0;
         }
     }
 }

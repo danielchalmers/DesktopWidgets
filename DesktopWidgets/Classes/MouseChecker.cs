@@ -149,8 +149,14 @@ namespace DesktopWidgets.Classes
             {
                 var checkRect = x;
                 if (!_settings.MouseBoundsUseDockOffset)
-                    checkRect = new Rect(checkRect.Left - _settings.DockOffset.X,
-                        checkRect.Top - _settings.DockOffset.Y, checkRect.Width, checkRect.Height);
+                    checkRect =
+                        new Rect(
+                            checkRect.Left -
+                            _settings.DockPosition.ConvertHorizontalPadding(_settings.DockAlignment,
+                                _settings.DockOffset.X),
+                            checkRect.Top -
+                            _settings.DockPosition.ConvertVerticalPadding(_settings.DockAlignment,
+                                _settings.DockOffset.Y), checkRect.Width, checkRect.Height);
                 if (checkRect.Contains(GetMouseLocation())) return true;
             }
             return false;

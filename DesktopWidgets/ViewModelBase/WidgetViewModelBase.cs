@@ -217,7 +217,7 @@ namespace DesktopWidgets.ViewModelBase
                             break;
                     }
                 }
-                newLeft += Settings.DockOffset.X;
+                newLeft += Settings.DockPosition.ConvertHorizontalPadding(Settings.DockAlignment, Settings.DockOffset.X);
             }
             return newLeft;
         }
@@ -264,7 +264,7 @@ namespace DesktopWidgets.ViewModelBase
                         ? monitorRect.Top
                         : monitorRect.Bottom - ActualHeight;
                 }
-                newTop += Settings.DockOffset.Y;
+                newTop += Settings.DockPosition.ConvertVerticalPadding(Settings.DockAlignment, Settings.DockOffset.Y);
             }
             return newTop;
         }
