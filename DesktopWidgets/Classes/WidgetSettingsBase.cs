@@ -254,5 +254,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide Sound Volume")]
         public double HideSoundVolume { get; set; } = 1.0;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Mouse Bounds Use Dock Offset")]
+        public bool MouseBoundsUseDockOffset { get; set; } = false;
     }
 }

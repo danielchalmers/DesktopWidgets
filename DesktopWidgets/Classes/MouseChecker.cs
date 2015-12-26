@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -146,7 +145,15 @@ namespace DesktopWidgets.Classes
                 }
             }
 
-            return checkBounds.Any(x => x.Contains(GetMouseLocation()));
+            foreach (var x in checkBounds)
+            {
+                var checkRect = x;
+                if (!_settings.MouseBoundsUseDockOffset)
+                    checkRect = new Rect(checkRect.Left - _settings.DockOffset.X,
+                        checkRect.Top - _settings.DockOffset.Y, checkRect.Width, checkRect.Height);
+                if (checkRect.Contains(GetMouseLocation())) return true;
+            }
+            return false;
         }
 
         private bool IsMouseInWindowBounds()
