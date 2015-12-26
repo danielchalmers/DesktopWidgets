@@ -30,7 +30,8 @@ namespace DesktopWidgets.Widgets.CountdownClock
             SoundHelper.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
             if (Settings.OpenOnEvent)
                 Settings.Identifier.GetView()
-                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
+                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                        false);
         }
     }
 }
