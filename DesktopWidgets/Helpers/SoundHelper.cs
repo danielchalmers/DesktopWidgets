@@ -1,13 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
-using System.Windows.Media;
+using WMPLib;
 
 namespace DesktopWidgets.Helpers
 {
     public static class SoundHelper
     {
-        private static readonly MediaPlayer MediaPlayer = new MediaPlayer();
+        private static readonly WindowsMediaPlayer MediaPlayer = new WindowsMediaPlayer();
 
         public static void PlaySoundAsync(string uriPath, double volume = 1)
         {
@@ -18,9 +17,8 @@ namespace DesktopWidgets.Helpers
         {
             if (string.IsNullOrWhiteSpace(uriPath) || !File.Exists(uriPath))
                 return;
-            MediaPlayer.Open(new Uri(uriPath));
-            MediaPlayer.Volume = volume;
-            MediaPlayer.Play();
+            MediaPlayer.settings.volume = (int) (volume*100);
+            MediaPlayer.URL = uriPath;
         }
     }
 }
