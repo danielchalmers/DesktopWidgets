@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace DesktopWidgets.Classes
@@ -82,7 +81,7 @@ namespace DesktopWidgets.Classes
                 {
                     return padding;
                 }
-                else if (screenDockPosition == ScreenDockPosition.Right)
+                if (screenDockPosition == ScreenDockPosition.Right)
                 {
                     return -padding;
                 }
@@ -93,7 +92,7 @@ namespace DesktopWidgets.Classes
                 {
                     return padding;
                 }
-                else if (screenDockAlignment == ScreenDockAlignment.Bottom)
+                if (screenDockAlignment == ScreenDockAlignment.Bottom)
                 {
                     return -padding;
                 }
@@ -110,7 +109,7 @@ namespace DesktopWidgets.Classes
                 {
                     return padding;
                 }
-                else if (screenDockPosition == ScreenDockPosition.Bottom)
+                if (screenDockPosition == ScreenDockPosition.Bottom)
                 {
                     return -padding;
                 }
@@ -121,7 +120,7 @@ namespace DesktopWidgets.Classes
                 {
                     return padding;
                 }
-                else if (screenDockAlignment == ScreenDockAlignment.Bottom)
+                if (screenDockAlignment == ScreenDockAlignment.Bottom)
                 {
                     return -padding;
                 }

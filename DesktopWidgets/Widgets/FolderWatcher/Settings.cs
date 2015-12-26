@@ -57,6 +57,14 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Enable Timeout")]
         public bool EnableTimeout { get; set; } = false;
 
+        [Category("Behavior")]
+        [DisplayName("Event Sound Path")]
+        public string EventSoundPath { get; set; }
+
+        [Category("Behavior")]
+        [DisplayName("Event Sound Volume")]
+        public double EventSoundVolume { get; set; } = 1.0;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On Event")]
         public bool OpenOnEvent { get; set; } = true;
@@ -68,13 +76,5 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On Event Duration")]
         public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
-
-        [Category("Behavior")]
-        [DisplayName("Event Sound Path")]
-        public string EventSoundPath { get; set; }
-
-        [Category("Behavior")]
-        [DisplayName("Event Sound Volume")]
-        public double EventSoundVolume { get; set; } = 1.0;
     }
 }
