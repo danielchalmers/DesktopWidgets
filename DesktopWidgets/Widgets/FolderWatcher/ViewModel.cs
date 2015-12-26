@@ -124,7 +124,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
 
             if (Settings.MuteEndTime < DateTime.Now)
+            {
                 Show();
+                SoundHelper.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
+            }
             //}
         }
 
