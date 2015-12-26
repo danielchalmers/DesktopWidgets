@@ -329,5 +329,17 @@ namespace DesktopWidgets.Properties {
                 this["ShortcutPropertiesIsExpanded"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int MaxConcurrentMediaPlayers {
+            get {
+                return ((int)(this["MaxConcurrentMediaPlayers"]));
+            }
+            set {
+                this["MaxConcurrentMediaPlayers"] = value;
+            }
+        }
     }
 }

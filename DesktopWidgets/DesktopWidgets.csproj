@@ -136,6 +136,7 @@
     <Compile Include="AppResources.xaml.cs">
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\MediaPlayerStore.cs" />
     <Compile Include="Widgets\FolderWatcher\DirectoryWatcher.cs" />
     <Compile Include="Classes\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
@@ -163,7 +164,6 @@
     <Compile Include="Classes\Win32App.cs" />
     <Compile Include="Classes\Win32RECT.cs" />
     <Compile Include="Helpers\RectHelper.cs" />
-    <Compile Include="Helpers\SoundHelper.cs" />
     <Compile Include="Helpers\TrayIconHelper.cs" />
     <Compile Include="Helpers\Win32Helper.cs" />
     <Compile Include="Classes\WindowUtilities.cs" />

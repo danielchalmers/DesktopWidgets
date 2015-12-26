@@ -27,7 +27,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
 
         private void OnEndAction()
         {
-            SoundHelper.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
+            MediaPlayerStore.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
             if (Settings.OpenOnEvent)
                 Settings.Identifier.GetView()
                     .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,

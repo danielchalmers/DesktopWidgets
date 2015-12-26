@@ -95,7 +95,7 @@ namespace DesktopWidgets.Helpers
                 if (animationMode == AnimationMode.Show)
                 {
                     view.ShowOpacity();
-                    SoundHelper.PlaySoundAsync(settings.ShowSoundPath, settings.ShowSoundVolume);
+                    MediaPlayerStore.PlaySoundAsync(settings.ShowSoundPath, settings.ShowSoundVolume);
                 }
                 astartAction?.Invoke();
                 view.AnimationRunning = true;
@@ -105,7 +105,7 @@ namespace DesktopWidgets.Helpers
                 if (animationMode == AnimationMode.Hide)
                 {
                     view.HideOpacity();
-                    SoundHelper.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
+                    MediaPlayerStore.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
                 }
                 aendAction?.Invoke();
                 view.AnimationRunning = false;
