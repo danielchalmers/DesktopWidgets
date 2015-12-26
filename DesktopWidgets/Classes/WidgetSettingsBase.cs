@@ -258,5 +258,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Mouse Bounds Use Dock Offset")]
         public bool MouseBoundsUseDockOffset { get; set; } = false;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Stay Open With Mouse Focus")]
+        public bool StayOpenIfMouseFocus { get; set; } = true;
     }
 }

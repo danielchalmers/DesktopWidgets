@@ -234,7 +234,15 @@ namespace DesktopWidgets.Classes
 
             if (_settings.OpenMode == OpenMode.Hidden)
             {
-                Hide();
+                if (_settings.StayOpenIfMouseFocus)
+                {
+                    if (!IsMouseInWindowBounds())
+                        Hide();
+                }
+                else
+                {
+                    Hide();
+                }
                 return;
             }
 
@@ -269,7 +277,9 @@ namespace DesktopWidgets.Classes
 
         private bool IsHideable()
         {
-            return !_view.IsMouseOver && _view.IsVisible && !IsMouseInWindowBounds() && !_view.IsContextMenuOpen;
+            var hideable = !_view.IsMouseOver && _view.IsVisible && !_view.IsContextMenuOpen;
+            if (hideable && _settings.StayOpenIfMouseFocus && IsMouseInWindowBounds()) hideable = false;
+            return hideable;
         }
 
         private bool IsShowable()
