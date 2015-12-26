@@ -7,6 +7,8 @@ namespace DesktopWidgets.Helpers
 {
     public static class SoundHelper
     {
+        private static readonly MediaPlayer MediaPlayer = new MediaPlayer();
+
         public static void PlaySoundAsync(string uriPath, double volume = 1)
         {
             new Thread(delegate() { PlaySound(uriPath, volume); }).Start();
@@ -16,10 +18,9 @@ namespace DesktopWidgets.Helpers
         {
             if (string.IsNullOrWhiteSpace(uriPath) || !File.Exists(uriPath))
                 return;
-            var player = new MediaPlayer();
-            player.Open(new Uri(uriPath));
-            player.Volume = volume;
-            player.Play();
+            MediaPlayer.Open(new Uri(uriPath));
+            MediaPlayer.Volume = volume;
+            MediaPlayer.Play();
         }
     }
 }
