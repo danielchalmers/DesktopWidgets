@@ -149,7 +149,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Open Hotkey")]
-        public Key HotKey { get; set; } = Key.CapsLock;
+        public Key HotKey { get; set; }
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Open Hotkey Modifiers")]
