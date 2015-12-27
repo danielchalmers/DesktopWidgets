@@ -300,11 +300,11 @@ namespace DesktopWidgets.Classes
 
         public void Hide(bool animate = true, bool checkHideStatus = false)
         {
+            KeepOpenForIntro = false;
             if (_view.AnimationRunning || !_view.IsVisible)
                 return;
             if (checkHideStatus && !IsHideable())
                 return;
-            KeepOpenForIntro = false;
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Hide);
             else

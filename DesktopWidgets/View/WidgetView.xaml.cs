@@ -91,7 +91,8 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
-        public void ShowIntro(int duration = -1, bool reversable = true)
+        public void ShowIntro(int duration = -1, bool reversable = true, bool hideOnFinish = true,
+            Action finishAction = null)
         {
             if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
                 return;
@@ -102,7 +103,9 @@ namespace DesktopWidgets.View
                 _introTimer.Tick += delegate
                 {
                     _introTimer.Stop();
-                    _mouseChecker.KeepOpenForIntro = false;
+                    if (hideOnFinish)
+                        _mouseChecker.Hide();
+                    finishAction?.Invoke();
                 };
             }
 

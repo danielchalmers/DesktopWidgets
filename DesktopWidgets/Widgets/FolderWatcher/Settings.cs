@@ -65,6 +65,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Event Sound Volume")]
         public double EventSoundVolume { get; set; } = 1.0;
 
+        [Category("Behavior")]
+        [DisplayName("Replace Existing File")]
+        public bool ReplaceExistingFile { get; set; } = false;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On Event")]
         public bool OpenOnEvent { get; set; } = true;

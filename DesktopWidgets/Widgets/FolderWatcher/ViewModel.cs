@@ -34,6 +34,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool _isImage;
 
+        private bool _isShowing;
+
         public ViewModel(WidgetId guid) : base(guid)
         {
             Settings = guid.GetSettings() as Settings;
@@ -104,12 +106,19 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (DateTime.Now - lastCheck >= Settings.TimeoutDuration)
                     return;
             _notificationQueue.Enqueue(path);
-            HandleDirectoryChange();
+            if (Settings.ReplaceExistingFile || (!_isShowing && _notificationQueue.Count == 1))
+                HandleDirectoryChange();
         }
 
         private void HandleDirectoryChange()
         {
-            //if (Settings.NotificationReplaceExisting || _notificationQueue.Count > 0)
+            if (_notificationQueue.Count == 0)
+            {
+                Hide();
+                return;
+            }
+            _isShowing = true;
+            //if (Settings.ReplaceExistingFile || _notificationQueue.Count > 0)
             //{
             CurrentFilePath = _notificationQueue.Dequeue();
 
@@ -125,7 +134,14 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
             if (Settings.MuteEndTime < DateTime.Now)
             {
-                Show();
+                if (Settings.OpenOnEvent)
+                    Settings.Identifier.GetView()
+                        .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                            false, false, delegate
+                            {
+                                _isShowing = false;
+                                HandleDirectoryChange();
+                            });
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             }
             //}
@@ -165,14 +181,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void DismissExecute()
         {
             Hide();
-        }
-
-        private void Show()
-        {
-            if (Settings.OpenOnEvent)
-                Settings.Identifier.GetView()
-                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                        false);
         }
 
         private void Hide()
