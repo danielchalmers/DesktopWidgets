@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows.Forms;
-using DesktopWidgets.Properties;
 
 namespace DesktopWidgets.Helpers
 {
@@ -8,9 +7,8 @@ namespace DesktopWidgets.Helpers
     {
         public static bool DoesMonitorHaveFullscreenApp(Screen screen)
         {
-            return !Settings.Default.IgnoreFullscreenWindows &&
-                   Win32Helper.GetForegroundApp()
-                       .IsFullScreen(screen);
+            return Win32Helper.GetForegroundApp()
+                .IsFullScreen(screen);
         }
 
         public static bool DoesMonitorHaveFullscreenApp(int index)
