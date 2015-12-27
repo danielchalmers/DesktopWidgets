@@ -262,5 +262,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Stay Open With Mouse Focus")]
         public bool StayOpenIfMouseFocus { get; set; } = true;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Show If Foreground Fullscreen")]
+        public bool FullscreenActivation { get; set; } = false;
     }
 }

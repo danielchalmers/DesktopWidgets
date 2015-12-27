@@ -218,7 +218,7 @@ namespace DesktopWidgets.Classes
                 QueueIntro = false;
             }
 
-            if (FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
+            if (!_settings.FullscreenActivation && FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
             {
                 _showTimer.Stop();
                 _hideTimer.Stop();
