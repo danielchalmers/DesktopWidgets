@@ -331,5 +331,12 @@ namespace DesktopWidgets.ViewModelBase
             Width = GetWidth();
             Height = GetHeight();
         }
+
+        public virtual void ReloadHotKeys()
+        {
+            if (Settings.OpenMode == OpenMode.Keyboard || Settings.OpenMode == OpenMode.MouseAndKeyboard)
+                HotkeyStore.RegisterHotkey(new Hotkey(Settings.HotKey, Settings.HotKeyModifiers, false),
+                    () => _id.GetView()?.ShowIntro());
+        }
     }
 }

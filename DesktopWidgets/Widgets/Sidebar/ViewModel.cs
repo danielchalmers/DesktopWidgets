@@ -8,8 +8,6 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
 using GalaSoft.MvvmLight.Command;
-using NHotkey;
-using NHotkey.Wpf;
 using DataFormats = System.Windows.Forms.DataFormats;
 
 namespace DesktopWidgets.Widgets.Sidebar
@@ -44,7 +42,6 @@ namespace DesktopWidgets.Widgets.Sidebar
                     new ObservableCollection<Shortcut>(ShortcutHelper.GetDefaultShortcuts(Settings.DefaultShortcutsMode));
                 Settings.DefaultShortcutsMode = DefaultShortcutsMode.DontChange;
             }
-            ReloadShortcutHotkeys();
         }
 
         public Settings Settings { get; }
@@ -68,41 +65,18 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private Shortcut SelectedShortcut { get; set; }
 
-        private void ReloadShortcutHotkeys()
+        public override void ReloadHotKeys()
         {
-            if (Settings?.Shortcuts == null)
-                return;
-            foreach (var shortcut in Settings.Shortcuts.Where(x => x.HotKey != Key.None))
-                ReloadShortcutHotKey(shortcut);
+            base.ReloadHotKeys();
+            if (Settings?.Shortcuts != null)
+                foreach (var shortcut in Settings.Shortcuts.Where(x => x.HotKey != Key.None))
+                    ReloadShortcutHotKey(shortcut);
         }
 
         public void ReloadShortcutHotKey(Shortcut shortcut)
         {
-            try
-            {
-                HotkeyManager.Current.AddOrReplace($"Shortcut\\{shortcut.Guid}\\Execute", shortcut.HotKey,
-                    shortcut.HotKeyModifiers, OnShortcutHotKey);
-            }
-            catch (HotkeyAlreadyRegisteredException)
-            {
-            }
-        }
-
-        private void OnShortcutHotKey(object sender, HotkeyEventArgs e)
-        {
-            var nameSplit = e.Name.Split('\\');
-            if (nameSplit.Length >= 1 && nameSplit[0] == "Shortcut")
-            {
-                if (nameSplit.Length >= 3 && nameSplit[2] == "Execute")
-                {
-                    var shortcut = Settings.Shortcuts.FirstOrDefault(x => x.Guid.ToString() == nameSplit[1]);
-                    if (shortcut != null &&
-                        (shortcut.HotKeyFullscreenActivation ||
-                         !FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.Monitor)))
-                        this.Execute(shortcut, false);
-                }
-            }
-            e.Handled = true;
+            HotkeyStore.RegisterHotkey(new Hotkey(shortcut.HotKey,
+                shortcut.HotKeyModifiers, shortcut.HotKeyFullscreenActivation), delegate { this.Execute(shortcut); });
         }
 
         private void DropExecute(DragEventArgs e)

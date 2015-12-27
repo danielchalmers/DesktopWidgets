@@ -8,8 +8,6 @@ using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
-using NHotkey;
-using NHotkey.Wpf;
 
 namespace DesktopWidgets.View
 {
@@ -93,13 +91,6 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
-        private void OnHotKey(object sender, HotkeyEventArgs e)
-        {
-            if (e.Name == "Show")
-                ShowIntro();
-            e.Handled = true;
-        }
-
         public void ShowIntro(int duration = -1, bool reversable = true)
         {
             if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
@@ -141,21 +132,6 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide();
         }
 
-        private void ReloadHotKeys()
-        {
-            try
-            {
-                if (Settings.OpenMode == OpenMode.Keyboard || Settings.OpenMode == OpenMode.MouseAndKeyboard)
-                {
-                    HotkeyManager.Current.AddOrReplace("Show", Settings.HotKey, Settings.HotKeyModifiers, OnHotKey);
-                }
-            }
-            catch (HotkeyAlreadyRegisteredException)
-            {
-            }
-        }
-
-
         public void UpdateUi(bool resetContext = true, bool updateNonUi = true, ScreenDockPosition? dockPosition = null,
             ScreenDockAlignment? dockAlignment = null)
         {
@@ -185,7 +161,7 @@ namespace DesktopWidgets.View
             if (updateNonUi)
             {
                 UpdateTimers();
-                ReloadHotKeys();
+                ViewModel.ReloadHotKeys();
             }
             IsRefreshRequired = false;
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
