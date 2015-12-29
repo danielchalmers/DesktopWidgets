@@ -40,7 +40,7 @@ namespace DesktopWidgets.View
                 (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
             contextMenu.DataContext = ViewModel;
             MainContentContainer.ContextMenu = contextMenu;
-            userControl.MouseDown += OnMouseDown;
+            userControl.MouseDown += Widget_OnMouseDown;
 
             var frameTop = userControl.TryFindResource("FrameTop") as Grid;
             if (frameTop != null)
@@ -200,13 +200,6 @@ namespace DesktopWidgets.View
             }
         }
 
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && Settings.DockPosition == ScreenDockPosition.None &&
-                Settings.DragToMove)
-                DragMove();
-        }
-
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
             _mouseChecker.Stop();
@@ -216,6 +209,20 @@ namespace DesktopWidgets.View
         {
             if (Settings.SnapToScreenEdges && Settings.DockPosition == ScreenDockPosition.None)
                 this.Snap();
+        }
+
+        private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed && Settings.DockPosition == ScreenDockPosition.None &&
+                Settings.DragWidgetToMove)
+                DragMove();
+        }
+
+        private void Titlebar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed && Settings.DockPosition == ScreenDockPosition.None &&
+                Settings.DragTitlebarToMove)
+                DragMove();
         }
 
         public void ShowOpacity()

@@ -133,8 +133,8 @@
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <StackPanel MouseDown="OnMouseDown">
-        <Border x:Name="Titlebar" Style="{StaticResource TitlebarStyle}">
+    <StackPanel>
+        <Border x:Name="Titlebar" Style="{StaticResource TitlebarStyle}" MouseDown="Titlebar_OnMouseDown">
             <Grid Margin="0,1,0,1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -148,7 +148,7 @@
                 <Button Grid.Column="2" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick" />
             </Grid>
         </Border>
-        <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}">
+        <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">
             <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
                 <StackPanel>
                     <Border x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />

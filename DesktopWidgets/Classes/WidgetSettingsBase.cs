@@ -172,8 +172,12 @@ namespace DesktopWidgets.Classes
         public bool Unclickable { get; set; } = false;
 
         [Category("Behavior")]
-        [DisplayName("Drag To Move")]
-        public bool DragToMove { get; set; } = true;
+        [DisplayName("Drag Widget To Move")]
+        public bool DragWidgetToMove { get; set; } = true;
+
+        [Category("Behavior")]
+        [DisplayName("Drag Titlebar To Move")]
+        public bool DragTitlebarToMove { get; set; } = true;
 
         [Category("Style (Background)")]
         [DisplayName("Image Path")]
