@@ -21,10 +21,6 @@ namespace DesktopWidgets.Classes
         [DisplayName("Name")]
         public string Name { get; set; } = "";
 
-        [Category("Style (Name)")]
-        [DisplayName("Show")]
-        public bool ShowName { get; set; } = true;
-
         [Category("Style")]
         [DisplayName("Font Family")]
         public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");
@@ -187,34 +183,6 @@ namespace DesktopWidgets.Classes
         [DisplayName("Image Opacity")]
         public double BackgroundImageOpacity { get; set; } = 1.0;
 
-        [Category("Style (Name)")]
-        [DisplayName("Font Family")]
-        public FontFamily NameFontFamily { get; set; } = new FontFamily("Segoe UI");
-
-        [Category("Style (Name)")]
-        [DisplayName("Font Weight")]
-        public FontWeight NameFontWeight { get; set; } = FontWeights.Bold;
-
-        [Category("Style (Name)")]
-        [DisplayName("Font Size")]
-        public int NameFontSize { get; set; } = 14;
-
-        [Category("Style (Name)")]
-        [DisplayName("Text Color")]
-        public Color NameTextColor { get; set; } = Colors.Black;
-
-        [Category("Style (Name)")]
-        [DisplayName("Background Color")]
-        public Color NameBackgroundColor { get; set; } = Colors.White;
-
-        [Category("Style (Name)")]
-        [DisplayName("Background Opacity")]
-        public double NameBackgroundOpacity { get; set; } = 1;
-
-        [Category("Style (Name)")]
-        [DisplayName("Alignment")]
-        public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
-
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Intro")]
         public bool ShowIntro { get; set; } = true;
@@ -266,5 +234,45 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Show If Foreground Fullscreen")]
         public bool FullscreenActivation { get; set; } = false;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Show Titlebar")]
+        public bool ShowTitlebar { get; set; } = true;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Show Menu Button")]
+        public bool ShowTitlebarMenuButton { get; set; } = true;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Background Color")]
+        public Color TitlebarBackgroundColor { get; set; } = Color.FromRgb(32, 32, 32);
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Background Opacity")]
+        public double TitlebarBackgroundOpacity { get; set; } = 0.5;
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Show Titlebar Name")]
+        public bool ShowTitlebarName { get; set; } = true;
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Font Family")]
+        public FontFamily NameFontFamily { get; set; } = new FontFamily("Segoe UI");
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Font Weight")]
+        public FontWeight NameFontWeight { get; set; } = FontWeights.Normal;
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Font Size")]
+        public int NameFontSize { get; set; } = 12;
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Color")]
+        public Color NameTextColor { get; set; } = Color.FromRgb(232, 232, 232);
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Alignment")]
+        public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
     }
 }

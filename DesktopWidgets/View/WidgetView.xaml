@@ -31,8 +31,8 @@
         <SolidColorBrush x:Key="WindowBorderBrush" Color="{Binding Settings.BorderColor}"
                          Opacity="{Binding Settings.BorderOpacity}" />
 
-        <SolidColorBrush x:Key="NameBackgroundBrush" Color="{Binding Settings.NameBackgroundColor}"
-                         Opacity="{Binding Settings.NameBackgroundOpacity}" />
+        <SolidColorBrush x:Key="TitlebarBackgroundBrush" Color="{Binding Settings.TitlebarBackgroundColor}"
+                         Opacity="{Binding Settings.TitlebarBackgroundOpacity}" />
         <SolidColorBrush x:Key="NameForegroundBrush" Color="{Binding Settings.NameTextColor}" />
 
         <Style x:Key="WidgetWindowStyle" TargetType="{x:Type Window}">
@@ -76,24 +76,54 @@
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
             <Setter Property="Focusable" Value="False" />
         </Style>
-        <Style x:Key="NameTextBlockStyle" TargetType="{x:Type TextBlock}">
+        <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Background" Value="{StaticResource TitlebarBackgroundBrush}" />
+            <Setter Property="Visibility"
+                    Value="{Binding Settings.ShowTitlebar, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+        <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Visibility"
+                    Value="{Binding Settings.ShowTitlebarMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Setter Property="Width" Value="16" />
+            <Setter Property="Height" Value="16" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
             <Setter Property="FontFamily" Value="{Binding Settings.NameFontFamily}" />
             <Setter Property="FontSize" Value="{Binding Settings.NameFontSize}" />
             <Setter Property="FontWeight" Value="{Binding Settings.NameFontWeight}" />
             <Setter Property="TextAlignment" Value="{Binding Settings.NameAlignment}" />
-            <Setter Property="Background" Value="{StaticResource NameBackgroundBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
             <Setter Property="Text" Value="{Binding Settings.Name}" />
             <Setter Property="Visibility">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
                         <Binding Path="Settings.Name"
                                  Converter="{StaticResource StringToIsNotNullOrWhiteSpaceConverter}" />
-                        <Binding Path="Settings.ShowName" />
+                        <Binding Path="Settings.ShowTitlebarName" />
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Focusable" Value="False" />
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -103,39 +133,54 @@
     <Window.Style>
         <Binding Source="{StaticResource WidgetWindowStyle}" />
     </Window.Style>
-    <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="OnMouseDown">
-        <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
-            <StackPanel>
-                <TextBlock x:Name="lblName" Style="{StaticResource NameTextBlockStyle}" />
-                <Border x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
-                <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}"
-                              Width="{Binding Width}"
-                              Height="{Binding Height}">
-                    <ScrollViewer.MaxWidth>
-                        <MultiBinding Converter="{StaticResource MaxSizeConverter}">
-                            <Binding Path="MaxWidth" />
-                            <Binding Path="BorderThickness.Left" ElementName="ContainerBorder1" />
-                            <Binding Path="BorderThickness.Right" ElementName="ContainerBorder1" />
-                            <Binding Path="Margin.Left" ElementName="ContainerBorder2" />
-                            <Binding Path="Margin.Right" ElementName="ContainerBorder2" />
-                            <Binding Path="ActualWidth" ElementName="lblName" />
-                            <Binding Path="IsVisible" ElementName="lblName" />
-                        </MultiBinding>
-                    </ScrollViewer.MaxWidth>
-                    <ScrollViewer.MaxHeight>
-                        <MultiBinding Converter="{StaticResource MaxSizeConverter}">
-                            <Binding Path="MaxHeight" />
-                            <Binding Path="BorderThickness.Top" ElementName="ContainerBorder1" />
-                            <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder1" />
-                            <Binding Path="Margin.Top" ElementName="ContainerBorder2" />
-                            <Binding Path="Margin.Bottom" ElementName="ContainerBorder2" />
-                            <Binding Path="ActualHeight" ElementName="lblName" />
-                            <Binding Path="IsVisible" ElementName="lblName" />
-                        </MultiBinding>
-                    </ScrollViewer.MaxHeight>
-                </ScrollViewer>
-                <Border x:Name="FrameContainerBottom" Visibility="Collapsed" Margin="5" />
-            </StackPanel>
+    <StackPanel MouseDown="OnMouseDown">
+        <Border x:Name="Titlebar" Style="{StaticResource TitlebarStyle}">
+            <Grid Margin="0,1,0,1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonStyle}" />
+                </Grid.Resources>
+                <TextBlock Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource NameBoxStyle}" />
+                <Button Grid.Column="2" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick" />
+            </Grid>
         </Border>
-    </Border>
+        <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}">
+            <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
+                <StackPanel>
+                    <Border x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
+                    <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}"
+                                  Width="{Binding Width}"
+                                  Height="{Binding Height}">
+                        <ScrollViewer.MaxWidth>
+                            <MultiBinding Converter="{StaticResource MaxSizeConverter}">
+                                <Binding Path="MaxWidth" />
+                                <Binding Path="BorderThickness.Left" ElementName="ContainerBorder1" />
+                                <Binding Path="BorderThickness.Right" ElementName="ContainerBorder1" />
+                                <Binding Path="Margin.Left" ElementName="ContainerBorder2" />
+                                <Binding Path="Margin.Right" ElementName="ContainerBorder2" />
+                                <Binding Path="ActualWidth" ElementName="Titlebar" />
+                                <Binding Path="IsVisible" ElementName="Titlebar" />
+                            </MultiBinding>
+                        </ScrollViewer.MaxWidth>
+                        <ScrollViewer.MaxHeight>
+                            <MultiBinding Converter="{StaticResource MaxSizeConverter}">
+                                <Binding Path="MaxHeight" />
+                                <Binding Path="BorderThickness.Top" ElementName="ContainerBorder1" />
+                                <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder1" />
+                                <Binding Path="Margin.Top" ElementName="ContainerBorder2" />
+                                <Binding Path="Margin.Bottom" ElementName="ContainerBorder2" />
+                                <Binding Path="ActualHeight" ElementName="Titlebar" />
+                                <Binding Path="IsVisible" ElementName="Titlebar" />
+                            </MultiBinding>
+                        </ScrollViewer.MaxHeight>
+                    </ScrollViewer>
+                    <Border x:Name="FrameContainerBottom" Visibility="Collapsed" Margin="5" />
+                </StackPanel>
+            </Border>
+        </Border>
+    </StackPanel>
 </Window>

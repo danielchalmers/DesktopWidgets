@@ -226,5 +226,10 @@ namespace DesktopWidgets.View
         {
             Opacity = 0;
         }
+
+        private void btnMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainContentContainer.ContextMenu.IsOpen = true;
+        }
     }
 }
