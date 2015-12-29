@@ -161,8 +161,16 @@
                         <ScrollViewer.MaxWidth>
                             <MultiBinding Converter="{StaticResource MaxSizeConverter}">
                                 <Binding Path="MaxWidth" />
+                                <Binding Path="BorderThickness.Left" RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="BorderThickness.Right" RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="Margin.Left" RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="Margin.Right" RelativeSource="{RelativeSource Self}" />
                                 <Binding Path="BorderThickness.Left" ElementName="ContainerBorder1" />
                                 <Binding Path="BorderThickness.Right" ElementName="ContainerBorder1" />
+                                <Binding Path="Margin.Left" ElementName="ContainerBorder1" />
+                                <Binding Path="Margin.Right" ElementName="ContainerBorder1" />
+                                <Binding Path="BorderThickness.Left" ElementName="ContainerBorder2" />
+                                <Binding Path="BorderThickness.Right" ElementName="ContainerBorder2" />
                                 <Binding Path="Margin.Left" ElementName="ContainerBorder2" />
                                 <Binding Path="Margin.Right" ElementName="ContainerBorder2" />
                                 <Binding Path="ActualWidth" ElementName="Titlebar" />
@@ -172,8 +180,16 @@
                         <ScrollViewer.MaxHeight>
                             <MultiBinding Converter="{StaticResource MaxSizeConverter}">
                                 <Binding Path="MaxHeight" />
+                                <Binding Path="BorderThickness.Top" RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="BorderThickness.Bottom" RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="Margin.Top" RelativeSource="{RelativeSource Self}" />
+                                <Binding Path="Margin.Bottom" RelativeSource="{RelativeSource Self}" />
                                 <Binding Path="BorderThickness.Top" ElementName="ContainerBorder1" />
                                 <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder1" />
+                                <Binding Path="Margin.Top" ElementName="ContainerBorder1" />
+                                <Binding Path="Margin.Bottom" ElementName="ContainerBorder1" />
+                                <Binding Path="BorderThickness.Top" ElementName="ContainerBorder2" />
+                                <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder2" />
                                 <Binding Path="Margin.Top" ElementName="ContainerBorder2" />
                                 <Binding Path="Margin.Bottom" ElementName="ContainerBorder2" />
                                 <Binding Path="ActualHeight" ElementName="Titlebar" />
