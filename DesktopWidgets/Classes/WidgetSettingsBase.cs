@@ -35,15 +35,15 @@ namespace DesktopWidgets.Classes
 
         [Category("Style (Border)")]
         [DisplayName("Border Color")]
-        public Color BorderColor { get; set; } = Colors.DimGray;
+        public Color BorderColor { get; set; } = Colors.Gray;
 
         [Category("Style (Background)")]
         [DisplayName("Opacity")]
-        public double BackgroundOpacity { get; set; } = 1;
+        public double BackgroundOpacity { get; set; } = 0.95;
 
         [Category("Style (Border)")]
         [DisplayName("Border Opacity")]
-        public double BorderOpacity { get; set; } = 1;
+        public double BorderOpacity { get; set; } = 0.5;
 
         [Category("Style (Size)")]
         [DisplayName("Width (px)")]
@@ -85,7 +85,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Animation Duration (ms)")]
-        public int AnimationTime { get; set; } = 150;
+        public int AnimationTime { get; set; } = 250;
 
         [Category("Dock")]
         [DisplayName("Screen")]
@@ -93,7 +93,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Style")]
         [DisplayName("Font Size")]
-        public int FontSize { get; set; } = 16;
+        public int FontSize { get; set; } = 14;
 
         [Category("Style")]
         [DisplayName("Stay On Top")]
@@ -273,7 +273,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Color")]
-        public Color NameTextColor { get; set; } = Color.FromRgb(232, 232, 232);
+        public Color NameTextColor { get; set; } = Colors.WhiteSmoke;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Alignment")]
