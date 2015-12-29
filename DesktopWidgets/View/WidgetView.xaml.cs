@@ -36,9 +36,10 @@ namespace DesktopWidgets.View
 
             userControl.Style = (Style) FindResource("UserControlStyle");
             MainContentContainer.Content = userControl;
-            MainContentContainer.ContextMenu =
-                (ContextMenu)
-                    (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
+            var contextMenu = (ContextMenu)
+                (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
+            contextMenu.DataContext = ViewModel;
+            MainContentContainer.ContextMenu = contextMenu;
             userControl.MouseDown += OnMouseDown;
 
             var frameTop = userControl.TryFindResource("FrameTop") as Grid;
