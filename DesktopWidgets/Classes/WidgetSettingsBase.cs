@@ -19,7 +19,7 @@ namespace DesktopWidgets.Classes
 
         [Category("General")]
         [DisplayName("Name")]
-        public string Name { get; set; } = "";
+        public string Name { get; set; } = "Untitled";
 
         [Category("Style")]
         [DisplayName("Font Family")]
