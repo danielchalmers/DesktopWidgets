@@ -22,6 +22,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
+        <classes:BoolToCornerRadiusConverter x:Key="BoolToCornerRadiusConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -51,7 +52,8 @@
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
-            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="CornerRadius"
+                    Value="{Binding Settings.RoundedCorners, Converter={StaticResource BoolToCornerRadiusConverter}}" />
             <Setter Property="BorderThickness"
                     Value="{Binding Settings.BorderEnabled, Converter={StaticResource BooleanToThicknessConverter}}" />
             <Setter Property="Focusable" Value="False" />
@@ -81,7 +83,8 @@
             <Setter Property="Background" Value="{StaticResource TitlebarBackgroundBrush}" />
             <Setter Property="Visibility"
                     Value="{Binding Settings.ShowTitlebar, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <Setter Property="CornerRadius" Value="4" />
+            <Setter Property="CornerRadius"
+                    Value="{Binding Settings.TitlebarRoundedCorners, Converter={StaticResource BoolToCornerRadiusConverter}}" />
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />

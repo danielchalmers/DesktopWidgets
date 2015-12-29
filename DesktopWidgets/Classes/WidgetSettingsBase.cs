@@ -278,5 +278,13 @@ namespace DesktopWidgets.Classes
         [Category("Style (Titlebar Name)")]
         [DisplayName("Alignment")]
         public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Rounded Corners")]
+        public bool TitlebarRoundedCorners { get; set; } = true;
+
+        [Category("Style")]
+        [DisplayName("Rounded Corners")]
+        public bool RoundedCorners { get; set; } = true;
     }
 }
