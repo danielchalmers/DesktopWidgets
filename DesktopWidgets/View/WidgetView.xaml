@@ -118,14 +118,14 @@
             <Setter Property="FontFamily" Value="{Binding Settings.TitlebarNameFontFamily}" />
             <Setter Property="FontSize" Value="{Binding Settings.TitlebarNameFontSize}" />
             <Setter Property="FontWeight" Value="{Binding Settings.TitlebarNameFontWeight}" />
-            <Setter Property="TextAlignment" Value="{Binding Settings.TitlebarNameAlignment}" />
+            <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="Text" Value="{Binding Settings.Name}" />
             <Setter Property="IsReadOnly"
                     Value="{Binding Settings.TitlebarNameAllowEditing, Converter={StaticResource InverseBoolConverter}}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="{Binding Settings.TitlebarNameHorizontalAlignment}" />
             <Setter Property="Visibility">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">

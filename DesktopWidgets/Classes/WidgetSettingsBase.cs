@@ -276,8 +276,8 @@ namespace DesktopWidgets.Classes
         public Color TitlebarNameTextColor { get; set; } = Colors.WhiteSmoke;
 
         [Category("Style (Titlebar Name)")]
-        [DisplayName("Alignment")]
-        public TextAlignment TitlebarNameAlignment { get; set; } = TextAlignment.Center;
+        [DisplayName("Horizontal Alignment")]
+        public HorizontalAlignment TitlebarNameHorizontalAlignment { get; set; } = HorizontalAlignment.Center;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Rounded Corners")]
