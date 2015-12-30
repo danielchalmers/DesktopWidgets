@@ -15,7 +15,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Style")]
         [DisplayName("Outer Padding")]
-        public Thickness Padding { get; set; } = new Thickness(2);
+        public Thickness Padding { get; set; } = new Thickness(3,2,3,2);
 
         [Category("General")]
         [DisplayName("Name")]
