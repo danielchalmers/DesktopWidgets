@@ -9,13 +9,13 @@ namespace DesktopWidgets.Helpers
 {
     public static class AppInitHelper
     {
-        public static void Initialize()
+        public static bool Initialize()
         {
             App.HelperWindow = new HelperWindow();
             SettingsHelper.UpgradeSettings();
             SettingsHelper.LoadSettings();
             if (IsAppAlreadyRunning())
-                return;
+                return false;
 
             WidgetHelper.LoadWidgetViews();
 
@@ -30,6 +30,8 @@ namespace DesktopWidgets.Helpers
                 new ManageWidgets().Show();
 
             CheckForUpdatesDelayed();
+
+            return true;
         }
 
         private static bool IsAppAlreadyRunning()
