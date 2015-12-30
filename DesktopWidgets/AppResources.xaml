@@ -32,7 +32,7 @@
     <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
         <Separator />
-        <MenuItem Header="Drag To Move" IsChecked="{Binding Settings.DragToMove}" IsCheckable="True" />
+        <MenuItem Header="Drag To Move" IsChecked="{Binding Settings.DragWidgetToMove}" IsCheckable="True" />
         <MenuItem Header="Stay On Top" IsChecked="{Binding Settings.OnTop}" IsCheckable="True" />
         <MenuItem Header="Dock">
             <MenuItem Header="None" Command="{Binding WidgetDockPosition}"
