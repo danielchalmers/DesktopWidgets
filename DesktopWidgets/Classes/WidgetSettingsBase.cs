@@ -261,23 +261,23 @@ namespace DesktopWidgets.Classes
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Font Family")]
-        public FontFamily NameFontFamily { get; set; } = new FontFamily("Segoe UI");
+        public FontFamily TitlebarNameFontFamily { get; set; } = new FontFamily("Segoe UI");
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Font Weight")]
-        public FontWeight NameFontWeight { get; set; } = FontWeights.Normal;
+        public FontWeight TitlebarNameFontWeight { get; set; } = FontWeights.Normal;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Font Size")]
-        public int NameFontSize { get; set; } = 12;
+        public int TitlebarNameFontSize { get; set; } = 12;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Color")]
-        public Color NameTextColor { get; set; } = Colors.WhiteSmoke;
+        public Color TitlebarNameTextColor { get; set; } = Colors.WhiteSmoke;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Alignment")]
-        public TextAlignment NameAlignment { get; set; } = TextAlignment.Center;
+        public TextAlignment TitlebarNameAlignment { get; set; } = TextAlignment.Center;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Rounded Corners")]
@@ -289,6 +289,6 @@ namespace DesktopWidgets.Classes
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Allow Editing")]
-        public bool NameAllowEditing { get; set; } = true;
+        public bool TitlebarNameAllowEditing { get; set; } = true;
     }
 }

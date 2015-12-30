@@ -36,7 +36,7 @@
 
         <SolidColorBrush x:Key="TitlebarBackgroundBrush" Color="{Binding Settings.TitlebarBackgroundColor}"
                          Opacity="{Binding Settings.TitlebarBackgroundOpacity}" />
-        <SolidColorBrush x:Key="NameForegroundBrush" Color="{Binding Settings.NameTextColor}" />
+        <SolidColorBrush x:Key="NameForegroundBrush" Color="{Binding Settings.TitlebarNameTextColor}" />
 
         <Style x:Key="WidgetWindowStyle" TargetType="{x:Type Window}">
             <Setter Property="WindowStyle" Value="None" />
@@ -115,13 +115,13 @@
         <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Focusable" Value="True" />
             <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
-            <Setter Property="FontFamily" Value="{Binding Settings.NameFontFamily}" />
-            <Setter Property="FontSize" Value="{Binding Settings.NameFontSize}" />
-            <Setter Property="FontWeight" Value="{Binding Settings.NameFontWeight}" />
-            <Setter Property="TextAlignment" Value="{Binding Settings.NameAlignment}" />
+            <Setter Property="FontFamily" Value="{Binding Settings.TitlebarNameFontFamily}" />
+            <Setter Property="FontSize" Value="{Binding Settings.TitlebarNameFontSize}" />
+            <Setter Property="FontWeight" Value="{Binding Settings.TitlebarNameFontWeight}" />
+            <Setter Property="TextAlignment" Value="{Binding Settings.TitlebarNameAlignment}" />
             <Setter Property="Text" Value="{Binding Settings.Name}" />
             <Setter Property="IsReadOnly"
-                    Value="{Binding Settings.NameAllowEditing, Converter={StaticResource InverseBoolConverter}}" />
+                    Value="{Binding Settings.TitlebarNameAllowEditing, Converter={StaticResource InverseBoolConverter}}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="VerticalAlignment" Value="Center" />
