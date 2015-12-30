@@ -567,9 +567,7 @@ namespace DesktopWidgets.Classes
             try
             {
                 var baseAmount = (double) value[0];
-                var total = value.ToList().GetRange(1, value.Length - 3).Select(x => (double) x).Sum();
-                if ((bool) value[value.Length - 1])
-                    total += (double) value[value.Length - 2];
+                var total = value.ToList().GetRange(1, value.Length - 1).Select(x => (double) x).Sum();
                 return baseAmount - total;
             }
             catch
