@@ -103,6 +103,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -186,6 +187,7 @@
     <Compile Include="Widgets\FolderWatcher\ViewModel.cs" />
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
+    <Compile Include="Widgets\RSSFeed\FeedItem.cs" />
     <Compile Include="Widgets\Sidebar\ManageShortcuts.xaml.cs">
       <DependentUpon>ManageShortcuts.xaml</DependentUpon>
     </Compile>
@@ -232,6 +234,12 @@
     <Compile Include="Widgets\Calculator\Metadata.cs" />
     <Compile Include="Widgets\Calculator\Settings.cs" />
     <Compile Include="Widgets\Calculator\ViewModel.cs" />
+    <Compile Include="Widgets\RSSFeed\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\RSSFeed\Metadata.cs" />
+    <Compile Include="Widgets\RSSFeed\Settings.cs" />
+    <Compile Include="Widgets\RSSFeed\ViewModel.cs" />
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
@@ -365,6 +373,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\Calculator\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\RSSFeed\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

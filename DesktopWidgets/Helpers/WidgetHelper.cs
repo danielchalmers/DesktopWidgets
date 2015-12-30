@@ -25,7 +25,8 @@ namespace DesktopWidgets.Helpers
             Widgets.PictureSlideshow.Metadata.FriendlyName,
             Widgets.Sidebar.Metadata.FriendlyName,
             Widgets.Calculator.Metadata.FriendlyName,
-            Widgets.FolderWatcher.Metadata.FriendlyName
+            Widgets.FolderWatcher.Metadata.FriendlyName,
+            Widgets.RSSFeed.Metadata.FriendlyName
         }.OrderBy(x => x).ToList();
 
         public static WidgetSettingsBase GetSettings(this WidgetId id)
@@ -103,6 +104,10 @@ namespace DesktopWidgets.Helpers
             {
                 return Widgets.FolderWatcher.Metadata.FriendlyName;
             }
+            if (settings is Widgets.RSSFeed.Settings)
+            {
+                return Widgets.RSSFeed.Metadata.FriendlyName;
+            }
             return string.Empty;
         }
 
@@ -132,6 +137,8 @@ namespace DesktopWidgets.Helpers
                     return new Widgets.Calculator.Settings();
                 case Widgets.FolderWatcher.Metadata.FriendlyName:
                     return new Widgets.FolderWatcher.Settings();
+                case Widgets.RSSFeed.Metadata.FriendlyName:
+                    return new Widgets.RSSFeed.Settings();
                 default:
                     return null;
             }
@@ -161,7 +168,7 @@ namespace DesktopWidgets.Helpers
             else if (settings is Widgets.Weather.Settings)
             {
                 dataContext = new Widgets.Weather.ViewModel(id);
-                userControl = new Widgets.Weather.ControlView();
+                userControl = new Widgets.RSSFeed.ControlView();
             }
             else if (settings is Widgets.Search.Settings)
             {
@@ -197,6 +204,11 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.FolderWatcher.ViewModel(id);
                 userControl = new Widgets.FolderWatcher.ControlView();
+            }
+            else if (settings is Widgets.RSSFeed.Settings)
+            {
+                dataContext = new Widgets.RSSFeed.ViewModel(id);
+                userControl = new Widgets.RSSFeed.ControlView();
             }
             else
             {
