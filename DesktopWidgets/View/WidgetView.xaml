@@ -8,6 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         classes:SizeObserver.Observe="True"
         classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
@@ -23,6 +24,7 @@
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
         <classes:BoolToCornerRadiusConverter x:Key="BoolToCornerRadiusConverter" />
+        <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -110,14 +112,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Focusable" Value="False" />
+        <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Focusable" Value="True" />
             <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
             <Setter Property="FontFamily" Value="{Binding Settings.NameFontFamily}" />
             <Setter Property="FontSize" Value="{Binding Settings.NameFontSize}" />
             <Setter Property="FontWeight" Value="{Binding Settings.NameFontWeight}" />
             <Setter Property="TextAlignment" Value="{Binding Settings.NameAlignment}" />
             <Setter Property="Text" Value="{Binding Settings.Name}" />
+            <Setter Property="IsReadOnly"
+                    Value="{Binding Settings.NameAllowEditing, Converter={StaticResource InverseBoolConverter}}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Visibility">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
@@ -147,7 +155,7 @@
                 <Grid.Resources>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonStyle}" />
                 </Grid.Resources>
-                <TextBlock Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource NameBoxStyle}" />
+                <TextBox Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource NameBoxStyle}" />
                 <Button Grid.Column="2" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick" />
             </Grid>
         </Border>

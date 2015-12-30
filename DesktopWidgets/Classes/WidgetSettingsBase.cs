@@ -286,5 +286,9 @@ namespace DesktopWidgets.Classes
         [Category("Style")]
         [DisplayName("Rounded Corners")]
         public bool RoundedCorners { get; set; } = true;
+
+        [Category("Style (Titlebar Name)")]
+        [DisplayName("Allow Editing")]
+        public bool NameAllowEditing { get; set; } = true;
     }
 }
