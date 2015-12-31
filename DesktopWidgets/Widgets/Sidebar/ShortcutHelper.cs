@@ -59,7 +59,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (msg && viewModel.Settings.Shortcuts.Any(x => x.Path == shortcut.Path))
                 if (
                     Popup.Show(
-                        $"You are attempting to add a shortcut that already exists. Are you sure?\n\n\"{GetName(shortcut)}\"",
+                        "A shortcut with this path already exists.\n\nAre you sure you want to add this shortcut?",
                         MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                     return;
             // Add new shortcut.
@@ -95,7 +95,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (!File.Exists(dialog.NewShortcut.Path) && !Directory.Exists(dialog.NewShortcut.Path) &&
                 !LinkHelper.IsHyperlink(dialog.NewShortcut.Path))
                 if (Popup.Show(
-                    $"That path does not exist. Do you want to add this shortcut anyway?\n\n\"{GetName(dialog.NewShortcut)}\"",
+                    "That path does not exist. Do you want to add this shortcut anyway?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
                     return;
@@ -133,7 +133,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             else
             {
                 if (Popup.Show(
-                    $"This file does not exist. Do you wish to remove this shortcut?\n\n\"{GetName(shortcut)}\"",
+                    $"This file does not exist. Do you want to remove \"{GetName(shortcut)}\"?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                     return;
                 viewModel.Remove(shortcut);
@@ -153,7 +153,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void Remove(this ViewModel viewModel, Shortcut shortcut, bool msg = false)
         {
             if (msg &&
-                Popup.Show($"Are you sure you want to delete this shortcut?\n\n\"{GetName(shortcut)}\"",
+                Popup.Show($"Are you sure you want to remove \"{GetName(shortcut)}\"?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
             viewModel.Settings.Shortcuts.Remove(shortcut);
@@ -162,7 +162,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void Reset(this ViewModel viewModel, bool msg = false)
         {
             if (msg &&
-                Popup.Show("Are you sure you want to delete all shortcuts? This cannot be undone.",
+                Popup.Show("Are you sure you want to remove all shortcuts? This cannot be undone.",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
             viewModel.Settings.Shortcuts.Clear();
