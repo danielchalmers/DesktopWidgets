@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DesktopWidgets.Helpers
 {
-    internal class FullScreenHelper
+    internal static class FullScreenHelper
     {
         public static bool DoesMonitorHaveFullscreenApp(Screen screen)
         {

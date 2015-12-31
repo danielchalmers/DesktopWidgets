@@ -8,7 +8,7 @@ using NHotkey.Wpf;
 
 namespace DesktopWidgets.Classes
 {
-    internal class HotkeyStore
+    internal static class HotkeyStore
     {
         private static readonly Dictionary<Hotkey, Action> Hotkeys = new Dictionary<Hotkey, Action>();
 

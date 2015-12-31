@@ -34,11 +34,6 @@ namespace DesktopWidgets.Classes
             out IntPtr piSmallVersion, int amountIcons);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        internal static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam,
-            uint fuFlags,
-            uint uTimeout, out IntPtr lpdwResult);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         internal static extern bool SendNotifyMessage(IntPtr hWnd, uint Msg, UIntPtr wParam, IntPtr lParam);
 
         [DllImport("user32")]

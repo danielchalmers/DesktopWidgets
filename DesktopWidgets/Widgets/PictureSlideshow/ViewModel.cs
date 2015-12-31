@@ -26,14 +26,16 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 return;
             _filePathList = new List<string>();
             _random = new Random();
-            _changeTimer = new DispatcherTimer();
-            _changeTimer.Interval = Settings.ChangeInterval;
+
+            _changeTimer = new DispatcherTimer {Interval = Settings.ChangeInterval};
             _changeTimer.Tick += (sender, args) => NextImage();
-            _changeTimer.Start();
+
             UpdateFileList(false, false);
             NextImage();
             if (Settings.Recursive)
                 UpdateFileList(Settings.Recursive, true);
+
+            _changeTimer.Start();
         }
 
         public Settings Settings { get; }

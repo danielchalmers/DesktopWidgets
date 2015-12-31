@@ -11,6 +11,7 @@ namespace DesktopWidgets.Widgets.Weather
 {
     public class ViewModel : WidgetViewModelBase
     {
+        private readonly DispatcherTimer _updateTimer;
         private string _description;
         private string _iconUrl;
 
@@ -21,21 +22,22 @@ namespace DesktopWidgets.Widgets.Weather
         private double _temperatureMax;
 
         private double _temperatureMin;
-        public DispatcherTimer UpdateTimer;
 
         public ViewModel(WidgetId id) : base(id)
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
-            UpdateTimer = new DispatcherTimer();
-            UpdateTimer.Interval = Settings.RefreshInterval.TotalMinutes < 30
-                ? TimeSpan.FromMinutes(30)
-                : Settings.RefreshInterval;
-            UpdateTimer.Tick += UpdateWeather;
+            _updateTimer = new DispatcherTimer
+            {
+                Interval = Settings.RefreshInterval.TotalMinutes < 30
+                    ? TimeSpan.FromMinutes(30)
+                    : Settings.RefreshInterval
+            };
+            _updateTimer.Tick += (sender, args) => UpdateWeather();
 
             UpdateWeather();
-            UpdateTimer.Start();
+            _updateTimer.Start();
         }
 
         public Settings Settings { get; }
@@ -119,7 +121,7 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
-        private void UpdateWeather(object sender = null, EventArgs eventArgs = null)
+        private void UpdateWeather()
         {
             if (Settings.ZipCode == 0)
             {

@@ -71,20 +71,24 @@ namespace DesktopWidgets.Classes
             _mouseCheckTimer.Stop();
         }
 
+        private Rect GetCenterBounds()
+        {
+            var viewBounds = _view.GetBounds();
+            return new Rect(viewBounds.Left - _settings.MouseBounds, viewBounds.Top - _settings.MouseBounds,
+                viewBounds.Width + (_settings.MouseBounds*2), viewBounds.Height + (_settings.MouseBounds*2));
+        }
+
         private bool IsMouseInMouseBounds()
         {
             // Return is mouse in correct bounds to show sidebar.
             var checkBounds = new List<Rect>();
-            var viewBounds = _view.GetBounds();
-            var centerBounds = new Rect(viewBounds.Left - _settings.MouseBounds, viewBounds.Top - _settings.MouseBounds,
-                viewBounds.Width + (_settings.MouseBounds*2), viewBounds.Height + (_settings.MouseBounds*2));
             if (_settings.CustomMouseDetectionBounds.Width > 0 && _settings.CustomMouseDetectionBounds.Height > 0)
             {
                 checkBounds.Add(_settings.CustomMouseDetectionBounds);
             }
             else if (!_settings.IsDocked)
             {
-                checkBounds.Add(centerBounds);
+                checkBounds.Add(GetCenterBounds());
             }
             else
             {
@@ -102,46 +106,55 @@ namespace DesktopWidgets.Classes
                                 monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
                             break;
                         default:
-                            checkBounds.Add(centerBounds);
+                            checkBounds.Add(GetCenterBounds());
                             break;
                     }
                     switch (_settings.VerticalAlignment)
                     {
                         case VerticalAlignment.Top:
-                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width, _settings.MouseBounds));
+                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
+                                _settings.MouseBounds));
                             break;
                         case VerticalAlignment.Bottom:
-                            checkBounds.Add(new Rect(monitorBounds.Left, (monitorBounds.Top + _view.ActualHeight) - _settings.MouseBounds, monitorBounds.Width, _settings.MouseBounds));
+                            checkBounds.Add(new Rect(monitorBounds.Left,
+                                (monitorBounds.Top + _view.ActualHeight) - _settings.MouseBounds, monitorBounds.Width,
+                                _settings.MouseBounds));
                             break;
                         default:
-                            checkBounds.Add(centerBounds);
+                            checkBounds.Add(GetCenterBounds());
                             break;
                     }
                 }
                 else
                 {
+                    var viewBounds = _view.GetBounds();
                     switch (_settings.HorizontalAlignment)
                     {
                         case HorizontalAlignment.Left:
-                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
+                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
+                                viewBounds.Height));
                             break;
                         case HorizontalAlignment.Right:
-                            checkBounds.Add(new Rect((viewBounds.Left + _view.ActualWidth) - _settings.MouseBounds, viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
+                            checkBounds.Add(new Rect((viewBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
+                                viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
                             break;
                         default:
-                            checkBounds.Add(centerBounds);
+                            checkBounds.Add(GetCenterBounds());
                             break;
                     }
                     switch (_settings.VerticalAlignment)
                     {
                         case VerticalAlignment.Top:
-                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width, _settings.MouseBounds));
+                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
+                                _settings.MouseBounds));
                             break;
                         case VerticalAlignment.Bottom:
-                            checkBounds.Add(new Rect(viewBounds.Left, (viewBounds.Top + _view.ActualHeight) - _settings.MouseBounds, viewBounds.Width, _settings.MouseBounds));
+                            checkBounds.Add(new Rect(viewBounds.Left,
+                                (viewBounds.Top + _view.ActualHeight) - _settings.MouseBounds, viewBounds.Width,
+                                _settings.MouseBounds));
                             break;
                         default:
-                            checkBounds.Add(centerBounds);
+                            checkBounds.Add(GetCenterBounds());
                             break;
                     }
                 }
@@ -241,7 +254,8 @@ namespace DesktopWidgets.Classes
 
         private bool IsShowable()
         {
-            return (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard) && IsMouseInMouseBounds();
+            return (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard) &&
+                   IsMouseInMouseBounds();
         }
 
         public void Show(bool animate = true)

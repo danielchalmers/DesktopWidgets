@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
@@ -14,7 +13,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     public class ViewModel : WidgetViewModelBase
     {
         private readonly DirectoryWatcher _directoryWatcher;
-        private readonly DispatcherTimer _hideTimer;
         private readonly Queue<string> _notificationQueue;
 
         private readonly List<string> _supportedImageExtensions = new List<string>

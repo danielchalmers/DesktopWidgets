@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace DesktopWidgets.Classes
 {
-    public class DelayedAction
+    public static class DelayedAction
     {
         public static void RunAction(int delay, Action action)
         {

@@ -272,7 +272,7 @@ namespace DesktopWidgets.ViewModelBase
             Settings.VerticalAlignment = verticalAlignment;
             Settings.IsDocked = true;
             _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
-            _id.GetView()?.ShowIntro(reversable:false);
+            _id.GetView()?.ShowIntro(reversable: false);
         }
 
         private void WidgetUndockExecute()
