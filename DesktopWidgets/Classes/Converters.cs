@@ -426,69 +426,16 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             switch (val.ShortcutOrientation)
             {
-                default:
-                case ShortcutOrientation.Auto:
-                    return val.DockPosition.IsVertical()
-                        ? Orientation.Horizontal
-                        : Orientation.Vertical;
                 case ShortcutOrientation.Horizontal:
                     return Orientation.Horizontal;
                 case ShortcutOrientation.Vertical:
                     return Orientation.Vertical;
+                default:
+                    return DependencyProperty.UnsetValue;
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class SettingsToHorizontalAlignmentConverter : IMultiValueConverter
-    {
-        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!ConverterHelper.IsValueValid(value))
-                return DependencyProperty.UnsetValue;
-            try
-            {
-                var dockPosition = (ScreenDockPosition) value[0];
-                var shortcutAlignment = (ShortcutAlignment) value[1];
-                return dockPosition.IsVertical()
-                    ? shortcutAlignment.ToHorizontalAlignment()
-                    : HorizontalAlignment.Stretch;
-            }
-            catch
-            {
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class SettingsToVerticalAlignmentConverter : IMultiValueConverter
-    {
-        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!ConverterHelper.IsValueValid(value))
-                return DependencyProperty.UnsetValue;
-            try
-            {
-                var dockPosition = (ScreenDockPosition) value[0];
-                var shortcutAlignment = (ShortcutAlignment) value[1];
-                return dockPosition.IsHorizontal() ? shortcutAlignment.ToVerticalAlignment() : VerticalAlignment.Top;
-            }
-            catch
-            {
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

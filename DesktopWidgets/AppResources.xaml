@@ -35,27 +35,26 @@
         <MenuItem Header="Drag To Move" IsChecked="{Binding Settings.DragWidgetToMove}" IsCheckable="True" />
         <MenuItem Header="Stay On Top" IsChecked="{Binding Settings.OnTop}" IsCheckable="True" />
         <MenuItem Header="Dock">
-            <MenuItem Header="None" Command="{Binding WidgetDockPosition}"
-                      CommandParameter="{x:Static local:ScreenDockPosition.None}" />
-            <MenuItem Header="Position">
-                <MenuItem Header="Left" Command="{Binding WidgetDockPosition}"
-                          CommandParameter="{x:Static local:ScreenDockPosition.Left}" />
-                <MenuItem Header="Right" Command="{Binding WidgetDockPosition}"
-                          CommandParameter="{x:Static local:ScreenDockPosition.Right}" />
-                <MenuItem Header="Top" Command="{Binding WidgetDockPosition}"
-                          CommandParameter="{x:Static local:ScreenDockPosition.Top}" />
-                <MenuItem Header="Bottom" Command="{Binding WidgetDockPosition}"
-                          CommandParameter="{x:Static local:ScreenDockPosition.Bottom}" />
+            <MenuItem Header="None" Command="{Binding WidgetUndock}" />
+            <MenuItem Header="Horizontal">
+                <MenuItem Header="Center" Command="{Binding WidgetDockHorizontal}"
+                          CommandParameter="{x:Static HorizontalAlignment.Center}" />
+                <MenuItem Header="Left" Command="{Binding WidgetDockHorizontal}"
+                          CommandParameter="{x:Static HorizontalAlignment.Left}" />
+                <MenuItem Header="Right" Command="{Binding WidgetDockHorizontal}"
+                          CommandParameter="{x:Static HorizontalAlignment.Right}" />
+                <MenuItem Header="Stretch" Command="{Binding WidgetDockHorizontal}"
+                          CommandParameter="{x:Static HorizontalAlignment.Stretch}" />
             </MenuItem>
-            <MenuItem Header="Alignment">
-                <MenuItem Header="Center" Command="{Binding WidgetDockAlignment}"
-                          CommandParameter="{x:Static local:ScreenDockAlignment.Center}" />
-                <MenuItem Header="Top" Command="{Binding WidgetDockAlignment}"
-                          CommandParameter="{x:Static local:ScreenDockAlignment.Top}" />
-                <MenuItem Header="Bottom" Command="{Binding WidgetDockAlignment}"
-                          CommandParameter="{x:Static local:ScreenDockAlignment.Bottom}" />
-                <MenuItem Header="Stretch" Command="{Binding WidgetDockAlignment}"
-                          CommandParameter="{x:Static local:ScreenDockAlignment.Stretch}" />
+            <MenuItem Header="Vertical">
+                <MenuItem Header="Center" Command="{Binding WidgetDockVertical}"
+                          CommandParameter="{x:Static VerticalAlignment.Center}" />
+                <MenuItem Header="Top" Command="{Binding WidgetDockVertical}"
+                          CommandParameter="{x:Static VerticalAlignment.Top}" />
+                <MenuItem Header="Bottom" Command="{Binding WidgetDockVertical}"
+                          CommandParameter="{x:Static VerticalAlignment.Bottom}" />
+                <MenuItem Header="Stretch" Command="{Binding WidgetDockVertical}"
+                          CommandParameter="{x:Static VerticalAlignment.Stretch}" />
             </MenuItem>
         </MenuItem>
         <Separator />

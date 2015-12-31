@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Windows;
@@ -32,8 +33,9 @@ namespace DesktopWidgets.ViewModelBase
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
 
-            WidgetDockPosition = new RelayCommand<ScreenDockPosition>(WidgetDockPositionExecute);
-            WidgetDockAlignment = new RelayCommand<ScreenDockAlignment>(WidgetDockAlignmentExecute);
+            WidgetDockHorizontal = new RelayCommand<HorizontalAlignment>(WidgetDockHorizontalExecute);
+            WidgetDockVertical = new RelayCommand<VerticalAlignment>(WidgetDockVerticalExecute);
+            WidgetUndock = new RelayCommand(WidgetUndockExecute);
         }
 
         public double Left
@@ -43,7 +45,7 @@ namespace DesktopWidgets.ViewModelBase
             {
                 if (_left != value)
                 {
-                    if (Settings.DockPosition == ScreenDockPosition.None)
+                    if (!Settings.IsDocked)
                         Settings.Left = value;
                     _left = value;
                     RaisePropertyChanged(nameof(Left));
@@ -58,7 +60,7 @@ namespace DesktopWidgets.ViewModelBase
             {
                 if (_top != value)
                 {
-                    if (Settings.DockPosition == ScreenDockPosition.None)
+                    if (!Settings.IsDocked)
                         Settings.Top = value;
                     _top = value;
                     RaisePropertyChanged(nameof(Top));
@@ -159,8 +161,9 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand ToggleEnableWidget { get; private set; }
         public ICommand ManageAllWidgets { get; private set; }
 
-        public ICommand WidgetDockPosition { get; private set; }
-        public ICommand WidgetDockAlignment { get; private set; }
+        public ICommand WidgetDockHorizontal { get; private set; }
+        public ICommand WidgetDockVertical { get; private set; }
+        public ICommand WidgetUndock { get; private set; }
 
         public bool IsContextMenuOpen
         {
@@ -177,110 +180,56 @@ namespace DesktopWidgets.ViewModelBase
 
         private double GetLeft()
         {
-            //if (double.IsNaN(ActualWidth) || ActualWidth < 1)
-            //    return double.NaN;
-            var newLeft = double.NaN;
-            if (Settings.DockPosition == ScreenDockPosition.None)
+            if (!Settings.IsDocked)
             {
-                newLeft = Settings.Left;
+                return Settings.Left;
             }
-            else
-            {
-                var horizontal = Settings.DockPosition.IsHorizontal();
-                var monitorRect =
-                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
+            var monitorRect = MonitorHelper.GetMonitorBounds(Settings.Monitor);
 
-                if (horizontal)
-                {
-                    newLeft = Settings.DockPosition == ScreenDockPosition.Left
-                        ? monitorRect.Left
-                        : monitorRect.Right - ActualWidth;
-                }
-                else
-                {
-                    switch (Settings.DockAlignment)
-                    {
-                        case ScreenDockAlignment.Top:
-                            newLeft = monitorRect.Left +
-                                      (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
-                            break;
-                        default:
-                        case ScreenDockAlignment.Center:
-                            newLeft = monitorRect.Left + (monitorRect.Width/2) - (ActualWidth/2);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            newLeft = (monitorRect.Right - ActualWidth) -
-                                      (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
-                            break;
-                        case ScreenDockAlignment.Stretch:
-                            newLeft = monitorRect.Left;
-                            break;
-                    }
-                }
-                newLeft += Settings.DockPosition.ConvertHorizontalPadding(Settings.DockAlignment, Settings.DockOffset.X);
+            switch (Settings.HorizontalAlignment)
+            {
+                case HorizontalAlignment.Stretch:
+                case HorizontalAlignment.Left:
+                    return (monitorRect.Left) + Settings.DockOffset.X;
+                case HorizontalAlignment.Center:
+                    return (monitorRect.Right/2 - ActualWidth/2) + Settings.DockOffset.X;
+                case HorizontalAlignment.Right:
+                    return (monitorRect.Right - ActualWidth) - Settings.DockOffset.X;
             }
-            return newLeft;
+            return double.NaN;
         }
 
         private double GetTop()
         {
-            //if (double.IsNaN(ActualHeight) || ActualHeight < 1)
-            //    return double.NaN;
-            var newTop = double.NaN;
-            if (Settings.DockPosition == ScreenDockPosition.None)
+            if (!Settings.IsDocked)
             {
-                newTop = Settings.Top;
+                return Settings.Top;
             }
-            else
-            {
-                var horizontal = Settings.DockPosition.IsHorizontal();
-                var monitorRect =
-                    MonitorHelper.GetMonitorBounds(Settings.Monitor);
+            var monitorRect = MonitorHelper.GetMonitorBounds(Settings.Monitor);
 
-                if (horizontal)
-                {
-                    switch (Settings.DockAlignment)
-                    {
-                        case ScreenDockAlignment.Top:
-                            newTop = monitorRect.Top +
-                                     (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
-                            break;
-                        default:
-                        case ScreenDockAlignment.Center:
-                            newTop = monitorRect.Top + (monitorRect.Height/2) - (ActualHeight/2);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            newTop = (monitorRect.Bottom - ActualHeight) -
-                                     (Settings.IgnoreCorners ? (Settings.CornerSize*2) : 0);
-                            break;
-                        case ScreenDockAlignment.Stretch:
-                            newTop = monitorRect.Top;
-                            break;
-                    }
-                }
-                else
-                {
-                    newTop = Settings.DockPosition == ScreenDockPosition.Top
-                        ? monitorRect.Top
-                        : monitorRect.Bottom - ActualHeight;
-                }
-                newTop += Settings.DockPosition.ConvertVerticalPadding(Settings.DockAlignment, Settings.DockOffset.Y);
+            switch (Settings.VerticalAlignment)
+            {
+                case VerticalAlignment.Stretch:
+                case VerticalAlignment.Top:
+                    return (monitorRect.Top) + Settings.DockOffset.Y;
+                case VerticalAlignment.Center:
+                    return (monitorRect.Bottom/2 - ActualHeight/2) + Settings.DockOffset.Y;
+                case VerticalAlignment.Bottom:
+                    return (monitorRect.Bottom - ActualHeight) - Settings.DockOffset.Y;
             }
-            return newTop;
+            return double.NaN;
         }
 
         private double GetWidth()
         {
-            return Settings.DockPosition != ScreenDockPosition.None && Settings.DockPosition.IsVertical() &&
-                   Settings.DockAlignment == ScreenDockAlignment.Stretch
+            return Settings.IsDocked && Settings.HorizontalAlignment == HorizontalAlignment.Stretch
                 ? MaxWidth
                 : Settings.Width;
         }
 
         private double GetHeight()
         {
-            return Settings.DockPosition != ScreenDockPosition.None && Settings.DockPosition.IsHorizontal() &&
-                   Settings.DockAlignment == ScreenDockAlignment.Stretch
+            return Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Stretch
                 ? MaxHeight
                 : Settings.Height;
         }
@@ -306,18 +255,29 @@ namespace DesktopWidgets.ViewModelBase
             new ManageWidgets().Show();
         }
 
-        private void WidgetDockPositionExecute(ScreenDockPosition screenDockPosition)
+        private void WidgetDockHorizontalExecute(HorizontalAlignment horizontalAlignment)
         {
-            var previousPosition = Settings.DockPosition;
-            Settings.DockPosition = screenDockPosition;
-            _id.GetView()?.UpdateUi(dockPosition: previousPosition);
+            var previousAlignment = Settings.HorizontalAlignment;
+            var previousIsDocked = Settings.IsDocked;
+            Settings.HorizontalAlignment = horizontalAlignment;
+            Settings.IsDocked = true;
+            _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
         }
 
-        private void WidgetDockAlignmentExecute(ScreenDockAlignment screenDockAlignment)
+        private void WidgetDockVerticalExecute(VerticalAlignment verticalAlignment)
         {
-            var previousAlignment = Settings.DockAlignment;
-            Settings.DockAlignment = screenDockAlignment;
-            _id.GetView()?.UpdateUi(dockAlignment: previousAlignment);
+            var previousAlignment = Settings.VerticalAlignment;
+            var previousIsDocked = Settings.IsDocked;
+            Settings.VerticalAlignment = verticalAlignment;
+            Settings.IsDocked = true;
+            _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
+        }
+
+        private void WidgetUndockExecute()
+        {
+            var previousIsDocked = Settings.IsDocked;
+            Settings.IsDocked = false;
+            _id.GetView()?.UpdateUi(isDocked: previousIsDocked);
         }
 
         public void UpdatePosition()

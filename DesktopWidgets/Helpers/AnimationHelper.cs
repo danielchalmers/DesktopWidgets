@@ -13,81 +13,40 @@ namespace DesktopWidgets.Helpers
 {
     public static class AnimationHelper
     {
-        public static void Animate(this WidgetView view, AnimationMode animationMode, Action astartAction = null,
-            Action aendAction = null, ScreenDockPosition? dockPosition = null, ScreenDockAlignment? dockAlignment = null)
+        public static void Animate(this WidgetView view, AnimationMode animationMode,
+            Action astartAction = null,
+            Action aendAction = null,
+            bool? isDocked = null,
+            HorizontalAlignment? dockHorizontalAlignment = null,
+            VerticalAlignment? dockVerticalAlignment = null)
         {
             var settings = view.Id.GetSettings();
 
-            var twoAnimations = true;
+            var horizontalAlignment = dockHorizontalAlignment ?? settings.HorizontalAlignment;
+            var verticalAlignment = dockVerticalAlignment ?? settings.VerticalAlignment;
+            var docked = isDocked ?? settings.IsDocked;
 
-            var position = dockPosition ?? settings.DockPosition;
-            var alignment = dockAlignment ?? settings.DockAlignment;
-
-            switch (position)
+            view.RenderTransformOrigin = new Point(0.5, 0.5);
+            if (docked)
             {
-                default:
-                    view.RenderTransformOrigin = new Point(0.5, 0.5);
-                    break;
-                case ScreenDockPosition.Left:
-                    switch (alignment)
-                    {
-                        default:
-                            view.RenderTransformOrigin = new Point(0, 0);
-                            twoAnimations = false;
-                            break;
-                        case ScreenDockAlignment.Top:
-                            view.RenderTransformOrigin = new Point(0, 0);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            view.RenderTransformOrigin = new Point(0, 1);
-                            break;
-                    }
-                    break;
-                case ScreenDockPosition.Right:
-                    switch (alignment)
-                    {
-                        default:
-                            view.RenderTransformOrigin = new Point(1, 0);
-                            twoAnimations = false;
-                            break;
-                        case ScreenDockAlignment.Top:
-                            view.RenderTransformOrigin = new Point(1, 0);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            view.RenderTransformOrigin = new Point(1, 1);
-                            break;
-                    }
-                    break;
-                case ScreenDockPosition.Top:
-                    switch (alignment)
-                    {
-                        default:
-                            view.RenderTransformOrigin = new Point(0, 0);
-                            twoAnimations = false;
-                            break;
-                        case ScreenDockAlignment.Top:
-                            view.RenderTransformOrigin = new Point(0, 0);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            view.RenderTransformOrigin = new Point(1, 0);
-                            break;
-                    }
-                    break;
-                case ScreenDockPosition.Bottom:
-                    switch (alignment)
-                    {
-                        default:
-                            view.RenderTransformOrigin = new Point(0, 1);
-                            twoAnimations = false;
-                            break;
-                        case ScreenDockAlignment.Top:
-                            view.RenderTransformOrigin = new Point(0, 1);
-                            break;
-                        case ScreenDockAlignment.Bottom:
-                            view.RenderTransformOrigin = new Point(1, 1);
-                            break;
-                    }
-                    break;
+                switch (horizontalAlignment)
+                {
+                    case HorizontalAlignment.Left:
+                        view.RenderTransformOrigin = new Point(0, view.RenderTransformOrigin.Y);
+                        break;
+                    case HorizontalAlignment.Right:
+                        view.RenderTransformOrigin = new Point(1, view.RenderTransformOrigin.Y);
+                        break;
+                }
+                switch (verticalAlignment)
+                {
+                    case VerticalAlignment.Top:
+                        view.RenderTransformOrigin = new Point(view.RenderTransformOrigin.X, 0);
+                        break;
+                    case VerticalAlignment.Bottom:
+                        view.RenderTransformOrigin = new Point(view.RenderTransformOrigin.X, 1);
+                        break;
+                }
             }
 
             Action startAction = delegate
@@ -124,13 +83,12 @@ namespace DesktopWidgets.Helpers
                 From = animationMode == AnimationMode.Show ? 0 : 1,
                 To = animationMode == AnimationMode.Show ? 1 : 0,
                 FillBehavior = FillBehavior.Stop,
-                EasingFunction =
-                    settings.AnimationEase
-                        ? new SineEase
-                        {
-                            EasingMode = animationMode == AnimationMode.Show ? EasingMode.EaseIn : EasingMode.EaseOut
-                        }
-                        : null
+                EasingFunction = settings.AnimationEase
+                    ? new SineEase
+                    {
+                        EasingMode = animationMode == AnimationMode.Show ? EasingMode.EaseIn : EasingMode.EaseOut
+                    }
+                    : null
             };
 
             // Start animation.
@@ -150,23 +108,13 @@ namespace DesktopWidgets.Helpers
                     doubleAnimation.Completed += delegate
                     {
                         counter++;
-                        if (!twoAnimations || counter == 2)
+                        if (counter == 2)
                             finishAction();
                     };
                     var trans = new ScaleTransform();
                     view.RenderTransform = trans;
-                    if (twoAnimations)
-                    {
-                        trans.BeginAnimation(ScaleTransform.ScaleXProperty, doubleAnimation);
-                        trans.BeginAnimation(ScaleTransform.ScaleYProperty, doubleAnimation);
-                    }
-                    else
-                    {
-                        trans.BeginAnimation(
-                            position.IsVertical()
-                                ? ScaleTransform.ScaleYProperty
-                                : ScaleTransform.ScaleXProperty, doubleAnimation);
-                    }
+                    trans.BeginAnimation(ScaleTransform.ScaleXProperty, doubleAnimation);
+                    trans.BeginAnimation(ScaleTransform.ScaleYProperty, doubleAnimation);
                     break;
                 default:
                     finishAction();

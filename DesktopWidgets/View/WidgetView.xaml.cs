@@ -70,7 +70,7 @@ namespace DesktopWidgets.View
 
         public bool IsContextMenuOpen => ViewModel.IsContextMenuOpen;
 
-        public WidgetId Id { get; private set; }
+        public WidgetId Id { get; }
         public bool AnimationRunning { get; set; } = false;
 
         public new bool IsVisible => !(Opacity < 1);
@@ -139,14 +139,16 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide();
         }
 
-        public void UpdateUi(bool resetContext = true, bool updateNonUi = true, ScreenDockPosition? dockPosition = null,
-            ScreenDockAlignment? dockAlignment = null)
+        public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool? isDocked = null,
+            HorizontalAlignment? dockHorizontalAlignment = null,
+            VerticalAlignment? dockVerticalAlignment = null)
         {
             if (!IsVisible)
                 Refresh(resetContext, updateNonUi, false);
             else
-                this.Animate(AnimationMode.Hide, null, () => Refresh(resetContext, updateNonUi, true), dockPosition,
-                    dockAlignment);
+                this.Animate(AnimationMode.Hide, null, () => Refresh(resetContext, updateNonUi, true), isDocked,
+                    dockHorizontalAlignment,
+                    dockVerticalAlignment);
         }
 
         private void Refresh(bool resetContext, bool updateNonUi, bool showIntro)
@@ -212,20 +214,20 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
         {
-            if (Settings.SnapToScreenEdges && Settings.DockPosition == ScreenDockPosition.None)
+            if (Settings.SnapToScreenEdges && !Settings.IsDocked)
                 this.Snap(true);
         }
 
         private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && Settings.DockPosition == ScreenDockPosition.None &&
+            if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
                 Settings.DragWidgetToMove)
                 DragMove();
         }
 
         private void Titlebar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && Settings.DockPosition == ScreenDockPosition.None &&
+            if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
                 Settings.DragTitlebarToMove)
                 DragMove();
         }

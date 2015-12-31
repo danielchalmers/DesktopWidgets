@@ -15,7 +15,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Style")]
         [DisplayName("Outer Padding")]
-        public Thickness Padding { get; set; } = new Thickness(3,2,3,2);
+        public Thickness Padding { get; set; } = new Thickness(3, 2, 3, 2);
 
         [Category("General")]
         [DisplayName("Name")]
@@ -120,12 +120,16 @@ namespace DesktopWidgets.Classes
         public OpenMode OpenMode { get; set; } = OpenMode.AlwaysOpen;
 
         [Category("Dock")]
-        [DisplayName("Position")]
-        public ScreenDockPosition DockPosition { get; set; } = ScreenDockPosition.None;
+        [DisplayName("Horizontal Alignment")]
+        public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Center;
 
         [Category("Dock")]
-        [DisplayName("Alignment")]
-        public ScreenDockAlignment DockAlignment { get; set; } = ScreenDockAlignment.Center;
+        [DisplayName("Vertical Alignment")]
+        public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Center;
+
+        [Category("Dock")]
+        [DisplayName("Docked")]
+        public bool IsDocked { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Mouse Detection Distance (px)")]
