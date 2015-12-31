@@ -43,7 +43,7 @@ namespace DesktopWidgets.Widgets.Search
         {
             if (string.IsNullOrWhiteSpace(Settings.BaseUrl))
             {
-                Popup.Show("You must setup a base url first.", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                Popup.Show("You must set up a base URL first.", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
             var searchText = SearchText;
