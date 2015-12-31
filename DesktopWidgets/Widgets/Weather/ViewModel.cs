@@ -33,15 +33,9 @@ namespace DesktopWidgets.Widgets.Weather
                 ? TimeSpan.FromMinutes(30)
                 : Settings.RefreshInterval;
             UpdateTimer.Tick += UpdateWeather;
+
+            UpdateWeather();
             UpdateTimer.Start();
-            if (Settings.ZipCode == 0)
-            {
-                ShowHelp = true;
-            }
-            else
-            {
-                UpdateWeather();
-            }
         }
 
         public Settings Settings { get; }
@@ -127,6 +121,12 @@ namespace DesktopWidgets.Widgets.Weather
 
         private void UpdateWeather(object sender = null, EventArgs eventArgs = null)
         {
+            if (Settings.ZipCode == 0)
+            {
+                ShowHelp = true;
+                return;
+            }
+
             string unitType;
             switch (Settings.UnitType)
             {
