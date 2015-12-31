@@ -11,10 +11,11 @@ namespace DesktopWidgets.Windows
     {
         private readonly SelectItemViewModel ViewModel;
 
-        public SelectItem(IEnumerable<object> items)
+        public SelectItem(IEnumerable<object> items, string title)
         {
             InitializeComponent();
             ViewModel = new SelectItemViewModel(items);
+            Title = $"Select {title}";
             DataContext = ViewModel;
         }
 
