@@ -64,6 +64,15 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
         }
 
+        private void NewHeadlineFound()
+        {
+            MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
+            if (Settings.OpenOnEvent)
+                Settings.Identifier.GetView()
+                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                        false);
+        }
+
         private void UpdateFeed()
         {
             if (string.IsNullOrWhiteSpace(Settings.RssFeedUrl))
@@ -77,13 +86,22 @@ namespace DesktopWidgets.Widgets.RSSFeed
             reader.Close();
             if (feed?.Items == null)
                 return;
+            var prevFeed = FeedItems.ToList();
             FeedItems.Clear();
-            foreach (var item in feed.Items)
+            var newHeadlineFound = false;
+            foreach (
+                var newItem in
+                    feed.Items.Select(
+                        item => new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri)))
             {
-                FeedItems.Add(new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri));
+                FeedItems.Add(newItem);
+                if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))
+                    newHeadlineFound = true;
                 if (FeedItems.Count >= Settings.MaxHeadlines && Settings.MaxHeadlines > 0)
                     break;
             }
+            if (prevFeed.Count > 0 && newHeadlineFound)
+                NewHeadlineFound();
         }
 
         private void NavigateHyperlinkExecute(RequestNavigateEventArgs e)

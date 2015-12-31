@@ -4,7 +4,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.RSSFeed
 {
-    public class Settings : WidgetSettingsBase
+    public class Settings : WidgetSettingsBase, IEventWidget
     {
         [Category("Style")]
         [DisplayName("Max Headlines")]
@@ -17,5 +17,25 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [Category("General")]
         [DisplayName("RSS Feed URL")]
         public string RssFeedUrl { get; set; }
+
+        [Category("Behavior")]
+        [DisplayName("New Headline Sound Path")]
+        public string EventSoundPath { get; set; }
+
+        [Category("Behavior")]
+        [DisplayName("New Headline Sound Volume")]
+        public double EventSoundVolume { get; set; } = 1.0;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Open On New Headline")]
+        public bool OpenOnEvent { get; set; } = true;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Stay Open On New Headline")]
+        public bool OpenOnEventStay { get; set; } = false;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Open On New Headline Duration")]
+        public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }
