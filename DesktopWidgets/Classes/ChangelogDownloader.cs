@@ -102,7 +102,7 @@ namespace DesktopWidgets.Classes
                 }
                 else
                 {
-                    if (commit != "Minor code cleanup")
+                    if (lastVersion != null)
                         versionCommits.Add(commit);
                 }
             }
