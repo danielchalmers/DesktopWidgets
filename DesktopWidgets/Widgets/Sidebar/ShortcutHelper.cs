@@ -301,5 +301,19 @@ namespace DesktopWidgets.Widgets.Sidebar
 
             return defaults;
         }
+
+        public static string GetFriendlyNameWithData(this Shortcut shortcut)
+        {
+            var dataList = new List<string>();
+            if (!string.IsNullOrWhiteSpace(shortcut.Path))
+                dataList.Add(shortcut.Path);
+            if (!string.IsNullOrWhiteSpace(shortcut.Args))
+                dataList.Add(shortcut.Args);
+            var dataStr = string.Join(", ", dataList);
+            if (!string.IsNullOrWhiteSpace(dataStr))
+                dataStr = $" ({dataStr})";
+
+            return $"{shortcut.Name}{dataStr}";
+        }
     }
 }
