@@ -15,6 +15,13 @@ namespace DesktopWidgets.Classes
 {
     internal class ChangelogDownloader
     {
+        private static readonly List<string> ChangelogBlacklist = new List<string>
+        {
+            "refactor",
+            "cleanup",
+            "clean up"
+        };
+
         private string _updateText;
         private Action<string> _updateTextAction;
 
@@ -55,7 +62,7 @@ namespace DesktopWidgets.Classes
                 var changes = x.Changes.ToList();
                 changes.Sort();
                 str.Append($"{x.Version} ({x.PublishDate.ToString("yyyy-MM-dd")})");
-                foreach (var y in changes)
+                foreach (var y in changes.Where(c => !ChangelogBlacklist.Contains(c.ToLower())))
                     str.Append($"\n {y}");
                 str.AppendLine();
                 str.AppendLine();
