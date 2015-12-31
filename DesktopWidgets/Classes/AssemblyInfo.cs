@@ -4,6 +4,7 @@ using System;
 using System.Deployment.Application;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using DesktopWidgets.Properties;
 
 #endregion
 
@@ -20,6 +21,9 @@ namespace DesktopWidgets.Classes
 
         public static string Description { get; } =
             GetAssemblyAttribute<AssemblyDescriptionAttribute>(a => a.Description);
+
+        public static string CustomDescription { get; } = string.Format(Resources.About, Title, Version,
+            Resources.GitHubIssues, Resources.GitHubCommits, Copyright);
 
         public static string Guid { get; } = GetAssemblyAttribute<GuidAttribute>(a => a.Value);
 

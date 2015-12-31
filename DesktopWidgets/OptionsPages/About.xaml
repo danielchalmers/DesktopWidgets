@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
       xmlns:properties="clr-namespace:DesktopWidgets.Properties"
+      xmlns:classes="clr-namespace:DesktopWidgets.Classes"
       mc:Ignorable="d"
       Title="About">
 
@@ -16,7 +17,8 @@
         <TextBlock Grid.Row="0"
                    Text="{x:Static properties:Resources.AppName}" FontSize="24" VerticalAlignment="Center"
                    HorizontalAlignment="Left" />
-        <TextBox Grid.Row="1" x:Name="txtDescription" Background="Transparent" BorderThickness="0" IsReadOnly="True"
+        <TextBox Grid.Row="1" Text="{x:Static classes:AssemblyInfo.CustomDescription}" Background="Transparent"
+                 BorderThickness="0" IsReadOnly="True"
                  TextWrapping="Wrap" Height="Auto" VerticalAlignment="Center" />
     </Grid>
 </Page>
