@@ -42,6 +42,9 @@ namespace DesktopWidgets.View
             MainContentContainer.ContextMenu = contextMenu;
             userControl.MouseDown += Widget_OnMouseDown;
 
+            MainContentContainer.ScrollToHorizontalOffset(Settings.ScrollHorizontalOffset);
+            MainContentContainer.ScrollToVerticalOffset(Settings.ScrollVerticalOffset);
+
             var frameTop = userControl.TryFindResource("FrameTop") as Grid;
             if (frameTop != null)
             {
@@ -203,6 +206,8 @@ namespace DesktopWidgets.View
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
             _mouseChecker.Stop();
+            Settings.ScrollHorizontalOffset = MainContentContainer.ContentHorizontalOffset;
+            Settings.ScrollVerticalOffset = MainContentContainer.ContentVerticalOffset;
         }
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)

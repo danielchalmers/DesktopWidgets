@@ -290,5 +290,11 @@ namespace DesktopWidgets.Classes
         [Category("Style (Titlebar Name)")]
         [DisplayName("Allow Editing")]
         public bool TitlebarNameAllowEditing { get; set; } = true;
+
+        [DisplayName("Scroll Horizontal Offset")]
+        public double ScrollHorizontalOffset { get; set; }
+
+        [DisplayName("Scroll Vertical Offset")]
+        public double ScrollVerticalOffset { get; set; }
     }
 }
