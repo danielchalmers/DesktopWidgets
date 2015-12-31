@@ -80,6 +80,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
                 ShowHelp = true;
                 return;
             }
+            ShowHelp = false;
 
             var reader = XmlReader.Create(Settings.RssFeedUrl);
             var feed = SyndicationFeed.Load(reader);

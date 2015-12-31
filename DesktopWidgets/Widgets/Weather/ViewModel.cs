@@ -128,6 +128,7 @@ namespace DesktopWidgets.Widgets.Weather
                 ShowHelp = true;
                 return;
             }
+            ShowHelp = false;
 
             string unitType;
             switch (Settings.UnitType)
