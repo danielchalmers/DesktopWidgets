@@ -24,6 +24,7 @@
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
         <classes:BoolToCornerRadiusConverter x:Key="BoolToCornerRadiusConverter" />
+        <classes:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
         <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
@@ -200,6 +201,8 @@
                                 <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder2" />
                                 <Binding Path="Margin.Top" ElementName="ContainerBorder2" />
                                 <Binding Path="Margin.Bottom" ElementName="ContainerBorder2" />
+                                <Binding Path="Visibility" ElementName="Titlebar"
+                                         Converter="{StaticResource VisibilityToBooleanConverter}" />
                                 <Binding Path="ActualHeight" ElementName="Titlebar" />
                             </MultiBinding>
                         </ScrollViewer.MaxHeight>

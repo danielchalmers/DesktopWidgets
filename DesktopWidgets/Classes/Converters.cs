@@ -514,7 +514,22 @@ namespace DesktopWidgets.Classes
             try
             {
                 var baseAmount = (double) value[0];
-                var total = value.ToList().GetRange(1, value.Length - 1).Select(x => (double) x).Sum();
+                var total = 0.0;
+                var ignoreNext = false;
+                foreach (var val in value.ToList().GetRange(1, value.Length - 1))
+                {
+                    if (ignoreNext)
+                        continue;
+                    if (val is bool)
+                    {
+                        if (!(bool) val)
+                            ignoreNext = true;
+                    }
+                    else
+                    {
+                        total += (double) val;
+                    }
+                }
                 return baseAmount - total;
             }
             catch
@@ -634,6 +649,21 @@ namespace DesktopWidgets.Classes
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
             return (bool) value ? Properties.Settings.Default.RoundedCornersRadius : 0;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class VisibilityToBooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            return (Visibility) value == Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
