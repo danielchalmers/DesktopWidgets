@@ -265,11 +265,11 @@ namespace DesktopWidgets.Helpers
 
         public static void Remove(this WidgetId id, bool msg = false)
         {
-            if (msg && Popup.Show("Are you sure you want to delete this widget?\n\nThis cannot be undone.",
+            var settings = id.GetSettings();
+            if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?\n\nThis cannot be undone.",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
 
-            var settings = id.GetSettings();
             App.WidgetsSettingsStore.Widgets.Remove(settings);
             var view = id.GetView();
             if (view != null)
