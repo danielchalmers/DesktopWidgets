@@ -262,6 +262,7 @@ namespace DesktopWidgets.ViewModelBase
             Settings.HorizontalAlignment = horizontalAlignment;
             Settings.IsDocked = true;
             _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
+            _id.GetView()?.ShowIntro(reversable: false);
         }
 
         private void WidgetDockVerticalExecute(VerticalAlignment verticalAlignment)
@@ -271,6 +272,7 @@ namespace DesktopWidgets.ViewModelBase
             Settings.VerticalAlignment = verticalAlignment;
             Settings.IsDocked = true;
             _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
+            _id.GetView()?.ShowIntro(reversable:false);
         }
 
         private void WidgetUndockExecute()
@@ -278,6 +280,7 @@ namespace DesktopWidgets.ViewModelBase
             var previousIsDocked = Settings.IsDocked;
             Settings.IsDocked = false;
             _id.GetView()?.UpdateUi(isDocked: previousIsDocked);
+            _id.GetView()?.ShowIntro(reversable: false);
         }
 
         public void UpdatePosition()
