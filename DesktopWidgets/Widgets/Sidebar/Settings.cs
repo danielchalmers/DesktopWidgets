@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Widgets.Sidebar
@@ -18,8 +19,12 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ToolTipType ToolTipType { get; set; } = ToolTipType.None;
 
         [Category("Shortcut Style")]
-        [DisplayName("Alignment")]
-        public ShortcutAlignment ButtonAlignment { get; set; } = ShortcutAlignment.Center;
+        [DisplayName("Horizontal Alignment")]
+        public HorizontalAlignment ButtonHorizontalAlignment { get; set; } = HorizontalAlignment.Center;
+
+        [Category("Shortcut Style")]
+        [DisplayName("Vertical Alignment")]
+        public VerticalAlignment ButtonVerticalAlignment { get; set; } = VerticalAlignment.Center;
 
         [Category("Shortcut Style")]
         [DisplayName("Icon Scaling Mode")]
@@ -31,7 +36,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         [Category("Style")]
         [DisplayName("Orientation")]
-        public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Auto;
+        public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Vertical;
 
         [Category("Shortcut Style")]
         [DisplayName("Height")]

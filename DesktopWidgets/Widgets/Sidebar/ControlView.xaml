@@ -34,8 +34,6 @@
         <classes:IconPositionIconToDockConverter x:Key="IconPositionIconToDockConverter" />
         <classes:ShortcutToToolTipConverter x:Key="ShortcutToToolTipConverter" />
         <classes:PositionToOrientationConverter x:Key="PositionToOrientationConverter" />
-        <classes:SettingsToVerticalAlignmentConverter x:Key="SettingsToVerticalAlignmentConverter" />
-        <classes:SettingsToHorizontalAlignmentConverter x:Key="SettingsToHorizontalAlignmentConverter" />
         <classes:TextToVisibilityConverter x:Key="TextToVisibilityConverter" />
 
         <Style TargetType="{x:Type TextBlock}" x:Key="StyleTextBlock">
@@ -136,19 +134,9 @@
             </ContextMenu.ItemsSource>
         </ContextMenu>
     </UserControl.Resources>
-    <ItemsControl AllowDrop="True" ItemsSource="{Binding Path=Settings.Shortcuts}" Focusable="False">
-        <ItemsControl.HorizontalAlignment>
-            <MultiBinding Converter="{StaticResource SettingsToHorizontalAlignmentConverter}">
-                <Binding Path="Settings.DockPosition" />
-                <Binding Path="Settings.ButtonAlignment" />
-            </MultiBinding>
-        </ItemsControl.HorizontalAlignment>
-        <ItemsControl.VerticalAlignment>
-            <MultiBinding Converter="{StaticResource SettingsToVerticalAlignmentConverter}">
-                <Binding Path="Settings.DockPosition" />
-                <Binding Path="Settings.ButtonAlignment" />
-            </MultiBinding>
-        </ItemsControl.VerticalAlignment>
+    <ItemsControl AllowDrop="True" ItemsSource="{Binding Path=Settings.Shortcuts}" Focusable="False"
+                  HorizontalAlignment="{Binding Settings.ButtonHorizontalAlignment}"
+                  VerticalAlignment="{Binding Settings.ButtonVerticalAlignment}">
         <ItemsControl.ContextMenu>
             <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                 <ContextMenu.ItemsSource>
