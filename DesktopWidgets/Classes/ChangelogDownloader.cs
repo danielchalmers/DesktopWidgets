@@ -28,10 +28,10 @@ namespace DesktopWidgets.Classes
         public void GetChangelog(Action<string> updateTextAction)
         {
             _updateTextAction = updateTextAction;
-            var bw = new BackgroundWorker();
-            bw.DoWork += Worker_DoWork;
-            bw.RunWorkerCompleted += Worker_Completed;
-            bw.RunWorkerAsync();
+            var worker = new BackgroundWorker();
+            worker.DoWork += Worker_DoWork;
+            worker.RunWorkerCompleted += Worker_Completed;
+            worker.RunWorkerAsync();
             _updateTextAction("Downloading changelog...");
         }
 
@@ -54,62 +54,52 @@ namespace DesktopWidgets.Classes
 
         private static string GetFormattedChangelog()
         {
-            var str = new StringBuilder();
-            var changelogData = ParseChangelogData(DownloadChangelog());
+            var changelogData = ParseChangelogJson(DownloadChangelogJson());
 
-            foreach (var x in changelogData)
+            var stringBuilder = new StringBuilder();
+            foreach (var changelog in changelogData)
             {
-                var changes = x.Changes.ToList();
-                changes.Sort();
-                str.Append($"{x.Version} ({x.PublishDate.ToString("yyyy-MM-dd")})");
-                foreach (var y in changes.Where(c => !ChangelogBlacklist.Contains(c.ToLower())))
-                    str.Append($"\n {y}");
-                str.AppendLine();
-                str.AppendLine();
+                stringBuilder.Append($"{changelog.Version} ({changelog.PublishDate.ToString("yyyy-MM-dd")})");
+                foreach (
+                    var change in
+                        changelog.History.OrderBy(x => x)
+                            .Where(c => !ChangelogBlacklist.Any(x => c.ToLower().Contains(x))))
+                    stringBuilder.Append($"{Environment.NewLine} {change}");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine();
             }
 
-            str.Append($"You can view the full changelog at {Resources.GitHubCommits}");
-            return str.ToString();
+            stringBuilder.Append($"You can view the full changelog at {Resources.GitHubCommits}");
+            return stringBuilder.ToString();
         }
 
-        private static IEnumerable<ChangelogVersionData> ParseChangelogData(string data)
+        private static IEnumerable<Changelog> ParseChangelogJson(string data)
         {
             var json = JsonConvert.DeserializeObject<List<GitHubApiCommitsRootObject>>(data);
-            var versionLog = new List<ChangelogVersionData>();
-            var versionCommits = new List<string>();
-            Version lastVersion = null;
-            var lastDateTime = DateTime.Now;
-            var lastCommit = json.Last();
+            var changelogData = new List<Changelog>();
+            var history = new List<string>();
+            json.Reverse();
             foreach (var j in json)
             {
-                var commit = j.commit.message;
-                var index = commit.IndexOf("\n", StringComparison.Ordinal);
-                if (index > 0)
-                    commit = commit.Substring(0, index);
+                var commit = j.commit.message.TrimEnd(Environment.NewLine.ToCharArray());
                 Version version;
-                if (Version.TryParse(commit, out version) || j.Equals(lastCommit))
+                if (Version.TryParse(commit, out version))
                 {
-                    if (lastVersion != null)
-                    {
-                        versionLog.Add(new ChangelogVersionData(
-                            lastVersion,
-                            lastDateTime,
-                            versionCommits.ToList()));
-                        versionCommits.Clear();
-                    }
-                    lastVersion = version;
-                    lastDateTime = DateTime.Parse(j.commit.committer.date);
+                    changelogData.Add(new Changelog(
+                        version,
+                        DateTime.Parse(j.commit.committer.date),
+                        history.ToList()));
+                    history.Clear();
                 }
                 else
                 {
-                    if (lastVersion != null)
-                        versionCommits.Add(commit);
+                    history.Add(commit);
                 }
             }
-            return versionLog;
+            return changelogData;
         }
 
-        private static string DownloadChangelog()
+        private static string DownloadChangelogJson()
         {
             using (var webClient = new WebClient())
             {
@@ -120,17 +110,17 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class ChangelogVersionData
+    public class Changelog
     {
-        public ChangelogVersionData(Version version, DateTime publishDateTime, List<string> changes)
+        public Changelog(Version version, DateTime publishDateTime, List<string> history)
         {
             Version = version;
             PublishDate = publishDateTime;
-            Changes = changes;
+            History = history;
         }
 
         public Version Version { get; }
         public DateTime PublishDate { get; }
-        public List<string> Changes { get; }
+        public List<string> History { get; }
     }
 }
