@@ -168,7 +168,7 @@ namespace DesktopWidgets.Helpers
             else if (settings is Widgets.Weather.Settings)
             {
                 dataContext = new Widgets.Weather.ViewModel(id);
-                userControl = new Widgets.RSSFeed.ControlView();
+                userControl = new Widgets.Weather.ControlView();
             }
             else if (settings is Widgets.Search.Settings)
             {
