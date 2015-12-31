@@ -143,10 +143,6 @@ namespace DesktopWidgets.Classes
         [DisplayName("Animation Type")]
         public AnimationType AnimationType { get; set; } = AnimationType.Fade;
 
-        [Category("Style")]
-        [DisplayName("Ignore Corners")]
-        public bool IgnoreCorners { get; set; } = false;
-
         [Category("Behavior (Hideable)")]
         [DisplayName("Open Hotkey")]
         public Key HotKey { get; set; }
@@ -162,10 +158,6 @@ namespace DesktopWidgets.Classes
         [Category("General")]
         [DisplayName("Force On Top Refresh Interval (ms)")]
         public int ForceOnTopInterval { get; set; } = 500;
-
-        [Category("Style")]
-        [DisplayName("Corner Size (px)")]
-        public int CornerSize { get; set; } = 16;
 
         [Category("Style")]
         [DisplayName("Intro Duration (ms)")]
