@@ -29,15 +29,9 @@ namespace DesktopWidgets.Widgets.RSSFeed
             FeedItems = new ObservableCollection<FeedItem>();
             UpdateTimer = new DispatcherTimer {Interval = Settings.RefreshInterval};
             UpdateTimer.Tick += (sender, args) => UpdateFeed();
+
+            UpdateFeed();
             UpdateTimer.Start();
-            if (string.IsNullOrWhiteSpace(Settings.RssFeedUrl))
-            {
-                ShowHelp = true;
-            }
-            else
-            {
-                UpdateFeed();
-            }
         }
 
         public Settings Settings { get; }
@@ -72,6 +66,12 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         private void UpdateFeed()
         {
+            if (string.IsNullOrWhiteSpace(Settings.RssFeedUrl))
+            {
+                ShowHelp = true;
+                return;
+            }
+
             var reader = XmlReader.Create(Settings.RssFeedUrl);
             var feed = SyndicationFeed.Load(reader);
             reader.Close();
