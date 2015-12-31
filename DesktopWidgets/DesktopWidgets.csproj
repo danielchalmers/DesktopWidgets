@@ -294,7 +294,7 @@
     <Compile Include="ViewModelBase\WidgetViewModelBase.cs" />
     <Compile Include="Classes\WidgetSettingsBase.cs" />
     <Compile Include="Helpers\WidgetHelper.cs" />
-    <Compile Include="Helpers\WindowHelper.cs" />
+    <Compile Include="Helpers\SnapHelper.cs" />
     <Compile Include="Windows\UpdatePrompt.xaml.cs">
       <DependentUpon>UpdatePrompt.xaml</DependentUpon>
     </Compile>

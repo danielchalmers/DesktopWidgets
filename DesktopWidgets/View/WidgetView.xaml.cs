@@ -208,7 +208,7 @@ namespace DesktopWidgets.View
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
         {
             if (Settings.SnapToScreenEdges && Settings.DockPosition == ScreenDockPosition.None)
-                this.Snap();
+                this.Snap(true);
         }
 
         private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)
