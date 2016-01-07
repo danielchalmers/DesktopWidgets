@@ -290,7 +290,7 @@ namespace DesktopWidgets.Classes
         public double ScrollVerticalOffset { get; set; }
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Full Bounds On Non-Sided Dock")]
+        [DisplayName("Full Mouse Bounds On Center Dock")]
         public bool CenterBoundsOnNonSidedDock { get; set; } = true;
 
         [Category("Behavior (Hideable)")]

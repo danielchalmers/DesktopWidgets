@@ -97,78 +97,94 @@ namespace DesktopWidgets.Classes
                     var monitorBounds = MonitorHelper.GetMonitorBounds(_settings.Monitor);
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
                         _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Horizontal)
-                        switch (_settings.HorizontalAlignment)
+                    {
+                        if (_settings.HorizontalAlignment == HorizontalAlignment.Left ||
+                            _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            case HorizontalAlignment.Left:
-                                checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, _settings.MouseBounds,
-                                    monitorBounds.Height));
-                                break;
-                            case HorizontalAlignment.Right:
-                                checkBounds.Add(new Rect(monitorBounds.Left + _view.ActualWidth - _settings.MouseBounds,
-                                    monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
-                                break;
-                            default:
-                                if (_settings.CenterBoundsOnNonSidedDock)
-                                    checkBounds.Add(GetCenterBounds());
-                                break;
+                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, _settings.MouseBounds,
+                                monitorBounds.Height));
                         }
+                        if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
+                            _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
+                        {
+                            checkBounds.Add(new Rect(monitorBounds.Left + _view.ActualWidth - _settings.MouseBounds,
+                                monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
+                        }
+                        if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
+                        {
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
+                        }
+                    }
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
                         _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Vertical)
-                        switch (_settings.VerticalAlignment)
+                    {
+                        if (_settings.VerticalAlignment == VerticalAlignment.Top ||
+                            _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            case VerticalAlignment.Top:
-                                checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
-                                    _settings.MouseBounds));
-                                break;
-                            case VerticalAlignment.Bottom:
-                                checkBounds.Add(new Rect(monitorBounds.Left,
-                                    monitorBounds.Top + _view.ActualHeight - _settings.MouseBounds, monitorBounds.Width,
-                                    _settings.MouseBounds));
-                                break;
-                            default:
-                                if (_settings.CenterBoundsOnNonSidedDock)
-                                    checkBounds.Add(GetCenterBounds());
-                                break;
+                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
+                                _settings.MouseBounds));
                         }
+                        if (_settings.VerticalAlignment == VerticalAlignment.Bottom ||
+                            _settings.VerticalAlignment == VerticalAlignment.Stretch)
+                        {
+                            checkBounds.Add(new Rect(monitorBounds.Left,
+                                monitorBounds.Top + _view.ActualHeight - _settings.MouseBounds, monitorBounds.Width,
+                                _settings.MouseBounds));
+                        }
+                        if (_settings.VerticalAlignment == VerticalAlignment.Center)
+                        {
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
+                        }
+                    }
                 }
                 else
                 {
                     var viewBounds = _view.GetBounds();
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
                         _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Horizontal)
-                        switch (_settings.HorizontalAlignment)
+                    {
+                        if (_settings.HorizontalAlignment == HorizontalAlignment.Left ||
+                            _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            case HorizontalAlignment.Left:
-                                checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
-                                    viewBounds.Height));
-                                break;
-                            case HorizontalAlignment.Right:
-                                checkBounds.Add(new Rect(viewBounds.Left + _view.ActualWidth - _settings.MouseBounds,
-                                    viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
-                                break;
-                            default:
-                                if (_settings.CenterBoundsOnNonSidedDock)
-                                    checkBounds.Add(GetCenterBounds());
-                                break;
+                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
+                                viewBounds.Height));
                         }
+                        if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
+                            _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
+                        {
+                            checkBounds.Add(new Rect(viewBounds.Left + _view.ActualWidth - _settings.MouseBounds,
+                                viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
+                        }
+                        if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
+                        {
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
+                        }
+                    }
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
                         _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Vertical)
-                        switch (_settings.VerticalAlignment)
+                    {
+                        if (_settings.VerticalAlignment == VerticalAlignment.Top ||
+                            _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            case VerticalAlignment.Top:
-                                checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
-                                    _settings.MouseBounds));
-                                break;
-                            case VerticalAlignment.Bottom:
-                                checkBounds.Add(new Rect(viewBounds.Left,
-                                    viewBounds.Top + _view.ActualHeight - _settings.MouseBounds, viewBounds.Width,
-                                    _settings.MouseBounds));
-                                break;
-                            default:
-                                if (_settings.CenterBoundsOnNonSidedDock)
-                                    checkBounds.Add(GetCenterBounds());
-                                break;
+                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
+                                _settings.MouseBounds));
                         }
+                        if (_settings.VerticalAlignment == VerticalAlignment.Bottom ||
+                            _settings.VerticalAlignment == VerticalAlignment.Stretch)
+                        {
+                            checkBounds.Add(new Rect(viewBounds.Left,
+                                viewBounds.Top + _view.ActualHeight - _settings.MouseBounds, viewBounds.Width,
+                                _settings.MouseBounds));
+                        }
+                        if (_settings.VerticalAlignment == VerticalAlignment.Center)
+                        {
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
+                        }
+                    }
                 }
             }
 
