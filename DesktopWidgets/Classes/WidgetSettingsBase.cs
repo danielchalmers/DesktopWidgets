@@ -288,5 +288,9 @@ namespace DesktopWidgets.Classes
 
         [DisplayName("Scroll Vertical Offset")]
         public double ScrollVerticalOffset { get; set; }
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Full Bounds On Non-Sided Dock")]
+        public bool CenterBoundsOnNonSidedDock { get; set; } = true;
     }
 }

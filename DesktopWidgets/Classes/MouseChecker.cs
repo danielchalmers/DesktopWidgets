@@ -106,7 +106,8 @@ namespace DesktopWidgets.Classes
                                 monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
                             break;
                         default:
-                            checkBounds.Add(GetCenterBounds());
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
                             break;
                     }
                     switch (_settings.VerticalAlignment)
@@ -121,7 +122,8 @@ namespace DesktopWidgets.Classes
                                 _settings.MouseBounds));
                             break;
                         default:
-                            checkBounds.Add(GetCenterBounds());
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
                             break;
                     }
                 }
@@ -139,7 +141,8 @@ namespace DesktopWidgets.Classes
                                 viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
                             break;
                         default:
-                            checkBounds.Add(GetCenterBounds());
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
                             break;
                     }
                     switch (_settings.VerticalAlignment)
@@ -154,7 +157,8 @@ namespace DesktopWidgets.Classes
                                 _settings.MouseBounds));
                             break;
                         default:
-                            checkBounds.Add(GetCenterBounds());
+                            if (_settings.CenterBoundsOnNonSidedDock)
+                                checkBounds.Add(GetCenterBounds());
                             break;
                     }
                 }
