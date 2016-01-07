@@ -95,72 +95,80 @@ namespace DesktopWidgets.Classes
                 if (_settings.StretchBounds)
                 {
                     var monitorBounds = MonitorHelper.GetMonitorBounds(_settings.Monitor);
-                    switch (_settings.HorizontalAlignment)
-                    {
-                        case HorizontalAlignment.Left:
-                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, _settings.MouseBounds,
-                                monitorBounds.Height));
-                            break;
-                        case HorizontalAlignment.Right:
-                            checkBounds.Add(new Rect(monitorBounds.Left + _view.ActualWidth - _settings.MouseBounds,
-                                monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
-                            break;
-                        default:
-                            if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
-                            break;
-                    }
-                    switch (_settings.VerticalAlignment)
-                    {
-                        case VerticalAlignment.Top:
-                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
-                                _settings.MouseBounds));
-                            break;
-                        case VerticalAlignment.Bottom:
-                            checkBounds.Add(new Rect(monitorBounds.Left,
-                                monitorBounds.Top + _view.ActualHeight - _settings.MouseBounds, monitorBounds.Width,
-                                _settings.MouseBounds));
-                            break;
-                        default:
-                            if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
-                            break;
-                    }
+                    if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
+                        _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Horizontal)
+                        switch (_settings.HorizontalAlignment)
+                        {
+                            case HorizontalAlignment.Left:
+                                checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, _settings.MouseBounds,
+                                    monitorBounds.Height));
+                                break;
+                            case HorizontalAlignment.Right:
+                                checkBounds.Add(new Rect(monitorBounds.Left + _view.ActualWidth - _settings.MouseBounds,
+                                    monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
+                                break;
+                            default:
+                                if (_settings.CenterBoundsOnNonSidedDock)
+                                    checkBounds.Add(GetCenterBounds());
+                                break;
+                        }
+                    if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
+                        _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Vertical)
+                        switch (_settings.VerticalAlignment)
+                        {
+                            case VerticalAlignment.Top:
+                                checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
+                                    _settings.MouseBounds));
+                                break;
+                            case VerticalAlignment.Bottom:
+                                checkBounds.Add(new Rect(monitorBounds.Left,
+                                    monitorBounds.Top + _view.ActualHeight - _settings.MouseBounds, monitorBounds.Width,
+                                    _settings.MouseBounds));
+                                break;
+                            default:
+                                if (_settings.CenterBoundsOnNonSidedDock)
+                                    checkBounds.Add(GetCenterBounds());
+                                break;
+                        }
                 }
                 else
                 {
                     var viewBounds = _view.GetBounds();
-                    switch (_settings.HorizontalAlignment)
-                    {
-                        case HorizontalAlignment.Left:
-                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
-                                viewBounds.Height));
-                            break;
-                        case HorizontalAlignment.Right:
-                            checkBounds.Add(new Rect(viewBounds.Left + _view.ActualWidth - _settings.MouseBounds,
-                                viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
-                            break;
-                        default:
-                            if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
-                            break;
-                    }
-                    switch (_settings.VerticalAlignment)
-                    {
-                        case VerticalAlignment.Top:
-                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
-                                _settings.MouseBounds));
-                            break;
-                        case VerticalAlignment.Bottom:
-                            checkBounds.Add(new Rect(viewBounds.Left,
-                                viewBounds.Top + _view.ActualHeight - _settings.MouseBounds, viewBounds.Width,
-                                _settings.MouseBounds));
-                            break;
-                        default:
-                            if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
-                            break;
-                    }
+                    if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
+                        _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Horizontal)
+                        switch (_settings.HorizontalAlignment)
+                        {
+                            case HorizontalAlignment.Left:
+                                checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
+                                    viewBounds.Height));
+                                break;
+                            case HorizontalAlignment.Right:
+                                checkBounds.Add(new Rect(viewBounds.Left + _view.ActualWidth - _settings.MouseBounds,
+                                    viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
+                                break;
+                            default:
+                                if (_settings.CenterBoundsOnNonSidedDock)
+                                    checkBounds.Add(GetCenterBounds());
+                                break;
+                        }
+                    if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
+                        _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Vertical)
+                        switch (_settings.VerticalAlignment)
+                        {
+                            case VerticalAlignment.Top:
+                                checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
+                                    _settings.MouseBounds));
+                                break;
+                            case VerticalAlignment.Bottom:
+                                checkBounds.Add(new Rect(viewBounds.Left,
+                                    viewBounds.Top + _view.ActualHeight - _settings.MouseBounds, viewBounds.Width,
+                                    _settings.MouseBounds));
+                                break;
+                            default:
+                                if (_settings.CenterBoundsOnNonSidedDock)
+                                    checkBounds.Add(GetCenterBounds());
+                                break;
+                        }
                 }
             }
 

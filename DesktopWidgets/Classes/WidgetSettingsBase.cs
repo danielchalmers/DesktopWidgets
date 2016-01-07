@@ -292,5 +292,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Full Bounds On Non-Sided Dock")]
         public bool CenterBoundsOnNonSidedDock { get; set; } = true;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Mouse Bounds Detection Axis")]
+        public MouseBoundsDetectionAxis MouseBoundsDetectionAxis { get; set; } = MouseBoundsDetectionAxis.Both;
     }
 }

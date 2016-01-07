@@ -82,4 +82,11 @@
         Preset,
         Taskbar
     }
+
+    public enum MouseBoundsDetectionAxis
+    {
+        Both,
+        Vertical,
+        Horizontal
+    }
 }
