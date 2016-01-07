@@ -41,7 +41,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             var newTime = _settings.UpdateInterval > 0
                 ? _settings.UpdateInterval
-                : (1000 - DateTime.Now.Millisecond);
+                : 1000 - DateTime.Now.Millisecond;
             _clockUpdateTimer.Interval = TimeSpan.FromMilliseconds(newTime);
             if (_clockUpdateTimer.IsEnabled)
             {

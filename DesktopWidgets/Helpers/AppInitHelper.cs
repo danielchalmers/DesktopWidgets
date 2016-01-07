@@ -55,7 +55,7 @@ namespace DesktopWidgets.Helpers
                 App.UpdateScheduler = new TaskScheduler();
                 App.UpdateScheduler.ScheduleTask(() =>
                     UpdateHelper.CheckForUpdatesAsync(true),
-                    (Settings.Default.CheckForUpdates && UpdateHelper.IsUpdateable),
+                    Settings.Default.CheckForUpdates && UpdateHelper.IsUpdateable,
                     TimeSpan.FromMinutes(Settings.Default.UpdateCheckIntervalMinutes));
                 App.UpdateScheduler.Start();
             }

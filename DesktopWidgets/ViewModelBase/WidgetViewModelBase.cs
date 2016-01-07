@@ -190,11 +190,11 @@ namespace DesktopWidgets.ViewModelBase
             {
                 case HorizontalAlignment.Stretch:
                 case HorizontalAlignment.Left:
-                    return (monitorRect.Left) + Settings.DockOffset.X;
+                    return monitorRect.Left + Settings.DockOffset.X;
                 case HorizontalAlignment.Center:
-                    return (monitorRect.Right/2 - ActualWidth/2) + Settings.DockOffset.X;
+                    return monitorRect.Right/2 - ActualWidth/2 + Settings.DockOffset.X;
                 case HorizontalAlignment.Right:
-                    return (monitorRect.Right - ActualWidth) - Settings.DockOffset.X;
+                    return monitorRect.Right - ActualWidth - Settings.DockOffset.X;
             }
             return double.NaN;
         }
@@ -211,11 +211,11 @@ namespace DesktopWidgets.ViewModelBase
             {
                 case VerticalAlignment.Stretch:
                 case VerticalAlignment.Top:
-                    return (monitorRect.Top) + Settings.DockOffset.Y;
+                    return monitorRect.Top + Settings.DockOffset.Y;
                 case VerticalAlignment.Center:
-                    return (monitorRect.Bottom/2 - ActualHeight/2) + Settings.DockOffset.Y;
+                    return monitorRect.Bottom/2 - ActualHeight/2 + Settings.DockOffset.Y;
                 case VerticalAlignment.Bottom:
-                    return (monitorRect.Bottom - ActualHeight) - Settings.DockOffset.Y;
+                    return monitorRect.Bottom - ActualHeight - Settings.DockOffset.Y;
             }
             return double.NaN;
         }

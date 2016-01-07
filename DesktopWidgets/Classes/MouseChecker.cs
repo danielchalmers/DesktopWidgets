@@ -75,7 +75,7 @@ namespace DesktopWidgets.Classes
         {
             var viewBounds = _view.GetBounds();
             return new Rect(viewBounds.Left - _settings.MouseBounds, viewBounds.Top - _settings.MouseBounds,
-                viewBounds.Width + (_settings.MouseBounds*2), viewBounds.Height + (_settings.MouseBounds*2));
+                viewBounds.Width + _settings.MouseBounds*2, viewBounds.Height + _settings.MouseBounds*2);
         }
 
         private bool IsMouseInMouseBounds()
@@ -102,7 +102,7 @@ namespace DesktopWidgets.Classes
                                 monitorBounds.Height));
                             break;
                         case HorizontalAlignment.Right:
-                            checkBounds.Add(new Rect((monitorBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
+                            checkBounds.Add(new Rect(monitorBounds.Left + _view.ActualWidth - _settings.MouseBounds,
                                 monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
                             break;
                         default:
@@ -117,7 +117,7 @@ namespace DesktopWidgets.Classes
                             break;
                         case VerticalAlignment.Bottom:
                             checkBounds.Add(new Rect(monitorBounds.Left,
-                                (monitorBounds.Top + _view.ActualHeight) - _settings.MouseBounds, monitorBounds.Width,
+                                monitorBounds.Top + _view.ActualHeight - _settings.MouseBounds, monitorBounds.Width,
                                 _settings.MouseBounds));
                             break;
                         default:
@@ -135,7 +135,7 @@ namespace DesktopWidgets.Classes
                                 viewBounds.Height));
                             break;
                         case HorizontalAlignment.Right:
-                            checkBounds.Add(new Rect((viewBounds.Left + _view.ActualWidth) - _settings.MouseBounds,
+                            checkBounds.Add(new Rect(viewBounds.Left + _view.ActualWidth - _settings.MouseBounds,
                                 viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
                             break;
                         default:
@@ -150,7 +150,7 @@ namespace DesktopWidgets.Classes
                             break;
                         case VerticalAlignment.Bottom:
                             checkBounds.Add(new Rect(viewBounds.Left,
-                                (viewBounds.Top + _view.ActualHeight) - _settings.MouseBounds, viewBounds.Width,
+                                viewBounds.Top + _view.ActualHeight - _settings.MouseBounds, viewBounds.Width,
                                 _settings.MouseBounds));
                             break;
                         default:
@@ -222,7 +222,7 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (!(_settings.Ignore00XY && (Control.MousePosition.X == 0 && Control.MousePosition.Y == 0)))
+            if (!(_settings.Ignore00XY && Control.MousePosition.X == 0 && Control.MousePosition.Y == 0))
             {
                 if (IsShowable())
                 {

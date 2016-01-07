@@ -27,7 +27,7 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            return value is bool && ((bool) value) ? True : False;
+            return value is bool && (bool) value ? True : False;
         }
 
         public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -198,7 +198,7 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            return ((bool) value) ? "Stop" : "Start";
+            return (bool) value ? "Stop" : "Start";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -244,7 +244,7 @@ namespace DesktopWidgets.Classes
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
             var newValue = (ShortcutContentMode) value;
-            return (newValue == ShortcutContentMode.Icon || newValue == ShortcutContentMode.Both)
+            return newValue == ShortcutContentMode.Icon || newValue == ShortcutContentMode.Both
                 ? Visibility.Visible
                 : Visibility.Collapsed;
         }
@@ -262,7 +262,7 @@ namespace DesktopWidgets.Classes
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
             var newValue = (ShortcutContentMode) value;
-            return (newValue == ShortcutContentMode.Text || newValue == ShortcutContentMode.Both)
+            return newValue == ShortcutContentMode.Text || newValue == ShortcutContentMode.Both
                 ? Visibility.Visible
                 : Visibility.Collapsed;
         }
@@ -630,7 +630,7 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             var val1 = (bool) value[0];
             var val2 = (string) value[1];
-            return val1 || (string.IsNullOrWhiteSpace(val2) || !File.Exists(val2))
+            return val1 || string.IsNullOrWhiteSpace(val2) || !File.Exists(val2)
                 ? Visibility.Collapsed
                 : Visibility.Visible;
         }

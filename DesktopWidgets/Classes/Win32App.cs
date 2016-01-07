@@ -12,7 +12,7 @@ namespace DesktopWidgets.Classes
     public class Win32App
     {
         private const int WS_EX_TRANSPARENT = 0x00000020;
-        private const int GWL_EXSTYLE = (-20);
+        private const int GWL_EXSTYLE = -20;
 
         public Win32App(IntPtr value)
         {
@@ -66,8 +66,8 @@ namespace DesktopWidgets.Classes
             if (NativeMethods.GetClassName(hwnd, className, maxChars) > 0)
             {
                 var cName = className.ToString();
-                return (cName == "Progman" || cName == "WorkerW" || hwnd.Equals(NativeMethods.GetDesktopWindow()) ||
-                        hwnd.Equals(NativeMethods.GetShellWindow()));
+                return cName == "Progman" || cName == "WorkerW" || hwnd.Equals(NativeMethods.GetDesktopWindow()) ||
+                       hwnd.Equals(NativeMethods.GetShellWindow());
             }
             return false;
         }

@@ -40,6 +40,6 @@ namespace DesktopWidgets.Helpers
             private readonly uint dwAttributes;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)] private readonly string szDisplayName;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)] private readonly string szTypeName;
-        };
+        }
     }
 }

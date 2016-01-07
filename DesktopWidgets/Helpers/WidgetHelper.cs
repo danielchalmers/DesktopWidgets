@@ -43,7 +43,7 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             var index = App.WidgetsSettingsStore.Widgets.IndexOf(settings);
-            var name = (settings.Name == "" ? $"Widget {index + 1}" : settings.Name);
+            var name = settings.Name == "" ? $"Widget {index + 1}" : settings.Name;
             return $"{name} ({id.GetFriendlyName()})";
         }
 
