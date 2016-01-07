@@ -1,11 +1,9 @@
 ﻿{0} ({1}).
 
+Source Code: {3}
+Changes: {4}
+Issues: {5}
 
-Links & Credit:
- Issues: {2}
- Changelog: {3}
+Icon made by {6}
 
- Icon made by Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
-
-
-{4}
+{2}

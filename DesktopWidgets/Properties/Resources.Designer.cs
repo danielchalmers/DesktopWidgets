@@ -116,6 +116,24 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets.
+        /// </summary>
+        public static string GitHubMainPage {
+            get {
+                return ResourceManager.GetString("GitHubMainPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/).
+        /// </summary>
+        public static string IconCredit {
+            get {
+                return ResourceManager.GetString("IconCredit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 16ef0da0f3d3cf8813b68caff516db23.
         /// </summary>
         public static string OpenWeatherMapAPIKey {
