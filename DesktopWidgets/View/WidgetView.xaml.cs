@@ -221,7 +221,7 @@ namespace DesktopWidgets.View
         private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
-                Settings.DragWidgetToMove)
+                Settings.DragToMove)
                 DragMove();
         }
 

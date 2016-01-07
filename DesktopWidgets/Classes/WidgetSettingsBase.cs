@@ -169,7 +169,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Behavior")]
         [DisplayName("Drag Widget To Move")]
-        public bool DragWidgetToMove { get; set; } = false;
+        public bool DragToMove { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Drag Titlebar To Move")]
