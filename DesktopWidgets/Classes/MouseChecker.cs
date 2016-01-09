@@ -107,7 +107,7 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(monitorBounds.Left + _view.ActualWidth - _settings.MouseBounds,
+                            checkBounds.Add(new Rect(monitorBounds.Right - _settings.MouseBounds,
                                 monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
@@ -129,7 +129,7 @@ namespace DesktopWidgets.Classes
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
                             checkBounds.Add(new Rect(monitorBounds.Left,
-                                monitorBounds.Top + _view.ActualHeight - _settings.MouseBounds, monitorBounds.Width,
+                                monitorBounds.Bottom - _settings.MouseBounds, monitorBounds.Width,
                                 _settings.MouseBounds));
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
@@ -154,7 +154,7 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(viewBounds.Left + _view.ActualWidth - _settings.MouseBounds,
+                            checkBounds.Add(new Rect(viewBounds.Right - _settings.MouseBounds,
                                 viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
@@ -176,7 +176,7 @@ namespace DesktopWidgets.Classes
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
                             checkBounds.Add(new Rect(viewBounds.Left,
-                                viewBounds.Top + _view.ActualHeight - _settings.MouseBounds, viewBounds.Width,
+                                viewBounds.Bottom - _settings.MouseBounds, viewBounds.Width,
                                 _settings.MouseBounds));
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
