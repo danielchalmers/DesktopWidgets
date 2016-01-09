@@ -5,8 +5,11 @@
         xmlns:local="clr-namespace:DesktopWidgets" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:DesktopWidgets.Properties" mc:Ignorable="d"
         Title="Options"
-        Width="600" Height="550"
-        ResizeMode="CanMinimize"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=OptionsWidth, Mode=TwoWay}"
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=OptionsHeight, Mode=TwoWay}"
+        MinWidth="450"
+        MinHeight="350"
+        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>

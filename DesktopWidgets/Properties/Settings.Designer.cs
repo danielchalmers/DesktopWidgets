@@ -359,5 +359,29 @@ namespace DesktopWidgets.Properties {
                 this["IgnoreAppBars"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public double OptionsWidth {
+            get {
+                return ((double)(this["OptionsWidth"]));
+            }
+            set {
+                this["OptionsWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("550")]
+        public double OptionsHeight {
+            get {
+                return ((double)(this["OptionsHeight"]));
+            }
+            set {
+                this["OptionsHeight"] = value;
+            }
+        }
     }
 }
