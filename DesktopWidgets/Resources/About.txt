@@ -1,9 +1,11 @@
-﻿{0} ({1}).
+﻿{0} ({1})
+
 
 Source Code: {3}
 Changes: {4}
 Issues: {5}
 
 Icon made by {6}
+
 
 {2}
