@@ -127,15 +127,8 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="{Binding Settings.TitlebarNameHorizontalAlignment}" />
-            <Setter Property="Visibility">
-                <Setter.Value>
-                    <MultiBinding Converter="{StaticResource MultiBooleanToVisibilityConverter}">
-                        <Binding Path="Settings.Name"
-                                 Converter="{StaticResource StringToIsNotNullOrWhiteSpaceConverter}" />
-                        <Binding Path="Settings.ShowTitlebarName" />
-                    </MultiBinding>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Visibility"
+                    Value="{Binding Settings.ShowTitlebarName, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
