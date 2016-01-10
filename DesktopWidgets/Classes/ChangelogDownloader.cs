@@ -57,7 +57,7 @@ namespace DesktopWidgets.Classes
             var changelogData = ParseChangelogJson(DownloadChangelogJson());
 
             var stringBuilder = new StringBuilder();
-            foreach (var changelog in changelogData)
+            foreach (var changelog in changelogData.OrderByDescending(x => x.PublishDate))
             {
                 stringBuilder.Append($"{changelog.Version} ({changelog.PublishDate.ToString("yyyy-MM-dd")})");
                 foreach (
