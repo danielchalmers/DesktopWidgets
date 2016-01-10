@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-      mc:Ignorable="d" Title="General">
+      mc:Ignorable="d" Title="Options">
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
@@ -29,13 +29,17 @@
 
         <xctk:PropertyGrid
             SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
-            AutoGenerateProperties="False"
-            IsCategorized="False"
-            ShowSortOptions="False">
+            AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}">
             <xctk:PropertyGrid.PropertyDefinitions>
-                <xctk:PropertyDefinition TargetProperties="RunOnStartup" />
-                <xctk:PropertyDefinition TargetProperties="CheckForUpdates" />
-                <xctk:PropertyDefinition TargetProperties="AutoUpdate" />
+                <xctk:PropertyDefinition Category="General"
+                                         TargetProperties="RunOnStartup"
+                                         DisplayName="Run on Startup" />
+                <xctk:PropertyDefinition Category="General"
+                                         TargetProperties="CheckForUpdates"
+                                         DisplayName="Check for Updates" />
+                <xctk:PropertyDefinition Category="General"
+                                         TargetProperties="AutoUpdate"
+                                         DisplayName="Silent Auto-Update" />
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
     </DockPanel>
