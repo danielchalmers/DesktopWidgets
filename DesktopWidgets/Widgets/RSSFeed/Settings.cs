@@ -46,6 +46,10 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("Publish Date Format")]
         public string PublishDateFormat { get; set; } = "";
 
+        [Category("Feed")]
+        [DisplayName("Category Filter")]
+        public string CategoryFilter { get; set; }
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On New Headline")]
         public bool OpenOnEvent { get; set; } = true;

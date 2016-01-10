@@ -97,6 +97,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
                 var newItem in
                     feed.Items.Where(
                         x =>
+                            (string.IsNullOrWhiteSpace(Settings.CategoryFilter) ||
+                             Settings.CategoryFilter.Split(',').ToList().Any(y => x.Categories.Any(z => z.Name == y))) &&
                             (string.IsNullOrWhiteSpace(Settings.RssFeedTitleWhitelist) ||
                              whitelist.Any(y => x.Title.Text.Contains(y))) &&
                             (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
