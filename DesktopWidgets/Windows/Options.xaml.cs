@@ -24,18 +24,11 @@ namespace DesktopWidgets.Windows
         {
             InitializeComponent();
 
-            Pages = new ObservableCollection<Page>();
-            Pages.Add(new General());
-            if (Settings.Default.EnableAdvancedMode)
-                Pages.Add(new Advanced());
-            Pages.Add(new About());
-
             Settings.Default.Save();
-
             DataContext = this;
         }
 
-        public ObservableCollection<Page> Pages { get; }
+        public ObservableCollection<Page> Pages { get; } = new ObservableCollection<Page> {new General(), new About()};
 
         public Page CurrentPage
         {

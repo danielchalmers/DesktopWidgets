@@ -7,16 +7,36 @@
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" Title="General">
-    <xctk:PropertyGrid
-        SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
-        AutoGenerateProperties="False"
-        IsCategorized="False"
-        ShowSortOptions="False">
-        <xctk:PropertyGrid.PropertyDefinitions>
-            <xctk:PropertyDefinition TargetProperties="RunOnStartup" />
-            <xctk:PropertyDefinition TargetProperties="CheckForUpdates" />
-            <xctk:PropertyDefinition TargetProperties="AutoUpdate" />
-            <xctk:PropertyDefinition TargetProperties="EnableAdvancedMode" />
-        </xctk:PropertyGrid.PropertyDefinitions>
-    </xctk:PropertyGrid>
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10"
+                    Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5,0,5,0" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="Width" Value="75" />
+                    <Setter Property="Height" Value="23" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Import..." Click="btnImport_OnClick" />
+            <Button Content="Export..." Click="btnExport_OnClick" />
+            <Button Content="Defaults..." Click="btnDefaults_OnClick" />
+        </StackPanel>
+
+        <xctk:PropertyGrid
+            SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
+            AutoGenerateProperties="False"
+            IsCategorized="False"
+            ShowSortOptions="False">
+            <xctk:PropertyGrid.PropertyDefinitions>
+                <xctk:PropertyDefinition TargetProperties="RunOnStartup" />
+                <xctk:PropertyDefinition TargetProperties="CheckForUpdates" />
+                <xctk:PropertyDefinition TargetProperties="AutoUpdate" />
+            </xctk:PropertyGrid.PropertyDefinitions>
+        </xctk:PropertyGrid>
+    </DockPanel>
 </Page>
