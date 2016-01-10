@@ -14,8 +14,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("Refresh Interval")]
         public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromHours(1);
 
-        [Category("General")]
-        [DisplayName("RSS Feed URL")]
+        [Category("Feed")]
+        [DisplayName("URL")]
         public string RssFeedUrl { get; set; }
 
         [Category("Behavior")]
