@@ -13,7 +13,7 @@
         Title="Manage Widgets"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsHeight, Mode=TwoWay}"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsWidth, Mode=TwoWay}"
-        MinHeight="482" MinWidth="535"
+        MinHeight="502" MinWidth="535"
         ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModel:ManageWidgetsViewModel />
@@ -61,15 +61,16 @@
                 </Style>
             </StackPanel.Resources>
             <Button Content="New..." Command="{Binding NewWidget}" IsEnabled="True" />
+            <Button Content="Import..." Command="{Binding ImportWidget}" IsEnabled="True" />
+            <Button Visibility="Hidden" />
             <Button Content="Edit..." Command="{Binding EditWidget}" />
             <Button
                 Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
                 Command="{Binding DisableWidget}" />
-            <Button Content="Clone" Command="{Binding CloneWidget}" />
             <Button Content="Remove..." Command="{Binding RemoveWidget}" />
             <Button Visibility="Hidden" />
+            <Button Content="Clone" Command="{Binding CloneWidget}" />
             <Button Content="Export..." Command="{Binding ExportWidget}" />
-            <Button Content="Import..." Command="{Binding ImportWidget}" IsEnabled="True" />
         </StackPanel>
 
         <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">
