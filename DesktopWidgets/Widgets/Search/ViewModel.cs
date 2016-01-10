@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Windows;
 using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
@@ -41,11 +40,6 @@ namespace DesktopWidgets.Widgets.Search
 
         private void GoExecute()
         {
-            if (string.IsNullOrWhiteSpace(Settings.BaseUrl))
-            {
-                Popup.Show("You must set up a base URL first.", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
-            }
             var searchText = SearchText;
             SearchText = string.Empty;
             Process.Start($"{Settings.BaseUrl}{searchText}{Settings.URLSuffix}");
