@@ -13,5 +13,9 @@ namespace DesktopWidgets.Widgets.Search
         [Category("General")]
         [DisplayName("Base URL")]
         public string BaseUrl { get; set; }
+
+        [Category("General")]
+        [DisplayName("URL Suffix")]
+        public string URLSuffix { get; set; }
     }
 }
