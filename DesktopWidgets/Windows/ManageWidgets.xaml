@@ -67,6 +67,9 @@
                 Command="{Binding DisableWidget}" />
             <Button Content="Clone" Command="{Binding CloneWidget}" />
             <Button Content="Remove..." Command="{Binding RemoveWidget}" />
+            <Button Visibility="Hidden" />
+            <Button Content="Export..." Command="{Binding ExportWidget}" />
+            <Button Content="Import..." Command="{Binding ImportWidget}" IsEnabled="True" />
         </StackPanel>
 
         <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">

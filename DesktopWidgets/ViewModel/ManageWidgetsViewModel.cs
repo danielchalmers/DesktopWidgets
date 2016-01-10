@@ -1,7 +1,9 @@
 ﻿using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 
 namespace DesktopWidgets.ViewModel
 {
@@ -17,6 +19,8 @@ namespace DesktopWidgets.ViewModel
             DisableWidget = new RelayCommand(DisableWidgetExecute);
             RemoveWidget = new RelayCommand(RemoveWidgetExecute);
             CloneWidget = new RelayCommand(CloneWidgetExecute);
+            ExportWidget = new RelayCommand(ExportWidgetExecute);
+            ImportWidget = new RelayCommand(ImportWidgetExecute);
         }
 
         public WidgetSettingsBase SelectedWidget
@@ -43,6 +47,10 @@ namespace DesktopWidgets.ViewModel
         public ICommand RemoveWidget { get; private set; }
 
         public ICommand CloneWidget { get; private set; }
+
+        public ICommand ExportWidget { get; private set; }
+
+        public ICommand ImportWidget { get; private set; }
 
 
         private void DeselectAllExecute()
@@ -75,6 +83,30 @@ namespace DesktopWidgets.ViewModel
         {
             SelectedWidget.Identifier.Clone();
             DeselectAllExecute();
+        }
+
+        private void ExportWidgetExecute()
+        {
+            var dialog = new InputBox("Export Widget",
+                JsonConvert.SerializeObject(SelectedWidget, SettingsHelper.JsonSerializerSettings));
+            dialog.ShowDialog();
+        }
+
+        private void ImportWidgetExecute()
+        {
+            var dialog = new InputBox("Import Widget");
+            dialog.ShowDialog();
+            if (dialog.Cancelled)
+                return;
+            try
+            {
+                WidgetHelper.Import(JsonConvert.DeserializeObject(dialog.InputData,
+                    SettingsHelper.JsonSerializerSettings));
+            }
+            catch
+            {
+                Popup.Show("Import failed. Data may be corrupt.");
+            }
         }
     }
 }

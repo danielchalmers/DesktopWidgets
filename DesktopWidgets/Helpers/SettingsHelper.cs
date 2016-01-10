@@ -15,7 +15,7 @@ namespace DesktopWidgets.Helpers
 {
     internal static class SettingsHelper
     {
-        private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All
         };

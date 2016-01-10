@@ -326,5 +326,14 @@ namespace DesktopWidgets.Helpers
             }
             return newWidget?.Identifier;
         }
+
+        public static void Import(object widgetData)
+        {
+            var newWidget = SettingsHelper.CloneObject(widgetData) as WidgetSettingsBase;
+            if (newWidget == null)
+                return;
+            newWidget.Identifier.GenerateNewGuid();
+            AddNewWidget(newWidget);
+        }
     }
 }
