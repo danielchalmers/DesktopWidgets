@@ -108,7 +108,7 @@ namespace DesktopWidgets.View
                 {
                     _introTimer.Stop();
                     if (hideOnFinish)
-                        _mouseChecker.Hide();
+                        _mouseChecker.Hide(checkHideStatus: true);
                     finishAction?.Invoke();
                 };
             }
