@@ -102,7 +102,9 @@ namespace DesktopWidgets.Widgets.RSSFeed
                             (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
                              blacklist.All(y => !x.Title.Text.Contains(y))))
                         .Select(
-                            item => new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri)))
+                            item =>
+                                new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
+                                    item.PublishDate.DateTime.ToString(Settings.PublishDateFormat))))
             {
                 FeedItems.Add(newItem);
                 if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))

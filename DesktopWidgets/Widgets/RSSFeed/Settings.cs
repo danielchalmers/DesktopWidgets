@@ -34,6 +34,18 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("New Headline Sound Volume")]
         public double EventSoundVolume { get; set; } = 1.0;
 
+        [Category("Style")]
+        [DisplayName("Show Publish Date")]
+        public bool ShowPublishDate { get; set; }
+
+        [Category("Style")]
+        [DisplayName("Publish Date Font Size")]
+        public int PublishDateFontSize { get; set; } = 11;
+
+        [Category("Style")]
+        [DisplayName("Publish Date Format")]
+        public string PublishDateFormat { get; set; } = "";
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On New Headline")]
         public bool OpenOnEvent { get; set; } = true;

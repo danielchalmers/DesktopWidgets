@@ -6,6 +6,7 @@
              xmlns:classes="clr-namespace:DesktopWidgets.Classes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:rssFeed="clr-namespace:DesktopWidgets.Widgets.RSSFeed"
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -17,7 +18,7 @@
         <ItemsControl ItemsSource="{Binding FeedItems}"
                       Visibility="{Binding ShowHelp, Converter={StaticResource BoolToCollapsedVisibilityConverter}}">
             <ItemsControl.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate DataType="rssFeed:FeedItem">
                     <StackPanel>
                         <TextBlock TextTrimming="CharacterEllipsis">
                             <Hyperlink NavigateUri="{Binding Hyperlink}">
@@ -31,6 +32,9 @@
                                 <TextBlock Text="{Binding Title}" />
                             </Hyperlink>
                         </TextBlock>
+                        <TextBlock Text="{Binding PublishDate}"
+                                   Visibility="{Binding DataContext.Settings.ShowPublishDate, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                   FontSize="{Binding DataContext.Settings.PublishDateFontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
