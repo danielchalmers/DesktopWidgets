@@ -82,6 +82,9 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
             ShowHelp = false;
 
+            var whitelist = Settings.RssFeedTitleWhitelist.Split(',').ToList();
+            var blacklist = Settings.RssFeedTitleBlacklist.Split(',').ToList();
+
             var reader = XmlReader.Create(Settings.RssFeedUrl);
             var feed = SyndicationFeed.Load(reader);
             reader.Close();
@@ -92,8 +95,14 @@ namespace DesktopWidgets.Widgets.RSSFeed
             var newHeadlineFound = false;
             foreach (
                 var newItem in
-                    feed.Items.Select(
-                        item => new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri)))
+                    feed.Items.Where(
+                        x =>
+                            (string.IsNullOrWhiteSpace(Settings.RssFeedTitleWhitelist) ||
+                             whitelist.Any(y => x.Title.Text.Contains(y))) &&
+                            (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
+                             blacklist.All(y => !x.Title.Text.Contains(y))))
+                        .Select(
+                            item => new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri)))
             {
                 FeedItems.Add(newItem);
                 if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))

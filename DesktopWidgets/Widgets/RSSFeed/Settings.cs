@@ -18,6 +18,14 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("URL")]
         public string RssFeedUrl { get; set; }
 
+        [Category("Feed")]
+        [DisplayName("Title Whitelist")]
+        public string RssFeedTitleWhitelist { get; set; }
+
+        [Category("Feed")]
+        [DisplayName("Title Blacklist")]
+        public string RssFeedTitleBlacklist { get; set; }
+
         [Category("Behavior")]
         [DisplayName("New Headline Sound Path")]
         public string EventSoundPath { get; set; }
