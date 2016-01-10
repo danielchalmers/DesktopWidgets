@@ -135,7 +135,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (Settings.OpenOnEvent)
                     Settings.Identifier.GetView()
                         .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                            false, false, delegate
+                            false, false, false, delegate
                             {
                                 _isShowing = false;
                                 HandleDirectoryChange();

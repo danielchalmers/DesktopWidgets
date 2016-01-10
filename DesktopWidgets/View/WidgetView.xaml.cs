@@ -95,7 +95,7 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
-        public void ShowIntro(int duration = -1, bool reversable = true, bool hideOnFinish = true,
+        public void ShowIntro(int duration = -1, bool reversable = true, bool activate = false, bool hideOnFinish = true,
             Action finishAction = null)
         {
             if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
@@ -123,7 +123,11 @@ namespace DesktopWidgets.View
             {
                 _mouseChecker.KeepOpenForIntro = true;
                 if (duration != 0)
+                {
                     _introTimer.Start();
+                    if (activate)
+                        Activate();
+                }
             }
         }
 
