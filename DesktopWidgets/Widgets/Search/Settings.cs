@@ -11,8 +11,8 @@ namespace DesktopWidgets.Widgets.Search
         }
 
         [Category("General")]
-        [DisplayName("Base URL")]
-        public string BaseUrl { get; set; }
+        [DisplayName("URL Prefix")]
+        public string BaseUrl { get; set; } = "http://";
 
         [Category("General")]
         [DisplayName("URL Suffix")]
