@@ -104,6 +104,10 @@ namespace DesktopWidgets.Helpers
                             case UpdatePrompt.UpdateMode.UpdateNow:
                                 try
                                 {
+                                    var progressDialog = new UpdateProgress(info.AvailableVersion);
+                                    ad.UpdateProgressChanged +=
+                                        (sender, args) => progressDialog.CurrentProgress = args.ProgressPercentage;
+                                    progressDialog.Show();
                                     ad.UpdateAsync();
                                 }
                                 catch (DeploymentDownloadException dde)

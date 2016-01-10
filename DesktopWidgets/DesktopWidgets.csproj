@@ -295,6 +295,9 @@
     <Compile Include="Classes\WidgetSettingsBase.cs" />
     <Compile Include="Helpers\WidgetHelper.cs" />
     <Compile Include="Helpers\SnapHelper.cs" />
+    <Compile Include="Windows\UpdateProgress.xaml.cs">
+      <DependentUpon>UpdateProgress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\UpdatePrompt.xaml.cs">
       <DependentUpon>UpdatePrompt.xaml</DependentUpon>
     </Compile>
@@ -435,6 +438,10 @@
     <Page Include="View\WidgetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdateProgress.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\UpdatePrompt.xaml">
       <Generator>MSBuild:Compile</Generator>
