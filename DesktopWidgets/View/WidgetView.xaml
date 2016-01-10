@@ -79,6 +79,7 @@
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
             <Setter Property="FontSize" Value="{Binding Settings.FontSize}" />
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
+            <Setter Property="FontWeight" Value="{Binding Settings.FontWeight}" />
             <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">

@@ -296,5 +296,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Mouse Bounds Detection Axis")]
         public MouseBoundsDetectionAxis MouseBoundsDetectionAxis { get; set; } = MouseBoundsDetectionAxis.Both;
+
+        [Category("Style")]
+        [DisplayName("Font Weight")]
+        public FontWeight FontWeight { get; set; } = FontWeights.Normal;
     }
 }
