@@ -333,15 +333,6 @@ namespace DesktopWidgets.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
-        public int RoundedCornersRadius {
-            get {
-                return ((int)(this["RoundedCornersRadius"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int SnapMargin {
             get {
                 return ((int)(this["SnapMargin"]));

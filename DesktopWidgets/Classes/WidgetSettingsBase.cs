@@ -279,6 +279,14 @@ namespace DesktopWidgets.Classes
         [DisplayName("Rounded Corners")]
         public bool RoundedCorners { get; set; } = true;
 
+        [Category("Style (Titlebar)")]
+        [DisplayName("Corner Radius")]
+        public CornerRadius TitlebarCornerRadius { get; set; } = new CornerRadius(4);
+
+        [Category("Style")]
+        [DisplayName("Corner Radius")]
+        public CornerRadius CornerRadius { get; set; } = new CornerRadius(4);
+
         [Category("Style (Titlebar Name)")]
         [DisplayName("Allow Editing")]
         public bool TitlebarNameAllowEditing { get; set; } = true;
