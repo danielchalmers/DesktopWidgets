@@ -61,8 +61,6 @@
         <MenuItem
             Header="{Binding Settings.Disabled, Converter={StaticResource BoolToEnableDisableNameConverter}}"
             Command="{Binding ToggleEnableWidget}" />
-        <Separator />
-        <CollectionContainer Collection="{StaticResource MainMenuItems}" />
     </CompositeCollection>
     <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
     <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
