@@ -1,9 +1,12 @@
 ﻿using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight.Command;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
 namespace DesktopWidgets.ViewModelBase
 {
@@ -259,20 +262,30 @@ namespace DesktopWidgets.ViewModelBase
         {
             var previousAlignment = Settings.HorizontalAlignment;
             var previousIsDocked = Settings.IsDocked;
+            var view = _id.GetView();
             Settings.HorizontalAlignment = horizontalAlignment;
             Settings.IsDocked = true;
-            _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
-            _id.GetView()?.ShowIntro(reversable: false);
+            if (view != null)
+            {
+                Settings.Monitor = Screen.FromHandle(new WindowInteropHelper(view).Handle).DeviceName;
+                view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
+                view.ShowIntro(reversable: false);
+            }
         }
 
         private void WidgetDockVerticalExecute(VerticalAlignment verticalAlignment)
         {
             var previousAlignment = Settings.VerticalAlignment;
             var previousIsDocked = Settings.IsDocked;
+            var view = _id.GetView();
             Settings.VerticalAlignment = verticalAlignment;
             Settings.IsDocked = true;
-            _id.GetView()?.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
-            _id.GetView()?.ShowIntro(reversable: false);
+            if (view != null)
+            {
+                Settings.Monitor = Screen.FromHandle(new WindowInteropHelper(view).Handle).DeviceName;
+                view.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
+                view.ShowIntro(reversable: false);
+            }
         }
 
         private void WidgetUndockExecute()
