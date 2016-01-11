@@ -7,7 +7,7 @@ namespace DesktopWidgets.Classes
 {
     public class WidgetSettingsBase
     {
-        [DisplayName("Disable")]
+        [DisplayName("Disabled")]
         public bool Disabled { get; set; } = false;
 
         [DisplayName("Internal Identifier")]
@@ -104,7 +104,7 @@ namespace DesktopWidgets.Classes
         public bool ForceOnTop { get; set; } = false;
 
         [Category("Style (Border)")]
-        [DisplayName("Show")]
+        [DisplayName("Visible")]
         public bool BorderEnabled { get; set; } = true;
 
         [Category("Behavior")]
@@ -184,11 +184,11 @@ namespace DesktopWidgets.Classes
         public double BackgroundImageOpacity { get; set; } = 1.0;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Show Intro")]
+        [DisplayName("Intro Enabled")]
         public bool ShowIntro { get; set; } = true;
 
         [Category("Style")]
-        [DisplayName("Show Context Menu")]
+        [DisplayName("Context Menu Enabled")]
         public bool ShowContextMenu { get; set; } = true;
 
         [Category("Style")]
@@ -232,11 +232,11 @@ namespace DesktopWidgets.Classes
         public bool FullscreenActivation { get; set; } = false;
 
         [Category("Style (Titlebar)")]
-        [DisplayName("Show Titlebar")]
+        [DisplayName("Visible")]
         public bool ShowTitlebar { get; set; } = true;
 
         [Category("Style (Titlebar)")]
-        [DisplayName("Show Menu Button")]
+        [DisplayName("Menu Button Visible")]
         public bool ShowTitlebarMenuButton { get; set; } = true;
 
         [Category("Style (Titlebar)")]
@@ -248,7 +248,7 @@ namespace DesktopWidgets.Classes
         public double TitlebarBackgroundOpacity { get; set; } = 0.5;
 
         [Category("Style (Titlebar Name)")]
-        [DisplayName("Show Titlebar Name")]
+        [DisplayName("Titlebar Name Visible")]
         public bool ShowTitlebarName { get; set; } = true;
 
         [Category("Style (Titlebar Name)")]
