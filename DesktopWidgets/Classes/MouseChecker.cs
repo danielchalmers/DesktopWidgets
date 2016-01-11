@@ -94,7 +94,7 @@ namespace DesktopWidgets.Classes
             {
                 if (_settings.StretchBounds)
                 {
-                    var monitorBounds = MonitorHelper.GetMonitorBounds(_settings.Monitor);
+                    var monitorBounds = ScreenHelper.GetScreenBounds(_settings.Monitor);
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
                         _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Horizontal)
                     {

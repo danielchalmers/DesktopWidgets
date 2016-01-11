@@ -12,7 +12,7 @@ namespace DesktopWidgets.Helpers
         private static List<Rect> GetSnapBounds(this Window window, bool useWidgetsBounds)
         {
             var bounds = new List<Rect>();
-            bounds.AddRange(MonitorHelper.GetAllMonitorBounds());
+            bounds.AddRange(ScreenHelper.GetAllScreenBounds());
             if (useWidgetsBounds)
                 bounds.AddRange(
                     App.WidgetViews.Where(x => !x.Settings.Disabled && !x.Equals(window))

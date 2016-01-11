@@ -99,7 +99,7 @@ namespace DesktopWidgets.ViewModelBase
             get
             {
                 return double.IsNaN(Settings.MaxWidth)
-                    ? MonitorHelper.GetMonitorBounds(Settings.Monitor).Width
+                    ? ScreenHelper.GetScreenBounds(Settings.Monitor).Width
                     : Settings.MaxWidth;
             }
             set
@@ -117,7 +117,7 @@ namespace DesktopWidgets.ViewModelBase
             get
             {
                 return double.IsNaN(Settings.MaxHeight)
-                    ? MonitorHelper.GetMonitorBounds(Settings.Monitor).Height
+                    ? ScreenHelper.GetScreenBounds(Settings.Monitor).Height
                     : Settings.MaxHeight;
             }
             set
@@ -184,7 +184,7 @@ namespace DesktopWidgets.ViewModelBase
             {
                 return Settings.Left;
             }
-            var monitorRect = MonitorHelper.GetMonitorBounds(Settings.Monitor);
+            var monitorRect = ScreenHelper.GetScreenBounds(Settings.Monitor);
 
             switch (Settings.HorizontalAlignment)
             {
@@ -205,7 +205,7 @@ namespace DesktopWidgets.ViewModelBase
             {
                 return Settings.Top;
             }
-            var monitorRect = MonitorHelper.GetMonitorBounds(Settings.Monitor);
+            var monitorRect = ScreenHelper.GetScreenBounds(Settings.Monitor);
 
             switch (Settings.VerticalAlignment)
             {

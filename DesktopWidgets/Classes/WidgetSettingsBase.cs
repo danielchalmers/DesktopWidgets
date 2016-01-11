@@ -89,7 +89,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Dock")]
         [DisplayName("Screen")]
-        public int Monitor { get; set; } = -1;
+        public string Monitor { get; set; }
 
         [Category("Style")]
         [DisplayName("Font Size")]

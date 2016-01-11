@@ -140,6 +140,7 @@
     <Compile Include="Classes\Hotkey.cs" />
     <Compile Include="Classes\HotkeyStore.cs" />
     <Compile Include="Classes\MediaPlayerStore.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Widgets\FolderWatcher\DirectoryWatcher.cs" />
     <Compile Include="Classes\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
@@ -175,7 +176,7 @@
     <Compile Include="Helpers\FileSystemHelper.cs" />
     <Compile Include="Helpers\IconHelper.cs" />
     <Compile Include="Helpers\LinkHelper.cs" />
-    <Compile Include="Helpers\MonitorHelper.cs" />
+    <Compile Include="Helpers\ScreenHelper.cs" />
     <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\RegistryHelper.cs" />
     <Compile Include="Helpers\UpdateHelper.cs" />

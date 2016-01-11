@@ -5,22 +5,12 @@ namespace DesktopWidgets.Helpers
 {
     internal static class FullScreenHelper
     {
-        public static bool DoesMonitorHaveFullscreenApp(Screen screen)
-        {
-            return Win32Helper.GetForegroundApp()
-                .IsFullScreen(screen);
-        }
+        private static bool DoesMonitorHaveFullscreenApp(Screen screen) => Win32Helper.GetForegroundApp()
+            .IsFullScreen(screen);
 
-        public static bool DoesMonitorHaveFullscreenApp(int index)
-        {
-            return DoesMonitorHaveFullscreenApp(index != -1
-                ? Screen.AllScreens[index]
-                : Screen.PrimaryScreen);
-        }
+        public static bool DoesMonitorHaveFullscreenApp(string deviceName)
+            => DoesMonitorHaveFullscreenApp(ScreenHelper.GetScreen(deviceName));
 
-        public static bool DoesAnyMonitorHaveFullscreenApp()
-        {
-            return Screen.AllScreens.Any(DoesMonitorHaveFullscreenApp);
-        }
+        public static bool DoesAnyMonitorHaveFullscreenApp() => Screen.AllScreens.Any(DoesMonitorHaveFullscreenApp);
     }
 }
