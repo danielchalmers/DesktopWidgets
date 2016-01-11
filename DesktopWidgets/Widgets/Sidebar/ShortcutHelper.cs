@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DesktopWidgets.Classes;
@@ -157,6 +158,9 @@ namespace DesktopWidgets.Widgets.Sidebar
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
             viewModel.Settings.Shortcuts.Remove(shortcut);
+            if (shortcut.HotKey != Key.None)
+                HotkeyStore.UnregisterHotkey(new Hotkey(shortcut.HotKey, shortcut.HotKeyModifiers,
+                    shortcut.HotKeyFullscreenActivation));
         }
 
         public static void Reset(this ViewModel viewModel, bool msg = false)

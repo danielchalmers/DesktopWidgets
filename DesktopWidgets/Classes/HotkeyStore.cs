@@ -29,6 +29,18 @@ namespace DesktopWidgets.Classes
             }
         }
 
+        public static void UnregisterHotkey(Hotkey hotkey)
+        {
+            try
+            {
+                HotkeyManager.Current.Remove($"{hotkey.Key}\\{hotkey.ModifierKeys}");
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
         private static void OnHotkey(object sender, HotkeyEventArgs e)
         {
             var keys = e.Name.Split('\\');
