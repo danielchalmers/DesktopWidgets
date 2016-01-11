@@ -25,7 +25,6 @@
         <SolidColorBrush x:Key="ButtonBrush" Color="{StaticResource ButtonColor}" />
         <SolidColorBrush x:Key="ButtonTextBrush" Color="{StaticResource ButtonTextColor}" />
 
-        <classes:BoolToThicknessConverter x:Key="BooleanToThicknessConverter" />
         <classes:ShowIconContentToVisibilityConverter x:Key="ShowIconContentToVisibilityConverter" />
         <classes:ShowTextContentToVisibilityConverter x:Key="ShowTextContentToVisibilityConverter" />
         <classes:ShortcutToImageConverter x:Key="ShortcutToImageConverter" />

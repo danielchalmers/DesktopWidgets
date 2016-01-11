@@ -16,7 +16,7 @@
         Closing="WidgetView_OnClosing"
         LocationChanged="WidgetView_OnLocationChanged">
     <Window.Resources>
-        <classes:BoolToThicknessConverter x:Key="BooleanToThicknessConverter" />
+        <classes:SettingsToThicknessConverter x:Key="SettingsToThicknessConverter" />
         <classes:MultiBoolToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
         <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
         <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
@@ -63,8 +63,14 @@
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
-            <Setter Property="BorderThickness"
-                    Value="{Binding Settings.BorderEnabled, Converter={StaticResource BooleanToThicknessConverter}}" />
+            <Setter Property="BorderThickness">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource SettingsToThicknessConverter}">
+                        <Binding Path="Settings.BorderEnabled" />
+                        <Binding Path="Settings.BorderThickness" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="WidgetBorderContainerStyle" TargetType="{x:Type Border}">

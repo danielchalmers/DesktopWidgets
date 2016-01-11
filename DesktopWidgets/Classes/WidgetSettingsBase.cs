@@ -308,5 +308,9 @@ namespace DesktopWidgets.Classes
         [Category("Style")]
         [DisplayName("Font Weight")]
         public FontWeight FontWeight { get; set; } = FontWeights.Normal;
+
+        [Category("Style (Border)")]
+        [DisplayName("Thickness")]
+        public Thickness BorderThickness { get; set; } = new Thickness(1);
     }
 }
