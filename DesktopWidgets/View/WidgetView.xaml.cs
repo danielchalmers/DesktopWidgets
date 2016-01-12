@@ -19,7 +19,6 @@ namespace DesktopWidgets.View
         private readonly MouseChecker _mouseChecker;
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
-        public readonly WidgetViewModelBase ViewModel;
         private DispatcherTimer _introTimer;
         private DispatcherTimer _onTopForceTimer;
         public bool IsRefreshRequired;
@@ -67,6 +66,8 @@ namespace DesktopWidgets.View
 
             _mouseChecker.Start();
         }
+
+        public WidgetViewModelBase ViewModel { get; set; }
 
         public bool IsContextMenuOpen => ViewModel.IsContextMenuOpen;
 
@@ -213,6 +214,7 @@ namespace DesktopWidgets.View
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
             _mouseChecker.Stop();
+            ViewModel = null;
             Settings.ScrollHorizontalOffset = MainContentContainer.ContentHorizontalOffset;
             Settings.ScrollVerticalOffset = MainContentContainer.ContentVerticalOffset;
         }
