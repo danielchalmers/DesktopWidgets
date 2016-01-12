@@ -32,6 +32,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             try
             {
                 var folder = _settings.WatchFolder;
+                if (string.IsNullOrWhiteSpace(folder) || !Directory.Exists(folder))
+                    return;
                 if (!_knownFilePaths.ContainsKey(folder))
                     _knownFilePaths.Add(folder, null);
                 var exclude = _settings.ExcludeFilter.Split('|');
