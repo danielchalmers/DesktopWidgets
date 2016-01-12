@@ -57,6 +57,8 @@ namespace DesktopWidgets.Helpers
                     !(AssemblyInfo.Version.Major != ForgetUpdateVersion.Major &&
                       ForgetUpdateVersion.Major == info.AvailableVersion.Major))
                 {
+                    if (auto && info.AvailableVersion == ForgetUpdateVersion)
+                        return;
                     var ad = ApplicationDeployment.CurrentDeployment;
                     ad.UpdateCompleted += delegate
                     {
@@ -79,8 +81,6 @@ namespace DesktopWidgets.Helpers
                         }
                         return;
                     }
-                    if (auto && info.AvailableVersion == ForgetUpdateVersion)
-                        return;
 
                     if (auto)
                     {
