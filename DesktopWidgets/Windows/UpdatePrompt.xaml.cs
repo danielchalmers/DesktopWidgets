@@ -117,7 +117,7 @@ namespace DesktopWidgets.Windows
             }
         }
 
-        public UpdateMode SelectedUpdateMode { get; private set; }
+        public UpdateMode SelectedUpdateMode { get; private set; } = UpdateMode.RemindLater;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
