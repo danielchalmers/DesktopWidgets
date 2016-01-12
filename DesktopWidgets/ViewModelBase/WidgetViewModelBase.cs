@@ -313,7 +313,9 @@ namespace DesktopWidgets.ViewModelBase
             if (Settings.OpenMode == OpenMode.Keyboard || Settings.OpenMode == OpenMode.MouseAndKeyboard)
                 HotkeyStore.RegisterHotkey(Settings.Identifier.Guid,
                     new Hotkey(Settings.HotKey, Settings.HotKeyModifiers, Settings.FullscreenActivation),
-                    () => _id.GetView()?.ShowIntro(activate: Settings.ActivateOnShow, reversable: true));
+                    () =>
+                        _id.GetView()?
+                            .ShowIntro(activate: Settings.ActivateOnShow, reversable: Settings.ToggleIntroOnHotkey));
         }
     }
 }

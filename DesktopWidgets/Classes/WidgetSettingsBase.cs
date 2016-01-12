@@ -312,5 +312,9 @@ namespace DesktopWidgets.Classes
         [Category("Style (Border)")]
         [DisplayName("Thickness")]
         public Thickness BorderThickness { get; set; } = new Thickness(1);
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Toggle Intro On Hotkey")]
+        public bool ToggleIntroOnHotkey { get; set; } = true;
     }
 }
