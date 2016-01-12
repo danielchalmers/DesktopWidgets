@@ -176,11 +176,22 @@
         </Border>
         <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">
             <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
-                <StackPanel Orientation="Horizontal">
-                    <Border x:Name="FrameContainerLeft" Visibility="Collapsed" />
-                    <StackPanel>
-                        <Border x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
-                        <ScrollViewer x:Name="MainContentContainer" Style="{StaticResource ScrollViewerContainerStyle}"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" x:Name="FrameContainerLeft" Visibility="Collapsed" />
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
+                        <ScrollViewer Grid.Row="1" x:Name="MainContentContainer"
+                                      Style="{StaticResource ScrollViewerContainerStyle}"
                                       Width="{Binding Width}"
                                       Height="{Binding Height}">
                             <ScrollViewer.MaxWidth>
@@ -221,10 +232,10 @@
                                 </MultiBinding>
                             </ScrollViewer.MaxHeight>
                         </ScrollViewer>
-                        <Border x:Name="FrameContainerBottom" Visibility="Collapsed" Margin="5" />
-                    </StackPanel>
-                    <Border x:Name="FrameContainerRight" Visibility="Collapsed" />
-                </StackPanel>
+                        <Border Grid.Row="2" x:Name="FrameContainerBottom" Visibility="Collapsed" Margin="5" />
+                    </Grid>
+                    <Border Grid.Column="2" x:Name="FrameContainerRight" Visibility="Collapsed" />
+                </Grid>
             </Border>
         </Border>
     </StackPanel>
