@@ -9,22 +9,18 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
+        <Grid x:Key="FrameRight">
+            <Button Content="Go" Command="{Binding Go}"
+                    IsEnabled="{Binding SearchText, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}"
+                    Width="32" />
+        </Grid>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="KeyUp">
-                    <command:EventToCommand Command="{Binding OnKeyUp}" PassEventArgsToCommand="True"
-                                            IsEnabled="{Binding SearchText, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
-        <Button Grid.Column="1" Content="Go" Command="{Binding Go}"
-                IsEnabled="{Binding SearchText, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}"
-                Width="32" />
-    </Grid>
+    <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="KeyUp">
+                <command:EventToCommand Command="{Binding OnKeyUp}" PassEventArgsToCommand="True"
+                                        IsEnabled="{Binding SearchText, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+    </TextBox>
 </UserControl>

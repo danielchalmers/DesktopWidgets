@@ -56,6 +56,18 @@ namespace DesktopWidgets.View
                 FrameContainerBottom.Child = frameBottom;
                 FrameContainerBottom.Visibility = Visibility.Visible;
             }
+            var frameLeft = userControl.TryFindResource("FrameLeft") as Grid;
+            if (frameLeft != null)
+            {
+                FrameContainerLeft.Child = frameLeft;
+                FrameContainerLeft.Visibility = Visibility.Visible;
+            }
+            var frameRight = userControl.TryFindResource("FrameRight") as Grid;
+            if (frameRight != null)
+            {
+                FrameContainerRight.Child = frameRight;
+                FrameContainerRight.Visibility = Visibility.Visible;
+            }
 
             _mouseChecker = new MouseChecker(this, Settings);
             UpdateUi(true);
