@@ -316,6 +316,8 @@ namespace DesktopWidgets.ViewModelBase
                     () =>
                         _id.GetView()?
                             .ShowIntro(activate: Settings.ActivateOnShow, reversable: Settings.ToggleIntroOnHotkey));
+            else
+                HotkeyStore.RemoveHotkey(_id.Guid);
         }
     }
 }
