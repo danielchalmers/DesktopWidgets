@@ -311,7 +311,7 @@ namespace DesktopWidgets.ViewModelBase
         public virtual void ReloadHotKeys()
         {
             if (Settings.OpenMode == OpenMode.Keyboard || Settings.OpenMode == OpenMode.MouseAndKeyboard)
-                HotkeyStore.RegisterHotkey(
+                HotkeyStore.RegisterHotkey(Settings.Identifier.Guid,
                     new Hotkey(Settings.HotKey, Settings.HotKeyModifiers, Settings.FullscreenActivation),
                     () => _id.GetView()?.ShowIntro(activate: Settings.ActivateOnShow, reversable: true));
         }

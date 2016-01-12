@@ -10,14 +10,21 @@ namespace DesktopWidgets.Classes
 {
     internal static class HotkeyStore
     {
-        private static readonly Dictionary<Hotkey, Action> Hotkeys = new Dictionary<Hotkey, Action>();
+        private static readonly Dictionary<Guid, Tuple<Hotkey, Action>> Hotkeys =
+            new Dictionary<Guid, Tuple<Hotkey, Action>>();
 
-        public static void RegisterHotkey(Hotkey hotkey, Action callback)
+        public static void RegisterHotkey(Guid guid, Hotkey hotkey, Action callback)
         {
-            if (Hotkeys.ContainsKey(hotkey))
-                Hotkeys[hotkey] = callback;
+            var dictionaryHotkey = new Tuple<Hotkey, Action>(hotkey, callback);
+            if (Hotkeys.ContainsKey(guid))
+            {
+                Hotkeys[guid] = dictionaryHotkey;
+                UnregisterHotkey(guid);
+            }
             else
-                Hotkeys.Add(hotkey, callback);
+            {
+                Hotkeys.Add(guid, dictionaryHotkey);
+            }
 
             try
             {
@@ -29,7 +36,24 @@ namespace DesktopWidgets.Classes
             }
         }
 
-        public static void UnregisterHotkey(Hotkey hotkey)
+        public static void RemoveHotkey(Guid guid)
+        {
+            Hotkeys.Remove(guid);
+        }
+
+        private static void UnregisterHotkey(Guid guid)
+        {
+            if (!Hotkeys.ContainsKey(guid))
+                return;
+            if (
+                Hotkeys.Count(
+                    x =>
+                        x.Value.Item1.Key == Hotkeys[guid].Item1.Key &&
+                        x.Value.Item1.ModifierKeys == Hotkeys[guid].Item1.ModifierKeys) == 0)
+                UnregisterHotkey(Hotkeys[guid].Item1);
+        }
+
+        private static void UnregisterHotkey(Hotkey hotkey)
         {
             try
             {
@@ -50,11 +74,14 @@ namespace DesktopWidgets.Classes
             Enum.TryParse(keys[0], out key);
             ModifierKeys modifierKeys;
             Enum.TryParse(keys[1], out modifierKeys);
-            foreach (var hotkey in Hotkeys.Where(x => x.Key.Key == key && x.Key.ModifierKeys == modifierKeys))
+            foreach (
+                var hotkey in Hotkeys.Where(x => x.Value.Item1.Key == key && x.Value.Item1.ModifierKeys == modifierKeys)
+                )
             {
-                if (!hotkey.Key.WorksIfForegroundIsFullscreen && FullScreenHelper.DoesAnyMonitorHaveFullscreenApp())
+                if (!hotkey.Value.Item1.WorksIfForegroundIsFullscreen &&
+                    FullScreenHelper.DoesAnyMonitorHaveFullscreenApp())
                     continue;
-                hotkey.Value?.Invoke();
+                hotkey.Value.Item2?.Invoke();
             }
         }
     }

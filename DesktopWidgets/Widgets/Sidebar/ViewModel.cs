@@ -75,7 +75,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public void ReloadShortcutHotKey(Shortcut shortcut)
         {
-            HotkeyStore.RegisterHotkey(new Hotkey(shortcut.HotKey,
+            HotkeyStore.RegisterHotkey(shortcut.Guid, new Hotkey(shortcut.HotKey,
                 shortcut.HotKeyModifiers, shortcut.HotKeyFullscreenActivation), delegate { this.Execute(shortcut); });
         }
 

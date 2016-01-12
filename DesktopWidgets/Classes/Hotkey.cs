@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace DesktopWidgets.Classes
 {
@@ -12,7 +11,6 @@ namespace DesktopWidgets.Classes
             WorksIfForegroundIsFullscreen = worksIfForegroundIsFullscreen;
         }
 
-        private Guid Guid { get; set; } = Guid.NewGuid();
         public Key Key { get; set; }
         public ModifierKeys ModifierKeys { get; set; }
         public bool WorksIfForegroundIsFullscreen { get; set; }

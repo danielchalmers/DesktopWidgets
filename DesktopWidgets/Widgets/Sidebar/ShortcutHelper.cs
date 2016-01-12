@@ -159,8 +159,7 @@ namespace DesktopWidgets.Widgets.Sidebar
                 return;
             viewModel.Settings.Shortcuts.Remove(shortcut);
             if (shortcut.HotKey != Key.None)
-                HotkeyStore.UnregisterHotkey(new Hotkey(shortcut.HotKey, shortcut.HotKeyModifiers,
-                    shortcut.HotKeyFullscreenActivation));
+                HotkeyStore.RemoveHotkey(shortcut.Guid);
         }
 
         public static void Reset(this ViewModel viewModel, bool msg = false)
