@@ -26,7 +26,9 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ListBox x:Name="lsShortcuts" Margin="15" MouseDown="listBox_MouseDown">
+        <ListBox Margin="15" MouseDown="listBox_MouseDown"
+                 ItemsSource="{Binding ViewModel.Settings.Shortcuts}"
+                 SelectedItem="{Binding SelectedShortcut}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=., Converter={StaticResource ShortcutToManageNameConverter}}" />
@@ -63,8 +65,7 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" IsDefault="True" IsCancel="True" />
+            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" IsDefault="True" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>

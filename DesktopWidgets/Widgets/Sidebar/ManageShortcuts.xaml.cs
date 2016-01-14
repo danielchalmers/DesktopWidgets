@@ -1,6 +1,8 @@
 ﻿#region
 
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 #endregion
@@ -10,18 +12,33 @@ namespace DesktopWidgets.Widgets.Sidebar
     /// <summary>
     ///     Interaction logic for ManageShortcuts.xaml
     /// </summary>
-    public partial class ManageShortcuts : Window
+    public partial class ManageShortcuts : Window, INotifyPropertyChanged
     {
-        private readonly ViewModel _viewModel;
+        private Shortcut _selectedShortcut;
 
         public ManageShortcuts(ViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = viewModel;
-            lsShortcuts.ItemsSource = viewModel.Settings.Shortcuts;
+            ViewModel = viewModel;
+            DataContext = this;
         }
 
-        private Shortcut SelectedShortcut => (Shortcut) lsShortcuts.SelectedItem;
+        public ViewModel ViewModel { get; }
+
+        public Shortcut SelectedShortcut
+        {
+            get { return _selectedShortcut; }
+            set
+            {
+                if (_selectedShortcut != value)
+                {
+                    _selectedShortcut = value;
+                    RaisePropertyChanged(nameof(SelectedShortcut));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
@@ -30,22 +47,22 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private void listBox_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            lsShortcuts.UnselectAll();
+            (sender as ListBox)?.UnselectAll();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.New();
+            ViewModel.New();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.Remove(SelectedShortcut, true);
+            ViewModel.Remove(SelectedShortcut, true);
         }
 
         private void btnOptions_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.OpenProperties(SelectedShortcut);
+            ViewModel.OpenProperties(SelectedShortcut);
         }
 
         private void btnMoveBrowse_Click(object sender, RoutedEventArgs e)
@@ -55,22 +72,27 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)
         {
-            lsShortcuts.SelectedItem = _viewModel.MoveUp(SelectedShortcut);
+            SelectedShortcut = ViewModel.MoveUp(SelectedShortcut);
         }
 
         private void btnMoveDown_Click(object sender, RoutedEventArgs e)
         {
-            lsShortcuts.SelectedItem = _viewModel.MoveDown(SelectedShortcut);
+            SelectedShortcut = ViewModel.MoveDown(SelectedShortcut);
         }
 
         private void btnMoveTop_Click(object sender, RoutedEventArgs e)
         {
-            lsShortcuts.SelectedItem = _viewModel.MoveUp(SelectedShortcut, true);
+            SelectedShortcut = ViewModel.MoveUp(SelectedShortcut, true);
         }
 
         private void btnMoveBottom_Click(object sender, RoutedEventArgs e)
         {
-            lsShortcuts.SelectedItem = _viewModel.MoveDown(SelectedShortcut, true);
+            SelectedShortcut = ViewModel.MoveDown(SelectedShortcut, true);
+        }
+
+        protected void RaisePropertyChanged(string prop)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
