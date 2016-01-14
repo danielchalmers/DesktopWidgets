@@ -11,9 +11,11 @@ namespace DesktopWidgets.OptionsPages
     /// </summary>
     public partial class About : Page
     {
-        public About()
+        public About(string title, string contents = "")
         {
             InitializeComponent();
+            Title = title;
+            txtAbout.Text = contents;
         }
     }
 }

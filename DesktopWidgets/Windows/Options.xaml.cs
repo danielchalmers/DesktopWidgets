@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using DesktopWidgets.Classes;
 using DesktopWidgets.OptionsPages;
 using DesktopWidgets.Properties;
 
@@ -26,9 +27,16 @@ namespace DesktopWidgets.Windows
 
             Settings.Default.Save();
             DataContext = this;
+
+            UpdateChangelog();
         }
 
-        public ObservableCollection<Page> Pages { get; } = new ObservableCollection<Page> {new General(), new About()};
+        public ObservableCollection<Page> Pages { get; } = new ObservableCollection<Page>
+        {
+            new General(),
+            new About("About", AssemblyInfo.CustomDescription),
+            new About("Changelog")
+        };
 
         public Page CurrentPage
         {
@@ -62,6 +70,17 @@ namespace DesktopWidgets.Windows
         {
             Settings.Default.Reload();
             Close();
+        }
+
+        private void UpdateChangelog()
+        {
+            ChangelogDownloader.GetCachedChangelog(e =>
+            {
+                foreach (
+                    var about in
+                        Pages.OfType<About>().Where(x => x.Title == "Changelog"))
+                    about.txtAbout.Text = e;
+            });
         }
     }
 }

@@ -40,6 +40,9 @@
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="AutoUpdate"
                                          DisplayName="Silent Auto-Update" />
+
+                <xctk:PropertyDefinition TargetProperties="Changelog"
+                                         IsBrowsable="False" />
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
     </DockPanel>

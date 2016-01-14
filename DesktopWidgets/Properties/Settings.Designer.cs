@@ -374,5 +374,17 @@ namespace DesktopWidgets.Properties {
                 this["OptionsHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Changelog {
+            get {
+                return ((string)(this["Changelog"]));
+            }
+            set {
+                this["Changelog"] = value;
+            }
+        }
     }
 }

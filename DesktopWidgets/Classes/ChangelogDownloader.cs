@@ -35,9 +35,18 @@ namespace DesktopWidgets.Classes
             _updateTextAction("Downloading changelog...");
         }
 
+        public static void GetCachedChangelog(Action<string> updateTextAction)
+        {
+            if (string.IsNullOrEmpty(Settings.Default.Changelog))
+                new ChangelogDownloader().GetChangelog(updateTextAction);
+            else
+                updateTextAction(Settings.Default.Changelog);
+        }
+
         private void Worker_Completed(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
             _updateTextAction(_updateText);
+            Settings.Default.Changelog = _updateText;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs doWorkEventArgs)

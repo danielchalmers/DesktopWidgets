@@ -17,7 +17,7 @@
         <TextBlock Grid.Row="0"
                    Text="{x:Static properties:Resources.AppName}" FontSize="24" VerticalAlignment="Center"
                    HorizontalAlignment="Left" />
-        <TextBox Grid.Row="1" Text="{x:Static classes:AssemblyInfo.CustomDescription}" Background="Transparent"
+        <TextBox x:Name="txtAbout" Grid.Row="1" Background="Transparent"
                  BorderThickness="0" IsReadOnly="True"
                  TextWrapping="Wrap" Height="Auto" VerticalAlignment="Center" />
     </Grid>

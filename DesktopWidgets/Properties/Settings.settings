@@ -94,5 +94,8 @@
     <Setting Name="OptionsHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">550</Value>
     </Setting>
+    <Setting Name="Changelog" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
