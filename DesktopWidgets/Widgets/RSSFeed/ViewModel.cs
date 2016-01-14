@@ -82,9 +82,6 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
             ShowHelp = false;
 
-            var whitelist = Settings.RssFeedTitleWhitelist.Split(',').ToList();
-            var blacklist = Settings.RssFeedTitleBlacklist.Split(',').ToList();
-
             var reader = XmlReader.Create(Settings.RssFeedUrl);
             var feed = SyndicationFeed.Load(reader);
             reader.Close();
@@ -98,11 +95,11 @@ namespace DesktopWidgets.Widgets.RSSFeed
                     feed.Items.Where(
                         x =>
                             (string.IsNullOrWhiteSpace(Settings.CategoryFilter) ||
-                             Settings.CategoryFilter.Split(',').ToList().Any(y => x.Categories.Any(z => z.Name == y))) &&
+                             Settings.CategoryFilter.Split(',').Any(y => x.Categories.Any(z => z.Name == y))) &&
                             (string.IsNullOrWhiteSpace(Settings.RssFeedTitleWhitelist) ||
-                             whitelist.Any(y => x.Title.Text.Contains(y))) &&
+                             Settings.RssFeedTitleWhitelist.Split(',').Any(y => x.Title.Text.Contains(y))) &&
                             (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
-                             blacklist.All(y => !x.Title.Text.Contains(y))))
+                             Settings.RssFeedTitleBlacklist.Split(',').All(y => !x.Title.Text.Contains(y))))
                         .Select(
                             item =>
                                 new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
