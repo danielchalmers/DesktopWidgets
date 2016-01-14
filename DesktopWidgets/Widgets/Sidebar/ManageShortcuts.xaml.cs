@@ -55,22 +55,22 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private void btnMoveUp_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.MoveUp(SelectedShortcut);
+            lsShortcuts.SelectedItem = _viewModel.MoveUp(SelectedShortcut);
         }
 
         private void btnMoveDown_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.MoveDown(SelectedShortcut);
+            lsShortcuts.SelectedItem = _viewModel.MoveDown(SelectedShortcut);
         }
 
         private void btnMoveTop_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.MoveUp(SelectedShortcut, true);
+            lsShortcuts.SelectedItem = _viewModel.MoveUp(SelectedShortcut, true);
         }
 
         private void btnMoveBottom_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel.MoveDown(SelectedShortcut, true);
+            lsShortcuts.SelectedItem = _viewModel.MoveDown(SelectedShortcut, true);
         }
     }
 }

@@ -178,36 +178,28 @@ namespace DesktopWidgets.Widgets.Sidebar
                 listBox.Items.Add(shortcut.Name);
         }
 
-        public static void MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
+        public static object MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
         {
             var index = viewModel.Settings.Shortcuts.IndexOf(shortcut);
             if (toEnd)
             {
-                viewModel.Settings.Shortcuts.Swap(index, 0);
+                return viewModel.Settings.Shortcuts.Swap(index, 0);
             }
-            else
-            {
-                if (index == 0)
-                    viewModel.MoveDown(shortcut, true);
-                else
-                    viewModel.Settings.Shortcuts.Swap(index, index - 1);
-            }
+            if (index == 0)
+                return viewModel.MoveDown(shortcut, true);
+            return viewModel.Settings.Shortcuts.Swap(index, index - 1);
         }
 
-        public static void MoveDown(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
+        public static object MoveDown(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
         {
             var index = viewModel.Settings.Shortcuts.IndexOf(shortcut);
             if (toEnd)
             {
-                viewModel.Settings.Shortcuts.Swap(index, viewModel.Settings.Shortcuts.Count - 1);
+                return viewModel.Settings.Shortcuts.Swap(index, viewModel.Settings.Shortcuts.Count - 1);
             }
-            else
-            {
-                if (viewModel.Settings.Shortcuts.Count - 1 < index + 1)
-                    viewModel.MoveUp(shortcut, true);
-                else
-                    viewModel.Settings.Shortcuts.Swap(index, index + 1);
-            }
+            if (viewModel.Settings.Shortcuts.Count - 1 < index + 1)
+                return viewModel.MoveUp(shortcut, true);
+            return viewModel.Settings.Shortcuts.Swap(index, index + 1);
         }
 
         private static ImageSource GetShortcutIcon(Shortcut shortcut)
