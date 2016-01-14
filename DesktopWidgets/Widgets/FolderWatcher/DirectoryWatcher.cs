@@ -39,7 +39,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 var exclude = _settings.ExcludeFilter.Split('|');
                 if (string.IsNullOrWhiteSpace(_settings.IncludeFilter))
                     _settings.IncludeFilter = "*.*";
-                var files = Directory.GetFiles(folder, _settings.IncludeFilter);
+                var files = Directory.EnumerateFiles(folder, _settings.IncludeFilter,
+                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).ToList();
                 foreach (var file in files)
                 {
                     if (_knownFilePaths[folder] == null || _knownFilePaths[folder].Any(x => x == file))
