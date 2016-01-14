@@ -2,6 +2,6 @@
 {
     public static class Metadata
     {
-        public const string FriendlyName = "RSS Headlines";
+        public const string FriendlyName = "RSS Feed";
     }
 }
