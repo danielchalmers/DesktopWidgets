@@ -12,12 +12,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
                    Text="{x:Static properties:Resources.AppName}" FontSize="24" VerticalAlignment="Center"
                    HorizontalAlignment="Left" />
-        <TextBox x:Name="txtAbout" Grid.Row="1" Background="Transparent"
+        <TextBox x:Name="txtAbout" Grid.Row="2" Background="Transparent"
                  BorderThickness="0" IsReadOnly="True"
                  TextWrapping="Wrap" Height="Auto" VerticalAlignment="Center" />
     </Grid>
