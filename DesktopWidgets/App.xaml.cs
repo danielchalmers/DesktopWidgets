@@ -29,7 +29,7 @@ namespace DesktopWidgets
         public static SaveTimer SaveTimer;
         public static TaskScheduler UpdateScheduler;
         public static List<string> Arguments;
-        public static bool UpdateWaiting;
+        public static Version UpdateWaiting;
 
         public App()
         {

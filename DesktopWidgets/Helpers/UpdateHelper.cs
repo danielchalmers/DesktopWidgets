@@ -84,10 +84,13 @@ namespace DesktopWidgets.Helpers
 
                     if (auto)
                     {
-                        App.UpdateWaiting = true;
-                        TrayIconHelper.ShowBalloon(
-                            $"An update is available ({info.AvailableVersion}).\nClick to view update details.",
-                            BalloonIcon.Info);
+                        if (App.UpdateWaiting != info.AvailableVersion)
+                        {
+                            App.UpdateWaiting = info.AvailableVersion;
+                            TrayIconHelper.ShowBalloon(
+                                $"An update is available ({info.AvailableVersion}).\nClick to view update details.",
+                                BalloonIcon.Info);
+                        }
                     }
                     else
                     {
@@ -138,9 +141,9 @@ namespace DesktopWidgets.Helpers
 
         public static void HandleUpdate()
         {
-            if (App.UpdateWaiting)
+            if (App.UpdateWaiting != null)
             {
-                App.UpdateWaiting = false;
+                App.UpdateWaiting = null;
                 CheckForUpdatesAsync(false);
             }
         }
