@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace DesktopWidgets.Classes
 {
@@ -11,5 +12,13 @@ namespace DesktopWidgets.Classes
         [Category("Style")]
         [DisplayName("Time Format")]
         public string TimeFormat { get; set; } = "hh:mm:ss";
+
+        [Category("General")]
+        [DisplayName("Time Offset (Positive)")]
+        public TimeSpan TimeOffsetPositive { get; set; }
+
+        [Category("General")]
+        [DisplayName("Time Offset (Negative)")]
+        public TimeSpan TimeOffsetNegative { get; set; }
     }
 }
