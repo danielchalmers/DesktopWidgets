@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.ServiceModel.Syndication;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -81,6 +84,31 @@ namespace DesktopWidgets.Widgets.RSSFeed
                         false);
         }
 
+        private void DownloadFeed(Action<SyndicationFeed> finishAction)
+        {
+            try
+            {
+                using (var wc = new WebClient())
+                {
+                    wc.DownloadStringCompleted +=
+                        (sender, args) =>
+                        {
+                            var sr = new StringReader(args.Result);
+                            var reader = XmlReader.Create(sr);
+                            var feed = SyndicationFeed.Load(reader);
+                            reader.Close();
+                            sr.Close();
+                            finishAction(feed);
+                        };
+                    wc.DownloadStringAsync(new Uri(Settings.RssFeedUrl));
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
         private void UpdateFeed()
         {
             _lastFeedUrl = Settings.RssFeedUrl;
@@ -92,47 +120,40 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
             ShowHelp = false;
 
-            SyndicationFeed feed = null;
-            try
+            DownloadFeed(feed =>
             {
-                var reader = XmlReader.Create(Settings.RssFeedUrl);
-                feed = SyndicationFeed.Load(reader);
-                reader.Close();
-            }
-            catch
-            {
-                // ignored
-            }
-            if (feed?.Items == null)
-                return;
-
-            var prevFeed = FeedItems.ToList();
-            FeedItems.Clear();
-            var newHeadlineFound = false;
-            foreach (
-                var newItem in
-                    feed.Items.Where(
-                        x =>
-                            (string.IsNullOrWhiteSpace(Settings.CategoryFilter) ||
-                             Settings.CategoryFilter.Split(',').Any(y => x.Categories.Any(z => z.Name == y))) &&
-                            (string.IsNullOrWhiteSpace(Settings.RssFeedTitleWhitelist) ||
-                             Settings.RssFeedTitleWhitelist.Split(',').Any(y => x.Title.Text.Contains(y))) &&
-                            (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
-                             Settings.RssFeedTitleBlacklist.Split(',').All(y => !x.Title.Text.Contains(y))))
-                        .Select(
-                            item =>
-                                new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
-                                    (item.PublishDate.DateTime + Settings.PublishDateTimeOffsetPositive -
-                                     Settings.PublishDateTimeOffsetNegative).ToString(Settings.PublishDateFormat))))
-            {
-                FeedItems.Add(newItem);
-                if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))
-                    newHeadlineFound = true;
-                if (FeedItems.Count >= Settings.MaxHeadlines && Settings.MaxHeadlines > 0)
-                    break;
-            }
-            if (prevFeed.Count > 0 && newHeadlineFound)
-                NewHeadlineFound();
+                if (feed?.Items != null)
+                {
+                    var prevFeed = FeedItems.ToList();
+                    FeedItems.Clear();
+                    var newHeadlineFound = false;
+                    foreach (
+                        var newItem in
+                            feed.Items.Where(
+                                x =>
+                                    (string.IsNullOrWhiteSpace(Settings.CategoryFilter) ||
+                                     Settings.CategoryFilter.Split(',').Any(y => x.Categories.Any(z => z.Name == y))) &&
+                                    (string.IsNullOrWhiteSpace(Settings.RssFeedTitleWhitelist) ||
+                                     Settings.RssFeedTitleWhitelist.Split(',').Any(y => x.Title.Text.Contains(y))) &&
+                                    (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
+                                     Settings.RssFeedTitleBlacklist.Split(',').All(y => !x.Title.Text.Contains(y))))
+                                .Select(
+                                    item =>
+                                        new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
+                                            (item.PublishDate.DateTime + Settings.PublishDateTimeOffsetPositive -
+                                             Settings.PublishDateTimeOffsetNegative).ToString(Settings.PublishDateFormat)))
+                        )
+                    {
+                        FeedItems.Add(newItem);
+                        if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))
+                            newHeadlineFound = true;
+                        if (FeedItems.Count >= Settings.MaxHeadlines && Settings.MaxHeadlines > 0)
+                            break;
+                    }
+                    if (prevFeed.Count > 0 && newHeadlineFound)
+                        NewHeadlineFound();
+                }
+            });
         }
 
         private void NavigateHyperlinkExecute(RequestNavigateEventArgs e)
