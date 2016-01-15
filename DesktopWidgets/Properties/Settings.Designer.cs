@@ -386,5 +386,16 @@ namespace DesktopWidgets.Properties {
                 this["Changelog"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Version UpdateWaiting {
+            get {
+                return ((global::System.Version)(this["UpdateWaiting"]));
+            }
+            set {
+                this["UpdateWaiting"] = value;
+            }
+        }
     }
 }

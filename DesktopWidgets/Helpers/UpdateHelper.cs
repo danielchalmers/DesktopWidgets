@@ -84,9 +84,9 @@ namespace DesktopWidgets.Helpers
 
                     if (auto)
                     {
-                        if (App.UpdateWaiting != info.AvailableVersion)
+                        if (Settings.Default.UpdateWaiting != info.AvailableVersion)
                         {
-                            App.UpdateWaiting = info.AvailableVersion;
+                            Settings.Default.UpdateWaiting = info.AvailableVersion;
                             TrayIconHelper.ShowBalloon(
                                 $"An update is available ({info.AvailableVersion}).\nClick to view update details.",
                                 BalloonIcon.Info);
@@ -141,9 +141,9 @@ namespace DesktopWidgets.Helpers
 
         public static void HandleUpdate()
         {
-            if (App.UpdateWaiting != null)
+            if (Settings.Default.UpdateWaiting != null)
             {
-                App.UpdateWaiting = null;
+                Settings.Default.UpdateWaiting = null;
                 CheckForUpdatesAsync(false);
             }
         }
