@@ -53,6 +53,8 @@ namespace DesktopWidgets
 
             SystemEvents.SessionEnding += SystemEvents_OnSessionEnding;
             SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
+            
+            UpdateHelper.HandleUpdate();
         }
 
         private void SystemEvents_OnSessionEnding(object sender, SessionEndingEventArgs e)
