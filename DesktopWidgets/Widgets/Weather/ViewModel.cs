@@ -144,14 +144,23 @@ namespace DesktopWidgets.Widgets.Weather
                     unitType = "kelvin";
                     break;
             }
-            string json;
-            using (var wc = new WebClient())
-                json =
-                    wc.DownloadString(
-                        $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Resources.OpenWeatherMapAPIKey}");
-            var data = JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(json);
 
-            if (data?.main?.temp == null)
+            OpenWeatherMapApiResult data = null;
+            try
+            {
+                string json;
+                using (var wc = new WebClient())
+                    json =
+                        wc.DownloadString(
+                            $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Resources.OpenWeatherMapAPIKey}");
+                data = JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(json);
+            }
+            catch
+            {
+                // ignored
+            }
+
+            if (data?.main?.temp == null || data.weather.Count == 0)
                 return;
 
             Temperature = data.main.temp;
