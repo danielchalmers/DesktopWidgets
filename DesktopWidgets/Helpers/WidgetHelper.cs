@@ -217,7 +217,7 @@ namespace DesktopWidgets.Helpers
 
             var widgetView = new WidgetView(id, dataContext, userControl);
             App.WidgetViews.Add(widgetView);
-            widgetView.Show();
+            ((Window) widgetView).Show();
         }
 
         private static void AddNewWidget(string type)

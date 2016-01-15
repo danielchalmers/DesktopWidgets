@@ -26,8 +26,6 @@ namespace DesktopWidgets.View
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
-            HideOpacity();
-            Visibility = Visibility.Visible;
             Id = id;
             Settings = id.GetSettings();
             ViewModel = viewModel;
@@ -70,7 +68,7 @@ namespace DesktopWidgets.View
             }
 
             _mouseChecker = new MouseChecker(this, Settings);
-            UpdateUi(true);
+            UpdateUi(updateOpacity: false);
             IsRefreshRequired = true;
 
             if (!App.Arguments.Contains("-systemstartup"))
@@ -85,8 +83,6 @@ namespace DesktopWidgets.View
 
         public WidgetId Id { get; }
         public bool AnimationRunning { get; set; } = false;
-
-        public new bool IsVisible => !(Opacity < 1);
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -157,20 +153,27 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide();
         }
 
-        public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool? isDocked = null,
+        public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool updateOpacity = true,
+            bool? isDocked = null,
             HorizontalAlignment? dockHorizontalAlignment = null,
             VerticalAlignment? dockVerticalAlignment = null)
         {
             if (!IsVisible)
-                Refresh(resetContext, updateNonUi, false);
+                Refresh(resetContext, updateNonUi, false, updateOpacity);
             else
-                this.Animate(AnimationMode.Hide, null, () => Refresh(resetContext, updateNonUi, true), isDocked,
+                this.Animate(AnimationMode.Hide, null, () => Refresh(resetContext, updateNonUi, true, updateOpacity),
+                    isDocked,
                     dockHorizontalAlignment,
                     dockVerticalAlignment);
         }
 
-        private void Refresh(bool resetContext, bool updateNonUi, bool showIntro)
+        private void Refresh(bool resetContext, bool updateNonUi, bool showIntro, bool updateOpacity)
         {
+            var isVisible = IsVisible;
+            Opacity = 0;
+            if (!isVisible)
+                Show();
+
             if (resetContext)
             {
                 //UpdateLayout();
@@ -190,6 +193,12 @@ namespace DesktopWidgets.View
                 UpdateTimers();
                 ViewModel.ReloadHotKeys();
             }
+
+            if (!isVisible)
+                Hide();
+            if (updateOpacity)
+                Opacity = 1;
+
             IsRefreshRequired = false;
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
                 ShowIntro();
@@ -252,16 +261,6 @@ namespace DesktopWidgets.View
                 DragMove();
         }
 
-        public void ShowOpacity()
-        {
-            Opacity = 1;
-        }
-
-        public void HideOpacity()
-        {
-            Opacity = 0;
-        }
-
         private void btnMenu_OnClick(object sender, RoutedEventArgs e)
         {
             MainContentContainer.ContextMenu.IsOpen = true;
@@ -271,6 +270,16 @@ namespace DesktopWidgets.View
         {
             Id.ToggleEnable();
             Id.ToggleEnable();
+        }
+
+        public new void Show()
+        {
+            Visibility = Visibility.Visible;
+        }
+
+        public new void Hide()
+        {
+            Visibility = Visibility.Hidden;
         }
     }
 }

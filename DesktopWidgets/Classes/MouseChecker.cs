@@ -293,7 +293,7 @@ namespace DesktopWidgets.Classes
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Show);
             else
-                _view.ShowOpacity();
+                _view.Show();
         }
 
         public void Hide(bool animate = true, bool checkHideStatus = false)
@@ -306,7 +306,7 @@ namespace DesktopWidgets.Classes
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Hide);
             else
-                _view.HideOpacity();
+                _view.Hide();
         }
     }
 }

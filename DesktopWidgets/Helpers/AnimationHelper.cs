@@ -53,7 +53,7 @@ namespace DesktopWidgets.Helpers
             {
                 if (animationMode == AnimationMode.Show)
                 {
-                    view.ShowOpacity();
+                    view.Show();
                     MediaPlayerStore.PlaySoundAsync(settings.ShowSoundPath, settings.ShowSoundVolume);
                 }
                 astartAction?.Invoke();
@@ -63,7 +63,7 @@ namespace DesktopWidgets.Helpers
             {
                 if (animationMode == AnimationMode.Hide)
                 {
-                    view.HideOpacity();
+                    view.Hide();
                     MediaPlayerStore.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
                 }
                 aendAction?.Invoke();
