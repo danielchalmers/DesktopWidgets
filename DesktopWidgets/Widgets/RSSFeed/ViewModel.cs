@@ -18,6 +18,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
         public readonly DispatcherTimer UpdateTimer;
         private ObservableCollection<FeedItem> _feedItems;
 
+        private string _lastFeedUrl;
+
         private bool _showHelp;
 
         public ViewModel(WidgetId id) : base(id)
@@ -29,6 +31,12 @@ namespace DesktopWidgets.Widgets.RSSFeed
             FeedItems = new ObservableCollection<FeedItem>();
             UpdateTimer = new DispatcherTimer {Interval = Settings.RefreshInterval};
             UpdateTimer.Tick += (sender, args) => UpdateFeed();
+
+            RefreshAction = delegate
+            {
+                if (_lastFeedUrl != Settings.RssFeedUrl)
+                    UpdateFeed();
+            };
 
             UpdateFeed();
             UpdateTimer.Start();
@@ -75,6 +83,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         private void UpdateFeed()
         {
+            _lastFeedUrl = Settings.RssFeedUrl;
+
             if (string.IsNullOrWhiteSpace(Settings.RssFeedUrl))
             {
                 ShowHelp = true;
