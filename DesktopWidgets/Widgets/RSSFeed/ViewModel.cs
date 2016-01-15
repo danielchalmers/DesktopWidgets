@@ -122,7 +122,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
                         .Select(
                             item =>
                                 new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
-                                    item.PublishDate.DateTime.ToString(Settings.PublishDateFormat))))
+                                    (item.PublishDate.DateTime + Settings.PublishDateTimeOffsetPositive -
+                                     Settings.PublishDateTimeOffsetNegative).ToString(Settings.PublishDateFormat))))
             {
                 FeedItems.Add(newItem);
                 if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))

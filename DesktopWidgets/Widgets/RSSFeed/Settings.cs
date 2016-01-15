@@ -50,6 +50,14 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("Category Filter")]
         public string CategoryFilter { get; set; }
 
+        [Category("Style")]
+        [DisplayName("Publish Date Time Offset (Positive)")]
+        public TimeSpan PublishDateTimeOffsetPositive { get; set; }
+
+        [Category("Style")]
+        [DisplayName("Publish Date Time Offset (Negative)")]
+        public TimeSpan PublishDateTimeOffsetNegative { get; set; }
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On New Headline")]
         public bool OpenOnEvent { get; set; } = true;
