@@ -128,17 +128,8 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
-        private void UpdateWeather()
+        private void DownloadWeatherData(Action<OpenWeatherMapApiResult> finishAction)
         {
-            _lastZipCode = Settings.ZipCode;
-
-            if (Settings.ZipCode == 0)
-            {
-                ShowHelp = true;
-                return;
-            }
-            ShowHelp = false;
-
             string unitType;
             switch (Settings.UnitType)
             {
@@ -154,29 +145,46 @@ namespace DesktopWidgets.Widgets.Weather
                     break;
             }
 
-            OpenWeatherMapApiResult data = null;
             try
             {
-                string json;
                 using (var wc = new WebClient())
-                    json =
-                        wc.DownloadString(
-                            $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Resources.OpenWeatherMapAPIKey}");
-                data = JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(json);
+                {
+                    wc.DownloadStringCompleted +=
+                        (sender, args) =>
+                            finishAction(JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(args.Result));
+                    wc.DownloadStringAsync(
+                        new Uri(
+                            $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Resources.OpenWeatherMapAPIKey}"));
+                }
             }
             catch
             {
                 // ignored
             }
+        }
 
-            if (data?.main?.temp == null || data.weather.Count == 0)
+        private void UpdateWeather()
+        {
+            _lastZipCode = Settings.ZipCode;
+
+            if (Settings.ZipCode == 0)
+            {
+                ShowHelp = true;
                 return;
+            }
+            ShowHelp = false;
 
-            Temperature = data.main.temp;
-            Description = data.weather[0].description;
-            TemperatureMin = data.main.temp_min;
-            TemperatureMax = data.main.temp_max;
-            IconUrl = $"{Resources.OpenWeatherMapDomain}img/w/{data.weather[0].icon}.png";
+            DownloadWeatherData(data =>
+            {
+                if (data?.main?.temp != null && data.weather.Count > 0)
+                {
+                    Temperature = data.main.temp;
+                    Description = data.weather[0].description;
+                    TemperatureMin = data.main.temp_min;
+                    TemperatureMax = data.main.temp_max;
+                    IconUrl = $"{Resources.OpenWeatherMapDomain}img/w/{data.weather[0].icon}.png";
+                }
+            });
         }
     }
 }
