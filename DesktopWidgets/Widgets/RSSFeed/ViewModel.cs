@@ -82,11 +82,20 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
             ShowHelp = false;
 
-            var reader = XmlReader.Create(Settings.RssFeedUrl);
-            var feed = SyndicationFeed.Load(reader);
-            reader.Close();
+            SyndicationFeed feed = null;
+            try
+            {
+                var reader = XmlReader.Create(Settings.RssFeedUrl);
+                feed = SyndicationFeed.Load(reader);
+                reader.Close();
+            }
+            catch
+            {
+                // ignored
+            }
             if (feed?.Items == null)
                 return;
+
             var prevFeed = FeedItems.ToList();
             FeedItems.Clear();
             var newHeadlineFound = false;
