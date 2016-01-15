@@ -1,4 +1,5 @@
-﻿using DesktopWidgets.Classes;
+﻿using System;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.ViewModelBase;
 
@@ -18,6 +19,10 @@ namespace DesktopWidgets.Widgets.CountdownClock
 
         private void OnTickAction()
         {
+            if (Settings.SyncYear && Settings.EndDateTime.Year != DateTime.Now.Year)
+                Settings.EndDateTime = new DateTime(DateTime.Now.Year, Settings.EndDateTime.Month,
+                    Settings.EndDateTime.Day, Settings.EndDateTime.Hour, Settings.EndDateTime.Minute,
+                    Settings.EndDateTime.Second, Settings.EndDateTime.Kind);
             if (CurrentTime >= Settings.EndDateTime && Settings.LastEndDateTime != Settings.EndDateTime)
             {
                 Settings.LastEndDateTime = Settings.EndDateTime;

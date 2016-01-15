@@ -30,6 +30,10 @@ namespace DesktopWidgets.Widgets.CountdownClock
         [DisplayName("Continue Counting")]
         public bool EndContinueCounting { get; set; } = false;
 
+        [Category("General")]
+        [DisplayName("Sync Year")]
+        public bool SyncYear { get; set; } = false;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On Event")]
         public bool OpenOnEvent { get; set; } = true;
