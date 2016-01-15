@@ -14,6 +14,7 @@ namespace DesktopWidgets.Widgets.Weather
         private readonly DispatcherTimer _updateTimer;
         private string _description;
         private string _iconUrl;
+        private int _lastZipCode;
 
         private bool _showHelp;
 
@@ -35,6 +36,12 @@ namespace DesktopWidgets.Widgets.Weather
                     : Settings.RefreshInterval
             };
             _updateTimer.Tick += (sender, args) => UpdateWeather();
+
+            RefreshAction = delegate
+            {
+                if (_lastZipCode != Settings.ZipCode)
+                    UpdateWeather();
+            };
 
             UpdateWeather();
             _updateTimer.Start();
@@ -123,6 +130,8 @@ namespace DesktopWidgets.Widgets.Weather
 
         private void UpdateWeather()
         {
+            _lastZipCode = Settings.ZipCode;
+
             if (Settings.ZipCode == 0)
             {
                 ShowHelp = true;

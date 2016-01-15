@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -26,6 +27,7 @@ namespace DesktopWidgets.ViewModelBase
         private double _top;
 
         private double _width;
+        public Action RefreshAction;
 
         protected WidgetViewModelBase(WidgetId id)
         {

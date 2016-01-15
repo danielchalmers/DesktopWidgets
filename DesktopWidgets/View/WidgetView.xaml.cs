@@ -194,6 +194,8 @@ namespace DesktopWidgets.View
                 ViewModel.ReloadHotKeys();
             }
 
+            ViewModel.RefreshAction?.Invoke();
+
             if (!isVisible)
                 Hide();
             if (updateOpacity)
