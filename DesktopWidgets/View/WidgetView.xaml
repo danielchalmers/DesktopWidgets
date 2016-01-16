@@ -23,7 +23,6 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
-        <classes:SettingsToCornerRadiusConverter x:Key="SettingsToCornerRadiusConverter" />
         <classes:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
         <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
 
@@ -55,14 +54,7 @@
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
-            <Setter Property="CornerRadius">
-                <Setter.Value>
-                    <MultiBinding Converter="{StaticResource SettingsToCornerRadiusConverter}">
-                        <Binding Path="Settings.RoundedCorners" />
-                        <Binding Path="Settings.CornerRadius" />
-                    </MultiBinding>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="CornerRadius" Value="{Binding Settings.CornerRadius}" />
             <Setter Property="BorderThickness">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource SettingsToThicknessConverter}">
@@ -99,14 +91,7 @@
             <Setter Property="Background" Value="{StaticResource TitlebarBackgroundBrush}" />
             <Setter Property="Visibility"
                     Value="{Binding Settings.ShowTitlebar, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <Setter Property="CornerRadius">
-                <Setter.Value>
-                    <MultiBinding Converter="{StaticResource SettingsToCornerRadiusConverter}">
-                        <Binding Path="Settings.TitlebarRoundedCorners" />
-                        <Binding Path="Settings.TitlebarCornerRadius" />
-                    </MultiBinding>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="CornerRadius" Value="{Binding Settings.TitlebarCornerRadius}" />
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />

@@ -643,24 +643,6 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class SettingsToCornerRadiusConverter : IMultiValueConverter
-    {
-        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!ConverterHelper.IsValueValid(value))
-                return DependencyProperty.UnsetValue;
-            if (value.Length != 2)
-                return DependencyProperty.UnsetValue;
-            var enabled = (bool) value[0];
-            return enabled ? value[1] : 0;
-        }
-
-        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class VisibilityToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

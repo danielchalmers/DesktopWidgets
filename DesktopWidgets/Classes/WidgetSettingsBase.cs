@@ -274,14 +274,6 @@ namespace DesktopWidgets.Classes
         public HorizontalAlignment TitlebarNameHorizontalAlignment { get; set; } = HorizontalAlignment.Center;
 
         [Category("Style (Titlebar)")]
-        [DisplayName("Rounded Corners")]
-        public bool TitlebarRoundedCorners { get; set; } = true;
-
-        [Category("Style")]
-        [DisplayName("Rounded Corners")]
-        public bool RoundedCorners { get; set; } = true;
-
-        [Category("Style (Titlebar)")]
         [DisplayName("Corner Radius")]
         public CornerRadius TitlebarCornerRadius { get; set; } = new CornerRadius(4);
 
