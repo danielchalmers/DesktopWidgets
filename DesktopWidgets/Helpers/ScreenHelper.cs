@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Interop;
 using DesktopWidgets.Properties;
 
 #endregion
@@ -12,7 +13,7 @@ namespace DesktopWidgets.Helpers
 {
     internal static class ScreenHelper
     {
-        private static Rect ToRect(this Screen screen)
+        public static Rect ToRect(this Screen screen)
         {
             return (Settings.Default.IgnoreAppBars ? screen.Bounds : screen.WorkingArea).ToRect();
         }
@@ -39,6 +40,11 @@ namespace DesktopWidgets.Helpers
         public static IEnumerable<Rect> GetAllScreenBounds()
         {
             return Screen.AllScreens.Select(ToRect);
+        }
+
+        public static Screen GetScreen(Window window)
+        {
+            return Screen.FromHandle(new WindowInteropHelper(window).Handle);
         }
     }
 }

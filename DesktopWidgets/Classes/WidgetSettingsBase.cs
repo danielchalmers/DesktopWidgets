@@ -310,5 +310,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Toggle Intro On Hotkey")]
         public bool ToggleIntroOnHotkey { get; set; } = true;
+
+        [Category("General")]
+        [DisplayName("Auto Detect Screen Bounds")]
+        public bool AutoDetectScreenBounds { get; set; } = true;
     }
 }

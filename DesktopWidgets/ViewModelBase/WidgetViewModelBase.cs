@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Interop;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight.Command;
-using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
 namespace DesktopWidgets.ViewModelBase
 {
@@ -283,9 +280,6 @@ namespace DesktopWidgets.ViewModelBase
             Settings.IsDocked = true;
             if (view != null)
             {
-                var screen = Screen.FromHandle(new WindowInteropHelper(view).Handle);
-                Settings.ScreenBounds =
-                    (Properties.Settings.Default.IgnoreAppBars ? screen.Bounds : screen.WorkingArea).ToRect();
                 view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
                 view.ShowIntro(reversable: false);
             }
@@ -300,9 +294,6 @@ namespace DesktopWidgets.ViewModelBase
             Settings.IsDocked = true;
             if (view != null)
             {
-                var screen = Screen.FromHandle(new WindowInteropHelper(view).Handle);
-                Settings.ScreenBounds =
-                    (Properties.Settings.Default.IgnoreAppBars ? screen.Bounds : screen.WorkingArea).ToRect();
                 view.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
                 view.ShowIntro(reversable: false);
             }

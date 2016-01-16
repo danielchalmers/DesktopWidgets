@@ -181,6 +181,10 @@ namespace DesktopWidgets.View
                 //UpdateLayout();
                 DataContext = ViewModel;
             }
+
+            if (Settings.AutoDetectScreenBounds)
+                Settings.ScreenBounds = ScreenHelper.GetScreen(this).ToRect();
+
             ViewModel.OnTop = Settings.OnTop;
             UpdateLayout();
             ViewModel.UpdateSize();
