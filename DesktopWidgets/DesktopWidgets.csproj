@@ -137,6 +137,7 @@
     <Compile Include="AppResources.xaml.cs">
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\EditWidgetStore.cs" />
     <Compile Include="Classes\Hotkey.cs" />
     <Compile Include="Classes\HotkeyStore.cs" />
     <Compile Include="Classes\MediaPlayerStore.cs" />
