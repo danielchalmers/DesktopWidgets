@@ -261,8 +261,7 @@ namespace DesktopWidgets.ViewModelBase
 
         private void ReloadWidgetExecute()
         {
-            _id.ToggleEnable();
-            _id.ToggleEnable();
+            _id.Reload();
         }
 
         private void ToggleEnableWidgetExecute()

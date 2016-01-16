@@ -263,6 +263,14 @@ namespace DesktopWidgets.Helpers
                 id.Disable();
         }
 
+        public static void Reload(this WidgetId id)
+        {
+            if (id.GetSettings().Disabled)
+                return;
+            id.Disable();
+            id.Enable();
+        }
+
         public static void Remove(this WidgetId id, bool msg = false)
         {
             var settings = id.GetSettings();
@@ -329,10 +337,7 @@ namespace DesktopWidgets.Helpers
         public static void ReloadWidgets()
         {
             foreach (var id in App.WidgetViews.Select(x => x.Id).ToList())
-            {
-                id.ToggleEnable();
-                id.ToggleEnable();
-            }
+                id.Reload();
         }
     }
 }

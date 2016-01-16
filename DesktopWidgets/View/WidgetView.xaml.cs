@@ -269,8 +269,7 @@ namespace DesktopWidgets.View
 
         private void btnReload_OnClick(object sender, RoutedEventArgs e)
         {
-            Id.ToggleEnable();
-            Id.ToggleEnable();
+            Id.Reload();
         }
 
         public new void Show()
