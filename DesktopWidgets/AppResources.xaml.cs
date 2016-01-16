@@ -50,5 +50,10 @@ namespace DesktopWidgets
         {
             WidgetHelper.NewWidget();
         }
+
+        private void menuItemReloadWidgets_OnClick(object sender, RoutedEventArgs e)
+        {
+            WidgetHelper.ReloadWidgets();
+        }
     }
 }

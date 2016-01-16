@@ -325,5 +325,14 @@ namespace DesktopWidgets.Helpers
             newWidget.Identifier.GenerateNewGuid();
             AddNewWidget(newWidget);
         }
+
+        public static void ReloadWidgets()
+        {
+            foreach (var id in App.WidgetViews.Select(x => x.Id).ToList())
+            {
+                id.ToggleEnable();
+                id.ToggleEnable();
+            }
+        }
     }
 }

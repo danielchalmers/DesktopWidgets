@@ -22,6 +22,8 @@
     <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
         <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
+        <MenuItem Header="Reload All Widgets" Click="menuItemReloadWidgets_OnClick" />
+        <Separator />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
         <Separator />
         <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick"
