@@ -98,6 +98,7 @@ namespace DesktopWidgets.Helpers
 
                         var updateDialog = new UpdatePrompt(info.AvailableVersion, info.IsUpdateRequired);
                         updateDialog.ShowDialog();
+                        updateDialog.Activate();
 
                         switch (updateDialog.SelectedUpdateMode)
                         {
@@ -111,6 +112,7 @@ namespace DesktopWidgets.Helpers
                                     ad.UpdateProgressChanged +=
                                         (sender, args) => progressDialog.CurrentProgress = args.ProgressPercentage;
                                     progressDialog.Show();
+                                    progressDialog.Activate();
                                     ad.UpdateAsync();
                                 }
                                 catch (DeploymentDownloadException dde)
