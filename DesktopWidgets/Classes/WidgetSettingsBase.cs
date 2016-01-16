@@ -21,11 +21,11 @@ namespace DesktopWidgets.Classes
         [DisplayName("Name")]
         public string Name { get; set; } = "Untitled";
 
-        [Category("Style")]
+        [Category("Style (Text)")]
         [DisplayName("Font Family")]
         public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");
 
-        [Category("Style")]
+        [Category("Style (Text)")]
         [DisplayName("Text Color")]
         public Color TextColor { get; set; } = Colors.Black;
 
@@ -69,9 +69,11 @@ namespace DesktopWidgets.Classes
         [DisplayName("Maximum Height (px)")]
         public double MaxHeight { get; set; } = double.NaN;
 
+        [Category("Style (Position)")]
         [DisplayName("Left Position (px)")]
         public double Left { get; set; } = double.NaN;
 
+        [Category("Style (Position)")]
         [DisplayName("Top Position (px)")]
         public double Top { get; set; } = double.NaN;
 
@@ -91,15 +93,15 @@ namespace DesktopWidgets.Classes
         [DisplayName("Screen")]
         public string Monitor { get; set; }
 
-        [Category("Style")]
+        [Category("Style (Text)")]
         [DisplayName("Font Size")]
         public int FontSize { get; set; } = 14;
 
-        [Category("Style")]
+        [Category("Behavior")]
         [DisplayName("Stay On Top")]
         public bool OnTop { get; set; } = true;
 
-        [Category("Style")]
+        [Category("Behavior")]
         [DisplayName("Force On Top")]
         public bool ForceOnTop { get; set; } = false;
 
@@ -155,7 +157,7 @@ namespace DesktopWidgets.Classes
         [DisplayName("Activate On Show")]
         public bool ActivateOnShow { get; set; } = true;
 
-        [Category("General")]
+        [Category("Behavior")]
         [DisplayName("Force On Top Refresh Interval (ms)")]
         public int ForceOnTopInterval { get; set; } = 500;
 
@@ -163,7 +165,7 @@ namespace DesktopWidgets.Classes
         [DisplayName("Intro Duration (ms)")]
         public int IntroDuration { get; set; } = 3000;
 
-        [Category("Style")]
+        [Category("Behavior")]
         [DisplayName("Unclickable")]
         public bool Unclickable { get; set; } = false;
 
@@ -305,7 +307,7 @@ namespace DesktopWidgets.Classes
         [DisplayName("Mouse Bounds Detection Axis")]
         public MouseBoundsDetectionAxis MouseBoundsDetectionAxis { get; set; } = MouseBoundsDetectionAxis.Both;
 
-        [Category("Style")]
+        [Category("Style (Text)")]
         [DisplayName("Font Weight")]
         public FontWeight FontWeight { get; set; } = FontWeights.Normal;
 
