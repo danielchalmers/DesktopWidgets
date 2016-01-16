@@ -235,7 +235,7 @@ namespace DesktopWidgets.View
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
             _mouseChecker.Stop();
-            _onTopForceTimer.Stop();
+            _onTopForceTimer?.Stop();
             HotkeyStore.RemoveHotkey(Id.Guid);
             ViewModel = null;
             Settings.ScrollHorizontalOffset = MainContentContainer.ContentHorizontalOffset;
