@@ -24,6 +24,8 @@ namespace DesktopWidgets.ViewModelBase
 
         private double _left;
 
+        private bool _onTop;
+
         private double _top;
 
         private double _width;
@@ -41,6 +43,19 @@ namespace DesktopWidgets.ViewModelBase
             WidgetDockHorizontal = new RelayCommand<HorizontalAlignment>(WidgetDockHorizontalExecute);
             WidgetDockVertical = new RelayCommand<VerticalAlignment>(WidgetDockVerticalExecute);
             WidgetUndock = new RelayCommand(WidgetUndockExecute);
+        }
+
+        public bool OnTop
+        {
+            get { return _onTop; }
+            set
+            {
+                if (_onTop != value)
+                {
+                    _onTop = value;
+                    RaisePropertyChanged(nameof(OnTop));
+                }
+            }
         }
 
         public double Left

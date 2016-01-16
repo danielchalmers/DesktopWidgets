@@ -181,6 +181,7 @@ namespace DesktopWidgets.View
                 //UpdateLayout();
                 DataContext = ViewModel;
             }
+            ViewModel.OnTop = Settings.OnTop;
             UpdateLayout();
             ViewModel.UpdateSize();
             UpdateLayout();
@@ -221,22 +222,20 @@ namespace DesktopWidgets.View
                     _onTopForceTimer = new DispatcherTimer();
                     _onTopForceTimer.Tick += delegate
                     {
-                        Settings.OnTop = false;
-                        Settings.OnTop = true;
+                        ViewModel.OnTop = false;
+                        ViewModel.OnTop = true;
                     };
                 }
                 _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(Settings.ForceOnTopInterval);
-                if (_onTopForceTimer.IsEnabled)
-                {
-                    _onTopForceTimer.Stop();
-                    _onTopForceTimer.Start();
-                }
+                _onTopForceTimer.Stop();
+                _onTopForceTimer.Start();
             }
         }
 
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
             _mouseChecker.Stop();
+            _onTopForceTimer.Stop();
             HotkeyStore.RemoveHotkey(Id.Guid);
             ViewModel = null;
             Settings.ScrollHorizontalOffset = MainContentContainer.ContentHorizontalOffset;
