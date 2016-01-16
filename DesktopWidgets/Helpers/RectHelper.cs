@@ -9,5 +9,10 @@ namespace DesktopWidgets.Helpers
         {
             return new Rect(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height);
         }
+
+        public static Rectangle ToRectangle(this Rect rect)
+        {
+            return new Rectangle((int) rect.X, (int) rect.Y, (int) rect.Width, (int) rect.Height);
+        }
     }
 }

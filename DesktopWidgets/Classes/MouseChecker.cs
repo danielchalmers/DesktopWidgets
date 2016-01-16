@@ -94,21 +94,21 @@ namespace DesktopWidgets.Classes
             {
                 if (_settings.StretchBounds)
                 {
-                    var monitorBounds = ScreenHelper.GetScreenBounds(_settings.Monitor);
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
                         _settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Horizontal)
                     {
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Left ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, _settings.MouseBounds,
-                                monitorBounds.Height));
+                            checkBounds.Add(new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
+                                _settings.MouseBounds,
+                                _settings.ScreenBounds.Height));
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(monitorBounds.Right - _settings.MouseBounds,
-                                monitorBounds.Top, _settings.MouseBounds, monitorBounds.Height));
+                            checkBounds.Add(new Rect(_settings.ScreenBounds.Right - _settings.MouseBounds,
+                                _settings.ScreenBounds.Top, _settings.MouseBounds, _settings.ScreenBounds.Height));
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
                         {
@@ -122,14 +122,15 @@ namespace DesktopWidgets.Classes
                         if (_settings.VerticalAlignment == VerticalAlignment.Top ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(monitorBounds.Left, monitorBounds.Top, monitorBounds.Width,
+                            checkBounds.Add(new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
+                                _settings.ScreenBounds.Width,
                                 _settings.MouseBounds));
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Bottom ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(monitorBounds.Left,
-                                monitorBounds.Bottom - _settings.MouseBounds, monitorBounds.Width,
+                            checkBounds.Add(new Rect(_settings.ScreenBounds.Left,
+                                _settings.ScreenBounds.Bottom - _settings.MouseBounds, _settings.ScreenBounds.Width,
                                 _settings.MouseBounds));
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
@@ -216,7 +217,7 @@ namespace DesktopWidgets.Classes
                 QueueIntro = false;
             }
 
-            if (!_settings.FullscreenActivation && FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.Monitor))
+            if (!_settings.FullscreenActivation && FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.ScreenBounds))
             {
                 _showTimer.Stop();
                 _hideTimer.Stop();

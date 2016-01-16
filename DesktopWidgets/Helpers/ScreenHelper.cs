@@ -29,6 +29,13 @@ namespace DesktopWidgets.Helpers
                 Screen.AllScreens.FirstOrDefault(x => x.Primary);
         }
 
+        public static Screen GetScreen(Rect bounds)
+        {
+            return
+                Screen.AllScreens.FirstOrDefault(x => x.Bounds.IntersectsWith(bounds.ToRectangle())) ??
+                Screen.AllScreens.FirstOrDefault(x => x.Primary);
+        }
+
         public static IEnumerable<Rect> GetAllScreenBounds()
         {
             return Screen.AllScreens.Select(ToRect);

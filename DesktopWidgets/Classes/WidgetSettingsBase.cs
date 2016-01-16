@@ -90,8 +90,8 @@ namespace DesktopWidgets.Classes
         public int AnimationTime { get; set; } = 250;
 
         [Category("Dock")]
-        [DisplayName("Screen")]
-        public string Monitor { get; set; }
+        [DisplayName("Screen Bounds")]
+        public Rect ScreenBounds { get; set; }
 
         [Category("Style (Text)")]
         [DisplayName("Font Size")]

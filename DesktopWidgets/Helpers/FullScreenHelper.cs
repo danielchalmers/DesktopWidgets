@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace DesktopWidgets.Helpers
@@ -10,6 +11,9 @@ namespace DesktopWidgets.Helpers
 
         public static bool DoesMonitorHaveFullscreenApp(string deviceName)
             => DoesMonitorHaveFullscreenApp(ScreenHelper.GetScreen(deviceName));
+
+        public static bool DoesMonitorHaveFullscreenApp(Rect bounds)
+            => DoesMonitorHaveFullscreenApp(ScreenHelper.GetScreen(bounds));
 
         public static bool DoesAnyMonitorHaveFullscreenApp() => Screen.AllScreens.Any(DoesMonitorHaveFullscreenApp);
     }

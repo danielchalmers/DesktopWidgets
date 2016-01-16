@@ -119,7 +119,7 @@ namespace DesktopWidgets.ViewModelBase
             get
             {
                 return double.IsNaN(Settings.MaxWidth)
-                    ? ScreenHelper.GetScreenBounds(Settings.Monitor).Width
+                    ? Settings.ScreenBounds.Width
                     : Settings.MaxWidth;
             }
             set
@@ -137,7 +137,7 @@ namespace DesktopWidgets.ViewModelBase
             get
             {
                 return double.IsNaN(Settings.MaxHeight)
-                    ? ScreenHelper.GetScreenBounds(Settings.Monitor).Height
+                    ? Settings.ScreenBounds.Height
                     : Settings.MaxHeight;
             }
             set
@@ -204,7 +204,7 @@ namespace DesktopWidgets.ViewModelBase
             {
                 return Settings.Left;
             }
-            var monitorRect = ScreenHelper.GetScreenBounds(Settings.Monitor);
+            var monitorRect = Settings.ScreenBounds;
 
             switch (Settings.HorizontalAlignment)
             {
@@ -225,7 +225,7 @@ namespace DesktopWidgets.ViewModelBase
             {
                 return Settings.Top;
             }
-            var monitorRect = ScreenHelper.GetScreenBounds(Settings.Monitor);
+            var monitorRect = Settings.ScreenBounds;
 
             switch (Settings.VerticalAlignment)
             {
@@ -283,7 +283,9 @@ namespace DesktopWidgets.ViewModelBase
             Settings.IsDocked = true;
             if (view != null)
             {
-                Settings.Monitor = Screen.FromHandle(new WindowInteropHelper(view).Handle).DeviceName;
+                var screen = Screen.FromHandle(new WindowInteropHelper(view).Handle);
+                Settings.ScreenBounds =
+                    (Properties.Settings.Default.IgnoreAppBars ? screen.Bounds : screen.WorkingArea).ToRect();
                 view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
                 view.ShowIntro(reversable: false);
             }
@@ -298,7 +300,9 @@ namespace DesktopWidgets.ViewModelBase
             Settings.IsDocked = true;
             if (view != null)
             {
-                Settings.Monitor = Screen.FromHandle(new WindowInteropHelper(view).Handle).DeviceName;
+                var screen = Screen.FromHandle(new WindowInteropHelper(view).Handle);
+                Settings.ScreenBounds =
+                    (Properties.Settings.Default.IgnoreAppBars ? screen.Bounds : screen.WorkingArea).ToRect();
                 view.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
                 view.ShowIntro(reversable: false);
             }
