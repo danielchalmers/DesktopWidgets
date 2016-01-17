@@ -34,7 +34,6 @@
     <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
         <Separator />
-        <MenuItem Header="Stay On Top" IsChecked="{Binding Settings.OnTop}" IsCheckable="True" />
         <MenuItem Header="Dock">
             <MenuItem Header="None" Command="{Binding WidgetUndock}" />
             <MenuItem Header="Horizontal">
