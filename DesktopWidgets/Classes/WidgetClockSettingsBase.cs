@@ -14,11 +14,7 @@ namespace DesktopWidgets.Classes
         public string TimeFormat { get; set; } = "hh:mm:ss";
 
         [Category("General")]
-        [DisplayName("Time Offset (Positive)")]
-        public TimeSpan TimeOffsetPositive { get; set; }
-
-        [Category("General")]
-        [DisplayName("Time Offset (Negative)")]
-        public TimeSpan TimeOffsetNegative { get; set; }
+        [DisplayName("Time Offset")]
+        public TimeSpan TimeOffset { get; set; }
     }
 }

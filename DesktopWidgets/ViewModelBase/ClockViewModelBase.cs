@@ -52,7 +52,7 @@ namespace DesktopWidgets.ViewModelBase
 
         public void UpdateCurrentTime()
         {
-            CurrentTime = DateTime.Now + _settings.TimeOffsetPositive - _settings.TimeOffsetNegative;
+            CurrentTime = DateTime.Now + _settings.TimeOffset;
             TickAction?.Invoke();
             SyncClockUpdateInterval();
         }

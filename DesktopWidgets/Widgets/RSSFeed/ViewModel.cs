@@ -140,8 +140,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
                                 .Select(
                                     item =>
                                         new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
-                                            (item.PublishDate.DateTime + Settings.PublishDateTimeOffsetPositive -
-                                             Settings.PublishDateTimeOffsetNegative).ToString(Settings.PublishDateFormat)))
+                                            (item.PublishDate.DateTime + Settings.PublishDateTimeOffset).ToString(
+                                                Settings.PublishDateFormat)))
                         )
                     {
                         FeedItems.Add(newItem);
