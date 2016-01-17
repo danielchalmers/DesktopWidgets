@@ -37,9 +37,9 @@
 
     public enum ToolTipType
     {
+        Both,
         Name,
         Path,
-        Both,
         None
     }
 
@@ -52,9 +52,9 @@
 
     public enum ShortcutContentMode
     {
-        Icon,
+        Both,
         Text,
-        Both
+        Icon
     }
 
     public enum ScrollBarVisibility
@@ -66,8 +66,8 @@
 
     public enum ShortcutOrientation
     {
-        Vertical,
-        Horizontal
+        Horizontal,
+        Vertical
     }
 
     public enum UpdateBranch
@@ -86,7 +86,7 @@
     public enum MouseBoundsDetectionAxis
     {
         Both,
-        Vertical,
-        Horizontal
+        Horizontal,
+        Vertical
     }
 }
