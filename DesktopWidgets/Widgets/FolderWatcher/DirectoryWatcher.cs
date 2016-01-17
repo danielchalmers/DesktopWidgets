@@ -20,7 +20,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             _knownFilePaths = new Dictionary<string, IEnumerable<string>>();
             _dirWatcherTimer = new DispatcherTimer
             {
-                Interval = _settings.FolderCheckInterval
+                Interval = TimeSpan.FromMilliseconds(_settings.FolderCheckIntervalMS)
             };
             _dirWatcherTimer.Tick += (sender, args) => CheckDirectoryForNewFiles(true);
 

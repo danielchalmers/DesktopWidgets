@@ -13,8 +13,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         }
 
         [Category("General")]
-        [DisplayName("Folder Check Interval")]
-        public TimeSpan FolderCheckInterval { get; set; } = TimeSpan.FromMilliseconds(500);
+        [DisplayName("Folder Check Interval (ms)")]
+        public int FolderCheckIntervalMS { get; set; } = 500;
 
         [Category("General")]
         [DisplayName("Watch Folder")]
