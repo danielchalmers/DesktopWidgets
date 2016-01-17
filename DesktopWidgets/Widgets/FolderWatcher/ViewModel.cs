@@ -47,7 +47,16 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             Mute = new RelayCommand(MuteExecute);
 
             _notificationQueue = new Queue<string>();
-            _directoryWatcher = new DirectoryWatcher(Settings, AddToFileQueue);
+            _directoryWatcher =
+                new DirectoryWatcher(
+                    new DirectoryWatcherSettings
+                    {
+                        WatchFolder = Settings.WatchFolder,
+                        IncludeFilter = Settings.IncludeFilter,
+                        ExcludeFilter = Settings.ExcludeFilter,
+                        Recursive = Settings.Recursive,
+                        CheckInterval = TimeSpan.FromMilliseconds(Settings.FolderCheckIntervalMS)
+                    }, AddToFileQueue);
             _directoryWatcher.Start();
         }
 
@@ -96,7 +105,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
         }
 
-        private void AddToFileQueue(string path)
+        private void AddToFileQueue(string path, DirectoryChange change)
         {
             var lastCheck = Settings.LastCheck;
             Settings.LastCheck = DateTime.Now;

@@ -89,4 +89,9 @@
         Horizontal,
         Vertical
     }
+
+    public enum DirectoryChange
+    {
+        NewFile
+    }
 }

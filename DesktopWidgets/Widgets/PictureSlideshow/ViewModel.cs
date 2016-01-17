@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
@@ -13,8 +9,8 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
     public class ViewModel : WidgetViewModelBase
     {
         private readonly DispatcherTimer _changeTimer;
+        private readonly DirectoryWatcher _directoryWatcher;
 
-        private readonly List<string> _filePathList;
         private readonly Random _random;
         private string _imageUrl;
         private int _index;
@@ -24,16 +20,22 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
-            _filePathList = new List<string>();
             _random = new Random();
 
             _changeTimer = new DispatcherTimer {Interval = Settings.ChangeInterval};
             _changeTimer.Tick += (sender, args) => NextImage();
 
-            UpdateFileList(false, false);
+            _directoryWatcher = new DirectoryWatcher(new DirectoryWatcherSettings
+            {
+                WatchFolder = Settings.RootPath,
+                IncludeFilter = Settings.FileFilterExtension,
+                MaxSize = Settings.FileFilterSize,
+                Recursive = Settings.Recursive
+            });
+            _directoryWatcher.CheckDirectoryForNewFiles();
             NextImage();
             if (Settings.Recursive)
-                UpdateFileList(Settings.Recursive, true);
+                _directoryWatcher.CheckDirectoryForNewFilesAsync();
 
             _changeTimer.Start();
         }
@@ -53,46 +55,25 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             }
         }
 
-        private void UpdateFileList(bool recursive, bool async)
-        {
-            if (string.IsNullOrWhiteSpace(Settings.RootPath) || !Directory.Exists(Settings.RootPath))
-                return;
-            Action getFiles = delegate
-            {
-                var filters = Settings.FileFilterExtension.Split('|');
-                _filePathList.Clear();
-                foreach (
-                    var file in
-                        Directory.EnumerateFiles(Settings.RootPath, "*.*",
-                            recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
-                {
-                    var fileInfo = new FileInfo(file);
-                    if (!filters.Contains(fileInfo.Extension.ToLower()) || fileInfo.Length > Settings.FileFilterSize)
-                        continue;
-                    _filePathList.Add(file);
-                }
-            };
-            if (async)
-                new Task(getFiles).Start();
-            else
-                getFiles();
-        }
-
         private void NextImage()
         {
-            if (_filePathList.Count == 0)
+            if (string.IsNullOrWhiteSpace(Settings.RootPath) ||
+                !_directoryWatcher.KnownFilePaths.ContainsKey(Settings.RootPath) ||
+                _directoryWatcher.KnownFilePaths[Settings.RootPath] == null)
                 return;
             string newImagePath;
 
             if (Settings.Shuffle)
             {
-                newImagePath = _filePathList[_random.Next(0, _filePathList.Count)];
+                newImagePath =
+                    _directoryWatcher.KnownFilePaths[Settings.RootPath][
+                        _random.Next(0, _directoryWatcher.KnownFilePaths.Count)];
             }
             else
             {
-                if (_index > _filePathList.Count - 1)
+                if (_index > _directoryWatcher.KnownFilePaths.Count - 1)
                     _index = 0;
-                newImagePath = _filePathList[_index];
+                newImagePath = _directoryWatcher.KnownFilePaths[Settings.RootPath][_index];
                 _index++;
             }
 

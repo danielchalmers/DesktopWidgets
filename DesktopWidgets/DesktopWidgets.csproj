@@ -157,12 +157,13 @@
     <Compile Include="AppResources.xaml.cs">
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\DirectoryWatcherSettings.cs" />
     <Compile Include="Classes\EditWidgetStore.cs" />
     <Compile Include="Classes\Hotkey.cs" />
     <Compile Include="Classes\HotkeyStore.cs" />
     <Compile Include="Classes\MediaPlayerStore.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Widgets\FolderWatcher\DirectoryWatcher.cs" />
+    <Compile Include="Classes\DirectoryWatcher.cs" />
     <Compile Include="Classes\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="Helpers\AppInitHelper.cs" />
