@@ -8,10 +8,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 {
     public class ViewModel : WidgetViewModelBase
     {
-        private readonly DispatcherTimer _changeTimer;
-        private readonly DirectoryWatcher _directoryWatcher;
-
         private readonly Random _random;
+        private DispatcherTimer _changeTimer;
+        private DirectoryWatcher _directoryWatcher;
         private string _imageUrl;
         private int _index;
 
@@ -78,6 +77,15 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             }
 
             ImageUrl = newImagePath;
+        }
+
+        public override void OnClose()
+        {
+            base.OnClose();
+            _directoryWatcher?.Stop();
+            _directoryWatcher = null;
+            _changeTimer?.Stop();
+            _changeTimer = null;
         }
     }
 }

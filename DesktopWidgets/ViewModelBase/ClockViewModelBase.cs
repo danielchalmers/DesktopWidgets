@@ -7,8 +7,8 @@ namespace DesktopWidgets.ViewModelBase
 {
     public class ClockViewModelBase : WidgetViewModelBase
     {
-        private readonly DispatcherTimer _clockUpdateTimer;
         private readonly WidgetClockSettingsBase _settings;
+        private DispatcherTimer _clockUpdateTimer;
         private DateTime _currentTime;
         public Action TickAction;
 
@@ -66,6 +66,13 @@ namespace DesktopWidgets.ViewModelBase
         public void StopClockUpdateTimer()
         {
             _clockUpdateTimer.Stop();
+        }
+
+        public override void OnClose()
+        {
+            base.OnClose();
+            _clockUpdateTimer?.Stop();
+            _clockUpdateTimer = null;
         }
     }
 }

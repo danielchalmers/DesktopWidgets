@@ -11,7 +11,6 @@ namespace DesktopWidgets.Widgets.Weather
 {
     public class ViewModel : WidgetViewModelBase
     {
-        private readonly DispatcherTimer _updateTimer;
         private string _description;
         private string _iconUrl;
         private int _lastZipCode;
@@ -23,6 +22,7 @@ namespace DesktopWidgets.Widgets.Weather
         private double _temperatureMax;
 
         private double _temperatureMin;
+        private DispatcherTimer _updateTimer;
 
         public ViewModel(WidgetId id) : base(id)
         {
@@ -185,6 +185,13 @@ namespace DesktopWidgets.Widgets.Weather
                     IconUrl = $"{Resources.OpenWeatherMapDomain}img/w/{data.weather[0].icon}.png";
                 }
             });
+        }
+
+        public override void OnClose()
+        {
+            base.OnClose();
+            _updateTimer?.Stop();
+            _updateTimer = null;
         }
     }
 }

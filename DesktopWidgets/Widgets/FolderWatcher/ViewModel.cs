@@ -12,7 +12,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 {
     public class ViewModel : WidgetViewModelBase
     {
-        private readonly DirectoryWatcher _directoryWatcher;
         private readonly Queue<string> _notificationQueue;
 
         private readonly List<string> _supportedImageExtensions = new List<string>
@@ -29,6 +28,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private string _currentFilePath;
 
         private BitmapImage _currentImage;
+        private DirectoryWatcher _directoryWatcher;
 
         private bool _isImage;
 
@@ -193,6 +193,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void Hide()
         {
             Settings.Identifier.GetView().HideUI();
+        }
+
+        public override void OnClose()
+        {
+            base.OnClose();
+            _directoryWatcher.Stop();
+            _directoryWatcher = null;
         }
     }
 }

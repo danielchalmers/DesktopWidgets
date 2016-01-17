@@ -17,11 +17,11 @@ namespace DesktopWidgets.Classes
 {
     public class MouseChecker
     {
-        private readonly DispatcherTimer _hideTimer;
-        private readonly DispatcherTimer _mouseCheckTimer;
         private readonly WidgetSettingsBase _settings;
-        private readonly DispatcherTimer _showTimer;
         private readonly WidgetView _view;
+        private DispatcherTimer _hideTimer;
+        private DispatcherTimer _mouseCheckTimer;
+        private DispatcherTimer _showTimer;
         public bool KeepOpenForIntro;
         public bool QueueIntro;
 
@@ -308,6 +308,16 @@ namespace DesktopWidgets.Classes
                 _view.Animate(AnimationMode.Hide);
             else
                 _view.Hide();
+        }
+
+        public void Dispose()
+        {
+            _mouseCheckTimer?.Stop();
+            _hideTimer?.Stop();
+            _showTimer?.Stop();
+            _mouseCheckTimer = null;
+            _hideTimer = null;
+            _showTimer = null;
         }
     }
 }

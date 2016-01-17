@@ -15,7 +15,8 @@ namespace DesktopWidgets.Classes
             timer.Tick += (sender, args) =>
             {
                 action();
-                timer.Stop();
+                timer?.Stop();
+                timer = null;
             };
             timer.Start();
         }

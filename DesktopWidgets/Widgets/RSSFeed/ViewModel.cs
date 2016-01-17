@@ -18,12 +18,12 @@ namespace DesktopWidgets.Widgets.RSSFeed
 {
     public class ViewModel : WidgetViewModelBase
     {
-        public readonly DispatcherTimer UpdateTimer;
         private ObservableCollection<FeedItem> _feedItems;
 
         private string _lastFeedUrl;
 
         private bool _showHelp;
+        public DispatcherTimer UpdateTimer;
 
         public ViewModel(WidgetId id) : base(id)
         {
@@ -159,6 +159,13 @@ namespace DesktopWidgets.Widgets.RSSFeed
         private void NavigateHyperlinkExecute(RequestNavigateEventArgs e)
         {
             Process.Start(e.Uri.AbsoluteUri);
+        }
+
+        public override void OnClose()
+        {
+            base.OnClose();
+            UpdateTimer?.Stop();
+            UpdateTimer = null;
         }
     }
 }

@@ -330,5 +330,9 @@ namespace DesktopWidgets.ViewModelBase
             else
                 HotkeyStore.RemoveHotkey(_id.Guid);
         }
+
+        public virtual void OnClose()
+        {
+        }
     }
 }
