@@ -77,6 +77,7 @@
             <Setter Property="HorizontalScrollBarVisibility"
                     Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
             <Setter Property="Focusable" Value="False" />
+            <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
@@ -84,7 +85,6 @@
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
             <Setter Property="FontWeight" Value="{Binding Settings.FontWeight}" />
             <Setter Property="Focusable" Value="False" />
-            <Setter Property="Padding" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">
             <Setter Property="Focusable" Value="False" />
