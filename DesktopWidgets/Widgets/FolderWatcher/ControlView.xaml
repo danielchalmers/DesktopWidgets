@@ -16,6 +16,7 @@
         <classes:FilePathToNameConverter x:Key="FilePathToNameConverter" />
         <classes:BooleanToHiddenVisibilityConverter x:Key="BooleanToHiddenVisibilityConverter" />
         <classes:InverseBoolOrFilePathToVisibilityConverter x:Key="InverseBoolOrFilePathToVisibilityConverter" />
+        <classes:NonAlwaysOnOpenModeToVisibilityConverter x:Key="NonAlwaysOnOpenModeToVisibilityConverter" />
 
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
@@ -25,7 +26,8 @@
                        Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
         <Grid x:Key="FrameBottom">
-            <StackPanel>
+            <StackPanel
+                Visibility="{Binding Settings.OpenMode, Converter={StaticResource NonAlwaysOnOpenModeToVisibilityConverter}}">
                 <StackPanel.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Height" Value="30" />
