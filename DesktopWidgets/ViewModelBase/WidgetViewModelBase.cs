@@ -32,6 +32,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             _id = id;
             Settings = id.GetSettings();
+            DismissWidget = new RelayCommand(DismissWidgetExecute);
             EditWidget = new RelayCommand(EditWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
@@ -173,6 +174,7 @@ namespace DesktopWidgets.ViewModelBase
             }
         }
 
+        public ICommand DismissWidget { get; private set; }
         public ICommand EditWidget { get; private set; }
         public ICommand ReloadWidget { get; private set; }
         public ICommand ToggleEnableWidget { get; private set; }
@@ -249,6 +251,11 @@ namespace DesktopWidgets.ViewModelBase
             return Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Stretch
                 ? MaxHeight
                 : Settings.Height;
+        }
+
+        private void DismissWidgetExecute()
+        {
+            _id.GetView()?.HideUI();
         }
 
         private void EditWidgetExecute()
