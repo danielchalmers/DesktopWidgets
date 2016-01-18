@@ -210,6 +210,12 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            if (App.IsMuted)
+            {
+                Hide();
+                return;
+            }
+
             var showIntro = false;
             if (QueueIntro)
             {

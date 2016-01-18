@@ -100,5 +100,11 @@
     <Setting Name="UpdateWaiting" Type="System.Version" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="MuteDuration" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">01:00:00</Value>
+    </Setting>
+    <Setting Name="MuteEndTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

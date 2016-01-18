@@ -9,6 +9,7 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
+    <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
     <Style TargetType="{x:Type xctk:PropertyGrid}">
         <Setter Property="IsCategorized" Value="True" />
         <Setter Property="ShowSortOptions" Value="True" />
@@ -20,6 +21,15 @@
                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
     </Style>
     <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
+        <MenuItem Click="menuItemMute_OnClick">
+            <MenuItem.Header>
+                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                    <Binding Path="MuteDuration" Source="{x:Static p:Settings.Default}" />
+                    <Binding Path="MuteEndTime" Source="{x:Static p:Settings.Default}" />
+                </MultiBinding>
+            </MenuItem.Header>
+        </MenuItem>
+        <Separator />
         <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="Reload All Widgets" Click="menuItemReloadWidgets_OnClick" />

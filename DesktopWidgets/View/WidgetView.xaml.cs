@@ -108,7 +108,7 @@ namespace DesktopWidgets.View
             bool hideOnFinish = true,
             Action finishAction = null)
         {
-            if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro)
+            if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro || App.IsMuted)
                 return;
 
             if (_introTimer == null)
@@ -143,7 +143,7 @@ namespace DesktopWidgets.View
 
         public void ShowUI()
         {
-            if (Settings.OpenMode != OpenMode.AlwaysOpen)
+            if (Settings.OpenMode != OpenMode.AlwaysOpen && !App.IsMuted)
                 _mouseChecker.Show();
         }
 

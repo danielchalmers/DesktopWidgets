@@ -345,5 +345,11 @@ namespace DesktopWidgets.Helpers
             foreach (var id in App.WidgetViews.Select(x => x.Id).ToList())
                 id.Reload();
         }
+
+        public static void HideWidgets()
+        {
+            foreach (var view in App.WidgetViews)
+                view.HideUI();
+        }
     }
 }

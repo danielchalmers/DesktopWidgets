@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Properties;
 using DesktopWidgets.View;
 using DesktopWidgets.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
@@ -34,6 +35,8 @@ namespace DesktopWidgets
         {
             Dispatcher.UnhandledException += OnDispatcherUnhandledException;
         }
+
+        public static bool IsMuted => Settings.Default.MuteEndTime > DateTime.Now;
 
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
 
 namespace DesktopWidgets
@@ -54,6 +56,19 @@ namespace DesktopWidgets
         private void menuItemReloadWidgets_OnClick(object sender, RoutedEventArgs e)
         {
             WidgetHelper.ReloadWidgets();
+        }
+
+        private void menuItemMute_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (App.IsMuted)
+            {
+                Settings.Default.MuteEndTime = DateTime.Now;
+            }
+            else
+            {
+                WidgetHelper.HideWidgets();
+                Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
+            }
         }
     }
 }

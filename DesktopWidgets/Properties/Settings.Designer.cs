@@ -397,5 +397,28 @@ namespace DesktopWidgets.Properties {
                 this["UpdateWaiting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("01:00:00")]
+        public global::System.TimeSpan MuteDuration {
+            get {
+                return ((global::System.TimeSpan)(this["MuteDuration"]));
+            }
+            set {
+                this["MuteDuration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime MuteEndTime {
+            get {
+                return ((global::System.DateTime)(this["MuteEndTime"]));
+            }
+            set {
+                this["MuteEndTime"] = value;
+            }
+        }
     }
 }
