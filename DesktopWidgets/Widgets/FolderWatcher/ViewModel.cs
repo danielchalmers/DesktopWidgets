@@ -43,8 +43,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             IsImage = false;
 
             OpenFile = new RelayCommand(OpenFileExecute);
-            Dismiss = new RelayCommand(DismissExecute);
-            Mute = new RelayCommand(MuteExecute);
 
             _notificationQueue = new Queue<string>();
             _directoryWatcher =
@@ -61,8 +59,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         }
 
         public ICommand OpenFile { get; set; }
-        public ICommand Dismiss { get; set; }
-        public ICommand Mute { get; set; }
 
         public Settings Settings { get; }
 
@@ -139,7 +135,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 IsImage = false;
             }
 
-            if (Settings.MuteEndTime < DateTime.Now)
+            if (!App.IsMuted)
             {
                 if (Settings.OpenOnEvent)
                     Settings.Identifier.GetView()
@@ -169,24 +165,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void OpenFileExecute()
         {
             ProcessHelper.Launch(CurrentFilePath);
-            Hide();
-        }
-
-        private void MuteExecute()
-        {
-            if (Settings.MuteEndTime > DateTime.Now)
-            {
-                Settings.MuteEndTime = DateTime.Now;
-            }
-            else
-            {
-                Hide();
-                Settings.MuteEndTime = DateTime.Now + Settings.MuteDuration;
-            }
-        }
-
-        private void DismissExecute()
-        {
             Hide();
         }
 

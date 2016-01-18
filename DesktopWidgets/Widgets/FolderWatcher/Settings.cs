@@ -32,20 +32,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show File Name")]
         public bool ShowFileName { get; set; } = true;
 
-        [Category("Style")]
-        [DisplayName("Show Mute")]
-        public bool ShowMute { get; set; } = true;
-
-        [Category("Style")]
-        [DisplayName("Show Dismiss")]
-        public bool ShowDismiss { get; set; } = true;
-
-        [DisplayName("Mute End Time")]
-        public DateTime MuteEndTime { get; set; } = DateTime.Now;
-
-        [DisplayName("Mute Duration")]
-        public TimeSpan MuteDuration { get; set; } = TimeSpan.FromHours(1);
-
         [Category("General")]
         [DisplayName("Timeout Duration")]
         public TimeSpan TimeoutDuration { get; set; } = TimeSpan.FromMinutes(1);
