@@ -70,5 +70,10 @@ namespace DesktopWidgets
                 Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
             }
         }
+
+        private void menuItemShowWidgets_OnClick(object sender, RoutedEventArgs e)
+        {
+            WidgetHelper.ShowAllWidgetIntros();
+        }
     }
 }

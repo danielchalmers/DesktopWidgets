@@ -32,6 +32,7 @@
         <Separator />
         <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
         <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
+        <MenuItem Header="Show All Widgets" Click="menuItemShowWidgets_OnClick" />
         <MenuItem Header="Reload All Widgets" Click="menuItemReloadWidgets_OnClick" />
         <Separator />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
