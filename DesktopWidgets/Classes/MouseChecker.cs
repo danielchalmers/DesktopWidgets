@@ -284,7 +284,7 @@ namespace DesktopWidgets.Classes
         private bool IsShowable()
         {
             return (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard) &&
-                   IsMouseInMouseBounds();
+                   (_view.IsMouseOver || IsMouseInMouseBounds());
         }
 
         public void Show(bool animate = true)
