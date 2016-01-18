@@ -146,6 +146,12 @@ namespace DesktopWidgets.Helpers
 
         public static void LoadView(this WidgetId id)
         {
+            foreach (var view in App.WidgetViews.Where(view => view.Id == id))
+            {
+                view.Close();
+                App.WidgetViews.Remove(view);
+            }
+
             var settings = id.GetSettings();
             UserControl userControl;
             WidgetViewModelBase dataContext;
@@ -217,7 +223,7 @@ namespace DesktopWidgets.Helpers
 
             var widgetView = new WidgetView(id, dataContext, userControl);
             App.WidgetViews.Add(widgetView);
-            ((Window) widgetView).Show();
+            widgetView.Show();
         }
 
         private static void AddNewWidget(string type)
