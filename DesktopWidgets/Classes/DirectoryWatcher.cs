@@ -44,6 +44,8 @@ namespace DesktopWidgets.Classes
                 {
                     if (KnownFilePaths[folder] == null)
                         break;
+                    if (file.Length > _settings.MaxSize && _settings.MaxSize > 0)
+                        continue;
                     if (!string.IsNullOrWhiteSpace(_settings.IncludeFilter) && _settings.IncludeFilter != "*.*" &&
                         !_settings.IncludeFilter.Split('|')
                             .Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
