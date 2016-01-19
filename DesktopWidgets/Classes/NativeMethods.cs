@@ -7,6 +7,10 @@ namespace DesktopWidgets.Classes
 {
     internal static class NativeMethods
     {
+        internal const uint SWP_NOSIZE = 0x0001;
+        internal const uint SWP_NOMOVE = 0x0002;
+        internal const uint SWP_SHOWWINDOW = 0x0040;
+
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern int GetWindowRect(IntPtr hWnd, out Win32Rect rc);
 
@@ -49,5 +53,9 @@ namespace DesktopWidgets.Classes
 
         [DllImport("user32.dll")]
         internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        internal static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy,
+            uint uFlags);
     }
 }

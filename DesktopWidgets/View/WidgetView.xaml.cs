@@ -23,6 +23,8 @@ namespace DesktopWidgets.View
         private DispatcherTimer _onTopForceTimer;
         public bool IsRefreshRequired;
 
+        public Win32App ThisApp;
+
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
@@ -89,8 +91,8 @@ namespace DesktopWidgets.View
             base.OnSourceInitialized(e);
             var hwnd = new WindowInteropHelper(this).Handle;
             var widgetSrc = HwndSource.FromHwnd(hwnd);
-
             widgetSrc?.AddHook(WndProc);
+            ThisApp = new Win32App(hwnd);
 
             if (Settings.Unclickable)
                 new Win32App(hwnd).SetWindowExTransparent();
@@ -224,11 +226,7 @@ namespace DesktopWidgets.View
                 if (_onTopForceTimer == null)
                 {
                     _onTopForceTimer = new DispatcherTimer();
-                    _onTopForceTimer.Tick += delegate
-                    {
-                        ViewModel.OnTop = false;
-                        ViewModel.OnTop = true;
-                    };
+                    _onTopForceTimer.Tick += (sender, args) => ThisApp.SetTopMost();
                 }
                 _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(Settings.ForceOnTopInterval);
                 _onTopForceTimer.Stop();
