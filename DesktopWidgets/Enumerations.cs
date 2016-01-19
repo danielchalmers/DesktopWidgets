@@ -92,6 +92,7 @@
 
     public enum DirectoryChange
     {
-        NewFile
+        NewFile,
+        FileChanged
     }
 }

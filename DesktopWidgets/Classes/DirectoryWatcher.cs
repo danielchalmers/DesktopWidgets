@@ -10,15 +10,16 @@ namespace DesktopWidgets.Classes
     internal class DirectoryWatcher
     {
         private readonly DispatcherTimer _dirWatcherTimer;
-        private readonly Action<string, DirectoryChange> _newFileAction;
+        private readonly Action<FileInfo, DirectoryChange> _newFileAction;
         private readonly DirectoryWatcherSettings _settings;
-        public readonly Dictionary<string, List<string>> KnownFilePaths;
+        public readonly Dictionary<string, List<FileInfo>> KnownFilePaths;
 
-        public DirectoryWatcher(DirectoryWatcherSettings settings, Action<string, DirectoryChange> newFileAction = null)
+        public DirectoryWatcher(DirectoryWatcherSettings settings,
+            Action<FileInfo, DirectoryChange> newFileAction = null)
         {
             _settings = settings;
             _newFileAction = newFileAction;
-            KnownFilePaths = new Dictionary<string, List<string>>();
+            KnownFilePaths = new Dictionary<string, List<FileInfo>>();
             _dirWatcherTimer = new DispatcherTimer {Interval = _settings.CheckInterval};
             _dirWatcherTimer.Tick += (sender, args) => CheckDirectoryForNewFiles();
         }
@@ -36,21 +37,36 @@ namespace DesktopWidgets.Classes
                 if (!KnownFilePaths.ContainsKey(folder))
                     KnownFilePaths.Add(folder, null);
                 var files = Directory.EnumerateFiles(folder, "*.*",
-                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).ToList();
+                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Select(x => new FileInfo(x))
+                    .ToList();
                 foreach (var file in files)
                 {
-                    if (KnownFilePaths[folder] == null || KnownFilePaths[folder].Any(x => x == file))
-                        continue;
+                    if (KnownFilePaths[folder] == null)
+                        break;
                     if (!string.IsNullOrWhiteSpace(_settings.IncludeFilter) && _settings.IncludeFilter != "*.*" &&
                         !_settings.IncludeFilter.Split('|')
-                            .Any(x => x.EndsWith(Path.GetExtension(file), StringComparison.OrdinalIgnoreCase)))
+                            .Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
                     if (!string.IsNullOrWhiteSpace(_settings.ExcludeFilter) &&
                         _settings.ExcludeFilter.Split('|')
-                            .Any(x => x.EndsWith(Path.GetExtension(file), StringComparison.OrdinalIgnoreCase)))
+                            .Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
                     if (promptAction)
-                        _newFileAction?.Invoke(file, DirectoryChange.NewFile);
+                    {
+                        var sameFiles = KnownFilePaths[folder].Where(x => x.FullName == file.FullName).ToList();
+                        if (sameFiles.Count > 0)
+                        {
+                            if (sameFiles.Any(x => x.LastWriteTimeUtc != file.LastWriteTimeUtc))
+                            {
+                                _newFileAction?.Invoke(file, DirectoryChange.FileChanged);
+                            }
+                        }
+                        else
+                        {
+                            _newFileAction?.Invoke(file, DirectoryChange.NewFile);
+                        }
+                    }
                 }
                 KnownFilePaths[folder] = files;
             }

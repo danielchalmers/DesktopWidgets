@@ -101,14 +101,16 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
         }
 
-        private void AddToFileQueue(string path, DirectoryChange change)
+        private void AddToFileQueue(FileInfo path, DirectoryChange change)
         {
+            if (change == DirectoryChange.FileChanged && !Settings.ShowModifiedFiles)
+                return;
             var lastCheck = Settings.LastCheck;
             Settings.LastCheck = DateTime.Now;
             if (Settings.EnableTimeout)
                 if (DateTime.Now - lastCheck >= Settings.TimeoutDuration)
                     return;
-            _notificationQueue.Enqueue(path);
+            _notificationQueue.Enqueue(path.FullName);
             if (Settings.ReplaceExistingFile || (!_isShowing && _notificationQueue.Count == 1))
                 HandleDirectoryChange();
         }

@@ -59,6 +59,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Recursive")]
         public bool Recursive { get; set; } = false;
 
+        [Category("General")]
+        [DisplayName("Show Modified Files")]
+        public bool ShowModifiedFiles { get; set; } = false;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Open On Event")]
         public bool OpenOnEvent { get; set; } = true;

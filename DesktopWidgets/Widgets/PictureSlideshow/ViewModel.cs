@@ -66,13 +66,13 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             {
                 newImagePath =
                     _directoryWatcher.KnownFilePaths[Settings.RootPath][
-                        _random.Next(0, _directoryWatcher.KnownFilePaths.Count)];
+                        _random.Next(0, _directoryWatcher.KnownFilePaths.Count)].FullName;
             }
             else
             {
                 if (_index > _directoryWatcher.KnownFilePaths.Count - 1)
                     _index = 0;
-                newImagePath = _directoryWatcher.KnownFilePaths[Settings.RootPath][_index];
+                newImagePath = _directoryWatcher.KnownFilePaths[Settings.RootPath][_index].FullName;
                 _index++;
             }
 
