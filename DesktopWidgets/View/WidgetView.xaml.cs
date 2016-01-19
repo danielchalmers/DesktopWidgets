@@ -221,14 +221,14 @@ namespace DesktopWidgets.View
                 _mouseChecker.Stop();
                 _mouseChecker.Start();
             }
-            if (Settings.ForceOnTop && Settings.ForceOnTopIntervalMS > 0)
+            if (Settings.ForceOnTop && Settings.ForceOnTopInterval > 0)
             {
                 if (_onTopForceTimer == null)
                 {
                     _onTopForceTimer = new DispatcherTimer();
                     _onTopForceTimer.Tick += (sender, args) => ThisApp.SetTopMost();
                 }
-                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(Settings.ForceOnTopIntervalMS);
+                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(Settings.ForceOnTopInterval);
                 _onTopForceTimer.Stop();
                 _onTopForceTimer.Start();
             }
