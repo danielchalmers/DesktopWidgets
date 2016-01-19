@@ -77,11 +77,5 @@ namespace DesktopWidgets.Classes
             var extendedStyle = NativeMethods.GetWindowLong(hwnd, GWL_EXSTYLE);
             NativeMethods.SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
-
-        public void SetTopMost()
-        {
-            NativeMethods.SetWindowPos(hwnd, new IntPtr(-1), 0, 0, 0, 0,
-                NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_SHOWWINDOW);
-        }
     }
 }
