@@ -159,7 +159,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Behavior")]
         [DisplayName("Force On Top Refresh Interval (ms)")]
-        public int ForceOnTopInterval { get; set; } = 500;
+        public int ForceOnTopIntervalMS { get; set; } = 100;
 
         [Category("Style")]
         [DisplayName("Intro Duration (ms)")]
