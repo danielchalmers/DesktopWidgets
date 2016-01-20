@@ -84,6 +84,8 @@ namespace DesktopWidgets.View
         public WidgetId Id { get; }
         public bool AnimationRunning { get; set; } = false;
 
+        public new bool IsVisible => Visibility == Visibility.Visible && Opacity > 0.99;
+
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
