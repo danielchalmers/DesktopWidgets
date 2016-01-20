@@ -8,14 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:sidebar="clr-namespace:DesktopWidgets.Widgets.Sidebar"
-             mc:Ignorable="d"
-
-             AllowDrop="True">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Drop">
-            <command:EventToCommand Command="{Binding Drop}" PassEventArgsToCommand="True" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+             mc:Ignorable="d">
     <UserControl.Resources>
         <Duration x:Key="ButtonAnimationDuration">0:0:0.050</Duration>
         <Color x:Key="ButtonColor">Transparent</Color>

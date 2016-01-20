@@ -14,7 +14,12 @@
         classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
         Closing="WidgetView_OnClosing"
-        LocationChanged="WidgetView_OnLocationChanged">
+        LocationChanged="WidgetView_OnLocationChanged" AllowDrop="{Binding AllowDrop}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Drop">
+            <command:EventToCommand Command="{Binding Drop}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Window.Resources>
         <classes:SettingsToThicknessConverter x:Key="SettingsToThicknessConverter" />
         <classes:MultiBoolToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />

@@ -14,5 +14,9 @@ namespace DesktopWidgets.Widgets.PictureFrame
         [Category("General")]
         [DisplayName("Image Path")]
         public string ImageUrl { get; set; }
+
+        [Category("General")]
+        [DisplayName("Allow Drag Drop Images")]
+        public bool AllowDropFiles { get; set; } = true;
     }
 }

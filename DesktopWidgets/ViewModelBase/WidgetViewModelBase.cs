@@ -37,11 +37,14 @@ namespace DesktopWidgets.ViewModelBase
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
+            Drop = new RelayCommand<DragEventArgs>(DropExecute);
 
             WidgetDockHorizontal = new RelayCommand<HorizontalAlignment>(WidgetDockHorizontalExecute);
             WidgetDockVertical = new RelayCommand<VerticalAlignment>(WidgetDockVerticalExecute);
             WidgetUndock = new RelayCommand(WidgetUndockExecute);
         }
+
+        public bool AllowDrop { get; set; }
 
         public bool OnTop
         {
@@ -183,6 +186,8 @@ namespace DesktopWidgets.ViewModelBase
         public ICommand WidgetDockHorizontal { get; private set; }
         public ICommand WidgetDockVertical { get; private set; }
         public ICommand WidgetUndock { get; private set; }
+
+        public ICommand Drop { get; set; }
 
         public bool IsContextMenuOpen
         {
@@ -339,6 +344,10 @@ namespace DesktopWidgets.ViewModelBase
         }
 
         public virtual void OnClose()
+        {
+        }
+
+        public virtual void DropExecute(DragEventArgs e)
         {
         }
     }

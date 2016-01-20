@@ -19,9 +19,9 @@ namespace DesktopWidgets.Widgets.Sidebar
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
+            AllowDrop = Settings.AllowDropFiles;
             IconCache = new Dictionary<string, ImageSource>();
 
-            Drop = new RelayCommand<DragEventArgs>(DropExecute);
             Refresh = new RelayCommand(RefreshExecute);
             NewShortcut = new RelayCommand(NewShortcutExecute);
             NewSeparator = new RelayCommand(NewSeparatorExecute);
@@ -49,7 +49,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         public Dictionary<string, ImageSource> IconCache { get; set; }
 
         public ICommand Refresh { get; set; }
-        public ICommand Drop { get; set; }
 
         public ICommand ShortcutFocus { get; set; }
 
@@ -77,12 +76,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             HotkeyStore.RegisterHotkey(shortcut.Guid, new Hotkey(shortcut.HotKey,
                 shortcut.HotKeyModifiers, shortcut.HotKeyFullscreenActivation), delegate { this.Execute(shortcut); });
-        }
-
-        private void DropExecute(DragEventArgs e)
-        {
-            if (Settings.AllowDropFiles && e.Data.GetDataPresent(DataFormats.FileDrop))
-                this.ProcessFiles((string[]) e.Data.GetData(DataFormats.FileDrop));
         }
 
         private void ShortcutFocusExecute(Shortcut shortcut)
@@ -140,6 +133,12 @@ namespace DesktopWidgets.Widgets.Sidebar
         private void RefreshExecute()
         {
             this.ForceRefresh();
+        }
+
+        public override void DropExecute(DragEventArgs e)
+        {
+            if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
+                this.ProcessFiles((string[]) e.Data.GetData(DataFormats.FileDrop));
         }
     }
 }
