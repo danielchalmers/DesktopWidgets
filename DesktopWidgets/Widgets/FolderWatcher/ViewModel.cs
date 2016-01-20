@@ -111,7 +111,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (DateTime.Now - lastCheck >= Settings.TimeoutDuration)
                     return;
             _notificationQueue.Enqueue(path.FullName);
-            if (Settings.ReplaceExistingFile || (!_isShowing && _notificationQueue.Count == 1))
+            if (!Settings.QueueFiles || (!_isShowing && _notificationQueue.Count == 1))
                 HandleDirectoryChange();
         }
 

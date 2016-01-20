@@ -52,8 +52,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public double EventSoundVolume { get; set; } = 1.0;
 
         [Category("Behavior")]
-        [DisplayName("Replace Existing File")]
-        public bool ReplaceExistingFile { get; set; } = false;
+        [DisplayName("Enable File Queue")]
+        public bool QueueFiles { get; set; } = true;
 
         [Category("General")]
         [DisplayName("Recursive")]
