@@ -350,5 +350,9 @@ namespace DesktopWidgets.ViewModelBase
         public virtual void DropExecute(DragEventArgs e)
         {
         }
+
+        public virtual void OnIntroFinish()
+        {
+        }
     }
 }

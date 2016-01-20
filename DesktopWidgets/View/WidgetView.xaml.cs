@@ -110,9 +110,7 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
-        public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
-            bool hideOnFinish = true,
-            Action finishAction = null)
+        public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false, bool hideOnFinish = true)
         {
             if (Settings.OpenMode == OpenMode.AlwaysOpen || App.IsMuted)
                 return;
@@ -125,7 +123,7 @@ namespace DesktopWidgets.View
                     _introTimer.Stop();
                     if (hideOnFinish)
                         _mouseChecker.Hide(checkHideStatus: true);
-                    finishAction?.Invoke();
+                    ViewModel.OnIntroFinish();
                 };
             }
 

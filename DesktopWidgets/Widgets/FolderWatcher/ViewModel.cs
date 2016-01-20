@@ -142,14 +142,17 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (Settings.OpenOnEvent)
                     Settings.Identifier.GetView()
                         .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                            false, false, false, delegate
-                            {
-                                _isShowing = false;
-                                HandleDirectoryChange();
-                            });
+                            false, false, false);
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             }
             //}
+        }
+
+        public override void OnIntroFinish()
+        {
+            base.OnIntroFinish();
+            _isShowing = false;
+            HandleDirectoryChange();
         }
 
         private void UpdateImage(string imagePath)
