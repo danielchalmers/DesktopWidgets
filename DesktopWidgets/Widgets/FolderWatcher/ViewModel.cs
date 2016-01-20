@@ -138,13 +138,11 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
 
             if (!App.IsMuted)
-            {
-                if (Settings.OpenOnEvent)
-                    Settings.Identifier.GetView()
-                        .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                            false, false, false);
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
-            }
+            if (Settings.OpenOnEvent)
+                Settings.Identifier.GetView()
+                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                        false, false, false);
             //}
         }
 

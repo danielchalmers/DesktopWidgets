@@ -61,13 +61,10 @@ namespace DesktopWidgets.Widgets.CountdownClock
         private void OnEndAction()
         {
             if (!App.IsMuted)
-            {
                 MediaPlayerStore.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
-                if (Settings.OpenOnEvent)
-                    Settings.Identifier.GetView()
-                        .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                            false);
-            }
+            if (Settings.OpenOnEvent)
+                Settings.Identifier.GetView()
+                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
         }
     }
 }

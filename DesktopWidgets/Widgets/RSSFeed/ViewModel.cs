@@ -78,13 +78,10 @@ namespace DesktopWidgets.Widgets.RSSFeed
         private void NewHeadlineFound()
         {
             if (!App.IsMuted)
-            {
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
-                if (Settings.OpenOnEvent)
-                    Settings.Identifier.GetView()
-                        .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                            false);
-            }
+            if (Settings.OpenOnEvent)
+                Settings.Identifier.GetView()
+                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
         }
 
         private void DownloadFeed(Action<SyndicationFeed> finishAction)
