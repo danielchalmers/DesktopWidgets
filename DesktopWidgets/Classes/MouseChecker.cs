@@ -204,12 +204,6 @@ namespace DesktopWidgets.Classes
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
-            if (_view.IsRefreshRequired)
-            {
-                _view.UpdateUi(false, false);
-                return;
-            }
-
             if (App.IsMuted)
             {
                 Hide();

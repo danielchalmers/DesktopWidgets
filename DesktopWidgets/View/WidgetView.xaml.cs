@@ -21,11 +21,12 @@ namespace DesktopWidgets.View
         public readonly UserControl UserControl;
         private DispatcherTimer _introTimer;
         private DispatcherTimer _onTopForceTimer;
-        public bool IsRefreshRequired;
 
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
+            Opacity = 0;
+            Hide();
             Id = id;
             Settings = id.GetSettings();
             ViewModel = viewModel;
@@ -68,11 +69,11 @@ namespace DesktopWidgets.View
             }
 
             _mouseChecker = new MouseChecker(this, Settings);
-            UpdateUi(updateOpacity: false);
-            IsRefreshRequired = true;
 
             if (!App.Arguments.Contains("-systemstartup"))
                 _mouseChecker.QueueIntro = true;
+
+            DataContext = ViewModel;
 
             _mouseChecker.Start();
         }
@@ -96,6 +97,9 @@ namespace DesktopWidgets.View
 
             if (Settings.Unclickable)
                 new Win32App(hwnd).SetWindowExTransparent();
+
+
+            UpdateUi(false, false);
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -110,7 +114,7 @@ namespace DesktopWidgets.View
             bool hideOnFinish = true,
             Action finishAction = null)
         {
-            if (IsRefreshRequired || Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro || App.IsMuted)
+            if (Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro || App.IsMuted)
                 return;
 
             if (_introTimer == null)
@@ -208,7 +212,6 @@ namespace DesktopWidgets.View
             if (updateOpacity)
                 Opacity = 1;
 
-            IsRefreshRequired = false;
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
                 ShowIntro();
         }
