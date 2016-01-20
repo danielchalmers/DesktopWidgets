@@ -310,5 +310,9 @@ namespace DesktopWidgets.Classes
         [Category("General")]
         [DisplayName("Auto Detect Screen Bounds")]
         public bool AutoDetectScreenBounds { get; set; } = true;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Ignore Screen Corner Size")]
+        public int IgnoreScreenCornerSize { get; set; } = 1;
     }
 }

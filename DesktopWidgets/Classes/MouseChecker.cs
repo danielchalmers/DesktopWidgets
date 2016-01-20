@@ -197,6 +197,13 @@ namespace DesktopWidgets.Classes
             return _view.GetBounds().Contains(GetMouseLocation());
         }
 
+        private bool IsMouseInCorners()
+        {
+            return
+                _settings.ScreenBounds.GetCorners(_settings.IgnoreScreenCornerSize)
+                    .Any(x => x.Contains(GetMouseLocation()));
+        }
+
         private void Update()
         {
             // Show or hide window based on mouse position.
@@ -256,7 +263,8 @@ namespace DesktopWidgets.Classes
                 if (IsShowable())
                 {
                     if (!_view.IsVisible &&
-                        !(_settings.Ignore00XY && Control.MousePosition.X == 0 && Control.MousePosition.Y == 0))
+                        !(_settings.Ignore00XY && Control.MousePosition.X == 0 && Control.MousePosition.Y == 0) &&
+                        !(_settings.IgnoreScreenCornerSize != 0 && IsMouseInCorners()))
                     {
                         if (_settings.ShowDelay == 0)
                         {
