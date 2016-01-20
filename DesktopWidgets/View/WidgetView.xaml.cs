@@ -110,11 +110,9 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
-        public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false, bool hideOnFinish = true)
+        public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
+            bool hideOnFinish = true)
         {
-            if (Settings.OpenMode == OpenMode.AlwaysOpen || App.IsMuted)
-                return;
-
             if (_introTimer == null)
             {
                 _introTimer = new DispatcherTimer();
