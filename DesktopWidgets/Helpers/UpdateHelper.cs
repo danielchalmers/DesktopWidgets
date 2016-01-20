@@ -17,7 +17,7 @@ namespace DesktopWidgets.Helpers
 
         public static void CheckForUpdatesAsync(bool auto)
         {
-            if (auto && (!IsUpdateDay || FullScreenHelper.DoesAnyMonitorHaveFullscreenApp()))
+            if (auto && (App.IsMuted || !IsUpdateDay || FullScreenHelper.DoesAnyMonitorHaveFullscreenApp()))
                 return;
 
             UpdateCheckInfo updateInfo = null;
