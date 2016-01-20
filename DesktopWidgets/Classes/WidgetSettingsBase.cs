@@ -185,10 +185,6 @@ namespace DesktopWidgets.Classes
         [DisplayName("Image Opacity")]
         public double BackgroundImageOpacity { get; set; } = 1.0;
 
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Intro Enabled")]
-        public bool ShowIntro { get; set; } = true;
-
         [Category("Style")]
         [DisplayName("Context Menu Enabled")]
         public bool ShowContextMenu { get; set; } = true;

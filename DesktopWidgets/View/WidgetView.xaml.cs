@@ -114,7 +114,7 @@ namespace DesktopWidgets.View
             bool hideOnFinish = true,
             Action finishAction = null)
         {
-            if (Settings.OpenMode == OpenMode.AlwaysOpen || !Settings.ShowIntro || App.IsMuted)
+            if (Settings.OpenMode == OpenMode.AlwaysOpen || App.IsMuted)
                 return;
 
             if (_introTimer == null)
