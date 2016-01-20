@@ -202,10 +202,6 @@ namespace DesktopWidgets.Classes
         public Point DockOffset { get; set; } = new Point();
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Ignore 0,0 Cursor Position")]
-        public bool Ignore00XY { get; set; } = true;
-
-        [Category("Behavior (Hideable)")]
         [DisplayName("Show Sound Path")]
         public string ShowSoundPath { get; set; }
 

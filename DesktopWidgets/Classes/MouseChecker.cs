@@ -262,9 +262,7 @@ namespace DesktopWidgets.Classes
             {
                 if (IsShowable())
                 {
-                    if (!_view.IsVisible &&
-                        !(_settings.Ignore00XY && Control.MousePosition.X == 0 && Control.MousePosition.Y == 0) &&
-                        !(_settings.IgnoreScreenCornerSize != 0 && IsMouseInCorners()))
+                    if (!_view.IsVisible && !(_settings.IgnoreScreenCornerSize != 0 && IsMouseInCorners()))
                     {
                         if (_settings.ShowDelay == 0)
                         {
