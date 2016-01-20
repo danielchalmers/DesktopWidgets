@@ -10,6 +10,7 @@
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
     <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
+    <classes:NonAlwaysOnOpenModeToBoolConverter x:Key="NonAlwaysOnOpenModeToBoolConverter" />
     <Style TargetType="{x:Type xctk:PropertyGrid}">
         <Setter Property="IsCategorized" Value="True" />
         <Setter Property="ShowSortOptions" Value="True" />
@@ -69,7 +70,8 @@
             </MenuItem>
         </MenuItem>
         <Separator />
-        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}" />
+        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}"
+                  IsEnabled="{Binding Settings.OpenMode, Converter={StaticResource NonAlwaysOnOpenModeToBoolConverter}}" />
         <MenuItem Header="Reload" Command="{Binding ReloadWidget}" />
         <MenuItem
             Header="{Binding Settings.Disabled, Converter={StaticResource BoolToEnableDisableNameConverter}}"

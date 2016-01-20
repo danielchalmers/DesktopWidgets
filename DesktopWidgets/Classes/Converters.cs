@@ -658,13 +658,13 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class NonAlwaysOnOpenModeToVisibilityConverter : IValueConverter
+    public class NonAlwaysOnOpenModeToBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            return (OpenMode) value == OpenMode.AlwaysOpen ? Visibility.Collapsed : Visibility.Visible;
+            return (OpenMode) value != OpenMode.AlwaysOpen;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
