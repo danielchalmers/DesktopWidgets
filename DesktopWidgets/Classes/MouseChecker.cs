@@ -251,24 +251,44 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (!(_settings.Ignore00XY && Control.MousePosition.X == 0 && Control.MousePosition.Y == 0))
+            if (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard)
             {
                 if (IsShowable())
                 {
-                    if (_showTimer.IsEnabled == false)
-                        _showTimer.Start();
+                    if (!_view.IsVisible &&
+                        !(_settings.Ignore00XY && Control.MousePosition.X == 0 && Control.MousePosition.Y == 0))
+                    {
+                        if (_settings.ShowDelay == 0)
+                        {
+                            Show();
+                        }
+                        else
+                        {
+                            if (_showTimer.IsEnabled == false)
+                                _showTimer.Start();
+                        }
+                    }
                 }
                 else
                 {
-                    _showTimer.Stop();
+                    if (_showTimer.IsEnabled)
+                        _showTimer.Stop();
                     if (IsHideable())
                     {
-                        if (_hideTimer.IsEnabled == false)
-                            _hideTimer.Start();
+                        if (_settings.HideDelay == 0)
+                        {
+                            Hide();
+                        }
+                        else
+                        {
+                            if (_hideTimer.IsEnabled == false)
+                                _hideTimer.Start();
+                        }
                     }
                     else
                     {
-                        _hideTimer.Stop();
+                        if (_hideTimer.IsEnabled)
+                            _hideTimer.Stop();
                     }
                 }
             }
@@ -276,15 +296,12 @@ namespace DesktopWidgets.Classes
 
         private bool IsHideable()
         {
-            return _view.IsVisible &&
-                   !_view.IsContextMenuOpen &&
-                   !(_settings.StayOpenIfMouseFocus && _view.IsMouseOver && IsMouseInWindowBounds());
+            return _view.IsVisible && !_view.IsContextMenuOpen && !(_settings.StayOpenIfMouseFocus && IsShowable());
         }
 
         private bool IsShowable()
         {
-            return (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard) &&
-                   (_view.IsMouseOver || IsMouseInMouseBounds());
+            return _view.IsMouseOver || IsMouseInMouseBounds();
         }
 
         public void Show(bool animate = true)
