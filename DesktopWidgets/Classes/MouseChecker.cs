@@ -37,13 +37,13 @@ namespace DesktopWidgets.Classes
             _mouseCheckTimer.Tick += (sender, args) => Update();
             _hideTimer.Tick += delegate
             {
-                Hide();
                 _hideTimer.Stop();
+                Hide();
             };
             _showTimer.Tick += delegate
             {
-                Show(activate: true);
                 _showTimer.Stop();
+                Show(activate: true);
             };
 
             UpdateIntervals();
