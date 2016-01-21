@@ -26,7 +26,8 @@ namespace DesktopWidgets.Helpers
             Widgets.Sidebar.Metadata.FriendlyName,
             Widgets.Calculator.Metadata.FriendlyName,
             Widgets.FolderWatcher.Metadata.FriendlyName,
-            Widgets.RSSFeed.Metadata.FriendlyName
+            Widgets.RSSFeed.Metadata.FriendlyName,
+            Widgets.CommandButton.Metadata.FriendlyName
         }.OrderBy(x => x).ToList();
 
         public static WidgetSettingsBase GetSettings(this WidgetId id)
@@ -108,6 +109,10 @@ namespace DesktopWidgets.Helpers
             {
                 return Widgets.RSSFeed.Metadata.FriendlyName;
             }
+            if (settings is Widgets.CommandButton.Settings)
+            {
+                return Widgets.CommandButton.Metadata.FriendlyName;
+            }
             return string.Empty;
         }
 
@@ -139,6 +144,8 @@ namespace DesktopWidgets.Helpers
                     return new Widgets.FolderWatcher.Settings();
                 case Widgets.RSSFeed.Metadata.FriendlyName:
                     return new Widgets.RSSFeed.Settings();
+                case Widgets.CommandButton.Metadata.FriendlyName:
+                    return new Widgets.CommandButton.Settings();
                 default:
                     return null;
             }
@@ -184,7 +191,7 @@ namespace DesktopWidgets.Helpers
             else if (settings is Widgets.Note.Settings)
             {
                 dataContext = new Widgets.Note.ViewModel(id);
-                userControl = new Widgets.Note.ControlView();
+                userControl = new Widgets.CommandButton.ControlView();
             }
             else if (settings is Widgets.PictureFrame.Settings)
             {
@@ -215,6 +222,11 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.RSSFeed.ViewModel(id);
                 userControl = new Widgets.RSSFeed.ControlView();
+            }
+            else if (settings is Widgets.CommandButton.Settings)
+            {
+                dataContext = new Widgets.CommandButton.ViewModel(id);
+                userControl = new Widgets.CommandButton.ControlView();
             }
             else
             {
