@@ -25,25 +25,26 @@ namespace DesktopWidgets.Widgets.CommandButton
 
         public void ExecuteCommand()
         {
-            if (string.IsNullOrWhiteSpace(Settings.Path))
+            if (string.IsNullOrWhiteSpace(Settings.FilePath))
             {
                 Popup.Show("You must enter a file path to execute first.", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (!File.Exists(Settings.Path))
+            if (!File.Exists(Settings.FilePath))
             {
                 Popup.Show("File path does not exist.", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Process.Start(Settings.Path, Settings.Args);
+            Process.Start(Settings.FilePath, Settings.FileArguments);
         }
 
         public override void ReloadHotKeys()
         {
             base.ReloadHotKeys();
-            if (Settings.HotKey != Key.None)
+            if (Settings.CommandHotKey != Key.None)
                 HotkeyStore.RegisterHotkey(_id.Guid,
-                    new Hotkey(Settings.HotKey, Settings.HotKeyModifiers, Settings.FullscreenActivation), ExecuteCommand);
+                    new Hotkey(Settings.CommandHotKey, Settings.CommandHotKeyModifiers, Settings.FullscreenActivation),
+                    ExecuteCommand);
             else
                 HotkeyStore.RemoveHotkey(_id.Guid);
         }

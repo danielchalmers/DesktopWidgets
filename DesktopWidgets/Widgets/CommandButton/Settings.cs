@@ -14,19 +14,19 @@ namespace DesktopWidgets.Widgets.CommandButton
 
         [Category("General")]
         [DisplayName("Path")]
-        public string Path { get; set; }
+        public string FilePath { get; set; }
 
         [Category("General")]
         [DisplayName("Arguments")]
-        public string Args { get; set; }
+        public string FileArguments { get; set; }
 
         [Category("General")]
         [DisplayName("Hotkey")]
-        public Key HotKey { get; set; }
+        public Key CommandHotKey { get; set; }
 
         [Category("General")]
         [DisplayName("Hotkey Modifiers")]
-        public ModifierKeys HotKeyModifiers { get; set; }
+        public ModifierKeys CommandHotKeyModifiers { get; set; }
 
         [Category("Style")]
         [DisplayName("Button Text")]
