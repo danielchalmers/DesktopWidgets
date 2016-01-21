@@ -184,6 +184,8 @@ namespace DesktopWidgets.View
                 DataContext = ViewModel;
             }
 
+            Title = Id.GetName();
+
             if (Settings.AutoDetectScreenBounds)
                 Settings.ScreenBounds = ScreenHelper.GetScreen(this).ToRect();
 
