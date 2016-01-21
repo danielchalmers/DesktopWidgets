@@ -41,7 +41,7 @@ namespace DesktopWidgets.Classes
 
         public static void Play(string path, double volume = 1)
         {
-            if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
+            if (App.IsMuted || string.IsNullOrWhiteSpace(path) || !File.Exists(path))
                 return;
             var player = GetAvailablePlayer();
             player.settings.volume = (int) (volume*100);
