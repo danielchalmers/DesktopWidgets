@@ -211,17 +211,17 @@ namespace DesktopWidgets.Classes
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
-            if (App.IsMuted)
-            {
-                Hide();
-                return;
-            }
-
             var showIntro = false;
             if (QueueIntro)
             {
                 showIntro = true;
                 QueueIntro = false;
+            }
+
+            if (App.IsMuted)
+            {
+                Hide();
+                return;
             }
 
             if (!_settings.FullscreenActivation && FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.ScreenBounds))
