@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:DesktopWidgets.View"
         xmlns:viewModel="clr-namespace:DesktopWidgets.ViewModel"
         mc:Ignorable="d"
-        Title="Select Item" Width="300" Height="350" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Select Item"
+        Width="300" MinHeight="350" SizeToContent="Height"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
