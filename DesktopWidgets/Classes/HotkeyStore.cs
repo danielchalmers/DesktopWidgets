@@ -67,6 +67,8 @@ namespace DesktopWidgets.Classes
 
         private static void OnHotkey(object sender, HotkeyEventArgs e)
         {
+            if (App.IsMuted)
+                return;
             var keys = e.Name.Split('\\');
             if (keys.Length != 2)
                 return;
