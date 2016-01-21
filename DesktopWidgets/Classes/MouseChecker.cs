@@ -42,7 +42,7 @@ namespace DesktopWidgets.Classes
             };
             _showTimer.Tick += delegate
             {
-                Show();
+                Show(activate: true);
                 _showTimer.Stop();
             };
 
@@ -266,7 +266,7 @@ namespace DesktopWidgets.Classes
                     {
                         if (_settings.ShowDelay == 0)
                         {
-                            Show();
+                            Show(activate: true);
                         }
                         else
                         {
@@ -310,7 +310,7 @@ namespace DesktopWidgets.Classes
             return _view.IsMouseOver || IsMouseInMouseBounds();
         }
 
-        public void Show(bool animate = true)
+        public void Show(bool animate = true, bool activate = false)
         {
             if (_view.AnimationRunning || _view.IsVisible)
                 return;
@@ -318,6 +318,8 @@ namespace DesktopWidgets.Classes
                 _view.Animate(AnimationMode.Show);
             else
                 _view.Show();
+            if (activate && _settings.ActivateOnShow)
+                _view.Activate();
         }
 
         public void Hide(bool animate = true, bool checkHideStatus = false)
