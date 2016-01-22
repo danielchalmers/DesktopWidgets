@@ -310,5 +310,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior (Hideable)")]
         [DisplayName("Ignore Screen Corner Size")]
         public int IgnoreScreenCornerSize { get; set; } = 1;
+
+        [Category("Style")]
+        [DisplayName("Resize Mode")]
+        public ResizeMode ResizeMode { get; set; } = ResizeMode.NoResize;
     }
 }
