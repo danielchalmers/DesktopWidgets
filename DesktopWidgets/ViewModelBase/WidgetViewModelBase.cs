@@ -119,7 +119,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             get
             {
-                return double.IsNaN(Settings.MaxWidth)
+                return double.IsNaN(Settings.MaxWidth) && Settings.MaxSizeUseScreen
                     ? Settings.ScreenBounds.Width
                     : Settings.MaxWidth;
             }
@@ -137,7 +137,7 @@ namespace DesktopWidgets.ViewModelBase
         {
             get
             {
-                return double.IsNaN(Settings.MaxHeight)
+                return double.IsNaN(Settings.MaxHeight) && Settings.MaxSizeUseScreen
                     ? Settings.ScreenBounds.Height
                     : Settings.MaxHeight;
             }

@@ -314,5 +314,9 @@ namespace DesktopWidgets.Classes
         [Category("Style")]
         [DisplayName("Resize Mode")]
         public ResizeMode ResizeMode { get; set; } = ResizeMode.NoResize;
+
+        [Category("Behavior")]
+        [DisplayName("Use Screen Size as Max Size")]
+        public bool MaxSizeUseScreen { get; set; } = true;
     }
 }
