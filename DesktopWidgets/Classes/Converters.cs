@@ -545,6 +545,45 @@ namespace DesktopWidgets.Classes
         }
     }
 
+    public class SizePaddingConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            try
+            {
+                var baseAmount = (double) value[0];
+                var total = 0.0;
+                var ignoreNext = false;
+                foreach (var val in value.ToList().GetRange(1, value.Length - 1))
+                {
+                    if (ignoreNext)
+                        continue;
+                    if (val is bool)
+                    {
+                        if (!(bool) val)
+                            ignoreNext = true;
+                    }
+                    else
+                    {
+                        total += (double) val;
+                    }
+                }
+                return baseAmount + total;
+            }
+            catch
+            {
+                return DependencyProperty.UnsetValue;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class IsExpandedToMoreOptionsHeaderConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

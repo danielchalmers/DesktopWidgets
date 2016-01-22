@@ -30,6 +30,7 @@
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
         <classes:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
         <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
+        <classes:SizePaddingConverter x:Key="SizePaddingConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -82,7 +83,6 @@
             <Setter Property="HorizontalScrollBarVisibility"
                     Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
             <Setter Property="Focusable" Value="False" />
-            <Setter Property="Margin" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
@@ -90,6 +90,7 @@
             <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
             <Setter Property="FontWeight" Value="{Binding Settings.FontWeight}" />
             <Setter Property="Focusable" Value="False" />
+            <Setter Property="Padding" Value="{Binding Settings.Padding}" />
         </Style>
         <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">
             <Setter Property="Focusable" Value="False" />
@@ -181,9 +182,21 @@
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0" x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
                         <ScrollViewer Grid.Row="1" x:Name="MainContentContainer"
-                                      Style="{StaticResource ScrollViewerContainerStyle}"
-                                      Width="{Binding Width}"
-                                      Height="{Binding Height}">
+                                      Style="{StaticResource ScrollViewerContainerStyle}">
+                            <ScrollViewer.Width>
+                                <MultiBinding Converter="{StaticResource SizePaddingConverter}">
+                                    <Binding Path="Width" />
+                                    <Binding Path="Content.Padding.Left" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Content.Padding.Right" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </ScrollViewer.Width>
+                            <ScrollViewer.Height>
+                                <MultiBinding Converter="{StaticResource SizePaddingConverter}">
+                                    <Binding Path="Height" />
+                                    <Binding Path="Content.Padding.Top" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Content.Padding.Bottom" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </ScrollViewer.Height>
                             <ScrollViewer.MaxWidth>
                                 <MultiBinding Converter="{StaticResource MaxSizeConverter}">
                                     <Binding Path="MaxWidth" />
