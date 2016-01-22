@@ -191,7 +191,7 @@ namespace DesktopWidgets.Helpers
             else if (settings is Widgets.Note.Settings)
             {
                 dataContext = new Widgets.Note.ViewModel(id);
-                userControl = new Widgets.CommandButton.ControlView();
+                userControl = new Widgets.Note.ControlView();
             }
             else if (settings is Widgets.PictureFrame.Settings)
             {
