@@ -78,6 +78,10 @@ namespace DesktopWidgets.Classes
             }
         }
 
+        public void SetWatchPath(string path)
+        {
+            _settings.WatchFolder = path;
+        }
 
         public void Start()
         {

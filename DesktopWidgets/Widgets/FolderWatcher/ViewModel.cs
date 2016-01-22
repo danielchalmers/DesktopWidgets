@@ -44,6 +44,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
             OpenFile = new RelayCommand(OpenFileExecute);
 
+            RefreshAction = delegate { _directoryWatcher.SetWatchPath(Settings.WatchFolder); };
+
             _notificationQueue = new Queue<string>();
             _directoryWatcher =
                 new DirectoryWatcher(
