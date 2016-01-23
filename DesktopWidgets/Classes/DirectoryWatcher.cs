@@ -21,7 +21,7 @@ namespace DesktopWidgets.Classes
             _newFileAction = newFileAction;
             KnownFilePaths = new Dictionary<string, List<FileInfo>>();
             _dirWatcherTimer = new DispatcherTimer {Interval = _settings.CheckInterval};
-            _dirWatcherTimer.Tick += (sender, args) => CheckDirectoryForNewFiles();
+            _dirWatcherTimer.Tick += (sender, args) => CheckDirectoryForNewFilesAsync();
         }
 
         public void CheckDirectoryForNewFilesAsync(bool promptAction = true)
