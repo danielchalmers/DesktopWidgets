@@ -43,6 +43,8 @@
 
                 <xctk:PropertyDefinition TargetProperties="Changelog"
                                          IsBrowsable="False" />
+                <xctk:PropertyDefinition TargetProperties="MustUpgrade"
+                                         IsBrowsable="False" />
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
     </DockPanel>
