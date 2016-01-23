@@ -231,7 +231,7 @@ namespace DesktopWidgets.Classes
 
         [Category("Style (Titlebar)")]
         [DisplayName("Reload Button Visible")]
-        public bool ShowTitlebarReloadButton { get; set; } = true;
+        public bool ShowTitlebarReloadButton { get; set; } = false;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Menu Button Visible")]
