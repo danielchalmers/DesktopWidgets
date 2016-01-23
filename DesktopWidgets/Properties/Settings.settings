@@ -85,9 +85,6 @@
     <Setting Name="SnapMargin" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">4</Value>
     </Setting>
-    <Setting Name="IgnoreAppBars" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="OptionsWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>

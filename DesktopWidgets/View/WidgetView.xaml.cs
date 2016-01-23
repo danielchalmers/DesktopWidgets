@@ -187,7 +187,7 @@ namespace DesktopWidgets.View
             Title = Id.GetName();
 
             if (Settings.AutoDetectScreenBounds)
-                Settings.ScreenBounds = ScreenHelper.GetScreen(this).ToRect();
+                Settings.ScreenBounds = ScreenHelper.GetScreen(this).ToRect(Settings.IgnoreAppBars);
 
             ViewModel.OnTop = Settings.OnTop;
             UpdateLayout();
@@ -256,7 +256,7 @@ namespace DesktopWidgets.View
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
         {
             if (Settings.SnapToScreenEdges && !Settings.IsDocked)
-                this.Snap(true);
+                this.Snap(true, Settings.IgnoreAppBars);
         }
 
         private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)

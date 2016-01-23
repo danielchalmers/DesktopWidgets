@@ -9,10 +9,10 @@ namespace DesktopWidgets.Helpers
 {
     public static class SnapHelper
     {
-        private static List<Rect> GetSnapBounds(this Window window, bool useWidgetsBounds)
+        private static List<Rect> GetSnapBounds(this Window window, bool useWidgetsBounds, bool useFullBounds)
         {
             var bounds = new List<Rect>();
-            bounds.AddRange(ScreenHelper.GetAllScreenBounds());
+            bounds.AddRange(ScreenHelper.GetAllScreenBounds(useFullBounds));
             if (useWidgetsBounds)
                 bounds.AddRange(
                     App.WidgetViews.Where(x => !x.Settings.Disabled && !x.Equals(window))
@@ -23,10 +23,11 @@ namespace DesktopWidgets.Helpers
         public static bool IsSnappable(double pos1, double pos2)
             => Math.Abs(pos1 - pos2) <= Settings.Default.SnapMargin;
 
-        public static void Snap(this Window window, bool useWidgetsBounds = false, Action leftSnapAction = null,
+        public static void Snap(this Window window, bool useWidgetsBounds = false, bool useFullBounds = false,
+            Action leftSnapAction = null,
             Action rightSnapAction = null, Action topSnapAction = null, Action bottomSnapAction = null)
         {
-            var compareBounds = GetSnapBounds(window, useWidgetsBounds);
+            var compareBounds = GetSnapBounds(window, useWidgetsBounds, useFullBounds);
             var windowBounds = window.GetBounds();
             window.SnapHorizontally(windowBounds, compareBounds, leftSnapAction, rightSnapAction);
             window.SnapVertically(windowBounds, compareBounds, topSnapAction, bottomSnapAction);

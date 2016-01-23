@@ -318,5 +318,9 @@ namespace DesktopWidgets.Classes
         [Category("Behavior")]
         [DisplayName("Use Screen Size as Max Size")]
         public bool MaxSizeUseScreen { get; set; } = true;
+
+        [Category("Behavior")]
+        [DisplayName("Ignore AppBars")]
+        public bool IgnoreAppBars { get; set; } = false;
     }
 }

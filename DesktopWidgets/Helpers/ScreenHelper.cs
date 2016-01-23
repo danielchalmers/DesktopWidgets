@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
-using DesktopWidgets.Properties;
 
 #endregion
 
@@ -13,14 +12,14 @@ namespace DesktopWidgets.Helpers
 {
     internal static class ScreenHelper
     {
-        public static Rect ToRect(this Screen screen)
+        public static Rect ToRect(this Screen screen, bool useFullBounds)
         {
-            return (Settings.Default.IgnoreAppBars ? screen.Bounds : screen.WorkingArea).ToRect();
+            return (useFullBounds ? screen.Bounds : screen.WorkingArea).ToRect();
         }
 
-        public static Rect GetScreenBounds(string deviceName)
+        public static Rect GetScreenBounds(string deviceName, bool useFullBounds)
         {
-            return GetScreen(deviceName).ToRect();
+            return GetScreen(deviceName).ToRect(useFullBounds);
         }
 
         public static Screen GetScreen(string deviceName)
@@ -37,9 +36,9 @@ namespace DesktopWidgets.Helpers
                 Screen.AllScreens.FirstOrDefault(x => x.Primary);
         }
 
-        public static IEnumerable<Rect> GetAllScreenBounds()
+        public static IEnumerable<Rect> GetAllScreenBounds(bool useFullBounds)
         {
-            return Screen.AllScreens.Select(ToRect);
+            return Screen.AllScreens.Select(x => x.ToRect(useFullBounds));
         }
 
         public static Screen GetScreen(Window window)
