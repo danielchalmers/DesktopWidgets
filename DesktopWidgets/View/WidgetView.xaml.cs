@@ -186,9 +186,6 @@ namespace DesktopWidgets.View
 
             Title = Id.GetName();
 
-            if (Settings.AutoDetectScreenBounds)
-                Settings.ScreenBounds = ScreenHelper.GetScreen(this).ToRect(Settings.IgnoreAppBars);
-
             ViewModel.OnTop = Settings.OnTop;
             UpdateLayout();
             ViewModel.UpdateSize();

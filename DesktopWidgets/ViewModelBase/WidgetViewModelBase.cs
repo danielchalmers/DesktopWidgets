@@ -292,6 +292,8 @@ namespace DesktopWidgets.ViewModelBase
             Settings.IsDocked = true;
             if (view != null)
             {
+                if (Settings.AutoDetectScreenBounds)
+                    Settings.ScreenBounds = ScreenHelper.GetScreen(view).ToRect(Settings.IgnoreAppBars);
                 view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
                 view.ShowIntro(reversable: false);
             }
@@ -306,6 +308,8 @@ namespace DesktopWidgets.ViewModelBase
             Settings.IsDocked = true;
             if (view != null)
             {
+                if (Settings.AutoDetectScreenBounds)
+                    Settings.ScreenBounds = ScreenHelper.GetScreen(view).ToRect(Settings.IgnoreAppBars);
                 view.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
                 view.ShowIntro(reversable: false);
             }
