@@ -37,6 +37,11 @@ namespace DesktopWidgets.Classes
 
         public static void GetCachedChangelog(Action<string> updateTextAction)
         {
+            if (Settings.Default.DisableChangelog)
+            {
+                updateTextAction("Changelog is disabled.");
+                return;
+            }
             if (string.IsNullOrEmpty(Settings.Default.Changelog))
                 new ChangelogDownloader().GetChangelog(updateTextAction);
             else
@@ -51,6 +56,11 @@ namespace DesktopWidgets.Classes
 
         private void Worker_DoWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
+            if (Settings.Default.DisableChangelog)
+            {
+                _updateText = "Changelog is disabled.";
+                return;
+            }
             try
             {
                 _updateText = GetFormattedChangelog();

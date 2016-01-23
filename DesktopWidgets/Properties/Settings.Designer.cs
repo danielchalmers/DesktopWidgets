@@ -420,5 +420,17 @@ namespace DesktopWidgets.Properties {
                 this["MuteEndTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DisableChangelog {
+            get {
+                return ((bool)(this["DisableChangelog"]));
+            }
+            set {
+                this["DisableChangelog"] = value;
+            }
+        }
     }
 }
