@@ -293,7 +293,17 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static void Edit(this WidgetId id) => EditWidgetStore.ShowEditWidgetWindow(id);
+        public static void Edit(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            var previousHorizontalAlignment = settings.HorizontalAlignment;
+            var previousVerticalAlignment = settings.VerticalAlignment;
+            var previousIsDocked = settings.IsDocked;
+            new EditWidget(id).ShowDialog();
+            id.GetView()?
+                .UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
+                    dockVerticalAlignment: previousVerticalAlignment);
+        }
 
         public static void LoadWidgetViews()
         {
