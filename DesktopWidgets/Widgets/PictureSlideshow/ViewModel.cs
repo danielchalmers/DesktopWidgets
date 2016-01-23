@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
@@ -19,6 +21,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
+            AllowDrop = Settings.AllowDropFiles;
             _random = new Random();
 
             _changeTimer = new DispatcherTimer {Interval = Settings.ChangeInterval};
@@ -31,6 +34,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 MaxSize = Settings.FileFilterSize,
                 Recursive = Settings.Recursive
             });
+            RefreshAction = delegate { _directoryWatcher.SetWatchPath(Settings.RootPath); };
             _directoryWatcher.CheckDirectoryForNewFiles();
             NextImage();
             if (Settings.Recursive)
@@ -49,6 +53,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 if (_imageUrl != value)
                 {
                     _imageUrl = value;
+                    Settings.ImageUrl = value;
                     RaisePropertyChanged(nameof(ImageUrl));
                 }
             }
@@ -56,23 +61,24 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         private void NextImage()
         {
-            if (string.IsNullOrWhiteSpace(Settings.RootPath) ||
+            var paths = _directoryWatcher.KnownFilePaths[Settings.RootPath];
+            if (Settings.Freeze || string.IsNullOrWhiteSpace(Settings.RootPath) ||
                 !_directoryWatcher.KnownFilePaths.ContainsKey(Settings.RootPath) ||
-                _directoryWatcher.KnownFilePaths[Settings.RootPath] == null)
+                paths == null)
                 return;
             string newImagePath;
 
             if (Settings.Shuffle)
             {
                 newImagePath =
-                    _directoryWatcher.KnownFilePaths[Settings.RootPath][
-                        _random.Next(0, _directoryWatcher.KnownFilePaths.Count)].FullName;
+                    paths[
+                        _random.Next(0, paths.Count)].FullName;
             }
             else
             {
                 if (_index > _directoryWatcher.KnownFilePaths.Count - 1)
                     _index = 0;
-                newImagePath = _directoryWatcher.KnownFilePaths[Settings.RootPath][_index].FullName;
+                newImagePath = paths[_index].FullName;
                 _index++;
             }
 
@@ -86,6 +92,15 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             _directoryWatcher = null;
             _changeTimer?.Stop();
             _changeTimer = null;
+        }
+
+        public override void DropExecute(DragEventArgs e)
+        {
+            if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                ImageUrl = ((string[]) e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
+                Settings.Freeze = true;
+            }
         }
     }
 }

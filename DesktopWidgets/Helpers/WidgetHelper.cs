@@ -21,7 +21,6 @@ namespace DesktopWidgets.Helpers
             Widgets.Weather.Metadata.FriendlyName,
             Widgets.Search.Metadata.FriendlyName,
             Widgets.Note.Metadata.FriendlyName,
-            Widgets.PictureFrame.Metadata.FriendlyName,
             Widgets.PictureSlideshow.Metadata.FriendlyName,
             Widgets.Sidebar.Metadata.FriendlyName,
             Widgets.Calculator.Metadata.FriendlyName,
@@ -85,10 +84,6 @@ namespace DesktopWidgets.Helpers
             {
                 return Widgets.Note.Metadata.FriendlyName;
             }
-            if (settings is Widgets.PictureFrame.Settings)
-            {
-                return Widgets.PictureFrame.Metadata.FriendlyName;
-            }
             if (settings is Widgets.PictureSlideshow.Settings)
             {
                 return Widgets.PictureSlideshow.Metadata.FriendlyName;
@@ -132,8 +127,6 @@ namespace DesktopWidgets.Helpers
                     return new Widgets.Search.Settings();
                 case Widgets.Note.Metadata.FriendlyName:
                     return new Widgets.Note.Settings();
-                case Widgets.PictureFrame.Metadata.FriendlyName:
-                    return new Widgets.PictureFrame.Settings();
                 case Widgets.PictureSlideshow.Metadata.FriendlyName:
                     return new Widgets.PictureSlideshow.Settings();
                 case Widgets.Sidebar.Metadata.FriendlyName:
@@ -192,11 +185,6 @@ namespace DesktopWidgets.Helpers
             {
                 dataContext = new Widgets.Note.ViewModel(id);
                 userControl = new Widgets.Note.ControlView();
-            }
-            else if (settings is Widgets.PictureFrame.Settings)
-            {
-                dataContext = new Widgets.PictureFrame.ViewModel(id);
-                userControl = new Widgets.PictureFrame.ControlView();
             }
             else if (settings is Widgets.PictureSlideshow.Settings)
             {

@@ -2,6 +2,6 @@
 {
     public static class Metadata
     {
-        public const string FriendlyName = "Picture Slideshow";
+        public const string FriendlyName = "Slideshow";
     }
 }
