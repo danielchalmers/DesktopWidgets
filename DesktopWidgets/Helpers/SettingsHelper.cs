@@ -17,7 +17,7 @@ namespace DesktopWidgets.Helpers
     {
         public static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {
-            TypeNameHandling = TypeNameHandling.All
+            TypeNameHandling = TypeNameHandling.Auto
         };
 
         public static object CloneObject(object obj)
