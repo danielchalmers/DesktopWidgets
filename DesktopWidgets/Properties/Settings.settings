@@ -82,7 +82,7 @@
     <Setting Name="MaxConcurrentMediaPlayers" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8</Value>
     </Setting>
-    <Setting Name="SnapMargin" Type="System.Int32" Scope="Application">
+    <Setting Name="SnapMargin" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="OptionsWidth" Type="System.Double" Scope="User">

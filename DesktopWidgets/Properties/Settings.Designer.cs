@@ -330,12 +330,15 @@ namespace DesktopWidgets.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int SnapMargin {
             get {
                 return ((int)(this["SnapMargin"]));
+            }
+            set {
+                this["SnapMargin"] = value;
             }
         }
         
