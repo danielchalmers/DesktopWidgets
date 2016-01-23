@@ -31,27 +31,27 @@ namespace DesktopWidgets.Widgets.CountdownClock
         public bool EndContinueCounting { get; set; } = false;
 
         [Category("End Sync")]
-        [DisplayName("Sync Year")]
+        [DisplayName("Sync Next Year")]
         public bool SyncYear { get; set; } = false;
 
         [Category("End Sync")]
-        [DisplayName("Sync Month")]
+        [DisplayName("Sync Next Month")]
         public bool SyncMonth { get; set; } = false;
 
         [Category("End Sync")]
-        [DisplayName("Sync Day")]
+        [DisplayName("Sync Next Day")]
         public bool SyncDay { get; set; } = false;
 
         [Category("End Sync")]
-        [DisplayName("Sync Hour")]
+        [DisplayName("Sync Next Hour")]
         public bool SyncHour { get; set; } = false;
 
         [Category("End Sync")]
-        [DisplayName("Sync Minute")]
+        [DisplayName("Sync Next Minute")]
         public bool SyncMinute { get; set; } = false;
 
         [Category("End Sync")]
-        [DisplayName("Sync Second")]
+        [DisplayName("Sync Next Second")]
         public bool SyncSecond { get; set; } = false;
 
         [Category("Behavior (Hideable)")]

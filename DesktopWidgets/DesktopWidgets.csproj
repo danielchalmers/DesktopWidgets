@@ -137,6 +137,7 @@
     <Compile Include="Classes\Hotkey.cs" />
     <Compile Include="Classes\HotkeyStore.cs" />
     <Compile Include="Classes\MediaPlayerStore.cs" />
+    <Compile Include="Helpers\DateTimeSyncHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Classes\DirectoryWatcher.cs" />
     <Compile Include="Classes\IEventWidget.cs" />
