@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace DesktopWidgets.Classes
@@ -65,12 +66,14 @@ namespace DesktopWidgets.Classes
                         {
                             if (sameFiles.Any(x => x.LastWriteTimeUtc != file.LastWriteTimeUtc))
                             {
-                                _newFileAction?.Invoke(file, DirectoryChange.FileChanged);
+                                Application.Current.Dispatcher.Invoke(
+                                    () => { _newFileAction?.Invoke(file, DirectoryChange.FileChanged); });
                             }
                         }
                         else
                         {
-                            _newFileAction?.Invoke(file, DirectoryChange.NewFile);
+                            Application.Current.Dispatcher.Invoke(
+                                () => { _newFileAction?.Invoke(file, DirectoryChange.NewFile); });
                         }
                     }
                 }
