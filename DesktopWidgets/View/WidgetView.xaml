@@ -101,8 +101,6 @@
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />
-            <Setter Property="Visibility"
-                    Value="{Binding Settings.ShowTitlebarMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Setter Property="Width" Value="16" />
             <Setter Property="Height" Value="16" />
             <Setter Property="Background" Value="Transparent" />
@@ -161,8 +159,10 @@
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonStyle}" />
                 </Grid.Resources>
                 <TextBox Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource NameBoxStyle}" />
-                <Button Grid.Column="2" Content="⟳" Click="btnReload_OnClick" />
-                <Button Grid.Column="3" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick" />
+                <Button Grid.Column="2" Content="⟳" Click="btnReload_OnClick"
+                        Visibility="{Binding Settings.ShowTitlebarReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Button Grid.Column="3" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick"
+                        Visibility="{Binding Settings.ShowTitlebarMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
         </Border>
         <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">

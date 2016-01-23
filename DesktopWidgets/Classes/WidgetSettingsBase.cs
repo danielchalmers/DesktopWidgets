@@ -230,6 +230,10 @@ namespace DesktopWidgets.Classes
         public bool ShowTitlebar { get; set; } = true;
 
         [Category("Style (Titlebar)")]
+        [DisplayName("Reload Button Visible")]
+        public bool ShowTitlebarReloadButton { get; set; } = true;
+
+        [Category("Style (Titlebar)")]
         [DisplayName("Menu Button Visible")]
         public bool ShowTitlebarMenuButton { get; set; } = true;
 
