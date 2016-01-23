@@ -37,22 +37,26 @@ namespace DesktopWidgets.Classes
                 if (!KnownFilePaths.ContainsKey(folder))
                     KnownFilePaths.Add(folder, null);
                 var files = Directory.EnumerateFiles(folder, "*.*",
-                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).AsParallel()
                     .Select(x => new FileInfo(x))
                     .ToList();
+                var includeFilter = !string.IsNullOrWhiteSpace(_settings.IncludeFilter)
+                    ? _settings.IncludeFilter.Split('|')
+                    : null;
+                var excludeFilter = !string.IsNullOrWhiteSpace(_settings.ExcludeFilter)
+                    ? _settings.ExcludeFilter.Split('|')
+                    : null;
                 foreach (var file in files)
                 {
                     if (KnownFilePaths[folder] == null)
                         break;
                     if (file.Length > _settings.MaxSize && _settings.MaxSize > 0)
                         continue;
-                    if (!string.IsNullOrWhiteSpace(_settings.IncludeFilter) && _settings.IncludeFilter != "*.*" &&
-                        !_settings.IncludeFilter.Split('|')
-                            .Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
+                    if (_settings.IncludeFilter != "*.*" && includeFilter != null &&
+                        !includeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
-                    if (!string.IsNullOrWhiteSpace(_settings.ExcludeFilter) &&
-                        _settings.ExcludeFilter.Split('|')
-                            .Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
+                    if (excludeFilter != null &&
+                        excludeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
                     if (promptAction)
                     {
