@@ -261,24 +261,24 @@ namespace DesktopWidgets.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public double EditWidgetWidth {
+        public double WidgetEditorWidth {
             get {
-                return ((double)(this["EditWidgetWidth"]));
+                return ((double)(this["WidgetEditorWidth"]));
             }
             set {
-                this["EditWidgetWidth"] = value;
+                this["WidgetEditorWidth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("650")]
-        public double EditWidgetHeight {
+        public double WidgetEditorHeight {
             get {
-                return ((double)(this["EditWidgetHeight"]));
+                return ((double)(this["WidgetEditorHeight"]));
             }
             set {
-                this["EditWidgetHeight"] = value;
+                this["WidgetEditorHeight"] = value;
             }
         }
         

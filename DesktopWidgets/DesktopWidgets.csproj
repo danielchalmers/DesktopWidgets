@@ -246,8 +246,8 @@
     <Compile Include="Widgets\Weather\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\Metadata.cs" />
     <Compile Include="Widgets\TimeClock\Settings.cs" />
-    <Compile Include="Windows\EditWidget.xaml.cs">
-      <DependentUpon>EditWidget.xaml</DependentUpon>
+    <Compile Include="Windows\WidgetEditor.xaml.cs">
+      <DependentUpon>WidgetEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
@@ -382,7 +382,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Windows\EditWidget.xaml">
+    <Page Include="Windows\WidgetEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

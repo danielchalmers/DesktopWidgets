@@ -299,7 +299,7 @@ namespace DesktopWidgets.Helpers
             var previousHorizontalAlignment = settings.HorizontalAlignment;
             var previousVerticalAlignment = settings.VerticalAlignment;
             var previousIsDocked = settings.IsDocked;
-            new EditWidget(id).ShowDialog();
+            new WidgetEditor(id).ShowDialog();
             id.GetView()?
                 .UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
                     dockVerticalAlignment: previousVerticalAlignment);

@@ -64,10 +64,10 @@
     <Setting Name="AllowMultiInstance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="EditWidgetWidth" Type="System.Double" Scope="User">
+    <Setting Name="WidgetEditorWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>
-    <Setting Name="EditWidgetHeight" Type="System.Double" Scope="User">
+    <Setting Name="WidgetEditorHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">650</Value>
     </Setting>
     <Setting Name="OptionsIndex" Type="System.Double" Scope="User">

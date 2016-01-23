@@ -5,11 +5,11 @@ using DesktopWidgets.Helpers;
 namespace DesktopWidgets.Windows
 {
     /// <summary>
-    ///     Interaction logic for EditWidget.xaml
+    ///     Interaction logic for WidgetEditor.xaml
     /// </summary>
-    public partial class EditWidget : Window
+    public partial class WidgetEditor : Window
     {
-        public EditWidget(WidgetId id)
+        public WidgetEditor(WidgetId id)
         {
             InitializeComponent();
             Title = $"Edit {id.GetName()}";
