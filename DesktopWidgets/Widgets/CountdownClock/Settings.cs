@@ -55,7 +55,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
         public bool SyncSecond { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open On Event")]
+        [DisplayName("Show On Event")]
         public bool OpenOnEvent { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
@@ -63,7 +63,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
         public bool OpenOnEventStay { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open On Event Duration")]
+        [DisplayName("Show On Event Duration")]
         public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

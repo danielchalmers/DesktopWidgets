@@ -55,7 +55,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
         public TimeSpan PublishDateTimeOffset { get; set; }
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open On New Headline")]
+        [DisplayName("Show On New Headline")]
         public bool OpenOnEvent { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
@@ -63,7 +63,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
         public bool OpenOnEventStay { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open On New Headline Duration")]
+        [DisplayName("Show On New Headline Duration")]
         public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

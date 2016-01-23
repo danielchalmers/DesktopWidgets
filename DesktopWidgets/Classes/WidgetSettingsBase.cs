@@ -118,7 +118,7 @@ namespace DesktopWidgets.Classes
         public bool AnimationEase { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open Mode")]
+        [DisplayName("Show Mode")]
         public OpenMode OpenMode { get; set; } = OpenMode.AlwaysOpen;
 
         [Category("Dock")]
@@ -146,11 +146,11 @@ namespace DesktopWidgets.Classes
         public AnimationType AnimationType { get; set; } = AnimationType.Fade;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open Hotkey")]
+        [DisplayName("Show Hotkey")]
         public Key HotKey { get; set; }
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Open Hotkey Modifiers")]
+        [DisplayName("Show Hotkey Modifiers")]
         public ModifierKeys HotKeyModifiers { get; set; }
 
         [Category("Behavior (Hideable)")]
