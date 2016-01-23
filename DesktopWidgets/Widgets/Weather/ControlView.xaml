@@ -24,8 +24,11 @@
                 </StackPanel.Resources>
                 <TextBlock
                     Visibility="{Binding Settings.ShowTemperature, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Run Text="{Binding Temperature}" />
-                    <Run Text="°" />
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0}°">
+                            <Binding Path="Temperature" />
+                        </MultiBinding>
+                    </TextBlock.Text>
                 </TextBlock>
                 <TextBlock Text="{Binding Description}"
                            Visibility="{Binding Settings.ShowDescription, Converter={StaticResource BooleanToVisibilityConverter}}" />
