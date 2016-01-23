@@ -289,5 +289,10 @@ namespace DesktopWidgets.View
         {
             Visibility = Visibility.Hidden;
         }
+
+        private void btnDismiss_OnClick(object sender, RoutedEventArgs e)
+        {
+            HideUI();
+        }
     }
 }

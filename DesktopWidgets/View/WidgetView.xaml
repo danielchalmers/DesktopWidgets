@@ -154,6 +154,7 @@
                     <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonStyle}" />
@@ -163,6 +164,8 @@
                         Visibility="{Binding Settings.ShowTitlebarReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Grid.Column="3" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick"
                         Visibility="{Binding Settings.ShowTitlebarMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Button Grid.Column="4" Margin="0,0,5,0" Content="×" Click="btnDismiss_OnClick"
+                        Visibility="{Binding Settings.ShowTitlebarDismissButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
         </Border>
         <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">

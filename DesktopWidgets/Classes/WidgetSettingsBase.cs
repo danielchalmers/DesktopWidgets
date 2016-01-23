@@ -238,6 +238,10 @@ namespace DesktopWidgets.Classes
         public bool ShowTitlebarMenuButton { get; set; } = true;
 
         [Category("Style (Titlebar)")]
+        [DisplayName("Dismiss Button Visible")]
+        public bool ShowTitlebarDismissButton { get; set; } = false;
+
+        [Category("Style (Titlebar)")]
         [DisplayName("Background Color")]
         public Color TitlebarBackgroundColor { get; set; } = Color.FromRgb(32, 32, 32);
 
