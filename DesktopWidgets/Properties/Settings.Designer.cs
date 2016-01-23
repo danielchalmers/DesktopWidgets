@@ -157,7 +157,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday")]
+        [global::System.Configuration.DefaultSettingValueAttribute("All")]
         public string UpdateDays {
             get {
                 return ((string)(this["UpdateDays"]));

@@ -13,7 +13,11 @@ namespace DesktopWidgets.Helpers
     {
         public static bool IsUpdateable => ApplicationDeployment.IsNetworkDeployed;
         private static Version ForgetUpdateVersion => Settings.Default.ForgetUpdateVersion ?? new Version(0, 0, 0, 0);
-        public static bool IsUpdateDay => Settings.Default.UpdateDays.Contains(DateTime.Today.DayOfWeek.ToString());
+
+        public static bool IsUpdateDay
+            =>
+                Settings.Default.UpdateDays.ToLower() == "all" ||
+                Settings.Default.UpdateDays.Contains(DateTime.Today.DayOfWeek.ToString());
 
         public static void CheckForUpdatesAsync(bool auto)
         {

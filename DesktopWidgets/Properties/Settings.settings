@@ -38,7 +38,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UpdateDays" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday</Value>
+      <Value Profile="(Default)">All</Value>
     </Setting>
     <Setting Name="ForgetUpdateVersion" Type="System.Version" Scope="User">
       <Value Profile="(Default)" />
