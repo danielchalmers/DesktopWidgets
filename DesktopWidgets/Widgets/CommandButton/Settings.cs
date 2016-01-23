@@ -6,12 +6,6 @@ namespace DesktopWidgets.Widgets.CommandButton
 {
     public class Settings : WidgetSettingsBase
     {
-        public Settings()
-        {
-            Width = 96;
-            Height = 96;
-        }
-
         [Category("General")]
         [DisplayName("Path")]
         public string FilePath { get; set; }
@@ -31,5 +25,13 @@ namespace DesktopWidgets.Widgets.CommandButton
         [Category("Style")]
         [DisplayName("Button Text")]
         public string ButtonText { get; set; } = "Execute";
+
+        [Category("Style")]
+        [DisplayName("Button Width")]
+        public double ButtonWidth { get; set; } = 96;
+
+        [Category("Style")]
+        [DisplayName("Button Height")]
+        public double ButtonHeight { get; set; } = 96;
     }
 }
