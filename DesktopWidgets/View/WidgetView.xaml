@@ -155,6 +155,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="5" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource TitlebarButtonStyle}" />
@@ -162,9 +163,9 @@
                 <TextBox Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource NameBoxStyle}" />
                 <Button Grid.Column="2" Content="⟳" Click="btnReload_OnClick"
                         Visibility="{Binding Settings.ShowTitlebarReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Grid.Column="3" Margin="0,0,5,0" Content="≡" Click="btnMenu_OnClick"
+                <Button Grid.Column="3" Content="≡" Click="btnMenu_OnClick"
                         Visibility="{Binding Settings.ShowTitlebarMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Grid.Column="4" Margin="0,0,5,0" Content="×" Click="btnDismiss_OnClick"
+                <Button Grid.Column="4" Content="×" Click="btnDismiss_OnClick"
                         Visibility="{Binding Settings.ShowTitlebarDismissButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
         </Border>
