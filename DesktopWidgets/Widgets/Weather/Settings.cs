@@ -27,7 +27,7 @@ namespace DesktopWidgets.Widgets.Weather
         public bool ShowTemperature { get; set; } = true;
 
         [Category("Style")]
-        [DisplayName("Show Temperature Min/Max")]
+        [DisplayName("Show Temperature Range")]
         public bool ShowTempMinMax { get; set; } = false;
 
         [Category("Style")]
