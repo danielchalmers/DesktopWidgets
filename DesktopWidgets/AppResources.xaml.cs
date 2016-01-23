@@ -75,5 +75,10 @@ namespace DesktopWidgets
         {
             WidgetHelper.ShowAllWidgetIntros();
         }
+
+        private void menuItemDismissWidgets_OnClick(object sender, RoutedEventArgs e)
+        {
+            WidgetHelper.HideWidgets();
+        }
     }
 }
