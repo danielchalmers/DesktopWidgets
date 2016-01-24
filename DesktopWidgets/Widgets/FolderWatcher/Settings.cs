@@ -64,6 +64,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show Modified Files")]
         public bool ShowModifiedFiles { get; set; } = false;
 
+        [Category("Style")]
+        [DisplayName("Show Images")]
+        public bool ShowImages { get; set; } = true;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Show On Event")]
         public bool OpenOnEvent { get; set; } = true;

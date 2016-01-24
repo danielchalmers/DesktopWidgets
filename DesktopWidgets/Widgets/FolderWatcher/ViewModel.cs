@@ -131,7 +131,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             //{
             CurrentFilePath = _notificationQueue.Dequeue();
 
-            if (_supportedImageExtensions.Contains(Path.GetExtension(CurrentFilePath).ToLower()))
+            if (Settings.ShowImages && _supportedImageExtensions.Contains(Path.GetExtension(CurrentFilePath).ToLower()))
             {
                 UpdateImage(CurrentFilePath);
                 IsImage = true;
