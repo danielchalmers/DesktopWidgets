@@ -60,9 +60,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Recursive")]
         public bool Recursive { get; set; } = false;
 
-        [Category("General")]
-        [DisplayName("Show Modified Files")]
-        public bool ShowModifiedFiles { get; set; } = false;
+        [Category("Behavior")]
+        [DisplayName("Detect Modified Files")]
+        public bool DetectModifiedFiles { get; set; } = false;
 
         [Category("Style")]
         [DisplayName("Show Images")]

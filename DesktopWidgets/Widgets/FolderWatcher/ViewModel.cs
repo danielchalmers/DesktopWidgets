@@ -121,7 +121,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void AddToFileQueue(FileInfo path, DirectoryChange change)
         {
-            if (change == DirectoryChange.FileChanged && !Settings.ShowModifiedFiles)
+            if (change == DirectoryChange.FileChanged && !Settings.DetectModifiedFiles)
                 return;
             var lastCheck = Settings.LastCheck;
             Settings.LastCheck = DateTime.Now;
