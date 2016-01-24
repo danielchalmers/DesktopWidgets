@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using DesktopWidgets.Classes;
+using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.CommandButton
 {

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Widgets.Sidebar;
 using Settings = DesktopWidgets.Widgets.CountdownClock.Settings;
 
@@ -297,7 +298,7 @@ namespace DesktopWidgets.Classes
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
             var shortcut = value[0] as Shortcut;
-            var viewModel = value[1] as Widgets.Sidebar.ViewModel;
+            var viewModel = value[1] as ViewModel;
             if (viewModel == null || shortcut == null)
                 return DependencyProperty.UnsetValue;
 

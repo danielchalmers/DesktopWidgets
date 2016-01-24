@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Threading;
-using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.WidgetBase.Settings;
 
-namespace DesktopWidgets.ViewModelBase
+namespace DesktopWidgets.WidgetBase.ViewModel
 {
     public class ClockViewModelBase : WidgetViewModelBase
     {

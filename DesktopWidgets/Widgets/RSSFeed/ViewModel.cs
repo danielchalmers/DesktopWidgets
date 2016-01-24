@@ -9,9 +9,10 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml;
-using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.Stores;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace DesktopWidgets.Widgets.RSSFeed

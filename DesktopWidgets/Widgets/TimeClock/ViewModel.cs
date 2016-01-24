@@ -1,6 +1,6 @@
-﻿using DesktopWidgets.Classes;
-using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+﻿using DesktopWidgets.Helpers;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 
 namespace DesktopWidgets.Widgets.TimeClock
 {

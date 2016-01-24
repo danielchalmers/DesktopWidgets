@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using NHotkey;
 using NHotkey.Wpf;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Stores
 {
     internal static class HotkeyStore
     {

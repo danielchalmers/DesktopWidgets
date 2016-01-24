@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
-using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 using GalaSoft.MvvmLight.Command;
 
 namespace DesktopWidgets.Widgets.StopwatchClock

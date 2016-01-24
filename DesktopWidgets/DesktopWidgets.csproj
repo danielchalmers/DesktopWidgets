@@ -135,12 +135,12 @@
     </Compile>
     <Compile Include="Classes\DirectoryWatcherSettings.cs" />
     <Compile Include="Classes\Hotkey.cs" />
-    <Compile Include="Classes\HotkeyStore.cs" />
-    <Compile Include="Classes\MediaPlayerStore.cs" />
+    <Compile Include="Stores\HotkeyStore.cs" />
+    <Compile Include="Stores\MediaPlayerStore.cs" />
     <Compile Include="Helpers\DateTimeSyncHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Classes\DirectoryWatcher.cs" />
-    <Compile Include="Classes\IEventWidget.cs" />
+    <Compile Include="WidgetBase\Interfaces\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="Helpers\AppInitHelper.cs" />
     <Compile Include="Classes\ChangelogDownloader.cs" />
@@ -150,25 +150,24 @@
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\SingleInstanceHelper.cs" />
     <Compile Include="Enumerations.cs" />
-    <Compile Include="Classes\EnumUtilities.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\FullScreenHelper.cs" />
-    <Compile Include="Classes\GitHubApiCommits.cs" />
-    <Compile Include="Classes\IconUtilities.cs" />
-    <Compile Include="Classes\ListUtilities.cs" />
+    <Compile Include="ApiClasses\GitHubCommitsApiResult.cs" />
+    <Compile Include="Helpers\ListHelper.cs" />
     <Compile Include="Classes\MouseChecker.cs" />
-    <Compile Include="Classes\OpenWeatherMapApiResult.cs" />
+    <Compile Include="ApiClasses\OpenWeatherMapApiResult.cs" />
     <Compile Include="Classes\SaveTimer.cs" />
     <Compile Include="Classes\SizeObserver.cs" />
     <Compile Include="Classes\TaskScheduler.cs" />
-    <Compile Include="Classes\WidgetClockSettingsBase.cs" />
-    <Compile Include="Classes\WidgetID.cs" />
-    <Compile Include="Classes\WidgetsSettingsStore.cs" />
+    <Compile Include="WidgetBase\Settings\WidgetClockSettingsBase.cs" />
+    <Compile Include="WidgetBase\WidgetID.cs" />
+    <Compile Include="WidgetBase\WidgetsSettingsStore.cs" />
     <Compile Include="Classes\Win32App.cs" />
     <Compile Include="Classes\Win32RECT.cs" />
     <Compile Include="Helpers\RectHelper.cs" />
     <Compile Include="Helpers\TrayIconHelper.cs" />
     <Compile Include="Helpers\Win32Helper.cs" />
-    <Compile Include="Classes\WindowUtilities.cs" />
+    <Compile Include="Helpers\WindowHelper.cs" />
     <Compile Include="Classes\Converters.cs" />
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="Helpers\FileSystemHelper.cs" />
@@ -278,17 +277,17 @@
     <Compile Include="Widgets\StopwatchClock\ViewModel.cs" />
     <Compile Include="Widgets\CountdownClock\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\ViewModel.cs" />
-    <Compile Include="ViewModel\ManageWidgetsViewModel.cs" />
-    <Compile Include="ViewModel\SelectItemViewModel.cs" />
+    <Compile Include="WindowViewModels\ManageWidgetsViewModel.cs" />
+    <Compile Include="WindowViewModels\SelectItemViewModel.cs" />
     <Compile Include="Windows\SelectItem.xaml.cs">
       <DependentUpon>SelectItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WidgetView.xaml.cs">
       <DependentUpon>WidgetView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModelBase\ClockViewModelBase.cs" />
-    <Compile Include="ViewModelBase\WidgetViewModelBase.cs" />
-    <Compile Include="Classes\WidgetSettingsBase.cs" />
+    <Compile Include="WidgetBase\ViewModel\WidgetClockViewModelBase.cs" />
+    <Compile Include="WidgetBase\ViewModel\WidgetViewModelBase.cs" />
+    <Compile Include="WidgetBase\Settings\WidgetSettingsBase.cs" />
     <Compile Include="Helpers\WidgetHelper.cs" />
     <Compile Include="Helpers\SnapHelper.cs" />
     <Compile Include="Windows\UpdateProgress.xaml.cs">

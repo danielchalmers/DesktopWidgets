@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
-    public static class ListUtilities
+    public static class ListHelper
     {
         public static object Swap<T>(this IList<T> list, int indexA, int indexB)
         {

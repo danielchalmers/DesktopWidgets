@@ -7,7 +7,10 @@ using System.Windows.Interop;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.Stores;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.Settings;
+using DesktopWidgets.WidgetBase.ViewModel;
 
 namespace DesktopWidgets.View
 {

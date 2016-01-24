@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #endregion
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.ApiClasses
 {
     public class Author
     {

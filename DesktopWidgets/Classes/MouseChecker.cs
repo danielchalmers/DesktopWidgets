@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.View;
+using DesktopWidgets.WidgetBase.Settings;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
 #endregion

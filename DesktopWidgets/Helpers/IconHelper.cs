@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -30,6 +31,40 @@ namespace DesktopWidgets.Helpers
                     i.Handle,
                     new Int32Rect(0, 0, i.Width, i.Height),
                     BitmapSizeOptions.FromEmptyOptions());
+        }
+
+        public static ImageSource ToImageSource(this Icon icon)
+        {
+            var bitmap = icon.ToBitmap();
+            var hBitmap = bitmap.GetHbitmap();
+
+            ImageSource wpfBitmap = Imaging.CreateBitmapSourceFromHBitmap(
+                hBitmap,
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+
+            if (!NativeMethods.DeleteObject(hBitmap))
+            {
+                throw new Win32Exception();
+            }
+
+            return wpfBitmap;
+        }
+
+        public static Icon Extract(string file, int number, bool largeIcon)
+        {
+            IntPtr large;
+            IntPtr small;
+            NativeMethods.ExtractIconEx(file, number, out large, out small, 1);
+            try
+            {
+                return Icon.FromHandle(largeIcon ? large : small);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         [StructLayout(LayoutKind.Sequential)]

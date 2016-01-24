@@ -4,7 +4,8 @@ using System.Windows;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 
 namespace DesktopWidgets.Widgets.PictureSlideshow
 {

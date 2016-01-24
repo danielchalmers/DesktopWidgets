@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopWidgets.View"
-        xmlns:viewModel="clr-namespace:DesktopWidgets.ViewModel"
         mc:Ignorable="d"
         Title="Select Item"
         Width="300" MinHeight="350" SizeToContent="Height"

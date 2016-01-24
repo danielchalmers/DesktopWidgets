@@ -1,4 +1,4 @@
-﻿using DesktopWidgets.Classes;
+﻿using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.StopwatchClock
 {

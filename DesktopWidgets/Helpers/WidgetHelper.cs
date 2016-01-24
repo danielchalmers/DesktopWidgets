@@ -5,7 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using DesktopWidgets.Classes;
 using DesktopWidgets.View;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.Settings;
+using DesktopWidgets.WidgetBase.ViewModel;
 using DesktopWidgets.Widgets.TimeClock;
 using DesktopWidgets.Windows;
 
@@ -158,7 +160,7 @@ namespace DesktopWidgets.Helpers
 
             if (settings is Settings)
             {
-                dataContext = new Widgets.TimeClock.ViewModel(id);
+                dataContext = new ViewModel(id);
                 userControl = new ControlView();
             }
             else if (settings is Widgets.CountdownClock.Settings)

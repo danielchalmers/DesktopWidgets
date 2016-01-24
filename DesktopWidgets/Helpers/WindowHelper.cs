@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
-    public static class WindowUtilities
+    public static class WindowHelper
     {
         public static Rect GetBounds(this Window target)
         {

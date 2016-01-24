@@ -10,6 +10,7 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.View;
+using DesktopWidgets.WidgetBase;
 using DesktopWidgets.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;

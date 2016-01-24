@@ -3,12 +3,15 @@ using System.Windows;
 using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Stores;
+using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-namespace DesktopWidgets.ViewModelBase
+namespace DesktopWidgets.WidgetBase.ViewModel
 {
-    public abstract class WidgetViewModelBase : GalaSoft.MvvmLight.ViewModelBase
+    public abstract class WidgetViewModelBase : ViewModelBase
     {
         public readonly WidgetId _id;
         private readonly WidgetSettingsBase Settings;

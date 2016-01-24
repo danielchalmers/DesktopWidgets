@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.WidgetBase.Settings
 {
     public class WidgetSettingsBase
     {

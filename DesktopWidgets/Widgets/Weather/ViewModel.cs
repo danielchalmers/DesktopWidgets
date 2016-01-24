@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Windows.Threading;
-using DesktopWidgets.Classes;
+using DesktopWidgets.ApiClasses;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 using Newtonsoft.Json;
 
 namespace DesktopWidgets.Widgets.Weather

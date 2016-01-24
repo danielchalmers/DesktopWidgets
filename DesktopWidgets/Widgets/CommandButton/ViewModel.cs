@@ -4,7 +4,9 @@ using System.Windows;
 using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.Stores;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace DesktopWidgets.Widgets.CommandButton

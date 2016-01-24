@@ -1,8 +1,8 @@
 ﻿using System.Windows.Media;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Helpers
 {
-    public static class EnumUtilities
+    public static class EnumHelper
     {
         public static System.Windows.Controls.ScrollBarVisibility ToWindowsScrollBarVisibility(
             this ScrollBarVisibility scrollBarVisibility)

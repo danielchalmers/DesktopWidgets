@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
 using Newtonsoft.Json;
 

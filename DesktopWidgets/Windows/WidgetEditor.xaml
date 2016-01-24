@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:DesktopWidgets.Windows"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:viewModelBase="clr-namespace:DesktopWidgets.ViewModelBase"
         mc:Ignorable="d"
         Title="Widget Editor"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=WidgetEditorWidth, Mode=TwoWay}"

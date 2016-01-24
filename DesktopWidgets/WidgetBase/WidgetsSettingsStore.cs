@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using DesktopWidgets.WidgetBase.Settings;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.WidgetBase
 {
     public class WidgetsSettingsStore
     {

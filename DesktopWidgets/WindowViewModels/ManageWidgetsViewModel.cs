@@ -1,13 +1,15 @@
 ﻿using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 
-namespace DesktopWidgets.ViewModel
+namespace DesktopWidgets.WindowViewModels
 {
-    public class ManageWidgetsViewModel : GalaSoft.MvvmLight.ViewModelBase
+    public class ManageWidgetsViewModel : ViewModelBase
     {
         private WidgetSettingsBase _selectedWidget;
 

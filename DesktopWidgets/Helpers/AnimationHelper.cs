@@ -4,7 +4,7 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using DesktopWidgets.Classes;
+using DesktopWidgets.Stores;
 using DesktopWidgets.View;
 
 #endregion

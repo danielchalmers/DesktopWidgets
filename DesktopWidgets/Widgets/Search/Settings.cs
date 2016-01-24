@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using DesktopWidgets.Classes;
+using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.Search
 {

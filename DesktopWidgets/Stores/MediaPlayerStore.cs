@@ -4,7 +4,7 @@ using System.Threading;
 using DesktopWidgets.Properties;
 using WMPLib;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.Stores
 {
     public static class MediaPlayerStore
     {

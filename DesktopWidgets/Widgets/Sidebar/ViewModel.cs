@@ -6,7 +6,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.ViewModelBase;
+using DesktopWidgets.Stores;
+using DesktopWidgets.WidgetBase;
+using DesktopWidgets.WidgetBase.ViewModel;
 using GalaSoft.MvvmLight.Command;
 using DataFormats = System.Windows.Forms.DataFormats;
 

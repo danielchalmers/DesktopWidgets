@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.ApiClasses
 {
     public class Coord
     {

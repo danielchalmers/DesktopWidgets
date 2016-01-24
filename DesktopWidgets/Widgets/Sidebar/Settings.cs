@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using DesktopWidgets.Classes;
+using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.Sidebar
 {

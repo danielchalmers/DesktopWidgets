@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
+using DesktopWidgets.Stores;
 
 #endregion
 
@@ -220,7 +221,7 @@ namespace DesktopWidgets.Widgets.Sidebar
                 if (shortcut.SpecialType == "Help")
                     return SystemIcons.Information.ToImageSource();
                 if (LinkHelper.IsHyperlink(shortcut.Path))
-                    return IconUtilities.Extract("shell32.dll", 13, true).ToImageSource();
+                    return IconHelper.Extract("shell32.dll", 13, true).ToImageSource();
             }
             catch
             {

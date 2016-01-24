@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.WidgetBase.Settings
 {
     public class WidgetClockSettingsBase : WidgetSettingsBase
     {

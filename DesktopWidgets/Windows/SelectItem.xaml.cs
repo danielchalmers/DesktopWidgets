@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using DesktopWidgets.ViewModel;
+using DesktopWidgets.WindowViewModels;
 
 namespace DesktopWidgets.Windows
 {

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
+using DesktopWidgets.ApiClasses;
 using DesktopWidgets.Properties;
 using Newtonsoft.Json;
 

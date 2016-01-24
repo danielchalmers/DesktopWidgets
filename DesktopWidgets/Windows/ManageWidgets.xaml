@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopWidgets"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
-        xmlns:viewModel="clr-namespace:DesktopWidgets.ViewModel"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+        xmlns:windowViewModels="clr-namespace:DesktopWidgets.WindowViewModels"
         mc:Ignorable="d"
         Title="Manage Widgets"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsHeight, Mode=TwoWay}"
@@ -16,7 +16,7 @@
         MinHeight="497" MinWidth="535"
         ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <viewModel:ManageWidgetsViewModel />
+        <windowViewModels:ManageWidgetsViewModel />
     </Window.DataContext>
     <Window.Resources>
         <classes:SelectedWidgetToEnableDisableNameConverter x:Key="SelectedWidgetToEnableDisableNameConverter" />

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesktopWidgets.Classes
+namespace DesktopWidgets.WidgetBase
 {
     public class WidgetId
     {
