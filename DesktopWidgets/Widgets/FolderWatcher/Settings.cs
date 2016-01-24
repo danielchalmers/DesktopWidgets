@@ -68,6 +68,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show Images")]
         public bool ShowImages { get; set; } = true;
 
+        [Category("General")]
+        [DisplayName("Show Content Filter")]
+        public string ShowContentFilter { get; set; } = ".txt|.cfg|.json|.xml|.log|.ini|.inf|.properties";
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Show On Event")]
         public bool OpenOnEvent { get; set; } = true;

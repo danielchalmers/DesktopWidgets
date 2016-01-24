@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DesktopWidgets.Classes;
@@ -31,6 +32,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
+
+
+        private FileType _fileType = FileType.None;
 
         private bool _isImage;
 
@@ -105,6 +109,19 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
         }
 
+        public FileType FileType
+        {
+            get { return _fileType; }
+            set
+            {
+                if (_fileType != value)
+                {
+                    _fileType = value;
+                    RaisePropertyChanged(nameof(FileType));
+                }
+            }
+        }
+
         private void AddToFileQueue(FileInfo path, DirectoryChange change)
         {
             if (change == DirectoryChange.FileChanged && !Settings.ShowModifiedFiles)
@@ -127,18 +144,15 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 return;
             }
             _isShowing = true;
-            //if (Settings.ReplaceExistingFile || _notificationQueue.Count > 0)
-            //{
             CurrentFilePath = _notificationQueue.Dequeue();
 
-            if (Settings.ShowImages && _supportedImageExtensions.Contains(Path.GetExtension(CurrentFilePath).ToLower()))
-            {
-                UpdateImage(CurrentFilePath);
-                IsImage = true;
-            }
+            if (HandleFileImage())
+                FileType = FileType.Image;
+            else if (HandleFileContent())
+                FileType = FileType.Text;
             else
             {
-                IsImage = false;
+                FileType = FileType.Other;
             }
 
             if (!App.IsMuted)
@@ -147,7 +161,26 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 Settings.Identifier.GetView()
                     .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
                         false, false, false);
-            //}
+        }
+
+        private bool HandleFileImage()
+        {
+            if (Settings.ShowImages && _supportedImageExtensions.Contains(Path.GetExtension(CurrentFilePath).ToLower()))
+            {
+                UpdateImage(CurrentFilePath);
+                return true;
+            }
+            return false;
+        }
+
+        private bool HandleFileContent()
+        {
+            var contentFilter = !string.IsNullOrWhiteSpace(Settings.ShowContentFilter)
+                ? Settings.ShowContentFilter.Split('|')
+                : null;
+            return contentFilter != null &&
+                   contentFilter.Any(
+                       x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
         }
 
         public override void OnIntroFinish()

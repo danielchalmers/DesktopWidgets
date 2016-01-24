@@ -10,12 +10,12 @@
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <classes:BooleanToCollapsedVisibilityConverter x:Key="BooleanToCollapsedVisibilityConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
         <classes:FilePathToNameConverter x:Key="FilePathToNameConverter" />
-        <classes:BooleanToHiddenVisibilityConverter x:Key="BooleanToHiddenVisibilityConverter" />
-        <classes:InverseBoolOrFilePathToVisibilityConverter x:Key="InverseBoolOrFilePathToVisibilityConverter" />
+        <classes:TextFileTypeToVisibilityConverter x:Key="TextFileTypeToVisibilityConverter" />
+        <classes:ImageFileTypeToVisibilityConverter x:Key="ImageFileTypeToVisibilityConverter" />
+        <classes:OtherFileTypeToVisibilityConverter x:Key="OtherFileTypeToVisibilityConverter" />
+        <classes:PathToContentsConverter x:Key="PathToContentsConverter" />
 
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
@@ -26,7 +26,7 @@
         </Grid>
     </UserControl.Resources>
     <Grid>
-        <Image Visibility="{Binding IsImage, Converter={StaticResource BooleanToVisibilityConverter}}"
+        <Image Visibility="{Binding FileType, Converter={StaticResource ImageFileTypeToVisibilityConverter}}"
                Source="{Binding CurrentImage}" Stretch="Uniform" MaxWidth="{Binding Width}"
                MaxHeight="{Binding Height}">
             <i:Interaction.Triggers>
@@ -35,14 +35,13 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Image>
+        <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 Text="{Binding CurrentFilePath, Converter={StaticResource PathToContentsConverter}}"
+                 Visibility="{Binding FileType, Converter={StaticResource TextFileTypeToVisibilityConverter}}" />
         <TextBlock
-            HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock.Visibility>
-                <MultiBinding Converter="{StaticResource InverseBoolOrFilePathToVisibilityConverter}">
-                    <Binding Path="IsImage" />
-                    <Binding Path="CurrentFilePath" />
-                </MultiBinding>
-            </TextBlock.Visibility>
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Visibility="{Binding FileType, Converter={StaticResource OtherFileTypeToVisibilityConverter}}">
             <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFilePath}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="RequestNavigate">

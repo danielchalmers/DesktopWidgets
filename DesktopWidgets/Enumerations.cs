@@ -95,4 +95,12 @@
         NewFile,
         FileChanged
     }
+
+    public enum FileType
+    {
+        None,
+        Text,
+        Image,
+        Other
+    }
 }
