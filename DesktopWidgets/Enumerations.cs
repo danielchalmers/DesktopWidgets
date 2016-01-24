@@ -101,6 +101,7 @@
         None,
         Text,
         Image,
+        Audio,
         Other
     }
 }

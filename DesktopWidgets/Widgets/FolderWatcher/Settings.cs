@@ -72,6 +72,18 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show Content Filter")]
         public string ShowContentFilter { get; set; } = ".txt|.cfg|.json|.xml|.log|.ini|.inf|.properties";
 
+        [Category("General")]
+        [DisplayName("Play Media Filter")]
+        public string PlayMediaFilter { get; set; } = ".wav|.mp3|.mp4|.m4a|.m3u|.wma";
+
+        [Category("General")]
+        [DisplayName("Play Media Volume")]
+        public double PlayMediaVolume { get; set; } = 1.0;
+
+        [Category("General")]
+        [DisplayName("Play Media On Detect")]
+        public bool PlayMedia { get; set; } = false;
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Show On Event")]
         public bool OpenOnEvent { get; set; } = true;

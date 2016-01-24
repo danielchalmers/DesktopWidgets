@@ -147,6 +147,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 FileType = FileType.Image;
             else if (HandleFileContent())
                 FileType = FileType.Text;
+            else if (HandleFileMedia())
+                FileType = FileType.Audio;
             else
             {
                 FileType = FileType.Other;
@@ -178,6 +180,20 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             return contentFilter != null &&
                    contentFilter.Any(
                        x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
+        }
+
+        private bool HandleFileMedia()
+        {
+            if (!Settings.PlayMedia)
+                return false;
+            var filter = !string.IsNullOrWhiteSpace(Settings.PlayMediaFilter)
+                ? Settings.PlayMediaFilter.Split('|')
+                : null;
+            var isMedia = filter != null &&
+                          filter.Any(
+                              x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
+            MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
+            return isMedia;
         }
 
         public override void OnIntroFinish()
