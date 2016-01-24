@@ -20,9 +20,17 @@
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
                        TextAlignment="Center"
-                       Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}"
                        ToolTip="{Binding CurrentFilePath}"
-                       Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                       Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Hyperlink NavigateUri="{Binding CurrentFilePath}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="RequestNavigate">
+                            <command:EventToCommand Command="{Binding OpenFile}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <TextBlock Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}" />
+                </Hyperlink>
+            </TextBlock>
         </Grid>
     </UserControl.Resources>
     <Grid>
