@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using DesktopWidgets.WidgetBase.Interfaces;
 using DesktopWidgets.WidgetBase.Settings;
 
@@ -71,6 +72,18 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [Category("General")]
         [DisplayName("Show Content Filter")]
         public string ShowContentFilter { get; set; } = ".txt|.cfg|.json|.xml|.log|.ini|.inf|.properties";
+
+        [Category("Style")]
+        [DisplayName("Show Content Font Size")]
+        public int ShowContentFontSize { get; set; } = 12;
+
+        [Category("Style")]
+        [DisplayName("Show Content Horizontal Alignment")]
+        public HorizontalAlignment ShowContentHorizontalAlignment { get; set; } = HorizontalAlignment.Stretch;
+
+        [Category("Style")]
+        [DisplayName("Show Content Vertical Alignment")]
+        public VerticalAlignment ShowContentVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
 
         [Category("General")]
         [DisplayName("Play Media Filter")]

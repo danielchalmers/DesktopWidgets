@@ -44,7 +44,9 @@
             </i:Interaction.Triggers>
         </Image>
         <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 HorizontalAlignment="{Binding Settings.ShowContentHorizontalAlignment}"
+                 VerticalAlignment="{Binding Settings.ShowContentVerticalAlignment}"
+                 FontSize="{Binding Settings.ShowContentFontSize}"
                  Text="{Binding CurrentFilePath, Converter={StaticResource PathToContentsConverter}}"
                  Visibility="{Binding FileType, Converter={StaticResource TextFileTypeToVisibilityConverter}}" />
         <TextBlock
