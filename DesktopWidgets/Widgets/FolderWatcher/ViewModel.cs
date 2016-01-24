@@ -88,11 +88,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             get { return _currentFilePath; }
             set
             {
-                if (_currentFilePath != value)
-                {
-                    _currentFilePath = value;
-                    RaisePropertyChanged(nameof(CurrentFilePath));
-                }
+                _currentFilePath = value;
+                RaisePropertyChanged(nameof(CurrentFilePath));
             }
         }
 
