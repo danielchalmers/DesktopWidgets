@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Stores;
+using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight;
@@ -13,8 +15,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 {
     public abstract class WidgetViewModelBase : ViewModelBase
     {
-        public readonly WidgetId _id;
-        private readonly WidgetSettingsBase Settings;
+        private readonly WidgetSettingsBase _settings;
+        protected readonly WidgetId Id;
         private double _actualHeight;
         private double _actualWidth;
 
@@ -25,16 +27,16 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         private double _left;
 
         private bool _onTop;
+        private DispatcherTimer _onTopForceTimer;
 
         private double _top;
 
         private double _width;
-        public Action RefreshAction;
 
         protected WidgetViewModelBase(WidgetId id)
         {
-            _id = id;
-            Settings = id.GetSettings();
+            Id = id;
+            _settings = id.GetSettings();
             DismissWidget = new RelayCommand(DismissWidgetExecute);
             EditWidget = new RelayCommand(EditWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
@@ -48,6 +50,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         }
 
         public bool AllowDrop { get; set; }
+
+        public WidgetView View { get; set; }
 
         public bool OnTop
         {
@@ -67,10 +71,10 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _left; }
             set
             {
-                if (_left != value)
+                if (Math.Abs(_left - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
-                    if (!Settings.IsDocked)
-                        Settings.Left = value;
+                    if (!_settings.IsDocked)
+                        _settings.Left = value;
                     _left = value;
                     RaisePropertyChanged(nameof(Left));
                 }
@@ -82,10 +86,10 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _top; }
             set
             {
-                if (_top != value)
+                if (Math.Abs(_top - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
-                    if (!Settings.IsDocked)
-                        Settings.Top = value;
+                    if (!_settings.IsDocked)
+                        _settings.Top = value;
                     _top = value;
                     RaisePropertyChanged(nameof(Top));
                 }
@@ -97,7 +101,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _width; }
             set
             {
-                if (_width != value)
+                if (Math.Abs(_width - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
                     _width = value;
                     RaisePropertyChanged(nameof(Width));
@@ -110,7 +114,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _height; }
             set
             {
-                if (_height != value)
+                if (Math.Abs(_height - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
                     _height = value;
                     RaisePropertyChanged(nameof(Height));
@@ -122,15 +126,15 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             get
             {
-                return double.IsNaN(Settings.MaxWidth) && Settings.MaxSizeUseScreen
-                    ? Settings.ScreenBounds.Width
-                    : Settings.MaxWidth;
+                return double.IsNaN(_settings.MaxWidth) && _settings.MaxSizeUseScreen
+                    ? _settings.ScreenBounds.Width
+                    : _settings.MaxWidth;
             }
             set
             {
-                if (Settings.MaxWidth != value)
+                if (Math.Abs(_settings.MaxWidth - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
-                    Settings.MaxWidth = value;
+                    _settings.MaxWidth = value;
                     RaisePropertyChanged(nameof(MaxWidth));
                 }
             }
@@ -140,15 +144,15 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             get
             {
-                return double.IsNaN(Settings.MaxHeight) && Settings.MaxSizeUseScreen
-                    ? Settings.ScreenBounds.Height
-                    : Settings.MaxHeight;
+                return double.IsNaN(_settings.MaxHeight) && _settings.MaxSizeUseScreen
+                    ? _settings.ScreenBounds.Height
+                    : _settings.MaxHeight;
             }
             set
             {
-                if (Settings.MaxHeight != value)
+                if (Math.Abs(_settings.MaxHeight - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
-                    Settings.MaxHeight = value;
+                    _settings.MaxHeight = value;
                     RaisePropertyChanged(nameof(MaxHeight));
                 }
             }
@@ -159,7 +163,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _actualWidth; }
             set
             {
-                if (_actualWidth != value && !double.IsNaN(value) && value > 0)
+                if (Math.Abs(_actualWidth - value) > Properties.Settings.Default.DoubleComparisonTolerance &&
+                    !double.IsNaN(value) && value > 0)
                 {
                     _actualWidth = value;
                     RaisePropertyChanged(nameof(ActualWidth));
@@ -172,7 +177,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _actualHeight; }
             set
             {
-                if (_actualHeight != value && !double.IsNaN(value) && value > 0)
+                if (Math.Abs(_actualHeight - value) > Properties.Settings.Default.DoubleComparisonTolerance &&
+                    !double.IsNaN(value) && value > 0)
                 {
                     _actualHeight = value;
                     RaisePropertyChanged(nameof(ActualHeight));
@@ -207,78 +213,78 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private double GetLeft()
         {
-            if (!Settings.IsDocked)
+            if (!_settings.IsDocked)
             {
-                return Settings.Left;
+                return _settings.Left;
             }
-            var monitorRect = Settings.ScreenBounds;
+            var monitorRect = _settings.ScreenBounds;
 
-            switch (Settings.HorizontalAlignment)
+            switch (_settings.HorizontalAlignment)
             {
                 case HorizontalAlignment.Stretch:
                 case HorizontalAlignment.Left:
-                    return monitorRect.Left + Settings.DockOffset.X;
+                    return monitorRect.Left + _settings.DockOffset.X;
                 case HorizontalAlignment.Center:
-                    return monitorRect.Right/2 - ActualWidth/2 + Settings.DockOffset.X;
+                    return monitorRect.Right/2 - ActualWidth/2 + _settings.DockOffset.X;
                 case HorizontalAlignment.Right:
-                    return monitorRect.Right - ActualWidth - Settings.DockOffset.X;
+                    return monitorRect.Right - ActualWidth - _settings.DockOffset.X;
             }
             return double.NaN;
         }
 
         private double GetTop()
         {
-            if (!Settings.IsDocked)
+            if (!_settings.IsDocked)
             {
-                return Settings.Top;
+                return _settings.Top;
             }
-            var monitorRect = Settings.ScreenBounds;
+            var monitorRect = _settings.ScreenBounds;
 
-            switch (Settings.VerticalAlignment)
+            switch (_settings.VerticalAlignment)
             {
                 case VerticalAlignment.Stretch:
                 case VerticalAlignment.Top:
-                    return monitorRect.Top + Settings.DockOffset.Y;
+                    return monitorRect.Top + _settings.DockOffset.Y;
                 case VerticalAlignment.Center:
-                    return monitorRect.Bottom/2 - ActualHeight/2 + Settings.DockOffset.Y;
+                    return monitorRect.Bottom/2 - ActualHeight/2 + _settings.DockOffset.Y;
                 case VerticalAlignment.Bottom:
-                    return monitorRect.Bottom - ActualHeight - Settings.DockOffset.Y;
+                    return monitorRect.Bottom - ActualHeight - _settings.DockOffset.Y;
             }
             return double.NaN;
         }
 
         private double GetWidth()
         {
-            return Settings.IsDocked && Settings.HorizontalAlignment == HorizontalAlignment.Stretch
+            return _settings.IsDocked && _settings.HorizontalAlignment == HorizontalAlignment.Stretch
                 ? MaxWidth
-                : Settings.Width;
+                : _settings.Width;
         }
 
         private double GetHeight()
         {
-            return Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Stretch
+            return _settings.IsDocked && _settings.VerticalAlignment == VerticalAlignment.Stretch
                 ? MaxHeight
-                : Settings.Height;
+                : _settings.Height;
         }
 
         private void DismissWidgetExecute()
         {
-            _id.GetView()?.HideUI();
+            View?.HideUi();
         }
 
         private void EditWidgetExecute()
         {
-            _id.Edit();
+            Id.Edit();
         }
 
         private void ReloadWidgetExecute()
         {
-            _id.Reload();
+            Id.Reload();
         }
 
         private void ToggleEnableWidgetExecute()
         {
-            _id.ToggleEnable();
+            Id.ToggleEnable();
         }
 
         private void ManageAllWidgetsExecute()
@@ -288,42 +294,40 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private void WidgetDockHorizontalExecute(HorizontalAlignment horizontalAlignment)
         {
-            var previousAlignment = Settings.HorizontalAlignment;
-            var previousIsDocked = Settings.IsDocked;
-            var view = _id.GetView();
-            Settings.HorizontalAlignment = horizontalAlignment;
-            Settings.IsDocked = true;
-            if (view != null)
+            var previousAlignment = _settings.HorizontalAlignment;
+            var previousIsDocked = _settings.IsDocked;
+            _settings.HorizontalAlignment = horizontalAlignment;
+            _settings.IsDocked = true;
+            if (View != null)
             {
-                if (Settings.AutoDetectScreenBounds)
-                    Settings.ScreenBounds = ScreenHelper.GetScreen(view).ToRect(Settings.IgnoreAppBars);
-                view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
-                view.ShowIntro(reversable: false);
+                if (_settings.AutoDetectScreenBounds)
+                    _settings.ScreenBounds = ScreenHelper.GetScreen(View).ToRect(_settings.IgnoreAppBars);
+                View.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
+                View.ShowIntro();
             }
         }
 
         private void WidgetDockVerticalExecute(VerticalAlignment verticalAlignment)
         {
-            var previousAlignment = Settings.VerticalAlignment;
-            var previousIsDocked = Settings.IsDocked;
-            var view = _id.GetView();
-            Settings.VerticalAlignment = verticalAlignment;
-            Settings.IsDocked = true;
-            if (view != null)
+            var previousAlignment = _settings.VerticalAlignment;
+            var previousIsDocked = _settings.IsDocked;
+            _settings.VerticalAlignment = verticalAlignment;
+            _settings.IsDocked = true;
+            if (View != null)
             {
-                if (Settings.AutoDetectScreenBounds)
-                    Settings.ScreenBounds = ScreenHelper.GetScreen(view).ToRect(Settings.IgnoreAppBars);
-                view.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
-                view.ShowIntro(reversable: false);
+                if (_settings.AutoDetectScreenBounds)
+                    _settings.ScreenBounds = ScreenHelper.GetScreen(View).ToRect(_settings.IgnoreAppBars);
+                View.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
+                View.ShowIntro();
             }
         }
 
         private void WidgetUndockExecute()
         {
-            var previousIsDocked = Settings.IsDocked;
-            Settings.IsDocked = false;
-            _id.GetView()?.UpdateUi(isDocked: previousIsDocked);
-            _id.GetView()?.ShowIntro(reversable: false);
+            var previousIsDocked = _settings.IsDocked;
+            _settings.IsDocked = false;
+            View?.UpdateUi(isDocked: previousIsDocked);
+            View?.ShowIntro();
         }
 
         public void UpdatePosition()
@@ -338,28 +342,67 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             Height = GetHeight();
         }
 
+        private void UpdateForceOnTopTimer()
+        {
+            if (!_settings.ForceOnTop || _settings.ForceOnTopInterval <= 0)
+            {
+                _onTopForceTimer.Stop();
+                return;
+            }
+            if (_onTopForceTimer == null)
+            {
+                _onTopForceTimer = new DispatcherTimer();
+                _onTopForceTimer.Tick += (sender, args) => View?.ResetOnTop();
+            }
+            _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
+            _onTopForceTimer.Stop();
+            _onTopForceTimer.Start();
+        }
+
         public virtual void ReloadHotKeys()
         {
-            if (Settings.OpenMode == OpenMode.Keyboard || Settings.OpenMode == OpenMode.MouseAndKeyboard)
-                HotkeyStore.RegisterHotkey(Settings.Identifier.Guid,
-                    new Hotkey(Settings.HotKey, Settings.HotKeyModifiers, Settings.FullscreenActivation),
+            if (_settings.OpenMode == OpenMode.Keyboard || _settings.OpenMode == OpenMode.MouseAndKeyboard)
+                HotkeyStore.RegisterHotkey(_settings.Identifier.Guid,
+                    new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation),
                     () =>
-                        _id.GetView()?
-                            .ShowIntro(activate: Settings.ActivateOnShow, reversable: Settings.ToggleIntroOnHotkey));
+                        View?.ShowIntro(activate: _settings.ActivateOnShow, reversable: _settings.ToggleIntroOnHotkey));
             else
-                HotkeyStore.RemoveHotkey(_id.Guid);
+                HotkeyStore.RemoveHotkey(Id.Guid);
         }
 
         public virtual void OnClose()
         {
+            _onTopForceTimer?.Stop();
+            _onTopForceTimer = null;
         }
 
         public virtual void DropExecute(DragEventArgs e)
         {
         }
 
-        public virtual void OnIntroFinish()
+        public virtual void OnIntro()
         {
+        }
+
+        public virtual void OnIntroEnd()
+        {
+        }
+
+        public virtual void OnRefresh()
+        {
+        }
+
+        public virtual void OnLoad()
+        {
+        }
+
+        public virtual void OnUiLoad()
+        {
+        }
+
+        public virtual void ReloadTimers()
+        {
+            UpdateForceOnTopTimer();
         }
     }
 }

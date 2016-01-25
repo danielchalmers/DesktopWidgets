@@ -8,9 +8,6 @@
                     xmlns:classes="clr-namespace:DesktopWidgets.Classes"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
-    <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
-    <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
-    <classes:NonAlwaysOnOpenModeToBoolConverter x:Key="NonAlwaysOnOpenModeToBoolConverter" />
     <Style TargetType="{x:Type xctk:PropertyGrid}">
         <Setter Property="IsCategorized" Value="True" />
         <Setter Property="ShowSortOptions" Value="True" />
@@ -21,64 +18,13 @@
         <Setter Property="NameColumnWidth"
                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
     </Style>
-    <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
-        <MenuItem Click="menuItemMute_OnClick">
-            <MenuItem.Header>
-                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
-                    <Binding Path="MuteDuration" Source="{x:Static p:Settings.Default}" />
-                    <Binding Path="MuteEndTime" Source="{x:Static p:Settings.Default}" />
-                </MultiBinding>
-            </MenuItem.Header>
-        </MenuItem>
-        <Separator />
-        <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
-        <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
-        <MenuItem Header="Show All Widgets" Click="menuItemShowWidgets_OnClick" />
-        <MenuItem Header="Dismiss All Widgets" Click="menuItemDismissWidgets_OnClick" />
-        <MenuItem Header="Reload All Widgets" Click="menuItemReloadWidgets_OnClick" />
-        <Separator />
-        <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
-        <Separator />
-        <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick"
-                  IsEnabled="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}}" />
-        <Separator />
-        <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
-    </x:Array>
-    <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
-        <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
-        <Separator />
-        <MenuItem Header="Dock">
-            <MenuItem Header="None" Command="{Binding WidgetUndock}" />
-            <MenuItem Header="Horizontal">
-                <MenuItem Header="Center" Command="{Binding WidgetDockHorizontal}"
-                          CommandParameter="{x:Static HorizontalAlignment.Center}" />
-                <MenuItem Header="Left" Command="{Binding WidgetDockHorizontal}"
-                          CommandParameter="{x:Static HorizontalAlignment.Left}" />
-                <MenuItem Header="Right" Command="{Binding WidgetDockHorizontal}"
-                          CommandParameter="{x:Static HorizontalAlignment.Right}" />
-                <MenuItem Header="Stretch" Command="{Binding WidgetDockHorizontal}"
-                          CommandParameter="{x:Static HorizontalAlignment.Stretch}" />
-            </MenuItem>
-            <MenuItem Header="Vertical">
-                <MenuItem Header="Center" Command="{Binding WidgetDockVertical}"
-                          CommandParameter="{x:Static VerticalAlignment.Center}" />
-                <MenuItem Header="Top" Command="{Binding WidgetDockVertical}"
-                          CommandParameter="{x:Static VerticalAlignment.Top}" />
-                <MenuItem Header="Bottom" Command="{Binding WidgetDockVertical}"
-                          CommandParameter="{x:Static VerticalAlignment.Bottom}" />
-                <MenuItem Header="Stretch" Command="{Binding WidgetDockVertical}"
-                          CommandParameter="{x:Static VerticalAlignment.Stretch}" />
-            </MenuItem>
-        </MenuItem>
-        <Separator />
-        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}"
-                  IsEnabled="{Binding Settings.OpenMode, Converter={StaticResource NonAlwaysOnOpenModeToBoolConverter}}" />
-        <MenuItem Header="Reload" Command="{Binding ReloadWidget}" />
-        <MenuItem
-            Header="{Binding Settings.Disabled, Converter={StaticResource BoolToEnableDisableNameConverter}}"
-            Command="{Binding ToggleEnableWidget}" />
-    </CompositeCollection>
-    <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
+    <Style x:Key="InfoTextbox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Height" Value="Auto" />
+    </Style>
     <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
                     ContextMenu="{StaticResource MainContextMenu}"
                     TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick" TrayLeftMouseUp="TrayIcon_OnTrayLeftMouseUp"

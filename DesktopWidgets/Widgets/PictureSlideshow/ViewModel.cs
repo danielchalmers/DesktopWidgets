@@ -35,7 +35,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 MaxSize = Settings.FileFilterSize,
                 Recursive = Settings.Recursive
             });
-            RefreshAction = delegate { _directoryWatcher.SetWatchPath(Settings.RootPath); };
             _directoryWatcher.CheckDirectoryForNewFiles();
             NextImage();
             if (Settings.Recursive)
@@ -102,6 +101,12 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 ImageUrl = ((string[]) e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
                 Settings.Freeze = true;
             }
+        }
+
+        public override void OnRefresh()
+        {
+            base.OnRefresh();
+            _directoryWatcher.SetWatchPath(Settings.RootPath);
         }
     }
 }

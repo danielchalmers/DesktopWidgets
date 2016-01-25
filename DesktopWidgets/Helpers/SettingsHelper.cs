@@ -82,8 +82,7 @@ namespace DesktopWidgets.Helpers
             if (refresh)
                 WidgetHelper.LoadWidgetViews();
             if (msg)
-                Popup.Show("All settings have been restored to default.", MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                Popup.Show("All settings have been restored to default.");
         }
 
         public static void ImportData()

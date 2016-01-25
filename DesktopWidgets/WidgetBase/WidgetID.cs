@@ -9,11 +9,6 @@ namespace DesktopWidgets.WidgetBase
             Guid = Guid.NewGuid();
         }
 
-        public WidgetId(Guid guid)
-        {
-            Guid = guid;
-        }
-
         public Guid Guid { get; private set; }
 
         public void GenerateNewGuid()

@@ -86,10 +86,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public VerticalAlignment ShowContentVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
 
         [Category("General")]
-        [DisplayName("Play Media Filter")]
-        public string PlayMediaFilter { get; set; } = ".wav|.mp3|.mp4|.m4a|.m3u|.wma";
-
-        [Category("General")]
         [DisplayName("Play Media Volume")]
         public double PlayMediaVolume { get; set; } = 1.0;
 

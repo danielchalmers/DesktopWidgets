@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -57,35 +56,18 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void Add(this ViewModel viewModel, Shortcut shortcut, bool msg = true)
         {
-            // If shortcut path already exists, ask user if they are sure.
             if (msg && viewModel.Settings.Shortcuts.Any(x => x.Path == shortcut.Path))
                 if (
                     Popup.Show(
                         "A shortcut with this path already exists.\n\nAre you sure you want to add this shortcut?",
                         MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                     return;
-            // Add new shortcut.
             viewModel.Settings.Shortcuts.Add(shortcut);
         }
 
         public static void OpenFolder(this Shortcut shortcut)
         {
             ProcessHelper.OpenFolder(shortcut.Path);
-        }
-
-        public static void Reload(this ViewModel viewModel)
-        {
-            if (Popup.Show("Are you sure you want to reload all shortcuts?",
-                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
-                return;
-            var shortcutList = viewModel.Settings.Shortcuts.ToList();
-            viewModel.Settings.Shortcuts.Clear();
-            foreach (var shortcut in shortcutList)
-                if (shortcut.SpecialType == string.Empty)
-                    viewModel.ProcessFile(shortcut.Path, shortcut.Name, false);
-                else
-                    viewModel.Add(shortcut, false);
-            viewModel.ClearIconCache();
         }
 
         public static void New(this ViewModel viewModel)
@@ -121,13 +103,12 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void ForceRefresh(this ViewModel viewModel)
         {
             viewModel.ClearIconCache();
-            //viewModel.Refresh();
         }
 
         public static void Execute(this ViewModel viewModel, Shortcut shortcut, bool hide = true)
         {
             if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
-                viewModel._id.GetView()?.HideUI();
+                viewModel.View?.HideUi();
             if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path) || LinkHelper.IsHyperlink(shortcut.Path))
             {
                 ProcessHelper.Launch(shortcut.Path, shortcut.Args, shortcut.StartInFolder, shortcut.WindowStyle);
@@ -161,22 +142,6 @@ namespace DesktopWidgets.Widgets.Sidebar
             viewModel.Settings.Shortcuts.Remove(shortcut);
             if (shortcut.HotKey != Key.None)
                 HotkeyStore.RemoveHotkey(shortcut.Guid);
-        }
-
-        public static void Reset(this ViewModel viewModel, bool msg = false)
-        {
-            if (msg &&
-                Popup.Show("Are you sure you want to remove all shortcuts? This cannot be undone.",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
-                return;
-            viewModel.Settings.Shortcuts.Clear();
-        }
-
-        public static void PopulateListBox(this ViewModel viewModel, ref ListBox listBox)
-        {
-            listBox.Items.Clear();
-            foreach (var shortcut in viewModel.Settings.Shortcuts)
-                listBox.Items.Add(shortcut.Name);
         }
 
         public static Shortcut MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
@@ -242,60 +207,46 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static IEnumerable<Shortcut> GetDefaultShortcuts(DefaultShortcutsMode mode)
         {
-            var defaults = new List<Shortcut>();
-
             switch (mode)
             {
-                default:
-                case DefaultShortcutsMode.DontChange:
-                    break;
                 case DefaultShortcutsMode.Preset:
-                    defaults.Add(new Shortcut
+                    yield return new Shortcut
                     {
                         Name = "Help",
                         Path = Resources.Website,
                         SpecialType = "Help"
-                    });
-                    defaults.Add(new Shortcut
+                    };
+                    yield return new Shortcut
                     {
                         Name = "File Explorer",
                         Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe"
-                    });
-                    defaults.Add(new Shortcut
+                    };
+                    yield return new Shortcut
                     {
                         Name = "Notepad",
                         Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\notepad.exe"
-                    });
-                    defaults.Add(new Shortcut
+                    };
+                    yield return new Shortcut
                     {
                         Name = "Calculator",
                         Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe"
-                    });
-                    defaults.Add(new Shortcut
+                    };
+                    yield return new Shortcut
                     {
                         Name = "Command Prompt",
                         Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe"
-                    });
+                    };
                     break;
                 case DefaultShortcutsMode.Taskbar:
-                    try
-                    {
-                        var taskbarPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                          Resources.TaskBarPath;
-                        defaults.AddRange(
-                            Directory.GetFiles(taskbarPath)
-                                .Where(file => Path.GetFileName(file) != "desktop.ini")
-                                .Select(
-                                    file => new Shortcut {Path = file, Name = Path.GetFileNameWithoutExtension(file)}));
-                    }
-                    catch
-                    {
-                        // ignored
-                    }
+                    var taskbarPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                                      Resources.TaskBarPath;
+                    foreach (var shortcut in Directory.GetFiles(taskbarPath)
+                        .Where(file => Path.GetFileName(file) != Resources.WindowsFolderDataFile)
+                        .Select(
+                            file => new Shortcut {Path = file, Name = Path.GetFileNameWithoutExtension(file)}))
+                        yield return shortcut;
                     break;
             }
-
-            return defaults;
         }
 
         public static string GetFriendlyNameWithData(this Shortcut shortcut)

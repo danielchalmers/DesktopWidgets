@@ -1,0 +1,36 @@
+﻿<ResourceDictionary x:Class="DesktopWidgets.MainContextMenu"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DesktopWidgets"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:tb="http://www.hardcodet.net/taskbar"
+                    xmlns:p="clr-namespace:DesktopWidgets.Properties"
+                    xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
+    <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
+    <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="MainMenuItems">
+        <MenuItem Click="menuItemMute_OnClick">
+            <MenuItem.Header>
+                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                    <Binding Path="MuteDuration" Source="{x:Static p:Settings.Default}" />
+                    <Binding Path="MuteEndTime" Source="{x:Static p:Settings.Default}" />
+                </MultiBinding>
+            </MenuItem.Header>
+        </MenuItem>
+        <Separator />
+        <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
+        <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
+        <MenuItem Header="Show All Widgets" Click="menuItemShowWidgets_OnClick" />
+        <MenuItem Header="Dismiss All Widgets" Click="menuItemDismissWidgets_OnClick" />
+        <MenuItem Header="Reload All Widgets" Click="menuItemReloadWidgets_OnClick" />
+        <Separator />
+        <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
+        <Separator />
+        <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick"
+                  IsEnabled="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}}" />
+        <Separator />
+        <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
+    </x:Array>
+    <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
+</ResourceDictionary>

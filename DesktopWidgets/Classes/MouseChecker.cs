@@ -30,7 +30,6 @@ namespace DesktopWidgets.Classes
         {
             _view = view;
             _settings = settings;
-            // Setup mouse checker, hide, show timers
             _mouseCheckTimer = new DispatcherTimer();
             _hideTimer = new DispatcherTimer();
             _showTimer = new DispatcherTimer();
@@ -62,15 +61,9 @@ namespace DesktopWidgets.Classes
             _showTimer.Interval = TimeSpan.FromMilliseconds(_settings.ShowDelay);
         }
 
-        public void Start()
-        {
-            _mouseCheckTimer.Start();
-        }
+        public void Start() => _mouseCheckTimer.Start();
 
-        public void Stop()
-        {
-            _mouseCheckTimer.Stop();
-        }
+        public void Stop() => _mouseCheckTimer.Stop();
 
         private Rect GetCenterBounds()
         {
@@ -79,17 +72,22 @@ namespace DesktopWidgets.Classes
                 viewBounds.Width + _settings.MouseBounds*2, viewBounds.Height + _settings.MouseBounds*2);
         }
 
-        private bool IsMouseInMouseBounds()
+        private bool IsMouseInMouseBounds() => GetValidBounds().Any(checkRect => checkRect.Contains(GetMouseLocation()));
+
+        private bool IsMouseInWindowBounds() => _view.GetBounds().Contains(GetMouseLocation());
+
+        private bool IsMouseInCorners() => _settings.ScreenBounds.GetCorners(_settings.IgnoreScreenCornerSize)
+            .Any(x => x.Contains(GetMouseLocation()));
+
+        private IEnumerable<Rect> GetValidBounds()
         {
-            // Return is mouse in correct bounds to show sidebar.
-            var checkBounds = new List<Rect>();
             if (_settings.CustomMouseDetectionBounds.Width > 0 && _settings.CustomMouseDetectionBounds.Height > 0)
             {
-                checkBounds.Add(_settings.CustomMouseDetectionBounds);
+                yield return _settings.CustomMouseDetectionBounds;
             }
             else if (!_settings.IsDocked)
             {
-                checkBounds.Add(GetCenterBounds());
+                yield return GetCenterBounds();
             }
             else
             {
@@ -101,20 +99,20 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Left ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
+                            yield return new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
                                 _settings.MouseBounds,
-                                _settings.ScreenBounds.Height));
+                                _settings.ScreenBounds.Height);
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(_settings.ScreenBounds.Right - _settings.MouseBounds,
-                                _settings.ScreenBounds.Top, _settings.MouseBounds, _settings.ScreenBounds.Height));
+                            yield return new Rect(_settings.ScreenBounds.Right - _settings.MouseBounds,
+                                _settings.ScreenBounds.Top, _settings.MouseBounds, _settings.ScreenBounds.Height);
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
+                                yield return GetCenterBounds();
                         }
                     }
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
@@ -123,21 +121,21 @@ namespace DesktopWidgets.Classes
                         if (_settings.VerticalAlignment == VerticalAlignment.Top ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
+                            yield return new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
                                 _settings.ScreenBounds.Width,
-                                _settings.MouseBounds));
+                                _settings.MouseBounds);
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Bottom ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(_settings.ScreenBounds.Left,
+                            yield return new Rect(_settings.ScreenBounds.Left,
                                 _settings.ScreenBounds.Bottom - _settings.MouseBounds, _settings.ScreenBounds.Width,
-                                _settings.MouseBounds));
+                                _settings.MouseBounds);
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
+                                yield return GetCenterBounds();
                         }
                     }
                 }
@@ -150,19 +148,19 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Left ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
-                                viewBounds.Height));
+                            yield return new Rect(viewBounds.Left, viewBounds.Top, _settings.MouseBounds,
+                                viewBounds.Height);
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(viewBounds.Right - _settings.MouseBounds,
-                                viewBounds.Top, _settings.MouseBounds, viewBounds.Height));
+                            yield return new Rect(viewBounds.Right - _settings.MouseBounds,
+                                viewBounds.Top, _settings.MouseBounds, viewBounds.Height);
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
+                                yield return GetCenterBounds();
                         }
                     }
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
@@ -171,44 +169,28 @@ namespace DesktopWidgets.Classes
                         if (_settings.VerticalAlignment == VerticalAlignment.Top ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
-                                _settings.MouseBounds));
+                            yield return new Rect(viewBounds.Left, viewBounds.Top, viewBounds.Width,
+                                _settings.MouseBounds);
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Bottom ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            checkBounds.Add(new Rect(viewBounds.Left,
+                            yield return new Rect(viewBounds.Left,
                                 viewBounds.Bottom - _settings.MouseBounds, viewBounds.Width,
-                                _settings.MouseBounds));
+                                _settings.MouseBounds);
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
-                                checkBounds.Add(GetCenterBounds());
+                                yield return GetCenterBounds();
                         }
                     }
                 }
             }
-
-            return checkBounds.Any(checkRect => checkRect.Contains(GetMouseLocation()));
-        }
-
-        private bool IsMouseInWindowBounds()
-        {
-            return _view.GetBounds().Contains(GetMouseLocation());
-        }
-
-        private bool IsMouseInCorners()
-        {
-            return
-                _settings.ScreenBounds.GetCorners(_settings.IgnoreScreenCornerSize)
-                    .Any(x => x.Contains(GetMouseLocation()));
         }
 
         private void Update()
         {
-            // Show or hide window based on mouse position.
-
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
@@ -259,6 +241,11 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            UpdateVisibilityStatus();
+        }
+
+        private void UpdateVisibilityStatus()
+        {
             if (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard)
             {
                 if (IsShowable())
@@ -302,14 +289,9 @@ namespace DesktopWidgets.Classes
         }
 
         private bool IsHideable()
-        {
-            return _view.IsVisible && !_view.IsContextMenuOpen && !(_settings.StayOpenIfMouseFocus && IsShowable());
-        }
+            => _view.IsVisible && !_view.IsContextMenuOpen && !(_settings.StayOpenIfMouseFocus && IsShowable());
 
-        private bool IsShowable()
-        {
-            return _view.IsMouseOver || IsMouseInMouseBounds();
-        }
+        private bool IsShowable() => _view.IsMouseOver || IsMouseInMouseBounds();
 
         public void Show(bool animate = true, bool activate = false)
         {
@@ -339,10 +321,10 @@ namespace DesktopWidgets.Classes
         public void Dispose()
         {
             _mouseCheckTimer?.Stop();
-            _hideTimer?.Stop();
-            _showTimer?.Stop();
             _mouseCheckTimer = null;
+            _hideTimer?.Stop();
             _hideTimer = null;
+            _showTimer?.Stop();
             _showTimer = null;
         }
     }

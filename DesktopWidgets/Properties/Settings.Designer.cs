@@ -423,5 +423,14 @@ namespace DesktopWidgets.Properties {
                 this["DisableChangelog"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1E-09")]
+        public double DoubleComparisonTolerance {
+            get {
+                return ((double)(this["DoubleComparisonTolerance"]));
+            }
+        }
     }
 }

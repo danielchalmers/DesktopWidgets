@@ -130,11 +130,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MainContextMenu.xaml.cs">
+      <DependentUpon>MainContextMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppResources.xaml.cs">
       <DependentUpon>AppResources.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\DirectoryWatcherSettings.cs" />
     <Compile Include="Classes\Hotkey.cs" />
+    <Compile Include="Helpers\MediaPlayerHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Stores\HotkeyStore.cs" />
     <Compile Include="Stores\MediaPlayerStore.cs" />
     <Compile Include="Helpers\DateTimeSyncHelper.cs" />
@@ -160,6 +165,7 @@
     <Compile Include="Classes\SizeObserver.cs" />
     <Compile Include="Classes\TaskScheduler.cs" />
     <Compile Include="WidgetBase\Settings\WidgetClockSettingsBase.cs" />
+    <Compile Include="WidgetBase\WidgetFactory.cs" />
     <Compile Include="WidgetBase\WidgetID.cs" />
     <Compile Include="WidgetBase\WidgetsSettingsStore.cs" />
     <Compile Include="Classes\Win32App.cs" />
@@ -334,7 +340,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="MainContextMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AppResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WidgetBase\ContextMenus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

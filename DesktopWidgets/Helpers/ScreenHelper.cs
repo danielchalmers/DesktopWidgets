@@ -17,18 +17,6 @@ namespace DesktopWidgets.Helpers
             return (useFullBounds ? screen.Bounds : screen.WorkingArea).ToRect();
         }
 
-        public static Rect GetScreenBounds(string deviceName, bool useFullBounds)
-        {
-            return GetScreen(deviceName).ToRect(useFullBounds);
-        }
-
-        public static Screen GetScreen(string deviceName)
-        {
-            return
-                Screen.AllScreens.FirstOrDefault(x => x.DeviceName.Contains(deviceName, true)) ??
-                Screen.AllScreens.FirstOrDefault(x => x.Primary);
-        }
-
         public static Screen GetScreen(Rect bounds)
         {
             return

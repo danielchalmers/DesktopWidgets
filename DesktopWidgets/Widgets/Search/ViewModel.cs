@@ -44,7 +44,7 @@ namespace DesktopWidgets.Widgets.Search
             SearchText = string.Empty;
             Process.Start($"{Settings.BaseUrl}{searchText}{Settings.URLSuffix}");
             if (Settings.HideOnSearch)
-                _id.GetView()?.HideUI();
+                View?.HideUi();
         }
 
         private void OnKeyUpExecute(KeyEventArgs args)

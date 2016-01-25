@@ -38,12 +38,6 @@ namespace DesktopWidgets.Widgets.Weather
             };
             _updateTimer.Tick += (sender, args) => UpdateWeather();
 
-            RefreshAction = delegate
-            {
-                if (_lastZipCode != Settings.ZipCode)
-                    UpdateWeather();
-            };
-
             UpdateWeather();
             _updateTimer.Start();
         }
@@ -69,7 +63,7 @@ namespace DesktopWidgets.Widgets.Weather
             get { return _temperature; }
             set
             {
-                if (_temperature != value)
+                if (Math.Abs(_temperature - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
                     _temperature = value;
                     RaisePropertyChanged(nameof(Temperature));
@@ -82,7 +76,7 @@ namespace DesktopWidgets.Widgets.Weather
             get { return _temperatureMin; }
             set
             {
-                if (_temperatureMin != value)
+                if (Math.Abs(_temperatureMin - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
                     _temperatureMin = value;
                     RaisePropertyChanged(nameof(TemperatureMin));
@@ -95,7 +89,7 @@ namespace DesktopWidgets.Widgets.Weather
             get { return _temperatureMax; }
             set
             {
-                if (_temperatureMax != value)
+                if (Math.Abs(_temperatureMax - value) > Properties.Settings.Default.DoubleComparisonTolerance)
                 {
                     _temperatureMax = value;
                     RaisePropertyChanged(nameof(TemperatureMax));
@@ -193,6 +187,13 @@ namespace DesktopWidgets.Widgets.Weather
             base.OnClose();
             _updateTimer?.Stop();
             _updateTimer = null;
+        }
+
+        public override void OnRefresh()
+        {
+            base.OnRefresh();
+            if (_lastZipCode != Settings.ZipCode)
+                UpdateWeather();
         }
     }
 }

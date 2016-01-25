@@ -43,7 +43,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Image>
-        <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
+        <TextBox Style="{StaticResource InfoTextbox}"
                  HorizontalAlignment="{Binding Settings.ShowContentHorizontalAlignment}"
                  VerticalAlignment="{Binding Settings.ShowContentVerticalAlignment}"
                  FontSize="{Binding Settings.ShowContentFontSize}"

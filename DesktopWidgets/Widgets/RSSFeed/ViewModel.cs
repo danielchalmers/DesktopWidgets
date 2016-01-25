@@ -36,12 +36,6 @@ namespace DesktopWidgets.Widgets.RSSFeed
             UpdateTimer = new DispatcherTimer {Interval = Settings.RefreshInterval};
             UpdateTimer.Tick += (sender, args) => UpdateFeed();
 
-            RefreshAction = delegate
-            {
-                if (_lastFeedUrl != Settings.RssFeedUrl)
-                    UpdateFeed();
-            };
-
             UpdateFeed();
             UpdateTimer.Start();
         }
@@ -81,8 +75,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
             if (!App.IsMuted)
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             if (Settings.OpenOnEvent)
-                Settings.Identifier.GetView()
-                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
+                View?.ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
         }
 
         private void DownloadFeed(Action<SyndicationFeed> finishAction)
@@ -167,6 +160,13 @@ namespace DesktopWidgets.Widgets.RSSFeed
             base.OnClose();
             UpdateTimer?.Stop();
             UpdateTimer = null;
+        }
+
+        public override void OnRefresh()
+        {
+            base.OnRefresh();
+            if (_lastFeedUrl != Settings.RssFeedUrl)
+                UpdateFeed();
         }
     }
 }

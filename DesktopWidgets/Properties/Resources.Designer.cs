@@ -61,17 +61,17 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} ({1}).
+        ///   Looks up a localized string similar to {0} ({1})
         ///
         ///
-        ///Links &amp; Credit:
-        /// Issues: {2}
-        /// Changelog: {3}
+        ///Source Code: {3}
+        ///Changes: {4}
+        ///Issues: {5}
         ///
-        /// Icon made by Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)
+        ///Icon made by {6}
         ///
         ///
-        ///{4}.
+        ///{2}.
         /// </summary>
         public static string About {
             get {
@@ -166,6 +166,15 @@ namespace DesktopWidgets.Properties {
         public static string Website {
             get {
                 return ResourceManager.GetString("Website", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to desktop.ini.
+        /// </summary>
+        public static string WindowsFolderDataFile {
+            get {
+                return ResourceManager.GetString("WindowsFolderDataFile", resourceCulture);
             }
         }
     }

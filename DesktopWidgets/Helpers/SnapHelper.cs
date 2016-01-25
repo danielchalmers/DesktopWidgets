@@ -8,15 +8,14 @@ namespace DesktopWidgets.Helpers
 {
     public static class SnapHelper
     {
-        private static List<Rect> GetSnapBounds(this Window window, bool useWidgetsBounds, bool useFullBounds)
+        private static IEnumerable<Rect> GetSnapBounds(this Window window, bool useWidgetsBounds, bool useFullBounds)
         {
-            var bounds = new List<Rect>();
-            bounds.AddRange(ScreenHelper.GetAllScreenBounds(useFullBounds));
+            foreach (var bounds in ScreenHelper.GetAllScreenBounds(useFullBounds))
+                yield return bounds;
             if (useWidgetsBounds)
-                bounds.AddRange(
-                    App.WidgetViews.Where(x => !x.Settings.Disabled && !x.Equals(window))
-                        .Select(view => view.GetBounds()));
-            return bounds;
+                foreach (var bounds in App.WidgetViews.Where(x => !x.Settings.Disabled && !x.Equals(window))
+                    .Select(view => view.GetBounds()))
+                    yield return bounds;
         }
 
         public static bool IsSnappable(double pos1, double pos2)
@@ -33,7 +32,7 @@ namespace DesktopWidgets.Helpers
         }
 
         private static bool SnapHorizontally(this Window window, Rect windowBounds,
-            IReadOnlyCollection<Rect> compareBounds, Action leftSnapAction, Action rightSnapAction)
+            IEnumerable<Rect> compareBounds, Action leftSnapAction, Action rightSnapAction)
         {
             var horizontal = new List<double>();
             horizontal.AddRange(compareBounds.Select(x => x.Left));
@@ -58,7 +57,7 @@ namespace DesktopWidgets.Helpers
         }
 
         private static bool SnapVertically(this Window window, Rect windowBounds,
-            IReadOnlyCollection<Rect> compareBounds, Action topSnapAction, Action bottomSnapAction)
+            IEnumerable<Rect> compareBounds, Action topSnapAction, Action bottomSnapAction)
         {
             var vertical = new List<double>();
             vertical.AddRange(compareBounds.Select(x => x.Top));

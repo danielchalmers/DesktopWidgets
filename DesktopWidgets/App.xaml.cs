@@ -53,7 +53,7 @@ namespace DesktopWidgets
 
             if (!AppInitHelper.Initialize())
                 return;
-            TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
+            TrayIcon = (TaskbarIcon) Resources["TrayIcon"];
 
             SystemEvents.SessionEnding += SystemEvents_OnSessionEnding;
             SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
@@ -73,6 +73,8 @@ namespace DesktopWidgets
                 base.OnExit(e);
 
                 SettingsHelper.SaveSettings();
+
+                AppMutex.ReleaseMutex();
             }
             catch
             {

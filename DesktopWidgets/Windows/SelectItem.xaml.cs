@@ -9,21 +9,21 @@ namespace DesktopWidgets.Windows
     /// </summary>
     public partial class SelectItem : Window
     {
-        private readonly SelectItemViewModel ViewModel;
+        private readonly SelectItemViewModel _viewModel;
 
         public SelectItem(IEnumerable<object> items, string title)
         {
             InitializeComponent();
-            ViewModel = new SelectItemViewModel(items);
+            _viewModel = new SelectItemViewModel(items);
             Title = $"Select {title}";
-            DataContext = ViewModel;
+            DataContext = _viewModel;
         }
 
         public object SelectedItem { get; private set; }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            SelectedItem = ViewModel.SelectedItem;
+            SelectedItem = _viewModel.SelectedItem;
             DialogResult = true;
         }
 

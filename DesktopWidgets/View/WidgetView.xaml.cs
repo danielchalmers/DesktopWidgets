@@ -23,53 +23,26 @@ namespace DesktopWidgets.View
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
         private DispatcherTimer _introTimer;
-        private DispatcherTimer _onTopForceTimer;
 
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
         {
             InitializeComponent();
+
             Opacity = 0;
             Hide();
+
             Id = id;
             Settings = id.GetSettings();
             ViewModel = viewModel;
             UserControl = userControl;
 
-            userControl.Style = (Style) FindResource("UserControlStyle");
-            MainContentContainer.Content = userControl;
-            var contextMenu = (ContextMenu)
-                (userControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
-            contextMenu.DataContext = ViewModel;
-            MainContentContainer.ContextMenu = contextMenu;
-            userControl.MouseDown += Widget_OnMouseDown;
+            SetupWidgetControl();
 
-            MainContentContainer.ScrollToHorizontalOffset(Settings.ScrollHorizontalOffset);
-            MainContentContainer.ScrollToVerticalOffset(Settings.ScrollVerticalOffset);
+            SetScrollPosition();
 
-            var frameTop = userControl.TryFindResource("FrameTop") as Grid;
-            if (frameTop != null)
-            {
-                FrameContainerTop.Child = frameTop;
-                FrameContainerTop.Visibility = Visibility.Visible;
-            }
-            var frameBottom = userControl.TryFindResource("FrameBottom") as Grid;
-            if (frameBottom != null)
-            {
-                FrameContainerBottom.Child = frameBottom;
-                FrameContainerBottom.Visibility = Visibility.Visible;
-            }
-            var frameLeft = userControl.TryFindResource("FrameLeft") as Grid;
-            if (frameLeft != null)
-            {
-                FrameContainerLeft.Child = frameLeft;
-                FrameContainerLeft.Visibility = Visibility.Visible;
-            }
-            var frameRight = userControl.TryFindResource("FrameRight") as Grid;
-            if (frameRight != null)
-            {
-                FrameContainerRight.Child = frameRight;
-                FrameContainerRight.Visibility = Visibility.Visible;
-            }
+            SetupFrame();
+
+            ViewModel.View = this;
 
             _mouseChecker = new MouseChecker(this, Settings);
 
@@ -79,6 +52,8 @@ namespace DesktopWidgets.View
             DataContext = ViewModel;
 
             _mouseChecker.Start();
+
+            ViewModel.OnLoad();
         }
 
         public WidgetViewModelBase ViewModel { get; set; }
@@ -86,9 +61,60 @@ namespace DesktopWidgets.View
         public bool IsContextMenuOpen => ViewModel.IsContextMenuOpen;
 
         public WidgetId Id { get; }
-        public bool AnimationRunning { get; set; } = false;
+        public bool AnimationRunning { get; set; }
 
         public new bool IsVisible => Visibility == Visibility.Visible && Opacity > 0.99;
+
+        private void SetupWidgetControl()
+        {
+            UserControl.Style = (Style) Resources["UserControlStyle"];
+            MainContentContainer.Content = UserControl;
+            var contextMenu = (ContextMenu)
+                (UserControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
+            contextMenu.DataContext = ViewModel;
+            MainContentContainer.ContextMenu = contextMenu;
+            UserControl.MouseDown += Widget_OnMouseDown;
+        }
+
+        private void SetupFrame()
+        {
+            var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
+            if (frameTop != null)
+            {
+                FrameContainerTop.Child = frameTop;
+                FrameContainerTop.Visibility = Visibility.Visible;
+            }
+            var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
+            if (frameBottom != null)
+            {
+                FrameContainerBottom.Child = frameBottom;
+                FrameContainerBottom.Visibility = Visibility.Visible;
+            }
+            var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
+            if (frameLeft != null)
+            {
+                FrameContainerLeft.Child = frameLeft;
+                FrameContainerLeft.Visibility = Visibility.Visible;
+            }
+            var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
+            if (frameRight != null)
+            {
+                FrameContainerRight.Child = frameRight;
+                FrameContainerRight.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void SetScrollPosition()
+        {
+            MainContentContainer.ScrollToHorizontalOffset(Settings.ScrollHorizontalOffset);
+            MainContentContainer.ScrollToVerticalOffset(Settings.ScrollVerticalOffset);
+        }
+
+        private void SaveScrollPosition()
+        {
+            Settings.ScrollHorizontalOffset = MainContentContainer.ContentHorizontalOffset;
+            Settings.ScrollVerticalOffset = MainContentContainer.ContentVerticalOffset;
+        }
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -101,8 +127,9 @@ namespace DesktopWidgets.View
             if (Settings.Unclickable)
                 new Win32App(hwnd).SetWindowExTransparent();
 
-
             UpdateUi(false, false);
+
+            ViewModel.OnUiLoad();
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -124,7 +151,7 @@ namespace DesktopWidgets.View
                     _introTimer.Stop();
                     if (hideOnFinish && Settings.OpenMode != OpenMode.AlwaysOpen)
                         _mouseChecker.Hide(checkHideStatus: true);
-                    ViewModel.OnIntroFinish();
+                    ViewModel.OnIntroEnd();
                 };
             }
 
@@ -134,25 +161,23 @@ namespace DesktopWidgets.View
             {
                 _mouseChecker.KeepOpenForIntro = false;
             }
-            else
+            else if (duration != 0)
             {
                 _mouseChecker.KeepOpenForIntro = true;
-                if (duration != 0)
-                {
-                    _introTimer.Start();
-                    if (activate)
-                        Activate();
-                }
+                _introTimer.Start();
+                if (activate)
+                    Activate();
+                ViewModel.OnIntro();
             }
         }
 
-        public void ShowUI()
+        public void ShowUi()
         {
             if (Settings.OpenMode != OpenMode.AlwaysOpen && !App.IsMuted)
                 _mouseChecker.Show();
         }
 
-        public void HideUI()
+        public void HideUi()
         {
             if (Settings.OpenMode != OpenMode.AlwaysOpen)
                 _mouseChecker.Hide();
@@ -203,7 +228,7 @@ namespace DesktopWidgets.View
                 ViewModel.ReloadHotKeys();
             }
 
-            ViewModel.RefreshAction?.Invoke();
+            ViewModel.OnRefresh();
 
             if (!isVisible)
                 Hide();
@@ -222,35 +247,23 @@ namespace DesktopWidgets.View
                 _mouseChecker.Stop();
                 _mouseChecker.Start();
             }
-            if (Settings.ForceOnTop && Settings.ForceOnTopInterval > 0)
-            {
-                if (_onTopForceTimer == null)
-                {
-                    _onTopForceTimer = new DispatcherTimer();
-                    _onTopForceTimer.Tick += delegate
-                    {
-                        ViewModel.OnTop = false;
-                        ViewModel.OnTop = true;
-                    };
-                }
-                _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(Settings.ForceOnTopInterval);
-                _onTopForceTimer.Stop();
-                _onTopForceTimer.Start();
-            }
+        }
+
+        public void ResetOnTop()
+        {
+            Topmost = true;
+            Topmost = false;
         }
 
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
-            _onTopForceTimer?.Stop();
-            _onTopForceTimer = null;
             _introTimer?.Stop();
             _introTimer = null;
             _mouseChecker.Dispose();
             HotkeyStore.RemoveHotkey(Id.Guid);
             ViewModel.OnClose();
             ViewModel = null;
-            Settings.ScrollHorizontalOffset = MainContentContainer.ContentHorizontalOffset;
-            Settings.ScrollVerticalOffset = MainContentContainer.ContentVerticalOffset;
+            SaveScrollPosition();
         }
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
@@ -295,7 +308,7 @@ namespace DesktopWidgets.View
 
         private void btnDismiss_OnClick(object sender, RoutedEventArgs e)
         {
-            HideUI();
+            HideUi();
         }
     }
 }

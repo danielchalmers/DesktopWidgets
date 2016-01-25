@@ -21,9 +21,6 @@
     </i:Interaction.Triggers>
     <Window.Resources>
         <classes:SettingsToThicknessConverter x:Key="SettingsToThicknessConverter" />
-        <classes:MultiBoolToVisibilityConverter x:Key="MultiBooleanToVisibilityConverter" />
-        <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
-        <classes:StringToIsNotNullOrWhiteSpaceConverter x:Key="StringToIsNotNullOrWhiteSpaceConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />

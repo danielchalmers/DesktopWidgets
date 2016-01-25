@@ -18,8 +18,6 @@
         <TextBlock Grid.Row="0"
                    Text="{x:Static properties:Resources.AppName}" FontSize="24" VerticalAlignment="Center"
                    HorizontalAlignment="Left" />
-        <TextBox x:Name="txtAbout" Grid.Row="2" Background="Transparent"
-                 BorderThickness="0" IsReadOnly="True"
-                 TextWrapping="Wrap" Height="Auto" VerticalAlignment="Center" />
+        <TextBox x:Name="txtAbout" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource InfoTextbox}" />
     </Grid>
 </Page>

@@ -44,11 +44,11 @@ namespace DesktopWidgets.Widgets.CommandButton
         {
             base.ReloadHotKeys();
             if (Settings.CommandHotKey != Key.None)
-                HotkeyStore.RegisterHotkey(_id.Guid,
+                HotkeyStore.RegisterHotkey(Id.Guid,
                     new Hotkey(Settings.CommandHotKey, Settings.CommandHotKeyModifiers, Settings.FullscreenActivation),
                     ExecuteCommand);
             else
-                HotkeyStore.RemoveHotkey(_id.Guid);
+                HotkeyStore.RemoveHotkey(Id.Guid);
         }
     }
 }

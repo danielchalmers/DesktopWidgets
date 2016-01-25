@@ -46,6 +46,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         [Category("General")]
         [DisplayName("Freeze")]
-        public bool Freeze { get; set; } = false;
+        public bool Freeze { get; set; }
     }
 }

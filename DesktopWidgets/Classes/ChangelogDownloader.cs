@@ -96,7 +96,6 @@ namespace DesktopWidgets.Classes
         private static IEnumerable<Changelog> ParseChangelogJson(string data)
         {
             var json = JsonConvert.DeserializeObject<List<GitHubApiCommitsRootObject>>(data);
-            var changelogData = new List<Changelog>();
             var history = new List<string>();
             json.Reverse();
             foreach (var j in json)
@@ -105,10 +104,10 @@ namespace DesktopWidgets.Classes
                 Version version;
                 if (Version.TryParse(commit, out version))
                 {
-                    changelogData.Add(new Changelog(
+                    yield return new Changelog(
                         version,
                         DateTime.Parse(j.commit.committer.date),
-                        history.ToList()));
+                        history.ToList());
                     history.Clear();
                 }
                 else
@@ -116,7 +115,6 @@ namespace DesktopWidgets.Classes
                     history.Add(commit);
                 }
             }
-            return changelogData;
         }
 
         private static string DownloadChangelogJson()

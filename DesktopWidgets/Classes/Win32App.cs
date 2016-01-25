@@ -16,22 +16,22 @@ namespace DesktopWidgets.Classes
 
         public Win32App(IntPtr value)
         {
-            hwnd = value;
+            Hwnd = value;
         }
 
-        private IntPtr hwnd { get; }
+        private IntPtr Hwnd { get; }
 
         public string GetTitle()
         {
             const int nChars = 256;
             var builder = new StringBuilder(nChars);
-            return NativeMethods.GetWindowText(hwnd, builder, nChars) > 0 ? builder.ToString() : null;
+            return NativeMethods.GetWindowText(Hwnd, builder, nChars) > 0 ? builder.ToString() : null;
         }
 
         public Win32Rect GetBounds()
         {
             Win32Rect appBounds;
-            NativeMethods.GetWindowRect(hwnd, out appBounds);
+            NativeMethods.GetWindowRect(Hwnd, out appBounds);
             return appBounds;
         }
 
@@ -63,19 +63,19 @@ namespace DesktopWidgets.Classes
             const int maxChars = 256;
             var className = new StringBuilder(maxChars);
 
-            if (NativeMethods.GetClassName(hwnd, className, maxChars) > 0)
+            if (NativeMethods.GetClassName(Hwnd, className, maxChars) > 0)
             {
                 var cName = className.ToString();
-                return cName == "Progman" || cName == "WorkerW" || hwnd.Equals(NativeMethods.GetDesktopWindow()) ||
-                       hwnd.Equals(NativeMethods.GetShellWindow());
+                return cName == "Progman" || cName == "WorkerW" || Hwnd.Equals(NativeMethods.GetDesktopWindow()) ||
+                       Hwnd.Equals(NativeMethods.GetShellWindow());
             }
             return false;
         }
 
         public void SetWindowExTransparent()
         {
-            var extendedStyle = NativeMethods.GetWindowLong(hwnd, GWL_EXSTYLE);
-            NativeMethods.SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
+            var extendedStyle = NativeMethods.GetWindowLong(Hwnd, GWL_EXSTYLE);
+            NativeMethods.SetWindowLong(Hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
         }
     }
 }

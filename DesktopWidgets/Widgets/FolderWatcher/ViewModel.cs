@@ -17,17 +17,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     {
         private readonly Queue<string> _notificationQueue;
 
-        private readonly List<string> _supportedImageExtensions = new List<string>
-        {
-            ".bmp",
-            ".gif",
-            ".ico",
-            ".jpg",
-            ".jpeg",
-            ".png",
-            ".tiff"
-        };
-
         private string _currentFilePath;
 
         private BitmapImage _currentImage;
@@ -49,8 +38,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             IsImage = false;
 
             OpenFile = new RelayCommand(OpenFileExecute);
-
-            RefreshAction = delegate { _directoryWatcher.SetWatchPath(Settings.WatchFolder); };
 
             _notificationQueue = new Queue<string>();
             _directoryWatcher =
@@ -98,7 +85,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             get { return _currentImage; }
             set
             {
-                if (_currentImage != value)
+                if (!Equals(_currentImage, value))
                 {
                     _currentImage = value;
                     RaisePropertyChanged(nameof(CurrentImage));
@@ -157,14 +144,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             if (!App.IsMuted)
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             if (Settings.OpenOnEvent)
-                Settings.Identifier.GetView()
-                    .ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                        false, false, false);
+                View?.ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                    false, false, false);
         }
 
         private bool HandleFileImage()
         {
-            if (Settings.ShowImages && _supportedImageExtensions.Contains(Path.GetExtension(CurrentFilePath).ToLower()))
+            if (Settings.ShowImages && ImageHelper.IsSupported(Path.GetExtension(CurrentFilePath)))
             {
                 UpdateImage(CurrentFilePath);
                 return true;
@@ -186,19 +172,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (!Settings.PlayMedia)
                 return false;
-            var filter = !string.IsNullOrWhiteSpace(Settings.PlayMediaFilter)
-                ? Settings.PlayMediaFilter.Split('|')
-                : null;
-            var isMedia = filter != null &&
-                          filter.Any(
-                              x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
             MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
-            return isMedia;
+            return MediaPlayerHelper.IsSupported(Path.GetExtension(CurrentFilePath));
         }
 
-        public override void OnIntroFinish()
+        public override void OnIntroEnd()
         {
-            base.OnIntroFinish();
+            base.OnIntroEnd();
             _isShowing = false;
             HandleDirectoryChange();
         }
@@ -223,7 +203,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void Hide()
         {
-            Settings.Identifier.GetView().HideUI();
+            View?.HideUi();
         }
 
         public override void OnClose()
@@ -231,6 +211,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             base.OnClose();
             _directoryWatcher.Stop();
             _directoryWatcher = null;
+        }
+
+        public override void OnRefresh()
+        {
+            base.OnRefresh();
+            _directoryWatcher.SetWatchPath(Settings.WatchFolder);
         }
     }
 }

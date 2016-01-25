@@ -8,10 +8,7 @@ namespace DesktopWidgets.Stores
 {
     public static class MediaPlayerStore
     {
-        private static readonly List<WindowsMediaPlayer> MediaPlayers = new List<WindowsMediaPlayer>
-        {
-            new WindowsMediaPlayer()
-        };
+        private static readonly List<WindowsMediaPlayer> MediaPlayers = new List<WindowsMediaPlayer>();
 
         private static WindowsMediaPlayer GetAvailablePlayer()
         {
@@ -31,6 +28,8 @@ namespace DesktopWidgets.Stores
             {
                 // ignored
             }
+            if (MediaPlayers.Count == 0)
+                MediaPlayers.Add(new WindowsMediaPlayer());
             return MediaPlayers[0];
         }
 
