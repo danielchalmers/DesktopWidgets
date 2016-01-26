@@ -61,11 +61,11 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         private void NextImage()
         {
-            var paths = _directoryWatcher.KnownFilePaths[Settings.RootPath];
             if (Settings.Freeze || string.IsNullOrWhiteSpace(Settings.RootPath) ||
                 !_directoryWatcher.KnownFilePaths.ContainsKey(Settings.RootPath) ||
-                paths == null)
+                _directoryWatcher.KnownFilePaths[Settings.RootPath] == null)
                 return;
+            var paths = _directoryWatcher.KnownFilePaths[Settings.RootPath];
             string newImagePath;
 
             if (Settings.Shuffle)
