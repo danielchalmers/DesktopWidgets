@@ -114,7 +114,11 @@ namespace DesktopWidgets.Helpers
                                 {
                                     var progressDialog = new UpdateProgress(info.AvailableVersion);
                                     ad.UpdateProgressChanged +=
-                                        (sender, args) => progressDialog.CurrentProgress = args.ProgressPercentage;
+                                        delegate(object sender, DeploymentProgressChangedEventArgs args)
+                                        {
+                                            if (args.State == DeploymentProgressState.DownloadingApplicationFiles)
+                                                progressDialog.CurrentProgress = args.ProgressPercentage;
+                                        };
                                     progressDialog.Show();
                                     progressDialog.Activate();
                                     ad.UpdateAsync();
