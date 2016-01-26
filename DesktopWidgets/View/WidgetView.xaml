@@ -97,8 +97,8 @@
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />
-            <Setter Property="Width" Value="16" />
-            <Setter Property="Height" Value="16" />
+            <Setter Property="Width" Value="{Binding Settings.TitlebarButtonSize}" />
+            <Setter Property="Height" Value="{Binding Settings.TitlebarButtonSize}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -106,7 +106,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="{Binding Settings.TitlebarButtonFontSize}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">

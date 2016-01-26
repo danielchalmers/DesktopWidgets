@@ -330,5 +330,13 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Ignore AppBars")]
         public bool IgnoreAppBars { get; set; } = false;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Button Font Size")]
+        public int TitlebarButtonFontSize { get; set; } = 12;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Button Size (px)")]
+        public double TitlebarButtonSize { get; set; } = 16;
     }
 }
