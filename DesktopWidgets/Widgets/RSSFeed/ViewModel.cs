@@ -165,6 +165,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
         public override void OnRefresh()
         {
             base.OnRefresh();
+            UpdateTimer.Interval = Settings.RefreshInterval;
             if (_lastFeedUrl != Settings.RssFeedUrl)
                 UpdateFeed();
         }

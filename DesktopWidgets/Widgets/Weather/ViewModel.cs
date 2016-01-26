@@ -30,12 +30,8 @@ namespace DesktopWidgets.Widgets.Weather
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
-            _updateTimer = new DispatcherTimer
-            {
-                Interval = Settings.RefreshInterval.TotalMinutes < 30
-                    ? TimeSpan.FromMinutes(30)
-                    : Settings.RefreshInterval
-            };
+            _updateTimer = new DispatcherTimer();
+            UpdateTimerInterval();
             _updateTimer.Tick += (sender, args) => UpdateWeather();
 
             UpdateWeather();
@@ -182,6 +178,13 @@ namespace DesktopWidgets.Widgets.Weather
             });
         }
 
+        private void UpdateTimerInterval()
+        {
+            _updateTimer.Interval = Settings.RefreshInterval.TotalMinutes < 30
+                ? TimeSpan.FromMinutes(30)
+                : Settings.RefreshInterval;
+        }
+
         public override void OnClose()
         {
             base.OnClose();
@@ -192,6 +195,7 @@ namespace DesktopWidgets.Widgets.Weather
         public override void OnRefresh()
         {
             base.OnRefresh();
+            UpdateTimerInterval();
             if (_lastZipCode != Settings.ZipCode)
                 UpdateWeather();
         }

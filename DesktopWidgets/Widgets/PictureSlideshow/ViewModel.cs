@@ -107,6 +107,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         public override void OnRefresh()
         {
             base.OnRefresh();
+            _changeTimer.Interval = Settings.ChangeInterval;
             _directoryWatcher.SetWatchPath(Settings.RootPath);
         }
     }
