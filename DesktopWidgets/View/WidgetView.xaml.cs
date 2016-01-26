@@ -226,6 +226,7 @@ namespace DesktopWidgets.View
             if (updateNonUi)
             {
                 UpdateTimers();
+                ViewModel.ReloadTimers();
                 ViewModel.ReloadHotKeys();
             }
 
