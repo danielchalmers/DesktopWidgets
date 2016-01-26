@@ -149,6 +149,7 @@ namespace DesktopWidgets.View
                 _introTimer.Tick += delegate
                 {
                     _introTimer.Stop();
+                    _mouseChecker.KeepOpenForIntro = false;
                     if (hideOnFinish && Settings.OpenMode != OpenMode.AlwaysOpen)
                         _mouseChecker.Hide(checkHideStatus: true);
                     ViewModel.OnIntroEnd();
