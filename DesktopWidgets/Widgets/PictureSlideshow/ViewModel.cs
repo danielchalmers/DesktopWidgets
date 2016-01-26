@@ -22,6 +22,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
+            ImageUrl = Settings.ImageUrl;
             AllowDrop = Settings.AllowDropFiles;
             _random = new Random();
 
