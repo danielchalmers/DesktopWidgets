@@ -74,7 +74,7 @@ namespace DesktopWidgets
 
                 SettingsHelper.SaveSettings();
 
-                AppMutex.ReleaseMutex();
+                AppMutex?.ReleaseMutex();
             }
             catch
             {
