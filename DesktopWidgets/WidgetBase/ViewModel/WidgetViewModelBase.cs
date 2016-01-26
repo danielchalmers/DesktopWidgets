@@ -346,7 +346,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             if (!_settings.ForceOnTop || _settings.ForceOnTopInterval <= 0)
             {
-                _onTopForceTimer.Stop();
+                _onTopForceTimer?.Stop();
                 return;
             }
             if (_onTopForceTimer == null)
