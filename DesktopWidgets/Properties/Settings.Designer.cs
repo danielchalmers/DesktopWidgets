@@ -432,5 +432,14 @@ namespace DesktopWidgets.Properties {
                 return ((double)(this["DoubleComparisonTolerance"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int ChangelogDownloadPages {
+            get {
+                return ((int)(this["ChangelogDownloadPages"]));
+            }
+        }
     }
 }

@@ -60,12 +60,14 @@ namespace DesktopWidgets.Classes
 
         private static string GetFormattedChangelog()
         {
-            IEnumerable<Changelog> changelogData = null;
+            List<Changelog> changelogData = null;
             if (!string.IsNullOrWhiteSpace(Settings.Default.ChangelogCache))
-                changelogData = JsonConvert.DeserializeObject<IEnumerable<Changelog>>(Settings.Default.ChangelogCache);
+                changelogData = JsonConvert.DeserializeObject<List<Changelog>>(Settings.Default.ChangelogCache);
             if (!(changelogData != null && changelogData.Any(x => x.Version == AssemblyInfo.Version)))
             {
-                changelogData = ParseChangelogJson(DownloadChangelogJson());
+                changelogData = new List<Changelog>();
+                for (var i = 1; i <= Settings.Default.ChangelogDownloadPages; i++)
+                    changelogData.AddRange(ParseChangelogJson(DownloadChangelogJson(i)));
                 Settings.Default.ChangelogCache = JsonConvert.SerializeObject(changelogData);
             }
 
@@ -110,12 +112,12 @@ namespace DesktopWidgets.Classes
             }
         }
 
-        private static string DownloadChangelogJson()
+        private static string DownloadChangelogJson(int page = 1)
         {
             using (var webClient = new WebClient())
             {
                 webClient.Headers.Add("User-Agent: Other");
-                var json = webClient.DownloadString(Resources.GitHubApiCommits);
+                var json = webClient.DownloadString($"{Resources.GitHubApiCommits}?page={page}");
                 return json;
             }
         }
