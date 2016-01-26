@@ -8,7 +8,6 @@
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
         <Separator />
         <MenuItem Header="Dock">
-            Z
             <MenuItem Header="None" Command="{Binding WidgetUndock}" />
             <MenuItem Header="Horizontal">
                 <MenuItem Header="Center" Command="{Binding WidgetDockHorizontal}"
