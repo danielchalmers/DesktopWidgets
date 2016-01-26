@@ -74,7 +74,7 @@ namespace DesktopWidgets.Windows
 
         private void UpdateChangelog()
         {
-            ChangelogDownloader.GetCachedChangelog(e =>
+            new ChangelogDownloader().GetChangelog(e =>
             {
                 foreach (
                     var about in

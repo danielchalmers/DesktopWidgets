@@ -36,23 +36,9 @@ namespace DesktopWidgets.Classes
             _updateTextAction("Downloading changelog...");
         }
 
-        public static void GetCachedChangelog(Action<string> updateTextAction)
-        {
-            if (Settings.Default.DisableChangelog)
-            {
-                updateTextAction("Changelog is disabled.");
-                return;
-            }
-            if (string.IsNullOrEmpty(Settings.Default.Changelog))
-                new ChangelogDownloader().GetChangelog(updateTextAction);
-            else
-                updateTextAction(Settings.Default.Changelog);
-        }
-
         private void Worker_Completed(object sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
         {
             _updateTextAction(_updateText);
-            Settings.Default.Changelog = _updateText;
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs doWorkEventArgs)
@@ -74,7 +60,14 @@ namespace DesktopWidgets.Classes
 
         private static string GetFormattedChangelog()
         {
-            var changelogData = ParseChangelogJson(DownloadChangelogJson());
+            IEnumerable<Changelog> changelogData = null;
+            if (!string.IsNullOrWhiteSpace(Settings.Default.ChangelogCache))
+                changelogData = JsonConvert.DeserializeObject<IEnumerable<Changelog>>(Settings.Default.ChangelogCache);
+            if (!(changelogData != null && changelogData.Any(x => x.Version == AssemblyInfo.Version)))
+            {
+                changelogData = ParseChangelogJson(DownloadChangelogJson());
+                Settings.Default.ChangelogCache = JsonConvert.SerializeObject(changelogData);
+            }
 
             var stringBuilder = new StringBuilder();
             foreach (var changelog in changelogData.OrderByDescending(x => x.PublishDate))

@@ -369,12 +369,12 @@ namespace DesktopWidgets.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Changelog {
+        public string ChangelogCache {
             get {
-                return ((string)(this["Changelog"]));
+                return ((string)(this["ChangelogCache"]));
             }
             set {
-                this["Changelog"] = value;
+                this["ChangelogCache"] = value;
             }
         }
         

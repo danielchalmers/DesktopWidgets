@@ -41,7 +41,7 @@
                                          TargetProperties="AutoUpdate"
                                          DisplayName="Silent Auto-Update" />
 
-                <xctk:PropertyDefinition TargetProperties="Changelog"
+                <xctk:PropertyDefinition TargetProperties="ChangelogCache"
                                          IsBrowsable="False" />
                 <xctk:PropertyDefinition TargetProperties="MustUpgrade"
                                          IsBrowsable="False" />
