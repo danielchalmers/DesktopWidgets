@@ -123,10 +123,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void HandleDirectoryChange()
         {
             if (_notificationQueue.Count == 0)
-            {
-                Hide();
                 return;
-            }
             _isShowing = true;
             CurrentFilePath = _notificationQueue.Dequeue();
 
