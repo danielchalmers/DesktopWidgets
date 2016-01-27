@@ -203,7 +203,7 @@ namespace DesktopWidgets.Classes
 
             if (App.IsMuted)
             {
-                Hide();
+                Hide(checkHideStatus:false);
                 return;
             }
 
@@ -223,15 +223,7 @@ namespace DesktopWidgets.Classes
 
             if (_settings.OpenMode == OpenMode.Hidden)
             {
-                if (_settings.StayOpenIfMouseFocus)
-                {
-                    if (!IsMouseInWindowBounds())
-                        Hide();
-                }
-                else
-                {
                     Hide();
-                }
                 return;
             }
 
@@ -305,7 +297,7 @@ namespace DesktopWidgets.Classes
                 _view.Activate();
         }
 
-        public void Hide(bool animate = true, bool checkHideStatus = false)
+        public void Hide(bool animate = true, bool checkHideStatus = true)
         {
             KeepOpenForIntro = false;
             if (_view.AnimationRunning || !_view.IsVisible)
