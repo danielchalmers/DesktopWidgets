@@ -203,7 +203,7 @@ namespace DesktopWidgets.Classes
 
             if (App.IsMuted)
             {
-                Hide(checkHideStatus:false);
+                Hide(checkHideStatus: false);
                 return;
             }
 
@@ -223,7 +223,7 @@ namespace DesktopWidgets.Classes
 
             if (_settings.OpenMode == OpenMode.Hidden)
             {
-                    Hide();
+                Hide();
                 return;
             }
 
