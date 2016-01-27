@@ -59,7 +59,7 @@ namespace DesktopWidgets.Widgets.Weather
             get { return _temperature; }
             set
             {
-                if (Math.Abs(_temperature - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_temperature))
                 {
                     _temperature = value;
                     RaisePropertyChanged(nameof(Temperature));
@@ -72,7 +72,7 @@ namespace DesktopWidgets.Widgets.Weather
             get { return _temperatureMin; }
             set
             {
-                if (Math.Abs(_temperatureMin - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_temperatureMin))
                 {
                     _temperatureMin = value;
                     RaisePropertyChanged(nameof(TemperatureMin));
@@ -85,7 +85,7 @@ namespace DesktopWidgets.Widgets.Weather
             get { return _temperatureMax; }
             set
             {
-                if (Math.Abs(_temperatureMax - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_temperatureMax))
                 {
                     _temperatureMax = value;
                     RaisePropertyChanged(nameof(TemperatureMax));

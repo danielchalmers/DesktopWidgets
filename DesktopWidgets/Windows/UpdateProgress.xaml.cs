@@ -3,7 +3,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-using DesktopWidgets.Properties;
+using DesktopWidgets.Helpers;
 
 #endregion
 
@@ -33,7 +33,7 @@ namespace DesktopWidgets.Windows
             get { return _currentProgress; }
             set
             {
-                if (Math.Abs(_currentProgress - value) > Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_currentProgress))
                 {
                     _currentProgress = value;
                     RaisePropertyChanged(nameof(CurrentProgress));

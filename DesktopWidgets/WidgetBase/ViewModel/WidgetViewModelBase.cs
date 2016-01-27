@@ -71,7 +71,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _left; }
             set
             {
-                if (Math.Abs(_left - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_left))
                 {
                     if (!_settings.IsDocked)
                         _settings.Left = value;
@@ -86,7 +86,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _top; }
             set
             {
-                if (Math.Abs(_top - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_top))
                 {
                     if (!_settings.IsDocked)
                         _settings.Top = value;
@@ -101,7 +101,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _width; }
             set
             {
-                if (Math.Abs(_width - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_width))
                 {
                     _width = value;
                     RaisePropertyChanged(nameof(Width));
@@ -114,7 +114,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _height; }
             set
             {
-                if (Math.Abs(_height - value) > Properties.Settings.Default.DoubleComparisonTolerance)
+                if (value.IsEqual(_height))
                 {
                     _height = value;
                     RaisePropertyChanged(nameof(Height));
@@ -122,49 +122,20 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             }
         }
 
-        public double MaxWidth
-        {
-            get
-            {
-                return double.IsNaN(_settings.MaxWidth) && _settings.MaxSizeUseScreen
-                    ? _settings.ScreenBounds.Width
-                    : _settings.MaxWidth;
-            }
-            set
-            {
-                if (Math.Abs(_settings.MaxWidth - value) > Properties.Settings.Default.DoubleComparisonTolerance)
-                {
-                    _settings.MaxWidth = value;
-                    RaisePropertyChanged(nameof(MaxWidth));
-                }
-            }
-        }
+        public double MaxWidth => double.IsNaN(_settings.MaxWidth) && _settings.MaxSizeUseScreen
+            ? _settings.ScreenBounds.Width
+            : _settings.MaxWidth;
 
-        public double MaxHeight
-        {
-            get
-            {
-                return double.IsNaN(_settings.MaxHeight) && _settings.MaxSizeUseScreen
-                    ? _settings.ScreenBounds.Height
-                    : _settings.MaxHeight;
-            }
-            set
-            {
-                if (Math.Abs(_settings.MaxHeight - value) > Properties.Settings.Default.DoubleComparisonTolerance)
-                {
-                    _settings.MaxHeight = value;
-                    RaisePropertyChanged(nameof(MaxHeight));
-                }
-            }
-        }
+        public double MaxHeight => double.IsNaN(_settings.MaxHeight) && _settings.MaxSizeUseScreen
+            ? _settings.ScreenBounds.Height
+            : _settings.MaxHeight;
 
         public double ActualWidth
         {
             get { return _actualWidth; }
             set
             {
-                if (Math.Abs(_actualWidth - value) > Properties.Settings.Default.DoubleComparisonTolerance &&
-                    !double.IsNaN(value) && value > 0)
+                if (value > 0 && value.IsEqual(_actualWidth))
                 {
                     _actualWidth = value;
                     RaisePropertyChanged(nameof(ActualWidth));
@@ -177,8 +148,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             get { return _actualHeight; }
             set
             {
-                if (Math.Abs(_actualHeight - value) > Properties.Settings.Default.DoubleComparisonTolerance &&
-                    !double.IsNaN(value) && value > 0)
+                if (value > 0 && value.IsEqual(_actualHeight))
                 {
                     _actualHeight = value;
                     RaisePropertyChanged(nameof(ActualHeight));
