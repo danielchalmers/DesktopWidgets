@@ -93,6 +93,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Play Media On Detect")]
         public bool PlayMedia { get; set; } = false;
 
+        [DisplayName("Current File")]
+        public string CurrentFilePath { get; set; }
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Show On Event")]
         public bool OpenOnEvent { get; set; } = true;

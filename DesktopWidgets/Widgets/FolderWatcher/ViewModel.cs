@@ -17,8 +17,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     {
         private readonly Queue<string> _notificationQueue;
 
-        private string _currentFilePath;
-
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
 
@@ -51,6 +49,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                         CheckInterval = TimeSpan.FromMilliseconds(Settings.FolderCheckIntervalMS)
                     }, AddToFileQueue);
             _directoryWatcher.Start();
+
+            if (!string.IsNullOrWhiteSpace(Settings.CurrentFilePath) && File.Exists(Settings.CurrentFilePath))
+                CheckFile();
         }
 
         public ICommand OpenFile { get; set; }
@@ -72,10 +73,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public string CurrentFilePath
         {
-            get { return _currentFilePath; }
+            get { return Settings.CurrentFilePath; }
             set
             {
-                _currentFilePath = value;
+                Settings.CurrentFilePath = value;
                 RaisePropertyChanged(nameof(CurrentFilePath));
             }
         }
@@ -120,13 +121,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 HandleDirectoryChange();
         }
 
-        private void HandleDirectoryChange()
+        private void CheckFile()
         {
-            if (_notificationQueue.Count == 0)
-                return;
-            _isShowing = true;
-            CurrentFilePath = _notificationQueue.Dequeue();
-
             if (HandleFileImage())
                 FileType = FileType.Image;
             else if (HandleFileContent())
@@ -137,6 +133,16 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
                 FileType = FileType.Other;
             }
+        }
+
+        private void HandleDirectoryChange()
+        {
+            if (_notificationQueue.Count == 0)
+                return;
+            _isShowing = true;
+            CurrentFilePath = _notificationQueue.Dequeue();
+
+            CheckFile();
 
             if (!App.IsMuted)
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
