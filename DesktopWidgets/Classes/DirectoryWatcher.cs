@@ -14,6 +14,10 @@ namespace DesktopWidgets.Classes
         private readonly Action<FileInfo, DirectoryChange> _newFileAction;
         private readonly DirectoryWatcherSettings _settings;
         public readonly Dictionary<string, List<FileInfo>> KnownFilePaths;
+        private IEnumerable<string> _excludeFilter;
+
+        private IEnumerable<string> _includeFilter;
+        private bool _isScanning;
 
         public DirectoryWatcher(DirectoryWatcherSettings settings,
             Action<FileInfo, DirectoryChange> newFileAction = null)
@@ -23,6 +27,18 @@ namespace DesktopWidgets.Classes
             KnownFilePaths = new Dictionary<string, List<FileInfo>>();
             _dirWatcherTimer = new DispatcherTimer {Interval = _settings.CheckInterval};
             _dirWatcherTimer.Tick += (sender, args) => CheckDirectoryForNewFilesAsync();
+
+            SetFilters(_settings.IncludeFilter, _settings.ExcludeFilter);
+        }
+
+        public void SetFilters(string includeFilter, string excludeFilter)
+        {
+            _includeFilter = !string.IsNullOrWhiteSpace(includeFilter)
+                ? _settings.IncludeFilter.Split('|')
+                : null;
+            _excludeFilter = !string.IsNullOrWhiteSpace(excludeFilter)
+                ? _settings.ExcludeFilter.Split('|')
+                : null;
         }
 
         public void CheckDirectoryForNewFilesAsync(bool promptAction = true)
@@ -30,38 +46,36 @@ namespace DesktopWidgets.Classes
 
         public void CheckDirectoryForNewFiles(bool promptAction = true)
         {
+            if (_isScanning)
+                return;
+            var dirInfo = new DirectoryInfo(_settings.WatchFolder);
+            if (!dirInfo.Exists)
+                return;
+            _isScanning = true;
             try
             {
-                var folder = _settings.WatchFolder;
-                if (string.IsNullOrWhiteSpace(folder) || !Directory.Exists(folder))
-                    return;
-                if (!KnownFilePaths.ContainsKey(folder))
-                    KnownFilePaths.Add(folder, null);
-                var files = Directory.EnumerateFiles(folder, "*.*",
-                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).AsParallel()
-                    .Select(x => new FileInfo(x))
+                if (!KnownFilePaths.ContainsKey(_settings.WatchFolder))
+                    KnownFilePaths.Add(_settings.WatchFolder, null);
+                var files = dirInfo.EnumerateFiles("*.*",
+                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .AsParallel()
                     .ToList();
-                var includeFilter = !string.IsNullOrWhiteSpace(_settings.IncludeFilter)
-                    ? _settings.IncludeFilter.Split('|')
-                    : null;
-                var excludeFilter = !string.IsNullOrWhiteSpace(_settings.ExcludeFilter)
-                    ? _settings.ExcludeFilter.Split('|')
-                    : null;
                 foreach (var file in files)
                 {
-                    if (KnownFilePaths[folder] == null)
+                    if (KnownFilePaths[_settings.WatchFolder] == null)
                         break;
                     if (file.Length > _settings.MaxSize && _settings.MaxSize > 0)
                         continue;
-                    if (_settings.IncludeFilter != "*.*" && includeFilter != null &&
-                        !includeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
+                    if (_settings.IncludeFilter != "*.*" && _includeFilter != null &&
+                        !_includeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
-                    if (excludeFilter != null &&
-                        excludeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
+                    if (_excludeFilter != null &&
+                        _excludeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
                     if (promptAction)
                     {
-                        var sameFiles = KnownFilePaths[folder].Where(x => x.FullName == file.FullName).ToList();
+                        var sameFiles =
+                            KnownFilePaths[_settings.WatchFolder].Where(x => x.FullName == file.FullName).ToList();
                         if (sameFiles.Count > 0)
                         {
                             if (sameFiles.Any(x => x.LastWriteTimeUtc != file.LastWriteTimeUtc))
@@ -77,12 +91,13 @@ namespace DesktopWidgets.Classes
                         }
                     }
                 }
-                KnownFilePaths[folder] = files;
+                KnownFilePaths[_settings.WatchFolder] = files;
             }
             catch
             {
                 // ignored
             }
+            _isScanning = false;
         }
 
         public void SetWatchPath(string path)
