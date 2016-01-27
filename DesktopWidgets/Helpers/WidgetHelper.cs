@@ -47,11 +47,7 @@ namespace DesktopWidgets.Helpers
                 App.WidgetViews.Remove(view);
             }
 
-            var factoryData = WidgetFactory.GetViewData(id);
-            if (factoryData?.Item1 == null || factoryData.Item2 == null)
-                return;
-
-            var widgetView = new WidgetView(id, factoryData.Item1, factoryData.Item2);
+            var widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView());
             App.WidgetViews.Add(widgetView);
             widgetView.Show();
         }

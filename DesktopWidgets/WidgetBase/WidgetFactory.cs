@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using DesktopWidgets.Helpers;
@@ -90,73 +89,64 @@ namespace DesktopWidgets.WidgetBase
             }
         }
 
-        public static Tuple<WidgetViewModelBase, UserControl> GetViewData(WidgetId id)
+        public static WidgetViewModelBase GetNewViewModel(this WidgetId id)
         {
             var settings = id.GetSettings();
-            UserControl userControl = null;
-            WidgetViewModelBase dataContext = null;
-
             if (settings is Widgets.TimeClock.Settings)
-            {
-                dataContext = new Widgets.TimeClock.ViewModel(id);
-                userControl = new ControlView();
-            }
-            else if (settings is Widgets.CountdownClock.Settings)
-            {
-                dataContext = new Widgets.CountdownClock.ViewModel(id);
-                userControl = new Widgets.CountdownClock.ControlView();
-            }
-            else if (settings is Widgets.StopwatchClock.Settings)
-            {
-                dataContext = new Widgets.StopwatchClock.ViewModel(id);
-                userControl = new Widgets.StopwatchClock.ControlView();
-            }
-            else if (settings is Widgets.Weather.Settings)
-            {
-                dataContext = new Widgets.Weather.ViewModel(id);
-                userControl = new Widgets.Weather.ControlView();
-            }
-            else if (settings is Widgets.Search.Settings)
-            {
-                dataContext = new Widgets.Search.ViewModel(id);
-                userControl = new Widgets.Search.ControlView();
-            }
-            else if (settings is Widgets.Note.Settings)
-            {
-                dataContext = new Widgets.Note.ViewModel(id);
-                userControl = new Widgets.Note.ControlView();
-            }
-            else if (settings is Widgets.PictureSlideshow.Settings)
-            {
-                dataContext = new Widgets.PictureSlideshow.ViewModel(id);
-                userControl = new Widgets.PictureSlideshow.ControlView();
-            }
-            else if (settings is Widgets.Sidebar.Settings)
-            {
-                dataContext = new Widgets.Sidebar.ViewModel(id);
-                userControl = new Widgets.Sidebar.ControlView();
-            }
-            else if (settings is Widgets.Calculator.Settings)
-            {
-                dataContext = new Widgets.Calculator.ViewModel(id);
-                userControl = new Widgets.Calculator.ControlView();
-            }
-            else if (settings is Widgets.FolderWatcher.Settings)
-            {
-                dataContext = new Widgets.FolderWatcher.ViewModel(id);
-                userControl = new Widgets.FolderWatcher.ControlView();
-            }
-            else if (settings is Widgets.RSSFeed.Settings)
-            {
-                dataContext = new Widgets.RSSFeed.ViewModel(id);
-                userControl = new Widgets.RSSFeed.ControlView();
-            }
-            else if (settings is Widgets.CommandButton.Settings)
-            {
-                dataContext = new Widgets.CommandButton.ViewModel(id);
-                userControl = new Widgets.CommandButton.ControlView();
-            }
-            return new Tuple<WidgetViewModelBase, UserControl>(dataContext, userControl);
+                return new Widgets.TimeClock.ViewModel(id);
+            if (settings is Widgets.CountdownClock.Settings)
+                return new Widgets.CountdownClock.ViewModel(id);
+            if (settings is Widgets.StopwatchClock.Settings)
+                return new Widgets.StopwatchClock.ViewModel(id);
+            if (settings is Widgets.Weather.Settings)
+                return new Widgets.Weather.ViewModel(id);
+            if (settings is Widgets.Search.Settings)
+                return new Widgets.Search.ViewModel(id);
+            if (settings is Widgets.Note.Settings)
+                return new Widgets.Note.ViewModel(id);
+            if (settings is Widgets.PictureSlideshow.Settings)
+                return new Widgets.PictureSlideshow.ViewModel(id);
+            if (settings is Widgets.Sidebar.Settings)
+                return new Widgets.Sidebar.ViewModel(id);
+            if (settings is Widgets.Calculator.Settings)
+                return new Widgets.Calculator.ViewModel(id);
+            if (settings is Widgets.FolderWatcher.Settings)
+                return new Widgets.FolderWatcher.ViewModel(id);
+            if (settings is Widgets.RSSFeed.Settings)
+                return new Widgets.RSSFeed.ViewModel(id);
+            if (settings is Widgets.CommandButton.Settings)
+                return new Widgets.CommandButton.ViewModel(id);
+            return null;
+        }
+
+        public static UserControl GetNewControlView(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            if (settings is Widgets.TimeClock.Settings)
+                return new ControlView();
+            if (settings is Widgets.CountdownClock.Settings)
+                return new Widgets.CountdownClock.ControlView();
+            if (settings is Widgets.StopwatchClock.Settings)
+                return new Widgets.StopwatchClock.ControlView();
+            if (settings is Widgets.Weather.Settings)
+                return new Widgets.Weather.ControlView();
+            if (settings is Widgets.Search.Settings)
+                return new Widgets.Search.ControlView();
+            if (settings is Widgets.Note.Settings)
+                return new Widgets.Note.ControlView();
+            if (settings is Widgets.PictureSlideshow.Settings)
+                return new Widgets.PictureSlideshow.ControlView();
+            if (settings is Widgets.Sidebar.Settings)
+                return new Widgets.Sidebar.ControlView();
+            if (settings is Widgets.Calculator.Settings)
+                return new Widgets.Calculator.ControlView();
+            if (settings is Widgets.FolderWatcher.Settings)
+                return new Widgets.FolderWatcher.ControlView();
+            if (settings is Widgets.RSSFeed.Settings)
+                return new Widgets.RSSFeed.ControlView();
+            if (settings is Widgets.CommandButton.Settings)
+                return new Widgets.CommandButton.ControlView();
+            return null;
         }
     }
 }
