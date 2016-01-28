@@ -33,10 +33,9 @@
             </TextBlock>
         </Grid>
     </UserControl.Resources>
-    <Grid>
+    <Grid MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
         <Image Visibility="{Binding FileType, Converter={StaticResource ImageFileTypeToVisibilityConverter}}"
-               Source="{Binding CurrentImage}" Stretch="Uniform" MaxWidth="{Binding Width}"
-               MaxHeight="{Binding Height}">
+               Source="{Binding CurrentImage}" Stretch="Uniform">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonUp">
                     <command:EventToCommand Command="{Binding OpenFile}" />
