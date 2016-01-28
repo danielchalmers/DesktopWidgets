@@ -63,7 +63,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         [Category("Behavior")]
         [DisplayName("Detect Modified Files")]
-        public bool DetectModifiedFiles { get; set; } = false;
+        public bool DetectModifiedFiles { get; set; } = true;
 
         [Category("Style")]
         [DisplayName("Show Images")]
