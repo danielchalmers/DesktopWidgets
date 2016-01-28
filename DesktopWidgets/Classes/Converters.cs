@@ -561,7 +561,8 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            return Path.GetFileName((string) value);
+            var path = (string) value;
+            return !File.Exists(path) ? null : Path.GetFileName(path);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -651,7 +652,8 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            return File.ReadAllText((string) value);
+            var path = (string) value;
+            return !File.Exists(path) ? null : File.ReadAllText(path);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

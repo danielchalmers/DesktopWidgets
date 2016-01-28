@@ -23,8 +23,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private FileType _fileType = FileType.None;
 
-        private bool _isImage;
-
         private bool _isShowing;
 
         public ViewModel(WidgetId guid) : base(guid)
@@ -32,8 +30,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             Settings = guid.GetSettings() as Settings;
             if (Settings == null)
                 return;
-
-            IsImage = false;
 
             OpenFile = new RelayCommand(OpenFileExecute);
 
@@ -50,26 +46,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                     }, AddToFileQueue);
             _directoryWatcher.Start();
 
-            if (!string.IsNullOrWhiteSpace(Settings.CurrentFilePath) && File.Exists(Settings.CurrentFilePath))
-                CheckFile();
+            CheckFile();
         }
 
         public ICommand OpenFile { get; set; }
 
         public Settings Settings { get; }
-
-        public bool IsImage
-        {
-            get { return _isImage; }
-            set
-            {
-                if (_isImage != value)
-                {
-                    _isImage = value;
-                    RaisePropertyChanged(nameof(IsImage));
-                }
-            }
-        }
 
         public string CurrentFilePath
         {
@@ -123,6 +105,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void CheckFile()
         {
+            if (string.IsNullOrWhiteSpace(Settings.CurrentFilePath) || !File.Exists(Settings.CurrentFilePath))
+                return;
             if (HandleFileImage())
                 FileType = FileType.Image;
             else if (HandleFileContent())
