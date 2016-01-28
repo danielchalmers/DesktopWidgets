@@ -274,7 +274,11 @@ namespace DesktopWidgets.View
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
         {
             if (Settings.SnapToScreenEdges && !Settings.IsDocked)
-                this.Snap(true, Settings.IgnoreAppBars);
+            {
+                var newLoc = this.Snap(true, Settings.IgnoreAppBars);
+                ViewModel.Left = newLoc.X;
+                ViewModel.Top = newLoc.Y;
+            }
         }
 
         private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)

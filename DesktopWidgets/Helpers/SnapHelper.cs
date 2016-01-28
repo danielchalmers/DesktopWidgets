@@ -18,21 +18,20 @@ namespace DesktopWidgets.Helpers
                     yield return bounds;
         }
 
-        public static bool IsSnappable(double pos1, double pos2)
+        private static bool IsSnappable(double pos1, double pos2)
             => Math.Abs(pos1 - pos2) <= Settings.Default.SnapMargin;
 
-        public static void Snap(this Window window, bool useWidgetsBounds = false, bool useFullBounds = false,
-            Action leftSnapAction = null,
-            Action rightSnapAction = null, Action topSnapAction = null, Action bottomSnapAction = null)
+        public static Point Snap(this Window window, bool useWidgetsBounds = false, bool useFullBounds = false)
         {
             var compareBounds = GetSnapBounds(window, useWidgetsBounds, useFullBounds);
             var windowBounds = window.GetBounds();
-            window.SnapHorizontally(windowBounds, compareBounds, leftSnapAction, rightSnapAction);
-            window.SnapVertically(windowBounds, compareBounds, topSnapAction, bottomSnapAction);
+            var x = SnapHorizontally(windowBounds, compareBounds);
+            var y = SnapVertically(windowBounds, compareBounds);
+            return new Point(x, y);
         }
 
-        private static bool SnapHorizontally(this Window window, Rect windowBounds,
-            IEnumerable<Rect> compareBounds, Action leftSnapAction, Action rightSnapAction)
+        private static double SnapHorizontally(Rect windowBounds,
+            IEnumerable<Rect> compareBounds)
         {
             var horizontal = new List<double>();
             horizontal.AddRange(compareBounds.Select(x => x.Left));
@@ -41,23 +40,15 @@ namespace DesktopWidgets.Helpers
             foreach (var pos in horizontal.Distinct())
             {
                 if (IsSnappable(pos, windowBounds.Left))
-                {
-                    window.Left = pos;
-                    leftSnapAction?.Invoke();
-                    return true;
-                }
+                    return pos;
                 if (IsSnappable(pos, windowBounds.Right))
-                {
-                    window.Left = pos - windowBounds.Width;
-                    rightSnapAction?.Invoke();
-                    return true;
-                }
+                    return pos - windowBounds.Width;
             }
-            return false;
+            return windowBounds.Left;
         }
 
-        private static bool SnapVertically(this Window window, Rect windowBounds,
-            IEnumerable<Rect> compareBounds, Action topSnapAction, Action bottomSnapAction)
+        private static double SnapVertically(Rect windowBounds,
+            IEnumerable<Rect> compareBounds)
         {
             var vertical = new List<double>();
             vertical.AddRange(compareBounds.Select(x => x.Top));
@@ -66,19 +57,11 @@ namespace DesktopWidgets.Helpers
             foreach (var pos in vertical.Distinct())
             {
                 if (IsSnappable(pos, windowBounds.Top))
-                {
-                    window.Top = pos;
-                    topSnapAction?.Invoke();
-                    return true;
-                }
+                    return pos;
                 if (IsSnappable(pos, windowBounds.Bottom))
-                {
-                    window.Top = pos - windowBounds.Height;
-                    bottomSnapAction?.Invoke();
-                    return true;
-                }
+                    return pos - windowBounds.Height;
             }
-            return false;
+            return windowBounds.Top;
         }
     }
 }
