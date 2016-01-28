@@ -9,7 +9,7 @@
         <classes:DateTimeToFormattedText x:Key="DateTimeToFormattedText" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock TextAlignment="Center">
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource DateTimeToFormattedText}">
                     <Binding Path="CurrentTime" />

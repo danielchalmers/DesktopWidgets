@@ -10,7 +10,7 @@
         <classes:DateTimeToCountdownText x:Key="DateTimeToCountdownText" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock TextAlignment="Center">
+        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource DateTimeToCountdownText}">
                     <Binding Path="CurrentTime" />
