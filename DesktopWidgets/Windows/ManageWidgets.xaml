@@ -44,7 +44,14 @@
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Path=., Converter={StaticResource WidgetToNameConverter}}" />
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource WidgetToNameConverter}">
+                                <Binding Path="." />
+                                <Binding Path="Name" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

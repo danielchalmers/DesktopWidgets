@@ -430,16 +430,16 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class WidgetToNameConverter : IValueConverter
+    public class WidgetToNameConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            return (value as WidgetSettingsBase)?.Identifier?.GetName();
+            return (value[0] as WidgetSettingsBase)?.Identifier?.GetName();
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
