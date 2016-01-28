@@ -87,6 +87,8 @@
             <Setter Property="FontWeight" Value="{Binding Settings.FontWeight}" />
             <Setter Property="Focusable" Value="False" />
             <Setter Property="Padding" Value="{Binding Settings.Padding}" />
+            <Setter Property="HorizontalAlignment" Value="{Binding Settings.ViewHorizontalAlignment}" />
+            <Setter Property="VerticalAlignment" Value="{Binding Settings.ViewVerticalAlignment}" />
         </Style>
         <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">
             <Setter Property="Focusable" Value="False" />

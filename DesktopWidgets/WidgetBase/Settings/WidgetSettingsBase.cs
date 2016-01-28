@@ -338,5 +338,13 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Style (Titlebar)")]
         [DisplayName("Button Size (px)")]
         public double TitlebarButtonSize { get; set; } = 16;
+
+        [Category("Style")]
+        [DisplayName("Horizontal Alignment")]
+        public HorizontalAlignment ViewHorizontalAlignment { get; set; } = HorizontalAlignment.Stretch;
+
+        [Category("Style")]
+        [DisplayName("Vertical Alignment")]
+        public VerticalAlignment ViewVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
     }
 }
