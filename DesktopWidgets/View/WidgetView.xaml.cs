@@ -152,6 +152,11 @@ namespace DesktopWidgets.View
         public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
             bool hideOnFinish = true)
         {
+            if (FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.ScreenBounds))
+            {
+                _mouseChecker.QueueIntro = true;
+                return;
+            }
             _hideIntroOnFinish = hideOnFinish;
             if (_introTimer == null)
             {
