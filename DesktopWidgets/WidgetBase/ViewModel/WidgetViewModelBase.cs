@@ -331,7 +331,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public virtual void ReloadHotKeys()
         {
-            if (_settings.OpenMode == OpenMode.Keyboard || _settings.OpenMode == OpenMode.MouseAndKeyboard)
+            if (_settings.HotKey != Key.None && _settings.OpenMode == OpenMode.Keyboard ||
+                _settings.OpenMode == OpenMode.MouseAndKeyboard)
                 HotkeyStore.RegisterHotkey(_settings.ShowHotkeyIdentifier,
                     new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation),
                     () =>
@@ -340,9 +341,12 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             else
                 HotkeyStore.RemoveHotkey(_settings.ShowHotkeyIdentifier);
 
-            HotkeyStore.RegisterHotkey(_settings.HideHotkeyIdentifier,
-                new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation),
-                () => View?.HideUi());
+            if (_settings.HideHotKey != Key.None)
+                HotkeyStore.RegisterHotkey(_settings.HideHotkeyIdentifier,
+                    new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation),
+                    () => View?.HideUi());
+            else
+                HotkeyStore.RemoveHotkey(_settings.HideHotkeyIdentifier);
         }
 
         public virtual void OnClose()
