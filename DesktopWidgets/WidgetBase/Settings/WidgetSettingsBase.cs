@@ -346,5 +346,13 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Style")]
         [DisplayName("Vertical Alignment")]
         public VerticalAlignment ViewVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Stay Open On Show Hotkey")]
+        public bool StayOpenOnShowHotkey { get; set; } = false;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Show Hotkey Duration (ms)")]
+        public int ShowHotkeyDuration { get; set; } = 5000;
     }
 }
