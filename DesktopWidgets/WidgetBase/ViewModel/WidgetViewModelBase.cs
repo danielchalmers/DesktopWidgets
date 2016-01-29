@@ -332,15 +332,15 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public virtual void ReloadHotKeys()
         {
             if (_settings.OpenMode == OpenMode.Keyboard || _settings.OpenMode == OpenMode.MouseAndKeyboard)
-                HotkeyStore.RegisterHotkey(_settings.Identifier.Guid,
+                HotkeyStore.RegisterHotkey(_settings.ShowHotkeyIdentifier,
                     new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation),
                     () =>
                         View?.ShowIntro(_settings.ShowHotkeyDuration, _settings.ToggleIntroOnHotkey,
                             _settings.ActivateOnShow, !_settings.StayOpenOnShowHotkey));
             else
-                HotkeyStore.RemoveHotkey(Id.Guid);
+                HotkeyStore.RemoveHotkey(_settings.ShowHotkeyIdentifier);
 
-            HotkeyStore.RegisterHotkey(_settings.Identifier.Guid,
+            HotkeyStore.RegisterHotkey(_settings.HideHotkeyIdentifier,
                 new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation),
                 () => View?.HideUi());
         }

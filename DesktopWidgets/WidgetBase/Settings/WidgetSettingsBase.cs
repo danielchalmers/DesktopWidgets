@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -362,5 +363,11 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior (Hideable)")]
         [DisplayName("Dismiss Hotkey Modifiers")]
         public ModifierKeys HideHotKeyModifiers { get; set; }
+
+        [DisplayName("Show Hotkey Identifier")]
+        public Guid ShowHotkeyIdentifier { get; } = new Guid();
+
+        [DisplayName("Hide Hotkey Identifier")]
+        public Guid HideHotkeyIdentifier { get; } = new Guid();
     }
 }
