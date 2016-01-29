@@ -140,6 +140,13 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
+        private void HideIntro()
+        {
+            _mouseChecker.KeepOpenForIntro = false;
+            if (Settings.OpenMode != OpenMode.AlwaysOpen)
+                _mouseChecker.Hide();
+        }
+
         public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
             bool hideOnFinish = true)
         {
@@ -150,11 +157,7 @@ namespace DesktopWidgets.View
                 {
                     _introTimer.Stop();
                     if (hideOnFinish)
-                    {
-                        _mouseChecker.KeepOpenForIntro = false;
-                        if (Settings.OpenMode != OpenMode.AlwaysOpen)
-                            _mouseChecker.Hide(checkHideStatus: true);
-                    }
+                        HideIntro();
                     ViewModel.OnIntroEnd();
                 };
             }
@@ -163,7 +166,7 @@ namespace DesktopWidgets.View
             _introTimer.Interval = TimeSpan.FromMilliseconds(duration == -1 ? Settings.IntroDuration : duration);
             if (_mouseChecker.KeepOpenForIntro && reversable)
             {
-                _mouseChecker.KeepOpenForIntro = false;
+                HideIntro();
             }
             else if (duration != 0)
             {
