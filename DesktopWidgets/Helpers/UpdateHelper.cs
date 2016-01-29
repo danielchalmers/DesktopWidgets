@@ -92,7 +92,7 @@ namespace DesktopWidgets.Helpers
                         {
                             Settings.Default.UpdateWaiting = info.AvailableVersion;
                             TrayIconHelper.ShowBalloon(
-                                $"An update is available ({info.AvailableVersion}).\nClick to view update details.",
+                                $"Update available ({info.AvailableVersion})\nClick to view details",
                                 BalloonIcon.Info);
                         }
                     }
