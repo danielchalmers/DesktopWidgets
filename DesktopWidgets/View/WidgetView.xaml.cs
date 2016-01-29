@@ -127,7 +127,7 @@ namespace DesktopWidgets.View
             if (Settings.Unclickable)
                 new Win32App(hwnd).SetWindowExTransparent();
 
-            UpdateUi(false, false);
+            UpdateUi(false);
 
             ViewModel.OnUiLoad();
         }
