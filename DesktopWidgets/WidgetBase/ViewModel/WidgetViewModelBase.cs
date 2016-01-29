@@ -339,6 +339,10 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                             _settings.ActivateOnShow, !_settings.StayOpenOnShowHotkey));
             else
                 HotkeyStore.RemoveHotkey(Id.Guid);
+
+            HotkeyStore.RegisterHotkey(_settings.Identifier.Guid,
+                new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation),
+                () => View?.HideUi());
         }
 
         public virtual void OnClose()

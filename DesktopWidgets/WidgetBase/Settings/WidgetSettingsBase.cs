@@ -354,5 +354,13 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Hotkey Duration (ms)")]
         public int ShowHotkeyDuration { get; set; } = 5000;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Dismiss Hotkey")]
+        public Key HideHotKey { get; set; }
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Dismiss Hotkey Modifiers")]
+        public ModifierKeys HideHotKeyModifiers { get; set; }
     }
 }
