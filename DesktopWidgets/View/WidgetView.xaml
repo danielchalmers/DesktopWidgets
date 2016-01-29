@@ -96,6 +96,8 @@
             <Setter Property="Visibility"
                     Value="{Binding Settings.ShowTitlebar, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Setter Property="CornerRadius" Value="{Binding Settings.TitlebarCornerRadius}" />
+            <Setter Property="Width" Value="{Binding Settings.TitlebarWidth}" />
+            <Setter Property="Height" Value="{Binding Settings.TitlebarHeight}" />
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />

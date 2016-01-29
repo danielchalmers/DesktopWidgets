@@ -369,5 +369,13 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [DisplayName("Hide Hotkey Identifier")]
         public Guid HideHotkeyIdentifier { get; } = Guid.NewGuid();
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Height (px)")]
+        public double TitlebarHeight { get; set; } = double.NaN;
+
+        [Category("Style (Titlebar)")]
+        [DisplayName("Width (px)")]
+        public double TitlebarWidth { get; set; } = double.NaN;
     }
 }
