@@ -22,6 +22,8 @@ namespace DesktopWidgets.View
         private readonly MouseChecker _mouseChecker;
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
+
+        private bool _hideIntroOnFinish;
         private DispatcherTimer _introTimer;
 
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
@@ -150,13 +152,14 @@ namespace DesktopWidgets.View
         public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
             bool hideOnFinish = true)
         {
+            _hideIntroOnFinish = hideOnFinish;
             if (_introTimer == null)
             {
                 _introTimer = new DispatcherTimer();
                 _introTimer.Tick += delegate
                 {
                     _introTimer.Stop();
-                    if (hideOnFinish)
+                    if (_hideIntroOnFinish)
                         HideIntro();
                     ViewModel.OnIntroEnd();
                 };

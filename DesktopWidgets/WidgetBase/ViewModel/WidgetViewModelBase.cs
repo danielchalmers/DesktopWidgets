@@ -336,7 +336,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                     new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation),
                     () =>
                         View?.ShowIntro(_settings.ShowHotkeyDuration, _settings.ToggleIntroOnHotkey,
-                            _settings.ActivateOnShow, _settings.StayOpenOnShowHotkey));
+                            _settings.ActivateOnShow, !_settings.StayOpenOnShowHotkey));
             else
                 HotkeyStore.RemoveHotkey(Id.Guid);
         }
