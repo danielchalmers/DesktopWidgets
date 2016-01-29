@@ -365,9 +365,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         public ModifierKeys HideHotKeyModifiers { get; set; }
 
         [DisplayName("Show Hotkey Identifier")]
-        public Guid ShowHotkeyIdentifier { get; } = new Guid();
+        public Guid ShowHotkeyIdentifier { get; } = Guid.NewGuid();
 
         [DisplayName("Hide Hotkey Identifier")]
-        public Guid HideHotkeyIdentifier { get; } = new Guid();
+        public Guid HideHotkeyIdentifier { get; } = Guid.NewGuid();
     }
 }
