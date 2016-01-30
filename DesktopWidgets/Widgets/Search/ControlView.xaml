@@ -15,7 +15,7 @@
                     Width="32" />
         </Grid>
     </UserControl.Resources>
-    <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <TextBox x:Name="MainElement" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyUp">
                 <command:EventToCommand Command="{Binding OnKeyUp}" PassEventArgsToCommand="True"

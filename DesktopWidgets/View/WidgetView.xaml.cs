@@ -134,6 +134,8 @@ namespace DesktopWidgets.View
             UpdateUi(false);
 
             ViewModel.OnUiLoad();
+
+            FocusMainElement();
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -330,6 +332,12 @@ namespace DesktopWidgets.View
         private void btnDismiss_OnClick(object sender, RoutedEventArgs e)
         {
             HideUi();
+        }
+
+        public void FocusMainElement()
+        {
+            var element = UserControl.FindName("MainElement") as UIElement;
+            element?.Focus();
         }
     }
 }

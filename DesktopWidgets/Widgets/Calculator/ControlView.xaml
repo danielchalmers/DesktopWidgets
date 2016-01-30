@@ -6,5 +6,5 @@
              xmlns:classes="clr-namespace:DesktopWidgets.Classes"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d">
-    <xctk:Calculator />
+    <xctk:Calculator x:Name="MainElement" />
 </UserControl>

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    <Button Command="{Binding Execute}" Content="{Binding Settings.ButtonText}"
+    <Button x:Name="MainElement" Command="{Binding Execute}" Content="{Binding Settings.ButtonText}"
             Width="{Binding Settings.ButtonWidth}"
             Height="{Binding Settings.ButtonHeight}" />
 </UserControl>
