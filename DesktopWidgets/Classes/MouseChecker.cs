@@ -248,6 +248,12 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            if (_settings.OpenMode == OpenMode.Keyboard && !KeepOpenForIntro)
+            {
+                Hide();
+                return;
+            }
+
             UpdateVisibilityStatus();
         }
 
