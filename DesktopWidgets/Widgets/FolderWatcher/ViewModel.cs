@@ -109,10 +109,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 return;
             if (HandleFileImage())
                 FileType = FileType.Image;
-            else if (HandleFileContent())
-                FileType = FileType.Text;
             else if (HandleFileMedia(playMedia))
                 FileType = FileType.Audio;
+            else if (HandleFileContent())
+                FileType = FileType.Text;
             else
             {
                 FileType = FileType.Other;
