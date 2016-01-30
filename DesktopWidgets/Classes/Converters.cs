@@ -661,4 +661,19 @@ namespace DesktopWidgets.Classes
             throw new NotImplementedException();
         }
     }
+
+    public class BoolToPauseTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            return (bool) value ? "Resume" : "Pause";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

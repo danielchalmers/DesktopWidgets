@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.ViewModel;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace DesktopWidgets.Widgets.PictureSlideshow
 {
@@ -17,13 +19,19 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         private string _imageUrl;
         private int _index;
 
+        private bool _isPaused;
+
         public ViewModel(WidgetId id) : base(id)
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
+            IsPaused = Settings.Freeze;
             ImageUrl = Settings.ImageUrl;
             AllowDrop = Settings.AllowDropFiles;
+
+            TogglePlayPause = new RelayCommand(TogglePlayPauseExecute);
+
             _random = new Random();
 
             _changeTimer = new DispatcherTimer {Interval = Settings.ChangeInterval};
@@ -46,6 +54,8 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         public Settings Settings { get; }
 
+        public ICommand TogglePlayPause { get; set; }
+
         public string ImageUrl
         {
             get { return _imageUrl; }
@@ -56,6 +66,20 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                     _imageUrl = value;
                     Settings.ImageUrl = value;
                     RaisePropertyChanged(nameof(ImageUrl));
+                }
+            }
+        }
+
+        public bool IsPaused
+        {
+            get { return _isPaused; }
+            set
+            {
+                if (_isPaused != value)
+                {
+                    _isPaused = value;
+                    Settings.Freeze = value;
+                    RaisePropertyChanged(nameof(IsPaused));
                 }
             }
         }
@@ -109,6 +133,11 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             base.OnRefresh();
             _changeTimer.Interval = Settings.ChangeInterval;
             _directoryWatcher.SetWatchPath(Settings.RootPath);
+        }
+
+        private void TogglePlayPauseExecute()
+        {
+            IsPaused = !IsPaused;
         }
     }
 }
