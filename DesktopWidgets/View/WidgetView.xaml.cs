@@ -188,8 +188,7 @@ namespace DesktopWidgets.View
 
         public void ShowUi()
         {
-            if (Settings.OpenMode != OpenMode.AlwaysOpen && !App.IsMuted)
-                _mouseChecker.Show();
+            _mouseChecker.Show();
         }
 
         public void HideUi()
