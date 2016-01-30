@@ -377,5 +377,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Style (Titlebar)")]
         [DisplayName("Width (px)")]
         public double TitlebarWidth { get; set; } = double.NaN;
+
+        [Category("Behavior")]
+        [DisplayName("Force Hidden")]
+        public bool ForceHide { get; set; }
     }
 }

@@ -287,7 +287,7 @@ namespace DesktopWidgets.Classes
 
         public void Show(bool animate = true, bool activate = false)
         {
-            if (_view.AnimationRunning || _view.IsVisible)
+            if (_view.AnimationRunning || _view.IsVisible && !_settings.ForceHide)
                 return;
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Show);
