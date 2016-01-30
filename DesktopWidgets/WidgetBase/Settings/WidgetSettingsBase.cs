@@ -412,5 +412,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Style (Frame)")]
         [DisplayName("Enable Right Frame")]
         public bool ShowRightFrame { get; set; } = true;
+
+        [Category("Behavior")]
+        [DisplayName("Use Mouse Movement For Idle Detection")]
+        public bool UseMouseMoveIdleDetection { get; set; } = false;
     }
 }

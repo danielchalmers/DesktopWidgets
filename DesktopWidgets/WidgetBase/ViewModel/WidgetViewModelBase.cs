@@ -366,7 +366,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public virtual void MouseMoveExecute(MouseEventArgs e)
         {
-            if (_settings.DetectIdle)
+            if (_settings.DetectIdle && _settings.UseMouseMoveIdleDetection)
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
         }
 
