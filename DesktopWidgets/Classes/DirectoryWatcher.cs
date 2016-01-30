@@ -46,7 +46,7 @@ namespace DesktopWidgets.Classes
 
         public void CheckDirectoryForNewFiles(bool promptAction = true)
         {
-            if (_isScanning)
+            if (_isScanning || string.IsNullOrWhiteSpace(_settings.WatchFolder))
                 return;
             var dirInfo = new DirectoryInfo(_settings.WatchFolder);
             if (!dirInfo.Exists)
