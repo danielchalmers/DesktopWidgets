@@ -46,7 +46,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                     }, AddToFileQueue);
             _directoryWatcher.Start();
 
-            CheckFile();
+            CheckFile(false);
         }
 
         public ICommand OpenFile { get; set; }
@@ -103,7 +103,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 HandleDirectoryChange();
         }
 
-        private void CheckFile()
+        private void CheckFile(bool playMedia = true)
         {
             if (string.IsNullOrWhiteSpace(Settings.CurrentFilePath) || !File.Exists(Settings.CurrentFilePath))
                 return;
@@ -111,7 +111,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 FileType = FileType.Image;
             else if (HandleFileContent())
                 FileType = FileType.Text;
-            else if (HandleFileMedia())
+            else if (HandleFileMedia(playMedia))
                 FileType = FileType.Audio;
             else
             {
@@ -129,7 +129,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             _isShowing = true;
             CurrentFilePath = _notificationQueue.Dequeue();
 
-            CheckFile();
+            CheckFile(true);
 
             if (!App.IsMuted)
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
@@ -158,11 +158,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                        x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
         }
 
-        private bool HandleFileMedia()
+        private bool HandleFileMedia(bool play)
         {
             if (!Settings.PlayMedia)
                 return false;
-            MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
+            if (play)
+                MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
             return MediaPlayerHelper.IsSupported(Path.GetExtension(CurrentFilePath));
         }
 
