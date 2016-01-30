@@ -205,7 +205,7 @@ namespace DesktopWidgets.Classes
 
             if (App.IsMuted)
             {
-                Hide(checkHideStatus: false);
+                Hide(checkHideStatus: false, checkIdleStatus: false);
                 return;
             }
 
