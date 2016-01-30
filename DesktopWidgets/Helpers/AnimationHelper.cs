@@ -66,6 +66,11 @@ namespace DesktopWidgets.Helpers
                     view.Hide();
                     MediaPlayerStore.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
                 }
+                else
+                {
+                    if (view.Settings.RefocusMainElementOnShow)
+                        view.FocusMainElement();
+                }
                 aendAction?.Invoke();
                 view.AnimationRunning = false;
             };

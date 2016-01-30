@@ -392,5 +392,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Detect Idle")]
         public bool DetectIdle { get; set; } = true;
+
+        [Category("Behavior")]
+        [DisplayName("Refocus Main Element On Show")]
+        public bool RefocusMainElementOnShow { get; set; } = true;
     }
 }
