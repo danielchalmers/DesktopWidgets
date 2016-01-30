@@ -13,7 +13,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         }
 
         [Category("General")]
-        [DisplayName("Root Folder")]
+        [DisplayName("Image Folder Path")]
         public string RootPath { get; set; }
 
         [Category("General")]
