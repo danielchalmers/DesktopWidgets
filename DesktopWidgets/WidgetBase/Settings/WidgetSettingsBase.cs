@@ -396,5 +396,21 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Refocus Main Element On Show")]
         public bool RefocusMainElementOnShow { get; set; } = true;
+
+        [Category("Style (Frame)")]
+        [DisplayName("Enable Top Frame")]
+        public bool ShowTopFrame { get; set; } = true;
+
+        [Category("Style (Frame)")]
+        [DisplayName("Enable Bottom Frame")]
+        public bool ShowBottomFrame { get; set; } = true;
+
+        [Category("Style (Frame)")]
+        [DisplayName("Enable Left Frame")]
+        public bool ShowLeftFrame { get; set; } = true;
+
+        [Category("Style (Frame)")]
+        [DisplayName("Enable Right Frame")]
+        public bool ShowRightFrame { get; set; } = true;
     }
 }

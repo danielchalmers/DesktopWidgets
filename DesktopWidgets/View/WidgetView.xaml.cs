@@ -82,29 +82,41 @@ namespace DesktopWidgets.View
 
         private void SetupFrame()
         {
-            var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
-            if (frameTop != null)
+            if (Settings.ShowTopFrame)
             {
-                FrameContainerTop.Child = frameTop;
-                FrameContainerTop.Visibility = Visibility.Visible;
+                var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
+                if (frameTop != null)
+                {
+                    FrameContainerTop.Child = frameTop;
+                    FrameContainerTop.Visibility = Visibility.Visible;
+                }
             }
-            var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
-            if (frameBottom != null)
+            if (Settings.ShowBottomFrame)
             {
-                FrameContainerBottom.Child = frameBottom;
-                FrameContainerBottom.Visibility = Visibility.Visible;
+                var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
+                if (frameBottom != null)
+                {
+                    FrameContainerBottom.Child = frameBottom;
+                    FrameContainerBottom.Visibility = Visibility.Visible;
+                }
             }
-            var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
-            if (frameLeft != null)
+            if (Settings.ShowLeftFrame)
             {
-                FrameContainerLeft.Child = frameLeft;
-                FrameContainerLeft.Visibility = Visibility.Visible;
+                var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
+                if (frameLeft != null)
+                {
+                    FrameContainerLeft.Child = frameLeft;
+                    FrameContainerLeft.Visibility = Visibility.Visible;
+                }
             }
-            var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
-            if (frameRight != null)
+            if (Settings.ShowRightFrame)
             {
-                FrameContainerRight.Child = frameRight;
-                FrameContainerRight.Visibility = Visibility.Visible;
+                var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
+                if (frameRight != null)
+                {
+                    FrameContainerRight.Child = frameRight;
+                    FrameContainerRight.Visibility = Visibility.Visible;
+                }
             }
         }
 
