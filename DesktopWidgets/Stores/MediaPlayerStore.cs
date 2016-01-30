@@ -46,5 +46,11 @@ namespace DesktopWidgets.Stores
             player.settings.volume = (int) (volume*100);
             player.URL = path;
         }
+
+        public static void StopAll()
+        {
+            foreach (var player in MediaPlayers)
+                player.close();
+        }
     }
 }

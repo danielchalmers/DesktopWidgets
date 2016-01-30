@@ -2,6 +2,7 @@
 using System.Windows;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
+using DesktopWidgets.Stores;
 using DesktopWidgets.Windows;
 
 namespace DesktopWidgets
@@ -52,6 +53,7 @@ namespace DesktopWidgets
             else
             {
                 WidgetHelper.HideWidgets();
+                MediaPlayerStore.StopAll();
                 Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
             }
         }
