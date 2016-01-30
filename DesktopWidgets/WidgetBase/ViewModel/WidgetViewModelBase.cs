@@ -42,7 +42,13 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
+
             Drop = new RelayCommand<DragEventArgs>(DropExecute);
+            MouseMove = new RelayCommand<MouseEventArgs>(MouseMoveExecute);
+            MouseDown = new RelayCommand<MouseEventArgs>(MouseDownExecute);
+            MouseUp = new RelayCommand<MouseEventArgs>(MouseUpExecute);
+            KeyDown = new RelayCommand<KeyEventArgs>(KeyDownExecute);
+            KeyUp = new RelayCommand<KeyEventArgs>(KeyUpExecute);
 
             WidgetDockHorizontal = new RelayCommand<HorizontalAlignment>(WidgetDockHorizontalExecute);
             WidgetDockVertical = new RelayCommand<VerticalAlignment>(WidgetDockVerticalExecute);
@@ -167,6 +173,11 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public ICommand WidgetUndock { get; private set; }
 
         public ICommand Drop { get; set; }
+        public ICommand MouseMove { get; set; }
+        public ICommand MouseDown { get; set; }
+        public ICommand MouseUp { get; set; }
+        public ICommand KeyDown { get; set; }
+        public ICommand KeyUp { get; set; }
 
         public bool IsContextMenuOpen
         {
@@ -349,14 +360,44 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 HotkeyStore.RemoveHotkey(_settings.HideHotkeyIdentifier);
         }
 
+        public virtual void DropExecute(DragEventArgs e)
+        {
+        }
+
+        public virtual void MouseMoveExecute(MouseEventArgs e)
+        {
+            if (_settings.DetectIdle)
+                _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+        }
+
+        public virtual void MouseDownExecute(MouseEventArgs e)
+        {
+            if (_settings.DetectIdle)
+                _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+        }
+
+        public virtual void MouseUpExecute(MouseEventArgs e)
+        {
+            if (_settings.DetectIdle)
+                _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+        }
+
+        public virtual void KeyDownExecute(KeyEventArgs e)
+        {
+            if (_settings.DetectIdle)
+                _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+        }
+
+        public virtual void KeyUpExecute(KeyEventArgs e)
+        {
+            if (_settings.DetectIdle)
+                _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+        }
+
         public virtual void OnClose()
         {
             _onTopForceTimer?.Stop();
             _onTopForceTimer = null;
-        }
-
-        public virtual void DropExecute(DragEventArgs e)
-        {
         }
 
         public virtual void OnIntro()

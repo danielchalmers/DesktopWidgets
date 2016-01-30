@@ -24,6 +24,8 @@ namespace DesktopWidgets.Classes
         private DispatcherTimer _mouseCheckTimer;
         private DispatcherTimer _showTimer;
         public bool KeepOpenForIntro;
+
+        public bool KeepOpenUntilIdle;
         public bool QueueIntro;
 
         public MouseChecker(WidgetView view, WidgetSettingsBase settings)
@@ -221,6 +223,19 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
+            if (_settings.DetectIdle && KeepOpenUntilIdle)
+            {
+                if (!_view.IsIdle)
+                {
+                    Show();
+                }
+                else
+                {
+                    Hide();
+                }
+                return;
+            }
+
             if (_settings.OpenMode == OpenMode.Hidden)
             {
                 Hide();
@@ -300,10 +315,18 @@ namespace DesktopWidgets.Classes
         public void Hide(bool animate = true, bool checkHideStatus = true)
         {
             KeepOpenForIntro = false;
+            KeepOpenUntilIdle = false;
             if (_view.AnimationRunning || !_view.IsVisible)
                 return;
             if (checkHideStatus && !IsHideable())
                 return;
+
+            if (!_view.IsIdle)
+            {
+                KeepOpenUntilIdle = true;
+                return;
+            }
+
             if (animate && _settings.AnimationTime != 0)
                 _view.Animate(AnimationMode.Hide);
             else

@@ -67,6 +67,8 @@ namespace DesktopWidgets.View
 
         public new bool IsVisible => Visibility == Visibility.Visible && Opacity > 0.99;
 
+        public bool IsIdle => Settings.DetectIdle && Settings.ActiveTimeEnd <= DateTime.Now;
+
         private void SetupWidgetControl()
         {
             UserControl.Style = (Style) Resources["UserControlStyle"];

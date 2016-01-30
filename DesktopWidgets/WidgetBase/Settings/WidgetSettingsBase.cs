@@ -14,6 +14,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Internal Identifier")]
         public WidgetId Identifier { get; } = new WidgetId();
 
+        [DisplayName("Active Time End")]
+        public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
+
         [Category("Style")]
         [DisplayName("Padding")]
         public Thickness Padding { get; set; } = new Thickness(3, 2, 3, 2);
@@ -381,5 +384,13 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Force Hidden")]
         public bool ForceHide { get; set; }
+
+        [Category("Behavior")]
+        [DisplayName("Idle Duration")]
+        public TimeSpan IdleDuration { get; set; } = TimeSpan.FromSeconds(5);
+
+        [Category("Behavior")]
+        [DisplayName("Detect Idle")]
+        public bool DetectIdle { get; set; } = true;
     }
 }

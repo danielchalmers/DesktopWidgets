@@ -18,6 +18,21 @@
         <i:EventTrigger EventName="Drop">
             <command:EventToCommand Command="{Binding Drop}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="MouseMove">
+            <command:EventToCommand Command="{Binding MouseMove}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseDown">
+            <command:EventToCommand Command="{Binding MouseDown}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="MouseUp">
+            <command:EventToCommand Command="{Binding MouseUp}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="KeyDown">
+            <command:EventToCommand Command="{Binding KeyDown}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="KeyUp">
+            <command:EventToCommand Command="{Binding KeyUp}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
         <classes:SettingsToThicknessConverter x:Key="SettingsToThicknessConverter" />
