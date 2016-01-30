@@ -206,10 +206,10 @@ namespace DesktopWidgets.View
             _mouseChecker.Show();
         }
 
-        public void HideUi(bool checkIdleStatus = true)
+        public void HideUi(bool checkIdleStatus = true, bool checkHideStatus = true)
         {
             if (Settings.OpenMode != OpenMode.AlwaysOpen)
-                _mouseChecker.Hide(checkIdleStatus: checkIdleStatus);
+                _mouseChecker.Hide(checkIdleStatus: checkIdleStatus, checkHideStatus: checkHideStatus);
         }
 
         public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool updateOpacity = true,
