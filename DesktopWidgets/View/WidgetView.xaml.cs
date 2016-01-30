@@ -135,7 +135,7 @@ namespace DesktopWidgets.View
 
             ViewModel.OnUiLoad();
 
-            FocusMainElement();
+            //FocusMainElement();
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -184,9 +184,8 @@ namespace DesktopWidgets.View
             {
                 _mouseChecker.KeepOpenForIntro = true;
                 _introTimer.Start();
-                if (activate)
-                    Activate();
                 ViewModel.OnIntro();
+                _mouseChecker.Show(activate: activate);
             }
         }
 
@@ -209,7 +208,8 @@ namespace DesktopWidgets.View
             if (!IsVisible)
                 Refresh(resetContext, updateNonUi, false, updateOpacity);
             else
-                this.Animate(AnimationMode.Hide, null, () => Refresh(resetContext, updateNonUi, true, updateOpacity),
+                this.Animate(AnimationMode.Hide, false, null,
+                    () => Refresh(resetContext, updateNonUi, true, updateOpacity),
                     isDocked,
                     dockHorizontalAlignment,
                     dockVerticalAlignment);

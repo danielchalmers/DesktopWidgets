@@ -13,7 +13,7 @@ namespace DesktopWidgets.Helpers
 {
     public static class AnimationHelper
     {
-        public static void Animate(this WidgetView view, AnimationMode animationMode,
+        public static void Animate(this WidgetView view, AnimationMode animationMode, bool focus = false,
             Action astartAction = null,
             Action aendAction = null,
             bool? isDocked = null,
@@ -68,7 +68,7 @@ namespace DesktopWidgets.Helpers
                 }
                 else
                 {
-                    if (view.Settings.RefocusMainElementOnShow)
+                    if (focus && view.Settings.RefocusMainElementOnShow)
                         view.FocusMainElement();
                 }
                 aendAction?.Invoke();

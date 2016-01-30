@@ -305,7 +305,7 @@ namespace DesktopWidgets.Classes
             if (_view.AnimationRunning || _view.IsVisible || App.IsMuted || _settings.ForceHide)
                 return;
             if (animate && _settings.AnimationTime != 0)
-                _view.Animate(AnimationMode.Show);
+                _view.Animate(AnimationMode.Show, activate);
             else
                 _view.Show();
             if (activate && _settings.ActivateOnShow)
