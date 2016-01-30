@@ -355,7 +355,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             if (_settings.HideHotKey != Key.None)
                 HotkeyStore.RegisterHotkey(_settings.HideHotkeyIdentifier,
                     new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation),
-                    () => View?.HideUi());
+                    () => View?.HideUi(false));
             else
                 HotkeyStore.RemoveHotkey(_settings.HideHotkeyIdentifier);
         }

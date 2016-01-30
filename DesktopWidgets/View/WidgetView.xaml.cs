@@ -146,11 +146,11 @@ namespace DesktopWidgets.View
             return IntPtr.Zero;
         }
 
-        private void HideIntro()
+        private void HideIntro(bool checkIdleStatus = true)
         {
             _mouseChecker.KeepOpenForIntro = false;
             if (Settings.OpenMode != OpenMode.AlwaysOpen)
-                _mouseChecker.Hide();
+                _mouseChecker.Hide(checkIdleStatus: checkIdleStatus);
         }
 
         public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
@@ -178,7 +178,7 @@ namespace DesktopWidgets.View
             _introTimer.Interval = TimeSpan.FromMilliseconds(duration == -1 ? Settings.IntroDuration : duration);
             if (_mouseChecker.KeepOpenForIntro && reversable)
             {
-                HideIntro();
+                HideIntro(false);
             }
             else if (duration != 0)
             {
@@ -195,10 +195,10 @@ namespace DesktopWidgets.View
             _mouseChecker.Show();
         }
 
-        public void HideUi()
+        public void HideUi(bool checkIdleStatus = true)
         {
             if (Settings.OpenMode != OpenMode.AlwaysOpen)
-                _mouseChecker.Hide();
+                _mouseChecker.Hide(checkIdleStatus: checkIdleStatus);
         }
 
         public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool updateOpacity = true,

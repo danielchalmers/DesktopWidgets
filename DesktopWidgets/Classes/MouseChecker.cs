@@ -40,7 +40,7 @@ namespace DesktopWidgets.Classes
             _hideTimer.Tick += delegate
             {
                 _hideTimer.Stop();
-                Hide();
+                Hide(checkIdleStatus: false);
             };
             _showTimer.Tick += delegate
             {
@@ -278,7 +278,7 @@ namespace DesktopWidgets.Classes
                     {
                         if (_settings.HideDelay == 0)
                         {
-                            Hide();
+                            Hide(checkIdleStatus: false);
                         }
                         else
                         {
@@ -312,7 +312,7 @@ namespace DesktopWidgets.Classes
                 _view.Activate();
         }
 
-        public void Hide(bool animate = true, bool checkHideStatus = true)
+        public void Hide(bool animate = true, bool checkHideStatus = true, bool checkIdleStatus = true)
         {
             KeepOpenForIntro = false;
             KeepOpenUntilIdle = false;
@@ -321,7 +321,7 @@ namespace DesktopWidgets.Classes
             if (checkHideStatus && !IsHideable())
                 return;
 
-            if (!_view.IsIdle)
+            if (checkIdleStatus && !_view.IsIdle)
             {
                 KeepOpenUntilIdle = true;
                 return;
