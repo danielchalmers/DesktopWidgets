@@ -33,6 +33,9 @@
         <i:EventTrigger EventName="KeyUp">
             <command:EventToCommand Command="{Binding KeyUp}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="MouseDoubleClick">
+            <command:EventToCommand Command="{Binding MouseDoubleClick}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
         <classes:SettingsToThicknessConverter x:Key="SettingsToThicknessConverter" />
