@@ -17,7 +17,7 @@ namespace DesktopWidgets.Helpers
             if (IsAppAlreadyRunning())
                 return false;
 
-            WidgetHelper.LoadWidgetViews();
+            WidgetHelper.LoadWidgetViews(App.Arguments.Contains("-systemstartup"));
 
             StartScheduledTasks();
 

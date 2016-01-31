@@ -39,7 +39,7 @@ namespace DesktopWidgets.Helpers
             AddNewWidget((string) dialog.SelectedItem);
         }
 
-        private static void LoadView(this WidgetId id)
+        private static void LoadView(this WidgetId id, bool systemStartup = false)
         {
             foreach (var view in App.WidgetViews.Where(view => view.Id == id))
             {
@@ -47,7 +47,7 @@ namespace DesktopWidgets.Helpers
                 App.WidgetViews.Remove(view);
             }
 
-            var widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView());
+            var widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView(), systemStartup);
             App.WidgetViews.Add(widgetView);
             widgetView.Show();
         }
@@ -131,7 +131,7 @@ namespace DesktopWidgets.Helpers
                     dockVerticalAlignment: previousVerticalAlignment);
         }
 
-        public static void LoadWidgetViews()
+        public static void LoadWidgetViews(bool systemStartup = false)
         {
             if (App.WidgetViews != null)
                 foreach (var view in App.WidgetViews)
@@ -141,7 +141,7 @@ namespace DesktopWidgets.Helpers
             foreach (
                 var id in
                     App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.Identifier))
-                id.LoadView();
+                id.LoadView(systemStartup);
         }
 
         public static void ShowAllWidgetIntros()

@@ -26,7 +26,7 @@ namespace DesktopWidgets.View
         private bool _hideIntroOnFinish;
         private DispatcherTimer _introTimer;
 
-        public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl)
+        public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl, bool systemStartup)
         {
             InitializeComponent();
 
@@ -48,7 +48,7 @@ namespace DesktopWidgets.View
 
             _mouseChecker = new MouseChecker(this, Settings);
 
-            if (!App.Arguments.Contains("-systemstartup") && Settings.ShowIntroOnLaunch)
+            if (!systemStartup && Settings.ShowIntroOnLaunch)
                 _mouseChecker.QueueIntro = true;
 
             DataContext = ViewModel;
