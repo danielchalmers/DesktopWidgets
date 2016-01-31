@@ -44,9 +44,9 @@ namespace DesktopWidgets.Widgets.CommandButton
         {
             base.ReloadHotKeys();
             if (Settings.CommandHotKey != Key.None)
-                HotkeyStore.RegisterHotkey(Id.Guid,
-                    new Hotkey(Settings.CommandHotKey, Settings.CommandHotKeyModifiers, Settings.FullscreenActivation),
-                    ExecuteCommand);
+                HotkeyStore.RegisterHotkey(
+                    new Hotkey(Settings.CommandHotKey, Settings.CommandHotKeyModifiers, Settings.FullscreenActivation,
+                        false, Id.Guid), ExecuteCommand);
             else
                 HotkeyStore.RemoveHotkey(Id.Guid);
         }

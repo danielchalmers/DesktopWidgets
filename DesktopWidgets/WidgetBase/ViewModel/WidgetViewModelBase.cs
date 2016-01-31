@@ -346,8 +346,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             if (_settings.HotKey != Key.None && _settings.OpenMode == OpenMode.Keyboard ||
                 _settings.OpenMode == OpenMode.MouseAndKeyboard)
-                HotkeyStore.RegisterHotkey(_settings.ShowHotkeyIdentifier,
-                    new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation),
+                HotkeyStore.RegisterHotkey(
+                    new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation, false,
+                        _settings.ShowHotkeyIdentifier),
                     () =>
                         View?.ShowIntro(_settings.ShowHotkeyDuration, _settings.ToggleIntroOnHotkey,
                             _settings.ActivateOnShow, !_settings.StayOpenOnShowHotkey));
@@ -355,8 +356,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 HotkeyStore.RemoveHotkey(_settings.ShowHotkeyIdentifier);
 
             if (_settings.HideHotKey != Key.None)
-                HotkeyStore.RegisterHotkey(_settings.HideHotkeyIdentifier,
-                    new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation),
+                HotkeyStore.RegisterHotkey(
+                    new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation,
+                        false, _settings.HideHotkeyIdentifier),
                     () => View?.HideUi(false));
             else
                 HotkeyStore.RemoveHotkey(_settings.HideHotkeyIdentifier);
