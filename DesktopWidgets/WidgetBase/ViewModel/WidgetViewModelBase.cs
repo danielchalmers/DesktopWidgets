@@ -252,7 +252,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private void DismissWidgetExecute()
         {
-            View?.HideUi(false, false);
+            View?.Dismiss();
         }
 
         private void EditWidgetExecute()

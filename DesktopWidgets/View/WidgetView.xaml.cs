@@ -212,6 +212,8 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide(checkIdleStatus: checkIdleStatus, checkHideStatus: checkHideStatus);
         }
 
+        public void Dismiss() => HideUi(false, false);
+
         public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool updateOpacity = true,
             bool? isDocked = null,
             HorizontalAlignment? dockHorizontalAlignment = null,
@@ -343,7 +345,7 @@ namespace DesktopWidgets.View
 
         private void btnDismiss_OnClick(object sender, RoutedEventArgs e)
         {
-            HideUi();
+            Dismiss();
         }
 
         public void FocusMainElement()

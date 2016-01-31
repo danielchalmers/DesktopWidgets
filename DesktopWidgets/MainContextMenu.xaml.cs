@@ -52,7 +52,7 @@ namespace DesktopWidgets
             }
             else
             {
-                WidgetHelper.HideWidgets();
+                WidgetHelper.DismissWidgets();
                 MediaPlayerStore.StopAll();
                 Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
             }
@@ -65,7 +65,7 @@ namespace DesktopWidgets
 
         private void menuItemDismissWidgets_OnClick(object sender, RoutedEventArgs e)
         {
-            WidgetHelper.HideWidgets();
+            WidgetHelper.DismissWidgets();
         }
     }
 }

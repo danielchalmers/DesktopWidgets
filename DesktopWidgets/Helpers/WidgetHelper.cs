@@ -182,10 +182,10 @@ namespace DesktopWidgets.Helpers
                 id.Reload();
         }
 
-        public static void HideWidgets()
+        public static void DismissWidgets()
         {
             foreach (var view in App.WidgetViews)
-                view.HideUi();
+                view.Dismiss();
         }
     }
 }
