@@ -30,7 +30,7 @@ namespace DesktopWidgets.Stores
             try
             {
                 HotkeyManager.Current.AddOrReplace($"{hotkey.Key}\\{hotkey.ModifierKeys}", hotkey.Key,
-                    hotkey.ModifierKeys, OnHotkey);
+                    hotkey.ModifierKeys, (sender, args) => OnHotkey(hotkey.Key, hotkey.ModifierKeys));
             }
             catch (HotkeyAlreadyRegisteredException)
             {
@@ -66,17 +66,10 @@ namespace DesktopWidgets.Stores
             }
         }
 
-        private static void OnHotkey(object sender, HotkeyEventArgs e)
+        private static void OnHotkey(Key key, ModifierKeys modifierKeys)
         {
             if (App.IsMuted)
                 return;
-            var keys = e.Name.Split('\\');
-            if (keys.Length != 2)
-                return;
-            Key key;
-            Enum.TryParse(keys[0], out key);
-            ModifierKeys modifierKeys;
-            Enum.TryParse(keys[1], out modifierKeys);
             foreach (
                 var hotkey in Hotkeys.Where(x => x.Value.Item1.Key == key && x.Value.Item1.ModifierKeys == modifierKeys)
                 )
