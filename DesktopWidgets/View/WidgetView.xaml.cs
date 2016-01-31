@@ -48,7 +48,7 @@ namespace DesktopWidgets.View
 
             _mouseChecker = new MouseChecker(this, Settings);
 
-            if (!App.Arguments.Contains("-systemstartup"))
+            if (!App.Arguments.Contains("-systemstartup") && Settings.ShowIntroOnLaunch)
                 _mouseChecker.QueueIntro = true;
 
             DataContext = ViewModel;

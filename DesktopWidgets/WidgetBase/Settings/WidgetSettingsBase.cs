@@ -416,5 +416,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Use Mouse Movement For Idle Detection")]
         public bool UseMouseMoveIdleDetection { get; set; } = false;
+
+        [Category("Behavior")]
+        [DisplayName("Show Intro On Launch")]
+        public bool ShowIntroOnLaunch { get; set; } = true;
     }
 }
