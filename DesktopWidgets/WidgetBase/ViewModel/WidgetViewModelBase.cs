@@ -438,5 +438,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             UpdateForceOnTopTimer();
         }
+
+        public virtual void OnDismiss()
+        {
+        }
     }
 }

@@ -166,7 +166,7 @@ namespace DesktopWidgets.View
         }
 
         public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
-            bool hideOnFinish = true)
+            bool hideOnFinish = true, bool executeFinishAction = true)
         {
             if (FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.ScreenBounds))
             {
@@ -182,7 +182,8 @@ namespace DesktopWidgets.View
                     _introTimer.Stop();
                     if (_hideIntroOnFinish)
                         HideIntro();
-                    ViewModel.OnIntroEnd();
+                    if (executeFinishAction)
+                        ViewModel.OnIntroEnd();
                 };
             }
 
@@ -212,7 +213,11 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide(checkIdleStatus: checkIdleStatus, checkHideStatus: checkHideStatus);
         }
 
-        public void Dismiss() => HideUi(false, false);
+        public void Dismiss()
+        {
+            HideUi(false, false);
+            ViewModel.OnDismiss();
+        }
 
         public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool updateOpacity = true,
             bool? isDocked = null,

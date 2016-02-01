@@ -134,8 +134,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             if (!App.IsMuted)
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             if (Settings.OpenOnEvent)
-                View?.ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                    false, false, false);
+            {
+                View?.ShowIntro((int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                    false, false, false, !Settings.OpenOnEventStay);
+            }
         }
 
         private bool HandleFileImage()
@@ -168,6 +170,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         }
 
         public override void OnIntroEnd()
+        {
+            base.OnIntroEnd();
+            _isShowing = false;
+            HandleDirectoryChange();
+        }
+
+        public override void OnDismiss()
         {
             base.OnIntroEnd();
             _isShowing = false;
