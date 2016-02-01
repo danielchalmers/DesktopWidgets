@@ -18,7 +18,7 @@ namespace DesktopWidgets.Helpers
 
         private static WidgetView GetView(this WidgetId id)
         {
-            return App.WidgetViews.FirstOrDefault(v => v.Id == id);
+            return App.WidgetViews.FirstOrDefault(w => w.Id == id && !w.IsClosed);
         }
 
         public static string GetName(this WidgetId id)
@@ -130,8 +130,9 @@ namespace DesktopWidgets.Helpers
             if (dismiss)
                 view?.Dismiss();
             new WidgetEditor(name, settings).ShowDialog();
-            view?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
-                dockVerticalAlignment: previousVerticalAlignment);
+            if (view != null && !view.IsClosed)
+                view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
+                    dockVerticalAlignment: previousVerticalAlignment);
         }
 
         public static void LoadWidgetViews(bool systemStartup = false)

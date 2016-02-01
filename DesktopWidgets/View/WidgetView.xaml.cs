@@ -69,6 +69,8 @@ namespace DesktopWidgets.View
 
         public bool IsIdle => Settings.DetectIdle && Settings.ActiveTimeEnd <= DateTime.Now;
 
+        public bool IsClosed { get; set; }
+
         private void SetupWidgetControl()
         {
             UserControl.Style = (Style) Resources["UserControlStyle"];
@@ -295,6 +297,7 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
+            IsClosed = true;
             _introTimer?.Stop();
             _introTimer = null;
             _mouseChecker.Dispose();
