@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Windows;
 using DesktopWidgets.ApiClasses;
 using DesktopWidgets.Properties;
 using Newtonsoft.Json;
@@ -58,7 +59,7 @@ namespace DesktopWidgets.Classes
             }
         }
 
-        private static string GetFormattedChangelog()
+        private string GetFormattedChangelog()
         {
             List<Changelog> changelogData = null;
             if (!string.IsNullOrWhiteSpace(Settings.Default.ChangelogCache))
@@ -67,7 +68,16 @@ namespace DesktopWidgets.Classes
             {
                 changelogData = new List<Changelog>();
                 for (var i = 1; i <= Settings.Default.ChangelogDownloadPages; i++)
+                {
+                    var i1 = i;
+                    Application.Current.Dispatcher.Invoke(
+                        () =>
+                        {
+                            _updateTextAction(
+                                $"Downloading changelog ({i1} of {Settings.Default.ChangelogDownloadPages})...");
+                        });
                     changelogData.AddRange(ParseChangelogJson(DownloadChangelogJson(i)));
+                }
                 Settings.Default.ChangelogCache = JsonConvert.SerializeObject(changelogData);
             }
 
