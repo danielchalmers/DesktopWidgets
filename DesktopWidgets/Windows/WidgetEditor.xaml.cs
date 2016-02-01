@@ -9,11 +9,11 @@ namespace DesktopWidgets.Windows
     /// </summary>
     public partial class WidgetEditor : Window
     {
-        public WidgetEditor(WidgetId id)
+        public WidgetEditor(string name, object settings)
         {
             InitializeComponent();
-            Title = $"Edit {id.GetName()}";
-            PropertyGrid.SelectedObject = id.GetSettings();
+            Title = $"Edit {name}";
+            PropertyGrid.SelectedObject = settings;
         }
 
         private void btnOK_OnClick(object sender, RoutedEventArgs e)

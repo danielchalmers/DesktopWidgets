@@ -122,13 +122,14 @@ namespace DesktopWidgets.Helpers
         public static void Edit(this WidgetId id)
         {
             var settings = id.GetSettings();
+            var view = id.GetView();
+            var name = id.GetName();
             var previousHorizontalAlignment = settings.HorizontalAlignment;
             var previousVerticalAlignment = settings.VerticalAlignment;
             var previousIsDocked = settings.IsDocked;
-            new WidgetEditor(id).ShowDialog();
-            id.GetView()?
-                .UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
-                    dockVerticalAlignment: previousVerticalAlignment);
+            new WidgetEditor(name, settings).ShowDialog();
+            view?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
+                dockVerticalAlignment: previousVerticalAlignment);
         }
 
         public static void LoadWidgetViews(bool systemStartup = false)
