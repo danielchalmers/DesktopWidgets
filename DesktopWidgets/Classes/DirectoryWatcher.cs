@@ -100,9 +100,14 @@ namespace DesktopWidgets.Classes
             _isScanning = false;
         }
 
-        public void SetWatchPath(string path)
+        public bool SetWatchPath(string path)
         {
-            _settings.WatchFolder = path;
+            if (_settings.WatchFolder != path)
+            {
+                _settings.WatchFolder = path;
+                return true;
+            }
+            return false;
         }
 
         public void Start()

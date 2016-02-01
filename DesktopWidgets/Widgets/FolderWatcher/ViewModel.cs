@@ -207,7 +207,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public override void OnRefresh()
         {
             base.OnRefresh();
-            _directoryWatcher.SetWatchPath(Settings.WatchFolder);
+            if (_directoryWatcher.SetWatchPath(Settings.WatchFolder))
+                FileType = FileType.None;
         }
     }
 }
