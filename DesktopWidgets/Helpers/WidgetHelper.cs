@@ -119,7 +119,7 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static void Edit(this WidgetId id)
+        public static void Edit(this WidgetId id, bool dismiss = false)
         {
             var settings = id.GetSettings();
             var view = id.GetView();
@@ -127,6 +127,8 @@ namespace DesktopWidgets.Helpers
             var previousHorizontalAlignment = settings.HorizontalAlignment;
             var previousVerticalAlignment = settings.VerticalAlignment;
             var previousIsDocked = settings.IsDocked;
+            if (dismiss)
+                view?.Dismiss();
             new WidgetEditor(name, settings).ShowDialog();
             view?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
                 dockVerticalAlignment: previousVerticalAlignment);

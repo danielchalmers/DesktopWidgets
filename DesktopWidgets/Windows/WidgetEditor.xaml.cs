@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using DesktopWidgets.Helpers;
-using DesktopWidgets.WidgetBase;
 
 namespace DesktopWidgets.Windows
 {

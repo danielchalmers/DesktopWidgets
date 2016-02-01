@@ -257,7 +257,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private void EditWidgetExecute()
         {
-            Id.Edit();
+            Id.Edit(true);
         }
 
         private void ReloadWidgetExecute()
