@@ -206,7 +206,7 @@ namespace DesktopWidgets.Classes
             {
                 _showTimer.Stop();
                 _hideTimer.Stop();
-                Hide(false, true);
+                Hide(false, false, false);
                 return;
             }
 
