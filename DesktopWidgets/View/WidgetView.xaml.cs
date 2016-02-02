@@ -236,6 +236,17 @@ namespace DesktopWidgets.View
                     dockVerticalAlignment);
         }
 
+        private void UpdatePositionAndLocation()
+        {
+            UpdateLayout();
+            ViewModel.UpdateSize();
+            UpdateLayout();
+            ViewModel.UpdatePosition();
+            UpdateLayout();
+            ViewModel.UpdatePosition();
+            UpdateLayout();
+        }
+
         private void Refresh(bool resetContext, bool updateNonUi, bool showIntro, bool updateOpacity)
         {
             var isVisible = IsVisible;
@@ -254,13 +265,17 @@ namespace DesktopWidgets.View
             Title = Id.GetName();
 
             ViewModel.OnTop = Settings.OnTop;
-            UpdateLayout();
-            ViewModel.UpdateSize();
-            UpdateLayout();
-            ViewModel.UpdatePosition();
-            UpdateLayout();
-            ViewModel.UpdatePosition();
-            UpdateLayout();
+
+            if (Settings.AutoDetectScreenBounds)
+            {
+                var oldScreen = Settings.ScreenBounds;
+                var newScreen = ScreenHelper.GetScreen(this).ToRect(Settings.IgnoreAppBars);
+                Settings.ScreenBounds = newScreen;
+                if (!oldScreen.Equals(newScreen))
+                    UpdatePositionAndLocation();
+            }
+            UpdatePositionAndLocation();
+
             if (updateNonUi)
             {
                 UpdateTimers();
