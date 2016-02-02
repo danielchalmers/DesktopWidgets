@@ -21,9 +21,10 @@ namespace DesktopWidgets.Widgets.RSSFeed
     {
         private ObservableCollection<FeedItem> _feedItems;
 
+        private string _helpText;
+
         private string _lastFeedUrl;
 
-        private bool _showHelp;
         public DispatcherTimer UpdateTimer;
 
         public ViewModel(WidgetId id) : base(id)
@@ -44,15 +45,15 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         public ICommand NavigateHyperlink { get; set; }
 
-        public bool ShowHelp
+        public string HelpText
         {
-            get { return _showHelp; }
+            get { return _helpText; }
             set
             {
-                if (_showHelp != value)
+                if (_helpText != value)
                 {
-                    _showHelp = value;
-                    RaisePropertyChanged(nameof(ShowHelp));
+                    _helpText = value;
+                    RaisePropertyChanged(nameof(HelpText));
                 }
             }
         }
@@ -99,7 +100,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
             catch
             {
-                // ignored
+                HelpText = "Error";
             }
         }
 
@@ -109,14 +110,18 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
             if (string.IsNullOrWhiteSpace(Settings.RssFeedUrl))
             {
-                ShowHelp = true;
+                HelpText = "Enter an RSS URL";
                 return;
             }
-            ShowHelp = false;
+            HelpText = "Loading...";
 
             DownloadFeed(feed =>
             {
-                if (feed?.Items != null)
+                if (feed?.Items == null)
+                {
+                    HelpText = "No feed items found";
+                }
+                else
                 {
                     var prevFeed = FeedItems.ToList();
                     FeedItems = new ObservableCollection<FeedItem>(feed.Items
@@ -127,6 +132,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
                     if (prevFeed.Count > 0 &&
                         FeedItems.Any(y => !prevFeed.Any(x => x.Title == y.Title && x.Hyperlink == y.Hyperlink)))
                         NewHeadlineFound();
+                    HelpText = "";
                 }
             });
         }

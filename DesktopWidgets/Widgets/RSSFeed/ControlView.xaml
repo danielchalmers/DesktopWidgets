@@ -10,15 +10,16 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <classes:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter" />
         <classes:DateTimeOffsetFormatToStringConverter x:Key="DateTimeOffsetFormatToStringConverter" />
+        <classes:StringNotEmptyToVisibilityConverter x:Key="StringNotEmptyToVisibilityConverter" />
+        <classes:StringEmptyToVisibilityConverter x:Key="StringEmptyToVisibilityConverter" />
         <classes:RSSFeedItemsConverter x:Key="RssFeedItemsConverter" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock Text="Enter an RSS URL" TextAlignment="Center"
-                   Visibility="{Binding ShowHelp, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock Text="{Binding HelpText}" TextAlignment="Center"
+                   Visibility="{Binding HelpText, Converter={StaticResource StringNotEmptyToVisibilityConverter}}" />
         <ItemsControl
-            Visibility="{Binding ShowHelp, Converter={StaticResource BoolToCollapsedVisibilityConverter}}">
+            Visibility="{Binding HelpText, Converter={StaticResource StringEmptyToVisibilityConverter}}">
             <ItemsControl.ItemsSource>
                 <MultiBinding Converter="{StaticResource RssFeedItemsConverter}">
                     <Binding Path="FeedItems" />
