@@ -119,32 +119,13 @@ namespace DesktopWidgets.Widgets.RSSFeed
                 if (feed?.Items != null)
                 {
                     var prevFeed = FeedItems.ToList();
-                    FeedItems.Clear();
-                    var newHeadlineFound = false;
-                    foreach (
-                        var newItem in
-                            feed.Items.Where(
-                                x =>
-                                    (string.IsNullOrWhiteSpace(Settings.CategoryFilter) ||
-                                     Settings.CategoryFilter.Split(',').Any(y => x.Categories.Any(z => z.Name == y))) &&
-                                    (string.IsNullOrWhiteSpace(Settings.RssFeedTitleWhitelist) ||
-                                     Settings.RssFeedTitleWhitelist.Split(',').Any(y => x.Title.Text.Contains(y))) &&
-                                    (string.IsNullOrWhiteSpace(Settings.RssFeedTitleBlacklist) ||
-                                     Settings.RssFeedTitleBlacklist.Split(',').All(y => !x.Title.Text.Contains(y))))
-                                .Select(
-                                    item =>
-                                        new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
-                                            (item.PublishDate.DateTime + Settings.PublishDateTimeOffset).ToString(
-                                                Settings.PublishDateFormat)))
-                        )
-                    {
-                        FeedItems.Add(newItem);
-                        if (!prevFeed.Any(x => x.Title == newItem.Title && x.Hyperlink == newItem.Hyperlink))
-                            newHeadlineFound = true;
-                        if (FeedItems.Count >= Settings.MaxHeadlines && Settings.MaxHeadlines > 0)
-                            break;
-                    }
-                    if (prevFeed.Count > 0 && newHeadlineFound)
+                    FeedItems = new ObservableCollection<FeedItem>(feed.Items
+                        .Select(
+                            item =>
+                                new FeedItem(item.Title.Text, item.Links.FirstOrDefault()?.Uri?.AbsoluteUri,
+                                    item.PublishDate.LocalDateTime, item.Categories)));
+                    if (prevFeed.Count > 0 &&
+                        FeedItems.Any(y => !prevFeed.Any(x => x.Title == y.Title && x.Hyperlink == y.Hyperlink)))
                         NewHeadlineFound();
                 }
             });

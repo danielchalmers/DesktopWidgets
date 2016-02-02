@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase.Settings;
+using DesktopWidgets.Widgets.RSSFeed;
 using DesktopWidgets.Widgets.Sidebar;
 using Settings = DesktopWidgets.Widgets.CountdownClock.Settings;
+using ViewModel = DesktopWidgets.Widgets.Sidebar.ViewModel;
 
 namespace DesktopWidgets.Classes
 {
@@ -672,6 +675,52 @@ namespace DesktopWidgets.Classes
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DateTimeOffsetFormatToStringConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value, true))
+                return DependencyProperty.UnsetValue;
+            if (value.Length != 3)
+                return DependencyProperty.UnsetValue;
+            return ((DateTime) value[0] + (TimeSpan) value[2]).ToString((string) value[1]);
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RSSFeedItemsConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value, true))
+                return DependencyProperty.UnsetValue;
+            if (value.Length != 5)
+                return DependencyProperty.UnsetValue;
+            var items = (ObservableCollection<FeedItem>) value[0];
+            var max = (int) value[1];
+            var titleWhitelist = ((string) value[2])?.Split(',');
+            var titleBlacklist = ((string) value[3])?.Split(',');
+            var categoryWhitelist = ((string) value[4])?.Split(',');
+
+            var newitems = items.Where(x => (categoryWhitelist == null ||
+                                             categoryWhitelist.Any(y => x.Categories.Any(z => z.Name == y))) &&
+                                            (titleWhitelist == null ||
+                                             titleWhitelist.Any(y => x.Title.Contains(y))) &&
+                                            (titleBlacklist == null ||
+                                             titleBlacklist.All(y => !x.Title.Contains(y))));
+            return newitems;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
