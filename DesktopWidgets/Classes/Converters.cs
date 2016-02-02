@@ -717,7 +717,7 @@ namespace DesktopWidgets.Classes
                                              titleWhitelist.Any(y => x.Title.Contains(y))) &&
                                             (titleBlacklist == null ||
                                              titleBlacklist.All(y => !x.Title.Contains(y))));
-            return newitems;
+            return max < 0 ? newitems : newitems.Take(max);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
