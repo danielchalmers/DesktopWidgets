@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using DesktopWidgets.WidgetBase.Interfaces;
@@ -23,12 +24,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public string WatchFolder { get; set; } = "";
 
         [Category("General")]
-        [DisplayName("Include Filter")]
-        public string IncludeFilter { get; set; } = "*.*";
+        [DisplayName("File Extension Whitelist")]
+        public List<string> FileExtensionWhitelist { get; set; } = new List<string>();
 
         [Category("General")]
-        [DisplayName("Exclude Filter")]
-        public string ExcludeFilter { get; set; } = "";
+        [DisplayName("File Extension Blacklist")]
+        public List<string> FileExtensionBlacklist { get; set; } = new List<string>();
 
         [Category("Style")]
         [DisplayName("Show File Name")]

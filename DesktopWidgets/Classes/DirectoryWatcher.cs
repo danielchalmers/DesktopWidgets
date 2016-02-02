@@ -14,9 +14,6 @@ namespace DesktopWidgets.Classes
         private readonly Action<FileInfo, DirectoryChange> _newFileAction;
         private readonly DirectoryWatcherSettings _settings;
         public readonly Dictionary<string, List<FileInfo>> KnownFilePaths;
-        private IEnumerable<string> _excludeFilter;
-
-        private IEnumerable<string> _includeFilter;
         private bool _isScanning;
 
         public DirectoryWatcher(DirectoryWatcherSettings settings,
@@ -27,18 +24,6 @@ namespace DesktopWidgets.Classes
             KnownFilePaths = new Dictionary<string, List<FileInfo>>();
             _dirWatcherTimer = new DispatcherTimer {Interval = _settings.CheckInterval};
             _dirWatcherTimer.Tick += (sender, args) => CheckDirectoryForNewFilesAsync();
-
-            SetFilters(_settings.IncludeFilter, _settings.ExcludeFilter);
-        }
-
-        public void SetFilters(string includeFilter, string excludeFilter)
-        {
-            _includeFilter = !string.IsNullOrWhiteSpace(includeFilter)
-                ? _settings.IncludeFilter.Split('|')
-                : null;
-            _excludeFilter = !string.IsNullOrWhiteSpace(excludeFilter)
-                ? _settings.ExcludeFilter.Split('|')
-                : null;
         }
 
         public void CheckDirectoryForNewFilesAsync(bool promptAction = true)
@@ -66,11 +51,13 @@ namespace DesktopWidgets.Classes
                         break;
                     if (file.Length > _settings.MaxSize && _settings.MaxSize > 0)
                         continue;
-                    if (_settings.IncludeFilter != "*.*" && _includeFilter != null &&
-                        !_includeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
+                    if (_settings.FileExtensionWhitelist != null && _settings.FileExtensionWhitelist.Count > 0 &&
+                        !_settings.FileExtensionWhitelist.Any(
+                            x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
-                    if (_excludeFilter != null &&
-                        _excludeFilter.Any(x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
+                    if (_settings.FileExtensionBlacklist != null && _settings.FileExtensionBlacklist.Count > 0 &&
+                        _settings.FileExtensionBlacklist.Any(
+                            x => x.EndsWith(file.Extension, StringComparison.OrdinalIgnoreCase)))
                         continue;
                     if (promptAction)
                     {

@@ -39,8 +39,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                     new DirectoryWatcherSettings
                     {
                         WatchFolder = Settings.WatchFolder,
-                        IncludeFilter = Settings.IncludeFilter,
-                        ExcludeFilter = Settings.ExcludeFilter,
+                        FileExtensionWhitelist = Settings.FileExtensionWhitelist,
+                        FileExtensionBlacklist = Settings.FileExtensionBlacklist,
                         Recursive = Settings.Recursive,
                         CheckInterval = TimeSpan.FromMilliseconds(Settings.FolderCheckIntervalMS)
                     }, AddToFileQueue);
