@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
@@ -707,15 +708,15 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             var items = (ObservableCollection<FeedItem>) value[0];
             var max = (int) value[1];
-            var titleWhitelist = ((string) value[2])?.Split(',');
-            var titleBlacklist = ((string) value[3])?.Split(',');
-            var categoryWhitelist = ((string) value[4])?.Split(',');
+            var titleWhitelist = (List<string>) value[2];
+            var titleBlacklist = (List<string>) value[3];
+            var categoryWhitelist = (List<string>) value[4];
 
-            var newitems = items.Where(x => (categoryWhitelist == null ||
+            var newitems = items.Where(x => (categoryWhitelist == null || categoryWhitelist.Count == 0 ||
                                              categoryWhitelist.Any(y => x.Categories.Any(z => z.Name == y))) &&
-                                            (titleWhitelist == null ||
+                                            (titleWhitelist == null || titleWhitelist.Count == 0 ||
                                              titleWhitelist.Any(y => x.Title.Contains(y))) &&
-                                            (titleBlacklist == null ||
+                                            (titleBlacklist == null || titleBlacklist.Count == 0 ||
                                              titleBlacklist.All(y => !x.Title.Contains(y))));
             return max < 0 ? newitems : newitems.Take(max);
         }

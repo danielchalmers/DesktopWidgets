@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using DesktopWidgets.WidgetBase.Interfaces;
 using DesktopWidgets.WidgetBase.Settings;
@@ -19,13 +20,17 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("URL")]
         public string RssFeedUrl { get; set; }
 
-        [Category("Feed")]
+        [Category("Feed (Filter)")]
         [DisplayName("Title Whitelist")]
-        public string RssFeedTitleWhitelist { get; set; }
+        public List<string> TitleWhitelist { get; set; } = new List<string>();
 
-        [Category("Feed")]
+        [Category("Feed (Filter)")]
         [DisplayName("Title Blacklist")]
-        public string RssFeedTitleBlacklist { get; set; }
+        public List<string> TitleBlacklist { get; set; } = new List<string>();
+
+        [Category("Feed (Filter)")]
+        [DisplayName("Category Whitelist")]
+        public List<string> CategoryWhitelist { get; set; } = new List<string>();
 
         [Category("Behavior")]
         [DisplayName("New Headline Sound Path")]
@@ -46,10 +51,6 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [Category("Style")]
         [DisplayName("Publish Date Format")]
         public string PublishDateFormat { get; set; } = "";
-
-        [Category("Feed")]
-        [DisplayName("Category Filter")]
-        public string CategoryFilter { get; set; }
 
         [Category("Style")]
         [DisplayName("Publish Date Time Offset")]

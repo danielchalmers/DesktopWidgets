@@ -23,9 +23,9 @@
                 <MultiBinding Converter="{StaticResource RssFeedItemsConverter}">
                     <Binding Path="FeedItems" />
                     <Binding Path="Settings.MaxHeadlines" />
-                    <Binding Path="Settings.RssFeedTitleWhitelist" />
-                    <Binding Path="Settings.RssFeedTitleBlacklist" />
-                    <Binding Path="Settings.CategoryFilter" />
+                    <Binding Path="Settings.TitleWhitelist" />
+                    <Binding Path="Settings.TitleBlacklist" />
+                    <Binding Path="Settings.CategoryWhitelist" />
                 </MultiBinding>
             </ItemsControl.ItemsSource>
             <ItemsControl.ItemTemplate>
