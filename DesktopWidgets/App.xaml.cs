@@ -31,6 +31,7 @@ namespace DesktopWidgets
         public static SaveTimer SaveTimer;
         public static TaskScheduler UpdateScheduler;
         public static List<string> Arguments;
+        public static bool IsWorkstationLocked;
 
         public App()
         {
@@ -56,9 +57,23 @@ namespace DesktopWidgets
             TrayIcon = (TaskbarIcon) Resources["TrayIcon"];
 
             SystemEvents.SessionEnding += SystemEvents_OnSessionEnding;
+            SystemEvents.SessionSwitch += SystemEventsOnSessionSwitch;
             SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
 
             UpdateHelper.HandleUpdate();
+        }
+
+        private void SystemEventsOnSessionSwitch(object sender, SessionSwitchEventArgs e)
+        {
+            switch (e.Reason)
+            {
+                case SessionSwitchReason.SessionLock:
+                    IsWorkstationLocked = true;
+                    break;
+                case SessionSwitchReason.SessionUnlock:
+                    IsWorkstationLocked = false;
+                    break;
+            }
         }
 
         private void SystemEvents_OnSessionEnding(object sender, SessionEndingEventArgs e)

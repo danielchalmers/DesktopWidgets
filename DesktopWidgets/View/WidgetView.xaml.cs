@@ -170,7 +170,7 @@ namespace DesktopWidgets.View
         public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
             bool hideOnFinish = true, bool executeFinishAction = true)
         {
-            if (FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.ScreenBounds))
+            if (App.IsWorkstationLocked || FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.ScreenBounds))
             {
                 _mouseChecker.QueueIntro = true;
                 return;
