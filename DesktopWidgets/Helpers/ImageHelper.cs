@@ -4,7 +4,7 @@ namespace DesktopWidgets.Helpers
 {
     public static class ImageHelper
     {
-        private static readonly List<string> SupportedExtensions = new List<string>
+        public static readonly List<string> SupportedExtensions = new List<string>
         {
             ".bmp",
             ".gif",

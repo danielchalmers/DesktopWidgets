@@ -17,10 +17,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         public string RootPath { get; set; }
 
         [Category("General")]
-        [DisplayName("Allowed File Extensions")]
-        public string FileFilterExtension { get; set; } = ".jpg|.jpeg|.png|.bmp|.gif|.ico|.tiff|.wmp";
-
-        [Category("General")]
         [DisplayName("Maximum File Size (bytes)")]
         public double FileFilterSize { get; set; } = 1024000;
 

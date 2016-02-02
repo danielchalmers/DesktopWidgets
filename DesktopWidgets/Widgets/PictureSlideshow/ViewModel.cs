@@ -40,7 +40,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             _directoryWatcher = new DirectoryWatcher(new DirectoryWatcherSettings
             {
                 WatchFolder = Settings.RootPath,
-                IncludeFilter = Settings.FileFilterExtension,
+                FileExtensionWhitelist = ImageHelper.SupportedExtensions,
                 MaxSize = Settings.FileFilterSize,
                 Recursive = Settings.Recursive
             });
