@@ -196,13 +196,6 @@ namespace DesktopWidgets.Classes
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
-            var showIntro = false;
-            if (QueueIntro)
-            {
-                showIntro = true;
-                QueueIntro = false;
-            }
-
             if (App.IsMuted)
             {
                 Hide(checkHideStatus: false, checkIdleStatus: false);
@@ -215,6 +208,13 @@ namespace DesktopWidgets.Classes
                 _hideTimer.Stop();
                 Hide(false, true);
                 return;
+            }
+
+            var showIntro = false;
+            if (QueueIntro && !App.IsWorkstationLocked)
+            {
+                showIntro = true;
+                QueueIntro = false;
             }
 
             if (_settings.OpenMode == OpenMode.AlwaysOpen || KeepOpenForIntro)
