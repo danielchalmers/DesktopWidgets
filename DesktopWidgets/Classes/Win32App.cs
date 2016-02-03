@@ -19,7 +19,7 @@ namespace DesktopWidgets.Classes
             Hwnd = value;
         }
 
-        private IntPtr Hwnd { get; }
+        public IntPtr Hwnd { get; }
 
         public string GetTitle()
         {

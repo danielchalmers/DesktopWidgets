@@ -203,7 +203,8 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (!_settings.FullscreenActivation && FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.ScreenBounds))
+            if (!_settings.FullscreenActivation &&
+                FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.ScreenBounds, _view.ThisApp))
             {
                 _showTimer.Stop();
                 _hideTimer.Stop();

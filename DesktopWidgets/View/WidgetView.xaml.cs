@@ -71,6 +71,8 @@ namespace DesktopWidgets.View
 
         public bool IsClosed { get; set; }
 
+        public Win32App ThisApp { get; set; }
+
         private void SetupWidgetControl()
         {
             UserControl.Style = (Style) Resources["UserControlStyle"];
@@ -142,8 +144,10 @@ namespace DesktopWidgets.View
 
             widgetSrc?.AddHook(WndProc);
 
+            ThisApp = new Win32App(hwnd);
+
             if (Settings.Unclickable)
-                new Win32App(hwnd).SetWindowExTransparent();
+                ThisApp.SetWindowExTransparent();
 
             UpdateUi(false);
 
