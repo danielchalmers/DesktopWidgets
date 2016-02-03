@@ -165,6 +165,7 @@
     <Compile Include="Classes\SaveTimer.cs" />
     <Compile Include="Classes\SizeObserver.cs" />
     <Compile Include="Classes\TaskScheduler.cs" />
+    <Compile Include="WidgetBase\IntroData.cs" />
     <Compile Include="WidgetBase\Settings\WidgetClockSettingsBase.cs" />
     <Compile Include="WidgetBase\WidgetFactory.cs" />
     <Compile Include="WidgetBase\WidgetID.cs" />

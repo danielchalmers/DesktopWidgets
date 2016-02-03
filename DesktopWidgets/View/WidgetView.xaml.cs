@@ -49,7 +49,7 @@ namespace DesktopWidgets.View
             _mouseChecker = new MouseChecker(this, Settings);
 
             if (!systemStartup && Settings.ShowIntroOnLaunch)
-                _mouseChecker.QueueIntro = true;
+                _mouseChecker.QueueIntro = new IntroData();
 
             DataContext = ViewModel;
 
@@ -167,15 +167,16 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide(checkIdleStatus: checkIdleStatus);
         }
 
-        public void ShowIntro(int duration = -1, bool reversable = false, bool activate = false,
-            bool hideOnFinish = true, bool executeFinishAction = true)
+        public void ShowIntro(IntroData introData = null)
         {
+            if (introData == null)
+                introData = new IntroData();
             if (App.IsWorkstationLocked || FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.ScreenBounds))
             {
-                _mouseChecker.QueueIntro = true;
+                _mouseChecker.QueueIntro = introData;
                 return;
             }
-            _hideIntroOnFinish = hideOnFinish;
+            _hideIntroOnFinish = introData.HideOnFinish;
             if (_introTimer == null)
             {
                 _introTimer = new DispatcherTimer();
@@ -184,23 +185,24 @@ namespace DesktopWidgets.View
                     _introTimer.Stop();
                     if (_hideIntroOnFinish)
                         HideIntro();
-                    if (executeFinishAction)
+                    if (introData.ExecuteFinishAction)
                         ViewModel.OnIntroEnd();
                 };
             }
 
             _introTimer.Stop();
-            _introTimer.Interval = TimeSpan.FromMilliseconds(duration == -1 ? Settings.IntroDuration : duration);
-            if (_mouseChecker.KeepOpenForIntro && reversable)
+            _introTimer.Interval =
+                TimeSpan.FromMilliseconds(introData.Duration == -1 ? Settings.IntroDuration : introData.Duration);
+            if (_mouseChecker.KeepOpenForIntro && introData.Reversable)
             {
                 HideIntro(false);
             }
-            else if (duration != 0)
+            else if (introData.Duration != 0)
             {
                 _mouseChecker.KeepOpenForIntro = true;
                 _introTimer.Start();
                 ViewModel.OnIntro();
-                _mouseChecker.Show(activate: activate);
+                _mouseChecker.Show(activate: introData.Activate);
             }
         }
 

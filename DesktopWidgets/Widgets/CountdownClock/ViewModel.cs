@@ -50,7 +50,8 @@ namespace DesktopWidgets.Widgets.CountdownClock
             if (!App.IsMuted)
                 MediaPlayerStore.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
             if (Settings.OpenOnEvent)
-                View?.ShowIntro(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds);
+                View?.ShowIntro(
+                    new IntroData(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds));
         }
     }
 }

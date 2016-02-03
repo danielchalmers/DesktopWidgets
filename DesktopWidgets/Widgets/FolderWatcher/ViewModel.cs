@@ -135,8 +135,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             if (Settings.OpenOnEvent)
             {
-                View?.ShowIntro((int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                    false, false, false, !Settings.OpenOnEventStay);
+                View?.ShowIntro(new IntroData((int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                    false, false, false, !Settings.OpenOnEventStay));
             }
         }
 

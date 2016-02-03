@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.View;
+using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
@@ -26,7 +27,7 @@ namespace DesktopWidgets.Classes
         public bool KeepOpenForIntro;
 
         public bool KeepOpenUntilIdle;
-        public bool QueueIntro;
+        public IntroData QueueIntro;
 
         public MouseChecker(WidgetView view, WidgetSettingsBase settings)
         {
@@ -211,10 +212,10 @@ namespace DesktopWidgets.Classes
             }
 
             var showIntro = false;
-            if (QueueIntro && !App.IsWorkstationLocked)
+            if (QueueIntro != null && !App.IsWorkstationLocked)
             {
                 showIntro = true;
-                QueueIntro = false;
+                QueueIntro = null;
             }
 
             if (_settings.OpenMode == OpenMode.AlwaysOpen || KeepOpenForIntro)
@@ -244,7 +245,7 @@ namespace DesktopWidgets.Classes
 
             if (showIntro)
             {
-                _view.ShowIntro();
+                _view.ShowIntro(QueueIntro);
                 return;
             }
 
