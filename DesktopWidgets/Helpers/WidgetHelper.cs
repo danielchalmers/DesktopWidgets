@@ -171,13 +171,25 @@ namespace DesktopWidgets.Helpers
             return newWidget?.Identifier;
         }
 
-        public static void Import(object widgetData)
+        public static void Import(object widgetData, bool msg = true)
         {
-            var newWidget = SettingsHelper.CloneObject(widgetData) as WidgetSettingsBase;
-            if (newWidget == null)
-                return;
-            newWidget.Identifier.GenerateNewGuid();
-            AddNewWidget(newWidget);
+            try
+            {
+                var newWidget = SettingsHelper.CloneObject(widgetData) as WidgetSettingsBase;
+                if (newWidget == null)
+                {
+                    if (msg)
+                        Popup.Show("Import failed. Data may be corrupt.", image: MessageBoxImage.Error);
+                    return;
+                }
+                newWidget.Identifier.GenerateNewGuid();
+                AddNewWidget(newWidget);
+            }
+            catch
+            {
+                if (msg)
+                    Popup.Show("Import failed. Data may be corrupt.", image: MessageBoxImage.Error);
+            }
         }
 
         public static void ReloadWidgets()

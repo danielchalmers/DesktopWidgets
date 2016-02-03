@@ -1,5 +1,4 @@
 ﻿using System.Windows.Input;
-using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
@@ -109,15 +108,8 @@ namespace DesktopWidgets.WindowViewModels
             dialog.ShowDialog();
             if (dialog.Cancelled)
                 return;
-            try
-            {
-                WidgetHelper.Import(JsonConvert.DeserializeObject(dialog.InputData,
-                    SettingsHelper.JsonSerializerSettings));
-            }
-            catch
-            {
-                Popup.Show("Import failed. Data may be corrupt.");
-            }
+            WidgetHelper.Import(JsonConvert.DeserializeObject(dialog.InputData,
+                SettingsHelper.JsonSerializerSettings));
         }
     }
 }
