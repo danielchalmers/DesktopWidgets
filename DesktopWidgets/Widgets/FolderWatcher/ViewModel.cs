@@ -162,11 +162,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool HandleFileMedia(bool play)
         {
-            if (!Settings.PlayMedia)
-                return false;
-            if (play)
-                MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
-            return MediaPlayerHelper.IsSupported(Path.GetExtension(CurrentFilePath));
+            if (Settings.ShowImages && MediaPlayerHelper.IsSupported(Path.GetExtension(CurrentFilePath)))
+            {
+                if (play)
+                    MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
+                return true;
+            }
+            return false;
         }
 
         public override void OnIntroEnd()
