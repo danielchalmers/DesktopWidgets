@@ -306,8 +306,8 @@ namespace DesktopWidgets.View
 
         public void ResetOnTop()
         {
-            Topmost = true;
             Topmost = false;
+            Topmost = true;
         }
 
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
