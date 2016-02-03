@@ -152,11 +152,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool HandleFileContent()
         {
-            var contentFilter = !string.IsNullOrWhiteSpace(Settings.ShowContentFilter)
-                ? Settings.ShowContentFilter.Split('|')
-                : null;
-            return contentFilter != null &&
-                   contentFilter.Any(
+            return Settings.ShowContentWhitelist != null && Settings.ShowContentWhitelist.Count > 0 &&
+                   Settings.ShowContentWhitelist.Any(
                        x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
         }
 

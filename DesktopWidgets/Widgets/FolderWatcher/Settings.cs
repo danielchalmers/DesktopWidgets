@@ -71,8 +71,18 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool ShowImages { get; set; } = true;
 
         [Category("General")]
-        [DisplayName("Show Content Filter")]
-        public string ShowContentFilter { get; set; } = ".txt|.cfg|.json|.xml|.log|.ini|.inf|.properties";
+        [DisplayName("Show Content Extension Whitelist")]
+        public List<string> ShowContentWhitelist { get; set; } = new List<string>
+        {
+            ".txt",
+            ".cfg",
+            ".json",
+            ".xml",
+            ".log",
+            ".ini",
+            ".inf",
+            ".properties"
+        };
 
         [Category("Style")]
         [DisplayName("Show Content Font Size")]
