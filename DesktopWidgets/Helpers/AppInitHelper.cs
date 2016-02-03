@@ -3,7 +3,6 @@ using System.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
-using Microsoft.Win32;
 
 namespace DesktopWidgets.Helpers
 {
@@ -22,7 +21,6 @@ namespace DesktopWidgets.Helpers
             StartScheduledTasks();
 
             App.SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
-            SystemEvents.SessionEnding += (sender, args) => SettingsHelper.SaveSettings();
 
             App.SuccessfullyLoaded = true;
 
