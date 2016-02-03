@@ -178,7 +178,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public override void OnDismiss()
         {
-            base.OnIntroEnd();
+            base.OnDismiss();
             _isShowing = false;
             HandleDirectoryChange();
         }
