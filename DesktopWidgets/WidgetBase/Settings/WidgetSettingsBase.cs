@@ -93,7 +93,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Animation Duration (ms)")]
         public int AnimationTime { get; set; } = 250;
 
-        [Category("Dock")]
+        [Category("General")]
         [DisplayName("Screen Bounds")]
         public Rect ScreenBounds { get; set; }
 
@@ -315,7 +315,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Toggle Intro On Hotkey")]
         public bool ToggleIntroOnHotkey { get; set; } = true;
 
-        [Category("General")]
+        [Category("Behavior")]
         [DisplayName("Auto Detect Screen Bounds")]
         public bool AutoDetectScreenBounds { get; set; } = true;
 
