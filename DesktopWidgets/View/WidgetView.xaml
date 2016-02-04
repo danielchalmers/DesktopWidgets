@@ -62,7 +62,7 @@
 
         <Style x:Key="WidgetWindowStyle" TargetType="{x:Type Window}">
             <Setter Property="WindowStyle" Value="None" />
-            <Setter Property="ResizeMode" Value="{Binding Settings.ResizeMode}" />
+            <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="ShowInTaskbar" Value="False" />
