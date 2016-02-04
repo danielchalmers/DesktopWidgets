@@ -95,7 +95,7 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("General")]
         [DisplayName("Screen Bounds")]
-        public Rect ScreenBounds { get; set; }
+        public Rect ScreenBounds { get; set; } = Rect.Empty;
 
         [Category("Style (Text)")]
         [DisplayName("Font Size")]

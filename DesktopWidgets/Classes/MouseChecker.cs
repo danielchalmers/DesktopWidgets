@@ -79,8 +79,9 @@ namespace DesktopWidgets.Classes
 
         private bool IsMouseInWindowBounds() => _view.GetBounds().Contains(GetMouseLocation());
 
-        private bool IsMouseInCorners() => _settings.ScreenBounds.GetCorners(_settings.IgnoreScreenCornerSize)
-            .Any(x => x.Contains(GetMouseLocation()));
+        private bool IsMouseInCorners()
+            => _view.ViewModel.GetScreenBounds().GetCorners(_settings.IgnoreScreenCornerSize)
+                .Any(x => x.Contains(GetMouseLocation()));
 
         private IEnumerable<Rect> GetValidBounds()
         {
@@ -102,15 +103,17 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Left ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            yield return new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
-                                _settings.MouseBounds,
-                                _settings.ScreenBounds.Height);
+                            yield return
+                                new Rect(_view.ViewModel.GetScreenBounds().Left, _view.ViewModel.GetScreenBounds().Top,
+                                    _settings.MouseBounds,
+                                    _view.ViewModel.GetScreenBounds().Height);
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Right ||
                             _settings.HorizontalAlignment == HorizontalAlignment.Stretch)
                         {
-                            yield return new Rect(_settings.ScreenBounds.Right - _settings.MouseBounds,
-                                _settings.ScreenBounds.Top, _settings.MouseBounds, _settings.ScreenBounds.Height);
+                            yield return new Rect(_view.ViewModel.GetScreenBounds().Right - _settings.MouseBounds,
+                                _view.ViewModel.GetScreenBounds().Top, _settings.MouseBounds,
+                                _view.ViewModel.GetScreenBounds().Height);
                         }
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
                         {
@@ -124,15 +127,17 @@ namespace DesktopWidgets.Classes
                         if (_settings.VerticalAlignment == VerticalAlignment.Top ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            yield return new Rect(_settings.ScreenBounds.Left, _settings.ScreenBounds.Top,
-                                _settings.ScreenBounds.Width,
-                                _settings.MouseBounds);
+                            yield return
+                                new Rect(_view.ViewModel.GetScreenBounds().Left, _view.ViewModel.GetScreenBounds().Top,
+                                    _view.ViewModel.GetScreenBounds().Width,
+                                    _settings.MouseBounds);
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Bottom ||
                             _settings.VerticalAlignment == VerticalAlignment.Stretch)
                         {
-                            yield return new Rect(_settings.ScreenBounds.Left,
-                                _settings.ScreenBounds.Bottom - _settings.MouseBounds, _settings.ScreenBounds.Width,
+                            yield return new Rect(_view.ViewModel.GetScreenBounds().Left,
+                                _view.ViewModel.GetScreenBounds().Bottom - _settings.MouseBounds,
+                                _view.ViewModel.GetScreenBounds().Width,
                                 _settings.MouseBounds);
                         }
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
@@ -204,7 +209,7 @@ namespace DesktopWidgets.Classes
             }
 
             if (!_settings.FullscreenActivation &&
-                FullScreenHelper.DoesMonitorHaveFullscreenApp(_settings.ScreenBounds, _view.ThisApp))
+                FullScreenHelper.DoesMonitorHaveFullscreenApp(_view.ViewModel.GetScreenBounds(), _view.ThisApp))
             {
                 _showTimer.Stop();
                 _hideTimer.Stop();

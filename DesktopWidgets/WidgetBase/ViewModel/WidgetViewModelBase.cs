@@ -130,11 +130,11 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         }
 
         public double MaxWidth => double.IsNaN(_settings.MaxWidth) && _settings.MaxSizeUseScreen
-            ? _settings.ScreenBounds.Width
+            ? GetScreenBounds().Width
             : _settings.MaxWidth;
 
         public double MaxHeight => double.IsNaN(_settings.MaxHeight) && _settings.MaxSizeUseScreen
-            ? _settings.ScreenBounds.Height
+            ? GetScreenBounds().Height
             : _settings.MaxHeight;
 
         public double ActualWidth
@@ -200,7 +200,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 return _settings.Left;
             }
-            var monitorRect = _settings.ScreenBounds;
+            var monitorRect = GetScreenBounds();
 
             switch (_settings.HorizontalAlignment)
             {
@@ -221,7 +221,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 return _settings.Top;
             }
-            var monitorRect = _settings.ScreenBounds;
+            var monitorRect = GetScreenBounds();
 
             switch (_settings.VerticalAlignment)
             {
@@ -275,6 +275,19 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             new ManageWidgets().Show();
         }
 
+        public void SetScreenBounds()
+        {
+            if (!_settings.AutoDetectScreenBounds)
+                return;
+            var screen = ScreenHelper.GetScreen(View);
+            _settings.ScreenBounds = screen.Primary ? Rect.Empty : screen.ToRect(_settings.IgnoreAppBars);
+        }
+
+        public Rect GetScreenBounds()
+        {
+            return _settings.ScreenBounds == Rect.Empty ? SystemParameters.WorkArea : _settings.ScreenBounds;
+        }
+
         private void WidgetDockHorizontalExecute(HorizontalAlignment horizontalAlignment)
         {
             var previousAlignment = _settings.HorizontalAlignment;
@@ -283,6 +296,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             _settings.IsDocked = true;
             if (View != null)
             {
+                SetScreenBounds();
                 View.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
                 View.ShowIntro();
             }
@@ -296,6 +310,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             _settings.IsDocked = true;
             if (View != null)
             {
+                SetScreenBounds();
                 View.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
                 View.ShowIntro();
             }

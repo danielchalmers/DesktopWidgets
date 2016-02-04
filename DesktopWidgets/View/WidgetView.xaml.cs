@@ -175,7 +175,7 @@ namespace DesktopWidgets.View
         {
             if (introData == null)
                 introData = new IntroData();
-            if (App.IsWorkstationLocked || FullScreenHelper.DoesMonitorHaveFullscreenApp(Settings.ScreenBounds))
+            if (App.IsWorkstationLocked || FullScreenHelper.DoesMonitorHaveFullscreenApp(ViewModel.GetScreenBounds()))
             {
                 _mouseChecker.QueueIntro = introData;
                 return;
@@ -272,14 +272,6 @@ namespace DesktopWidgets.View
 
             ViewModel.OnTop = Settings.OnTop;
 
-            if (Settings.AutoDetectScreenBounds)
-            {
-                var oldScreen = Settings.ScreenBounds;
-                var newScreen = ScreenHelper.GetScreen(this).ToRect(Settings.IgnoreAppBars);
-                Settings.ScreenBounds = newScreen;
-                if (!oldScreen.Equals(newScreen))
-                    UpdatePositionAndLocation();
-            }
             UpdatePositionAndLocation();
 
             if (updateNonUi)
