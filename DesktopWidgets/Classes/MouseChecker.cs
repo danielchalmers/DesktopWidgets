@@ -217,11 +217,10 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            var showIntro = false;
             if (QueueIntro != null && !App.IsWorkstationLocked)
             {
-                showIntro = true;
-                QueueIntro = null;
+                _view.ShowIntro(QueueIntro);
+                return;
             }
 
             if (_settings.OpenMode == OpenMode.AlwaysOpen || KeepOpenForIntro)
@@ -246,12 +245,6 @@ namespace DesktopWidgets.Classes
             if (_settings.OpenMode == OpenMode.Hidden)
             {
                 Hide();
-                return;
-            }
-
-            if (showIntro)
-            {
-                _view.ShowIntro(QueueIntro);
                 return;
             }
 

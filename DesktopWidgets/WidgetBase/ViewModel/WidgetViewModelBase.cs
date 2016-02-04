@@ -361,8 +361,13 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                     new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation, false,
                         _settings.ShowHotkeyIdentifier),
                     () =>
-                        View?.ShowIntro(new IntroData(_settings.ShowHotkeyDuration, _settings.ToggleIntroOnHotkey,
-                            _settings.ActivateOnShow, !_settings.StayOpenOnShowHotkey)));
+                        View?.ShowIntro(new IntroData
+                        {
+                            Duration = _settings.ShowHotkeyDuration,
+                            Reversable = _settings.ToggleIntroOnHotkey,
+                            Activate = _settings.ActivateOnShow,
+                            HideOnFinish = !_settings.StayOpenOnShowHotkey
+                        }));
             else
                 HotkeyStore.RemoveHotkey(_settings.ShowHotkeyIdentifier);
 

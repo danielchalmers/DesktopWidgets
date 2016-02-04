@@ -77,7 +77,10 @@ namespace DesktopWidgets.Widgets.RSSFeed
                 MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             if (Settings.OpenOnEvent)
                 View?.ShowIntro(
-                    new IntroData(Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds));
+                    new IntroData
+                    {
+                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds
+                    });
         }
 
         private void DownloadFeed(Action<SyndicationFeed> finishAction)

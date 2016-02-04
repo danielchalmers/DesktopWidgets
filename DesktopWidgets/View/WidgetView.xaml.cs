@@ -174,6 +174,7 @@ namespace DesktopWidgets.View
 
         public void ShowIntro(IntroData introData = null)
         {
+            _mouseChecker.QueueIntro = null;
             if (introData == null)
                 introData = new IntroData();
             if (App.IsWorkstationLocked || FullScreenHelper.DoesMonitorHaveFullscreenApp(ViewModel.GetScreenBounds()))
