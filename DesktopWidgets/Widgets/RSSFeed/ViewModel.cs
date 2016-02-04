@@ -10,7 +10,6 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.ViewModel;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -73,13 +72,13 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         private void NewHeadlineFound()
         {
-            if (!App.IsMuted)
-                MediaPlayerStore.PlaySoundAsync(Settings.EventSoundPath, Settings.EventSoundVolume);
             if (Settings.OpenOnEvent)
                 View?.ShowIntro(
                     new IntroData
                     {
-                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds
+                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                        SoundPath = Settings.EventSoundPath,
+                        SoundVolume = Settings.EventSoundVolume
                     });
         }
 

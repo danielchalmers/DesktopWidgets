@@ -1,5 +1,4 @@
 ﻿using DesktopWidgets.Helpers;
-using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.ViewModel;
 
@@ -47,13 +46,13 @@ namespace DesktopWidgets.Widgets.CountdownClock
 
         private void OnEndAction()
         {
-            if (!App.IsMuted)
-                MediaPlayerStore.PlaySoundAsync(Settings.EndSoundPath, Settings.EndSoundVolume);
             if (Settings.OpenOnEvent)
                 View?.ShowIntro(
                     new IntroData
                     {
-                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds
+                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
+                        SoundPath = Settings.EndSoundPath,
+                        SoundVolume = Settings.EndSoundVolume
                     });
         }
     }
