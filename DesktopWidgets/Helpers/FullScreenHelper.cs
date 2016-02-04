@@ -13,7 +13,7 @@ namespace DesktopWidgets.Helpers
         private static bool DoesMonitorHaveFullscreenApp(Screen screen, Win32App ignoreApp)
         {
             var foregroundApp = Win32Helper.GetForegroundApp();
-            return foregroundApp.Hwnd != ignoreApp.Hwnd && foregroundApp.IsFullScreen(screen);
+            return foregroundApp.Hwnd != ignoreApp?.Hwnd && foregroundApp.IsFullScreen(screen);
         }
 
         public static bool DoesMonitorHaveFullscreenApp(Rect bounds)
