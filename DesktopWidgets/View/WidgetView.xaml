@@ -43,8 +43,10 @@
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
         <classes:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
+        <classes:NotCollapsedVisibilityToBooleanConverter x:Key="NotCollapsedVisibilityToBooleanConverter" />
         <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
         <classes:SizePaddingConverter x:Key="SizePaddingConverter" />
+        <classes:TitlebarVisibilityConverter x:Key="TitlebarVisibilityConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
                          Opacity="{Binding Settings.BackgroundOpacity}" />
@@ -111,11 +113,17 @@
         <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">
             <Setter Property="Focusable" Value="False" />
             <Setter Property="Background" Value="{StaticResource TitlebarBackgroundBrush}" />
-            <Setter Property="Visibility"
-                    Value="{Binding Settings.ShowTitlebar, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Setter Property="CornerRadius" Value="{Binding Settings.TitlebarCornerRadius}" />
             <Setter Property="Width" Value="{Binding Settings.TitlebarWidth}" />
             <Setter Property="Height" Value="{Binding Settings.TitlebarHeight}" />
+            <Setter Property="Visibility">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource TitlebarVisibilityConverter}">
+                        <Binding Path="Settings.TitlebarVisibilityMode" />
+                        <Binding Path="IsMouseOver" RelativeSource="{RelativeSource AncestorType={x:Type Window}}" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />
@@ -252,7 +260,7 @@
                                     <Binding Path="Margin.Top" ElementName="ContainerBorder2" />
                                     <Binding Path="Margin.Bottom" ElementName="ContainerBorder2" />
                                     <Binding Path="Visibility" ElementName="Titlebar"
-                                             Converter="{StaticResource VisibilityToBooleanConverter}" />
+                                             Converter="{StaticResource NotCollapsedVisibilityToBooleanConverter}" />
                                     <Binding Path="ActualHeight" ElementName="Titlebar" />
                                 </MultiBinding>
                             </ScrollViewer.MaxHeight>

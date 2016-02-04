@@ -231,7 +231,7 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Style (Titlebar)")]
         [DisplayName("Visible")]
-        public bool ShowTitlebar { get; set; } = true;
+        public TitlebarVisibilityMode TitlebarVisibilityMode { get; set; } = TitlebarVisibilityMode.OnHover;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Reload Button Visible")]

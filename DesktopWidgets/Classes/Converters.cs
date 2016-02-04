@@ -590,6 +590,21 @@ namespace DesktopWidgets.Classes
         }
     }
 
+    public class NotCollapsedVisibilityToBooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            return (Visibility) value != Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class NonAlwaysOnOpenModeToBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -748,6 +763,34 @@ namespace DesktopWidgets.Classes
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class TitlebarVisibilityConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value, true))
+                return DependencyProperty.UnsetValue;
+            if (value.Length != 2)
+                return DependencyProperty.UnsetValue;
+            var visMode = (TitlebarVisibilityMode) value[0];
+            var isMouseOver = (bool) value[1];
+            switch (visMode)
+            {
+                case TitlebarVisibilityMode.AlwaysVisible:
+                    return Visibility.Visible;
+                case TitlebarVisibilityMode.OnHover:
+                    return isMouseOver ? Visibility.Visible : Visibility.Hidden;
+                default:
+                case TitlebarVisibilityMode.Hidden:
+                    return Visibility.Collapsed;
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

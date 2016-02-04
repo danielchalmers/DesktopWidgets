@@ -104,4 +104,11 @@
         Audio,
         Other
     }
+
+    public enum TitlebarVisibilityMode
+    {
+        AlwaysVisible,
+        OnHover,
+        Hidden
+    }
 }
