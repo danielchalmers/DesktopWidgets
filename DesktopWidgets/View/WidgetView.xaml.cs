@@ -23,8 +23,9 @@ namespace DesktopWidgets.View
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
 
-        private bool _hideIntroOnFinish;
         private DispatcherTimer _introTimer;
+
+        private IntroData _lastIntroData;
 
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl, bool systemStartup)
         {
@@ -180,16 +181,16 @@ namespace DesktopWidgets.View
                 _mouseChecker.QueueIntro = introData;
                 return;
             }
-            _hideIntroOnFinish = introData.HideOnFinish;
+            _lastIntroData = introData;
             if (_introTimer == null)
             {
                 _introTimer = new DispatcherTimer();
                 _introTimer.Tick += delegate
                 {
                     _introTimer.Stop();
-                    if (_hideIntroOnFinish)
+                    if (_lastIntroData.HideOnFinish)
                         HideIntro();
-                    if (introData.ExecuteFinishAction)
+                    if (_lastIntroData.ExecuteFinishAction)
                         ViewModel.OnIntroEnd();
                 };
             }
