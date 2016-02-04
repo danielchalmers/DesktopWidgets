@@ -16,7 +16,7 @@
                 <MultiBinding Converter="{StaticResource DateTimeToElapsedTimeTextConverter}">
                     <Binding Path="CurrentTime" />
                     <Binding Path="StartTime" />
-                    <Binding Path="Settings" />
+                    <Binding Path="Settings.DateTimeFormat" />
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>

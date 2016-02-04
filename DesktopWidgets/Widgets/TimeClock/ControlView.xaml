@@ -13,7 +13,7 @@
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource DateTimeToFormattedText}">
                     <Binding Path="CurrentTime" />
-                    <Binding Path="Settings" />
+                    <Binding Path="Settings.DateTimeFormat" />
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>

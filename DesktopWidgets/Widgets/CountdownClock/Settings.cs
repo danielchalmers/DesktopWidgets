@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using DesktopWidgets.WidgetBase.Interfaces;
 using DesktopWidgets.WidgetBase.Settings;
@@ -9,7 +10,10 @@ namespace DesktopWidgets.Widgets.CountdownClock
     {
         public Settings()
         {
-            TimeFormat = "dd:hh:mm:ss";
+            DateTimeFormat = new List<string>
+            {
+                "{dd}:{hh}:{mm}:{ss}"
+            };
         }
 
         [Category("End")]

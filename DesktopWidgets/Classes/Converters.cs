@@ -71,23 +71,15 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            try
-            {
-                var val = System.Convert.ToDateTime(value[0]);
-                var settings = value[1] as Settings;
-                if (settings == null)
-                    return DependencyProperty.UnsetValue;
-
-                var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
-                var ts = settings.EndDateTime - val;
-                return ts.TotalSeconds > 0 || settings.EndContinueCounting
-                    ? ts.ToString(format)
-                    : TimeSpan.FromSeconds(0).ToString(format);
-            }
-            catch
-            {
+            var val = System.Convert.ToDateTime(value[0]);
+            var settings = value[1] as Settings;
+            if (settings == null)
                 return DependencyProperty.UnsetValue;
-            }
+
+            var ts = settings.EndDateTime - val;
+            return ts.TotalSeconds > 0 || settings.EndContinueCounting
+                ? ts.ParseCustomFormat(settings.DateTimeFormat)
+                : TimeSpan.FromSeconds(0).ParseCustomFormat(settings.DateTimeFormat);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -102,20 +94,27 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            try
-            {
-                var val = System.Convert.ToDateTime(value[0]);
-                var settings = value[1] as Widgets.TimeClock.Settings;
-                if (settings == null)
-                    return DependencyProperty.UnsetValue;
+            var dateTime = System.Convert.ToDateTime(value[0]);
+            var format = (List<string>) value[1];
+            return dateTime.ParseCustomFormat(format);
+        }
 
-                var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
-                return val.ToString(format);
-            }
-            catch
-            {
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DateTimeToElapsedTimeTextConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            }
+            var currentTime = System.Convert.ToDateTime(value[0]);
+            var startTime = System.Convert.ToDateTime(value[1]);
+            var format = (List<string>) value[2];
+            return (startTime - currentTime).ParseCustomFormat(format);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -147,36 +146,6 @@ namespace DesktopWidgets.Classes
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class DateTimeToElapsedTimeTextConverter : IMultiValueConverter
-    {
-        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!ConverterHelper.IsValueValid(value))
-                return DependencyProperty.UnsetValue;
-            try
-            {
-                var currentTime = System.Convert.ToDateTime(value[0]);
-                var startTime = System.Convert.ToDateTime(value[1]);
-                var settings = value[2] as Widgets.StopwatchClock.Settings;
-                if (settings == null)
-                    return DependencyProperty.UnsetValue;
-
-                var format = settings.TimeFormat.Replace(":", "\\:").Replace(".", "\\.");
-                var ts = startTime - currentTime;
-                return ts.ToString(format);
-            }
-            catch
-            {
-                return DependencyProperty.UnsetValue;
-            }
-        }
-
-        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

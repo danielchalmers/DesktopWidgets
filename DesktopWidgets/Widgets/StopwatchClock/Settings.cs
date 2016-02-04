@@ -1,4 +1,5 @@
-﻿using DesktopWidgets.WidgetBase.Settings;
+﻿using System.Collections.Generic;
+using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.StopwatchClock
 {
@@ -6,7 +7,10 @@ namespace DesktopWidgets.Widgets.StopwatchClock
     {
         public Settings()
         {
-            TimeFormat = "mm:ss.fff";
+            DateTimeFormat = new List<string>
+            {
+                "{mm}:{ss}.{fff}"
+            };
             UpdateInterval = 10;
         }
     }

@@ -21,7 +21,7 @@ namespace DesktopWidgets.Widgets.TimeClock
         {
             base.LeftMouseDoubleClickExecute(e);
             if (Settings.CopyTextOnDoubleClick)
-                Clipboard.SetText(CurrentTime.ToString(Settings.TimeFormat));
+                Clipboard.SetText(CurrentTime.ParseCustomFormat(Settings.DateTimeFormat));
         }
     }
 }
