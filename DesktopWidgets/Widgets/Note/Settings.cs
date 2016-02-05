@@ -5,13 +5,15 @@ namespace DesktopWidgets.Widgets.Note
 {
     public class Settings : WidgetSettingsBase
     {
-        public Settings()
+        [DisplayName("Saved Text")]
+        public string Text { get; set; }
+
+        public override void SetDefaults()
         {
+            base.SetDefaults();
+            Text = "";
             Width = 160;
             Height = 132;
         }
-
-        [DisplayName("Saved Text")]
-        public string Text { get; set; }
     }
 }

@@ -5,8 +5,9 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 {
     public class Settings : WidgetClockSettingsBase
     {
-        public Settings()
+        public override void SetDefaults()
         {
+            base.SetDefaults();
             DateTimeFormat = new List<string> {"{mm}m {ss}s {ff}ms"};
             UpdateInterval = 10;
         }

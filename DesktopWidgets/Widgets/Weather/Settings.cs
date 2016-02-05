@@ -12,7 +12,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         [Category("General")]
         [DisplayName("Refresh Interval")]
-        public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromHours(1);
+        public TimeSpan RefreshInterval { get; set; }
 
         [Category("General")]
         [DisplayName("Zip Code")]
@@ -20,18 +20,30 @@ namespace DesktopWidgets.Widgets.Weather
 
         [Category("Style")]
         [DisplayName("Show Icon")]
-        public bool ShowIcon { get; set; } = true;
+        public bool ShowIcon { get; set; }
 
         [Category("Style")]
         [DisplayName("Show Temperature")]
-        public bool ShowTemperature { get; set; } = true;
+        public bool ShowTemperature { get; set; }
 
         [Category("Style")]
         [DisplayName("Show Temperature Range")]
-        public bool ShowTempMinMax { get; set; } = false;
+        public bool ShowTempMinMax { get; set; }
 
         [Category("Style")]
         [DisplayName("Show Description")]
-        public bool ShowDescription { get; set; } = true;
+        public bool ShowDescription { get; set; }
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+            UnitType = TemperatureUnitType.Celsius;
+            RefreshInterval = TimeSpan.FromHours(1);
+            ZipCode = 0;
+            ShowIcon = true;
+            ShowTemperature = true;
+            ShowTempMinMax = false;
+            ShowDescription = true;
+        }
     }
 }

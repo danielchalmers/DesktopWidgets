@@ -58,6 +58,13 @@ namespace DesktopWidgets.WidgetBase
 
         public static WidgetSettingsBase GetNewSettingsFromFriendlyName(string name)
         {
+            var settings = GetNewSettingsFromFriendlyNameWithoutDefaults(name);
+            settings.SetDefaults();
+            return settings;
+        }
+
+        private static WidgetSettingsBase GetNewSettingsFromFriendlyNameWithoutDefaults(string name)
+        {
             switch (name)
             {
                 case Metadata.FriendlyName:
