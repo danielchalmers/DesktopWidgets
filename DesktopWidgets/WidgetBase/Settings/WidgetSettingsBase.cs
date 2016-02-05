@@ -14,6 +14,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Internal Identifier")]
         public WidgetId Identifier { get; } = new WidgetId();
 
+        [Category("Behavior (Idle)")]
         [DisplayName("Active Time End")]
         public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
 
@@ -381,11 +382,11 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Force Hidden")]
         public bool ForceHide { get; set; }
 
-        [Category("Behavior")]
+        [Category("Behavior (Idle)")]
         [DisplayName("Idle Duration")]
         public TimeSpan IdleDuration { get; set; } = TimeSpan.FromSeconds(5);
 
-        [Category("Behavior")]
+        [Category("Behavior (Idle)")]
         [DisplayName("Detect Idle")]
         public bool DetectIdle { get; set; } = true;
 
@@ -409,7 +410,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Enable Right Frame")]
         public bool ShowRightFrame { get; set; } = true;
 
-        [Category("Behavior")]
+        [Category("Behavior (Idle)")]
         [DisplayName("Use Mouse Movement For Idle Detection")]
         public bool UseMouseMoveIdleDetection { get; set; } = false;
 
