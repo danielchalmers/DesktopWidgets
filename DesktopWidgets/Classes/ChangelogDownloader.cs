@@ -27,8 +27,11 @@ namespace DesktopWidgets.Classes
         private string _updateText;
         private Action<string> _updateTextAction;
 
-        public void GetChangelog(Action<string> updateTextAction)
+        private bool _useCache;
+
+        public void GetChangelog(Action<string> updateTextAction, bool useCache = true)
         {
+            _useCache = useCache;
             _updateTextAction = updateTextAction;
             var worker = new BackgroundWorker();
             worker.DoWork += Worker_DoWork;
@@ -62,7 +65,7 @@ namespace DesktopWidgets.Classes
         private string GetFormattedChangelog()
         {
             List<Changelog> changelogData = null;
-            if (!string.IsNullOrWhiteSpace(Settings.Default.ChangelogCache))
+            if (_useCache && !string.IsNullOrWhiteSpace(Settings.Default.ChangelogCache))
                 changelogData = JsonConvert.DeserializeObject<List<Changelog>>(Settings.Default.ChangelogCache);
             if (!(changelogData != null && changelogData.Any(x => x.Version == AssemblyInfo.Version)))
             {

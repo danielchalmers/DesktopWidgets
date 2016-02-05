@@ -62,7 +62,7 @@ namespace DesktopWidgets.Windows
             }
             DataContext = this;
 
-            new ChangelogDownloader().GetChangelog(x => { ChangelogText = x; });
+            new ChangelogDownloader().GetChangelog(x => { ChangelogText = x; }, false);
         }
 
         public bool UpdateIsRequired
