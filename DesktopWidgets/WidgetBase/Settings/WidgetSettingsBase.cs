@@ -411,7 +411,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         public bool ShowRightFrame { get; set; } = true;
 
         [Category("Behavior (Idle)")]
-        [DisplayName("Use Mouse Movement For Idle Detection")]
+        [DisplayName("Detect Mouse Movement")]
         public bool UseMouseMoveIdleDetection { get; set; } = false;
 
         [Category("Behavior")]
