@@ -68,7 +68,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         [Category("Behavior")]
         [DisplayName("Detect New Files")]
-        public bool DetectNewFiles { get; set; }
+        public bool DetectNewFiles { get; set; } = true;
 
         [Category("Style")]
         [DisplayName("Show Images")]
