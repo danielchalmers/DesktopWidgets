@@ -93,6 +93,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (change == DirectoryChange.FileChanged && !Settings.DetectModifiedFiles)
                 return;
+            if (change == DirectoryChange.NewFile && !Settings.DetectNewFiles)
+                return;
             var lastCheck = Settings.LastCheck;
             Settings.LastCheck = DateTime.Now;
             if (Settings.EnableTimeout)

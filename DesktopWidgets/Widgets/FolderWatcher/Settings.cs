@@ -60,6 +60,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Detect Modified Files")]
         public bool DetectModifiedFiles { get; set; }
 
+        [Category("Behavior")]
+        [DisplayName("Detect New Files")]
+        public bool DetectNewFiles { get; set; }
+
         [Category("Style")]
         [DisplayName("Show Images")]
         public bool ShowImages { get; set; }
@@ -119,6 +123,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             QueueFiles = true;
             Recursive = false;
             DetectModifiedFiles = true;
+            DetectNewFiles = true;
             ShowImages = true;
             ShowContentWhitelist = new List<string>
             {
