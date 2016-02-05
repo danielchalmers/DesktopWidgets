@@ -9,145 +9,145 @@ namespace DesktopWidgets.WidgetBase.Settings
     public class WidgetSettingsBase
     {
         [DisplayName("Disabled")]
-        public bool Disabled { get; set; }
+        public bool Disabled { get; set; } = false;
 
         [DisplayName("Internal Identifier")]
-        public WidgetId Identifier { get; set; }
+        public WidgetId Identifier { get; } = new WidgetId();
 
         [DisplayName("Active Time End")]
-        public DateTime ActiveTimeEnd { get; set; }
+        public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
 
         [Category("Style")]
         [DisplayName("Padding")]
-        public Thickness Padding { get; set; }
+        public Thickness Padding { get; set; } = new Thickness(3, 2, 3, 2);
 
         [Category("General")]
         [DisplayName("Name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = "Untitled";
 
         [Category("Style (Text)")]
         [DisplayName("Font Family")]
-        public FontFamily FontFamily { get; set; }
+        public FontFamily FontFamily { get; set; } = new FontFamily("Segoe UI");
 
         [Category("Style (Text)")]
         [DisplayName("Text Color")]
-        public Color TextColor { get; set; }
+        public Color TextColor { get; set; } = Colors.Black;
 
         [Category("Style (Background)")]
         [DisplayName("Color")]
-        public Color BackgroundColor { get; set; }
+        public Color BackgroundColor { get; set; } = Colors.White;
 
         [Category("Style (Border)")]
         [DisplayName("Border Color")]
-        public Color BorderColor { get; set; }
+        public Color BorderColor { get; set; } = Colors.Gray;
 
         [Category("Style (Background)")]
         [DisplayName("Opacity")]
-        public double BackgroundOpacity { get; set; }
+        public double BackgroundOpacity { get; set; } = 0.95;
 
         [Category("Style (Border)")]
         [DisplayName("Border Opacity")]
-        public double BorderOpacity { get; set; }
+        public double BorderOpacity { get; set; } = 0.5;
 
         [Category("Style (Size)")]
         [DisplayName("Width (px)")]
-        public double Width { get; set; }
+        public double Width { get; set; } = double.NaN;
 
         [Category("Style (Size)")]
         [DisplayName("Height (px)")]
-        public double Height { get; set; }
+        public double Height { get; set; } = double.NaN;
 
         [Category("Style (Size)")]
         [DisplayName("Minimum Width (px)")]
-        public double MinWidth { get; set; }
+        public double MinWidth { get; set; } = double.NaN;
 
         [Category("Style (Size)")]
         [DisplayName("Minimum Height (px)")]
-        public double MinHeight { get; set; }
+        public double MinHeight { get; set; } = double.NaN;
 
         [Category("Style (Size)")]
         [DisplayName("Maximum Width (px)")]
-        public double MaxWidth { get; set; }
+        public double MaxWidth { get; set; } = double.NaN;
 
         [Category("Style (Size)")]
         [DisplayName("Maximum Height (px)")]
-        public double MaxHeight { get; set; }
+        public double MaxHeight { get; set; } = double.NaN;
 
         [Category("Style (Position)")]
         [DisplayName("Left Position (px)")]
-        public double Left { get; set; }
+        public double Left { get; set; } = double.NaN;
 
         [Category("Style (Position)")]
         [DisplayName("Top Position (px)")]
-        public double Top { get; set; }
+        public double Top { get; set; } = double.NaN;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Delay (ms)")]
-        public int ShowDelay { get; set; }
+        public int ShowDelay { get; set; } = 0;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide Delay (ms)")]
-        public int HideDelay { get; set; }
+        public int HideDelay { get; set; } = 0;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Animation Duration (ms)")]
-        public int AnimationTime { get; set; }
+        public int AnimationTime { get; set; } = 250;
 
         [Category("General")]
         [DisplayName("Screen Bounds")]
-        public Rect ScreenBounds { get; set; }
+        public Rect ScreenBounds { get; set; } = Rect.Empty;
 
         [Category("Style (Text)")]
         [DisplayName("Font Size")]
-        public int FontSize { get; set; }
+        public int FontSize { get; set; } = 14;
 
         [Category("Behavior")]
         [DisplayName("Stay On Top")]
-        public bool OnTop { get; set; }
+        public bool OnTop { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Force On Top")]
-        public bool ForceOnTop { get; set; }
+        public bool ForceOnTop { get; set; } = false;
 
         [Category("Style (Border)")]
         [DisplayName("Visible")]
-        public bool BorderEnabled { get; set; }
+        public bool BorderEnabled { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Snap To Edges")]
-        public bool SnapToScreenEdges { get; set; }
+        public bool SnapToScreenEdges { get; set; } = true;
 
         [Category("Style")]
         [DisplayName("Ease Animation")]
-        public bool AnimationEase { get; set; }
+        public bool AnimationEase { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Mode")]
-        public OpenMode OpenMode { get; set; }
+        public OpenMode OpenMode { get; set; } = OpenMode.AlwaysOpen;
 
         [Category("Dock")]
         [DisplayName("Horizontal Alignment")]
-        public HorizontalAlignment HorizontalAlignment { get; set; }
+        public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Center;
 
         [Category("Dock")]
         [DisplayName("Vertical Alignment")]
-        public VerticalAlignment VerticalAlignment { get; set; }
+        public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Center;
 
         [Category("Dock")]
         [DisplayName("Docked")]
-        public bool IsDocked { get; set; }
+        public bool IsDocked { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Mouse Detection Distance (px)")]
-        public int MouseBounds { get; set; }
+        public int MouseBounds { get; set; } = 8;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Stretch Mouse Bounds")]
-        public bool StretchBounds { get; set; }
+        public bool StretchBounds { get; set; } = false;
 
         [Category("Style")]
         [DisplayName("Animation Type")]
-        public AnimationType AnimationType { get; set; }
+        public AnimationType AnimationType { get; set; } = AnimationType.Fade;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Hotkey")]
@@ -159,27 +159,27 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Activate On Show")]
-        public bool ActivateOnShow { get; set; }
+        public bool ActivateOnShow { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Force On Top Refresh Interval (ms)")]
-        public int ForceOnTopInterval { get; set; }
+        public int ForceOnTopInterval { get; set; } = 500;
 
         [Category("Style")]
         [DisplayName("Intro Duration (ms)")]
-        public int IntroDuration { get; set; }
+        public int IntroDuration { get; set; } = 3000;
 
         [Category("Behavior")]
         [DisplayName("Unclickable")]
-        public bool Unclickable { get; set; }
+        public bool Unclickable { get; set; } = false;
 
         [Category("Behavior")]
         [DisplayName("Drag Widget To Move")]
-        public bool DragToMove { get; set; }
+        public bool DragToMove { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Drag Titlebar To Move")]
-        public bool DragTitlebarToMove { get; set; }
+        public bool DragTitlebarToMove { get; set; } = true;
 
         [Category("Style (Background)")]
         [DisplayName("Image Path")]
@@ -187,23 +187,23 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Style (Background)")]
         [DisplayName("Image Opacity")]
-        public double BackgroundImageOpacity { get; set; }
+        public double BackgroundImageOpacity { get; set; } = 1.0;
 
         [Category("Style")]
         [DisplayName("Context Menu Enabled")]
-        public bool ShowContextMenu { get; set; }
+        public bool ShowContextMenu { get; set; } = true;
 
         [Category("Style")]
         [DisplayName("Scrollbar Visibility")]
-        public ScrollBarVisibility ScrollBarVisibility { get; set; }
+        public ScrollBarVisibility ScrollBarVisibility { get; set; } = ScrollBarVisibility.Auto;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Custom Mouse Detection Bounds")]
-        public Rect CustomMouseDetectionBounds { get; set; }
+        public Rect CustomMouseDetectionBounds { get; set; } = new Rect();
 
         [Category("Dock")]
         [DisplayName("Offset")]
-        public Point DockOffset { get; set; }
+        public Point DockOffset { get; set; } = new Point();
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Sound Path")]
@@ -211,7 +211,7 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Sound Volume")]
-        public double ShowSoundVolume { get; set; }
+        public double ShowSoundVolume { get; set; } = 1.0;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide Sound Path")]
@@ -219,75 +219,75 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide Sound Volume")]
-        public double HideSoundVolume { get; set; }
+        public double HideSoundVolume { get; set; } = 1.0;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Stay Open With Mouse Focus")]
-        public bool StayOpenIfMouseFocus { get; set; }
+        public bool StayOpenIfMouseFocus { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show If Foreground Fullscreen")]
-        public bool FullscreenActivation { get; set; }
+        public bool FullscreenActivation { get; set; } = false;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Visible")]
-        public TitlebarVisibilityMode TitlebarVisibilityMode { get; set; }
+        public TitlebarVisibilityMode TitlebarVisibilityMode { get; set; } = TitlebarVisibilityMode.AlwaysVisible;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Reload Button Visible")]
-        public bool ShowTitlebarReloadButton { get; set; }
+        public bool ShowTitlebarReloadButton { get; set; } = false;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Menu Button Visible")]
-        public bool ShowTitlebarMenuButton { get; set; }
+        public bool ShowTitlebarMenuButton { get; set; } = true;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Dismiss Button Visible")]
-        public bool ShowTitlebarDismissButton { get; set; }
+        public bool ShowTitlebarDismissButton { get; set; } = false;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Background Color")]
-        public Color TitlebarBackgroundColor { get; set; }
+        public Color TitlebarBackgroundColor { get; set; } = Color.FromRgb(32, 32, 32);
 
         [Category("Style (Titlebar)")]
         [DisplayName("Background Opacity")]
-        public double TitlebarBackgroundOpacity { get; set; }
+        public double TitlebarBackgroundOpacity { get; set; } = 0.5;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Titlebar Name Visible")]
-        public bool ShowTitlebarName { get; set; }
+        public bool ShowTitlebarName { get; set; } = true;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Font Family")]
-        public FontFamily TitlebarNameFontFamily { get; set; }
+        public FontFamily TitlebarNameFontFamily { get; set; } = new FontFamily("Segoe UI");
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Font Weight")]
-        public FontWeight TitlebarNameFontWeight { get; set; }
+        public FontWeight TitlebarNameFontWeight { get; set; } = FontWeights.Normal;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Font Size")]
-        public int TitlebarNameFontSize { get; set; }
+        public int TitlebarNameFontSize { get; set; } = 12;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Color")]
-        public Color TitlebarNameTextColor { get; set; }
+        public Color TitlebarNameTextColor { get; set; } = Colors.WhiteSmoke;
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Horizontal Alignment")]
-        public HorizontalAlignment TitlebarNameHorizontalAlignment { get; set; }
+        public HorizontalAlignment TitlebarNameHorizontalAlignment { get; set; } = HorizontalAlignment.Center;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Corner Radius")]
-        public CornerRadius TitlebarCornerRadius { get; set; }
+        public CornerRadius TitlebarCornerRadius { get; set; } = new CornerRadius(4);
 
         [Category("Style")]
         [DisplayName("Corner Radius")]
-        public CornerRadius CornerRadius { get; set; }
+        public CornerRadius CornerRadius { get; set; } = new CornerRadius(4);
 
         [Category("Style (Titlebar Name)")]
         [DisplayName("Allow Editing")]
-        public bool TitlebarNameAllowEditing { get; set; }
+        public bool TitlebarNameAllowEditing { get; set; } = true;
 
         [DisplayName("Scroll Horizontal Offset")]
         public double ScrollHorizontalOffset { get; set; }
@@ -297,63 +297,63 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Full Mouse Bounds On Center Dock")]
-        public bool CenterBoundsOnNonSidedDock { get; set; }
+        public bool CenterBoundsOnNonSidedDock { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Mouse Bounds Detection Axis")]
-        public MouseBoundsDetectionAxis MouseBoundsDetectionAxis { get; set; }
+        public MouseBoundsDetectionAxis MouseBoundsDetectionAxis { get; set; } = MouseBoundsDetectionAxis.Both;
 
         [Category("Style (Text)")]
         [DisplayName("Font Weight")]
-        public FontWeight FontWeight { get; set; }
+        public FontWeight FontWeight { get; set; } = FontWeights.Normal;
 
         [Category("Style (Border)")]
         [DisplayName("Thickness")]
-        public Thickness BorderThickness { get; set; }
+        public Thickness BorderThickness { get; set; } = new Thickness(1);
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Toggle Intro On Hotkey")]
-        public bool ToggleIntroOnHotkey { get; set; }
+        public bool ToggleIntroOnHotkey { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Auto Detect Screen Bounds")]
-        public bool AutoDetectScreenBounds { get; set; }
+        public bool AutoDetectScreenBounds { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Ignore Screen Corner Size")]
-        public int IgnoreScreenCornerSize { get; set; }
+        public int IgnoreScreenCornerSize { get; set; } = 1;
 
         [Category("Behavior")]
         [DisplayName("Use Screen Size as Max Size")]
-        public bool MaxSizeUseScreen { get; set; }
+        public bool MaxSizeUseScreen { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Ignore AppBars")]
-        public bool IgnoreAppBars { get; set; }
+        public bool IgnoreAppBars { get; set; } = false;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Button Font Size")]
-        public int TitlebarButtonFontSize { get; set; }
+        public int TitlebarButtonFontSize { get; set; } = 12;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Button Size (px)")]
-        public double TitlebarButtonSize { get; set; }
+        public double TitlebarButtonSize { get; set; } = 16;
 
         [Category("Style")]
         [DisplayName("Horizontal Alignment")]
-        public HorizontalAlignment ViewHorizontalAlignment { get; set; }
+        public HorizontalAlignment ViewHorizontalAlignment { get; set; } = HorizontalAlignment.Stretch;
 
         [Category("Style")]
         [DisplayName("Vertical Alignment")]
-        public VerticalAlignment ViewVerticalAlignment { get; set; }
+        public VerticalAlignment ViewVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Stay Open On Show Hotkey")]
-        public bool StayOpenOnShowHotkey { get; set; }
+        public bool StayOpenOnShowHotkey { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show Hotkey Duration (ms)")]
-        public int ShowHotkeyDuration { get; set; }
+        public int ShowHotkeyDuration { get; set; } = 5000;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Dismiss Hotkey")]
@@ -364,18 +364,18 @@ namespace DesktopWidgets.WidgetBase.Settings
         public ModifierKeys HideHotKeyModifiers { get; set; }
 
         [DisplayName("Show Hotkey Identifier")]
-        public Guid ShowHotkeyIdentifier { get; set; }
+        public Guid ShowHotkeyIdentifier { get; } = Guid.NewGuid();
 
         [DisplayName("Hide Hotkey Identifier")]
-        public Guid HideHotkeyIdentifier { get; set; }
+        public Guid HideHotkeyIdentifier { get; } = Guid.NewGuid();
 
         [Category("Style (Titlebar)")]
         [DisplayName("Height (px)")]
-        public double TitlebarHeight { get; set; }
+        public double TitlebarHeight { get; set; } = double.NaN;
 
         [Category("Style (Titlebar)")]
         [DisplayName("Width (px)")]
-        public double TitlebarWidth { get; set; }
+        public double TitlebarWidth { get; set; } = double.NaN;
 
         [Category("Behavior")]
         [DisplayName("Force Hidden")]
@@ -383,146 +383,38 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior")]
         [DisplayName("Idle Duration")]
-        public TimeSpan IdleDuration { get; set; }
+        public TimeSpan IdleDuration { get; set; } = TimeSpan.FromSeconds(5);
 
         [Category("Behavior")]
         [DisplayName("Detect Idle")]
-        public bool DetectIdle { get; set; }
+        public bool DetectIdle { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Refocus Main Element On Show")]
-        public bool RefocusMainElementOnShow { get; set; }
+        public bool RefocusMainElementOnShow { get; set; } = true;
 
         [Category("Style (Frame)")]
         [DisplayName("Enable Top Frame")]
-        public bool ShowTopFrame { get; set; }
+        public bool ShowTopFrame { get; set; } = true;
 
         [Category("Style (Frame)")]
         [DisplayName("Enable Bottom Frame")]
-        public bool ShowBottomFrame { get; set; }
+        public bool ShowBottomFrame { get; set; } = true;
 
         [Category("Style (Frame)")]
         [DisplayName("Enable Left Frame")]
-        public bool ShowLeftFrame { get; set; }
+        public bool ShowLeftFrame { get; set; } = true;
 
         [Category("Style (Frame)")]
         [DisplayName("Enable Right Frame")]
-        public bool ShowRightFrame { get; set; }
+        public bool ShowRightFrame { get; set; } = true;
 
         [Category("Behavior")]
         [DisplayName("Use Mouse Movement For Idle Detection")]
-        public bool UseMouseMoveIdleDetection { get; set; }
+        public bool UseMouseMoveIdleDetection { get; set; } = false;
 
         [Category("Behavior")]
         [DisplayName("Show Intro On Launch")]
-        public bool ShowIntroOnLaunch { get; set; }
-
-        public virtual void SetDefaults()
-        {
-            Disabled = false;
-            Identifier = new WidgetId();
-            ActiveTimeEnd = DateTime.Now;
-            Padding = new Thickness(3, 2, 3, 2);
-            Name = "Untitled";
-            FontFamily = new FontFamily("Segoe UI");
-            TextColor = Colors.Black;
-            BackgroundColor = Colors.White;
-            BorderColor = Colors.Gray;
-            BackgroundOpacity = 0.95;
-            BorderOpacity = 0.5;
-            Width = double.NaN;
-            Height = double.NaN;
-            MinWidth = double.NaN;
-            MinHeight = double.NaN;
-            MaxWidth = double.NaN;
-            MaxHeight = double.NaN;
-            Left = double.NaN;
-            Top = double.NaN;
-            ShowDelay = 0;
-            HideDelay = 0;
-            AnimationTime = 250;
-            ScreenBounds = Rect.Empty;
-            FontSize = 14;
-            OnTop = true;
-            ForceOnTop = false;
-            BorderEnabled = true;
-            SnapToScreenEdges = true;
-            AnimationEase = true;
-            OpenMode = OpenMode.AlwaysOpen;
-            HorizontalAlignment = HorizontalAlignment.Center;
-            VerticalAlignment = VerticalAlignment.Center;
-            IsDocked = false;
-            MouseBounds = 8;
-            StretchBounds = false;
-            AnimationType = AnimationType.Fade;
-            HotKey = Key.None;
-            HotKeyModifiers = ModifierKeys.None;
-            ActivateOnShow = true;
-            ForceOnTopInterval = 500;
-            IntroDuration = 3000;
-            Unclickable = false;
-            DragToMove = true;
-            DragTitlebarToMove = true;
-            BackgroundImagePath = "";
-            BackgroundImageOpacity = 1.0;
-            ShowContextMenu = true;
-            ScrollBarVisibility = ScrollBarVisibility.Auto;
-            CustomMouseDetectionBounds = new Rect();
-            DockOffset = new Point();
-            ShowSoundPath = "";
-            ShowSoundVolume = 1.0;
-            HideSoundPath = "";
-            HideSoundVolume = 1.0;
-            StayOpenIfMouseFocus = true;
-            FullscreenActivation = false;
-            TitlebarVisibilityMode = TitlebarVisibilityMode.AlwaysVisible;
-            ShowTitlebarReloadButton = false;
-            ShowTitlebarMenuButton = true;
-            ShowTitlebarDismissButton = false;
-            TitlebarBackgroundColor = Color.FromRgb(32, 32, 32);
-            TitlebarBackgroundOpacity = 0.5;
-            ShowTitlebarName = true;
-            TitlebarNameFontFamily = new FontFamily("Segoe UI");
-            TitlebarNameFontWeight = FontWeights.Normal;
-            TitlebarNameFontSize = 12;
-            TitlebarNameTextColor = Colors.WhiteSmoke;
-            TitlebarNameHorizontalAlignment = HorizontalAlignment.Center;
-            TitlebarCornerRadius = new CornerRadius(4);
-            CornerRadius = new CornerRadius(4);
-            TitlebarNameAllowEditing = true;
-            ScrollHorizontalOffset = 0;
-            ScrollVerticalOffset = 0;
-            CenterBoundsOnNonSidedDock = true;
-            MouseBoundsDetectionAxis = MouseBoundsDetectionAxis.Both;
-            FontWeight = FontWeights.Normal;
-            BorderThickness = new Thickness(1);
-            ToggleIntroOnHotkey = true;
-            AutoDetectScreenBounds = true;
-            IgnoreScreenCornerSize = 1;
-            MaxSizeUseScreen = true;
-            IgnoreAppBars = false;
-            TitlebarButtonFontSize = 12;
-            TitlebarButtonSize = 16;
-            ViewHorizontalAlignment = HorizontalAlignment.Stretch;
-            ViewVerticalAlignment = VerticalAlignment.Stretch;
-            StayOpenOnShowHotkey = false;
-            ShowHotkeyDuration = 5000;
-            HideHotKey = Key.None;
-            HideHotKeyModifiers = ModifierKeys.None;
-            ShowHotkeyIdentifier = Guid.NewGuid();
-            HideHotkeyIdentifier = Guid.NewGuid();
-            TitlebarHeight = double.NaN;
-            TitlebarWidth = double.NaN;
-            ForceHide = false;
-            IdleDuration = TimeSpan.FromSeconds(5);
-            DetectIdle = true;
-            RefocusMainElementOnShow = true;
-            ShowTopFrame = true;
-            ShowBottomFrame = true;
-            ShowLeftFrame = true;
-            ShowRightFrame = true;
-            UseMouseMoveIdleDetection = false;
-            ShowIntroOnLaunch = true;
-        }
+        public bool ShowIntroOnLaunch { get; set; } = true;
     }
 }

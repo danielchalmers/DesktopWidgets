@@ -10,11 +10,11 @@ namespace DesktopWidgets.Widgets.RSSFeed
     {
         [Category("Style")]
         [DisplayName("Max Headlines")]
-        public int MaxHeadlines { get; set; }
+        public int MaxHeadlines { get; set; } = 5;
 
         [Category("General")]
         [DisplayName("Refresh Interval")]
-        public TimeSpan RefreshInterval { get; set; }
+        public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromHours(1);
 
         [Category("Feed")]
         [DisplayName("URL")]
@@ -22,15 +22,15 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         [Category("Feed (Filter)")]
         [DisplayName("Title Whitelist")]
-        public List<string> TitleWhitelist { get; set; }
+        public List<string> TitleWhitelist { get; set; } = new List<string>();
 
         [Category("Feed (Filter)")]
         [DisplayName("Title Blacklist")]
-        public List<string> TitleBlacklist { get; set; }
+        public List<string> TitleBlacklist { get; set; } = new List<string>();
 
         [Category("Feed (Filter)")]
         [DisplayName("Category Whitelist")]
-        public List<string> CategoryWhitelist { get; set; }
+        public List<string> CategoryWhitelist { get; set; } = new List<string>();
 
         [Category("Behavior")]
         [DisplayName("New Headline Sound Path")]
@@ -38,7 +38,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         [Category("Behavior")]
         [DisplayName("New Headline Sound Volume")]
-        public double EventSoundVolume { get; set; }
+        public double EventSoundVolume { get; set; } = 1.0;
 
         [Category("Style")]
         [DisplayName("Show Publish Date")]
@@ -46,11 +46,11 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         [Category("Style")]
         [DisplayName("Publish Date Font Size")]
-        public int PublishDateFontSize { get; set; }
+        public int PublishDateFontSize { get; set; } = 11;
 
         [Category("Style")]
         [DisplayName("Publish Date Format")]
-        public string PublishDateFormat { get; set; }
+        public string PublishDateFormat { get; set; } = "";
 
         [Category("Style")]
         [DisplayName("Publish Date Time Offset")]
@@ -58,34 +58,14 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show On New Headline")]
-        public bool OpenOnEvent { get; set; }
+        public bool OpenOnEvent { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Stay Open On New Headline")]
-        public bool OpenOnEventStay { get; set; }
+        public bool OpenOnEventStay { get; set; } = false;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Show On New Headline Duration")]
-        public TimeSpan OpenOnEventDuration { get; set; }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            MaxHeadlines = 5;
-            RefreshInterval = TimeSpan.FromHours(1);
-            RssFeedUrl = "";
-            TitleWhitelist = new List<string>();
-            TitleBlacklist = new List<string>();
-            CategoryWhitelist = new List<string>();
-            EventSoundPath = "";
-            EventSoundVolume = 1.0;
-            ShowPublishDate = false;
-            PublishDateFontSize = 11;
-            PublishDateFormat = "";
-            PublishDateTimeOffset = TimeSpan.FromHours(0);
-            OpenOnEvent = true;
-            OpenOnEventStay = false;
-            OpenOnEventDuration = TimeSpan.FromSeconds(10);
-        }
+        public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

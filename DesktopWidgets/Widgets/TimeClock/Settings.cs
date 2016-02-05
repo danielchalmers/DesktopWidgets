@@ -7,12 +7,6 @@ namespace DesktopWidgets.Widgets.TimeClock
     {
         [Category("Behavior")]
         [DisplayName("Copy Time On Double Click")]
-        public bool CopyTextOnDoubleClick { get; set; }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            CopyTextOnDoubleClick = true;
-        }
+        public bool CopyTextOnDoubleClick { get; set; } = true;
     }
 }

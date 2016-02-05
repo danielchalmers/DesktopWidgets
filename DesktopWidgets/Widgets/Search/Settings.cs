@@ -5,9 +5,14 @@ namespace DesktopWidgets.Widgets.Search
 {
     public class Settings : WidgetSettingsBase
     {
+        public Settings()
+        {
+            Width = 150;
+        }
+
         [Category("General")]
         [DisplayName("URL Prefix")]
-        public string BaseUrl { get; set; }
+        public string BaseUrl { get; set; } = "http://";
 
         [Category("General")]
         [DisplayName("URL Suffix")]
@@ -15,15 +20,6 @@ namespace DesktopWidgets.Widgets.Search
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide On Search")]
-        public bool HideOnSearch { get; set; }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            BaseUrl = "http://";
-            URLSuffix = "";
-            HideOnSearch = true;
-            Width = 150;
-        }
+        public bool HideOnSearch { get; set; } = true;
     }
 }

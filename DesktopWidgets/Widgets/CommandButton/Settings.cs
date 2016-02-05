@@ -24,26 +24,14 @@ namespace DesktopWidgets.Widgets.CommandButton
 
         [Category("Style")]
         [DisplayName("Button Text")]
-        public string ButtonText { get; set; }
+        public string ButtonText { get; set; } = "Execute";
 
         [Category("Style")]
         [DisplayName("Button Width")]
-        public double ButtonWidth { get; set; }
+        public double ButtonWidth { get; set; } = 96;
 
         [Category("Style")]
         [DisplayName("Button Height")]
-        public double ButtonHeight { get; set; }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            FilePath = "";
-            FileArguments = "";
-            CommandHotKey = Key.None;
-            CommandHotKeyModifiers = ModifierKeys.None;
-            ButtonText = "Execute";
-            ButtonWidth = 96;
-            ButtonHeight = 96;
-        }
+        public double ButtonHeight { get; set; } = 96;
     }
 }

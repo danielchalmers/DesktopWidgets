@@ -12,72 +12,53 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         [Category("Shortcut Style")]
         [DisplayName("Icon Position")]
-        public IconPosition IconPosition { get; set; }
+        public IconPosition IconPosition { get; set; } = IconPosition.Left;
 
         [Category("Shortcut Style")]
         [DisplayName("Tooltip Type")]
-        public ToolTipType ToolTipType { get; set; }
+        public ToolTipType ToolTipType { get; set; } = ToolTipType.None;
 
         [Category("Shortcut Style")]
         [DisplayName("Horizontal Alignment")]
-        public HorizontalAlignment ButtonHorizontalAlignment { get; set; }
+        public HorizontalAlignment ButtonHorizontalAlignment { get; set; } = HorizontalAlignment.Center;
 
         [Category("Shortcut Style")]
         [DisplayName("Vertical Alignment")]
-        public VerticalAlignment ButtonVerticalAlignment { get; set; }
+        public VerticalAlignment ButtonVerticalAlignment { get; set; } = VerticalAlignment.Center;
 
         [Category("Shortcut Style")]
         [DisplayName("Icon Scaling Mode")]
-        public ImageScalingMode IconScalingMode { get; set; }
+        public ImageScalingMode IconScalingMode { get; set; } = ImageScalingMode.LowQuality;
 
         [Category("Shortcut Style")]
         [DisplayName("Content Mode")]
-        public ShortcutContentMode ShortcutContentMode { get; set; }
+        public ShortcutContentMode ShortcutContentMode { get; set; } = ShortcutContentMode.Both;
 
         [Category("Style")]
         [DisplayName("Orientation")]
-        public ShortcutOrientation ShortcutOrientation { get; set; }
+        public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Vertical;
 
         [Category("Shortcut Style")]
         [DisplayName("Height")]
-        public int ButtonHeight { get; set; }
+        public int ButtonHeight { get; set; } = 32;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide on Shortcut Launch")]
-        public bool HideOnExecute { get; set; }
+        public bool HideOnExecute { get; set; } = true;
 
         [Category("General")]
         [DisplayName("Allow Drag Drop Files")]
-        public bool AllowDropFiles { get; set; }
+        public bool AllowDropFiles { get; set; } = true;
 
         [DisplayName("Default Shortcuts Mode")]
-        public DefaultShortcutsMode DefaultShortcutsMode { get; set; }
+        public DefaultShortcutsMode DefaultShortcutsMode { get; set; } = DefaultShortcutsMode.Preset;
 
         [Category("General")]
         [DisplayName("Parse Shortcut Files")]
-        public bool ParseShortcutFiles { get; set; }
+        public bool ParseShortcutFiles { get; set; } = false;
 
         [Category("General")]
         [DisplayName("Enable Icon Cache")]
-        public bool UseIconCache { get; set; }
-
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-            Shortcuts = null;
-            IconPosition = IconPosition.Left;
-            ToolTipType = ToolTipType.None;
-            ButtonHorizontalAlignment = HorizontalAlignment.Center;
-            ButtonVerticalAlignment = VerticalAlignment.Center;
-            IconScalingMode = ImageScalingMode.LowQuality;
-            ShortcutContentMode = ShortcutContentMode.Both;
-            ShortcutOrientation = ShortcutOrientation.Vertical;
-            ButtonHeight = 32;
-            HideOnExecute = true;
-            AllowDropFiles = true;
-            DefaultShortcutsMode = DefaultShortcutsMode.Preset;
-            ParseShortcutFiles = false;
-            UseIconCache = true;
-        }
+        public bool UseIconCache { get; set; } = true;
     }
 }
