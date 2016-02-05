@@ -69,19 +69,19 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool ShowImages { get; set; }
 
         [Category("General")]
-        [DisplayName("Show Content Extension Whitelist")]
-        public List<string> ShowContentWhitelist { get; set; }
+        [DisplayName("Show Text Content Whitelist")]
+        public List<string> ShowTextContentWhitelist { get; set; }
 
         [Category("Style")]
-        [DisplayName("Show Content Font Size")]
+        [DisplayName("Show Text Content Font Size")]
         public int ShowContentFontSize { get; set; }
 
         [Category("Style")]
-        [DisplayName("Show Content Horizontal Alignment")]
+        [DisplayName("Show Text Content Horizontal Alignment")]
         public HorizontalAlignment ShowContentHorizontalAlignment { get; set; }
 
         [Category("Style")]
-        [DisplayName("Show Content Vertical Alignment")]
+        [DisplayName("Show Text Content Vertical Alignment")]
         public VerticalAlignment ShowContentVerticalAlignment { get; set; }
 
         [Category("General")]
@@ -125,7 +125,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             DetectModifiedFiles = true;
             DetectNewFiles = true;
             ShowImages = true;
-            ShowContentWhitelist = new List<string>
+            ShowTextContentWhitelist = new List<string>
             {
                 ".txt",
                 ".cfg",

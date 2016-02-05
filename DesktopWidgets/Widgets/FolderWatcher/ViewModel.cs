@@ -158,8 +158,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool HandleFileContent()
         {
-            return Settings.ShowContentWhitelist != null && Settings.ShowContentWhitelist.Count > 0 &&
-                   Settings.ShowContentWhitelist.Any(
+            return Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
+                   Settings.ShowTextContentWhitelist.Any(
                        x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
         }
 
