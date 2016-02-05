@@ -24,6 +24,8 @@ namespace DesktopWidgets.WidgetBase.Settings
             UpdateInterval = -1;
             DateTimeFormat = new List<string> {"{hh}:{mm} {tt}"};
             TimeOffset = TimeSpan.FromHours(0);
+
+            FontSize = 24;
         }
     }
 }
