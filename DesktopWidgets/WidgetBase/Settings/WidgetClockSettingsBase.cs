@@ -12,10 +12,7 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Style")]
         [DisplayName("Time Format")]
-        public List<string> DateTimeFormat { get; set; } = new List<string>
-        {
-            "{hh}:{mm}:{ss}"
-        };
+        public List<string> DateTimeFormat { get; set; } = new List<string> {"{hh}:{mm} {tt}"};
 
         [Category("General")]
         [DisplayName("Time Offset")]

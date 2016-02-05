@@ -7,10 +7,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
     {
         public Settings()
         {
-            DateTimeFormat = new List<string>
-            {
-                "{mm}:{ss}.{fff}"
-            };
+            DateTimeFormat = new List<string> {"{mm}m {ss}s {ff}ms"};
             UpdateInterval = 10;
         }
     }
