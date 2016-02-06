@@ -125,7 +125,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (_notificationQueue.Count == 0)
             {
-                View.HideUi();
+                View?.HideUi();
                 return;
             }
             _isShowing = true;

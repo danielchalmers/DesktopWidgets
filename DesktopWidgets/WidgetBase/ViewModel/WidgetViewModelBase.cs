@@ -277,7 +277,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public void SetScreenBounds()
         {
-            if (!_settings.AutoDetectScreenBounds)
+            if (!_settings.AutoDetectScreenBounds || View == null)
                 return;
             var screen = ScreenHelper.GetScreen(View);
             _settings.ScreenBounds = screen.Primary ? Rect.Empty : screen.ToRect(_settings.IgnoreAppBars);
@@ -297,8 +297,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             if (View != null)
             {
                 SetScreenBounds();
-                View.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
-                View.ShowIntro();
+                View?.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousAlignment);
+                View?.ShowIntro();
             }
         }
 
@@ -311,8 +311,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             if (View != null)
             {
                 SetScreenBounds();
-                View.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
-                View.ShowIntro();
+                View?.UpdateUi(isDocked: previousIsDocked, dockVerticalAlignment: previousAlignment);
+                View?.ShowIntro();
             }
         }
 
