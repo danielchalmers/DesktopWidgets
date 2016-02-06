@@ -4,7 +4,6 @@ using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Newtonsoft.Json;
 
 namespace DesktopWidgets.WindowViewModels
 {
@@ -97,8 +96,7 @@ namespace DesktopWidgets.WindowViewModels
 
         private void ExportWidgetExecute()
         {
-            var dialog = new InputBox("Export Widget",
-                JsonConvert.SerializeObject(SelectedWidget, SettingsHelper.JsonSerializerSettings));
+            var dialog = new InputBox("Export Widget", WidgetHelper.Export(SelectedWidget));
             dialog.ShowDialog();
         }
 
@@ -108,8 +106,7 @@ namespace DesktopWidgets.WindowViewModels
             dialog.ShowDialog();
             if (dialog.Cancelled)
                 return;
-            WidgetHelper.Import(JsonConvert.DeserializeObject(dialog.InputData,
-                SettingsHelper.JsonSerializerSettings));
+            WidgetHelper.Import(dialog.InputData);
         }
     }
 }

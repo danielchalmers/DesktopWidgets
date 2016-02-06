@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
@@ -6,6 +7,7 @@ using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
+using Newtonsoft.Json;
 
 namespace DesktopWidgets.Helpers
 {
@@ -171,19 +173,33 @@ namespace DesktopWidgets.Helpers
             return newWidget?.Identifier;
         }
 
-        public static void Import(object widgetData, bool msg = true)
+        public static string Export(WidgetSettingsBase settings)
+        {
+            return Export(new List<WidgetSettingsBase> {settings});
+        }
+
+        public static string Export(List<WidgetSettingsBase> settings)
+        {
+            return JsonConvert.SerializeObject(settings, SettingsHelper.JsonSerializerSettings);
+        }
+
+        public static void Import(string widgetData, bool msg = true)
         {
             try
             {
-                var newWidget = SettingsHelper.CloneObject(widgetData) as WidgetSettingsBase;
-                if (newWidget == null)
+                var newWidgets = JsonConvert.DeserializeObject<List<WidgetSettingsBase>>(widgetData,
+                    SettingsHelper.JsonSerializerSettings);
+                if (newWidgets == null || newWidgets.Count == 0)
                 {
                     if (msg)
                         Popup.Show("Import failed. Data may be corrupt.", image: MessageBoxImage.Error);
                     return;
                 }
-                newWidget.Identifier.GenerateNewGuid();
-                AddNewWidget(newWidget);
+                foreach (var widget in newWidgets)
+                {
+                    widget.Identifier.GenerateNewGuid();
+                    AddNewWidget(widget);
+                }
             }
             catch
             {
