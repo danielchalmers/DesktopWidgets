@@ -43,15 +43,21 @@ namespace DesktopWidgets.Windows
                     UpdateSubText =
                         $"A new major release, {AssemblyInfo.Title} {updateVersion.Major}.{updateVersion.Minor} is now available!";
                 }
-                else if (updateVersion.Revision != AssemblyInfo.Version.Revision)
-                {
-                    UpdateSubText =
-                        $"{AssemblyInfo.Title} {updateVersion} is now available!";
-                }
                 else
                 {
-                    UpdateSubText =
-                        $"{AssemblyInfo.Title} {updateVersion.Major}.{updateVersion.Minor}.{updateVersion.Build} is now available!";
+                    if (updateVersion.Major == AssemblyInfo.Version.Major &&
+                        updateVersion.Minor == AssemblyInfo.Version.Minor &&
+                        updateVersion.Build == AssemblyInfo.Version.Build &&
+                        updateVersion.Revision != AssemblyInfo.Version.Revision)
+                    {
+                        UpdateSubText =
+                            $"{AssemblyInfo.Title} {updateVersion} is now available!";
+                    }
+                    else
+                    {
+                        UpdateSubText =
+                            $"{AssemblyInfo.Title} {updateVersion.Major}.{updateVersion.Minor}.{updateVersion.Build} is now available!";
+                    }
                 }
                 UpdateSubText += "\nDo you want to update to the latest version?";
             }
