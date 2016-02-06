@@ -203,12 +203,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void OpenFileExecute()
         {
             ProcessHelper.Launch(CurrentFilePath);
-            Hide();
-        }
-
-        private void Hide()
-        {
-            View?.HideUi();
+            View?.Dismiss();
         }
 
         public override void OnClose()
