@@ -88,6 +88,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             ".properties"
         };
 
+        [Category("General")]
+        [DisplayName("Show Text Content Max Size (bytes)")]
+        public int ShowContentMaxSize { get; set; } = 1048576;
+
         [Category("Style")]
         [DisplayName("Show Text Content Font Size")]
         public int ShowContentFontSize { get; set; } = 12;
