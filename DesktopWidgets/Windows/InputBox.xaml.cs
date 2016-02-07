@@ -14,13 +14,15 @@ namespace DesktopWidgets.Windows
     /// </summary>
     public partial class InputBox : Window, INotifyPropertyChanged
     {
+        private readonly bool _allowEmptyData;
         private string _inputData;
 
-        public InputBox(string title, string displayData = null)
+        public InputBox(string title, string displayData = null, bool allowEmptyData = false)
         {
             InitializeComponent();
             Title = title;
             InputData = displayData;
+            _allowEmptyData = allowEmptyData;
             IsDisplayData = !string.IsNullOrEmpty(displayData);
             if (IsDisplayData)
                 txtData.SelectAll();
@@ -53,6 +55,8 @@ namespace DesktopWidgets.Windows
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            if (!_allowEmptyData && string.IsNullOrWhiteSpace(InputData))
+                Cancelled = true;
             DialogResult = true;
         }
 
