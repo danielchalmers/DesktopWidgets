@@ -23,10 +23,18 @@ namespace DesktopWidgets.Helpers
             ObjectCreationHandling = ObjectCreationHandling.Replace
         };
 
+        private static readonly JsonSerializerSettings JsonSerializerSettingsAllTypeHandling = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All,
+            ObjectCreationHandling = ObjectCreationHandling.Replace
+        };
+
         public static object CloneObject(object obj)
         {
-            return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj, JsonSerializerSettings),
-                JsonSerializerSettings);
+            return
+                JsonConvert.DeserializeObject(
+                    JsonConvert.SerializeObject(obj, JsonSerializerSettingsAllTypeHandling),
+                    JsonSerializerSettingsAllTypeHandling);
         }
 
         public static void UpgradeSettings()
