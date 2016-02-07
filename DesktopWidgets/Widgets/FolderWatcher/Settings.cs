@@ -20,8 +20,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public int FolderCheckIntervalMS { get; set; } = 500;
 
         [Category("General")]
-        [DisplayName("Watch Folder Path")]
-        public string WatchFolder { get; set; } = "";
+        [DisplayName("Watch Folder Paths")]
+        public List<string> WatchFolders { get; set; } = new List<string>();
 
         [Category("General")]
         [DisplayName("File Extension Whitelist")]

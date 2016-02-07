@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -39,15 +40,15 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
             _directoryWatcher = new DirectoryWatcher(new DirectoryWatcherSettings
             {
-                WatchFolder = Settings.RootPath,
+                WatchFolders = new List<string> {Settings.RootPath},
                 FileExtensionWhitelist = ImageHelper.SupportedExtensions,
                 MaxSize = Settings.FileFilterSize,
                 Recursive = Settings.Recursive
             });
-            _directoryWatcher.CheckDirectoryForNewFiles();
+            _directoryWatcher.CheckDirectoriesForNewFiles();
             NextImage();
             if (Settings.Recursive)
-                _directoryWatcher.CheckDirectoryForNewFilesAsync();
+                _directoryWatcher.CheckDirectoriesForNewFilesAsync();
 
             _changeTimer.Start();
         }
@@ -132,7 +133,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         {
             base.OnRefresh();
             _changeTimer.Interval = Settings.ChangeInterval;
-            _directoryWatcher.SetWatchPath(Settings.RootPath);
+            _directoryWatcher.SetWatchPaths(new List<string> {Settings.RootPath});
         }
 
         private void TogglePlayPauseExecute()

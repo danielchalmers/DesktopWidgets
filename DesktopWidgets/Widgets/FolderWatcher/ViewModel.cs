@@ -38,7 +38,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 new DirectoryWatcher(
                     new DirectoryWatcherSettings
                     {
-                        WatchFolder = Settings.WatchFolder,
+                        WatchFolders = Settings.WatchFolders,
                         FileExtensionWhitelist = Settings.FileExtensionWhitelist,
                         FileExtensionBlacklist = Settings.FileExtensionBlacklist,
                         Recursive = Settings.Recursive,
@@ -216,8 +216,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public override void OnRefresh()
         {
             base.OnRefresh();
-            if (_directoryWatcher.SetWatchPath(Settings.WatchFolder))
-                FileType = FileType.None;
+            _directoryWatcher.SetWatchPaths(Settings.WatchFolders);
         }
     }
 }
