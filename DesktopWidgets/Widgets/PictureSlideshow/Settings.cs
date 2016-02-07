@@ -18,7 +18,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         [Category("General")]
         [DisplayName("Maximum File Size (bytes)")]
-        public double FileFilterSize { get; set; } = 1024000;
+        public double FileFilterSize { get; set; } = 1048576;
 
         [Category("General")]
         [DisplayName("Next Image Interval")]
