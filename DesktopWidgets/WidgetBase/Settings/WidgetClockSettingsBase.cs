@@ -22,5 +22,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("General")]
         [DisplayName("Time Offset")]
         public TimeSpan TimeOffset { get; set; }
+
+        [Category("Behavior")]
+        [DisplayName("Copy Time On Double Click")]
+        public bool CopyTextOnDoubleClick { get; set; } = true;
     }
 }

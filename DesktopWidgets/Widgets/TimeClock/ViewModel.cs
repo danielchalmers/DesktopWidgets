@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using DesktopWidgets.Helpers;
+﻿using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.ViewModel;
 
@@ -16,12 +14,5 @@ namespace DesktopWidgets.Widgets.TimeClock
         }
 
         public Settings Settings { get; }
-
-        public override void LeftMouseDoubleClickExecute(MouseButtonEventArgs e)
-        {
-            base.LeftMouseDoubleClickExecute(e);
-            if (Settings.CopyTextOnDoubleClick)
-                Clipboard.SetText(CurrentTime.ParseCustomFormat(Settings.DateTimeFormat));
-        }
     }
 }

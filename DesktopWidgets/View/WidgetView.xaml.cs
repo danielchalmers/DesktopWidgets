@@ -374,8 +374,12 @@ namespace DesktopWidgets.View
 
         public void FocusMainElement()
         {
-            var element = UserControl.FindName("MainElement") as UIElement;
-            element?.Focus();
+            GetMainElement()?.Focus();
+        }
+
+        public UIElement GetMainElement()
+        {
+            return UserControl.FindName("MainElement") as UIElement;
         }
     }
 }

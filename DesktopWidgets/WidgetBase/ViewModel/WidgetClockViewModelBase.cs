@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase.Settings;
@@ -73,6 +76,17 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             base.OnClose();
             _clockUpdateTimer?.Stop();
             _clockUpdateTimer = null;
+        }
+
+        public override void LeftMouseDoubleClickExecute(MouseButtonEventArgs e)
+        {
+            base.LeftMouseDoubleClickExecute(e);
+            if (_settings.CopyTextOnDoubleClick)
+            {
+                var textBlock = View.GetMainElement() as TextBlock;
+                if (textBlock != null)
+                    Clipboard.SetText(textBlock.Text);
+            }
         }
     }
 }
