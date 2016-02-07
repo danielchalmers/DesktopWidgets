@@ -15,7 +15,6 @@
         <classes:TextFileTypeToVisibilityConverter x:Key="TextFileTypeToVisibilityConverter" />
         <classes:ImageFileTypeToVisibilityConverter x:Key="ImageFileTypeToVisibilityConverter" />
         <classes:OtherFileTypeToVisibilityConverter x:Key="OtherFileTypeToVisibilityConverter" />
-        <classes:PathToContentsConverter x:Key="PathToContentsConverter" />
 
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
@@ -45,8 +44,8 @@
         <TextBox Style="{StaticResource InfoTextbox}"
                  HorizontalAlignment="{Binding Settings.ShowContentHorizontalAlignment}"
                  VerticalAlignment="{Binding Settings.ShowContentVerticalAlignment}"
+                 Text="{Binding CurrentFileContent}"
                  FontSize="{Binding Settings.ShowContentFontSize}"
-                 Text="{Binding CurrentFilePath, Converter={StaticResource PathToContentsConverter}}"
                  Visibility="{Binding FileType, Converter={StaticResource TextFileTypeToVisibilityConverter}}" />
         <TextBlock
             HorizontalAlignment="Center" VerticalAlignment="Center"

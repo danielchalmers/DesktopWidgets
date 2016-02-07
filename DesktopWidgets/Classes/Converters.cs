@@ -634,22 +634,6 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class PathToContentsConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!ConverterHelper.IsValueValid(value))
-                return DependencyProperty.UnsetValue;
-            var path = (string) value;
-            return !File.Exists(path) ? null : File.ReadAllText(path);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class BoolToPauseTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

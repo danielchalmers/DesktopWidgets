@@ -17,6 +17,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     {
         private readonly Queue<string> _notificationQueue;
 
+        private string _currentFileContent;
+
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
 
@@ -60,6 +62,16 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
                 Settings.CurrentFilePath = value;
                 RaisePropertyChanged(nameof(CurrentFilePath));
+            }
+        }
+
+        public string CurrentFileContent
+        {
+            get { return _currentFileContent; }
+            set
+            {
+                _currentFileContent = value;
+                RaisePropertyChanged(nameof(CurrentFileContent));
             }
         }
 
@@ -130,6 +142,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
             _isShowing = true;
             CurrentFilePath = _notificationQueue.Dequeue();
+            CurrentFileContent = "";
 
             CheckFile(true);
 
@@ -158,9 +171,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool HandleFileContent()
         {
-            return Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
-                   Settings.ShowTextContentWhitelist.Any(
-                       x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
+            var isContent = Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
+                            Settings.ShowTextContentWhitelist.Any(
+                                x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase));
+            if (isContent)
+                CurrentFileContent = File.ReadAllText(CurrentFilePath);
+            return isContent;
         }
 
         private bool HandleFileMedia(bool play)
