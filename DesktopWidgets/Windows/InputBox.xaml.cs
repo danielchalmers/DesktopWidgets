@@ -1,7 +1,9 @@
 ﻿#region
 
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
+using Microsoft.Win32;
 
 #endregion
 
@@ -19,21 +21,15 @@ namespace DesktopWidgets.Windows
             InitializeComponent();
             Title = title;
             InputData = displayData;
-            if (!string.IsNullOrEmpty(displayData))
-            {
-                txtData.IsReadOnly = true;
+            IsDisplayData = !string.IsNullOrEmpty(displayData);
+            if (IsDisplayData)
                 txtData.SelectAll();
-                btnCancel.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                btnCancel.Visibility = Visibility.Visible;
-            }
             DataContext = this;
             txtData.Focus();
         }
 
         public bool Cancelled { get; private set; }
+        public bool IsDisplayData { get; }
 
         public string InputData
         {
@@ -64,6 +60,22 @@ namespace DesktopWidgets.Windows
         {
             Cancelled = true;
             DialogResult = true;
+        }
+
+        private void btnSave_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new SaveFileDialog
+            {
+                DefaultExt = ".txt",
+                Filter = "Text file (*.txt)|*.txt|All files (*.*)|*.*"
+            };
+            dialog.ShowDialog();
+            File.WriteAllText(dialog.FileName, InputData);
+        }
+
+        private void btnCopy_OnClick(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(InputData);
         }
     }
 }
