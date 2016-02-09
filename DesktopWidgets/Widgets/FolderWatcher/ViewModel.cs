@@ -175,7 +175,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             var isContent = Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
                             Settings.ShowTextContentWhitelist.Any(
                                 x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase)) &&
-                            new FileInfo(CurrentFilePath).Length <= Settings.ShowContentMaxSize;
+                            (Settings.ShowContentMaxSize <= 0 ||
+                             new FileInfo(CurrentFilePath).Length <= Settings.ShowContentMaxSize);
             if (isContent)
                 new Task(() => { CurrentFileContent = File.ReadAllText(CurrentFilePath); }).Start();
             return isContent;
