@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DesktopWidgets.Classes;
@@ -176,7 +177,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                                 x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase)) &&
                             new FileInfo(CurrentFilePath).Length <= Settings.ShowContentMaxSize;
             if (isContent)
-                CurrentFileContent = File.ReadAllText(CurrentFilePath);
+                new Task(() => { CurrentFileContent = File.ReadAllText(CurrentFilePath); }).Start();
             return isContent;
         }
 
