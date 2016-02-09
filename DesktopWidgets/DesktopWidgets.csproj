@@ -126,10 +126,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\OpenFileAction.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\EventActionPair.cs" />
+    <Compile Include="Events\HotkeyEvent.cs" />
+    <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Events\WidgetMouseUpEvent.cs" />
+    <Compile Include="Events\WidgetMouseDownEvent.cs" />
+    <Compile Include="Events\WidgetEventBase.cs" />
     <Compile Include="Helpers\DoubleHelper.cs" />
     <Compile Include="MainContextMenu.xaml.cs">
       <DependentUpon>MainContextMenu.xaml</DependentUpon>
@@ -493,6 +501,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

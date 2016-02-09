@@ -5,15 +5,6 @@ namespace DesktopWidgets.Classes
 {
     internal class Hotkey
     {
-        public Hotkey(Key key, ModifierKeys modifierKeys, bool worksIfForegroundIsFullscreen, bool worksIfMuted)
-        {
-            Key = key;
-            ModifierKeys = modifierKeys;
-            WorksIfForegroundIsFullscreen = worksIfForegroundIsFullscreen;
-            WorksIfMuted = worksIfMuted;
-            Guid = Guid.NewGuid();
-        }
-
         public Hotkey(Key key, ModifierKeys modifierKeys, bool worksIfForegroundIsFullscreen, bool worksIfMuted,
             Guid guid)
         {
@@ -24,9 +15,13 @@ namespace DesktopWidgets.Classes
             Guid = guid;
         }
 
-        public Guid Guid { get; set; }
-        public Key Key { get; set; }
-        public ModifierKeys ModifierKeys { get; set; }
+        public Hotkey()
+        {
+        }
+
+        public Guid Guid { get; set; } = Guid.NewGuid();
+        public Key Key { get; set; } = Key.None;
+        public ModifierKeys ModifierKeys { get; set; } = ModifierKeys.None;
         public bool WorksIfForegroundIsFullscreen { get; set; }
         public bool WorksIfMuted { get; set; }
     }

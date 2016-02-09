@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.WidgetBase
@@ -7,5 +8,8 @@ namespace DesktopWidgets.WidgetBase
     {
         public int Version { get; set; } = 1;
         public ObservableCollection<WidgetSettingsBase> Widgets { get; set; }
+
+        public ObservableCollection<EventActionPair> EventActionPairs { get; set; } =
+            new ObservableCollection<EventActionPair>();
     }
 }

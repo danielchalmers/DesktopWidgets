@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Events;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Stores;
 using DesktopWidgets.View;
@@ -45,8 +46,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
             Drop = new RelayCommand<DragEventArgs>(DropExecute);
             MouseMove = new RelayCommand<MouseEventArgs>(MouseMoveExecute);
-            MouseDown = new RelayCommand<MouseEventArgs>(MouseDownExecute);
-            MouseUp = new RelayCommand<MouseEventArgs>(MouseUpExecute);
+            MouseDown = new RelayCommand<MouseButtonEventArgs>(MouseDownExecute);
+            MouseUp = new RelayCommand<MouseButtonEventArgs>(MouseUpExecute);
             KeyDown = new RelayCommand<KeyEventArgs>(KeyDownExecute);
             KeyUp = new RelayCommand<KeyEventArgs>(KeyUpExecute);
             MouseDoubleClick = new RelayCommand<MouseButtonEventArgs>(MouseDoubleClickExecute);
@@ -390,16 +391,34 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
         }
 
-        public virtual void MouseDownExecute(MouseEventArgs e)
+        public virtual void MouseDownExecute(MouseButtonEventArgs e)
         {
             if (_settings.DetectIdle)
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetMouseDownEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                if (evnt.MouseButton == e.ChangedButton)
+                    eventPair.Action.Execute();
+            }
         }
 
-        public virtual void MouseUpExecute(MouseEventArgs e)
+        public virtual void MouseUpExecute(MouseButtonEventArgs e)
         {
             if (_settings.DetectIdle)
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetMouseUpEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                if (evnt.MouseButton == e.ChangedButton)
+                    eventPair.Action.Execute();
+            }
         }
 
         public virtual void KeyDownExecute(KeyEventArgs e)
