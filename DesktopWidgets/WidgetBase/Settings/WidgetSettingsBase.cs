@@ -12,7 +12,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         public bool Disabled { get; set; } = false;
 
         [DisplayName("Internal Identifier")]
-        public WidgetId Identifier { get; } = new WidgetId();
+        public WidgetId Identifier { get; set; } = new WidgetId();
 
         [Category("Behavior (Idle)")]
         [DisplayName("Active Time End")]
@@ -365,10 +365,10 @@ namespace DesktopWidgets.WidgetBase.Settings
         public ModifierKeys HideHotKeyModifiers { get; set; }
 
         [DisplayName("Show Hotkey Identifier")]
-        public Guid ShowHotkeyIdentifier { get; } = Guid.NewGuid();
+        public Guid ShowHotkeyIdentifier { get; set; } = Guid.NewGuid();
 
         [DisplayName("Hide Hotkey Identifier")]
-        public Guid HideHotkeyIdentifier { get; } = Guid.NewGuid();
+        public Guid HideHotkeyIdentifier { get; set; } = Guid.NewGuid();
 
         [Category("Style (Titlebar)")]
         [DisplayName("Height (px)")]

@@ -4,12 +4,7 @@ namespace DesktopWidgets.WidgetBase
 {
     public class WidgetId
     {
-        public WidgetId()
-        {
-            Guid = Guid.NewGuid();
-        }
-
-        public Guid Guid { get; private set; }
+        public Guid Guid { get; set; } = Guid.NewGuid();
 
         public void GenerateNewGuid()
         {
