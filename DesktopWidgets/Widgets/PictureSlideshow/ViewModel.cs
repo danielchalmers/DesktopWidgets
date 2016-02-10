@@ -43,7 +43,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 WatchFolders = new List<string> {Settings.RootPath},
                 FileExtensionWhitelist = ImageHelper.SupportedExtensions,
                 MaxSize = Settings.FileFilterSize,
-                Recursive = Settings.Recursive
+                Recursive = Settings.Recursive,
+                DetectNewFiles = false,
+                DetectModifiedFiles = false
             });
             _directoryWatcher.CheckDirectoriesForNewFiles();
             NextImage();

@@ -11,5 +11,7 @@ namespace DesktopWidgets.Classes
         public bool Recursive { get; set; }
         public TimeSpan CheckInterval { get; set; }
         public double MaxSize { get; set; }
+        public bool DetectNewFiles { get; set; }
+        public bool DetectModifiedFiles { get; set; }
     }
 }

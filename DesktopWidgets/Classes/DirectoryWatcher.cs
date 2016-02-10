@@ -26,10 +26,10 @@ namespace DesktopWidgets.Classes
             _dirWatcherTimer.Tick += (sender, args) => CheckDirectoriesForNewFilesAsync();
         }
 
-        public void CheckDirectoriesForNewFilesAsync(bool promptAction = true)
-            => new Task(() => { CheckDirectoriesForNewFiles(promptAction); }).Start();
+        public void CheckDirectoriesForNewFilesAsync()
+            => new Task(CheckDirectoriesForNewFiles).Start();
 
-        public void CheckDirectoriesForNewFiles(bool promptAction = true)
+        public void CheckDirectoriesForNewFiles()
         {
             if (_isScanning)
                 return;
@@ -53,24 +53,33 @@ namespace DesktopWidgets.Classes
                     var oldFiles = KnownFilePaths[folder]?.ToList();
                     KnownFilePaths[folder] = files;
 
-                    if (oldFiles != null && promptAction)
+                    if (oldFiles != null)
                     {
-                        var newFiles = files.Where(x => oldFiles.All(y => y.FullName != x.FullName)).ToList();
-                        var changedFiles =
-                            files.Where(
-                                x =>
-                                    oldFiles.Any(
-                                        y => y.FullName == x.FullName && y.LastWriteTimeUtc != x.LastWriteTimeUtc))
-                                .ToList();
-
-                        Application.Current.Dispatcher.Invoke(
-                            () =>
-                            {
-                                if (changedFiles.Count > 0)
-                                    _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
-                                if (newFiles.Count > 0)
-                                    _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
-                            });
+                        if (_settings.DetectModifiedFiles)
+                        {
+                            var changedFiles =
+                                files.Where(
+                                    x =>
+                                        oldFiles.Any(
+                                            y => y.FullName == x.FullName && y.LastWriteTimeUtc != x.LastWriteTimeUtc))
+                                    .ToList();
+                            Application.Current.Dispatcher.Invoke(
+                                () =>
+                                {
+                                    if (changedFiles.Count > 0)
+                                        _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
+                                });
+                        }
+                        if (_settings.DetectNewFiles)
+                        {
+                            var newFiles = files.Where(x => oldFiles.All(y => y.FullName != x.FullName)).ToList();
+                            Application.Current.Dispatcher.Invoke(
+                                () =>
+                                {
+                                    if (newFiles.Count > 0)
+                                        _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
+                                });
+                        }
                     }
                 }
                 catch

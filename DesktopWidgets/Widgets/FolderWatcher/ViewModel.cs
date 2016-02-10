@@ -45,7 +45,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                         FileExtensionWhitelist = Settings.FileExtensionWhitelist,
                         FileExtensionBlacklist = Settings.FileExtensionBlacklist,
                         Recursive = Settings.Recursive,
-                        CheckInterval = TimeSpan.FromMilliseconds(Settings.FolderCheckIntervalMS)
+                        CheckInterval = TimeSpan.FromMilliseconds(Settings.FolderCheckIntervalMS),
+                        DetectNewFiles = Settings.DetectNewFiles,
+                        DetectModifiedFiles = Settings.DetectModifiedFiles
                     }, AddToFileQueue);
             _directoryWatcher.Start();
 
@@ -104,10 +106,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
-            if (change == DirectoryChange.FileChanged && !Settings.DetectModifiedFiles)
-                return;
-            if (change == DirectoryChange.NewFile && !Settings.DetectNewFiles)
-                return;
             var lastCheck = Settings.LastCheck;
             Settings.LastCheck = DateTime.Now;
             if (Settings.EnableTimeout)
