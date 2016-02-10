@@ -102,7 +102,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
         }
 
-        private void AddToFileQueue(FileInfo path, DirectoryChange change)
+        private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
             if (change == DirectoryChange.FileChanged && !Settings.DetectModifiedFiles)
                 return;
@@ -113,8 +113,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             if (Settings.EnableTimeout)
                 if (DateTime.Now - lastCheck >= Settings.TimeoutDuration)
                     return;
-            _notificationQueue.Enqueue(path.FullName);
-            if (!Settings.QueueFiles || (!_isShowing && _notificationQueue.Count == 1))
+            var notificationCount = _notificationQueue.Count;
+            foreach (var path in paths)
+                _notificationQueue.Enqueue(path.FullName);
+            if (!Settings.QueueFiles || (!_isShowing && notificationCount == 0))
                 HandleDirectoryChange();
         }
 
