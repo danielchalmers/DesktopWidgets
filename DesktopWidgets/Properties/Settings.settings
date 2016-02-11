@@ -118,5 +118,11 @@
     <Setting Name="ManageEventsHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">550</Value>
     </Setting>
+    <Setting Name="EventActionPairEditorWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">800</Value>
+    </Setting>
+    <Setting Name="EventActionPairEditorHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">650</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

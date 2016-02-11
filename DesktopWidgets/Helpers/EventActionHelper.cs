@@ -28,11 +28,8 @@ namespace DesktopWidgets.Helpers
             if (pair == null)
                 return;
 
-            var editEventDialog = new WidgetEditor("Event", pair.Event);
-            var editActionDialog = new WidgetEditor("Action", pair.Action);
-
-            editEventDialog.ShowDialog();
-            editActionDialog.ShowDialog();
+            var editDialog = new EventActionPairEditor(pair);
+            editDialog.ShowDialog();
         }
 
         public static void RemovePair(EventActionId id)

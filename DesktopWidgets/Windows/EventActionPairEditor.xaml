@@ -1,0 +1,38 @@
+﻿<Window x:Class="DesktopWidgets.Windows.EventActionPairEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopWidgets.Windows"
+        xmlns:p="clr-namespace:DesktopWidgets.Properties"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Event and Action Editor"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=EventActionPairEditorWidth, Mode=TwoWay}"
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=EventActionPairEditorHeight, Mode=TwoWay}"
+        MinWidth="300"
+        MinHeight="300"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type xctk:PropertyGrid}">
+                <Setter Property="IsMiscCategoryLabelHidden" Value="True" />
+            </Style>
+        </Grid.Resources>
+        <xctk:PropertyGrid Grid.Row="0" Grid.Column="0" x:Name="EventPropertyGrid" />
+        <xctk:PropertyGrid Grid.Row="0" Grid.Column="2" x:Name="ActionPropertyGrid" />
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="OK" Margin="15" Width="75" Height="23"
+                HorizontalAlignment="Right"
+                IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
+    </Grid>
+</Window>

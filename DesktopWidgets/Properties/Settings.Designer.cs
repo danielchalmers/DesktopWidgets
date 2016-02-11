@@ -465,5 +465,29 @@ namespace DesktopWidgets.Properties {
                 this["ManageEventsHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("800")]
+        public double EventActionPairEditorWidth {
+            get {
+                return ((double)(this["EventActionPairEditorWidth"]));
+            }
+            set {
+                this["EventActionPairEditorWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("650")]
+        public double EventActionPairEditorHeight {
+            get {
+                return ((double)(this["EventActionPairEditorHeight"]));
+            }
+            set {
+                this["EventActionPairEditorHeight"] = value;
+            }
+        }
     }
 }
