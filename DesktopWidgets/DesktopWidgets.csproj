@@ -127,6 +127,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\WidgetToggleEnabledAction.cs" />
     <Compile Include="Actions\WidgetHideAction.cs" />
     <Compile Include="Actions\WidgetEnableAction.cs" />
     <Compile Include="Actions\WidgetIntroAction.cs" />

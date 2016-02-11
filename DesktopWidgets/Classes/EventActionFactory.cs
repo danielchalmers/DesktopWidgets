@@ -23,6 +23,7 @@ namespace DesktopWidgets.Classes
             "Play Sound",
             "Widget Enable",
             "Widget Disable",
+            "Widget Toggle Enabled",
             "Widget Intro",
             "Widget Dismiss",
             "Widget Hide"
@@ -68,6 +69,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetDismissAction();
                 case "Widget Hide":
                     return new WidgetHideAction();
+                case "Widget Toggle Enabled":
+                    return new WidgetToggleEnabledAction();
             }
             return null;
         }
@@ -107,6 +110,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Dismiss";
             if (action is WidgetHideAction)
                 return "Widget Hide";
+            if (action is WidgetToggleEnabledAction)
+                return "Widget Toggle Enabled";
             return null;
         }
     }
