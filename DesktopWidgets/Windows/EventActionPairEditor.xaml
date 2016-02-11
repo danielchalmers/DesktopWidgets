@@ -23,7 +23,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <xctk:PropertyGrid Grid.Row="0" SelectedObject="{Binding EventActionPair.Event}"
-                           IsMiscCategoryLabelHidden="True">
+                           IsMiscCategoryLabelHidden="True" ShowTitle="True">
             <xctk:PropertyGrid.EditorDefinitions>
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
@@ -35,7 +35,7 @@
             </xctk:PropertyGrid.EditorDefinitions>
         </xctk:PropertyGrid>
         <xctk:PropertyGrid Grid.Row="2" SelectedObject="{Binding EventActionPair.Action}"
-                           IsMiscCategoryLabelHidden="True">
+                           IsMiscCategoryLabelHidden="True" ShowTitle="True">
             <xctk:PropertyGrid.EditorDefinitions>
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
