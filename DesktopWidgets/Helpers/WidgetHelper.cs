@@ -16,12 +16,12 @@ namespace DesktopWidgets.Helpers
     {
         public static WidgetSettingsBase GetSettings(this WidgetId id)
         {
-            return App.WidgetsSettingsStore.Widgets.FirstOrDefault(v => v.Identifier == id);
+            return App.WidgetsSettingsStore.Widgets.FirstOrDefault(v => v.Identifier.Guid == id.Guid);
         }
 
         public static WidgetView GetView(this WidgetId id)
         {
-            return App.WidgetViews.FirstOrDefault(w => w.Id == id && !w.IsClosed);
+            return App.WidgetViews.FirstOrDefault(w => w.Id.Guid == id.Guid && !w.IsClosed);
         }
 
         public static string GetName(this WidgetId id)
