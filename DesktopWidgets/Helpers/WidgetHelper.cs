@@ -236,5 +236,12 @@ namespace DesktopWidgets.Helpers
             foreach (var view in App.WidgetViews)
                 view.Dismiss();
         }
+
+        public static WidgetId ChooseWidget()
+        {
+            var dialog = new SelectWidget();
+            dialog.ShowDialog();
+            return dialog.SelectedItem?.Identifier;
+        }
     }
 }

@@ -29,9 +29,29 @@
                 <Setter Property="IsMiscCategoryLabelHidden" Value="True" />
             </Style>
         </Grid.Resources>
-        <xctk:PropertyGrid Grid.Row="0" Grid.Column="0" x:Name="EventPropertyGrid" />
-        <xctk:PropertyGrid Grid.Row="0" Grid.Column="2" x:Name="ActionPropertyGrid" />
-        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="OK" Margin="15" Width="75" Height="23"
+        <xctk:PropertyGrid Grid.Row="0" Grid.Column="0" SelectedObject="{Binding EventActionPair.Event}">
+            <xctk:PropertyGrid.EditorDefinitions>
+                <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
+                    <xctk:EditorTemplateDefinition.EditingTemplate>
+                        <DataTemplate>
+                            <Button Content="Select Widget..." Click="btnSelectWidgetForEvent_OnClick" />
+                        </DataTemplate>
+                    </xctk:EditorTemplateDefinition.EditingTemplate>
+                </xctk:EditorTemplateDefinition>
+            </xctk:PropertyGrid.EditorDefinitions>
+        </xctk:PropertyGrid>
+        <xctk:PropertyGrid Grid.Row="0" Grid.Column="2" SelectedObject="{Binding EventActionPair.Action}">
+            <xctk:PropertyGrid.EditorDefinitions>
+                <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
+                    <xctk:EditorTemplateDefinition.EditingTemplate>
+                        <DataTemplate>
+                            <Button Content="Select Widget..." Click="btnSelectWidgetForAction_OnClick" />
+                        </DataTemplate>
+                    </xctk:EditorTemplateDefinition.EditingTemplate>
+                </xctk:EditorTemplateDefinition>
+            </xctk:PropertyGrid.EditorDefinitions>
+        </xctk:PropertyGrid>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Content="OK" Margin="15" Width="75" Height="23"
                 HorizontalAlignment="Right"
                 IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
     </Grid>

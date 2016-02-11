@@ -1,5 +1,8 @@
 ﻿using System.Windows;
+using DesktopWidgets.Actions;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Events;
+using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Windows
 {
@@ -11,13 +14,25 @@ namespace DesktopWidgets.Windows
         public EventActionPairEditor(EventActionPair pair)
         {
             InitializeComponent();
-            EventPropertyGrid.SelectedObject = pair.Event;
-            ActionPropertyGrid.SelectedObject = pair.Action;
+            EventActionPair = pair;
+            DataContext = this;
         }
+
+        public EventActionPair EventActionPair { get; set; }
 
         private void btnOK_OnClick(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void btnSelectWidgetForEvent_OnClick(object sender, RoutedEventArgs e)
+        {
+            ((WidgetEventBase) EventActionPair.Event).WidgetId = WidgetHelper.ChooseWidget();
+        }
+
+        private void btnSelectWidgetForAction_OnClick(object sender, RoutedEventArgs e)
+        {
+            ((WidgetActionBase) EventActionPair.Action).WidgetId = WidgetHelper.ChooseWidget();
         }
     }
 }
