@@ -498,5 +498,16 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 eventPair.Action.Execute();
             }
         }
+
+        public virtual void OnSpecialEvent()
+        {
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetSpecialEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
+        }
     }
 }

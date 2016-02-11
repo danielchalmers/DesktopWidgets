@@ -158,6 +158,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                     SoundVolume = Settings.EventSoundVolume
                 });
             }
+            OnSpecialEvent();
         }
 
         private bool HandleFileImage()

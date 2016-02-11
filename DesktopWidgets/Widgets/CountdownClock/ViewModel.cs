@@ -54,6 +54,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
                         SoundPath = Settings.EndSoundPath,
                         SoundVolume = Settings.EndSoundVolume
                     });
+            OnSpecialEvent();
         }
     }
 }

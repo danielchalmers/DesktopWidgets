@@ -80,6 +80,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
                         SoundPath = Settings.EventSoundPath,
                         SoundVolume = Settings.EventSoundVolume
                     });
+            OnSpecialEvent();
         }
 
         private void DownloadFeed(Action<SyndicationFeed> finishAction)

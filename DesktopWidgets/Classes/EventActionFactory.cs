@@ -13,7 +13,8 @@ namespace DesktopWidgets.Classes
             "Widget Enable",
             "Widget Disable",
             "Widget Intro",
-            "Widget Dismiss"
+            "Widget Dismiss",
+            "Widget Special Event"
         };
 
         public static readonly List<string> AvailableActions = new List<string>
@@ -43,6 +44,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetIntroEvent();
                 case "Widget Dismiss":
                     return new WidgetDismissEvent();
+                case "Widget Special Event":
+                    return new WidgetSpecialEvent();
             }
             return null;
         }
@@ -83,6 +86,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Intro";
             if (evnt is WidgetDismissEvent)
                 return "Widget Dismiss";
+            if (evnt is WidgetSpecialEvent)
+                return "Widget Special Event";
             return null;
         }
 
