@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Events;
 using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
@@ -18,7 +19,7 @@ namespace DesktopWidgets.Helpers
             return App.WidgetsSettingsStore.Widgets.FirstOrDefault(v => v.Identifier == id);
         }
 
-        private static WidgetView GetView(this WidgetId id)
+        public static WidgetView GetView(this WidgetId id)
         {
             return App.WidgetViews.FirstOrDefault(w => w.Id == id && !w.IsClosed);
         }
@@ -67,7 +68,7 @@ namespace DesktopWidgets.Helpers
             settings.Identifier.LoadView();
         }
 
-        private static void Disable(this WidgetId id)
+        public static void Disable(this WidgetId id)
         {
             var settings = id.GetSettings();
             if (settings.Disabled)
@@ -78,15 +79,31 @@ namespace DesktopWidgets.Helpers
                 return;
             view.Animate(AnimationMode.Hide, false, null, view.Close);
             App.WidgetViews.Remove(view);
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetDisableEvent;
+                if (evnt == null || evnt.WidgetId.Guid != id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
 
-        private static void Enable(this WidgetId id)
+        public static void Enable(this WidgetId id)
         {
             var settings = id.GetSettings();
             if (!settings.Disabled)
                 return;
             settings.Disabled = false;
             id.LoadView();
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetEnableEvent;
+                if (evnt == null || evnt.WidgetId.Guid != id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
 
         public static void ToggleEnable(this WidgetId id)

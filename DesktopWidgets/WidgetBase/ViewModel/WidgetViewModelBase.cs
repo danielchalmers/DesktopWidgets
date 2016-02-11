@@ -451,10 +451,24 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public virtual void OnIntro()
         {
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetIntroEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
 
         public virtual void OnIntroEnd()
         {
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetIntroEndEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
 
         public virtual void OnRefresh()
@@ -476,6 +490,13 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public virtual void OnDismiss()
         {
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetDismissEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
     }
 }
