@@ -281,6 +281,9 @@
     <Compile Include="Windows\ManageEvents.xaml.cs">
       <DependentUpon>ManageEvents.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SelectDualItem.xaml.cs">
+      <DependentUpon>SelectDualItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SelectWidget.xaml.cs">
       <DependentUpon>SelectWidget.xaml</DependentUpon>
     </Compile>
@@ -320,6 +323,7 @@
     <Compile Include="Widgets\TimeClock\ViewModel.cs" />
     <Compile Include="WindowViewModels\ManageEventsViewModel.cs" />
     <Compile Include="WindowViewModels\ManageWidgetsViewModel.cs" />
+    <Compile Include="WindowViewModels\SelectDualItemViewModel.cs" />
     <Compile Include="WindowViewModels\SelectItemViewModel.cs" />
     <Compile Include="Windows\SelectItem.xaml.cs">
       <DependentUpon>SelectItem.xaml</DependentUpon>
@@ -435,6 +439,10 @@
     <Page Include="Windows\ManageEvents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SelectDualItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\SelectWidget.xaml">
       <Generator>MSBuild:Compile</Generator>

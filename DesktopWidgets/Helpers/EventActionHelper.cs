@@ -9,16 +9,17 @@ namespace DesktopWidgets.Helpers
     {
         public static void NewPair()
         {
-            var selectEventDialog = new SelectItem(EventActionFactory.AvailableEvents, "New Event");
-            var selectActionDialog = new SelectItem(EventActionFactory.AvailableActions, "New Action");
+            var dialog = new SelectDualItem(EventActionFactory.AvailableEvents, EventActionFactory.AvailableActions,
+                "New Event and Action");
+            dialog.ShowDialog();
 
-            selectEventDialog.ShowDialog();
-            selectActionDialog.ShowDialog();
+            if (dialog.SelectedItem1 == null || dialog.SelectedItem2 == null)
+                return;
 
             App.WidgetsSettingsStore.EventActionPairs.Add(new EventActionPair
             {
-                Event = EventActionFactory.GetNewEventFromName((string) selectEventDialog.SelectedItem),
-                Action = EventActionFactory.GetNewActionFromName((string) selectActionDialog.SelectedItem)
+                Event = EventActionFactory.GetNewEventFromName((string) dialog.SelectedItem1),
+                Action = EventActionFactory.GetNewActionFromName((string) dialog.SelectedItem2)
             });
         }
 
