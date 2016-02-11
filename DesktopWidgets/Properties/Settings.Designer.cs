@@ -441,5 +441,29 @@ namespace DesktopWidgets.Properties {
                 return ((int)(this["ChangelogDownloadPages"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public double ManageEventsWidth {
+            get {
+                return ((double)(this["ManageEventsWidth"]));
+            }
+            set {
+                this["ManageEventsWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("550")]
+        public double ManageEventsHeight {
+            get {
+                return ((double)(this["ManageEventsHeight"]));
+            }
+            set {
+                this["ManageEventsHeight"] = value;
+            }
+        }
     }
 }

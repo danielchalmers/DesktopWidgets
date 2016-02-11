@@ -139,6 +139,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\EventActionFactory.cs" />
+    <Compile Include="Classes\EventActionId.cs" />
     <Compile Include="Classes\EventActionPair.cs" />
     <Compile Include="Events\HotkeyEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Events\WidgetMouseDownEvent.cs" />
     <Compile Include="Events\WidgetEventBase.cs" />
     <Compile Include="Helpers\DoubleHelper.cs" />
+    <Compile Include="Helpers\EventActionHelper.cs" />
     <Compile Include="MainContextMenu.xaml.cs">
       <DependentUpon>MainContextMenu.xaml</DependentUpon>
     </Compile>
@@ -274,6 +277,9 @@
     <Compile Include="Widgets\Weather\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\Metadata.cs" />
     <Compile Include="Widgets\TimeClock\Settings.cs" />
+    <Compile Include="Windows\ManageEvents.xaml.cs">
+      <DependentUpon>ManageEvents.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\WidgetEditor.xaml.cs">
       <DependentUpon>WidgetEditor.xaml</DependentUpon>
     </Compile>
@@ -305,6 +311,7 @@
     <Compile Include="Widgets\StopwatchClock\ViewModel.cs" />
     <Compile Include="Widgets\CountdownClock\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\ViewModel.cs" />
+    <Compile Include="WindowViewModels\ManageEventsViewModel.cs" />
     <Compile Include="WindowViewModels\ManageWidgetsViewModel.cs" />
     <Compile Include="WindowViewModels\SelectItemViewModel.cs" />
     <Compile Include="Windows\SelectItem.xaml.cs">
@@ -417,6 +424,10 @@
     <Page Include="Widgets\Weather\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\ManageEvents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\WidgetEditor.xaml">
       <SubType>Designer</SubType>

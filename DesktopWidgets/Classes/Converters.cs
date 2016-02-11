@@ -748,4 +748,22 @@ namespace DesktopWidgets.Classes
             throw new NotImplementedException();
         }
     }
+
+    public class EventActionPairToNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var pair = value as EventActionPair;
+            if (pair == null)
+                return DependencyProperty.UnsetValue;
+            var eventName = EventActionFactory.GetNameFromEvent(pair.Event);
+            var actionName = EventActionFactory.GetNameFromAction(pair.Action);
+            return $"{eventName} -> {actionName}";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

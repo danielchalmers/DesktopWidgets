@@ -25,6 +25,8 @@
         <MenuItem Header="Dismiss All Widgets" Click="menuItemDismissWidgets_OnClick" />
         <MenuItem Header="Reload All Widgets" Click="menuItemReloadWidgets_OnClick" />
         <Separator />
+        <MenuItem Header="Manage Events..." Click="menuItemManageEvents_OnClick" />
+        <Separator />
         <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
         <Separator />
         <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick"

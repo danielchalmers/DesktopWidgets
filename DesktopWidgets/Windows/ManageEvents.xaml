@@ -1,0 +1,85 @@
+﻿<Window x:Class="DesktopWidgets.Windows.ManageEvents"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopWidgets"
+        xmlns:p="clr-namespace:DesktopWidgets.Properties"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
+        xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+        xmlns:windowViewModels="clr-namespace:DesktopWidgets.WindowViewModels"
+        mc:Ignorable="d"
+        Title="Manage Events"
+        Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsWidth, Mode=TwoWay}"
+        Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsHeight, Mode=TwoWay}"
+        MinHeight="497" MinWidth="535"
+        ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <windowViewModels:ManageEventsViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <classes:SelectedWidgetToEnableDisableNameConverter x:Key="SelectedWidgetToEnableDisableNameConverter" />
+        <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
+        <classes:EventActionPairToNameConverter x:Key="EventActionPairToNameConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <ListBox Margin="15"
+                 ItemsSource="{Binding Path=EventActionPairs, Source={x:Static local:App.WidgetsSettingsStore}}"
+                 SelectedItem="{Binding SelectedPair}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <command:EventToCommand Command="{Binding DeselectAll}"
+                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <Binding Converter="{StaticResource EventActionPairToNameConverter}" />
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,15,15,15">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="30" />
+                    <Setter Property="Margin" Value="0,0,0,10" />
+                    <Setter Property="Padding" Value="15,0,15,0" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                    <Setter Property="IsEnabled"
+                            Value="{Binding SelectedPair, Converter={StaticResource NotNullToBoolConverter}}" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="New..." Command="{Binding NewPair}" IsEnabled="True" />
+            <Button Visibility="Hidden" />
+            <Button Content="Edit..." Command="{Binding EditPair}" />
+            <Button Content="Remove..." Command="{Binding RemovePair}" />
+        </StackPanel>
+
+        <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="75" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23" />
+            </Grid.RowDefinitions>
+
+            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" IsDefault="True" IsCancel="True" />
+        </Grid>
+    </Grid>
+</Window>

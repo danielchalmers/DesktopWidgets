@@ -67,5 +67,11 @@ namespace DesktopWidgets
         {
             WidgetHelper.DismissWidgets();
         }
+
+        private void menuItemManageEvents_OnClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new ManageEvents();
+            dialog.Show();
+        }
     }
 }
