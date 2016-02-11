@@ -71,7 +71,7 @@ namespace DesktopWidgets.Helpers
         public static void Disable(this WidgetId id)
         {
             var settings = id.GetSettings();
-            if (settings.Disabled)
+            if (settings == null || settings.Disabled)
                 return;
             settings.Disabled = true;
             var view = id.GetView();
@@ -92,7 +92,7 @@ namespace DesktopWidgets.Helpers
         public static void Enable(this WidgetId id)
         {
             var settings = id.GetSettings();
-            if (!settings.Disabled)
+            if (settings == null || !settings.Disabled)
                 return;
             settings.Disabled = false;
             id.LoadView();
@@ -108,7 +108,10 @@ namespace DesktopWidgets.Helpers
 
         public static void ToggleEnable(this WidgetId id)
         {
-            if (id.GetSettings().Disabled)
+            var settings = id.GetSettings();
+            if (settings == null)
+                return;
+            if (settings.Disabled)
                 id.Enable();
             else
                 id.Disable();
@@ -116,7 +119,8 @@ namespace DesktopWidgets.Helpers
 
         public static void Reload(this WidgetId id)
         {
-            if (id.GetSettings().Disabled)
+            var settings = id.GetSettings();
+            if (settings == null || settings.Disabled)
                 return;
             id.Disable();
             id.Enable();
@@ -125,6 +129,8 @@ namespace DesktopWidgets.Helpers
         public static void Remove(this WidgetId id, bool msg = false)
         {
             var settings = id.GetSettings();
+            if (settings == null)
+                return;
             if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?\n\nThis cannot be undone.",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
@@ -141,6 +147,8 @@ namespace DesktopWidgets.Helpers
         public static void Edit(this WidgetId id, bool dismiss = false)
         {
             var settings = id.GetSettings();
+            if (settings == null)
+                return;
             var view = id.GetView();
             var name = id.GetName();
             var previousHorizontalAlignment = settings.HorizontalAlignment;
