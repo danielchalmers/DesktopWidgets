@@ -16,11 +16,14 @@ namespace DesktopWidgets.Helpers
             if (dialog.SelectedItem1 == null || dialog.SelectedItem2 == null)
                 return;
 
-            App.WidgetsSettingsStore.EventActionPairs.Add(new EventActionPair
+            var newPair = new EventActionPair
             {
                 Event = EventActionFactory.GetNewEventFromName((string) dialog.SelectedItem1),
                 Action = EventActionFactory.GetNewActionFromName((string) dialog.SelectedItem2)
-            });
+            };
+            App.WidgetsSettingsStore.EventActionPairs.Add(newPair);
+
+            EditPair(newPair);
         }
 
         public static void EditPair(EventActionId id)
@@ -28,7 +31,11 @@ namespace DesktopWidgets.Helpers
             var pair = App.WidgetsSettingsStore.EventActionPairs.FirstOrDefault(x => x.Identifier.Guid == id.Guid);
             if (pair == null)
                 return;
+            EditPair(pair);
+        }
 
+        private static void EditPair(EventActionPair pair)
+        {
             var editDialog = new EventActionPairEditor(pair);
             editDialog.ShowDialog();
         }
