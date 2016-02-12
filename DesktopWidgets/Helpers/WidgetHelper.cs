@@ -74,11 +74,7 @@ namespace DesktopWidgets.Helpers
             if (settings == null || settings.Disabled)
                 return;
             settings.Disabled = true;
-            var view = id.GetView();
-            if (view == null)
-                return;
-            view.Animate(AnimationMode.Hide, false, null, view.Close);
-            App.WidgetViews.Remove(view);
+            id.CloseView();
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
@@ -106,6 +102,15 @@ namespace DesktopWidgets.Helpers
             }
         }
 
+        public static void CloseView(this WidgetId id)
+        {
+            var view = id.GetView();
+            if (view == null)
+                return;
+            view.Animate(AnimationMode.Hide, false, null, view.Close);
+            App.WidgetViews.Remove(view);
+        }
+
         public static void ToggleEnable(this WidgetId id)
         {
             var settings = id.GetSettings();
@@ -122,8 +127,8 @@ namespace DesktopWidgets.Helpers
             var settings = id.GetSettings();
             if (settings == null || settings.Disabled)
                 return;
-            id.Disable();
-            id.Enable();
+            id.CloseView();
+            id.LoadView();
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
