@@ -22,8 +22,7 @@ namespace DesktopWidgets.WidgetBase
             Widgets.Sidebar.Metadata.FriendlyName,
             Widgets.Calculator.Metadata.FriendlyName,
             Widgets.FolderWatcher.Metadata.FriendlyName,
-            Widgets.RSSFeed.Metadata.FriendlyName,
-            Widgets.CommandButton.Metadata.FriendlyName
+            Widgets.RSSFeed.Metadata.FriendlyName
         }.OrderBy(x => x).ToList();
 
         public static string GetFriendlyName(this WidgetId id)
@@ -51,8 +50,6 @@ namespace DesktopWidgets.WidgetBase
                 return Widgets.FolderWatcher.Metadata.FriendlyName;
             if (settings is Widgets.RSSFeed.Settings)
                 return Widgets.RSSFeed.Metadata.FriendlyName;
-            if (settings is Widgets.CommandButton.Settings)
-                return Widgets.CommandButton.Metadata.FriendlyName;
             return null;
         }
 
@@ -82,8 +79,6 @@ namespace DesktopWidgets.WidgetBase
                     return new Widgets.FolderWatcher.Settings();
                 case Widgets.RSSFeed.Metadata.FriendlyName:
                     return new Widgets.RSSFeed.Settings();
-                case Widgets.CommandButton.Metadata.FriendlyName:
-                    return new Widgets.CommandButton.Settings();
                 default:
                     return null;
             }
@@ -114,8 +109,6 @@ namespace DesktopWidgets.WidgetBase
                 return new Widgets.FolderWatcher.ViewModel(id);
             if (settings is Widgets.RSSFeed.Settings)
                 return new Widgets.RSSFeed.ViewModel(id);
-            if (settings is Widgets.CommandButton.Settings)
-                return new Widgets.CommandButton.ViewModel(id);
             return null;
         }
 
@@ -144,8 +137,6 @@ namespace DesktopWidgets.WidgetBase
                 return new Widgets.FolderWatcher.ControlView();
             if (settings is Widgets.RSSFeed.Settings)
                 return new Widgets.RSSFeed.ControlView();
-            if (settings is Widgets.CommandButton.Settings)
-                return new Widgets.CommandButton.ControlView();
             return null;
         }
     }
