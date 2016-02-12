@@ -124,6 +124,14 @@ namespace DesktopWidgets.Helpers
                 return;
             id.Disable();
             id.Enable();
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetReloadEvent;
+                if (evnt == null || evnt.WidgetId.Guid != id.Guid)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
 
         public static void Remove(this WidgetId id, bool msg = false)

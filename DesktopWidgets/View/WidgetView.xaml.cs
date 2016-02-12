@@ -172,6 +172,13 @@ namespace DesktopWidgets.View
                 _mouseChecker.Hide(checkIdleStatus: checkIdleStatus);
         }
 
+        public void CancelIntro()
+        {
+            if (!_introTimer.IsEnabled && !_mouseChecker.KeepOpenForIntro)
+                return;
+            HideIntro(false);
+        }
+
         public void ShowIntro(IntroData introData = null)
         {
             _mouseChecker.QueueIntro = null;

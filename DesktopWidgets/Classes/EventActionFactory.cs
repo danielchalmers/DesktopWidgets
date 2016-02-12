@@ -10,9 +10,12 @@ namespace DesktopWidgets.Classes
         {
             "Widget Mouse Down",
             "Widget Mouse Up",
+            "Widget Mouse Double Click",
             "Widget Enable",
             "Widget Disable",
+            "Widget Reload",
             "Widget Intro",
+            "Widget Intro End",
             "Widget Dismiss",
             "Widget Special Event"
         };
@@ -23,8 +26,10 @@ namespace DesktopWidgets.Classes
             "Play Sound",
             "Widget Enable",
             "Widget Disable",
+            "Widget Reload",
             "Widget Toggle Enabled",
             "Widget Intro",
+            "Widget Cancel Intro",
             "Widget Dismiss",
             "Widget Hide"
         };
@@ -47,6 +52,12 @@ namespace DesktopWidgets.Classes
                     return new WidgetDismissEvent();
                 case "Widget Special Event":
                     return new WidgetSpecialEvent();
+                case "Widget Intro End":
+                    return new WidgetIntroEndEvent();
+                case "Widget Mouse Double Click":
+                    return new WidgetMouseDoubleClickEvent();
+                case "Widget Reload":
+                    return new WidgetReloadEvent();
             }
             return null;
         }
@@ -71,6 +82,10 @@ namespace DesktopWidgets.Classes
                     return new WidgetHideAction();
                 case "Widget Toggle Enabled":
                     return new WidgetToggleEnabledAction();
+                case "Widget Cancel Intro":
+                    return new WidgetCancelIntroAction();
+                case "Widget Reload":
+                    return new WidgetReloadAction();
             }
             return null;
         }
@@ -91,6 +106,12 @@ namespace DesktopWidgets.Classes
                 return "Widget Dismiss";
             if (evnt is WidgetSpecialEvent)
                 return "Widget Special Event";
+            if (evnt is WidgetIntroEndEvent)
+                return "Widget Intro End";
+            if (evnt is WidgetMouseDoubleClickEvent)
+                return "Widget Mouse Double Click";
+            if (evnt is WidgetReloadEvent)
+                return "Widget Reload";
             return null;
         }
 
@@ -112,6 +133,10 @@ namespace DesktopWidgets.Classes
                 return "Widget Hide";
             if (action is WidgetToggleEnabledAction)
                 return "Widget Toggle Enabled";
+            if (action is WidgetCancelIntroAction)
+                return "Widget Cancel Intro";
+            if (action is WidgetReloadAction)
+                return "Widget Reload";
             return null;
         }
     }

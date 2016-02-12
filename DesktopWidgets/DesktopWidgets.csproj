@@ -127,6 +127,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\WidgetCancelIntroAction.cs" />
+    <Compile Include="Actions\WidgetReloadAction.cs" />
     <Compile Include="Actions\WidgetToggleEnabledAction.cs" />
     <Compile Include="Actions\WidgetHideAction.cs" />
     <Compile Include="Actions\WidgetEnableAction.cs" />
@@ -150,6 +152,8 @@
     <Compile Include="Events\WidgetIntroEndEvent.cs" />
     <Compile Include="Events\WidgetIntroEvent.cs" />
     <Compile Include="Events\WidgetDismissEvent.cs" />
+    <Compile Include="Events\WidgetMouseDoubleClickEvent.cs" />
+    <Compile Include="Events\WidgetReloadEvent.cs" />
     <Compile Include="Events\WidgetSpecialEvent.cs" />
     <Compile Include="Events\WidgetMouseUpEvent.cs" />
     <Compile Include="Events\WidgetMouseDownEvent.cs" />

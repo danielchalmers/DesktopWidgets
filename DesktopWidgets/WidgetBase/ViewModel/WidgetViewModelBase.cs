@@ -437,6 +437,15 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             if (e.ChangedButton == MouseButton.Left)
                 LeftMouseDoubleClickExecute(e);
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetMouseDoubleClickEvent;
+                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                    continue;
+                if (evnt.MouseButton == e.ChangedButton)
+                    eventPair.Action.Execute();
+            }
         }
 
         public virtual void LeftMouseDoubleClickExecute(MouseButtonEventArgs e)
