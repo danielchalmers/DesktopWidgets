@@ -20,7 +20,9 @@
             <TextBlock TextTrimming="CharacterEllipsis"
                        TextAlignment="Center"
                        ToolTip="{Binding CurrentFilePath}"
-                       Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}">
+                       Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center">
                 <Hyperlink NavigateUri="{Binding CurrentFilePath}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RequestNavigate">
