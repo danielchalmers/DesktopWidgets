@@ -8,6 +8,8 @@ namespace DesktopWidgets.Classes
     {
         public static readonly List<string> AvailableEvents = new List<string>
         {
+            "Foreground Fullscreen Changed",
+            "Foreground Title Changed",
             "Widget Mouse Down",
             "Widget Mouse Up",
             "Widget Mouse Double Click",
@@ -58,6 +60,10 @@ namespace DesktopWidgets.Classes
                     return new WidgetMouseDoubleClickEvent();
                 case "Widget Reload":
                     return new WidgetReloadEvent();
+                case "Foreground Fullscreen Changed":
+                    return new ForegroundFullscreenChangedEvent();
+                case "Foreground Title Changed":
+                    return new ForegroundTitleChangedEvent();
             }
             return null;
         }
@@ -112,6 +118,10 @@ namespace DesktopWidgets.Classes
                 return "Widget Mouse Double Click";
             if (evnt is WidgetReloadEvent)
                 return "Widget Reload";
+            if (evnt is ForegroundFullscreenChangedEvent)
+                return "Foreground Fullscreen Changed";
+            if (evnt is ForegroundTitleChangedEvent)
+                return "Foreground Title Changed";
             return null;
         }
 

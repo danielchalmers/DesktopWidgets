@@ -111,4 +111,11 @@
         OnHover,
         Hidden
     }
+
+    public enum YesNoAny
+    {
+        Yes,
+        No,
+        Any
+    }
 }

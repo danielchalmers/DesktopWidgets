@@ -22,6 +22,8 @@ namespace DesktopWidgets.Helpers
 
             App.SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
 
+            ForegroundTracker.AddHook();
+
             App.SuccessfullyLoaded = true;
 
             if (!App.Arguments.Contains("-systemstartup") && App.WidgetsSettingsStore.Widgets.Count == 0)

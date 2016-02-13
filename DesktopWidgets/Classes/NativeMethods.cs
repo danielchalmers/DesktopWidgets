@@ -7,6 +7,9 @@ namespace DesktopWidgets.Classes
 {
     internal static class NativeMethods
     {
+        internal const uint WINEVENT_OUTOFCONTEXT = 0;
+        internal const uint EVENT_SYSTEM_FOREGROUND = 3;
+
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern int GetWindowRect(IntPtr hWnd, out Win32Rect rc);
 
@@ -49,5 +52,13 @@ namespace DesktopWidgets.Classes
 
         [DllImport("user32.dll")]
         internal static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("user32.dll")]
+        internal static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc,
+            WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+
+        internal delegate void WinEventDelegate(
+            IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread,
+            uint dwmsEventTime);
     }
 }

@@ -145,6 +145,9 @@
     <Compile Include="Classes\EventActionFactory.cs" />
     <Compile Include="Classes\EventActionId.cs" />
     <Compile Include="Classes\EventActionPair.cs" />
+    <Compile Include="Classes\ForegroundTracker.cs" />
+    <Compile Include="Events\ForegroundFullscreenChangedEvent.cs" />
+    <Compile Include="Events\ForegroundTitleChangedEvent.cs" />
     <Compile Include="Events\HotkeyEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\WidgetEnableEvent.cs" />
