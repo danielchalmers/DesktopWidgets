@@ -69,18 +69,7 @@ namespace DesktopWidgets.Classes
                 changelogData = JsonConvert.DeserializeObject<List<Changelog>>(Settings.Default.ChangelogCache);
             if (!(changelogData != null && changelogData.Any(x => x.Version == AssemblyInfo.Version)))
             {
-                changelogData = new List<Changelog>();
-                for (var i = 1; i <= Settings.Default.ChangelogDownloadPages; i++)
-                {
-                    var i1 = i;
-                    Application.Current.Dispatcher.Invoke(
-                        () =>
-                        {
-                            _updateTextAction(
-                                $"Downloading changelog ({i1} of {Settings.Default.ChangelogDownloadPages})...");
-                        });
-                    changelogData.AddRange(ParseChangelogJson(DownloadChangelogJson(i)));
-                }
+                changelogData = ParseChangelogJson(DownloadAllChangelogPages()).ToList();
                 Settings.Default.ChangelogCache = JsonConvert.SerializeObject(changelogData);
             }
 
@@ -101,12 +90,10 @@ namespace DesktopWidgets.Classes
             return stringBuilder.ToString();
         }
 
-        private static IEnumerable<Changelog> ParseChangelogJson(string data)
+        private static IEnumerable<Changelog> ParseChangelogJson(IEnumerable<GitHubApiCommitsRootObject> json)
         {
-            var json = JsonConvert.DeserializeObject<List<GitHubApiCommitsRootObject>>(data);
             var history = new List<string>();
-            json.Reverse();
-            foreach (var j in json)
+            foreach (var j in json.Reverse())
             {
                 var commit = j.commit.message.TrimEnd(Environment.NewLine.ToCharArray());
                 Version version;
@@ -123,6 +110,24 @@ namespace DesktopWidgets.Classes
                     history.Add(commit);
                 }
             }
+        }
+
+        private IEnumerable<GitHubApiCommitsRootObject> DownloadAllChangelogPages()
+        {
+            var returnData = new List<GitHubApiCommitsRootObject>();
+            for (var i = 1; i <= Settings.Default.ChangelogDownloadPages; i++)
+            {
+                var i1 = i;
+                Application.Current.Dispatcher.Invoke(
+                    () =>
+                    {
+                        _updateTextAction(
+                            $"Downloading changelog ({i1} of {Settings.Default.ChangelogDownloadPages})...");
+                    });
+                returnData.AddRange(
+                    JsonConvert.DeserializeObject<IEnumerable<GitHubApiCommitsRootObject>>(DownloadChangelogJson(i1)));
+            }
+            return returnData;
         }
 
         private static string DownloadChangelogJson(int page = 1)
