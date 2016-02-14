@@ -1,11 +1,6 @@
 ﻿#region
 
-using System;
-using System.Diagnostics;
-using System.IO;
 using System.Windows;
-using System.Windows.Input;
-using Microsoft.Win32;
 
 #endregion
 
@@ -22,9 +17,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             InitializeComponent();
             Title = shortcut == null ? "New Shortcut" : "Edit Shortcut";
-            cbWindowStyle.ItemsSource = Enum.GetValues(typeof (ProcessWindowStyle));
-            cbHotkey.ItemsSource = Enum.GetValues(typeof (Key));
-            cbHotkeyModifier.ItemsSource = Enum.GetValues(typeof (ModifierKeys));
 
             if (shortcut == null)
                 NewShortcut = new Shortcut();
@@ -43,27 +35,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             NewShortcut = null;
             DialogResult = true;
-        }
-
-        private void btnBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            var dlg = new OpenFileDialog();
-            if (Directory.Exists(NewShortcut.ProcessFile.Path) || File.Exists(NewShortcut.ProcessFile.Path))
-                dlg.InitialDirectory = Path.GetDirectoryName(NewShortcut.ProcessFile.Path);
-            if (dlg.ShowDialog() ?? false)
-            {
-                var path = dlg.FileName;
-
-                NewShortcut.ProcessFile.Path = path;
-                txtPath.Text = path;
-
-                if (string.IsNullOrWhiteSpace(txtName.Text) && File.Exists(path))
-                {
-                    var name = Path.GetFileNameWithoutExtension(path);
-                    NewShortcut.Name = name;
-                    txtName.Text = name;
-                }
-            }
         }
     }
 }

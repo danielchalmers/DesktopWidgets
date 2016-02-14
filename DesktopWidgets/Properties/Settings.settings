@@ -76,9 +76,6 @@
     <Setting Name="PropertyGridNameColumnWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
-    <Setting Name="ShortcutPropertiesIsExpanded" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="MaxConcurrentMediaPlayers" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8</Value>
     </Setting>

@@ -6,100 +6,23 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
-        mc:Ignorable="d" Title="Shortcut Properties" SizeToContent="Height" Width="350" ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="Edit Shortcut"
+        Height="400" Width="450"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <classes:IsExpandedToMoreOptionsHeaderConverter x:Key="IsExpandedToMoreOptionsHeaderConverter" />
-    </Window.Resources>
-    <Grid>
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid IsSharedSizeScope="True" Margin="15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="31" SharedSizeGroup="optionsHeight" />
-                <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Left" />
-                    <Setter Property="Margin" Value="0,0,15,0" />
-                    <Setter Property="Padding" Value="0" />
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="Height" Value="23" />
-                </Style>
-            </Grid.Resources>
-
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" />
-            <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch"
-                     VerticalAlignment="Center" Height="23" Text="{Binding Path=Name, Mode=TwoWay}" />
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Path:" />
-            <Grid Grid.Row="1" Grid.Column="1" Height="23" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBox x:Name="txtPath" HorizontalAlignment="Stretch" Height="23"
-                         VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" />
-                <Button Grid.Column="1" Content="..." Margin="5,0,0,0" Width="23" Height="23"
-                        Click="btnBrowse_Click" />
-            </Grid>
-            <Expander Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0" Padding="0,0,0,5"
-                      IsExpanded="{Binding Source={x:Static p:Settings.Default}, Path=ShortcutPropertiesIsExpanded, Mode=TwoWay}"
-                      Header="{Binding Path=.IsExpanded, RelativeSource={RelativeSource Self}, Converter={StaticResource IsExpandedToMoreOptionsHeaderConverter}}">
-                <Grid IsSharedSizeScope="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="31" SharedSizeGroup="optionsHeight" />
-                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                        <RowDefinition Height="Auto" SharedSizeGroup="optionsHeight" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Start in:" />
-                    <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
-                             VerticalAlignment="Center" Text="{Binding Path=StartInFolder, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Arguments:" />
-                    <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
-                             VerticalAlignment="Center" Text="{Binding Path=Args, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Icon Path:" />
-                    <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" Height="23"
-                             VerticalAlignment="Center" Text="{Binding Path=IconPath, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="Window Style:" />
-                    <ComboBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Stretch"
-                              x:Name="cbWindowStyle" VerticalAlignment="Center"
-                              SelectedItem="{Binding Path=WindowStyle, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="Hotkey:" />
-                    <ComboBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"
-                              x:Name="cbHotkey" VerticalAlignment="Center"
-                              SelectedItem="{Binding Path=HotKey, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="Hotkey Modifier:" />
-                    <ComboBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Stretch"
-                              x:Name="cbHotkeyModifier" VerticalAlignment="Center"
-                              SelectedItem="{Binding Path=HotKeyModifiers, Mode=TwoWay}" />
-                    <TextBlock Grid.Row="6" Grid.Column="0" Text="Hotkey If Fullscreen:" />
-                    <CheckBox Grid.Row="6" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                              IsChecked="{Binding Path=HotKeyFullscreenActivation, Mode=TwoWay}" />
-                </Grid>
-            </Expander>
-        </Grid>
-
-        <Grid Grid.Column="0" Grid.Row="1" Margin="0,0,15,15">
+        <xctk:PropertyGrid Grid.Row="0"
+                           SelectedObject="{Binding}"
+                           IsMiscCategoryLabelHidden="True"
+                           ShowSearchBox="False"
+                           ShowSortOptions="False" />
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
@@ -110,10 +33,8 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" x:Name="btnOK" Content="OK" Click="btnOK_Click" HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" IsDefault="True" />
-            <Button Grid.Column="3" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsCancel="True" />
+            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" IsDefault="True" />
+            <Button Grid.Column="3" Content="Cancel" Click="btnCancel_Click" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>
