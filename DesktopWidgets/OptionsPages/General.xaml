@@ -27,9 +27,9 @@
             <Button Content="Defaults..." Click="btnDefaults_OnClick" />
         </StackPanel>
 
-        <xctk:PropertyGrid
-            SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
-            AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}">
+        <xctk:PropertyGrid Style="{StaticResource PropertyGridCategorisedStyle}"
+                           SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
+                           AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}">
             <xctk:PropertyGrid.PropertyDefinitions>
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="RunOnStartup"

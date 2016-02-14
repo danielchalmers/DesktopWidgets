@@ -8,15 +8,29 @@
                     xmlns:classes="clr-namespace:DesktopWidgets.Classes"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
-    <Style TargetType="{x:Type xctk:PropertyGrid}">
-        <Setter Property="IsCategorized" Value="True" />
-        <Setter Property="ShowSortOptions" Value="True" />
-        <Setter Property="ShowSummary" Value="False" />
-        <Setter Property="ShowTitle" Value="False" />
-        <Setter Property="ShowAdvancedOptions" Value="False" />
+    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridNonCategorisedStyle">
         <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}" />
         <Setter Property="NameColumnWidth"
                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
+        <Setter Property="ShowAdvancedOptions" Value="False" />
+        <Setter Property="ShowSummary" Value="False" />
+        <Setter Property="ShowTitle" Value="False" />
+        <Setter Property="IsCategorized" Value="False" />
+        <Setter Property="ShowSortOptions" Value="False" />
+        <Setter Property="IsMiscCategoryLabelHidden" Value="True" />
+        <Setter Property="ShowSearchBox" Value="False" />
+    </Style>
+    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridCategorisedStyle">
+        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}" />
+        <Setter Property="NameColumnWidth"
+                Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
+        <Setter Property="ShowAdvancedOptions" Value="False" />
+        <Setter Property="ShowSummary" Value="False" />
+        <Setter Property="ShowTitle" Value="False" />
+        <Setter Property="IsCategorized" Value="True" />
+        <Setter Property="ShowSortOptions" Value="True" />
+        <Setter Property="IsMiscCategoryLabelHidden" Value="False" />
+        <Setter Property="ShowSearchBox" Value="True" />
     </Style>
     <Style x:Key="InfoTextbox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="Transparent" />

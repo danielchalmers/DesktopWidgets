@@ -22,8 +22,10 @@
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid Grid.Row="0" SelectedObject="{Binding EventActionPair.Event}"
-                           IsMiscCategoryLabelHidden="True" ShowTitle="True">
+        <xctk:PropertyGrid Grid.Row="0"
+                           Style="{StaticResource PropertyGridNonCategorisedStyle}"
+                           ShowTitle="True"
+                           SelectedObject="{Binding EventActionPair.Event}">
             <xctk:PropertyGrid.EditorDefinitions>
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
@@ -34,8 +36,10 @@
                 </xctk:EditorTemplateDefinition>
             </xctk:PropertyGrid.EditorDefinitions>
         </xctk:PropertyGrid>
-        <xctk:PropertyGrid Grid.Row="2" SelectedObject="{Binding EventActionPair.Action}"
-                           IsMiscCategoryLabelHidden="True" ShowTitle="True">
+        <xctk:PropertyGrid Grid.Row="2"
+                           Style="{StaticResource PropertyGridNonCategorisedStyle}"
+                           ShowTitle="True"
+                           SelectedObject="{Binding EventActionPair.Action}">
             <xctk:PropertyGrid.EditorDefinitions>
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>

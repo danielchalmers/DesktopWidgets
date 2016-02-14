@@ -17,11 +17,8 @@
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid Grid.Row="0"
-                           SelectedObject="{Binding}"
-                           IsMiscCategoryLabelHidden="True"
-                           ShowSearchBox="False"
-                           ShowSortOptions="False" />
+        <xctk:PropertyGrid Grid.Row="0" Style="{StaticResource PropertyGridNonCategorisedStyle}"
+                           SelectedObject="{Binding}" />
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
