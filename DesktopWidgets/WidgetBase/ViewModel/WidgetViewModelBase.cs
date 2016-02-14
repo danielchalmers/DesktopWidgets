@@ -2,10 +2,8 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using DesktopWidgets.Classes;
 using DesktopWidgets.Events;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.Stores;
 using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
@@ -352,33 +350,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
             _onTopForceTimer.Stop();
             _onTopForceTimer.Start();
-        }
-
-        public virtual void ReloadHotKeys()
-        {
-            if (_settings.HotKey != Key.None && _settings.OpenMode == OpenMode.Keyboard ||
-                _settings.OpenMode == OpenMode.MouseAndKeyboard)
-                HotkeyStore.RegisterHotkey(
-                    new Hotkey(_settings.HotKey, _settings.HotKeyModifiers, _settings.FullscreenActivation, false,
-                        _settings.ShowHotkeyIdentifier),
-                    () =>
-                        View?.ShowIntro(new IntroData
-                        {
-                            Duration = _settings.ShowHotkeyDuration,
-                            Reversable = _settings.ToggleIntroOnHotkey,
-                            Activate = _settings.ActivateOnShow,
-                            HideOnFinish = !_settings.StayOpenOnShowHotkey
-                        }));
-            else
-                HotkeyStore.RemoveHotkey(_settings.ShowHotkeyIdentifier);
-
-            if (_settings.HideHotKey != Key.None)
-                HotkeyStore.RegisterHotkey(
-                    new Hotkey(_settings.HideHotKey, _settings.HideHotKeyModifiers, _settings.FullscreenActivation,
-                        false, _settings.HideHotkeyIdentifier),
-                    () => View?.HideUi(false));
-            else
-                HotkeyStore.RemoveHotkey(_settings.HideHotkeyIdentifier);
         }
 
         public virtual void DropExecute(DragEventArgs e)

@@ -70,19 +70,6 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
         }
 
-        private void NewHeadlineFound()
-        {
-            if (Settings.OpenOnEvent)
-                View?.ShowIntro(
-                    new IntroData
-                    {
-                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                        SoundPath = Settings.EventSoundPath,
-                        SoundVolume = Settings.EventSoundVolume
-                    });
-            OnSpecialEvent();
-        }
-
         private void DownloadFeed(Action<SyndicationFeed> finishAction)
         {
             try
@@ -135,7 +122,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
                                     item.PublishDate.LocalDateTime, item.Categories)));
                     if (prevFeed.Count > 0 &&
                         FeedItems.Any(y => !prevFeed.Any(x => x.Title == y.Title && x.Hyperlink == y.Hyperlink)))
-                        NewHeadlineFound();
+                        OnSpecialEvent();
                     HelpText = "";
                 }
             });

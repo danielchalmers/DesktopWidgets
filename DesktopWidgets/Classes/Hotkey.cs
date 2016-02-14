@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Windows.Input;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.Classes
 {
-    internal class Hotkey
+    [ExpandableObject]
+    public class Hotkey
     {
         public Hotkey(Key key, ModifierKeys modifierKeys, bool worksIfForegroundIsFullscreen, bool worksIfMuted,
             Guid guid)

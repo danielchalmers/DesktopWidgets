@@ -4,7 +4,6 @@ using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using DesktopWidgets.Stores;
 using DesktopWidgets.View;
 
 #endregion
@@ -54,7 +53,6 @@ namespace DesktopWidgets.Helpers
                 if (animationMode == AnimationMode.Show)
                 {
                     view.Show();
-                    MediaPlayerStore.PlaySoundAsync(settings.ShowSoundPath, settings.ShowSoundVolume);
                 }
                 astartAction?.Invoke();
                 view.AnimationRunning = true;
@@ -64,7 +62,6 @@ namespace DesktopWidgets.Helpers
                 if (animationMode == AnimationMode.Hide)
                 {
                     view.Hide();
-                    MediaPlayerStore.PlaySoundAsync(settings.HideSoundPath, settings.HideSoundVolume);
                 }
                 else
                 {

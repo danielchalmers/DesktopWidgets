@@ -1,13 +1,11 @@
-﻿using System.ComponentModel;
+﻿using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.WidgetBase;
 
 namespace DesktopWidgets.Actions
 {
     public class WidgetIntroAction : WidgetActionBase
     {
-        [DisplayName("Intro Settings")]
-        public IntroData IntroSettings { get; set; }
+        public IntroData IntroSettings { get; set; } = new IntroData();
 
         public override void Execute()
         {

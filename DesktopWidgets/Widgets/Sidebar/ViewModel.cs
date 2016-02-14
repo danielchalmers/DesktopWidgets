@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
@@ -66,18 +65,17 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         private Shortcut SelectedShortcut { get; set; }
 
-        public override void ReloadHotKeys()
+        public override void OnRefresh()
         {
-            base.ReloadHotKeys();
+            base.OnRefresh();
             if (Settings?.Shortcuts != null)
-                foreach (var shortcut in Settings.Shortcuts.Where(x => x.HotKey != Key.None))
+                foreach (var shortcut in Settings.Shortcuts.Where(x => x.Hotkey.Key != Key.None))
                     ReloadShortcutHotKey(shortcut);
         }
 
         public void ReloadShortcutHotKey(Shortcut shortcut)
         {
-            HotkeyStore.RegisterHotkey(new Hotkey(shortcut.HotKey,
-                shortcut.HotKeyModifiers, shortcut.HotKeyFullscreenActivation, false, shortcut.Guid),
+            HotkeyStore.RegisterHotkey(shortcut.Hotkey,
                 delegate { this.Execute(shortcut); });
         }
 

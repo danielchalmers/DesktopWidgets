@@ -3,6 +3,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 
 #endregion
@@ -14,20 +15,25 @@ namespace DesktopWidgets.Helpers
         public static void Launch(string path, string args = "", string startIn = "",
             ProcessWindowStyle style = ProcessWindowStyle.Normal)
         {
-            if (Settings.Default.LaunchProcessAsync)
-                new Thread(delegate() { RunProcess(path, args, startIn, style); }).Start();
-            else
-                RunProcess(path, args, startIn, style);
+            Launch(new ProcessFile {Path = path, Arguments = args, StartInFolder = startIn, WindowStyle = style});
         }
 
-        private static void RunProcess(string path, string args, string startIn, ProcessWindowStyle style)
+        public static void Launch(ProcessFile file)
+        {
+            if (Settings.Default.LaunchProcessAsync)
+                new Thread(delegate() { RunProcess(file); }).Start();
+            else
+                RunProcess(file);
+        }
+
+        private static void RunProcess(ProcessFile file)
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = path,
-                Arguments = args,
-                WorkingDirectory = startIn,
-                WindowStyle = style
+                FileName = file.Path,
+                Arguments = file.Arguments,
+                WorkingDirectory = file.StartInFolder,
+                WindowStyle = file.WindowStyle
             });
         }
 

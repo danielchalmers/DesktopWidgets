@@ -21,7 +21,7 @@ namespace DesktopWidgets.Widgets.Sidebar
     public static class ShortcutHelper
     {
         public static string GetName(Shortcut shortcut)
-            => string.IsNullOrWhiteSpace(shortcut.Name) ? shortcut.Path : shortcut.Name;
+            => string.IsNullOrWhiteSpace(shortcut.Name) ? shortcut.ProcessFile.Path : shortcut.Name;
 
         private static string GetNameFromPath(string path)
         {
@@ -40,7 +40,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             viewModel.Add(new Shortcut
             {
                 Name = name == "" ? GetNameFromPath(filepath) : name,
-                Path = filepath
+                ProcessFile = new ProcessFile(filepath)
             }, msg);
         }
 
@@ -56,7 +56,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void Add(this ViewModel viewModel, Shortcut shortcut, bool msg = true)
         {
-            if (msg && viewModel.Settings.Shortcuts.Any(x => x.Path == shortcut.Path))
+            if (msg && viewModel.Settings.Shortcuts.Any(x => x.ProcessFile.Path == shortcut.ProcessFile.Path))
                 if (
                     Popup.Show(
                         "A shortcut with this path already exists.\n\nAre you sure you want to add this shortcut?",
@@ -67,17 +67,18 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void OpenFolder(this Shortcut shortcut)
         {
-            ProcessHelper.OpenFolder(shortcut.Path);
+            ProcessHelper.OpenFolder(shortcut.ProcessFile.Path);
         }
 
         public static void New(this ViewModel viewModel)
         {
             var dialog = new ShortcutProperties();
             dialog.ShowDialog();
-            if (string.IsNullOrWhiteSpace(dialog.NewShortcut?.Path))
+            if (string.IsNullOrWhiteSpace(dialog.NewShortcut?.ProcessFile.Path))
                 return;
-            if (!File.Exists(dialog.NewShortcut.Path) && !Directory.Exists(dialog.NewShortcut.Path) &&
-                !LinkHelper.IsHyperlink(dialog.NewShortcut.Path))
+            if (!File.Exists(dialog.NewShortcut.ProcessFile.Path) &&
+                !Directory.Exists(dialog.NewShortcut.ProcessFile.Path) &&
+                !LinkHelper.IsHyperlink(dialog.NewShortcut.ProcessFile.Path))
                 if (Popup.Show(
                     "That path does not exist. Do you want to add this shortcut anyway?",
                     MessageBoxButton.YesNo,
@@ -95,7 +96,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             if (viewModel.Settings.UseIconCache)
                 foreach (var t in viewModel.Settings.Shortcuts)
-                    viewModel.IconCache.Remove(t.Path);
+                    viewModel.IconCache.Remove(t.ProcessFile.Path);
             else
                 viewModel.IconCache.Clear();
         }
@@ -109,9 +110,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
                 viewModel.View?.HideUi();
-            if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path) || LinkHelper.IsHyperlink(shortcut.Path))
+            if (File.Exists(shortcut.ProcessFile.Path) || Directory.Exists(shortcut.ProcessFile.Path) ||
+                LinkHelper.IsHyperlink(shortcut.ProcessFile.Path))
             {
-                ProcessHelper.Launch(shortcut.Path, shortcut.Args, shortcut.StartInFolder, shortcut.WindowStyle);
+                ProcessHelper.Launch(shortcut.ProcessFile);
             }
             else
             {
@@ -140,7 +142,7 @@ namespace DesktopWidgets.Widgets.Sidebar
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 return;
             viewModel.Settings.Shortcuts.Remove(shortcut);
-            if (shortcut.HotKey != Key.None)
+            if (shortcut.Hotkey.Key != Key.None)
                 HotkeyStore.RemoveHotkey(shortcut.Guid);
         }
 
@@ -181,11 +183,11 @@ namespace DesktopWidgets.Widgets.Sidebar
                     bmi.EndInit();
                     return bmi;
                 }
-                if (File.Exists(shortcut.Path) || Directory.Exists(shortcut.Path))
-                    return IconHelper.GetPathIcon(shortcut.Path);
+                if (File.Exists(shortcut.ProcessFile.Path) || Directory.Exists(shortcut.ProcessFile.Path))
+                    return IconHelper.GetPathIcon(shortcut.ProcessFile.Path);
                 if (shortcut.SpecialType == "Help")
                     return SystemIcons.Information.ToImageSource();
-                if (LinkHelper.IsHyperlink(shortcut.Path))
+                if (LinkHelper.IsHyperlink(shortcut.ProcessFile.Path))
                     return IconHelper.Extract("shell32.dll", 13, true).ToImageSource();
             }
             catch
@@ -200,9 +202,9 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (!viewModel.Settings.UseIconCache)
                 return GetShortcutIcon(shortcut);
 
-            if (!viewModel.IconCache.ContainsKey(shortcut.Path))
-                viewModel.IconCache.Add(shortcut.Path, GetShortcutIcon(shortcut));
-            return viewModel.IconCache[shortcut.Path];
+            if (!viewModel.IconCache.ContainsKey(shortcut.ProcessFile.Path))
+                viewModel.IconCache.Add(shortcut.ProcessFile.Path, GetShortcutIcon(shortcut));
+            return viewModel.IconCache[shortcut.ProcessFile.Path];
         }
 
         public static IEnumerable<Shortcut> GetDefaultShortcuts(DefaultShortcutsMode mode)
@@ -213,28 +215,34 @@ namespace DesktopWidgets.Widgets.Sidebar
                     yield return new Shortcut
                     {
                         Name = "Help",
-                        Path = Resources.Website,
+                        ProcessFile = new ProcessFile(Resources.Website),
                         SpecialType = "Help"
                     };
                     yield return new Shortcut
                     {
                         Name = "File Explorer",
-                        Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\explorer.exe"
+                        ProcessFile =
+                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.Windows) +
+                                            "\\explorer.exe")
                     };
                     yield return new Shortcut
                     {
                         Name = "Notepad",
-                        Path = Environment.GetFolderPath(Environment.SpecialFolder.Windows) + "\\notepad.exe"
+                        ProcessFile =
+                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.Windows) +
+                                            "\\notepad.exe")
                     };
                     yield return new Shortcut
                     {
                         Name = "Calculator",
-                        Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe"
+                        ProcessFile =
+                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe")
                     };
                     yield return new Shortcut
                     {
                         Name = "Command Prompt",
-                        Path = Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe"
+                        ProcessFile =
+                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe")
                     };
                     break;
                 case DefaultShortcutsMode.Taskbar:
@@ -243,7 +251,12 @@ namespace DesktopWidgets.Widgets.Sidebar
                     foreach (var shortcut in Directory.GetFiles(taskbarPath)
                         .Where(file => Path.GetFileName(file) != Resources.WindowsFolderDataFile)
                         .Select(
-                            file => new Shortcut {Path = file, Name = Path.GetFileNameWithoutExtension(file)}))
+                            file =>
+                                new Shortcut
+                                {
+                                    ProcessFile = new ProcessFile(file),
+                                    Name = Path.GetFileNameWithoutExtension(file)
+                                }))
                         yield return shortcut;
                     break;
             }
@@ -252,10 +265,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static string GetFriendlyNameWithData(this Shortcut shortcut)
         {
             var dataList = new List<string>();
-            if (!string.IsNullOrWhiteSpace(shortcut.Path))
-                dataList.Add(shortcut.Path);
-            if (!string.IsNullOrWhiteSpace(shortcut.Args))
-                dataList.Add(shortcut.Args);
+            if (!string.IsNullOrWhiteSpace(shortcut.ProcessFile.Path))
+                dataList.Add(shortcut.ProcessFile.Path);
+            if (!string.IsNullOrWhiteSpace(shortcut.ProcessFile.Arguments))
+                dataList.Add(shortcut.ProcessFile.Arguments);
             var dataStr = string.Join(", ", dataList);
             if (!string.IsNullOrWhiteSpace(dataStr))
                 dataStr = $" ({dataStr})";

@@ -1,17 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.Classes
 {
+    [ExpandableObject]
+    [DisplayName("Directory Watcher Settings")]
     public class DirectoryWatcherSettings
     {
-        public List<string> WatchFolders { get; set; }
-        public List<string> FileExtensionWhitelist { get; set; }
-        public List<string> FileExtensionBlacklist { get; set; }
-        public bool Recursive { get; set; }
-        public TimeSpan CheckInterval { get; set; }
-        public double MaxSize { get; set; }
-        public bool DetectNewFiles { get; set; }
-        public bool DetectModifiedFiles { get; set; }
+        [DisplayName("Watch Folder Paths")]
+        public List<string> WatchFolders { get; set; } = new List<string>();
+
+        [DisplayName("File Extension Whitelist")]
+        public List<string> FileExtensionWhitelist { get; set; } = new List<string>();
+
+        [DisplayName("File Extension Blacklist")]
+        public List<string> FileExtensionBlacklist { get; set; } = new List<string>();
+
+        [DisplayName("Recursive")]
+        public bool Recursive { get; set; } = false;
+
+        [DisplayName("Check Interval (ms)")]
+        public int CheckInterval { get; set; } = 500;
+
+        [DisplayName("Max File Size (bytes)")]
+        public double MaxSize { get; set; } = 1048576;
+
+        [DisplayName("Detect New Files")]
+        public bool DetectNewFiles { get; set; } = true;
+
+        [DisplayName("Detect Modified Files")]
+        public bool DetectModifiedFiles { get; set; } = true;
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using DesktopWidgets.WidgetBase.Interfaces;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.CountdownClock
 {
-    public class Settings : WidgetClockSettingsBase, IEventWidget
+    public class Settings : WidgetClockSettingsBase
     {
         public Settings()
         {
@@ -19,14 +18,6 @@ namespace DesktopWidgets.Widgets.CountdownClock
 
         [DisplayName("Last End Date/Time")]
         public DateTime LastEndDateTime { get; set; } = DateTime.Now;
-
-        [Category("End")]
-        [DisplayName("Sound Path")]
-        public string EndSoundPath { get; set; }
-
-        [Category("End")]
-        [DisplayName("Sound Volume")]
-        public double EndSoundVolume { get; set; } = 1;
 
         [Category("Style")]
         [DisplayName("Continue Counting")]
@@ -55,17 +46,5 @@ namespace DesktopWidgets.Widgets.CountdownClock
         [Category("End Sync")]
         [DisplayName("Sync Next Second")]
         public bool SyncSecond { get; set; } = false;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show On Event")]
-        public bool OpenOnEvent { get; set; } = true;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Stay Open On Event")]
-        public bool OpenOnEventStay { get; set; } = false;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show On Event Duration")]
-        public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

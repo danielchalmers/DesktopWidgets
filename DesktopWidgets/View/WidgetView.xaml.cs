@@ -215,7 +215,6 @@ namespace DesktopWidgets.View
                 _mouseChecker.KeepOpenForIntro = true;
                 _introTimer.Start();
                 ViewModel.OnIntro();
-                MediaPlayerStore.PlaySoundAsync(introData.SoundPath, introData.SoundVolume);
                 _mouseChecker.Show(activate: introData.Activate);
             }
         }
@@ -288,7 +287,6 @@ namespace DesktopWidgets.View
             {
                 UpdateTimers();
                 ViewModel.ReloadTimers();
-                ViewModel.ReloadHotKeys();
             }
 
             ViewModel.OnRefresh();

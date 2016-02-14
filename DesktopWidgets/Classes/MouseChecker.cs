@@ -9,7 +9,6 @@ using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.View;
-using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
 
@@ -248,18 +247,12 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (_settings.OpenMode == OpenMode.Keyboard && !KeepOpenForIntro)
-            {
-                Hide();
-                return;
-            }
-
             UpdateVisibilityStatus();
         }
 
         private void UpdateVisibilityStatus()
         {
-            if (_settings.OpenMode == OpenMode.Mouse || _settings.OpenMode == OpenMode.MouseAndKeyboard)
+            if (_settings.OpenMode == OpenMode.Mouse)
             {
                 if (IsShowable())
                 {

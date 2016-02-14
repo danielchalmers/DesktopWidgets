@@ -11,8 +11,6 @@
     {
         AlwaysOpen,
         Mouse,
-        Keyboard,
-        MouseAndKeyboard,
         Hidden
     }
 

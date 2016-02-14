@@ -15,6 +15,8 @@ namespace DesktopWidgets.Stores
 
         public static void RegisterHotkey(Hotkey hotkey, Action callback)
         {
+            if (hotkey.Key == Key.None)
+                return;
             foreach (var hk in Hotkeys.Where(x => x.Item1.Guid == hotkey.Guid).ToList())
             {
                 Hotkeys.Remove(hk);

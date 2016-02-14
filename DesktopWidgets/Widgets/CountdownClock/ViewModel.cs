@@ -38,23 +38,10 @@ namespace DesktopWidgets.Widgets.CountdownClock
             if (CurrentTime >= Settings.EndDateTime && Settings.LastEndDateTime != Settings.EndDateTime)
             {
                 Settings.LastEndDateTime = Settings.EndDateTime;
-                OnEndAction();
+                OnSpecialEvent();
             }
 
             SyncTime();
-        }
-
-        private void OnEndAction()
-        {
-            if (Settings.OpenOnEvent)
-                View?.ShowIntro(
-                    new IntroData
-                    {
-                        Duration = Settings.OpenOnEventStay ? 0 : (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                        SoundPath = Settings.EndSoundPath,
-                        SoundVolume = Settings.EndSoundVolume
-                    });
-            OnSpecialEvent();
         }
     }
 }

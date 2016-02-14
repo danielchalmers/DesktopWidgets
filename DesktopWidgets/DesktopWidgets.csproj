@@ -146,6 +146,9 @@
     <Compile Include="Classes\EventActionId.cs" />
     <Compile Include="Classes\EventActionPair.cs" />
     <Compile Include="Classes\ForegroundTracker.cs" />
+    <Compile Include="Classes\FilePath.cs" />
+    <Compile Include="Classes\ProcessFile.cs" />
+    <Compile Include="Classes\SoundFile.cs" />
     <Compile Include="Events\ForegroundFullscreenChangedEvent.cs" />
     <Compile Include="Events\ForegroundTitleChangedEvent.cs" />
     <Compile Include="Events\HotkeyEvent.cs" />
@@ -178,7 +181,6 @@
     <Compile Include="Helpers\DateTimeSyncHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Classes\DirectoryWatcher.cs" />
-    <Compile Include="WidgetBase\Interfaces\IEventWidget.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="Helpers\AppInitHelper.cs" />
     <Compile Include="Classes\ChangelogDownloader.cs" />
@@ -197,10 +199,10 @@
     <Compile Include="Classes\SaveTimer.cs" />
     <Compile Include="Classes\SizeObserver.cs" />
     <Compile Include="Classes\TaskScheduler.cs" />
-    <Compile Include="WidgetBase\IntroData.cs" />
+    <Compile Include="Classes\IntroData.cs" />
     <Compile Include="WidgetBase\Settings\WidgetClockSettingsBase.cs" />
     <Compile Include="WidgetBase\WidgetFactory.cs" />
-    <Compile Include="WidgetBase\WidgetID.cs" />
+    <Compile Include="WidgetBase\WidgetId.cs" />
     <Compile Include="WidgetBase\WidgetsSettingsStore.cs" />
     <Compile Include="Classes\Win32App.cs" />
     <Compile Include="Classes\Win32RECT.cs" />

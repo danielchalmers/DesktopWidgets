@@ -297,9 +297,9 @@ namespace DesktopWidgets.Classes
                 case ToolTipType.Name:
                     return shortcut.Name;
                 case ToolTipType.Path:
-                    return shortcut.Path;
+                    return shortcut.ProcessFile.Path;
                 case ToolTipType.Both:
-                    return $"{shortcut.Name}\n{shortcut.Path}";
+                    return $"{shortcut.Name}\n{shortcut.ProcessFile.Path}";
                 default:
                     return null;
             }

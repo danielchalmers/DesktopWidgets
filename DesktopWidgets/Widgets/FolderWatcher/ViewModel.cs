@@ -38,17 +38,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
             _notificationQueue = new Queue<string>();
             _directoryWatcher =
-                new DirectoryWatcher(
-                    new DirectoryWatcherSettings
-                    {
-                        WatchFolders = Settings.WatchFolders,
-                        FileExtensionWhitelist = Settings.FileExtensionWhitelist,
-                        FileExtensionBlacklist = Settings.FileExtensionBlacklist,
-                        Recursive = Settings.Recursive,
-                        CheckInterval = TimeSpan.FromMilliseconds(Settings.FolderCheckIntervalMS),
-                        DetectNewFiles = Settings.DetectNewFiles,
-                        DetectModifiedFiles = Settings.DetectModifiedFiles
-                    }, AddToFileQueue);
+                new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
             _directoryWatcher.Start();
 
             CheckFile(false);
@@ -147,17 +137,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
             CheckFile(true);
 
-            if (Settings.OpenOnEvent)
-            {
-                View?.ShowIntro(new IntroData
-                {
-                    Duration = (int) Settings.OpenOnEventDuration.TotalMilliseconds,
-                    HideOnFinish = false,
-                    ExecuteFinishAction = !Settings.OpenOnEventStay,
-                    SoundPath = Settings.EventSoundPath,
-                    SoundVolume = Settings.EventSoundVolume
-                });
-            }
             OnSpecialEvent();
         }
 
@@ -236,7 +215,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public override void OnRefresh()
         {
             base.OnRefresh();
-            _directoryWatcher.SetWatchPaths(Settings.WatchFolders);
+            _directoryWatcher.SetSettings(Settings.DirectoryWatcherSettings);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 using WMPLib;
 
@@ -33,10 +34,17 @@ namespace DesktopWidgets.Stores
             return MediaPlayers[0];
         }
 
+        public static void PlaySoundAsync(SoundFile soundFile)
+        {
+            new Thread(delegate() { Play(soundFile); }).Start();
+        }
+
         public static void PlaySoundAsync(string path, double volume = 1)
         {
             new Thread(delegate() { Play(path, volume); }).Start();
         }
+
+        public static void Play(SoundFile soundFile) => Play(soundFile.Path, soundFile.Volume);
 
         public static void Play(string path, double volume = 1)
         {

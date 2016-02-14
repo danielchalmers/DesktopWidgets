@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
-using DesktopWidgets.WidgetBase.Interfaces;
+using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.FolderWatcher
 {
-    public class Settings : WidgetSettingsBase, IEventWidget
+    public class Settings : WidgetSettingsBase
     {
         public Settings()
         {
@@ -16,20 +16,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         }
 
         [Category("General")]
-        [DisplayName("Folder Check Interval (ms)")]
-        public int FolderCheckIntervalMS { get; set; } = 500;
-
-        [Category("General")]
-        [DisplayName("Watch Folder Paths")]
-        public List<string> WatchFolders { get; set; } = new List<string>();
-
-        [Category("General")]
-        [DisplayName("File Extension Whitelist")]
-        public List<string> FileExtensionWhitelist { get; set; } = new List<string>();
-
-        [Category("General")]
-        [DisplayName("File Extension Blacklist")]
-        public List<string> FileExtensionBlacklist { get; set; } = new List<string>();
+        public DirectoryWatcherSettings DirectoryWatcherSettings { get; set; } = new DirectoryWatcherSettings();
 
         [Category("Style")]
         [DisplayName("Show File Name")]
@@ -47,28 +34,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool EnableTimeout { get; set; } = false;
 
         [Category("Behavior")]
-        [DisplayName("Event Sound Path")]
-        public string EventSoundPath { get; set; }
-
-        [Category("Behavior")]
-        [DisplayName("Event Sound Volume")]
-        public double EventSoundVolume { get; set; } = 1.0;
-
-        [Category("Behavior")]
         [DisplayName("Enable File Queue")]
         public bool QueueFiles { get; set; } = true;
-
-        [Category("General")]
-        [DisplayName("Recursive")]
-        public bool Recursive { get; set; } = false;
-
-        [Category("Behavior")]
-        [DisplayName("Detect Modified Files")]
-        public bool DetectModifiedFiles { get; set; } = true;
-
-        [Category("Behavior")]
-        [DisplayName("Detect New Files")]
-        public bool DetectNewFiles { get; set; } = true;
 
         [Category("Style")]
         [DisplayName("Show Images")]
@@ -114,17 +81,5 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         [DisplayName("Current File")]
         public string CurrentFilePath { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show On Event")]
-        public bool OpenOnEvent { get; set; } = true;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Stay Open On Event")]
-        public bool OpenOnEventStay { get; set; } = false;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show On Event Duration")]
-        public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

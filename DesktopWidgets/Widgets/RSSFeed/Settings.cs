@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using DesktopWidgets.WidgetBase.Interfaces;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.RSSFeed
 {
-    public class Settings : WidgetSettingsBase, IEventWidget
+    public class Settings : WidgetSettingsBase
     {
         [Category("Style")]
         [DisplayName("Max Headlines")]
@@ -32,14 +31,6 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("Category Whitelist")]
         public List<string> CategoryWhitelist { get; set; } = new List<string>();
 
-        [Category("Behavior")]
-        [DisplayName("New Headline Sound Path")]
-        public string EventSoundPath { get; set; }
-
-        [Category("Behavior")]
-        [DisplayName("New Headline Sound Volume")]
-        public double EventSoundVolume { get; set; } = 1.0;
-
         [Category("Style")]
         [DisplayName("Show Publish Date")]
         public bool ShowPublishDate { get; set; }
@@ -55,17 +46,5 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [Category("Style")]
         [DisplayName("Publish Date Time Offset")]
         public TimeSpan PublishDateTimeOffset { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show On New Headline")]
-        public bool OpenOnEvent { get; set; } = true;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Stay Open On New Headline")]
-        public bool OpenOnEventStay { get; set; } = false;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show On New Headline Duration")]
-        public TimeSpan OpenOnEventDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }

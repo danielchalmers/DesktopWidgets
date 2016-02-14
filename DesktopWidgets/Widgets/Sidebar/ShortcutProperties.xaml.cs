@@ -48,13 +48,13 @@ namespace DesktopWidgets.Widgets.Sidebar
         private void btnBrowse_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
-            if (Directory.Exists(NewShortcut.Path) || File.Exists(NewShortcut.Path))
-                dlg.InitialDirectory = Path.GetDirectoryName(NewShortcut.Path);
+            if (Directory.Exists(NewShortcut.ProcessFile.Path) || File.Exists(NewShortcut.ProcessFile.Path))
+                dlg.InitialDirectory = Path.GetDirectoryName(NewShortcut.ProcessFile.Path);
             if (dlg.ShowDialog() ?? false)
             {
                 var path = dlg.FileName;
 
-                NewShortcut.Path = path;
+                NewShortcut.ProcessFile.Path = path;
                 txtPath.Text = path;
 
                 if (string.IsNullOrWhiteSpace(txtName.Text) && File.Exists(path))

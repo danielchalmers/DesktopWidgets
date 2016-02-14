@@ -1,16 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace DesktopWidgets.WidgetBase.Settings
 {
     public class WidgetSettingsBase
     {
+        [Browsable(false)]
         [DisplayName("Disabled")]
         public bool Disabled { get; set; } = false;
 
+        [Browsable(false)]
         [DisplayName("Internal Identifier")]
         public WidgetId Identifier { get; set; } = new WidgetId();
 
@@ -151,14 +152,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         public AnimationType AnimationType { get; set; } = AnimationType.Fade;
 
         [Category("Behavior (Hideable)")]
-        [DisplayName("Show Hotkey")]
-        public Key HotKey { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show Hotkey Modifiers")]
-        public ModifierKeys HotKeyModifiers { get; set; }
-
-        [Category("Behavior (Hideable)")]
         [DisplayName("Activate On Show")]
         public bool ActivateOnShow { get; set; } = true;
 
@@ -205,22 +198,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Dock")]
         [DisplayName("Offset")]
         public Point DockOffset { get; set; } = new Point();
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show Sound Path")]
-        public string ShowSoundPath { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show Sound Volume")]
-        public double ShowSoundVolume { get; set; } = 1.0;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Hide Sound Path")]
-        public string HideSoundPath { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Hide Sound Volume")]
-        public double HideSoundVolume { get; set; } = 1.0;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Stay Open With Mouse Focus")]
@@ -312,10 +289,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Thickness")]
         public Thickness BorderThickness { get; set; } = new Thickness(1);
 
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Toggle Intro On Hotkey")]
-        public bool ToggleIntroOnHotkey { get; set; } = true;
-
         [Category("Behavior")]
         [DisplayName("Auto Detect Screen Bounds")]
         public bool AutoDetectScreenBounds { get; set; } = true;
@@ -347,28 +320,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Style")]
         [DisplayName("Vertical Alignment")]
         public VerticalAlignment ViewVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Stay Open On Show Hotkey")]
-        public bool StayOpenOnShowHotkey { get; set; } = false;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Show Hotkey Duration (ms)")]
-        public int ShowHotkeyDuration { get; set; } = 5000;
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Dismiss Hotkey")]
-        public Key HideHotKey { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Dismiss Hotkey Modifiers")]
-        public ModifierKeys HideHotKeyModifiers { get; set; }
-
-        [DisplayName("Show Hotkey Identifier")]
-        public Guid ShowHotkeyIdentifier { get; set; } = Guid.NewGuid();
-
-        [DisplayName("Hide Hotkey Identifier")]
-        public Guid HideHotkeyIdentifier { get; set; } = Guid.NewGuid();
 
         [Category("Style (Titlebar)")]
         [DisplayName("Height (px)")]
