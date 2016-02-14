@@ -7,7 +7,7 @@ namespace DesktopWidgets.Actions
         public override void Execute()
         {
             base.Execute();
-            WidgetId.GetView()?.CancelIntro();
+            WidgetId?.GetView()?.CancelIntro();
         }
     }
 }

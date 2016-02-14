@@ -14,7 +14,7 @@ namespace DesktopWidgets.Actions
         public override void Execute()
         {
             base.Execute();
-            WidgetId.GetView()?.HideUi(CheckIdleStatus, CheckHideStatus);
+            WidgetId?.GetView()?.HideUi(CheckIdleStatus, CheckHideStatus);
         }
     }
 }

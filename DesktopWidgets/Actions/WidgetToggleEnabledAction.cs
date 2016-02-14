@@ -7,7 +7,7 @@ namespace DesktopWidgets.Actions
         public override void Execute()
         {
             base.Execute();
-            WidgetId.ToggleEnable();
+            WidgetId?.ToggleEnable();
         }
     }
 }

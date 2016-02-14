@@ -10,7 +10,7 @@ namespace DesktopWidgets.Actions
         public override void Execute()
         {
             base.Execute();
-            WidgetId.GetView()?.ShowIntro(IntroSettings);
+            WidgetId?.GetView()?.ShowIntro(IntroSettings);
         }
     }
 }

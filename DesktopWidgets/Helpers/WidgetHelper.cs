@@ -21,7 +21,7 @@ namespace DesktopWidgets.Helpers
 
         public static WidgetView GetView(this WidgetId id)
         {
-            return App.WidgetViews.FirstOrDefault(w => w.Id.Guid == id.Guid && !w.IsClosed);
+            return App.WidgetViews.FirstOrDefault(w => w.Id?.Guid == id?.Guid && !w.IsClosed);
         }
 
         public static string GetName(this WidgetId id)
