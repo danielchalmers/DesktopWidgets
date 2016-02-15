@@ -18,19 +18,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         protected readonly WidgetId Id;
         private double _actualHeight;
         private double _actualWidth;
-
-        private double _height;
-
         private bool _isContextMenuOpen;
-
-        private double _left;
-
         private bool _onTop;
         private DispatcherTimer _onTopForceTimer;
-
-        private double _top;
-
-        private double _width;
 
         protected WidgetViewModelBase(WidgetId id)
         {
@@ -74,57 +64,45 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double Left
         {
-            get { return _left; }
+            get { return _settings.Left; }
             set
             {
-                if (value.IsEqual(_left))
-                {
-                    if (!_settings.IsDocked)
-                        _settings.Left = value;
-                    _left = value;
-                    RaisePropertyChanged(nameof(Left));
-                }
+                if (!_settings.IsDocked)
+                    _settings.Left = value;
+                _settings.Left = value;
+                RaisePropertyChanged(nameof(Left));
             }
         }
 
         public double Top
         {
-            get { return _top; }
+            get { return _settings.Top; }
             set
             {
-                if (value.IsEqual(_top))
-                {
-                    if (!_settings.IsDocked)
-                        _settings.Top = value;
-                    _top = value;
-                    RaisePropertyChanged(nameof(Top));
-                }
+                if (!_settings.IsDocked)
+                    _settings.Top = value;
+                _settings.Top = value;
+                RaisePropertyChanged(nameof(Top));
             }
         }
 
         public double Width
         {
-            get { return _width; }
+            get { return _settings.Style.Width; }
             set
             {
-                if (value.IsEqual(_width))
-                {
-                    _width = value;
-                    RaisePropertyChanged(nameof(Width));
-                }
+                _settings.Style.Width = value;
+                RaisePropertyChanged(nameof(Width));
             }
         }
 
         public double Height
         {
-            get { return _height; }
+            get { return _settings.Style.Height; }
             set
             {
-                if (value.IsEqual(_height))
-                {
-                    _height = value;
-                    RaisePropertyChanged(nameof(Height));
-                }
+                _settings.Style.Height = value;
+                RaisePropertyChanged(nameof(Height));
             }
         }
 
