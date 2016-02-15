@@ -370,7 +370,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetMouseDownEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 if (evnt.MouseButton == e.ChangedButton)
                     eventPair.Action.Execute();
@@ -385,7 +385,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetMouseUpEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 if (evnt.MouseButton == e.ChangedButton)
                     eventPair.Action.Execute();
@@ -412,7 +412,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetMouseDoubleClickEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 if (evnt.MouseButton == e.ChangedButton)
                     eventPair.Action.Execute();
@@ -434,7 +434,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetIntroEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }
@@ -445,7 +445,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetIntroEndEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }
@@ -473,7 +473,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetDismissEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }
@@ -484,7 +484,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetSpecialEvent;
-                if (evnt == null || evnt.WidgetId.Guid != Id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != Id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }

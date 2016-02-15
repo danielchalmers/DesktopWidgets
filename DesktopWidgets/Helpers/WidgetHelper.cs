@@ -79,7 +79,7 @@ namespace DesktopWidgets.Helpers
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetDisableEvent;
-                if (evnt == null || evnt.WidgetId.Guid != id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }
@@ -96,7 +96,7 @@ namespace DesktopWidgets.Helpers
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetEnableEvent;
-                if (evnt == null || evnt.WidgetId.Guid != id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }
@@ -133,7 +133,7 @@ namespace DesktopWidgets.Helpers
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetReloadEvent;
-                if (evnt == null || evnt.WidgetId.Guid != id.Guid)
+                if (evnt == null || evnt.WidgetId?.Guid != id?.Guid)
                     continue;
                 eventPair.Action.Execute();
             }
