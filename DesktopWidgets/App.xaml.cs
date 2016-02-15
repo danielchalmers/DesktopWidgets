@@ -49,8 +49,10 @@ namespace DesktopWidgets
                 AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
                 Arguments =
                     AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData[0].Split(',').ToList();
+            else if (e.Args.Length > 0)
+                Arguments = e.Args[0].Split(',').ToList();
             else
-                Arguments = e.Args.ToList();
+                Arguments = new List<string>();
 
             if (!AppInitHelper.Initialize())
                 return;
