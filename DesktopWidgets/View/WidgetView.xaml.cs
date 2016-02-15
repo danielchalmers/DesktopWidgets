@@ -57,7 +57,12 @@ namespace DesktopWidgets.View
             _mouseChecker.Start();
 
             ViewModel.OnLoad();
+
+            HasLoaded = true;
         }
+
+        public bool HasLoaded { private get; set; }
+        public bool HasSourceLoaded { private get; set; }
 
         public WidgetViewModelBase ViewModel { get; set; }
 
@@ -73,6 +78,8 @@ namespace DesktopWidgets.View
         public bool IsClosed { get; set; }
 
         public Win32App ThisApp { get; set; }
+
+        public bool IsRefreshing { get; set; }
 
         private void SetupWidgetControl()
         {
@@ -155,6 +162,8 @@ namespace DesktopWidgets.View
             ViewModel.OnUiLoad();
 
             //FocusMainElement();
+
+            HasSourceLoaded = true;
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -264,6 +273,7 @@ namespace DesktopWidgets.View
 
         private void Refresh(bool resetContext, bool updateNonUi, bool showIntro, bool updateOpacity)
         {
+            IsRefreshing = true;
             var isVisible = IsVisible;
             Opacity = 0;
             if (!isVisible)
@@ -295,6 +305,8 @@ namespace DesktopWidgets.View
                 Hide();
             if (updateOpacity)
                 Opacity = 1;
+
+            IsRefreshing = false;
 
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
                 ShowIntro();
@@ -330,7 +342,7 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
         {
-            if (Settings.SnapToScreenEdges && !Settings.IsDocked)
+            if (HasSourceLoaded && !IsRefreshing && Settings.SnapToScreenEdges && !Settings.IsDocked)
             {
                 var newLoc = this.Snap(true, Settings.IgnoreAppBars);
                 ViewModel.Left = newLoc.X;
