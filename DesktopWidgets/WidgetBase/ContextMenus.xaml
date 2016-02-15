@@ -31,8 +31,7 @@
             </MenuItem>
         </MenuItem>
         <Separator />
-        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}"
-                  IsEnabled="{Binding Settings.OpenMode, Converter={StaticResource NonAlwaysOnOpenModeToBoolConverter}}" />
+        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}" />
         <MenuItem Header="Reload" Command="{Binding ReloadWidget}" />
         <MenuItem
             Header="{Binding Settings.Disabled, Converter={StaticResource BoolToEnableDisableNameConverter}}"
