@@ -150,6 +150,7 @@
     <Compile Include="Classes\FilePath.cs" />
     <Compile Include="Classes\ProcessFile.cs" />
     <Compile Include="Classes\SoundFile.cs" />
+    <Compile Include="Events\LaunchEvent.cs" />
     <Compile Include="Events\ForegroundFullscreenChangedEvent.cs" />
     <Compile Include="Events\ForegroundTitleChangedEvent.cs" />
     <Compile Include="Events\HotkeyEvent.cs" />

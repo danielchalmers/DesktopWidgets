@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Events;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
 
@@ -30,6 +32,16 @@ namespace DesktopWidgets.Helpers
                 new ManageWidgets().Show();
 
             CheckForUpdatesDelayed();
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as LaunchEvent;
+                if (evnt == null)
+                    continue;
+                if ((!evnt.SystemStartup || App.Arguments.Contains("-systemstartup")) &&
+                    (evnt.Parameters.Count == 0 || !evnt.Parameters.Except(App.Arguments).Any()))
+                    eventPair.Action.Execute();
+            }
 
             return true;
         }

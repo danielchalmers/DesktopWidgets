@@ -8,6 +8,7 @@ namespace DesktopWidgets.Classes
     {
         public static readonly List<string> AvailableEvents = new List<string>
         {
+            "Launch",
             "Foreground Fullscreen Changed",
             "Foreground Title Changed",
             "Widget Mouse Down",
@@ -64,6 +65,8 @@ namespace DesktopWidgets.Classes
                     return new ForegroundFullscreenChangedEvent();
                 case "Foreground Title Changed":
                     return new ForegroundTitleChangedEvent();
+                case "Launch":
+                    return new LaunchEvent();
             }
             return null;
         }
@@ -122,6 +125,8 @@ namespace DesktopWidgets.Classes
                 return "Foreground Fullscreen Changed";
             if (evnt is ForegroundTitleChangedEvent)
                 return "Foreground Title Changed";
+            if (evnt is LaunchEvent)
+                return "Launch";
             return null;
         }
 
