@@ -27,6 +27,7 @@ namespace DesktopWidgets.Classes
         {
             "Open File",
             "Play Sound",
+            "Show Popup",
             "Widget Enable",
             "Widget Disable",
             "Widget Reload",
@@ -95,6 +96,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetCancelIntroAction();
                 case "Widget Reload":
                     return new WidgetReloadAction();
+                case "Show Popup":
+                    return new PopupAction();
             }
             return null;
         }
@@ -152,6 +155,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Cancel Intro";
             if (action is WidgetReloadAction)
                 return "Widget Reload";
+            if (action is PopupAction)
+                return "Show Popup";
             return null;
         }
     }
