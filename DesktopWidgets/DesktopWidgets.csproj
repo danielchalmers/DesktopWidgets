@@ -145,6 +145,7 @@
     <Compile Include="Classes\EventActionFactory.cs" />
     <Compile Include="Classes\EventActionId.cs" />
     <Compile Include="Classes\EventActionPair.cs" />
+    <Compile Include="Classes\FontSettings.cs" />
     <Compile Include="Classes\ForegroundTracker.cs" />
     <Compile Include="Classes\FilePath.cs" />
     <Compile Include="Classes\ProcessFile.cs" />
@@ -201,6 +202,9 @@
     <Compile Include="Classes\TaskScheduler.cs" />
     <Compile Include="Classes\IntroData.cs" />
     <Compile Include="WidgetBase\Settings\WidgetClockSettingsBase.cs" />
+    <Compile Include="WidgetBase\Styles\BorderStyleBase.cs" />
+    <Compile Include="WidgetBase\Styles\WidgetStyle.cs" />
+    <Compile Include="WidgetBase\Styles\WidgetTitlebarStyle.cs" />
     <Compile Include="WidgetBase\WidgetFactory.cs" />
     <Compile Include="WidgetBase\WidgetId.cs" />
     <Compile Include="WidgetBase\WidgetsSettingsStore.cs" />

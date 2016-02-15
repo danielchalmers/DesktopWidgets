@@ -72,7 +72,7 @@ namespace DesktopWidgets.Helpers
                 view.AnimationRunning = false;
             };
 
-            if (settings.AnimationType == AnimationType.None)
+            if (settings.Style.AnimationType == AnimationType.None)
             {
                 startAction();
                 finishAction();
@@ -85,7 +85,7 @@ namespace DesktopWidgets.Helpers
                 From = animationMode == AnimationMode.Show ? 0 : 1,
                 To = animationMode == AnimationMode.Show ? 1 : 0,
                 FillBehavior = FillBehavior.Stop,
-                EasingFunction = settings.AnimationEase
+                EasingFunction = settings.Style.AnimationEase
                     ? new SineEase
                     {
                         EasingMode = animationMode == AnimationMode.Show ? EasingMode.EaseIn : EasingMode.EaseOut
@@ -95,7 +95,7 @@ namespace DesktopWidgets.Helpers
 
             // Start animation.
             startAction();
-            switch (settings.AnimationType)
+            switch (settings.Style.AnimationType)
             {
                 case AnimationType.Fade:
                     var storyBoard = new Storyboard();

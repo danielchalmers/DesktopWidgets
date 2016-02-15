@@ -87,7 +87,7 @@ namespace DesktopWidgets.View
 
         private void SetupFrame()
         {
-            if (Settings.ShowTopFrame)
+            if (Settings.Style.ShowTopFrame)
             {
                 var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
                 if (frameTop != null)
@@ -96,7 +96,7 @@ namespace DesktopWidgets.View
                     FrameContainerTop.Visibility = Visibility.Visible;
                 }
             }
-            if (Settings.ShowBottomFrame)
+            if (Settings.Style.ShowBottomFrame)
             {
                 var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
                 if (frameBottom != null)
@@ -105,7 +105,7 @@ namespace DesktopWidgets.View
                     FrameContainerBottom.Visibility = Visibility.Visible;
                 }
             }
-            if (Settings.ShowLeftFrame)
+            if (Settings.Style.ShowLeftFrame)
             {
                 var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
                 if (frameLeft != null)
@@ -114,7 +114,7 @@ namespace DesktopWidgets.View
                     FrameContainerLeft.Visibility = Visibility.Visible;
                 }
             }
-            if (Settings.ShowRightFrame)
+            if (Settings.Style.ShowRightFrame)
             {
                 var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
                 if (frameRight != null)

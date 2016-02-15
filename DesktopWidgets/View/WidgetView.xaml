@@ -48,17 +48,17 @@
         <classes:SizePaddingConverter x:Key="SizePaddingConverter" />
         <classes:TitlebarVisibilityConverter x:Key="TitlebarVisibilityConverter" />
 
-        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.BackgroundColor}"
-                         Opacity="{Binding Settings.BackgroundOpacity}" />
-        <ImageBrush x:Key="WindowBackgroundImageBrush" ImageSource="{Binding Settings.BackgroundImagePath}"
-                    Opacity="{Binding Settings.BackgroundImageOpacity}" />
-        <SolidColorBrush x:Key="WindowForegroundBrush" Color="{Binding Settings.TextColor}" />
-        <SolidColorBrush x:Key="WindowBorderBrush" Color="{Binding Settings.BorderColor}"
-                         Opacity="{Binding Settings.BorderOpacity}" />
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.Style.BackgroundColor}"
+                         Opacity="{Binding Settings.Style.BackgroundOpacity}" />
+        <ImageBrush x:Key="WindowBackgroundImageBrush" ImageSource="{Binding Settings.Style.BackgroundImagePath}"
+                    Opacity="{Binding Settings.Style.BackgroundImageOpacity}" />
+        <SolidColorBrush x:Key="WindowForegroundBrush" Color="{Binding Settings.Style.TextColor}" />
+        <SolidColorBrush x:Key="WindowBorderBrush" Color="{Binding Settings.Style.BorderColor}"
+                         Opacity="{Binding Settings.Style.BorderOpacity}" />
 
-        <SolidColorBrush x:Key="TitlebarBackgroundBrush" Color="{Binding Settings.TitlebarBackgroundColor}"
-                         Opacity="{Binding Settings.TitlebarBackgroundOpacity}" />
-        <SolidColorBrush x:Key="NameForegroundBrush" Color="{Binding Settings.TitlebarNameTextColor}" />
+        <SolidColorBrush x:Key="TitlebarBackgroundBrush" Color="{Binding Settings.TitlebarStyle.BackgroundColor}"
+                         Opacity="{Binding Settings.TitlebarStyle.BackgroundOpacity}" />
+        <SolidColorBrush x:Key="NameForegroundBrush" Color="{Binding Settings.TitlebarStyle.TextColor}" />
 
         <Style x:Key="WidgetWindowStyle" TargetType="{x:Type Window}">
             <Setter Property="WindowStyle" Value="None" />
@@ -76,12 +76,12 @@
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
-            <Setter Property="CornerRadius" Value="{Binding Settings.CornerRadius}" />
+            <Setter Property="CornerRadius" Value="{Binding Settings.Style.CornerRadius}" />
             <Setter Property="BorderThickness">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource SettingsToThicknessConverter}">
-                        <Binding Path="Settings.BorderEnabled" />
-                        <Binding Path="Settings.BorderThickness" />
+                        <Binding Path="Settings.Style.BorderEnabled" />
+                        <Binding Path="Settings.Style.BorderThickness" />
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
@@ -92,34 +92,35 @@
             <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="ScrollViewerContainerStyle" TargetType="{x:Type ScrollViewer}">
-            <Setter Property="MinWidth" Value="{Binding Settings.MinWidth}" />
-            <Setter Property="MinHeight" Value="{Binding Settings.MinHeight}" />
+            <Setter Property="MinWidth" Value="{Binding Settings.Style.MinWidth}" />
+            <Setter Property="MinHeight" Value="{Binding Settings.Style.MinHeight}" />
             <Setter Property="VerticalScrollBarVisibility"
-                    Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
+                    Value="{Binding Path=Settings.Style.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
             <Setter Property="HorizontalScrollBarVisibility"
-                    Value="{Binding Path=Settings.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
+                    Value="{Binding Path=Settings.Style.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
             <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
             <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
-            <Setter Property="FontSize" Value="{Binding Settings.FontSize}" />
-            <Setter Property="FontFamily" Value="{Binding Settings.FontFamily}" />
-            <Setter Property="FontWeight" Value="{Binding Settings.FontWeight}" />
+            <Setter Property="FontSize" Value="{Binding Settings.Style.FontSettings.FontSize}" />
+            <Setter Property="FontFamily" Value="{Binding Settings.Style.FontSettings.FontFamily}" />
+            <Setter Property="FontWeight" Value="{Binding Settings.Style.FontSettings.FontWeight}" />
             <Setter Property="Focusable" Value="False" />
-            <Setter Property="Padding" Value="{Binding Settings.Padding}" />
-            <Setter Property="HorizontalAlignment" Value="{Binding Settings.ViewHorizontalAlignment}" />
-            <Setter Property="VerticalAlignment" Value="{Binding Settings.ViewVerticalAlignment}" />
+            <Setter Property="Padding" Value="{Binding Settings.Style.Padding}" />
+            <Setter Property="HorizontalAlignment" Value="{Binding Settings.Style.HorizontalAlignment}" />
+            <Setter Property="VerticalAlignment" Value="{Binding Settings.Style.VerticalAlignment}" />
         </Style>
         <Style x:Key="TitlebarStyle" TargetType="{x:Type Border}">
             <Setter Property="Focusable" Value="False" />
             <Setter Property="Background" Value="{StaticResource TitlebarBackgroundBrush}" />
-            <Setter Property="CornerRadius" Value="{Binding Settings.TitlebarCornerRadius}" />
-            <Setter Property="Width" Value="{Binding Settings.TitlebarWidth}" />
-            <Setter Property="Height" Value="{Binding Settings.TitlebarHeight}" />
+            <Setter Property="Padding" Value="{Binding Settings.TitlebarStyle.Padding}" />
+            <Setter Property="CornerRadius" Value="{Binding Settings.TitlebarStyle.CornerRadius}" />
+            <Setter Property="Width" Value="{Binding Settings.TitlebarStyle.Width}" />
+            <Setter Property="Height" Value="{Binding Settings.TitlebarStyle.Height}" />
             <Setter Property="Visibility">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource TitlebarVisibilityConverter}">
-                        <Binding Path="Settings.TitlebarVisibilityMode" />
+                        <Binding Path="Settings.TitlebarStyle.VisibilityMode" />
                         <Binding Path="IsMouseOver" RelativeSource="{RelativeSource AncestorType={x:Type Window}}" />
                     </MultiBinding>
                 </Setter.Value>
@@ -127,8 +128,8 @@
         </Style>
         <Style x:Key="TitlebarButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Focusable" Value="False" />
-            <Setter Property="Width" Value="{Binding Settings.TitlebarButtonSize}" />
-            <Setter Property="Height" Value="{Binding Settings.TitlebarButtonSize}" />
+            <Setter Property="Width" Value="{Binding Settings.TitlebarStyle.ButtonSize}" />
+            <Setter Property="Height" Value="{Binding Settings.TitlebarStyle.ButtonSize}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -136,7 +137,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="FontSize" Value="{Binding Settings.TitlebarButtonFontSize}" />
+            <Setter Property="FontSize" Value="{Binding Settings.TitlebarStyle.FontSettings.ButtonFontSize}" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -150,22 +151,22 @@
         <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Focusable" Value="True" />
             <Setter Property="Foreground" Value="{StaticResource NameForegroundBrush}" />
-            <Setter Property="FontFamily" Value="{Binding Settings.TitlebarNameFontFamily}" />
-            <Setter Property="FontSize" Value="{Binding Settings.TitlebarNameFontSize}" />
-            <Setter Property="FontWeight" Value="{Binding Settings.TitlebarNameFontWeight}" />
+            <Setter Property="FontFamily" Value="{Binding Settings.TitlebarStyle.FontSettings.NameFontFamily}" />
+            <Setter Property="FontSize" Value="{Binding Settings.TitlebarStyle.FontSettings.NameFontSize}" />
+            <Setter Property="FontWeight" Value="{Binding Settings.TitlebarStyle.FontSettings.NameFontWeight}" />
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="Text" Value="{Binding Settings.Name}" />
             <Setter Property="IsReadOnly"
-                    Value="{Binding Settings.TitlebarNameAllowEditing, Converter={StaticResource InverseBoolConverter}}" />
+                    Value="{Binding Settings.TitlebarStyle.NameAllowEditing, Converter={StaticResource InverseBoolConverter}}" />
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="{Binding Settings.TitlebarNameHorizontalAlignment}" />
+            <Setter Property="HorizontalAlignment" Value="{Binding Settings.TitlebarStyle.NameHorizontalAlignment}" />
             <Setter Property="Visibility"
-                    Value="{Binding Settings.ShowTitlebarName, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    Value="{Binding Settings.Style.ShowName, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
-                     Visibility="{Binding Settings.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
+                     Visibility="{Binding Settings.Style.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
                      IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}"
                      ItemsSource="{StaticResource WidgetMenuItems}" />
     </Window.Resources>
@@ -188,11 +189,11 @@
                 </Grid.Resources>
                 <TextBox Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource NameBoxStyle}" />
                 <Button Grid.Column="2" Content="⟳" Click="btnReload_OnClick"
-                        Visibility="{Binding Settings.ShowTitlebarReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        Visibility="{Binding Settings.Style.ShowReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Grid.Column="3" Content="≡" Click="btnMenu_OnClick"
-                        Visibility="{Binding Settings.ShowTitlebarMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        Visibility="{Binding Settings.Style.ShowMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Grid.Column="4" Content="×" Click="btnDismiss_OnClick"
-                        Visibility="{Binding Settings.ShowTitlebarDismissButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        Visibility="{Binding Settings.Style.ShowDismissButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
         </Border>
         <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">

@@ -128,13 +128,13 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             }
         }
 
-        public double MaxWidth => double.IsNaN(_settings.MaxWidth) && _settings.MaxSizeUseScreen
+        public double MaxWidth => double.IsNaN(_settings.Style.MaxWidth) && _settings.MaxSizeUseScreen
             ? GetScreenBounds().Width
-            : _settings.MaxWidth;
+            : _settings.Style.MaxWidth;
 
-        public double MaxHeight => double.IsNaN(_settings.MaxHeight) && _settings.MaxSizeUseScreen
+        public double MaxHeight => double.IsNaN(_settings.Style.MaxHeight) && _settings.MaxSizeUseScreen
             ? GetScreenBounds().Height
-            : _settings.MaxHeight;
+            : _settings.Style.MaxHeight;
 
         public double ActualWidth
         {
@@ -239,14 +239,14 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             return _settings.IsDocked && _settings.HorizontalAlignment == HorizontalAlignment.Stretch
                 ? MaxWidth
-                : _settings.Width;
+                : _settings.Style.Width;
         }
 
         private double GetHeight()
         {
             return _settings.IsDocked && _settings.VerticalAlignment == VerticalAlignment.Stretch
                 ? MaxHeight
-                : _settings.Height;
+                : _settings.Style.Height;
         }
 
         private void DismissWidgetExecute()

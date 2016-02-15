@@ -7,8 +7,8 @@ namespace DesktopWidgets.Widgets.Note
     {
         public Settings()
         {
-            Width = 160;
-            Height = 132;
+            Style.Width = 160;
+            Style.Height = 132;
         }
 
         [DisplayName("Saved Text")]

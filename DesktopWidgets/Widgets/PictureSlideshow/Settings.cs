@@ -8,8 +8,8 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
     {
         public Settings()
         {
-            Width = 384;
-            Height = 216;
+            Style.Width = 384;
+            Style.Height = 216;
         }
 
         [Category("General")]

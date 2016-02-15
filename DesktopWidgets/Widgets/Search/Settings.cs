@@ -7,7 +7,7 @@ namespace DesktopWidgets.Widgets.Search
     {
         public Settings()
         {
-            Width = 150;
+            Style.Width = 150;
         }
 
         [Category("General")]

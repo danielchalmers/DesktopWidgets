@@ -8,7 +8,7 @@ namespace DesktopWidgets.WidgetBase.Settings
     {
         protected WidgetClockSettingsBase()
         {
-            FontSize = 24;
+            Style.FontSettings.FontSize = 24;
         }
 
         [Category("General")]

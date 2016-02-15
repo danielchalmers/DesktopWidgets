@@ -34,10 +34,6 @@
             <Setter Property="TextAlignment" Value="Left" />
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="Margin" Value="4" />
-            <Setter Property="FontSize"
-                    Value="{Binding Path=DataContext.Settings.FontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
-            <Setter Property="FontFamily"
-                    Value="{Binding Path=DataContext.Settings.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
             <Setter Property="Visibility"
                     Value="{Binding Path=DataContext.Settings.ShortcutContentMode, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ShowTextContentToVisibilityConverter}}" />
             <Setter Property="DockPanel.Dock"
