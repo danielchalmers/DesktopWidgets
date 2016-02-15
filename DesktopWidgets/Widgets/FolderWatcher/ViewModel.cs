@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,15 +18,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     public class ViewModel : WidgetViewModelBase
     {
         private readonly Queue<string> _notificationQueue;
-
         private string _currentFileContent;
-
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
-
-
         private FileType _fileType = FileType.None;
 
+        private int _historyIndex;
         private bool _isShowing;
 
         public ViewModel(WidgetId guid) : base(guid)
@@ -34,9 +32,16 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             if (Settings == null)
                 return;
 
+            IsPaused = Settings.Paused;
+
             OpenFile = new RelayCommand(OpenFileExecute);
+            TogglePlayPause = new RelayCommand(TogglePlayPauseExecute);
+            Next = new RelayCommand(NextExecute);
+            Previous = new RelayCommand(PreviousExecute);
 
             _notificationQueue = new Queue<string>();
+            FileHistory = new ObservableCollection<string>();
+
             _directoryWatcher =
                 new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
             _directoryWatcher.Start();
@@ -45,6 +50,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         }
 
         public ICommand OpenFile { get; set; }
+        public ICommand TogglePlayPause { get; set; }
+        public ICommand Next { get; set; }
+        public ICommand Previous { get; set; }
 
         public Settings Settings { get; }
 
@@ -94,6 +102,31 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
         }
 
+        public bool IsPaused
+        {
+            get { return Settings.Paused; }
+            set
+            {
+                Settings.Paused = value;
+                RaisePropertyChanged(nameof(IsPaused));
+            }
+        }
+
+        public ObservableCollection<string> FileHistory { get; set; }
+
+        public int HistoryIndex
+        {
+            get { return _historyIndex; }
+            set
+            {
+                if (_historyIndex != value)
+                {
+                    _historyIndex = value;
+                    RaisePropertyChanged(nameof(HistoryIndex));
+                }
+            }
+        }
+
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
             var lastCheck = Settings.LastCheck;
@@ -103,7 +136,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                     return;
             var notificationCount = _notificationQueue.Count;
             foreach (var path in paths)
+            {
                 _notificationQueue.Enqueue(path.FullName);
+                FileHistory.Add(path.FullName);
+            }
             if (!Settings.QueueFiles || (!_isShowing && notificationCount == 0))
                 HandleDirectoryChange();
         }
@@ -126,13 +162,17 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void HandleDirectoryChange()
         {
+            if (IsPaused)
+                return;
             if (_notificationQueue.Count == 0)
             {
                 View?.HideUi();
                 return;
             }
             _isShowing = true;
-            CurrentFilePath = _notificationQueue.Dequeue();
+            var nextFile = _notificationQueue.Dequeue();
+            HistoryIndex = FileHistory.IndexOf(nextFile);
+            CurrentFilePath = nextFile;
             CurrentFileContent = "";
 
             CheckFile(true);
@@ -216,6 +256,36 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             base.OnRefresh();
             _directoryWatcher.SetSettings(Settings.DirectoryWatcherSettings);
+        }
+
+        private void TogglePlayPauseExecute()
+        {
+            _notificationQueue.Clear();
+            IsPaused = !IsPaused;
+        }
+
+        private void NextExecute()
+        {
+            if (Settings.PauseOnSwitch)
+                IsPaused = true;
+            _notificationQueue.Clear();
+            if (HistoryIndex < FileHistory.Count - 1)
+            {
+                HistoryIndex++;
+                CurrentFilePath = FileHistory[HistoryIndex];
+            }
+        }
+
+        private void PreviousExecute()
+        {
+            if (Settings.PauseOnSwitch)
+                IsPaused = true;
+            _notificationQueue.Clear();
+            if (HistoryIndex > 0)
+            {
+                HistoryIndex--;
+                CurrentFilePath = FileHistory[HistoryIndex];
+            }
         }
     }
 }

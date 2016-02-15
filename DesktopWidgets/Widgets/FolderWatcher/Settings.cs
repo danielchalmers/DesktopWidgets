@@ -81,5 +81,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         [DisplayName("Current File")]
         public string CurrentFilePath { get; set; }
+
+        [Category("General")]
+        [DisplayName("Paused")]
+        public bool Paused { get; set; } = false;
+
+        [Category("Behavior")]
+        [DisplayName("Pause On Next/Previous")]
+        public bool PauseOnSwitch { get; set; } = true;
     }
 }

@@ -15,6 +15,8 @@
         <classes:TextFileTypeToVisibilityConverter x:Key="TextFileTypeToVisibilityConverter" />
         <classes:ImageFileTypeToVisibilityConverter x:Key="ImageFileTypeToVisibilityConverter" />
         <classes:OtherFileTypeToVisibilityConverter x:Key="OtherFileTypeToVisibilityConverter" />
+        <classes:BoolToPauseTextConverter x:Key="BoolToPauseTextConverter" />
+        <classes:IntIsLessConverter x:Key="IntIsLessConverter" />
 
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
@@ -32,6 +34,31 @@
                     <TextBlock Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}" />
                 </Hyperlink>
             </TextBlock>
+        </Grid>
+        <Grid x:Key="FrameBottom">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}" />
+                </Grid.Resources>
+                <Button Grid.Column="0" Content="Previous" IsEnabled="{Binding HistoryIndex}"
+                        Command="{Binding Previous}" />
+                <Button Grid.Column="1"
+                        Content="{Binding IsPaused, Converter={StaticResource BoolToPauseTextConverter}}"
+                        Command="{Binding TogglePlayPause}" />
+                <Button Grid.Column="2" Content="Next" Command="{Binding Next}">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource IntIsLessConverter}">
+                            <Binding Path="HistoryIndex" />
+                            <Binding Path="FileHistory.Count" />
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+            </Grid>
         </Grid>
     </UserControl.Resources>
     <Grid MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
