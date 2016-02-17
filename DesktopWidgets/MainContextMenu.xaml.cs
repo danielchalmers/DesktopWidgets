@@ -1,8 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using DesktopWidgets.Helpers;
-using DesktopWidgets.Properties;
-using DesktopWidgets.Stores;
 using DesktopWidgets.Windows;
 
 namespace DesktopWidgets
@@ -46,16 +43,7 @@ namespace DesktopWidgets
 
         private void menuItemMute_OnClick(object sender, RoutedEventArgs e)
         {
-            if (App.IsMuted)
-            {
-                Settings.Default.MuteEndTime = DateTime.Now;
-            }
-            else
-            {
-                WidgetHelper.DismissWidgets();
-                MediaPlayerStore.StopAll();
-                Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
-            }
+            App.ToggleMute();
         }
 
         private void menuItemShowWidgets_OnClick(object sender, RoutedEventArgs e)

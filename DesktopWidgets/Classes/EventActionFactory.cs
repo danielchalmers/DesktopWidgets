@@ -29,6 +29,8 @@ namespace DesktopWidgets.Classes
             "Open File",
             "Play Sound",
             "Show Popup",
+            "Mute",
+            "Unmute",
             "Widget Enable",
             "Widget Disable",
             "Widget Reload",
@@ -101,6 +103,10 @@ namespace DesktopWidgets.Classes
                     return new WidgetReloadAction();
                 case "Show Popup":
                     return new PopupAction();
+                case "Mute":
+                    return new MuteAction();
+                case "Unmute":
+                    return new UnmuteAction();
             }
             return null;
         }
@@ -162,6 +168,10 @@ namespace DesktopWidgets.Classes
                 return "Widget Reload";
             if (action is PopupAction)
                 return "Show Popup";
+            if (action is MuteAction)
+                return "Mute";
+            if (action is UnmuteAction)
+                return "Unmute";
             return null;
         }
     }

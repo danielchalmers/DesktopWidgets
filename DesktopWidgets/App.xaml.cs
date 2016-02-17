@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
+using DesktopWidgets.Stores;
 using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.Windows;
@@ -111,6 +112,26 @@ namespace DesktopWidgets
             e.Handled = true;
             if (!SuccessfullyLoaded)
                 AppHelper.ShutdownApplication();
+        }
+
+        public static void Mute()
+        {
+            WidgetHelper.DismissWidgets();
+            MediaPlayerStore.StopAll();
+            Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
+        }
+
+        public static void Unmute()
+        {
+            Settings.Default.MuteEndTime = DateTime.Now;
+        }
+
+        public static void ToggleMute()
+        {
+            if (IsMuted)
+                Unmute();
+            else
+                Mute();
         }
     }
 }

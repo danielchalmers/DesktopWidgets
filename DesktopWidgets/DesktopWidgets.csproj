@@ -127,6 +127,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\UnmuteAction.cs" />
+    <Compile Include="Actions\MuteAction.cs" />
     <Compile Include="Actions\PopupAction.cs" />
     <Compile Include="Actions\WidgetCancelIntroAction.cs" />
     <Compile Include="Actions\WidgetReloadAction.cs" />
