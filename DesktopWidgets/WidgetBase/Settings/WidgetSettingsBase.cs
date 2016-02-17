@@ -23,7 +23,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         public WidgetStyle Style { get; set; } = new WidgetStyle();
 
         [Category("Style")]
-        public WidgetTitlebarStyle TitlebarStyle { get; set; } = new WidgetTitlebarStyle();
+        public WidgetActionBarStyle ActionBarStyle { get; set; } = new WidgetActionBarStyle();
 
         [Category("General")]
         [DisplayName("Name")]
@@ -108,8 +108,8 @@ namespace DesktopWidgets.WidgetBase.Settings
         public bool DragToMove { get; set; } = true;
 
         [Category("Behavior")]
-        [DisplayName("Drag Titlebar To Move")]
-        public bool DragTitlebarToMove { get; set; } = true;
+        [DisplayName("Drag Action Bar To Move")]
+        public bool DragActionBarToMove { get; set; } = true;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Custom Mouse Detection Bounds")]

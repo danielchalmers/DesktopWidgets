@@ -721,7 +721,7 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class TitlebarVisibilityConverter : IMultiValueConverter
+    public class ActionBarVisibilityConverter : IMultiValueConverter
     {
         public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {

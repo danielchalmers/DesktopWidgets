@@ -357,10 +357,10 @@ namespace DesktopWidgets.View
                 DragMove();
         }
 
-        private void Titlebar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        private void ActionBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
-                Settings.DragTitlebarToMove)
+                Settings.DragActionBarToMove)
                 DragMove();
         }
 

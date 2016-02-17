@@ -208,7 +208,7 @@
     <Compile Include="WidgetBase\Settings\WidgetClockSettingsBase.cs" />
     <Compile Include="WidgetBase\Styles\BorderStyleBase.cs" />
     <Compile Include="WidgetBase\Styles\WidgetStyle.cs" />
-    <Compile Include="WidgetBase\Styles\WidgetTitlebarStyle.cs" />
+    <Compile Include="WidgetBase\Styles\WidgetActionBarStyle.cs" />
     <Compile Include="WidgetBase\WidgetFactory.cs" />
     <Compile Include="WidgetBase\WidgetId.cs" />
     <Compile Include="WidgetBase\WidgetsSettingsStore.cs" />

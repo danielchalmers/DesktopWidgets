@@ -35,5 +35,11 @@ namespace DesktopWidgets.WidgetBase.Styles
 
         [Category("Text")]
         public FontSettings FontSettings { get; set; } = new FontSettings();
+
+        [DisplayName("Horizontal Alignment")]
+        public HorizontalAlignment HorizontalAlignment { get; set; }
+
+        [DisplayName("Vertical Alignment")]
+        public VerticalAlignment VerticalAlignment { get; set; }
     }
 }

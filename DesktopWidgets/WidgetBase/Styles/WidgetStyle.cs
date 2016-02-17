@@ -19,6 +19,8 @@ namespace DesktopWidgets.WidgetBase.Styles
             Width = double.NaN;
             Height = double.NaN;
             CornerRadius = new CornerRadius(4);
+            HorizontalAlignment = HorizontalAlignment.Stretch;
+            VerticalAlignment = VerticalAlignment.Stretch;
         }
 
         [Category("Size")]
@@ -74,12 +76,6 @@ namespace DesktopWidgets.WidgetBase.Styles
         [Category("Frame")]
         [DisplayName("Enable Right Frame")]
         public bool ShowRightFrame { get; set; } = true;
-
-        [DisplayName("Horizontal Alignment")]
-        public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Stretch;
-
-        [DisplayName("Vertical Alignment")]
-        public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Stretch;
 
         [Category("Border")]
         [DisplayName("Visible")]
