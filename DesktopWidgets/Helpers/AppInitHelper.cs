@@ -4,6 +4,7 @@ using System.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Events;
 using DesktopWidgets.Properties;
+using DesktopWidgets.Stores;
 using DesktopWidgets.Windows;
 
 namespace DesktopWidgets.Helpers
@@ -36,13 +37,17 @@ namespace DesktopWidgets.Helpers
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as LaunchEvent;
-                if (evnt == null)
-                    continue;
-                if ((!evnt.SystemStartup || App.Arguments.Contains("-systemstartup")) &&
-                    (evnt.Parameters.Count == 0 || !evnt.Parameters.Except(App.Arguments).Any()))
-                    eventPair.Action.Execute();
-            }
+                if (evnt != null)
+                {
+                    if ((!evnt.SystemStartup || App.Arguments.Contains("-systemstartup")) &&
+                        (evnt.Parameters.Count == 0 || !evnt.Parameters.Except(App.Arguments).Any()))
+                        eventPair.Action.Execute();
+                }
 
+                var hotkeyEvent = eventPair.Event as HotkeyEvent;
+                if (hotkeyEvent != null)
+                    HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, eventPair.Action.Execute);
+            }
             return true;
         }
 

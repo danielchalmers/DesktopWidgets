@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Events;
+using DesktopWidgets.Stores;
 using DesktopWidgets.Windows;
 
 namespace DesktopWidgets.Helpers
@@ -38,6 +40,10 @@ namespace DesktopWidgets.Helpers
         {
             var editDialog = new EventActionPairEditor(pair);
             editDialog.ShowDialog();
+
+            var hotkeyEvent = pair.Event as HotkeyEvent;
+            if (hotkeyEvent != null)
+                HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, pair.Action.Execute);
         }
 
         public static void RemovePair(EventActionId id)
@@ -48,7 +54,12 @@ namespace DesktopWidgets.Helpers
                 return;
             foreach (
                 var pair in App.WidgetsSettingsStore.EventActionPairs.Where(x => x.Identifier.Guid == id.Guid).ToList())
+            {
                 App.WidgetsSettingsStore.EventActionPairs.Remove(pair);
+                var hotkeyEvent = pair.Event as HotkeyEvent;
+                if (hotkeyEvent != null)
+                    HotkeyStore.RemoveHotkey(hotkeyEvent.Hotkey);
+            }
         }
     }
 }

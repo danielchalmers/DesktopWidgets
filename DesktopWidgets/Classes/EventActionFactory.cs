@@ -8,6 +8,7 @@ namespace DesktopWidgets.Classes
     {
         public static readonly List<string> AvailableEvents = new List<string>
         {
+            "Hotkey",
             "Launch",
             "Foreground Fullscreen Changed",
             "Foreground Title Changed",
@@ -68,6 +69,8 @@ namespace DesktopWidgets.Classes
                     return new ForegroundTitleChangedEvent();
                 case "Launch":
                     return new LaunchEvent();
+                case "Hotkey":
+                    return new HotkeyEvent();
             }
             return null;
         }
@@ -130,6 +133,8 @@ namespace DesktopWidgets.Classes
                 return "Foreground Title Changed";
             if (evnt is LaunchEvent)
                 return "Launch";
+            if (evnt is HotkeyEvent)
+                return "Hotkey";
             return null;
         }
 
