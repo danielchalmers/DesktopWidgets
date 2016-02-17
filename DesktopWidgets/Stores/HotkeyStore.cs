@@ -17,12 +17,8 @@ namespace DesktopWidgets.Stores
         {
             if (hotkey.Key == Key.None)
                 return;
-            foreach (var hk in Hotkeys.Where(x => x.Item1.Guid == hotkey.Guid).ToList())
-            {
-                Hotkeys.Remove(hk);
-                if (Hotkeys.All(x => x.Item1.Key != hotkey.Key && x.Item1.ModifierKeys != hotkey.ModifierKeys))
-                    UnregisterHotkey(hk.Item1);
-            }
+
+            RemoveHotkey(hotkey);
             Hotkeys.Add(new Tuple<Hotkey, Action>(hotkey, callback));
 
             try
@@ -36,10 +32,17 @@ namespace DesktopWidgets.Stores
             }
         }
 
+        public static void RemoveHotkey(Hotkey hotkey) => RemoveHotkey(hotkey.Guid);
+
         public static void RemoveHotkey(Guid guid)
         {
             foreach (var hk in Hotkeys.Where(x => x.Item1.Guid == guid).ToList())
+            {
+                var hotkey = hk.Item1;
                 Hotkeys.Remove(hk);
+                if (Hotkeys.All(x => x.Item1.Key != hotkey.Key && x.Item1.ModifierKeys != hotkey.ModifierKeys))
+                    UnregisterHotkey(hotkey);
+            }
         }
 
         private static void UnregisterHotkey(Hotkey hotkey)
