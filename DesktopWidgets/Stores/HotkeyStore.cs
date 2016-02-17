@@ -38,7 +38,7 @@ namespace DesktopWidgets.Stores
 
         public static void RemoveHotkey(Guid guid)
         {
-            foreach (var hk in Hotkeys.Where(x => x.Item1.Guid == guid))
+            foreach (var hk in Hotkeys.Where(x => x.Item1.Guid == guid).ToList())
                 Hotkeys.Remove(hk);
         }
 
