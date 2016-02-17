@@ -143,7 +143,7 @@ namespace DesktopWidgets.Widgets.Sidebar
                 return;
             viewModel.Settings.Shortcuts.Remove(shortcut);
             if (shortcut.Hotkey.Key != Key.None)
-                HotkeyStore.RemoveHotkey(shortcut.Guid);
+                HotkeyStore.RemoveHotkey(shortcut.Hotkey.Guid);
         }
 
         public static Shortcut MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
