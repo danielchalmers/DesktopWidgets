@@ -19,8 +19,8 @@ namespace DesktopWidgets.WidgetBase.Styles
             Width = double.NaN;
             Height = double.NaN;
             CornerRadius = new CornerRadius(4);
-            HorizontalAlignment = HorizontalAlignment.Stretch;
-            VerticalAlignment = VerticalAlignment.Stretch;
+            HorizontalAlignment = HorizontalAlignment.Left;
+            VerticalAlignment = VerticalAlignment.Top;
         }
 
         [Category("Size")]

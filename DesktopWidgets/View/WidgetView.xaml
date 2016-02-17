@@ -74,6 +74,8 @@
             <Setter Property="Focusable" Value="False" />
         </Style>
         <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="HorizontalAlignment" Value="{Binding Settings.Style.HorizontalAlignment}" />
+            <Setter Property="VerticalAlignment" Value="{Binding Settings.Style.VerticalAlignment}" />
             <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
             <Setter Property="CornerRadius" Value="{Binding Settings.Style.CornerRadius}" />
@@ -107,8 +109,6 @@
             <Setter Property="FontWeight" Value="{Binding Settings.Style.FontSettings.FontWeight}" />
             <Setter Property="Focusable" Value="False" />
             <Setter Property="Padding" Value="{Binding Settings.Style.Padding}" />
-            <Setter Property="HorizontalAlignment" Value="{Binding Settings.Style.HorizontalAlignment}" />
-            <Setter Property="VerticalAlignment" Value="{Binding Settings.Style.VerticalAlignment}" />
         </Style>
         <Style x:Key="ActionBarStyle" TargetType="{x:Type Border}">
             <Setter Property="Focusable" Value="False" />
