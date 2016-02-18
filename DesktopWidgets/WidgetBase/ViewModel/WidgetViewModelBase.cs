@@ -16,9 +16,12 @@ namespace DesktopWidgets.WidgetBase.ViewModel
     {
         private readonly WidgetSettingsBase _settings;
         protected readonly WidgetId Id;
+        private DispatcherTimer _actionBarHideTimer;
         private double _actualHeight;
         private double _actualWidth;
         private bool _isContextMenuOpen;
+
+        private bool _keepActionBarOpen;
         private bool _onTop;
         private DispatcherTimer _onTopForceTimer;
 
@@ -167,6 +170,19 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 {
                     _isContextMenuOpen = value;
                     RaisePropertyChanged(nameof(IsContextMenuOpen));
+                }
+            }
+        }
+
+        public bool KeepActionBarOpen
+        {
+            get { return _keepActionBarOpen; }
+            set
+            {
+                if (_keepActionBarOpen != value)
+                {
+                    _keepActionBarOpen = value;
+                    RaisePropertyChanged(nameof(KeepActionBarOpen));
                 }
             }
         }
@@ -330,6 +346,36 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             _onTopForceTimer.Start();
         }
 
+        private void UpdateActionBarTimer()
+        {
+            if (_settings.ActionBarStyle.StayOpenDuration <= 0)
+            {
+                _actionBarHideTimer?.Stop();
+                return;
+            }
+            if (_actionBarHideTimer == null)
+            {
+                _actionBarHideTimer = new DispatcherTimer();
+                _actionBarHideTimer.Tick += (sender, args) =>
+                {
+                    KeepActionBarOpen = false;
+                    _actionBarHideTimer.Stop();
+                };
+            }
+            _actionBarHideTimer.Interval = TimeSpan.FromMilliseconds(_settings.ActionBarStyle.StayOpenDuration);
+            _actionBarHideTimer.Stop();
+            _actionBarHideTimer.Start();
+        }
+
+        private void StartActionBarKeepOpen()
+        {
+            if (_actionBarHideTimer == null)
+                return;
+            _actionBarHideTimer.Stop();
+            _actionBarHideTimer.Start();
+            KeepActionBarOpen = true;
+        }
+
         public virtual void DropExecute(DragEventArgs e)
         {
         }
@@ -338,6 +384,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             if (_settings.DetectIdle && _settings.UseMouseMoveIdleDetection)
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+
+            StartActionBarKeepOpen();
         }
 
         public virtual void MouseDownExecute(MouseButtonEventArgs e)
@@ -444,6 +492,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public virtual void ReloadTimers()
         {
             UpdateForceOnTopTimer();
+            UpdateActionBarTimer();
         }
 
         public virtual void OnDismiss()

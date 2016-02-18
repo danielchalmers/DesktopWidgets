@@ -125,6 +125,7 @@
                     <MultiBinding Converter="{StaticResource ActionBarVisibilityConverter}">
                         <Binding Path="Settings.ActionBarStyle.VisibilityMode" />
                         <Binding Path="IsMouseOver" RelativeSource="{RelativeSource AncestorType={x:Type Window}}" />
+                        <Binding Path="KeepActionBarOpen" />
                     </MultiBinding>
                 </Setter.Value>
             </Setter>

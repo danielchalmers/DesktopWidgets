@@ -727,16 +727,17 @@ namespace DesktopWidgets.Classes
         {
             if (!ConverterHelper.IsValueValid(value, true))
                 return DependencyProperty.UnsetValue;
-            if (value.Length != 2)
+            if (value.Length != 3)
                 return DependencyProperty.UnsetValue;
             var visMode = (TitlebarVisibilityMode) value[0];
             var isMouseOver = (bool) value[1];
+            var keepOpen = (bool) value[2];
             switch (visMode)
             {
                 case TitlebarVisibilityMode.AlwaysVisible:
                     return Visibility.Visible;
                 case TitlebarVisibilityMode.OnHover:
-                    return isMouseOver ? Visibility.Visible : Visibility.Hidden;
+                    return isMouseOver || keepOpen ? Visibility.Visible : Visibility.Hidden;
                 default:
                 case TitlebarVisibilityMode.Hidden:
                     return Visibility.Collapsed;

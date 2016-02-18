@@ -47,5 +47,8 @@ namespace DesktopWidgets.WidgetBase.Styles
         [Category("Name")]
         [DisplayName("Show Name")]
         public bool ShowName { get; set; } = false;
+
+        [DisplayName("Stay Open Duration (ms)")]
+        public int StayOpenDuration { get; set; } = 1500;
     }
 }
