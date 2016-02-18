@@ -25,7 +25,7 @@ namespace DesktopWidgets.Classes
         public int CheckInterval { get; set; } = 500;
 
         [DisplayName("Max File Size (bytes)")]
-        public double MaxSize { get; set; } = 1048576;
+        public double MaxSize { get; set; } = 0;
 
         [DisplayName("Detect New Files")]
         public bool DetectNewFiles { get; set; } = true;
