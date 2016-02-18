@@ -429,7 +429,7 @@ namespace DesktopWidgets.Classes
                 var baseAmount = (double) value[0];
                 var total = 0.0;
                 var ignoreNext = false;
-                foreach (var val in value.ToList().GetRange(1, value.Length - 1))
+                foreach (var val in value.ToList().GetRange(1, value.Length - 6))
                 {
                     if (ignoreNext)
                         continue;
@@ -443,7 +443,19 @@ namespace DesktopWidgets.Classes
                         total += (double) val;
                     }
                 }
-                return baseAmount - total;
+
+                var condition1 = (bool) value[value.Length - 5];
+                var condition2 = (bool) value[value.Length - 4];
+                var actualSize = (double) value[value.Length - 3];
+                var size1 = (double) value[value.Length - 2];
+                var size2 = (double) value[value.Length - 1];
+
+                var baseReturn = baseAmount - total;
+
+                if (condition1 && condition2)
+                    baseReturn -= actualSize + size1 + size2;
+
+                return baseReturn;
             }
             catch
             {
@@ -782,6 +794,34 @@ namespace DesktopWidgets.Classes
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DockIsVerticalToBooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var dock = (Dock) value;
+            return dock == Dock.Top || dock == Dock.Bottom;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DockIsHorizontalToBooleanConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var dock = (Dock) value;
+            return dock == Dock.Left || dock == Dock.Right;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
