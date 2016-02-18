@@ -338,6 +338,8 @@ namespace DesktopWidgets.View
             ViewModel.OnClose();
             ViewModel = null;
             SaveScrollPosition();
+
+            App.WidgetViews.Remove(this);
         }
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)
@@ -397,6 +399,11 @@ namespace DesktopWidgets.View
         public UIElement GetMainElement()
         {
             return UserControl.FindName("MainElement") as UIElement;
+        }
+
+        public void CloseAnimation()
+        {
+            this.Animate(AnimationMode.Hide, false, null, Close);
         }
     }
 }

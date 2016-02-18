@@ -104,11 +104,7 @@ namespace DesktopWidgets.Helpers
 
         public static void CloseView(this WidgetId id)
         {
-            var view = id.GetView();
-            if (view == null)
-                return;
-            view.Animate(AnimationMode.Hide, false, null, view.Close);
-            App.WidgetViews.Remove(view);
+            id.GetView()?.CloseAnimation();
         }
 
         public static void ToggleEnable(this WidgetId id)
