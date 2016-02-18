@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using DesktopWidgets.Classes;
@@ -21,17 +20,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [Category("Style")]
         [DisplayName("Show File Name")]
         public bool ShowFileName { get; set; } = true;
-
-        [Category("General")]
-        [DisplayName("Timeout Duration")]
-        public TimeSpan TimeoutDuration { get; set; } = TimeSpan.FromMinutes(1);
-
-        [DisplayName("Last File Check")]
-        public DateTime LastCheck { get; set; } = DateTime.Now;
-
-        [Category("General")]
-        [DisplayName("Enable Timeout")]
-        public bool EnableTimeout { get; set; } = false;
 
         [Category("Behavior")]
         [DisplayName("Enable File Queue")]

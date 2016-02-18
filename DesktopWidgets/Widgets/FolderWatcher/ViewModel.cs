@@ -129,11 +129,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
-            var lastCheck = Settings.LastCheck;
-            Settings.LastCheck = DateTime.Now;
-            if (Settings.EnableTimeout)
-                if (DateTime.Now - lastCheck >= Settings.TimeoutDuration)
-                    return;
             var notificationCount = _notificationQueue.Count;
             foreach (var path in paths)
             {

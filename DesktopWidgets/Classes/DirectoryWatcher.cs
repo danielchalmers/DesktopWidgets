@@ -31,7 +31,10 @@ namespace DesktopWidgets.Classes
 
         public void CheckDirectoriesForNewFiles()
         {
-            if (_isScanning)
+            var lastCheck = _settings.LastCheck;
+            _settings.LastCheck = DateTime.Now;
+            if (_isScanning ||
+                (_settings.TimeoutDuration.TotalSeconds > 0 && DateTime.Now - lastCheck >= _settings.TimeoutDuration))
                 return;
             _isScanning = true;
             foreach (

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
@@ -31,5 +32,12 @@ namespace DesktopWidgets.Classes
 
         [DisplayName("Detect Modified Files")]
         public bool DetectModifiedFiles { get; set; } = true;
+
+        [DisplayName("Timeout Duration")]
+        public TimeSpan TimeoutDuration { get; set; } = TimeSpan.FromMinutes(0);
+
+        [Browsable(false)]
+        [DisplayName("Last Check")]
+        public DateTime LastCheck { get; set; } = DateTime.Now;
     }
 }
