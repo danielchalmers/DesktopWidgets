@@ -12,16 +12,16 @@ namespace DesktopWidgets.Classes
             "Launch",
             "Foreground Fullscreen Changed",
             "Foreground Title Changed",
+            "Widget Special Event",
             "Widget Mouse Down",
             "Widget Mouse Up",
             "Widget Mouse Double Click",
-            "Widget Enable",
-            "Widget Disable",
-            "Widget Reload",
             "Widget Intro",
             "Widget Intro End",
             "Widget Dismiss",
-            "Widget Special Event"
+            "Widget Reload",
+            "Widget Enable",
+            "Widget Disable"
         };
 
         public static readonly List<string> AvailableActions = new List<string>
@@ -31,14 +31,14 @@ namespace DesktopWidgets.Classes
             "Show Popup",
             "Mute",
             "Unmute",
-            "Widget Enable",
-            "Widget Disable",
-            "Widget Reload",
-            "Widget Toggle Enabled",
             "Widget Intro",
             "Widget Cancel Intro",
             "Widget Dismiss",
-            "Widget Hide"
+            "Widget Hide",
+            "Widget Reload",
+            "Widget Enable",
+            "Widget Disable",
+            "Widget Toggle Enabled"
         };
 
         public static IEvent GetNewEventFromName(string name)
