@@ -35,7 +35,7 @@ namespace DesktopWidgets.Helpers
         public static void NewWidget()
         {
             var dialog =
-                new SelectItem(WidgetFactory.AvailableWidgets, "Widget");
+                new SelectItem(WidgetFactory.AvailableWidgets, "New Widget");
             dialog.ShowDialog();
             if (dialog.SelectedItem == null)
                 return;
