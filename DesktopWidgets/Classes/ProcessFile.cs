@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.Classes
 {
+    [ExpandableObject]
     [DisplayName("Process File")]
     public class ProcessFile : FilePath
     {
