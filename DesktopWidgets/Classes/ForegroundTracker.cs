@@ -29,13 +29,23 @@ namespace DesktopWidgets.Classes
             ForegroundTitle = foreground.GetTitle();
             IsForegroundFullscreen = foreground.IsFullScreen();
 
+            if (ForegroundTitle == null)
+                ForegroundTitle = string.Empty;
+            if (oldTitle == null)
+                oldTitle = string.Empty;
+
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as ForegroundTitleChangedEvent;
                 if (evnt == null)
                     continue;
-                if ((string.IsNullOrWhiteSpace(evnt.ToTitle) || evnt.ToTitle == ForegroundTitle) &&
-                    (string.IsNullOrWhiteSpace(evnt.FromTitle) || evnt.FromTitle == oldTitle))
+                if ((string.IsNullOrWhiteSpace(evnt.ToTitle) ||
+                     (evnt.ToTitleMatchMode == MatchMode.Equals && ForegroundTitle == evnt.ToTitle) ||
+                     (evnt.ToTitleMatchMode == MatchMode.Contains && ForegroundTitle.Contains(evnt.ToTitle)))
+                    &&
+                    (string.IsNullOrWhiteSpace(evnt.FromTitle) ||
+                     (evnt.FromTitleMatchMode == MatchMode.Equals && oldTitle == evnt.FromTitle) ||
+                     (evnt.FromTitleMatchMode == MatchMode.Contains && oldTitle.Contains(evnt.FromTitle))))
                     eventPair.Action.Execute();
             }
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)

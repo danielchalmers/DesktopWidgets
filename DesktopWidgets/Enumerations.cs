@@ -116,4 +116,10 @@
         No,
         Any
     }
+
+    public enum MatchMode
+    {
+        Equals,
+        Contains
+    }
 }
