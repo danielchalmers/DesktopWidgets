@@ -18,10 +18,24 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding ItemsList1}"
-                 SelectedItem="{Binding SelectedItem1}" />
-        <ListBox Grid.Column="2" Grid.Row="0" ItemsSource="{Binding ItemsList2}"
-                 SelectedItem="{Binding SelectedItem2}" />
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding Title1}" />
+            <ListBox Grid.Row="1" Margin="0,5,0,0" ItemsSource="{Binding ItemsList1}"
+                     SelectedItem="{Binding SelectedItem1}" />
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="{Binding Title2}" />
+            <ListBox Grid.Row="1" Margin="0,5,0,0" ItemsSource="{Binding ItemsList2}"
+                     SelectedItem="{Binding SelectedItem2}" />
+        </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,15,0,0" HorizontalAlignment="Right">
             <Grid.ColumnDefinitions>

@@ -11,10 +11,11 @@ namespace DesktopWidgets.Windows
     {
         private readonly SelectDualItemViewModel _viewModel;
 
-        public SelectDualItem(IEnumerable<object> items1, IEnumerable<object> items2, string title)
+        public SelectDualItem(IEnumerable<object> items1, IEnumerable<object> items2, string title, string help1,
+            string help2)
         {
             InitializeComponent();
-            _viewModel = new SelectDualItemViewModel(items1, items2);
+            _viewModel = new SelectDualItemViewModel(items1, items2, help1, help2);
             Title = $"Select {title}";
             DataContext = _viewModel;
         }

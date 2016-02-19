@@ -12,7 +12,7 @@ namespace DesktopWidgets.Helpers
         public static void NewPair()
         {
             var dialog = new SelectDualItem(EventActionFactory.AvailableEvents, EventActionFactory.AvailableActions,
-                "New Event and Action Pair");
+                "New Event and Action Pair", "Event:", "Action:");
             dialog.ShowDialog();
 
             if (dialog.SelectedItem1 == null || dialog.SelectedItem2 == null)
