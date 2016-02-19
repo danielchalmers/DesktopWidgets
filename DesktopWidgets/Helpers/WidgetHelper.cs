@@ -44,11 +44,8 @@ namespace DesktopWidgets.Helpers
 
         private static void LoadView(this WidgetId id, bool systemStartup = false)
         {
-            foreach (var view in App.WidgetViews.Where(view => view.Id == id))
-            {
+            foreach (var view in App.WidgetViews.Where(view => view.Id == id).ToList())
                 view.Close();
-                App.WidgetViews.Remove(view);
-            }
 
             var widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView(), systemStartup);
             App.WidgetViews.Add(widgetView);
