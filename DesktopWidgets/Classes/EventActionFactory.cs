@@ -27,6 +27,7 @@ namespace DesktopWidgets.Classes
         public static readonly List<string> AvailableActions = new List<string>
         {
             "Open File",
+            "Write File",
             "Play Sound",
             "Show Popup",
             "Mute",
@@ -107,6 +108,8 @@ namespace DesktopWidgets.Classes
                     return new MuteAction();
                 case "Unmute":
                     return new UnmuteAction();
+                case "Write File":
+                    return new WriteFileAction();
             }
             return null;
         }
@@ -172,6 +175,8 @@ namespace DesktopWidgets.Classes
                 return "Mute";
             if (action is UnmuteAction)
                 return "Unmute";
+            if (action is WriteFileAction)
+                return "Write File";
             return null;
         }
     }

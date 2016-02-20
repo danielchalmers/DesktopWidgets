@@ -122,4 +122,17 @@
         Equals,
         Contains
     }
+
+    public enum FileWriteMode
+    {
+        Overwrite,
+        Append
+    }
+
+    public enum InsertMode
+    {
+        None,
+        Prefix,
+        Suffix
+    }
 }
