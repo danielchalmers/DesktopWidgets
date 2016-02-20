@@ -57,6 +57,7 @@ namespace DesktopWidgets.Helpers
                     Widgets = new ObservableCollection<WidgetSettingsBase>()
                 };
             App.WidgetsSettingsStore.Widgets.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
+            App.WidgetsSettingsStore.EventActionPairs.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
         }
 
         private static void SaveWidgetsDataToSettings()
