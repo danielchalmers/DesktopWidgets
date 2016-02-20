@@ -180,5 +180,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Show Intro On Launch")]
         public bool ShowIntroOnLaunch { get; set; } = true;
+
+        [Category("Dock")]
+        [DisplayName("Dock As AppBar")]
+        public bool IsAppBar { get; set; } = false;
     }
 }

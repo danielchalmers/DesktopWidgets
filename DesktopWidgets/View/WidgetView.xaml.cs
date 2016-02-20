@@ -11,6 +11,7 @@ using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.WidgetBase.ViewModel;
+using WpfAppBar;
 
 namespace DesktopWidgets.View
 {
@@ -271,6 +272,24 @@ namespace DesktopWidgets.View
             UpdateLayout();
         }
 
+        private bool UpdateAppBarStatus()
+        {
+            if (Settings.IsDocked && Settings.HorizontalAlignment == HorizontalAlignment.Left)
+                AppBarFunctions.SetAppBar(this, ABEdge.Left);
+            else if (Settings.IsDocked && Settings.HorizontalAlignment == HorizontalAlignment.Right)
+                AppBarFunctions.SetAppBar(this, ABEdge.Right);
+            else if (Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Top)
+                AppBarFunctions.SetAppBar(this, ABEdge.Top);
+            else if (Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Bottom)
+                AppBarFunctions.SetAppBar(this, ABEdge.Bottom);
+            else
+            {
+                AppBarFunctions.SetAppBar(this, ABEdge.None);
+                return false;
+            }
+            return true;
+        }
+
         private void Refresh(bool resetContext, bool updateNonUi, bool showIntro, bool updateOpacity)
         {
             IsRefreshing = true;
@@ -291,7 +310,8 @@ namespace DesktopWidgets.View
 
             ViewModel.OnTop = Settings.OnTop;
 
-            UpdatePositionAndLocation();
+            if (!UpdateAppBarStatus())
+                UpdatePositionAndLocation();
 
             if (updateNonUi)
             {
