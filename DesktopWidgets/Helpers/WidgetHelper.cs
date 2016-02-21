@@ -175,8 +175,8 @@ namespace DesktopWidgets.Helpers
         public static void LoadWidgetViews(bool systemStartup = false)
         {
             if (App.WidgetViews != null)
-                foreach (var view in App.WidgetViews)
-                    view.Close();
+                foreach (var view in App.WidgetViews.Where(x => !x.IsClosed).ToList())
+                    view?.Close();
             App.WidgetViews = new ObservableCollection<WidgetView>();
 
             foreach (
