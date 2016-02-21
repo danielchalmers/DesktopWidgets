@@ -158,6 +158,9 @@ namespace DesktopWidgets.View
             if (Settings.Unclickable)
                 ThisApp.SetWindowExTransparent();
 
+            if (Settings.IsAppBar)
+                SetAsAppBar();
+
             UpdateUi(false);
 
             ViewModel.OnUiLoad();
@@ -272,22 +275,28 @@ namespace DesktopWidgets.View
             UpdateLayout();
         }
 
-        private bool UpdateAppBarStatus()
+        private void SetAsAppBar()
         {
-            if (Settings.IsDocked && Settings.HorizontalAlignment == HorizontalAlignment.Left)
-                AppBarFunctions.SetAppBar(this, ABEdge.Left);
-            else if (Settings.IsDocked && Settings.HorizontalAlignment == HorizontalAlignment.Right)
-                AppBarFunctions.SetAppBar(this, ABEdge.Right);
-            else if (Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Top)
-                AppBarFunctions.SetAppBar(this, ABEdge.Top);
-            else if (Settings.IsDocked && Settings.VerticalAlignment == VerticalAlignment.Bottom)
-                AppBarFunctions.SetAppBar(this, ABEdge.Bottom);
-            else
+            switch (Settings.HorizontalAlignment)
             {
-                AppBarFunctions.SetAppBar(this, ABEdge.None);
-                return false;
+                case HorizontalAlignment.Left:
+                    AppBarFunctions.SetAppBar(this, ABEdge.Left);
+                    break;
+                case HorizontalAlignment.Right:
+                    AppBarFunctions.SetAppBar(this, ABEdge.Right);
+                    break;
+                default:
+                    switch (Settings.VerticalAlignment)
+                    {
+                        case VerticalAlignment.Top:
+                            AppBarFunctions.SetAppBar(this, ABEdge.Top);
+                            break;
+                        case VerticalAlignment.Bottom:
+                            AppBarFunctions.SetAppBar(this, ABEdge.Bottom);
+                            break;
+                    }
+                    break;
             }
-            return true;
         }
 
         private void Refresh(bool resetContext, bool updateNonUi, bool showIntro, bool updateOpacity)
@@ -310,8 +319,7 @@ namespace DesktopWidgets.View
 
             ViewModel.OnTop = Settings.OnTop;
 
-            if (!UpdateAppBarStatus())
-                UpdatePositionAndLocation();
+            UpdatePositionAndLocation();
 
             if (updateNonUi)
             {
