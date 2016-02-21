@@ -12,19 +12,19 @@ namespace DesktopWidgets.WidgetBase.Settings
         }
 
         [Category("General")]
-        [DisplayName("Refresh Interval")]
+        [DisplayName("Update Interval")]
         public int UpdateInterval { get; set; } = -1;
 
         [Category("Style")]
-        [DisplayName("Time Format")]
+        [DisplayName("Date/Time Format")]
         public List<string> DateTimeFormat { get; set; } = new List<string> {"{hh}:{mm} {tt}"};
 
         [Category("General")]
-        [DisplayName("Time Offset")]
+        [DisplayName("Date/Time Offset")]
         public TimeSpan TimeOffset { get; set; }
 
         [Category("Behavior")]
-        [DisplayName("Copy Time On Double Click")]
+        [DisplayName("Copy Text On Double Click")]
         public bool CopyTextOnDoubleClick { get; set; } = true;
     }
 }
