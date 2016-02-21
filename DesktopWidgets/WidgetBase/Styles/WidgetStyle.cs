@@ -12,7 +12,7 @@ namespace DesktopWidgets.WidgetBase.Styles
         public WidgetStyle()
         {
             FontSettings.FontSize = 14;
-            Padding = new Thickness(3, 2, 3, 2);
+            Padding = new Thickness(5);
             TextColor = Colors.Black;
             BackgroundColor = Colors.White;
             BackgroundOpacity = 0.95;
