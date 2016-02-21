@@ -47,6 +47,10 @@ namespace DesktopWidgets.WidgetBase.Styles
         [DisplayName("Animation Type")]
         public AnimationType AnimationType { get; set; } = AnimationType.Fade;
 
+        [Category("Animation")]
+        [DisplayName("Animation Duration (ms)")]
+        public int AnimationTime { get; set; } = 250;
+
         [Category("Background Image")]
         [DisplayName("Path")]
         public string BackgroundImagePath { get; set; }

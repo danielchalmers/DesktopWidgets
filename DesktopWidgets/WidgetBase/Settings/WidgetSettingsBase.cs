@@ -43,10 +43,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Hide Delay (ms)")]
         public int HideDelay { get; set; } = 0;
 
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Animation Duration (ms)")]
-        public int AnimationTime { get; set; } = 250;
-
         [Category("General")]
         [DisplayName("Screen Bounds")]
         public Rect ScreenBounds { get; set; } = Rect.Empty;

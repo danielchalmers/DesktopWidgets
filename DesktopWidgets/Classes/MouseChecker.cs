@@ -303,7 +303,7 @@ namespace DesktopWidgets.Classes
         {
             if (_view.AnimationRunning || _view.IsVisible || App.IsMuted || _settings.ForceHide)
                 return;
-            if (animate && _settings.AnimationTime != 0)
+            if (animate && _settings.Style.AnimationTime != 0)
                 _view.Animate(AnimationMode.Show, activate);
             else
                 _view.Show();
@@ -326,7 +326,7 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if (animate && _settings.AnimationTime != 0)
+            if (animate && _settings.Style.AnimationTime != 0)
                 _view.Animate(AnimationMode.Hide);
             else
                 _view.Hide();

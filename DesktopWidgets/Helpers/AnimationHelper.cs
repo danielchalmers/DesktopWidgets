@@ -81,7 +81,7 @@ namespace DesktopWidgets.Helpers
 
             var doubleAnimation = new DoubleAnimation
             {
-                Duration = new Duration(TimeSpan.FromMilliseconds(settings.AnimationTime)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(settings.Style.AnimationTime)),
                 From = animationMode == AnimationMode.Show ? 0 : 1,
                 To = animationMode == AnimationMode.Show ? 1 : 0,
                 FillBehavior = FillBehavior.Stop,
