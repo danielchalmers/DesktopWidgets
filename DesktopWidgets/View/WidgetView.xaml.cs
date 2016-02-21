@@ -28,6 +28,8 @@ namespace DesktopWidgets.View
 
         private IntroData _lastIntroData;
 
+        public Action CloseAction;
+
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl, bool systemStartup)
         {
             InitializeComponent();
@@ -368,6 +370,8 @@ namespace DesktopWidgets.View
             SaveScrollPosition();
 
             App.WidgetViews.Remove(this);
+
+            CloseAction?.Invoke();
         }
 
         private void WidgetView_OnLocationChanged(object sender, EventArgs e)

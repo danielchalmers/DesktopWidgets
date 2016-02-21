@@ -99,9 +99,14 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static void CloseView(this WidgetId id)
+        public static void CloseView(this WidgetId id, bool reload = false)
         {
-            id.GetView()?.CloseAnimation();
+            var view = id.GetView();
+            if (view == null)
+                return;
+            if (reload)
+                view.CloseAction = () => { id.LoadView(); };
+            view.CloseAnimation();
         }
 
         public static void ToggleEnable(this WidgetId id)
@@ -120,8 +125,7 @@ namespace DesktopWidgets.Helpers
             var settings = id.GetSettings();
             if (settings == null || settings.Disabled)
                 return;
-            id.CloseView();
-            id.LoadView();
+            id.CloseView(true);
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
