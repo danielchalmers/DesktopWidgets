@@ -129,13 +129,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
-            var notificationCount = _notificationQueue.Count;
             foreach (var path in paths)
             {
                 _notificationQueue.Enqueue(path.FullName);
                 FileHistory.Add(path.FullName);
             }
-            if (!Settings.QueueFiles || (!_isShowing && notificationCount == 0))
+            if (!Settings.QueueFiles || !_isShowing)
                 HandleDirectoryChange();
         }
 
