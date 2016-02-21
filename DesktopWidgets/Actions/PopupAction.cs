@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace DesktopWidgets.Actions
 {
-    internal class PopupAction : IAction
+    internal class PopupAction : ActionBase
     {
         [DisplayName("Text")]
         public string Text { get; set; }
@@ -14,8 +14,9 @@ namespace DesktopWidgets.Actions
         [DisplayName("Image")]
         public MessageBoxImage Image { get; set; }
 
-        public void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
             MessageBox.Show(Text, Title, MessageBoxButton.OK, Image);
         }
     }

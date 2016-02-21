@@ -78,7 +78,7 @@ namespace DesktopWidgets.Classes
             return null;
         }
 
-        public static IAction GetNewActionFromName(string name)
+        public static ActionBase GetNewActionFromName(string name)
         {
             switch (name)
             {
@@ -147,7 +147,7 @@ namespace DesktopWidgets.Classes
             return null;
         }
 
-        public static string GetNameFromAction(IAction action)
+        public static string GetNameFromAction(ActionBase action)
         {
             if (action is OpenFileAction)
                 return "Open File";

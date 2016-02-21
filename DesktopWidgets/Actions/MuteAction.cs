@@ -4,7 +4,7 @@ using DesktopWidgets.Properties;
 
 namespace DesktopWidgets.Actions
 {
-    internal class MuteAction : IAction
+    internal class MuteAction : ActionBase
     {
         [DisplayName("Duration")]
         public TimeSpan Duration { get; set; } = Settings.Default.MuteDuration;
@@ -12,8 +12,9 @@ namespace DesktopWidgets.Actions
         [DisplayName("Toggle")]
         public bool Toggle { get; set; } = false;
 
-        public void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
             if (Toggle)
                 App.ToggleMute();
             else

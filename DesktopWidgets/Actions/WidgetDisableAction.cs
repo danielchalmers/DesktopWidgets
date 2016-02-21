@@ -4,9 +4,9 @@ namespace DesktopWidgets.Actions
 {
     public class WidgetDisableAction : WidgetActionBase
     {
-        public override void Execute()
+        public override void ExecuteAction()
         {
-            base.Execute();
+            base.ExecuteAction();
             WidgetId?.Disable();
         }
     }

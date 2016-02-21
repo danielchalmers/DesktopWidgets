@@ -3,12 +3,13 @@ using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Actions
 {
-    internal class OpenFileAction : IAction
+    internal class OpenFileAction : ActionBase
     {
         public ProcessFile ProcessFile { get; set; } = new ProcessFile();
 
-        public void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
             ProcessHelper.Launch(ProcessFile);
         }
     }

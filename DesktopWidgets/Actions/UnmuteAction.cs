@@ -1,9 +1,10 @@
 ﻿namespace DesktopWidgets.Actions
 {
-    internal class UnmuteAction : IAction
+    internal class UnmuteAction : ActionBase
     {
-        public void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
             App.Unmute();
         }
     }

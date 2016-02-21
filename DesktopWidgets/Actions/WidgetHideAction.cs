@@ -11,9 +11,9 @@ namespace DesktopWidgets.Actions
         [DisplayName("Check Idle Status")]
         public bool CheckIdleStatus { get; set; } = false;
 
-        public override void Execute()
+        public override void ExecuteAction()
         {
-            base.Execute();
+            base.ExecuteAction();
             WidgetId?.GetView()?.HideUi(CheckIdleStatus, CheckHideStatus);
         }
     }

@@ -130,7 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Actions\IAction.cs" />
+    <Compile Include="Actions\ActionBase.cs" />
     <Compile Include="Actions\WriteFileAction.cs" />
     <Compile Include="Actions\UnmuteAction.cs" />
     <Compile Include="Actions\MuteAction.cs" />

@@ -3,12 +3,13 @@ using DesktopWidgets.Stores;
 
 namespace DesktopWidgets.Actions
 {
-    internal class PlaySoundAction : IAction
+    internal class PlaySoundAction : ActionBase
     {
         public SoundFile SoundFile { get; set; } = new SoundFile();
 
-        public void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
             MediaPlayerStore.PlaySoundAsync(SoundFile);
         }
     }

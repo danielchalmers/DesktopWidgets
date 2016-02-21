@@ -4,9 +4,9 @@ namespace DesktopWidgets.Actions
 {
     public class WidgetDismissAction : WidgetActionBase
     {
-        public override void Execute()
+        public override void ExecuteAction()
         {
-            base.Execute();
+            base.ExecuteAction();
             WidgetId?.GetView()?.Dismiss();
         }
     }

@@ -3,13 +3,14 @@ using DesktopWidgets.WidgetBase;
 
 namespace DesktopWidgets.Actions
 {
-    public class WidgetActionBase : IAction
+    public abstract class WidgetActionBase : ActionBase
     {
         [DisplayName("Widget")]
         public WidgetId WidgetId { get; set; }
 
-        public virtual void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
         }
     }
 }

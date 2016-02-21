@@ -6,7 +6,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Actions
 {
-    internal class WriteFileAction : IAction
+    internal class WriteFileAction : ActionBase
     {
         public FilePath FilePath { get; set; } = new FilePath();
 
@@ -22,8 +22,9 @@ namespace DesktopWidgets.Actions
         [DisplayName("New Line Mode")]
         public InsertMode NewLineMode { get; set; } = InsertMode.None;
 
-        public void Execute()
+        public override void ExecuteAction()
         {
+            base.ExecuteAction();
             var writePath = FilePath.Path;
             if (string.IsNullOrWhiteSpace(writePath) || !File.Exists(writePath))
             {
