@@ -40,15 +40,15 @@ namespace DesktopWidgets.WidgetBase.Styles
         public double MaxHeight { get; set; } = double.NaN;
 
         [Category("Animation")]
-        [DisplayName("Ease Animation")]
+        [DisplayName("Ease")]
         public bool AnimationEase { get; set; } = true;
 
         [Category("Animation")]
-        [DisplayName("Animation Type")]
+        [DisplayName("Type")]
         public AnimationType AnimationType { get; set; } = AnimationType.Fade;
 
         [Category("Animation")]
-        [DisplayName("Animation Duration (ms)")]
+        [DisplayName("Duration (ms)")]
         public int AnimationTime { get; set; } = 250;
 
         [Category("Background Image")]
@@ -66,19 +66,19 @@ namespace DesktopWidgets.WidgetBase.Styles
         public ScrollBarVisibility ScrollBarVisibility { get; set; } = ScrollBarVisibility.Auto;
 
         [Category("Frame")]
-        [DisplayName("Enable Top Frame")]
+        [DisplayName("Top")]
         public bool ShowTopFrame { get; set; } = true;
 
         [Category("Frame")]
-        [DisplayName("Enable Bottom Frame")]
+        [DisplayName("Bottom")]
         public bool ShowBottomFrame { get; set; } = true;
 
         [Category("Frame")]
-        [DisplayName("Enable Left Frame")]
+        [DisplayName("Left")]
         public bool ShowLeftFrame { get; set; } = true;
 
         [Category("Frame")]
-        [DisplayName("Enable Right Frame")]
+        [DisplayName("Right")]
         public bool ShowRightFrame { get; set; } = true;
 
         [Category("Border")]
@@ -86,11 +86,11 @@ namespace DesktopWidgets.WidgetBase.Styles
         public bool BorderEnabled { get; set; } = true;
 
         [Category("Border")]
-        [DisplayName("Border Color")]
+        [DisplayName("Color")]
         public Color BorderColor { get; set; } = Colors.Gray;
 
         [Category("Border")]
-        [DisplayName("Border Opacity")]
+        [DisplayName("Opacity")]
         public double BorderOpacity { get; set; } = 0.5;
 
         [Category("Border")]

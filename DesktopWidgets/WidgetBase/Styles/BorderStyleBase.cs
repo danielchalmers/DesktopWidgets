@@ -11,7 +11,7 @@ namespace DesktopWidgets.WidgetBase.Styles
         public Thickness Padding { get; set; }
 
         [Category("Text")]
-        [DisplayName("Text Color")]
+        [DisplayName("Color")]
         public Color TextColor { get; set; }
 
         [Category("Background")]

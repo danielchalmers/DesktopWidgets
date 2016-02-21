@@ -33,19 +33,19 @@ namespace DesktopWidgets.WidgetBase.Styles
         public Orientation Orientation { get; set; } = Orientation.Vertical;
 
         [Category("Buttons")]
-        [DisplayName("Button Font Size")]
+        [DisplayName("Font Size")]
         public int ButtonFontSize { get; set; } = 16;
 
         [Category("Buttons")]
-        [DisplayName("Button Size (px)")]
+        [DisplayName("Size (px)")]
         public double ButtonSize { get; set; } = 24;
 
         [Category("Buttons")]
-        [DisplayName("Button Margin")]
+        [DisplayName("Margin")]
         public Thickness ButtonMargin { get; set; } = new Thickness(0, 2, 0, 2);
 
         [Category("Name")]
-        [DisplayName("Show Name")]
+        [DisplayName("Visible")]
         public bool ShowName { get; set; } = false;
 
         [DisplayName("Stay Open Duration (ms)")]
