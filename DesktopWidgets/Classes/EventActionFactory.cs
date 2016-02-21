@@ -19,6 +19,8 @@ namespace DesktopWidgets.Classes
             "Widget Intro",
             "Widget Intro End",
             "Widget Dismiss",
+            "Widget Show",
+            "Widget Hide",
             "Widget Reload",
             "Widget Enable",
             "Widget Disable"
@@ -74,6 +76,10 @@ namespace DesktopWidgets.Classes
                     return new LaunchEvent();
                 case "Hotkey":
                     return new HotkeyEvent();
+                case "Widget Show":
+                    return new WidgetShowEvent();
+                case "Widget Hide":
+                    return new WidgetHideEvent();
             }
             return null;
         }
@@ -144,6 +150,10 @@ namespace DesktopWidgets.Classes
                 return "Launch";
             if (evnt is HotkeyEvent)
                 return "Hotkey";
+            if (evnt is WidgetShowEvent)
+                return "Widget Show";
+            if (evnt is WidgetHideEvent)
+                return "Widget Hide";
             return null;
         }
 

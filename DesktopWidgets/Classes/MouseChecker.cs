@@ -309,6 +309,8 @@ namespace DesktopWidgets.Classes
                 _view.Show();
             if (activate && _settings.ActivateOnShow)
                 _view.Activate();
+
+            _view.ViewModel.OnShow();
         }
 
         public void Hide(bool animate = true, bool checkHideStatus = true, bool checkIdleStatus = true)
@@ -330,6 +332,8 @@ namespace DesktopWidgets.Classes
                 _view.Animate(AnimationMode.Hide);
             else
                 _view.Hide();
+
+            _view.ViewModel.OnHide();
         }
 
         public void Dispose()

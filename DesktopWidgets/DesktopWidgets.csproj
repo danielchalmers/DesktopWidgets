@@ -163,6 +163,8 @@
     <Compile Include="Events\ForegroundTitleChangedEvent.cs" />
     <Compile Include="Events\HotkeyEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Events\WidgetShowEvent.cs" />
+    <Compile Include="Events\WidgetHideEvent.cs" />
     <Compile Include="Events\WidgetEnableEvent.cs" />
     <Compile Include="Events\WidgetDisableEvent.cs" />
     <Compile Include="Events\WidgetIntroEndEvent.cs" />
