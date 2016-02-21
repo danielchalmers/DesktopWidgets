@@ -254,15 +254,22 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void TogglePlayPauseExecute()
         {
-            _notificationQueue.Clear();
-            IsPaused = !IsPaused;
+            if (IsPaused)
+            {
+                IsPaused = false;
+                _isShowing = false;
+                HandleDirectoryChange();
+            }
+            else
+            {
+                IsPaused = true;
+            }
         }
 
         private void NextExecute()
         {
             if (Settings.PauseOnSwitch)
                 IsPaused = true;
-            _notificationQueue.Clear();
             if (HistoryIndex < FileHistory.Count - 1)
             {
                 HistoryIndex++;
@@ -274,7 +281,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (Settings.PauseOnSwitch)
                 IsPaused = true;
-            _notificationQueue.Clear();
             if (HistoryIndex > 0)
             {
                 HistoryIndex--;
