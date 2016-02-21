@@ -39,7 +39,9 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="15" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="15" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
@@ -47,10 +49,10 @@
                 </Grid.Resources>
                 <Button Grid.Column="0" Content="Previous" IsEnabled="{Binding HistoryIndex}"
                         Command="{Binding Previous}" />
-                <Button Grid.Column="1"
+                <Button Grid.Column="2"
                         Content="{Binding IsPaused, Converter={StaticResource BoolToPauseTextConverter}}"
                         Command="{Binding TogglePlayPause}" />
-                <Button Grid.Column="2" Content="Next" Command="{Binding Next}">
+                <Button Grid.Column="4" Content="Next" Command="{Binding Next}">
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource IntIsLessConverter}">
                             <Binding Path="HistoryIndex" />
