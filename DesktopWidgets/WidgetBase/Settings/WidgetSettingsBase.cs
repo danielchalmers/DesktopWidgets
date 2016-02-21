@@ -163,7 +163,7 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior (Idle)")]
         [DisplayName("Idle Duration")]
-        public TimeSpan IdleDuration { get; set; } = TimeSpan.FromSeconds(5);
+        public TimeSpan IdleDuration { get; set; } = TimeSpan.FromSeconds(3);
 
         [Category("Behavior (Idle)")]
         [DisplayName("Detect Idle")]
