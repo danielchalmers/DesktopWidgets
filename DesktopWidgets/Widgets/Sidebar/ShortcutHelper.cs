@@ -74,7 +74,8 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             var dialog = new ShortcutProperties();
             dialog.ShowDialog();
-            if (string.IsNullOrWhiteSpace(dialog.NewShortcut?.ProcessFile.Path))
+            if (string.IsNullOrWhiteSpace(dialog.NewShortcut?.Name) &&
+                string.IsNullOrWhiteSpace(dialog.NewShortcut?.ProcessFile.Path))
                 return;
             if (!File.Exists(dialog.NewShortcut.ProcessFile.Path) &&
                 !Directory.Exists(dialog.NewShortcut.ProcessFile.Path) &&
