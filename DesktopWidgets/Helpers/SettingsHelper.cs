@@ -23,7 +23,7 @@ namespace DesktopWidgets.Helpers
             ObjectCreationHandling = ObjectCreationHandling.Replace
         };
 
-        private static readonly JsonSerializerSettings JsonSerializerSettingsAllTypeHandling = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings JsonSerializerSettingsAllTypeHandling = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All,
             ObjectCreationHandling = ObjectCreationHandling.Replace

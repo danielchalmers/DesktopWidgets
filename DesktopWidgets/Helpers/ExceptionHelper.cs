@@ -16,7 +16,7 @@ namespace DesktopWidgets.Helpers
             {
                 if (!Settings.Default.DumpUnhandledErrors)
                     return;
-                var serialised = JsonConvert.SerializeObject(ex);
+                var serialised = JsonConvert.SerializeObject(ex, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
                 var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                 var path = Path.Combine(ExceptionDumpPath, $"error-{timestamp}.json");
                 if (!Directory.Exists(ExceptionDumpPath))
