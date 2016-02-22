@@ -178,6 +178,7 @@
     <Compile Include="Events\WidgetEventBase.cs" />
     <Compile Include="Helpers\DoubleHelper.cs" />
     <Compile Include="Helpers\EventActionHelper.cs" />
+    <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="MainContextMenu.xaml.cs">
       <DependentUpon>MainContextMenu.xaml</DependentUpon>
     </Compile>

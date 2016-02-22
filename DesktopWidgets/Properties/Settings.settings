@@ -121,5 +121,8 @@
     <Setting Name="EventActionPairEditorHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">650</Value>
     </Setting>
+    <Setting Name="DumpUnhandledErrors" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

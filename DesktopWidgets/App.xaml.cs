@@ -104,6 +104,7 @@ namespace DesktopWidgets
 
         private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            ExceptionHelper.SaveException(e.Exception);
             var exception = e.Exception.Message;
             Popup.Show(
                 SuccessfullyLoaded

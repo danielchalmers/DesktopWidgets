@@ -477,5 +477,17 @@ namespace DesktopWidgets.Properties {
                 this["EventActionPairEditorHeight"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DumpUnhandledErrors {
+            get {
+                return ((bool)(this["DumpUnhandledErrors"]));
+            }
+            set {
+                this["DumpUnhandledErrors"] = value;
+            }
+        }
     }
 }
