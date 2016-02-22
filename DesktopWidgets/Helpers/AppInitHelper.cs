@@ -28,7 +28,11 @@ namespace DesktopWidgets.Helpers
             ForegroundTracker.AddHook();
 
             App.SuccessfullyLoaded = true;
+            return true;
+        }
 
+        public static void InitializeExtra()
+        {
             if (!App.Arguments.Contains("-systemstartup") && App.WidgetsSettingsStore.Widgets.Count == 0)
                 new ManageWidgets().Show();
 
@@ -48,7 +52,6 @@ namespace DesktopWidgets.Helpers
                 if (hotkeyEvent != null)
                     HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, eventPair.Action.Execute);
             }
-            return true;
         }
 
         private static bool IsAppAlreadyRunning()
