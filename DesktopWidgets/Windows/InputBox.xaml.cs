@@ -73,8 +73,8 @@ namespace DesktopWidgets.Windows
                 DefaultExt = ".txt",
                 Filter = "Text file (*.txt)|*.txt|All files (*.*)|*.*"
             };
-            dialog.ShowDialog();
-            File.WriteAllText(dialog.FileName, InputData);
+            if (dialog.ShowDialog() == true)
+                File.WriteAllText(dialog.FileName, InputData);
         }
 
         private void btnCopy_OnClick(object sender, RoutedEventArgs e)
