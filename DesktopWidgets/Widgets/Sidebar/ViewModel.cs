@@ -87,7 +87,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         private void ShortcutExecuteExecute(Shortcut shortcut)
         {
             ShortcutFocusExecute(shortcut);
-            this.Execute(SelectedShortcut, !Keyboard.Modifiers.HasFlag(ModifierKeys.Shift));
+            this.Execute(SelectedShortcut, !Keyboard.Modifiers.HasFlag(Settings.KeepOpenWithModifierKey));
         }
 
         private void ShortcutEditExecute()

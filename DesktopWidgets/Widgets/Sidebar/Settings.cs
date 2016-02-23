@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.Sidebar
@@ -60,5 +61,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         [Category("General")]
         [DisplayName("Enable Icon Cache")]
         public bool UseIconCache { get; set; } = true;
+
+        [Category("Behavior")]
+        [DisplayName("Keep Open With Modifier Key")]
+        public ModifierKeys KeepOpenWithModifierKey { get; set; } = ModifierKeys.Shift;
     }
 }
