@@ -64,6 +64,6 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         [Category("Behavior")]
         [DisplayName("Keep Open With Modifier Key")]
-        public ModifierKeys KeepOpenWithModifierKey { get; set; } = ModifierKeys.Shift;
+        public ModifierKeys KeepOpenWithModifierKey { get; set; } = ModifierKeys.Control;
     }
 }
