@@ -437,5 +437,11 @@ namespace DesktopWidgets.View
         {
             this.Animate(AnimationMode.Hide, false, null, Close);
         }
+
+        private void WidgetView_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!IsRefreshing)
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action) ViewModel.UpdatePosition);
+        }
     }
 }
