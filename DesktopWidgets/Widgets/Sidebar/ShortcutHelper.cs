@@ -120,7 +120,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             {
                 if (Popup.Show(
                     $"This file does not exist. Do you want to remove \"{GetName(shortcut)}\"?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
                     return;
                 viewModel.Remove(shortcut);
             }
@@ -140,7 +140,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             if (msg &&
                 Popup.Show($"Are you sure you want to remove \"{GetName(shortcut)}\"?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
                 return;
             viewModel.Settings.Shortcuts.Remove(shortcut);
             if (shortcut.Hotkey.Key != Key.None)
