@@ -26,6 +26,8 @@ namespace DesktopWidgets.View
 
         private DispatcherTimer _introTimer;
 
+        private bool _isAppBar;
+
         private IntroData _lastIntroData;
 
         public Action CloseAction;
@@ -283,18 +285,22 @@ namespace DesktopWidgets.View
             {
                 case HorizontalAlignment.Left:
                     AppBarFunctions.SetAppBar(this, ABEdge.Left);
+                    _isAppBar = true;
                     break;
                 case HorizontalAlignment.Right:
                     AppBarFunctions.SetAppBar(this, ABEdge.Right);
+                    _isAppBar = true;
                     break;
                 default:
                     switch (Settings.VerticalAlignment)
                     {
                         case VerticalAlignment.Top:
                             AppBarFunctions.SetAppBar(this, ABEdge.Top);
+                            _isAppBar = true;
                             break;
                         case VerticalAlignment.Bottom:
                             AppBarFunctions.SetAppBar(this, ABEdge.Bottom);
+                            _isAppBar = true;
                             break;
                     }
                     break;
@@ -319,9 +325,11 @@ namespace DesktopWidgets.View
 
             Title = Id.GetName();
 
-            ViewModel.OnTop = Settings.OnTop;
-
-            UpdatePositionAndLocation();
+            if (!_isAppBar)
+            {
+                ViewModel.OnTop = Settings.OnTop;
+                UpdatePositionAndLocation();
+            }
 
             if (updateNonUi)
             {
@@ -440,7 +448,7 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!IsRefreshing)
+            if (!IsRefreshing && !_isAppBar)
                 Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action) ViewModel.UpdatePosition);
         }
     }
