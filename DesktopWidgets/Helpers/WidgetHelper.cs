@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -47,12 +48,22 @@ namespace DesktopWidgets.Helpers
 
         private static void LoadView(this WidgetId id, bool systemStartup = false)
         {
-            foreach (var view in App.WidgetViews.Where(view => view.Id == id).ToList())
-                view.Close();
+            WidgetView widgetView = null;
+            try
+            {
+                foreach (var view in App.WidgetViews.Where(view => view.Id == id).ToList())
+                    view.Close();
 
-            var widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView(), systemStartup);
-            App.WidgetViews.Add(widgetView);
-            widgetView.Show();
+                widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView(), systemStartup);
+                App.WidgetViews.Add(widgetView);
+                widgetView.Show();
+            }
+            catch (Exception ex)
+            {
+                widgetView?.Close();
+                var name = id.GetName();
+                Popup.Show($"{name} failed to load.\n\n{ex.Message}", image: MessageBoxImage.Error);
+            }
         }
 
         private static void AddNewWidget(string type)
@@ -104,12 +115,20 @@ namespace DesktopWidgets.Helpers
 
         public static void CloseView(this WidgetId id, bool reload = false)
         {
-            var view = id.GetView();
-            if (view == null)
-                return;
-            if (reload)
-                view.CloseAction = () => { id.LoadView(); };
-            view.CloseAnimation();
+            try
+            {
+                var view = id.GetView();
+                if (view == null)
+                    return;
+                if (reload)
+                    view.CloseAction = () => { id.LoadView(); };
+                view.CloseAnimation();
+            }
+            catch (Exception ex)
+            {
+                var name = id.GetName();
+                Popup.Show($"{name} failed to close.\n\n{ex.Message}", image: MessageBoxImage.Error);
+            }
         }
 
         public static void ToggleEnable(this WidgetId id)

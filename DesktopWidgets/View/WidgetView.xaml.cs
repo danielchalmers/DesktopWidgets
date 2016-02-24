@@ -152,6 +152,10 @@ namespace DesktopWidgets.View
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
+
+            if (!HasLoaded)
+                return;
+
             var hwnd = new WindowInteropHelper(this).Handle;
             var widgetSrc = HwndSource.FromHwnd(hwnd);
 
@@ -368,14 +372,21 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)
         {
-            IsClosed = true;
-            _introTimer?.Stop();
-            _introTimer = null;
-            _mouseChecker.Dispose();
-            HotkeyStore.RemoveHotkey(Id.Guid);
-            ViewModel.OnClose();
-            ViewModel = null;
-            SaveScrollPosition();
+            try
+            {
+                IsClosed = true;
+                _introTimer?.Stop();
+                _introTimer = null;
+                _mouseChecker?.Dispose();
+                HotkeyStore.RemoveHotkey(Id.Guid);
+                ViewModel?.OnClose();
+                ViewModel = null;
+                SaveScrollPosition();
+            }
+            catch
+            {
+                // ignored
+            }
 
             App.WidgetViews.Remove(this);
 
