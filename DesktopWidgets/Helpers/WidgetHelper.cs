@@ -145,7 +145,7 @@ namespace DesktopWidgets.Helpers
             if (settings == null)
                 return;
             if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?\n\nThis cannot be undone.",
-                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
                 return;
 
             App.WidgetsSettingsStore.Widgets.Remove(settings);
