@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Threading;
 using System.Windows;
 using DesktopWidgets.Properties;
 
@@ -23,6 +24,14 @@ namespace DesktopWidgets.Classes
             {
                 return MessageBoxResult.Cancel;
             }
+        }
+
+        public static void ShowAsync(string text, MessageBoxButton button = MessageBoxButton.OK,
+            MessageBoxImage image = MessageBoxImage.Information, MessageBoxResult defaultButton = MessageBoxResult.OK)
+        {
+            new Thread(
+                new ThreadStart(delegate { MessageBox.Show(text, Resources.AppName, button, image, defaultButton); }))
+                .Start();
         }
     }
 }

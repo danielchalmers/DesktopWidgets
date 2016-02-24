@@ -62,7 +62,7 @@ namespace DesktopWidgets.Helpers
             {
                 widgetView?.Close();
                 var name = id.GetName();
-                Popup.Show($"{name} failed to load.\n\n{ex.Message}", image: MessageBoxImage.Error);
+                Popup.ShowAsync($"{name} failed to load.\n\n{ex.Message}", image: MessageBoxImage.Error);
             }
         }
 
@@ -127,7 +127,7 @@ namespace DesktopWidgets.Helpers
             catch (Exception ex)
             {
                 var name = id.GetName();
-                Popup.Show($"{name} failed to close.\n\n{ex.Message}", image: MessageBoxImage.Error);
+                Popup.ShowAsync($"{name} failed to close.\n\n{ex.Message}", image: MessageBoxImage.Error);
             }
         }
 
