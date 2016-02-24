@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Deployment.Application;
+using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
@@ -51,7 +52,7 @@ namespace DesktopWidgets.Helpers
                 {
                     if (!auto)
                         Popup.Show(
-                            "An error occurred while trying to check for updates.");
+                            "An error occurred while trying to check for updates.", image: MessageBoxImage.Error);
                     return;
                 }
 
@@ -127,7 +128,7 @@ namespace DesktopWidgets.Helpers
                                 {
                                     Popup.Show(
                                         "Cannot download the latest version of this application.\n\nPlease check your network connection, or try again later.\n\nError: " +
-                                        dde);
+                                        dde, image: MessageBoxImage.Error);
                                 }
                                 break;
                         }
