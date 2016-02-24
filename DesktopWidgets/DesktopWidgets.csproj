@@ -158,6 +158,8 @@
     <Compile Include="Classes\FilePath.cs" />
     <Compile Include="Classes\ProcessFile.cs" />
     <Compile Include="Classes\SoundFile.cs" />
+    <Compile Include="Helpers\CompressionHelper.cs" />
+    <Compile Include="WidgetBase\WidgetPackageInfo.cs" />
     <Compile Include="Events\LaunchEvent.cs" />
     <Compile Include="Events\ForegroundFullscreenChangedEvent.cs" />
     <Compile Include="Events\ForegroundTitleChangedEvent.cs" />
@@ -341,6 +343,9 @@
     <Compile Include="Widgets\StopwatchClock\ViewModel.cs" />
     <Compile Include="Widgets\CountdownClock\ViewModel.cs" />
     <Compile Include="Widgets\TimeClock\ViewModel.cs" />
+    <Compile Include="Windows\WidgetPackageExport.xaml.cs">
+      <DependentUpon>WidgetPackageExport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowViewModels\ManageEventsViewModel.cs" />
     <Compile Include="WindowViewModels\ManageWidgetsViewModel.cs" />
     <Compile Include="WindowViewModels\SelectDualItemViewModel.cs" />
@@ -523,6 +528,10 @@
     <Page Include="Windows\UpdatePrompt.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\WidgetPackageExport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

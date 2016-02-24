@@ -152,6 +152,24 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .widget.
+        /// </summary>
+        public static string PackageExtension {
+            get {
+                return ResourceManager.GetString("PackageExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Widget package (*.widget)|*.widget|All files (*.*)|*.*.
+        /// </summary>
+        public static string PackageExtensionFilter {
+            get {
+                return ResourceManager.GetString("PackageExtensionFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar.
         /// </summary>
         public static string TaskBarPath {

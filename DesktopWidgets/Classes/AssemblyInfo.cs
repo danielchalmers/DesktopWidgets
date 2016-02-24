@@ -16,6 +16,8 @@ namespace DesktopWidgets.Classes
             ? ApplicationDeployment.CurrentDeployment.CurrentVersion
             : Assembly.GetExecutingAssembly().GetName().Version;
 
+        public static Version ActualVersion { get; } = Assembly.GetExecutingAssembly().GetName().Version;
+
         public static string Copyright { get; } = GetAssemblyAttribute<AssemblyCopyrightAttribute>(a => a.Copyright);
         public static string Title { get; } = GetAssemblyAttribute<AssemblyTitleAttribute>(a => a.Title);
 

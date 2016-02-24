@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase.Settings;
-using DesktopWidgets.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -96,17 +95,12 @@ namespace DesktopWidgets.WindowViewModels
 
         private void ExportWidgetExecute()
         {
-            var dialog = new InputBox("Export Widget", WidgetHelper.Export(SelectedWidget));
-            dialog.ShowDialog();
+            WidgetHelper.Export(SelectedWidget);
         }
 
         private void ImportWidgetExecute()
         {
-            var dialog = new InputBox("Import Widget");
-            dialog.ShowDialog();
-            if (dialog.Cancelled)
-                return;
-            WidgetHelper.Import(dialog.InputData);
+            WidgetHelper.Import();
         }
     }
 }

@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Events;
+using DesktopWidgets.Properties;
 using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 
 namespace DesktopWidgets.Helpers
@@ -208,39 +211,94 @@ namespace DesktopWidgets.Helpers
             return newWidget?.Identifier;
         }
 
-        public static string Export(WidgetSettingsBase settings)
-        {
-            return Export(new List<WidgetSettingsBase> {settings});
-        }
-
-        public static string Export(List<WidgetSettingsBase> settings)
-        {
-            return JsonConvert.SerializeObject(settings, SettingsHelper.JsonSerializerSettings);
-        }
-
-        public static void Import(string widgetData, bool msg = true)
+        private static WidgetSettingsBase Deserialise(string settingsData)
         {
             try
             {
-                var newWidgets = JsonConvert.DeserializeObject<List<WidgetSettingsBase>>(widgetData,
-                    SettingsHelper.JsonSerializerSettings);
-                if (newWidgets == null || newWidgets.Count == 0)
-                {
-                    if (msg)
-                        Popup.Show("Import failed. Data may be corrupt.", image: MessageBoxImage.Error);
-                    return;
-                }
-                foreach (var widget in newWidgets)
-                {
-                    widget.Identifier.GenerateNewGuid();
-                    AddNewWidget(widget);
-                }
+                return JsonConvert.DeserializeObject<WidgetSettingsBase>(settingsData,
+                    SettingsHelper.JsonSerializerSettingsAllTypeHandling);
             }
             catch
             {
-                if (msg)
-                    Popup.Show("Import failed. Data may be corrupt.", image: MessageBoxImage.Error);
+                // ignored
             }
+            return null;
+        }
+
+        private static string Serialise(WidgetSettingsBase settings)
+        {
+            return JsonConvert.SerializeObject(settings, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
+        }
+
+        private static string GetImportConfirmText(WidgetPackageInfo packageInfo)
+        {
+            var importText = new StringBuilder();
+            importText.AppendLine("Do you want to import this widget?");
+            importText.AppendLine();
+            importText.AppendLine($"Publisher: {packageInfo.Publisher}");
+            importText.AppendLine($"Name: {packageInfo.Name}");
+            importText.AppendLine($"Publish Date: {packageInfo.PublishDateTime}");
+            return importText.ToString();
+        }
+
+        public static void Import()
+        {
+            var dialog = new OpenFileDialog
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Filter = Resources.PackageExtensionFilter
+            };
+            if (dialog.ShowDialog() != true)
+                return;
+            var fileContent = File.ReadAllText(dialog.FileName);
+
+            WidgetSettingsBase settings = null;
+            try
+            {
+                settings = Deserialise(CompressionHelper.Decompress(fileContent));
+            }
+            catch
+            {
+                // ignored
+            }
+
+            if (settings?.PackageInfo == null)
+            {
+                Popup.Show("Import failed. Widget may be corrupt.", image: MessageBoxImage.Error);
+                return;
+            }
+
+            if (
+                Popup.Show(GetImportConfirmText(settings.PackageInfo), MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) ==
+                MessageBoxResult.No)
+                return;
+
+            if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
+            {
+                Popup.Show(
+                    $"This widget requires a higher version.\n\nSupported version: {settings.PackageInfo.AppVersion}\nCurrent version: {AssemblyInfo.Version}",
+                    image: MessageBoxImage.Error);
+                return;
+            }
+
+            settings.Identifier.GenerateNewGuid();
+            settings.Disabled = false;
+            AddNewWidget(settings);
+        }
+
+        public static void Export(WidgetSettingsBase widget)
+        {
+            var settings = SettingsHelper.CloneObject(widget) as WidgetSettingsBase;
+            if (settings == null)
+                return;
+            settings.PackageInfo = new WidgetPackageInfo {Name = settings.Name};
+            var dialog = new WidgetPackageExport(settings);
+            if (dialog.ShowDialog() != true)
+                return;
+            File.WriteAllText(dialog.Path, CompressionHelper.Compress(Serialise(settings)));
+            Popup.Show($"\"{settings.PackageInfo.Name}\" has been saved to \"{dialog.Path}\".");
         }
 
         public static void ReloadWidgets()

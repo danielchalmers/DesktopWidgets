@@ -15,6 +15,10 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Internal Identifier")]
         public WidgetId Identifier { get; set; } = new WidgetId();
 
+        [Browsable(false)]
+        [DisplayName("Package Info")]
+        public WidgetPackageInfo PackageInfo { get; set; }
+
         [Category("Behavior (Idle)")]
         [DisplayName("Active Time End")]
         public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
