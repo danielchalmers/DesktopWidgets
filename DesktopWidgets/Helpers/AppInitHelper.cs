@@ -19,8 +19,6 @@ namespace DesktopWidgets.Helpers
             if (IsAppAlreadyRunning())
                 return false;
 
-            WidgetHelper.LoadWidgetViews(App.Arguments.Contains("-systemstartup"));
-
             StartScheduledTasks();
 
             App.SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
@@ -33,6 +31,8 @@ namespace DesktopWidgets.Helpers
 
         public static void InitializeExtra()
         {
+            WidgetHelper.LoadWidgetViews(App.Arguments.Contains("-systemstartup"));
+
             if (!App.Arguments.Contains("-systemstartup") && App.WidgetsSettingsStore.Widgets.Count == 0)
                 new ManageWidgets().Show();
 
