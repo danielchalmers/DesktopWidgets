@@ -107,6 +107,13 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+
+        <Grid x:Key="FrameBottom">
+            <StackPanel>
+                <Button Content="New Shortcut..." Command="{Binding NewShortcut}" />
+            </StackPanel>
+        </Grid>
+
         <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="SidebarMenuItems">
             <MenuItem Header="New Shortcut..." Command="{Binding NewShortcut}" />
             <MenuItem Header="New Separator..." Command="{Binding NewSeparator}" />
