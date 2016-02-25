@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Stores;
@@ -18,6 +19,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     public class ViewModel : WidgetViewModelBase
     {
         private readonly Queue<string> _notificationQueue;
+        private readonly DispatcherTimer _resumeTimer;
         private string _currentFileContent;
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
@@ -41,6 +43,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
             _notificationQueue = new Queue<string>();
             FileHistory = new ObservableCollection<string>();
+
+            if (Settings.ResumeWaitDuration.TotalSeconds > 0)
+            {
+                _resumeTimer = new DispatcherTimer {Interval = Settings.ResumeWaitDuration};
+                _resumeTimer.Tick += (sender, args) => { Unpause(); };
+            }
 
             _directoryWatcher =
                 new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
@@ -255,21 +263,29 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void TogglePlayPauseExecute()
         {
             if (IsPaused)
-            {
-                IsPaused = false;
-                _isShowing = false;
-                HandleDirectoryChange();
-            }
+                Unpause();
             else
-            {
-                IsPaused = true;
-            }
+                Pause();
+        }
+
+        private void Pause()
+        {
+            _resumeTimer?.Stop();
+            IsPaused = true;
+        }
+
+        private void Unpause()
+        {
+            _resumeTimer?.Stop();
+            IsPaused = false;
+            _isShowing = false;
+            HandleDirectoryChange();
         }
 
         private void NextExecute()
         {
-            if (Settings.PauseOnSwitch)
-                IsPaused = true;
+            IsPaused = true;
+            _resumeTimer?.Start();
             if (HistoryIndex < FileHistory.Count - 1)
             {
                 HistoryIndex++;
@@ -280,8 +296,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void PreviousExecute()
         {
-            if (Settings.PauseOnSwitch)
-                IsPaused = true;
+            IsPaused = true;
+            _resumeTimer?.Start();
             if (HistoryIndex > 0)
             {
                 HistoryIndex--;

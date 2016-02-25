@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using DesktopWidgets.Classes;
@@ -75,7 +76,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool Paused { get; set; } = false;
 
         [Category("Behavior")]
-        [DisplayName("Pause On Next/Previous")]
-        public bool PauseOnSwitch { get; set; } = true;
+        [DisplayName("Resume On Manual Change Duration")]
+        public TimeSpan ResumeWaitDuration { get; set; } = TimeSpan.FromSeconds(10);
     }
 }
