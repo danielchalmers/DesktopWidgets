@@ -274,6 +274,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
                 HistoryIndex++;
                 CurrentFilePath = FileHistory[HistoryIndex];
+                CheckFile();
             }
         }
 
@@ -285,6 +286,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
                 HistoryIndex--;
                 CurrentFilePath = FileHistory[HistoryIndex];
+                CheckFile();
             }
         }
     }
