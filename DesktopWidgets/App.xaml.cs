@@ -83,7 +83,6 @@ namespace DesktopWidgets
         private void SystemEvents_OnSessionEnding(object sender, SessionEndingEventArgs e)
         {
             SettingsHelper.SaveSettings();
-            AppHelper.ShutdownApplication();
         }
 
         protected override void OnExit(ExitEventArgs e)
