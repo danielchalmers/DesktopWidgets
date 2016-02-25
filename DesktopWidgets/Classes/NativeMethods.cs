@@ -10,6 +10,11 @@ namespace DesktopWidgets.Classes
         internal const uint WINEVENT_OUTOFCONTEXT = 0;
         internal const uint EVENT_SYSTEM_FOREGROUND = 3;
 
+        internal const int SWP_NOMOVE = 0x0002;
+        internal const int SWP_NOSIZE = 0x0001;
+        internal const int SWP_SHOWWINDOW = 0x0040;
+        internal const int SWP_NOACTIVATE = 0x0010;
+
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern int GetWindowRect(IntPtr hWnd, out Win32Rect rc);
 
@@ -56,6 +61,10 @@ namespace DesktopWidgets.Classes
         [DllImport("user32.dll")]
         internal static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc,
             WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        internal static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy,
+            int wFlags);
 
         internal delegate void WinEventDelegate(
             IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread,

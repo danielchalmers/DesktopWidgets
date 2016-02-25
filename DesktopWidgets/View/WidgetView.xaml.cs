@@ -331,7 +331,6 @@ namespace DesktopWidgets.View
 
             if (!_isAppBar)
             {
-                ViewModel.OnTop = Settings.OnTop;
                 UpdatePositionAndLocation();
             }
 
@@ -362,12 +361,6 @@ namespace DesktopWidgets.View
                 _mouseChecker.Stop();
                 _mouseChecker.Start();
             }
-        }
-
-        public void ResetOnTop()
-        {
-            Topmost = false;
-            Topmost = true;
         }
 
         private void WidgetView_OnClosing(object sender, CancelEventArgs e)

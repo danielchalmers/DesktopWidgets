@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DesktopWidgets.Events;
 using DesktopWidgets.Helpers;
 
@@ -60,6 +61,8 @@ namespace DesktopWidgets.Classes
                         (evnt.ToFullscreen == YesNoAny.No && !IsForegroundFullscreen)))
                     eventPair.Action.Execute();
             }
+            foreach (var widget in App.WidgetViews.Where(x => x.Settings.OnTop))
+                widget.ThisApp?.BringToFront();
         }
     }
 }

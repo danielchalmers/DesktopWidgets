@@ -56,10 +56,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         public bool OnTop { get; set; } = true;
 
         [Category("Behavior")]
-        [DisplayName("Force On Top")]
-        public bool ForceOnTop { get; set; } = false;
-
-        [Category("Behavior")]
         [DisplayName("Snap To Edges")]
         public bool SnapToScreenEdges { get; set; } = true;
 
@@ -92,7 +88,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         public bool ActivateOnShow { get; set; } = true;
 
         [Category("Behavior")]
-        [DisplayName("Force On Top Refresh Interval (ms)")]
+        [DisplayName("Force On Top Interval (ms)")]
         public int ForceOnTopInterval { get; set; } = 500;
 
         [Category("Behavior")]

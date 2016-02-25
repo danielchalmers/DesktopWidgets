@@ -22,7 +22,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         private bool _isContextMenuOpen;
 
         private bool _keepActionBarOpen;
-        private bool _onTop;
         private DispatcherTimer _onTopForceTimer;
 
         protected WidgetViewModelBase(WidgetId id)
@@ -51,19 +50,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public bool AllowDrop { get; set; }
 
         public WidgetView View { get; set; }
-
-        public bool OnTop
-        {
-            get { return _onTop; }
-            set
-            {
-                if (_onTop != value)
-                {
-                    _onTop = value;
-                    RaisePropertyChanged(nameof(OnTop));
-                }
-            }
-        }
 
         public double Left
         {
@@ -331,15 +317,16 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private void UpdateForceOnTopTimer()
         {
-            if (!_settings.ForceOnTop || _settings.ForceOnTopInterval <= 0)
+            if (!_settings.OnTop || _settings.ForceOnTopInterval <= 0)
             {
                 _onTopForceTimer?.Stop();
+                _onTopForceTimer = null;
                 return;
             }
             if (_onTopForceTimer == null)
             {
                 _onTopForceTimer = new DispatcherTimer();
-                _onTopForceTimer.Tick += (sender, args) => View?.ResetOnTop();
+                _onTopForceTimer.Tick += (sender, args) => View?.ThisApp?.BringToFront();
             }
             _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
             _onTopForceTimer.Stop();
