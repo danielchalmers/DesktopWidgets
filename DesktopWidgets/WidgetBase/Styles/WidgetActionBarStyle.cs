@@ -40,9 +40,17 @@ namespace DesktopWidgets.WidgetBase.Styles
         [DisplayName("Margin")]
         public Thickness ButtonMargin { get; set; } = new Thickness(0, 2, 0, 2);
 
+        [Category("Buttons")]
+        [DisplayName("Dock")]
+        public Dock ButtonDock { get; set; } = Dock.Bottom;
+
         [Category("Name")]
         [DisplayName("Visible")]
         public bool ShowName { get; set; } = false;
+
+        [Category("Name")]
+        [DisplayName("Dock")]
+        public Dock NameDock { get; set; } = Dock.Top;
 
         [DisplayName("Stay Open Duration (ms)")]
         public int StayOpenDuration { get; set; } = 1500;

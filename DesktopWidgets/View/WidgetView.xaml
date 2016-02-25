@@ -182,15 +182,19 @@
                 DockPanel.Dock="{Binding Settings.ActionBarStyle.Dock}"
                 Style="{StaticResource ActionBarStyle}"
                 MouseDown="ActionBar_OnMouseDown">
-            <StackPanel Orientation="{Binding Settings.ActionBarStyle.Orientation}">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ActionBarButtonStyle}" />
-                </StackPanel.Resources>
-                <TextBlock Style="{StaticResource NameBoxStyle}" />
-                <Button Content="×" Click="btnDismiss_OnClick" />
-                <Button Content="≡" Click="btnMenu_OnClick" />
-                <Button Content="⟳" Click="btnReload_OnClick" />
-            </StackPanel>
+            <DockPanel LastChildFill="True">
+                <StackPanel Orientation="{Binding Settings.ActionBarStyle.Orientation}"
+                            DockPanel.Dock="{Binding Settings.ActionBarStyle.ButtonDock}">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ActionBarButtonStyle}" />
+                    </StackPanel.Resources>
+                    <Button Content="×" Click="btnDismiss_OnClick" />
+                    <Button Content="≡" Click="btnMenu_OnClick" />
+                    <Button Content="⟳" Click="btnReload_OnClick" />
+                </StackPanel>
+                <TextBlock Style="{StaticResource NameBoxStyle}"
+                           DockPanel.Dock="{Binding Settings.ActionBarStyle.NameDock}" />
+            </DockPanel>
         </Border>
         <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">
             <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
