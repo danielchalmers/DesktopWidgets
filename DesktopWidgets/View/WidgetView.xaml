@@ -145,7 +145,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ActionBarButtonStyle" TargetType="{x:Type Button}">
+        <Style x:Key="ActionBarButtonStyle" TargetType="{x:Type Button}"
+               BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
             <Setter Property="Width" Value="{Binding Settings.ActionBarStyle.ButtonSize}" />
             <Setter Property="Height" Value="{Binding Settings.ActionBarStyle.ButtonSize}" />
             <Setter Property="Margin" Value="{Binding Settings.ActionBarStyle.ButtonMargin}" />
