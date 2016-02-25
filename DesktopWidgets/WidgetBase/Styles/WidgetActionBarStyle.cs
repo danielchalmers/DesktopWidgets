@@ -33,10 +33,6 @@ namespace DesktopWidgets.WidgetBase.Styles
         public Orientation Orientation { get; set; } = Orientation.Vertical;
 
         [Category("Buttons")]
-        [DisplayName("Font Size")]
-        public int ButtonFontSize { get; set; } = 16;
-
-        [Category("Buttons")]
         [DisplayName("Size (px)")]
         public double ButtonSize { get; set; } = 24;
 
