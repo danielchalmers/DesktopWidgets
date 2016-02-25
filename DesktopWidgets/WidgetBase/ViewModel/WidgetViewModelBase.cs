@@ -440,6 +440,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             _onTopForceTimer?.Stop();
             _onTopForceTimer = null;
+            _actionBarHideTimer?.Stop();
+            _actionBarHideTimer = null;
         }
 
         public virtual void OnIntro()
