@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,14 +17,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 {
     public class ViewModel : WidgetViewModelBase
     {
-        private readonly Queue<string> _notificationQueue;
         private readonly DispatcherTimer _resumeTimer;
         private string _currentFileContent;
+        private string _currentFilePath;
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
         private FileType _fileType = FileType.None;
-
-        private int _historyIndex;
         private bool _isShowing;
 
         public ViewModel(WidgetId guid) : base(guid)
@@ -35,14 +32,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 return;
 
             IsPaused = Settings.Paused;
+            CurrentFilePath = Settings.CurrentFilePath;
 
             OpenFile = new RelayCommand(OpenFileExecute);
             TogglePlayPause = new RelayCommand(TogglePlayPauseExecute);
             Next = new RelayCommand(NextExecute);
             Previous = new RelayCommand(PreviousExecute);
-
-            _notificationQueue = new Queue<string>();
-            FileHistory = new ObservableCollection<string>();
 
             if (Settings.ResumeWaitDuration.TotalSeconds > 0)
             {
@@ -66,11 +61,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public string CurrentFilePath
         {
-            get { return Settings.CurrentFilePath; }
+            get { return _currentFilePath; }
             set
             {
+                _currentFilePath = value;
                 Settings.CurrentFilePath = value;
                 RaisePropertyChanged(nameof(CurrentFilePath));
+                CheckFile();
             }
         }
 
@@ -120,28 +117,24 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
         }
 
-        public ObservableCollection<string> FileHistory { get; set; }
+        public bool PreviousEnabled => HistoryIndex > 0;
+        public bool NextEnabled => HistoryIndex < Settings.History.Count - 1;
 
-        public int HistoryIndex
+        private int HistoryIndex => Settings.History.IndexOf(CurrentFilePath);
+
+        private void UpdateNextPrevious()
         {
-            get { return _historyIndex; }
-            set
-            {
-                if (_historyIndex != value)
-                {
-                    _historyIndex = value;
-                    RaisePropertyChanged(nameof(HistoryIndex));
-                }
-            }
+            RaisePropertyChanged(nameof(PreviousEnabled));
+            RaisePropertyChanged(nameof(NextEnabled));
         }
 
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
-            foreach (var path in paths)
-            {
-                _notificationQueue.Enqueue(path.FullName);
-                FileHistory.Add(path.FullName);
-            }
+            Settings.History.AddRange(paths.Select(x => x.FullName));
+            if (Settings.MaxHistory > 0 && Settings.History.Count > Settings.MaxHistory)
+                Settings.History.RemoveRange(0, Settings.History.Count - Settings.MaxHistory);
+            UpdateNextPrevious();
+            RaisePropertyChanged(nameof(Settings.History));
             if (!Settings.QueueFiles || !_isShowing)
                 HandleDirectoryChange();
         }
@@ -166,15 +159,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (IsPaused)
                 return;
-            if (_notificationQueue.Count == 0)
+            if (HistoryIndex == Settings.History.Count - 1)
             {
                 View?.HideUi();
                 return;
             }
             _isShowing = true;
-            var nextFile = _notificationQueue.Dequeue();
-            HistoryIndex = FileHistory.IndexOf(nextFile);
-            CurrentFilePath = nextFile;
+            CurrentFilePath = Settings.History[HistoryIndex + 1];
             CurrentFileContent = "";
 
             CheckFile(true);
@@ -284,26 +275,22 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void NextExecute()
         {
-            IsPaused = true;
+            _resumeTimer?.Stop();
             _resumeTimer?.Start();
-            if (HistoryIndex < FileHistory.Count - 1)
-            {
-                HistoryIndex++;
-                CurrentFilePath = FileHistory[HistoryIndex];
-                CheckFile();
-            }
+            IsPaused = true;
+            if (NextEnabled)
+                CurrentFilePath = Settings.History[HistoryIndex + 1];
+            UpdateNextPrevious();
         }
 
         private void PreviousExecute()
         {
-            IsPaused = true;
+            _resumeTimer?.Stop();
             _resumeTimer?.Start();
-            if (HistoryIndex > 0)
-            {
-                HistoryIndex--;
-                CurrentFilePath = FileHistory[HistoryIndex];
-                CheckFile();
-            }
+            IsPaused = true;
+            if (PreviousEnabled)
+                CurrentFilePath = Settings.History[HistoryIndex - 1];
+            UpdateNextPrevious();
         }
     }
 }

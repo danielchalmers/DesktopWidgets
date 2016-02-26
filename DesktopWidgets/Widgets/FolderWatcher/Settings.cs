@@ -69,7 +69,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool PlayMedia { get; set; } = false;
 
         [DisplayName("Current File")]
-        public string CurrentFilePath { get; set; }
+        public string CurrentFilePath { get; set; } = "";
 
         [Category("General")]
         [DisplayName("Paused")]
@@ -78,5 +78,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [Category("Behavior")]
         [DisplayName("Resume On Manual Change Duration")]
         public TimeSpan ResumeWaitDuration { get; set; } = TimeSpan.FromSeconds(10);
+
+        [Browsable(false)]
+        [DisplayName("History")]
+        public List<string> History { get; set; } = new List<string>();
+
+        [Category("General")]
+        [DisplayName("History Limit")]
+        public int MaxHistory { get; set; } = 999;
     }
 }
