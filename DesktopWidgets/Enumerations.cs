@@ -135,4 +135,11 @@
         Prefix,
         Suffix
     }
+
+    public enum InputMode
+    {
+        Clipboard,
+        File,
+        Text
+    }
 }
