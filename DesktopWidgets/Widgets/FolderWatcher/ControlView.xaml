@@ -23,7 +23,8 @@
                        ToolTip="{Binding CurrentFilePath}"
                        Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center">
+                       HorizontalAlignment="Center"
+                       MaxWidth="{Binding Settings.Style.Width}">
                 <Hyperlink NavigateUri="{Binding CurrentFilePath}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RequestNavigate">
