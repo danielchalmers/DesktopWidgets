@@ -67,7 +67,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 _currentFilePath = value;
                 Settings.CurrentFilePath = value;
                 RaisePropertyChanged(nameof(CurrentFilePath));
-                CheckFile();
             }
         }
 
@@ -168,7 +167,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             CurrentFilePath = Settings.History[HistoryIndex + 1];
             CurrentFileContent = "";
 
-            CheckFile(true);
+            CheckFile();
 
             OnSpecialEvent();
         }
@@ -279,7 +278,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             _resumeTimer?.Start();
             IsPaused = true;
             if (NextEnabled)
+            {
                 CurrentFilePath = Settings.History[HistoryIndex + 1];
+                CheckFile();
+            }
             UpdateNextPrevious();
         }
 
@@ -289,7 +291,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             _resumeTimer?.Start();
             IsPaused = true;
             if (PreviousEnabled)
+            {
                 CurrentFilePath = Settings.History[HistoryIndex - 1];
+                CheckFile();
+            }
             UpdateNextPrevious();
         }
     }
