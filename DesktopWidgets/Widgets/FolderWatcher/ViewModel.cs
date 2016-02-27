@@ -234,7 +234,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             var bmi = new BitmapImage();
             bmi.BeginInit();
-            bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             bmi.CacheOption = BitmapCacheOption.OnLoad;
             bmi.UriSource = new Uri(CurrentFile.FullName, UriKind.RelativeOrAbsolute);
             bmi.EndInit();
