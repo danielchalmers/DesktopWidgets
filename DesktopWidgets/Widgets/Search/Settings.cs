@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.Search
@@ -8,6 +9,7 @@ namespace DesktopWidgets.Widgets.Search
         public Settings()
         {
             Style.Width = 150;
+            Style.FramePadding = new Thickness(0);
         }
 
         [Category("General")]
