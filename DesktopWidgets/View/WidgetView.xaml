@@ -171,6 +171,12 @@
             <Setter Property="Visibility"
                     Value="{Binding Settings.ActionBarStyle.ShowName, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Style>
+        <Style x:Key="FrameStyle" TargetType="{x:Type Border}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="MaxWidth" Value="{Binding Settings.Style.Width}" />
+            <Setter Property="MaxHeight" Value="{Binding Settings.Style.Height}" />
+        </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.Style.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
                      IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}"
@@ -206,14 +212,14 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" x:Name="FrameContainerLeft" Visibility="Collapsed" />
+                    <Border Grid.Column="0" x:Name="FrameContainerLeft" Style="{StaticResource FrameStyle}" />
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" x:Name="FrameContainerTop" Visibility="Collapsed" Margin="5" />
+                        <Border Grid.Row="0" x:Name="FrameContainerTop" Style="{StaticResource FrameStyle}" />
                         <ScrollViewer Grid.Row="1" x:Name="MainContentContainer"
                                       Style="{StaticResource ScrollViewerContainerStyle}">
                             <ScrollViewer.Width>
@@ -279,9 +285,9 @@
                                 </MultiBinding>
                             </ScrollViewer.MaxHeight>
                         </ScrollViewer>
-                        <Border Grid.Row="2" x:Name="FrameContainerBottom" Visibility="Collapsed" Margin="5" />
+                        <Border Grid.Row="2" x:Name="FrameContainerBottom" Style="{StaticResource FrameStyle}" />
                     </Grid>
-                    <Border Grid.Column="2" x:Name="FrameContainerRight" Visibility="Collapsed" />
+                    <Border Grid.Column="2" x:Name="FrameContainerRight" Style="{StaticResource FrameStyle}" />
                 </Grid>
             </Border>
         </Border>
