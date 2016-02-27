@@ -174,8 +174,6 @@
         <Style x:Key="FrameStyle" TargetType="{x:Type Border}">
             <Setter Property="Visibility" Value="Collapsed" />
             <Setter Property="Padding" Value="{Binding Settings.Style.FramePadding}" />
-            <Setter Property="MaxWidth" Value="{Binding Settings.Style.Width}" />
-            <Setter Property="MaxHeight" Value="{Binding Settings.Style.Height}" />
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.Style.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
