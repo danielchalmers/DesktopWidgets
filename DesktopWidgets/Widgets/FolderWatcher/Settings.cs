@@ -87,5 +87,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [Category("General")]
         [DisplayName("History Limit")]
         public int MaxFileHistory { get; set; } = 999;
+
+        [Category("General")]
+        [DisplayName("Resume On Start Mode")]
+        public ResumeOnStartMode ResumeOnStartMode { get; set; } = ResumeOnStartMode.Auto;
+
+        [Browsable(false)]
+        [DisplayName("Resume On Start")]
+        public bool ResumeOnNextStart { get; set; } = false;
     }
 }

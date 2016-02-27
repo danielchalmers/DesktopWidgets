@@ -31,6 +31,19 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             if (Settings == null)
                 return;
 
+            switch (Settings.ResumeOnStartMode)
+            {
+                case ResumeOnStartMode.Auto:
+                    if (Settings.ResumeOnNextStart)
+                    {
+                        Settings.Paused = false;
+                        Settings.ResumeOnNextStart = false;
+                    }
+                    break;
+                case ResumeOnStartMode.Resume:
+                    Settings.Paused = false;
+                    break;
+            }
             IsPaused = Settings.Paused;
             CurrentFile = Settings.CurrentFile;
 
@@ -45,8 +58,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 _resumeTimer.Tick += (sender, args) => { Unpause(); };
             }
 
-            _directoryWatcher =
-                new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
+            _directoryWatcher = new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
             _directoryWatcher.Start();
 
             CheckFile(false);
@@ -187,8 +199,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             var isContent = Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
                             Settings.ShowTextContentWhitelist.Any(
                                 x => x.EndsWith(CurrentFile.Extension, StringComparison.OrdinalIgnoreCase)) &&
-                            (Settings.ShowContentMaxSize <= 0 ||
-                             CurrentFile.Length <= Settings.ShowContentMaxSize);
+                            (Settings.ShowContentMaxSize <= 0 || CurrentFile.Length <= Settings.ShowContentMaxSize);
             if (isContent)
                 new Task(() => { CurrentFileContent = File.ReadAllText(CurrentFile.FullName); }).Start();
             return isContent;
@@ -261,12 +272,14 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void Pause()
         {
             _resumeTimer?.Stop();
+            Settings.ResumeOnNextStart = false;
             IsPaused = true;
         }
 
         private void Unpause()
         {
             _resumeTimer?.Stop();
+            Settings.ResumeOnNextStart = false;
             IsPaused = false;
             _isShowing = false;
             HandleDirectoryChange();
@@ -276,6 +289,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             _resumeTimer?.Stop();
             _resumeTimer?.Start();
+            if (!IsPaused)
+                Settings.ResumeOnNextStart = true;
             IsPaused = true;
             if (NextEnabled)
             {
@@ -289,6 +304,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             _resumeTimer?.Stop();
             _resumeTimer?.Start();
+            if (!IsPaused)
+                Settings.ResumeOnNextStart = true;
             IsPaused = true;
             if (PreviousEnabled)
             {

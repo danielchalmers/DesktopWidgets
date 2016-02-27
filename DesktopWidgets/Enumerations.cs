@@ -142,4 +142,11 @@
         File,
         Text
     }
+
+    public enum ResumeOnStartMode
+    {
+        Auto,
+        Resume,
+        DontChange
+    }
 }
