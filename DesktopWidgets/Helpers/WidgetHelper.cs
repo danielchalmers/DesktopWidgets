@@ -266,45 +266,49 @@ namespace DesktopWidgets.Helpers
             {
                 CheckFileExists = true,
                 CheckPathExists = true,
-                Filter = Resources.PackageExtensionFilter
+                Filter = Resources.PackageExtensionFilter,
+                Multiselect = true
             };
             if (dialog.ShowDialog() != true)
                 return;
-            var fileContent = File.ReadAllText(dialog.FileName);
-
-            WidgetSettingsBase settings = null;
-            try
+            foreach (var fileName in dialog.FileNames)
             {
-                settings = Deserialise(CompressionHelper.Decompress(fileContent));
-            }
-            catch
-            {
-                // ignored
-            }
+                var fileContent = File.ReadAllText(fileName);
 
-            if (settings?.PackageInfo == null)
-            {
-                Popup.Show("Import failed. Widget may be corrupt.", image: MessageBoxImage.Error);
-                return;
+                WidgetSettingsBase settings = null;
+                try
+                {
+                    settings = Deserialise(CompressionHelper.Decompress(fileContent));
+                }
+                catch
+                {
+                    // ignored
+                }
+
+                if (settings?.PackageInfo == null)
+                {
+                    Popup.Show("Import failed. Widget may be corrupt.", image: MessageBoxImage.Error);
+                    return;
+                }
+
+                if (
+                    Popup.Show(GetImportConfirmText(settings.PackageInfo), MessageBoxButton.YesNo,
+                        MessageBoxImage.Question) ==
+                    MessageBoxResult.No)
+                    return;
+
+                if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
+                {
+                    Popup.Show(
+                        $"This widget requires a higher version.\n\nSupported version: {settings.PackageInfo.AppVersion}\nCurrent version: {AssemblyInfo.Version}",
+                        image: MessageBoxImage.Error);
+                    return;
+                }
+
+                settings.Identifier.GenerateNewGuid();
+                settings.Disabled = false;
+                AddNewWidget(settings);
             }
-
-            if (
-                Popup.Show(GetImportConfirmText(settings.PackageInfo), MessageBoxButton.YesNo,
-                    MessageBoxImage.Question) ==
-                MessageBoxResult.No)
-                return;
-
-            if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
-            {
-                Popup.Show(
-                    $"This widget requires a higher version.\n\nSupported version: {settings.PackageInfo.AppVersion}\nCurrent version: {AssemblyInfo.Version}",
-                    image: MessageBoxImage.Error);
-                return;
-            }
-
-            settings.Identifier.GenerateNewGuid();
-            settings.Disabled = false;
-            AddNewWidget(settings);
         }
 
         public static void Export(WidgetSettingsBase widget)
