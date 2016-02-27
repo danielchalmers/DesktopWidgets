@@ -115,11 +115,11 @@ namespace DesktopWidgets
                 AppHelper.ShutdownApplication();
         }
 
-        public static void Mute()
+        public static void Mute(TimeSpan duration)
         {
             WidgetHelper.DismissWidgets();
             MediaPlayerStore.StopAll();
-            Settings.Default.MuteEndTime = DateTime.Now + Settings.Default.MuteDuration;
+            Settings.Default.MuteEndTime = DateTime.Now + duration;
         }
 
         public static void Unmute()
@@ -127,12 +127,12 @@ namespace DesktopWidgets
             Settings.Default.MuteEndTime = DateTime.Now;
         }
 
-        public static void ToggleMute()
+        public static void ToggleMute(TimeSpan duration)
         {
             if (IsMuted)
                 Unmute();
             else
-                Mute();
+                Mute(duration);
         }
     }
 }

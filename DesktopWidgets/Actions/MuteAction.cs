@@ -16,9 +16,9 @@ namespace DesktopWidgets.Actions
         {
             base.ExecuteAction();
             if (Toggle)
-                App.ToggleMute();
+                App.ToggleMute(Duration);
             else
-                App.Mute();
+                App.Mute(Duration);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Properties;
 using DesktopWidgets.Windows;
 
 namespace DesktopWidgets
@@ -43,7 +44,7 @@ namespace DesktopWidgets
 
         private void menuItemMute_OnClick(object sender, RoutedEventArgs e)
         {
-            App.ToggleMute();
+            App.ToggleMute(Settings.Default.MuteDuration);
         }
 
         private void menuItemShowWidgets_OnClick(object sender, RoutedEventArgs e)
