@@ -24,7 +24,7 @@ namespace DesktopWidgets.Stores
             try
             {
                 HotkeyManager.Current.AddOrReplace(hotkey.Guid.ToString(),
-                    hotkey.Key, hotkey.ModifierKeys,
+                    hotkey.Key, hotkey.ModifierKeys, !hotkey.CanRepeat,
                     (sender, args) => OnHotkey(hotkey.Key, hotkey.ModifierKeys));
             }
             catch (HotkeyAlreadyRegisteredException)

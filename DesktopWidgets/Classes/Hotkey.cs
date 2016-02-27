@@ -33,6 +33,9 @@ namespace DesktopWidgets.Classes
         [DisplayName("Modifier Keys")]
         public ModifierKeys ModifierKeys { get; set; } = ModifierKeys.None;
 
+        [DisplayName("Allow Repetition")]
+        public bool CanRepeat { get; set; } = true;
+
         [DisplayName("Works If Foreground Is Fullscreen")]
         public bool WorksIfForegroundIsFullscreen { get; set; }
 
