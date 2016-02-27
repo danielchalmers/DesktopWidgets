@@ -18,8 +18,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
     public class ViewModel : WidgetViewModelBase
     {
         private readonly DispatcherTimer _resumeTimer;
+        private FileInfo _currentFile;
         private string _currentFileContent;
-        private string _currentFilePath;
         private BitmapImage _currentImage;
         private DirectoryWatcher _directoryWatcher;
         private FileType _fileType = FileType.None;
@@ -32,7 +32,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 return;
 
             IsPaused = Settings.Paused;
-            CurrentFilePath = Settings.CurrentFilePath;
+            CurrentFile = Settings.CurrentFile;
 
             OpenFile = new RelayCommand(OpenFileExecute);
             TogglePlayPause = new RelayCommand(TogglePlayPauseExecute);
@@ -59,14 +59,14 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public Settings Settings { get; }
 
-        public string CurrentFilePath
+        public FileInfo CurrentFile
         {
-            get { return _currentFilePath; }
+            get { return _currentFile; }
             set
             {
-                _currentFilePath = value;
-                Settings.CurrentFilePath = value;
-                RaisePropertyChanged(nameof(CurrentFilePath));
+                _currentFile = value;
+                Settings.CurrentFile = value;
+                RaisePropertyChanged(nameof(CurrentFile));
             }
         }
 
@@ -117,9 +117,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         }
 
         public bool PreviousEnabled => HistoryIndex > 0;
-        public bool NextEnabled => HistoryIndex < Settings.History.Count - 1;
+        public bool NextEnabled => HistoryIndex < Settings.FileHistory.Count - 1;
 
-        private int HistoryIndex => Settings.History.IndexOf(CurrentFilePath);
+        private int HistoryIndex => Settings.FileHistory.IndexOf(CurrentFile);
 
         private void UpdateNextPrevious()
         {
@@ -129,18 +129,18 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
-            Settings.History.AddRange(paths.Select(x => x.FullName));
-            if (Settings.MaxHistory > 0 && Settings.History.Count > Settings.MaxHistory)
-                Settings.History.RemoveRange(0, Settings.History.Count - Settings.MaxHistory);
+            Settings.FileHistory.AddRange(paths);
+            if (Settings.MaxFileHistory > 0 && Settings.FileHistory.Count > Settings.MaxFileHistory)
+                Settings.FileHistory.RemoveRange(0, Settings.FileHistory.Count - Settings.MaxFileHistory);
             UpdateNextPrevious();
-            RaisePropertyChanged(nameof(Settings.History));
+            RaisePropertyChanged(nameof(Settings.FileHistory));
             if (!Settings.QueueFiles || !_isShowing)
                 HandleDirectoryChange();
         }
 
         private void CheckFile(bool playMedia = true)
         {
-            if (string.IsNullOrWhiteSpace(Settings.CurrentFilePath) || !File.Exists(Settings.CurrentFilePath))
+            if (Settings.CurrentFile == null || !Settings.CurrentFile.Exists)
                 return;
             if (HandleFileImage())
                 FileType = FileType.Image;
@@ -158,13 +158,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (IsPaused)
                 return;
-            if (HistoryIndex == Settings.History.Count - 1)
+            if (HistoryIndex == Settings.FileHistory.Count - 1)
             {
                 View?.HideUi();
                 return;
             }
             _isShowing = true;
-            CurrentFilePath = Settings.History[HistoryIndex + 1];
+            CurrentFile = Settings.FileHistory[HistoryIndex + 1];
             CurrentFileContent = "";
 
             CheckFile();
@@ -174,9 +174,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool HandleFileImage()
         {
-            if (Settings.ShowImages && ImageHelper.IsSupported(Path.GetExtension(CurrentFilePath)))
+            if (Settings.ShowImages && ImageHelper.IsSupported(CurrentFile.Extension))
             {
-                UpdateImage(CurrentFilePath);
+                UpdateImage();
                 return true;
             }
             return false;
@@ -186,20 +186,20 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             var isContent = Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
                             Settings.ShowTextContentWhitelist.Any(
-                                x => x.EndsWith(Path.GetExtension(CurrentFilePath), StringComparison.OrdinalIgnoreCase)) &&
+                                x => x.EndsWith(CurrentFile.Extension, StringComparison.OrdinalIgnoreCase)) &&
                             (Settings.ShowContentMaxSize <= 0 ||
-                             new FileInfo(CurrentFilePath).Length <= Settings.ShowContentMaxSize);
+                             CurrentFile.Length <= Settings.ShowContentMaxSize);
             if (isContent)
-                new Task(() => { CurrentFileContent = File.ReadAllText(CurrentFilePath); }).Start();
+                new Task(() => { CurrentFileContent = File.ReadAllText(CurrentFile.FullName); }).Start();
             return isContent;
         }
 
         private bool HandleFileMedia(bool play)
         {
-            if (Settings.ShowImages && MediaPlayerHelper.IsSupported(Path.GetExtension(CurrentFilePath)))
+            if (Settings.ShowImages && MediaPlayerHelper.IsSupported(CurrentFile.Extension))
             {
                 if (play)
-                    MediaPlayerStore.PlaySoundAsync(CurrentFilePath, Settings.PlayMediaVolume);
+                    MediaPlayerStore.PlaySoundAsync(CurrentFile.FullName, Settings.PlayMediaVolume);
                 return true;
             }
             return false;
@@ -219,13 +219,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             HandleDirectoryChange();
         }
 
-        private void UpdateImage(string imagePath)
+        private void UpdateImage()
         {
             var bmi = new BitmapImage();
             bmi.BeginInit();
             bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             bmi.CacheOption = BitmapCacheOption.OnLoad;
-            bmi.UriSource = new Uri(imagePath, UriKind.RelativeOrAbsolute);
+            bmi.UriSource = new Uri(CurrentFile.FullName, UriKind.RelativeOrAbsolute);
             bmi.EndInit();
 
             CurrentImage = bmi;
@@ -233,7 +233,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void OpenFileExecute()
         {
-            ProcessHelper.Launch(CurrentFilePath);
+            ProcessHelper.Launch(CurrentFile.FullName);
             View?.Dismiss();
         }
 
@@ -279,7 +279,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             IsPaused = true;
             if (NextEnabled)
             {
-                CurrentFilePath = Settings.History[HistoryIndex + 1];
+                CurrentFile = Settings.FileHistory[HistoryIndex + 1];
                 CheckFile();
             }
             UpdateNextPrevious();
@@ -292,7 +292,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             IsPaused = true;
             if (PreviousEnabled)
             {
-                CurrentFilePath = Settings.History[HistoryIndex - 1];
+                CurrentFile = Settings.FileHistory[HistoryIndex - 1];
                 CheckFile();
             }
             UpdateNextPrevious();

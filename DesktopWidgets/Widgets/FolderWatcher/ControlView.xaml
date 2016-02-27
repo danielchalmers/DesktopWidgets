@@ -11,7 +11,6 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <classes:FilePathToNameConverter x:Key="FilePathToNameConverter" />
         <classes:TextFileTypeToVisibilityConverter x:Key="TextFileTypeToVisibilityConverter" />
         <classes:ImageFileTypeToVisibilityConverter x:Key="ImageFileTypeToVisibilityConverter" />
         <classes:OtherFileTypeToVisibilityConverter x:Key="OtherFileTypeToVisibilityConverter" />
@@ -20,18 +19,18 @@
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
                        TextAlignment="Center"
-                       ToolTip="{Binding CurrentFilePath}"
+                       ToolTip="{Binding CurrentFile.FullName}"
                        Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        MaxWidth="{Binding Settings.Style.Width}">
-                <Hyperlink NavigateUri="{Binding CurrentFilePath}">
+                <Hyperlink NavigateUri="{Binding CurrentFile.FullName}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RequestNavigate">
                             <command:EventToCommand Command="{Binding OpenFile}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <TextBlock Text="{Binding CurrentFilePath, Converter={StaticResource FilePathToNameConverter}}" />
+                    <TextBlock Text="{Binding CurrentFile.Name}" />
                 </Hyperlink>
             </TextBlock>
         </Grid>
@@ -74,7 +73,7 @@
         <TextBlock
             HorizontalAlignment="Center" VerticalAlignment="Center"
             Visibility="{Binding FileType, Converter={StaticResource OtherFileTypeToVisibilityConverter}}">
-            <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFilePath}">
+            <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFile.FullName}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="RequestNavigate">
                         <command:EventToCommand Command="{Binding OpenFile}" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Settings;
@@ -69,7 +70,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool PlayMedia { get; set; } = false;
 
         [DisplayName("Current File")]
-        public string CurrentFilePath { get; set; } = "";
+        public FileInfo CurrentFile { get; set; }
 
         [Category("General")]
         [DisplayName("Paused")]
@@ -81,10 +82,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         [Browsable(false)]
         [DisplayName("History")]
-        public List<string> History { get; set; } = new List<string>();
+        public List<FileInfo> FileHistory { get; set; } = new List<FileInfo>();
 
         [Category("General")]
         [DisplayName("History Limit")]
-        public int MaxHistory { get; set; } = 999;
+        public int MaxFileHistory { get; set; } = 999;
     }
 }
