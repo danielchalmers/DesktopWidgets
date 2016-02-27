@@ -65,6 +65,7 @@ namespace DesktopWidgets.Classes
                                     x =>
                                         oldFiles.Any(
                                             y => y.FullName == x.FullName && y.LastWriteTimeUtc != x.LastWriteTimeUtc))
+                                    .OrderBy(x => x.LastWriteTimeUtc)
                                     .ToList();
                             Application.Current.Dispatcher.Invoke(
                                 () =>
@@ -75,7 +76,10 @@ namespace DesktopWidgets.Classes
                         }
                         if (_settings.DetectNewFiles)
                         {
-                            var newFiles = files.Where(x => oldFiles.All(y => y.FullName != x.FullName)).ToList();
+                            var newFiles =
+                                files.Where(x => oldFiles.All(y => y.FullName != x.FullName))
+                                    .OrderBy(x => x.LastWriteTimeUtc)
+                                    .ToList();
                             Application.Current.Dispatcher.Invoke(
                                 () =>
                                 {
