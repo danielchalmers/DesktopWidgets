@@ -81,6 +81,10 @@ namespace DesktopWidgets.WidgetBase.Styles
         [DisplayName("Right")]
         public bool ShowRightFrame { get; set; } = true;
 
+        [Category("Frame")]
+        [DisplayName("Padding")]
+        public Thickness FramePadding { get; set; } = new Thickness(5);
+
         [Category("Border")]
         [DisplayName("Visible")]
         public bool BorderEnabled { get; set; } = true;
