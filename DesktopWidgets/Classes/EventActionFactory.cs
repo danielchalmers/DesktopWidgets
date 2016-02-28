@@ -10,6 +10,7 @@ namespace DesktopWidgets.Classes
         {
             "Hotkey",
             "Launch",
+            "Mute / Unmute",
             "Foreground Fullscreen Changed",
             "Foreground Title Changed",
             "Widget Special Event",
@@ -80,6 +81,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetShowEvent();
                 case "Widget Hide":
                     return new WidgetHideEvent();
+                case "Mute / Unmute":
+                    return new MuteUnmuteEvent();
             }
             return null;
         }
@@ -154,6 +157,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Show";
             if (evnt is WidgetHideEvent)
                 return "Widget Hide";
+            if (evnt is MuteUnmuteEvent)
+                return "Mute / Unmute";
             return null;
         }
 

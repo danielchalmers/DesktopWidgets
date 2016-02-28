@@ -160,6 +160,7 @@
     <Compile Include="Classes\ProcessFile.cs" />
     <Compile Include="Classes\SoundFile.cs" />
     <Compile Include="Classes\SpeechSettings.cs" />
+    <Compile Include="Events\MuteUnmuteEvent.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="WidgetBase\WidgetPackageInfo.cs" />
     <Compile Include="Events\LaunchEvent.cs" />

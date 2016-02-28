@@ -156,4 +156,12 @@
         Mute,
         Unmute
     }
+
+    public enum MuteEventMode
+    {
+        Toggle,
+        Mute,
+        Unmute,
+        All
+    }
 }
