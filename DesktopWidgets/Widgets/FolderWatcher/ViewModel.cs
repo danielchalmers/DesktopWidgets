@@ -223,13 +223,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             HandleDirectoryChange();
         }
 
-        public override void OnDismiss()
-        {
-            base.OnDismiss();
-            _isShowing = false;
-            HandleDirectoryChange();
-        }
-
         private void UpdateImage()
         {
             var bmi = new BitmapImage();
