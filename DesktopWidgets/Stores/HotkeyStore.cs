@@ -66,7 +66,7 @@ namespace DesktopWidgets.Stores
                             hotkey =>
                                 (hotkey.Item1.WorksIfForegroundIsFullscreen ||
                                  !FullScreenHelper.DoesAnyMonitorHaveFullscreenApp()) &&
-                                (!hotkey.Item1.WorksIfMuted || !App.IsMuted)))
+                                (hotkey.Item1.WorksIfMuted || !App.IsMuted)))
             {
                 hotkey.Item2?.Invoke();
             }
