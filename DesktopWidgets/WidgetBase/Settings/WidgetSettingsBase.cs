@@ -180,5 +180,9 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Dock")]
         [DisplayName("Dock As AppBar")]
         public bool IsAppBar { get; set; } = false;
+
+        [Category("Behavior")]
+        [DisplayName("Ignore Mute")]
+        public bool IgnoreMute { get; set; } = false;
     }
 }
