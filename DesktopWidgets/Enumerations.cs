@@ -149,4 +149,11 @@
         Resume,
         DontChange
     }
+
+    public enum MuteMode
+    {
+        Toggle,
+        Mute,
+        Unmute
+    }
 }

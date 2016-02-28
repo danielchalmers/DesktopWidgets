@@ -33,8 +33,7 @@ namespace DesktopWidgets.Classes
             "Play Sound",
             "Show Popup",
             "Speak Text",
-            "Mute",
-            "Unmute",
+            "Mute / Unmute",
             "Widget Intro",
             "Widget Cancel Intro",
             "Widget Dismiss",
@@ -111,10 +110,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetReloadAction();
                 case "Show Popup":
                     return new PopupAction();
-                case "Mute":
-                    return new MuteAction();
-                case "Unmute":
-                    return new UnmuteAction();
+                case "Mute / Unmute":
+                    return new MuteUnmuteAction();
                 case "Write File":
                     return new WriteFileAction();
                 case "Speak Text":
@@ -184,10 +181,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Reload";
             if (action is PopupAction)
                 return "Show Popup";
-            if (action is MuteAction)
-                return "Mute";
-            if (action is UnmuteAction)
-                return "Unmute";
+            if (action is MuteUnmuteAction)
+                return "Mute / Unmute";
             if (action is WriteFileAction)
                 return "Write File";
             if (action is SpeakTextAction)

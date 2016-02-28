@@ -134,8 +134,7 @@
     <Compile Include="Actions\ActionBase.cs" />
     <Compile Include="Actions\SpeakTextAction.cs" />
     <Compile Include="Actions\WriteFileAction.cs" />
-    <Compile Include="Actions\UnmuteAction.cs" />
-    <Compile Include="Actions\MuteAction.cs" />
+    <Compile Include="Actions\MuteUnmuteAction.cs" />
     <Compile Include="Actions\PopupAction.cs" />
     <Compile Include="Actions\WidgetCancelIntroAction.cs" />
     <Compile Include="Actions\WidgetReloadAction.cs" />
