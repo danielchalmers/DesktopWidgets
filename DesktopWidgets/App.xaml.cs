@@ -94,6 +94,8 @@ namespace DesktopWidgets
 
                 SettingsHelper.SaveSettings();
 
+                TrayIcon.Dispose();
+
                 AppMutex?.ReleaseMutex();
             }
             catch
