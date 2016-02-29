@@ -27,11 +27,11 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Enable File Queue")]
         public bool QueueFiles { get; set; } = true;
 
-        [Category("Style")]
+        [Category("Content")]
         [DisplayName("Show Images")]
         public bool ShowImages { get; set; } = true;
 
-        [Category("General")]
+        [Category("Content")]
         [DisplayName("Show Text Content Whitelist")]
         public List<string> ShowTextContentWhitelist { get; set; } = new List<string>
         {
@@ -45,7 +45,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             ".properties"
         };
 
-        [Category("General")]
+        [Category("Content")]
         [DisplayName("Show Text Content Max Size (bytes)")]
         public int ShowContentMaxSize { get; set; } = 1048576;
 
@@ -61,11 +61,11 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show Text Content Vertical Alignment")]
         public VerticalAlignment ShowContentVerticalAlignment { get; set; } = VerticalAlignment.Stretch;
 
-        [Category("General")]
+        [Category("Content")]
         [DisplayName("Play Media Volume")]
         public double PlayMediaVolume { get; set; } = 1.0;
 
-        [Category("General")]
+        [Category("Content")]
         [DisplayName("Play Media On Detect")]
         public bool PlayMedia { get; set; } = false;
 
