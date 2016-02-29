@@ -273,8 +273,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             _resumeTimer?.Stop();
             Settings.ResumeOnNextStart = false;
             IsPaused = false;
-            _isShowing = false;
-            HandleDirectoryChange();
         }
 
         private void NextExecute()
