@@ -55,7 +55,7 @@ namespace DesktopWidgets.View
             _mouseChecker = new MouseChecker(this, Settings);
 
             if (!systemStartup && Settings.ShowIntroOnLaunch)
-                _mouseChecker.QueueIntro = new IntroData();
+                _mouseChecker.QueueIntro = new IntroData {ExecuteFinishAction = false};
 
             DataContext = ViewModel;
 
