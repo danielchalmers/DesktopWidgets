@@ -20,13 +20,15 @@ namespace DesktopWidgets.Helpers
         public static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Auto,
-            ObjectCreationHandling = ObjectCreationHandling.Replace
+            ObjectCreationHandling = ObjectCreationHandling.Replace,
+            MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
         public static readonly JsonSerializerSettings JsonSerializerSettingsAllTypeHandling = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All,
-            ObjectCreationHandling = ObjectCreationHandling.Replace
+            ObjectCreationHandling = ObjectCreationHandling.Replace,
+            MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
         public static object CloneObject(object obj)
