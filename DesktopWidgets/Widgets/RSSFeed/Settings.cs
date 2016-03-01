@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.RSSFeed
@@ -36,8 +37,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
         public bool ShowPublishDate { get; set; }
 
         [Category("Style")]
-        [DisplayName("Publish Date Font Size")]
-        public int PublishDateFontSize { get; set; } = 11;
+        [DisplayName("Publish Date Font Settings")]
+        public FontSettings PublishDateFontSettings { get; set; } = new FontSettings {FontSize = 11};
 
         [Category("Style")]
         [DisplayName("Publish Date Format")]

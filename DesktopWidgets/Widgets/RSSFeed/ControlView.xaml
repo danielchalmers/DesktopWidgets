@@ -46,7 +46,9 @@
                         </TextBlock>
                         <TextBlock
                             Visibility="{Binding DataContext.Settings.ShowPublishDate, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                            FontSize="{Binding DataContext.Settings.PublishDateFontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                            FontSize="{Binding DataContext.Settings.FileNameFontSettings.FontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                            FontFamily="{Binding DataContext.Settings.FileNameFontSettings.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                            FontWeight="{Binding DataContext.Settings.FileNameFontSettings.FontWeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
                             <TextBlock.Text>
                                 <MultiBinding
                                     Converter="{StaticResource DateTimeOffsetFormatToStringConverter}">
