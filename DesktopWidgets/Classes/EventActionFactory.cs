@@ -11,8 +11,7 @@ namespace DesktopWidgets.Classes
             "Hotkey",
             "Launch",
             "Mute / Unmute",
-            "Foreground Fullscreen Changed",
-            "Foreground Title Changed",
+            "Foreground Changed",
             "Widget Special Event",
             "Widget Mouse Down",
             "Widget Mouse Up",
@@ -70,10 +69,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetMouseDoubleClickEvent();
                 case "Widget Reload":
                     return new WidgetReloadEvent();
-                case "Foreground Fullscreen Changed":
-                    return new ForegroundFullscreenChangedEvent();
-                case "Foreground Title Changed":
-                    return new ForegroundTitleChangedEvent();
+                case "Foreground Changed":
+                    return new ForegroundChangedEvent();
                 case "Launch":
                     return new LaunchEvent();
                 case "Hotkey":
@@ -148,10 +145,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Mouse Double Click";
             if (evnt is WidgetReloadEvent)
                 return "Widget Reload";
-            if (evnt is ForegroundFullscreenChangedEvent)
-                return "Foreground Fullscreen Changed";
-            if (evnt is ForegroundTitleChangedEvent)
-                return "Foreground Title Changed";
+            if (evnt is ForegroundChangedEvent)
+                return "Foreground Changed";
             if (evnt is LaunchEvent)
                 return "Launch";
             if (evnt is HotkeyEvent)

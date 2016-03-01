@@ -165,8 +165,7 @@
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="WidgetBase\WidgetPackageInfo.cs" />
     <Compile Include="Events\LaunchEvent.cs" />
-    <Compile Include="Events\ForegroundFullscreenChangedEvent.cs" />
-    <Compile Include="Events\ForegroundTitleChangedEvent.cs" />
+    <Compile Include="Events\ForegroundChangedEvent.cs" />
     <Compile Include="Events\HotkeyEvent.cs" />
     <Compile Include="Events\IEvent.cs" />
     <Compile Include="Events\WidgetShowEvent.cs" />

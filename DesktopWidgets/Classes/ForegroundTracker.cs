@@ -37,28 +37,21 @@ namespace DesktopWidgets.Classes
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
-                var evnt = eventPair.Event as ForegroundTitleChangedEvent;
+                var evnt = eventPair.Event as ForegroundChangedEvent;
                 if (evnt == null)
                     continue;
-                if ((string.IsNullOrWhiteSpace(evnt.ToTitle) ||
+                if (((evnt.FromFullscreen == YesNoAny.Any) ||
+                     (evnt.FromFullscreen == YesNoAny.Yes && oldFullscreen) ||
+                     (evnt.FromFullscreen == YesNoAny.No && !oldFullscreen)) &&
+                    ((evnt.ToFullscreen == YesNoAny.Any) ||
+                     (evnt.ToFullscreen == YesNoAny.Yes && IsForegroundFullscreen) ||
+                     (evnt.ToFullscreen == YesNoAny.No && !IsForegroundFullscreen)) &&
+                    (string.IsNullOrWhiteSpace(evnt.ToTitle) ||
                      (evnt.ToTitleMatchMode == MatchMode.Equals && ForegroundTitle == evnt.ToTitle) ||
-                     (evnt.ToTitleMatchMode == MatchMode.Contains && ForegroundTitle.Contains(evnt.ToTitle)))
-                    &&
+                     (evnt.ToTitleMatchMode == MatchMode.Contains && ForegroundTitle.Contains(evnt.ToTitle))) &&
                     (string.IsNullOrWhiteSpace(evnt.FromTitle) ||
                      (evnt.FromTitleMatchMode == MatchMode.Equals && oldTitle == evnt.FromTitle) ||
                      (evnt.FromTitleMatchMode == MatchMode.Contains && oldTitle.Contains(evnt.FromTitle))))
-                    eventPair.Action.Execute();
-            }
-            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
-            {
-                var evnt = eventPair.Event as ForegroundFullscreenChangedEvent;
-                if (evnt == null)
-                    continue;
-                if (((evnt.FromFullscreen == YesNoAny.Any) || (evnt.FromFullscreen == YesNoAny.Yes && oldFullscreen) ||
-                     (evnt.FromFullscreen == YesNoAny.No && !oldFullscreen))
-                    && ((evnt.ToFullscreen == YesNoAny.Any) ||
-                        (evnt.ToFullscreen == YesNoAny.Yes && IsForegroundFullscreen) ||
-                        (evnt.ToFullscreen == YesNoAny.No && !IsForegroundFullscreen)))
                     eventPair.Action.Execute();
             }
             foreach (var widget in App.WidgetViews.Where(x => x.Settings.OnTop))
