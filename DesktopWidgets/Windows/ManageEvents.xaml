@@ -47,7 +47,10 @@
                 <DataTemplate>
                     <TextBlock>
                         <TextBlock.Text>
-                            <Binding Converter="{StaticResource EventActionPairToNameConverter}" />
+                            <MultiBinding Converter="{StaticResource EventActionPairToNameConverter}">
+                                <Binding Path="." />
+                                <Binding Path="Name" />
+                            </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
                 </DataTemplate>

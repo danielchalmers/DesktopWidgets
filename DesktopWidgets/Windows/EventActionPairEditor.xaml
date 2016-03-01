@@ -16,13 +16,24 @@
         WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
             <RowDefinition Height="0.5*" />
             <RowDefinition Height="15" />
             <RowDefinition Height="0.5*" />
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid Grid.Row="0"
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="Name:" />
+            <TextBox Grid.Column="2" Text="{Binding EventActionPair.Name}" />
+        </Grid>
+        <xctk:PropertyGrid Grid.Row="2"
                            Style="{StaticResource PropertyGridNonCategorisedStyle}"
                            ShowTitle="True"
                            SelectedObject="{Binding EventActionPair.Event}">
@@ -36,7 +47,7 @@
                 </xctk:EditorTemplateDefinition>
             </xctk:PropertyGrid.EditorDefinitions>
         </xctk:PropertyGrid>
-        <xctk:PropertyGrid Grid.Row="2"
+        <xctk:PropertyGrid Grid.Row="4"
                            Style="{StaticResource PropertyGridNonCategorisedStyle}"
                            ShowTitle="True"
                            SelectedObject="{Binding EventActionPair.Action}">
@@ -50,7 +61,7 @@
                 </xctk:EditorTemplateDefinition>
             </xctk:PropertyGrid.EditorDefinitions>
         </xctk:PropertyGrid>
-        <Button Grid.Row="4" Grid.Column="0" Content="OK" Width="75" Height="23"
+        <Button Grid.Row="6" Grid.Column="0" Content="OK" Width="75" Height="23"
                 HorizontalAlignment="Right"
                 IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
     </Grid>

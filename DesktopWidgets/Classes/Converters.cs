@@ -762,19 +762,24 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class EventActionPairToNameConverter : IValueConverter
+    public class EventActionPairToNameConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
         {
-            var pair = value as EventActionPair;
+            if (value.Length != 2)
+                return DependencyProperty.UnsetValue;
+            var pair = value[0] as EventActionPair;
             if (pair == null)
                 return DependencyProperty.UnsetValue;
             var eventName = EventActionFactory.GetNameFromEvent(pair.Event);
             var actionName = EventActionFactory.GetNameFromAction(pair.Action);
-            return $"{eventName} -> {actionName}";
+            var name = pair.Name;
+            var idName = $"{eventName} -> {actionName}";
+
+            return string.IsNullOrWhiteSpace(name) ? idName : $"{name} ({idName})";
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
