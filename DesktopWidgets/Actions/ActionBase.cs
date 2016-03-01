@@ -10,6 +10,9 @@ namespace DesktopWidgets.Actions
         [DisplayName("Delay")]
         public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
 
+        [DisplayName("Show Errors")]
+        public bool ShowErrors { get; set; } = false;
+
         public void Execute()
         {
             DelayedAction.RunAction((int) Delay.TotalMilliseconds, () =>
@@ -20,7 +23,9 @@ namespace DesktopWidgets.Actions
                 }
                 catch (Exception ex)
                 {
-                    Popup.ShowAsync($"{GetType().Name} failed to execute.\n\n{ex.Message}", image: MessageBoxImage.Error);
+                    if (ShowErrors)
+                        Popup.ShowAsync($"{GetType().Name} failed to execute.\n\n{ex.Message}",
+                            image: MessageBoxImage.Error);
                 }
             });
         }
