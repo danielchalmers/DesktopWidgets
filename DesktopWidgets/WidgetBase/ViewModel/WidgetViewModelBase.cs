@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
@@ -326,7 +327,12 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             if (_onTopForceTimer == null)
             {
                 _onTopForceTimer = new DispatcherTimer();
-                _onTopForceTimer.Tick += (sender, args) => View?.ThisApp?.BringToFront();
+                _onTopForceTimer.Tick +=
+                    (sender, args) =>
+                    {
+                        if (App.WidgetViews.Where(x => x.Id != Id).All(x => !x.IsMouseOver))
+                            View?.ThisApp?.BringToFront();
+                    };
             }
             _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
             _onTopForceTimer.Stop();
