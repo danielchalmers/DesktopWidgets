@@ -95,7 +95,8 @@ namespace DesktopWidgets.Classes
             var history = new List<string>();
             foreach (var j in json.Reverse())
             {
-                var commit = j.commit.message.TrimEnd(Environment.NewLine.ToCharArray());
+                var fullCommit = j.commit.message?.Split('\n');
+                var commit = fullCommit != null && fullCommit.Length > 0 ? fullCommit[0] : string.Empty;
                 Version version;
                 if (Version.TryParse(commit, out version))
                 {
