@@ -23,7 +23,10 @@
                        Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       MaxWidth="{Binding Settings.Style.Width}">
+                       MaxWidth="{Binding Settings.Style.Width}"
+                       FontSize="{Binding Settings.FileNameFontSettings.FontSize}"
+                       FontFamily="{Binding Settings.FileNameFontSettings.FontFamily}"
+                       FontWeight="{Binding Settings.FileNameFontSettings.FontWeight}">
                 <Hyperlink NavigateUri="{Binding CurrentFile.FullName}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RequestNavigate">

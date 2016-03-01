@@ -23,6 +23,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [DisplayName("Show File Name")]
         public bool ShowFileName { get; set; } = true;
 
+        [Category("Style")]
+        [DisplayName("File Name Font Settings")]
+        public FontSettings FileNameFontSettings { get; set; } = new FontSettings();
+
         [Category("Behavior")]
         [DisplayName("Change Current File On Detect")]
         public bool QueueFiles { get; set; } = true;
