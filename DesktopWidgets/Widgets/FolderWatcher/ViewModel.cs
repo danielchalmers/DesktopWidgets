@@ -297,5 +297,12 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             }
             UpdateNextPrevious();
         }
+
+        public override void ExecuteSpecialAction()
+        {
+            base.ExecuteSpecialAction();
+            _isShowing = false;
+            HandleDirectoryChange();
+        }
     }
 }

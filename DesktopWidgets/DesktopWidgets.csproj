@@ -133,6 +133,7 @@
     </ApplicationDefinition>
     <Compile Include="Actions\ActionBase.cs" />
     <Compile Include="Actions\SpeakTextAction.cs" />
+    <Compile Include="Actions\WidgetSpecialAction.cs" />
     <Compile Include="Actions\WriteFileAction.cs" />
     <Compile Include="Actions\MuteUnmuteAction.cs" />
     <Compile Include="Actions\PopupAction.cs" />

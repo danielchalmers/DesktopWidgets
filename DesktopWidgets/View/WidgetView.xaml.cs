@@ -455,5 +455,10 @@ namespace DesktopWidgets.View
             if (!IsRefreshing && !_isAppBar)
                 Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action) ViewModel.UpdatePosition);
         }
+
+        public void ExecuteSpecialAction()
+        {
+            ViewModel.ExecuteSpecialAction();
+        }
     }
 }

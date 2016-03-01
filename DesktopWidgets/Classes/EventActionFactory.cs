@@ -35,6 +35,7 @@ namespace DesktopWidgets.Classes
             "Show Popup",
             "Speak Text",
             "Mute / Unmute",
+            "Widget Special Action",
             "Widget Intro",
             "Widget Cancel Intro",
             "Widget Dismiss",
@@ -119,6 +120,8 @@ namespace DesktopWidgets.Classes
                     return new WriteFileAction();
                 case "Speak Text":
                     return new SpeakTextAction();
+                case "Widget Special Action":
+                    return new WidgetSpecialAction();
             }
             return null;
         }
@@ -192,6 +195,8 @@ namespace DesktopWidgets.Classes
                 return "Write File";
             if (action is SpeakTextAction)
                 return "Speak Text";
+            if (action is WidgetSpecialAction)
+                return "Widget Special Action";
             return null;
         }
     }

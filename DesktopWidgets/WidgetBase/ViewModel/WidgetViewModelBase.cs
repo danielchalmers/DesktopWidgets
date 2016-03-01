@@ -527,5 +527,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 eventPair.Action.Execute();
             }
         }
+
+        public virtual void ExecuteSpecialAction()
+        {
+        }
     }
 }
