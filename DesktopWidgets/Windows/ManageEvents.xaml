@@ -19,7 +19,8 @@
         <windowViewModels:ManageEventsViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <classes:SelectedWidgetToEnableDisableNameConverter x:Key="SelectedWidgetToEnableDisableNameConverter" />
+        <classes:SelectedEventActionPairToEnableDisableNameConverter
+            x:Key="SelectedEventActionPairToEnableDisableNameConverter" />
         <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
         <classes:EventActionPairToNameConverter x:Key="EventActionPairToNameConverter" />
     </Window.Resources>
@@ -67,6 +68,9 @@
             <Button Content="New..." Command="{Binding NewPair}" IsEnabled="True" />
             <Button Visibility="Hidden" />
             <Button Content="Edit..." Command="{Binding EditPair}" />
+            <Button
+                Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
+                Command="{Binding ToggleEnablePair}" />
             <Button Content="Remove..." Command="{Binding RemovePair}" />
         </StackPanel>
 

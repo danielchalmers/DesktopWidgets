@@ -40,10 +40,16 @@ namespace DesktopWidgets.Helpers
         {
             var editDialog = new EventActionPairEditor(pair);
             editDialog.ShowDialog();
+            RefreshPair(pair);
+        }
 
-            var hotkeyEvent = pair.Event as HotkeyEvent;
-            if (hotkeyEvent != null)
-                HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, pair.Action.Execute);
+        public static void ToggleEnablePair(EventActionId id)
+        {
+            var pair = App.WidgetsSettingsStore.EventActionPairs.FirstOrDefault(x => x.Identifier.Guid == id.Guid);
+            if (pair == null)
+                return;
+            pair.Disabled = !pair.Disabled;
+            RefreshPair(pair);
         }
 
         public static void RemovePair(EventActionId id)
@@ -59,6 +65,16 @@ namespace DesktopWidgets.Helpers
                 var hotkeyEvent = pair.Event as HotkeyEvent;
                 if (hotkeyEvent != null)
                     HotkeyStore.RemoveHotkey(hotkeyEvent.Hotkey);
+            }
+        }
+
+        private static void RefreshPair(EventActionPair pair)
+        {
+            var hotkeyEvent = pair.Event as HotkeyEvent;
+            if (hotkeyEvent != null)
+            {
+                hotkeyEvent.Hotkey.Disabled = pair.Disabled;
+                HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, pair.Action.Execute);
             }
         }
     }

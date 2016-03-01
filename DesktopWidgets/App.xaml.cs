@@ -129,7 +129,8 @@ namespace DesktopWidgets
                 foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
                 {
                     var evnt = eventPair.Event as MuteUnmuteEvent;
-                    if (evnt == null || !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Mute))
+                    if (evnt == null || eventPair.Disabled ||
+                        !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Mute))
                         continue;
                     eventPair.Action.Execute();
                 }
@@ -145,7 +146,8 @@ namespace DesktopWidgets
                 foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
                 {
                     var evnt = eventPair.Event as MuteUnmuteEvent;
-                    if (evnt == null || !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Unmute))
+                    if (evnt == null || eventPair.Disabled ||
+                        !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Unmute))
                         continue;
                     eventPair.Action.Execute();
                 }
@@ -162,7 +164,8 @@ namespace DesktopWidgets
             foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as MuteUnmuteEvent;
-                if (evnt == null || !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Toggle))
+                if (evnt == null || eventPair.Disabled ||
+                    !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Toggle))
                     continue;
                 eventPair.Action.Execute();
             }
