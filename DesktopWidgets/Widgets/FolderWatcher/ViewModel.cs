@@ -216,13 +216,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             return false;
         }
 
-        public override void OnIntroEnd()
-        {
-            base.OnIntroEnd();
-            _isShowing = false;
-            HandleDirectoryChange();
-        }
-
         private void UpdateImage()
         {
             var bmi = new BitmapImage();
