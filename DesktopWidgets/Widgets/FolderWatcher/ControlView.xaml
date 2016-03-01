@@ -71,8 +71,10 @@
                  HorizontalAlignment="{Binding Settings.ShowContentHorizontalAlignment}"
                  VerticalAlignment="{Binding Settings.ShowContentVerticalAlignment}"
                  Text="{Binding CurrentFileContent}"
-                 FontSize="{Binding Settings.ShowContentFontSize}"
-                 Visibility="{Binding FileType, Converter={StaticResource TextFileTypeToVisibilityConverter}}" />
+                 Visibility="{Binding FileType, Converter={StaticResource TextFileTypeToVisibilityConverter}}"
+                 FontSize="{Binding Settings.ContentFontSettings.FontSize}"
+                 FontFamily="{Binding Settings.ContentFontSettings.FontFamily}"
+                 FontWeight="{Binding Settings.ContentFontSettings.FontWeight}" />
         <TextBlock
             HorizontalAlignment="Center" VerticalAlignment="Center"
             Visibility="{Binding FileType, Converter={StaticResource OtherFileTypeToVisibilityConverter}}">

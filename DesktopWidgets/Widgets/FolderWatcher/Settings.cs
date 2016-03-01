@@ -54,8 +54,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public int ShowContentMaxSize { get; set; } = 1048576;
 
         [Category("Style")]
-        [DisplayName("Show Text Content Font Size")]
-        public int ShowContentFontSize { get; set; } = 12;
+        [DisplayName("Text Content Font Settings")]
+        public FontSettings ContentFontSettings { get; set; } = new FontSettings();
 
         [Category("Style")]
         [DisplayName("Show Text Content Horizontal Alignment")]
