@@ -24,7 +24,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool ShowFileName { get; set; } = true;
 
         [Category("Behavior")]
-        [DisplayName("Enable File Queue")]
+        [DisplayName("Change Current File On Detect")]
         public bool QueueFiles { get; set; } = true;
 
         [Category("Content")]
