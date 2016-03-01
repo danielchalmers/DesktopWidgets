@@ -145,18 +145,6 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LaunchProcessAsync {
-            get {
-                return ((bool)(this["LaunchProcessAsync"]));
-            }
-            set {
-                this["LaunchProcessAsync"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("All")]
         public string UpdateDays {
             get {

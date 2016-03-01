@@ -2,9 +2,7 @@
 
 using System.Diagnostics;
 using System.IO;
-using System.Threading;
 using DesktopWidgets.Classes;
-using DesktopWidgets.Properties;
 
 #endregion
 
@@ -19,14 +17,6 @@ namespace DesktopWidgets.Helpers
         }
 
         public static void Launch(ProcessFile file)
-        {
-            if (Settings.Default.LaunchProcessAsync)
-                new Thread(delegate() { RunProcess(file); }).Start();
-            else
-                RunProcess(file);
-        }
-
-        private static void RunProcess(ProcessFile file)
         {
             Process.Start(new ProcessStartInfo
             {
