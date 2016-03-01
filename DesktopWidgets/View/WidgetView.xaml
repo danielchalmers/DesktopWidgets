@@ -156,7 +156,9 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="FontSize" Value="{Binding Settings.ActionBarStyle.ButtonFontSize}" />
+            <Setter Property="FontSize" Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontSize}" />
+            <Setter Property="FontFamily" Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontFamily}" />
+            <Setter Property="FontWeight" Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontWeight}" />
         </Style>
         <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="Focusable" Value="True" />

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using DesktopWidgets.Classes;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.WidgetBase.Styles
@@ -33,8 +34,8 @@ namespace DesktopWidgets.WidgetBase.Styles
         public Orientation Orientation { get; set; } = Orientation.Vertical;
 
         [Category("Buttons")]
-        [DisplayName("Font Size")]
-        public int ButtonFontSize { get; set; } = 16;
+        [DisplayName("Font Settings")]
+        public FontSettings ButtonFontSettings { get; set; } = new FontSettings {FontSize = 16};
 
         [Category("Buttons")]
         [DisplayName("Size (px)")]
