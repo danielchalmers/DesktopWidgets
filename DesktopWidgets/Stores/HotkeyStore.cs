@@ -62,6 +62,7 @@ namespace DesktopWidgets.Stores
             foreach (
                 var hotkey in
                     Hotkeys.Where(x => x.Item1.Key == key && x.Item1.ModifierKeys == modifierKeys)
+                        .Where(x => !x.Item1.Disabled)
                         .Where(
                             hotkey =>
                                 (hotkey.Item1.WorksIfForegroundIsFullscreen ||

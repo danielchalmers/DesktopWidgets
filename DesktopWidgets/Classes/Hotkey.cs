@@ -41,5 +41,8 @@ namespace DesktopWidgets.Classes
 
         [DisplayName("Works If Muted")]
         public bool WorksIfMuted { get; set; }
+
+        [DisplayName("Disabled")]
+        public bool Disabled { get; set; } = false;
     }
 }
