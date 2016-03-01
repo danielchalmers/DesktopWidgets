@@ -156,6 +156,7 @@
     <Compile Include="Classes\EventActionId.cs" />
     <Compile Include="Classes\EventActionPair.cs" />
     <Compile Include="Classes\FontSettings.cs" />
+    <Compile Include="Classes\ForegroundMatchData.cs" />
     <Compile Include="Classes\ForegroundTracker.cs" />
     <Compile Include="Classes\FilePath.cs" />
     <Compile Include="Classes\ProcessFile.cs" />

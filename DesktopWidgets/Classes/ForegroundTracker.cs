@@ -40,18 +40,20 @@ namespace DesktopWidgets.Classes
                 var evnt = eventPair.Event as ForegroundChangedEvent;
                 if (evnt == null)
                     continue;
-                if (((evnt.FromFullscreen == YesNoAny.Any) ||
-                     (evnt.FromFullscreen == YesNoAny.Yes && oldFullscreen) ||
-                     (evnt.FromFullscreen == YesNoAny.No && !oldFullscreen)) &&
-                    ((evnt.ToFullscreen == YesNoAny.Any) ||
-                     (evnt.ToFullscreen == YesNoAny.Yes && IsForegroundFullscreen) ||
-                     (evnt.ToFullscreen == YesNoAny.No && !IsForegroundFullscreen)) &&
-                    (string.IsNullOrWhiteSpace(evnt.ToTitle) ||
-                     (evnt.ToTitleMatchMode == MatchMode.Equals && ForegroundTitle == evnt.ToTitle) ||
-                     (evnt.ToTitleMatchMode == MatchMode.Contains && ForegroundTitle.Contains(evnt.ToTitle))) &&
-                    (string.IsNullOrWhiteSpace(evnt.FromTitle) ||
-                     (evnt.FromTitleMatchMode == MatchMode.Equals && oldTitle == evnt.FromTitle) ||
-                     (evnt.FromTitleMatchMode == MatchMode.Contains && oldTitle.Contains(evnt.FromTitle))))
+                if (((evnt.FromMatchData.Fullscreen == YesNoAny.Any) ||
+                     (evnt.FromMatchData.Fullscreen == YesNoAny.Yes && oldFullscreen) ||
+                     (evnt.FromMatchData.Fullscreen == YesNoAny.No && !oldFullscreen)) &&
+                    ((evnt.ToMatchData.Fullscreen == YesNoAny.Any) ||
+                     (evnt.ToMatchData.Fullscreen == YesNoAny.Yes && IsForegroundFullscreen) ||
+                     (evnt.ToMatchData.Fullscreen == YesNoAny.No && !IsForegroundFullscreen)) &&
+                    (string.IsNullOrWhiteSpace(evnt.ToMatchData.Title) ||
+                     (evnt.ToMatchData.TitleMatchMode == MatchMode.Equals && ForegroundTitle == evnt.ToMatchData.Title) ||
+                     (evnt.ToMatchData.TitleMatchMode == MatchMode.Contains &&
+                      ForegroundTitle.Contains(evnt.ToMatchData.Title))) &&
+                    (string.IsNullOrWhiteSpace(evnt.FromMatchData.Title) ||
+                     (evnt.FromMatchData.TitleMatchMode == MatchMode.Equals && oldTitle == evnt.FromMatchData.Title) ||
+                     (evnt.FromMatchData.TitleMatchMode == MatchMode.Contains &&
+                      oldTitle.Contains(evnt.FromMatchData.Title))))
                     eventPair.Action.Execute();
             }
             foreach (var widget in App.WidgetViews.Where(x => x.Settings.OnTop))
