@@ -9,10 +9,19 @@ namespace DesktopWidgets.Helpers
 {
     public static class EventActionHelper
     {
-        public static void NewPair()
+        private static void Add(this EventActionPair pair)
         {
-            var dialog = new SelectDualItem(EventActionFactory.AvailableEvents, EventActionFactory.AvailableActions,
-                "New Event and Action Pair", "Event:", "Action:");
+            App.WidgetsSettingsStore.EventActionPairs.Add(pair);
+        }
+
+        public static void New()
+        {
+            var dialog = new SelectDualItem(
+                EventActionFactory.AvailableEvents,
+                EventActionFactory.AvailableActions,
+                "New Event and Action Pair",
+                "Event:",
+                "Action:");
             dialog.ShowDialog();
 
             if (dialog.SelectedItem1 == null || dialog.SelectedItem2 == null)
@@ -23,36 +32,38 @@ namespace DesktopWidgets.Helpers
                 Event = EventActionFactory.GetNewEventFromName((string) dialog.SelectedItem1),
                 Action = EventActionFactory.GetNewActionFromName((string) dialog.SelectedItem2)
             };
-            App.WidgetsSettingsStore.EventActionPairs.Add(newPair);
+            newPair.Add();
 
-            EditPair(newPair);
+            newPair.Edit();
         }
 
-        public static void EditPair(EventActionId id)
+        private static EventActionPair GetPair(this EventActionId id)
         {
-            var pair = App.WidgetsSettingsStore.EventActionPairs.FirstOrDefault(x => x.Identifier.Guid == id.Guid);
-            if (pair == null)
-                return;
-            EditPair(pair);
+            return App.WidgetsSettingsStore.EventActionPairs.FirstOrDefault(x => x?.Identifier?.Guid == id?.Guid);
         }
 
-        private static void EditPair(EventActionPair pair)
+        public static void Edit(this EventActionId id)
+        {
+            id.GetPair()?.Edit();
+        }
+
+        private static void Edit(this EventActionPair pair)
         {
             var editDialog = new EventActionPairEditor(pair);
             editDialog.ShowDialog();
-            RefreshPair(pair);
+            pair?.Refresh();
         }
 
-        public static void ToggleEnablePair(EventActionId id)
+        public static void ToggleEnableDisable(this EventActionId id)
         {
-            var pair = App.WidgetsSettingsStore.EventActionPairs.FirstOrDefault(x => x.Identifier.Guid == id.Guid);
+            var pair = id.GetPair();
             if (pair == null)
                 return;
             pair.Disabled = !pair.Disabled;
-            RefreshPair(pair);
+            pair.Refresh();
         }
 
-        public static void RemovePair(EventActionId id)
+        public static void Remove(this EventActionId id)
         {
             if (
                 Popup.Show("Are you sure you want to delete this event and action pair?", MessageBoxButton.YesNo,
@@ -68,7 +79,7 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        private static void RefreshPair(EventActionPair pair)
+        private static void Refresh(this EventActionPair pair)
         {
             var hotkeyEvent = pair.Event as HotkeyEvent;
             if (hotkeyEvent != null)

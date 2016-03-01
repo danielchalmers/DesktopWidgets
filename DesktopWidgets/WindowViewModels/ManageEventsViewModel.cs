@@ -45,23 +45,23 @@ namespace DesktopWidgets.WindowViewModels
 
         private void NewPairExecute()
         {
-            EventActionHelper.NewPair();
+            EventActionHelper.New();
         }
 
         private void EditPairExecute()
         {
-            EventActionHelper.EditPair(SelectedPair.Identifier);
+            SelectedPair.Identifier.Edit();
         }
 
         private void ToggleEnablePairExecute()
         {
-            EventActionHelper.ToggleEnablePair(SelectedPair.Identifier);
+            SelectedPair.Identifier.ToggleEnableDisable();
             DeselectAllExecute();
         }
 
         private void RemovePairExecute()
         {
-            EventActionHelper.RemovePair(SelectedPair.Identifier);
+            SelectedPair.Identifier.Remove();
             DeselectAllExecute();
         }
     }
