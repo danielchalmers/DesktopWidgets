@@ -196,9 +196,12 @@
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ActionBarButtonStyle}" />
                     </StackPanel.Resources>
-                    <Button Content="≡" Click="btnMenu_OnClick" />
-                    <Button Content="⟳" Click="btnReload_OnClick" />
-                    <Button Content="×" Click="btnDismiss_OnClick" />
+                    <Button Content="≡" Click="btnMenu_OnClick"
+                            Visibility="{Binding Settings.ActionBarStyle.ShowMenuButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Button Content="⟳" Click="btnReload_OnClick"
+                            Visibility="{Binding Settings.ActionBarStyle.ShowReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Button Content="×" Click="btnDismiss_OnClick"
+                            Visibility="{Binding Settings.ActionBarStyle.ShowDismissButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
                 <TextBlock Style="{StaticResource NameBoxStyle}"
                            DockPanel.Dock="{Binding Settings.ActionBarStyle.NameDock}" />
