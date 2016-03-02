@@ -16,10 +16,10 @@ namespace DesktopWidgets.Classes
         [DisplayName("Activate")]
         public bool Activate { get; set; } = false;
 
-        [DisplayName("Hide On Finish")]
+        [DisplayName("Hide On End")]
         public bool HideOnFinish { get; set; } = true;
 
-        [DisplayName("Execute Finish Action")]
+        [DisplayName("Trigger End Event")]
         public bool ExecuteFinishAction { get; set; } = true;
     }
 }
