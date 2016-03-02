@@ -56,7 +56,7 @@ namespace DesktopWidgets.Classes
                       oldTitle.Contains(evnt.FromMatchData.Title))))
                     eventPair.Action.Execute();
             }
-            foreach (var widget in App.WidgetViews.Where(x => x.Settings.OnTop))
+            foreach (var widget in App.WidgetViews.Where(x => x.Settings.ForceTopmost))
                 widget.ThisApp?.BringToFront();
         }
     }

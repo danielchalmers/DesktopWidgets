@@ -318,7 +318,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private void UpdateForceOnTopTimer()
         {
-            if (!_settings.OnTop || _settings.ForceOnTopInterval <= 0)
+            if (!_settings.ForceTopmost || _settings.ForceOnTopInterval <= 0)
             {
                 _onTopForceTimer?.Stop();
                 _onTopForceTimer = null;

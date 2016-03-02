@@ -53,7 +53,11 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior")]
         [DisplayName("Stay On Top")]
-        public bool OnTop { get; set; } = true;
+        public bool Topmost { get; set; } = true;
+
+        [Category("Behavior")]
+        [DisplayName("Force Stay On Top")]
+        public bool ForceTopmost { get; set; } = false;
 
         [Category("Behavior")]
         [DisplayName("Snap To Edges")]
