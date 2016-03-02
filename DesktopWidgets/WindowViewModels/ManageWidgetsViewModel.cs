@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase.Settings;
 using GalaSoft.MvvmLight;
@@ -12,6 +13,7 @@ namespace DesktopWidgets.WindowViewModels
 
         public ManageWidgetsViewModel()
         {
+            MouseDoubleClick = new RelayCommand<MouseButtonEventArgs>(MouseDoubleClickExecute);
             DeselectAll = new RelayCommand(DeselectAllExecute);
             NewWidget = new RelayCommand(NewWidgetExecute);
             EditWidget = new RelayCommand(EditWidgetExecute);
@@ -36,6 +38,8 @@ namespace DesktopWidgets.WindowViewModels
             }
         }
 
+        public ICommand MouseDoubleClick { get; private set; }
+
         public ICommand DeselectAll { get; private set; }
 
         public ICommand NewWidget { get; private set; }
@@ -54,6 +58,11 @@ namespace DesktopWidgets.WindowViewModels
 
         public ICommand ImportWidget { get; private set; }
 
+        private void MouseDoubleClickExecute(MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                SelectedWidget?.Identifier?.GetView()?.ShowIntro(new IntroData {ExecuteFinishAction = true});
+        }
 
         private void DeselectAllExecute()
         {

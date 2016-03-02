@@ -41,6 +41,9 @@
                     <command:EventToCommand Command="{Binding DeselectAll}"
                                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
                 </i:EventTrigger>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <command:EventToCommand Command="{Binding MouseDoubleClick}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
