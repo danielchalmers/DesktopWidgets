@@ -52,11 +52,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             Next = new RelayCommand(NextExecute);
             Previous = new RelayCommand(PreviousExecute);
 
-            if (Settings.ResumeWaitDuration.TotalSeconds > 0)
-            {
-                _resumeTimer = new DispatcherTimer {Interval = Settings.ResumeWaitDuration};
-                _resumeTimer.Tick += (sender, args) => { Unpause(); };
-            }
+            _resumeTimer = new DispatcherTimer {Interval = Settings.ResumeWaitDuration};
+            _resumeTimer.Tick += (sender, args) => { Unpause(); };
 
             _directoryWatcher = new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
             _directoryWatcher.Start();
@@ -268,13 +265,21 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             IsPaused = false;
         }
 
+        private void PauseAndAutoResume()
+        {
+            if (Settings.ResumeWaitDuration.TotalSeconds > 0)
+            {
+                _resumeTimer?.Stop();
+                _resumeTimer?.Start();
+                if (!IsPaused)
+                    Settings.ResumeOnNextStart = true;
+                IsPaused = true;
+            }
+        }
+
         private void NextExecute()
         {
-            _resumeTimer?.Stop();
-            _resumeTimer?.Start();
-            if (!IsPaused)
-                Settings.ResumeOnNextStart = true;
-            IsPaused = true;
+            PauseAndAutoResume();
             if (NextEnabled)
             {
                 CurrentFile = Settings.FileHistory[HistoryIndex + 1];
@@ -285,11 +290,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void PreviousExecute()
         {
-            _resumeTimer?.Stop();
-            _resumeTimer?.Start();
-            if (!IsPaused)
-                Settings.ResumeOnNextStart = true;
-            IsPaused = true;
+            PauseAndAutoResume();
             if (PreviousEnabled)
             {
                 CurrentFile = Settings.FileHistory[HistoryIndex - 1];
