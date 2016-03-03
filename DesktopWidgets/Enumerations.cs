@@ -112,9 +112,9 @@
 
     public enum YesNoAny
     {
+        Any,
         Yes,
-        No,
-        Any
+        No
     }
 
     public enum StringMatchMode
