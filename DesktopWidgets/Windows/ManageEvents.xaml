@@ -75,6 +75,8 @@
                 Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
                 Command="{Binding ToggleEnablePair}" />
             <Button Content="Remove..." Command="{Binding RemovePair}" />
+            <Button Visibility="Hidden" />
+            <Button Content="Clone" Command="{Binding ClonePair}" />
         </StackPanel>
 
         <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">

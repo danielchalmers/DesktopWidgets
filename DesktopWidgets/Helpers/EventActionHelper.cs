@@ -88,5 +88,16 @@ namespace DesktopWidgets.Helpers
                 HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, pair.Action.Execute);
             }
         }
+
+        public static EventActionId Clone(this EventActionId id)
+        {
+            var newPair = SettingsHelper.CloneObject(id.GetPair()) as EventActionPair;
+            if (newPair != null)
+            {
+                newPair.Identifier.GenerateNewGuid();
+                newPair.Add();
+            }
+            return newPair?.Identifier;
+        }
     }
 }
