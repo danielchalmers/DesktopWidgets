@@ -99,41 +99,72 @@ namespace DesktopWidgets.View
 
         private void SetupFrame()
         {
-            if (Settings.Style.ShowTopFrame)
-            {
-                var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
-                if (frameTop != null)
-                {
-                    FrameContainerTop.Child = frameTop;
-                    FrameContainerTop.Visibility = Visibility.Visible;
-                }
-            }
-            if (Settings.Style.ShowBottomFrame)
-            {
-                var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
-                if (frameBottom != null)
-                {
-                    FrameContainerBottom.Child = frameBottom;
-                    FrameContainerBottom.Visibility = Visibility.Visible;
-                }
-            }
             if (Settings.Style.ShowLeftFrame)
             {
-                var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
-                if (frameLeft != null)
+                if (FrameContainerLeft.Child == null)
                 {
-                    FrameContainerLeft.Child = frameLeft;
-                    FrameContainerLeft.Visibility = Visibility.Visible;
+                    var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
+                    if (frameLeft != null)
+                    {
+                        FrameContainerLeft.Child = frameLeft;
+                        FrameContainerLeft.Visibility = Visibility.Visible;
+                    }
                 }
             }
+            else
+            {
+                FrameContainerLeft.Visibility = Visibility.Collapsed;
+            }
+
             if (Settings.Style.ShowRightFrame)
             {
-                var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
-                if (frameRight != null)
+                if (FrameContainerRight.Child == null)
                 {
-                    FrameContainerRight.Child = frameRight;
-                    FrameContainerRight.Visibility = Visibility.Visible;
+                    var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
+                    if (frameRight != null)
+                    {
+                        FrameContainerRight.Child = frameRight;
+                        FrameContainerRight.Visibility = Visibility.Visible;
+                    }
                 }
+            }
+            else
+            {
+                FrameContainerRight.Visibility = Visibility.Collapsed;
+            }
+
+            if (Settings.Style.ShowTopFrame)
+            {
+                if (FrameContainerTop.Child == null)
+                {
+                    var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
+                    if (frameTop != null)
+                    {
+                        FrameContainerTop.Child = frameTop;
+                        FrameContainerTop.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else
+            {
+                FrameContainerTop.Visibility = Visibility.Collapsed;
+            }
+
+            if (Settings.Style.ShowBottomFrame)
+            {
+                if (FrameContainerBottom.Child == null)
+                {
+                    var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
+                    if (frameBottom != null)
+                    {
+                        FrameContainerBottom.Child = frameBottom;
+                        FrameContainerBottom.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            else
+            {
+                FrameContainerBottom.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -328,6 +359,8 @@ namespace DesktopWidgets.View
             }
 
             Title = Id.GetName();
+
+            SetupFrame();
 
             if (!_isAppBar)
             {
