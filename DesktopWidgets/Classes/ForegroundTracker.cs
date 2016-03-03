@@ -10,8 +10,8 @@ namespace DesktopWidgets.Classes
         private static NativeMethods.WinEventDelegate _winEventDelegate;
         private static IntPtr m_hhook;
 
-        public static bool IsForegroundFullscreen;
-        public static string ForegroundTitle;
+        private static bool _isForegroundFullscreen;
+        private static string _foregroundTitle;
 
         public static void AddHook()
         {
@@ -25,41 +25,98 @@ namespace DesktopWidgets.Classes
             uint dwEventThread, uint dwmsEventTime)
         {
             var foreground = Win32Helper.GetForegroundApp();
-            var oldTitle = ForegroundTitle;
-            var oldFullscreen = IsForegroundFullscreen;
-            ForegroundTitle = foreground.GetTitle();
-            IsForegroundFullscreen = foreground.IsFullScreen();
-
-            if (ForegroundTitle == null)
-                ForegroundTitle = string.Empty;
-            if (oldTitle == null)
-                oldTitle = string.Empty;
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as ForegroundChangedEvent;
-                if (evnt == null)
+                if (evnt == null || !IsForegroundValid(foreground, evnt.FromMatchData, evnt.ToMatchData))
                     continue;
-                if (((evnt.FromMatchData.Fullscreen == YesNoAny.Any) ||
-                     (evnt.FromMatchData.Fullscreen == YesNoAny.Yes && oldFullscreen) ||
-                     (evnt.FromMatchData.Fullscreen == YesNoAny.No && !oldFullscreen)) &&
-                    ((evnt.ToMatchData.Fullscreen == YesNoAny.Any) ||
-                     (evnt.ToMatchData.Fullscreen == YesNoAny.Yes && IsForegroundFullscreen) ||
-                     (evnt.ToMatchData.Fullscreen == YesNoAny.No && !IsForegroundFullscreen)) &&
-                    (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Any ||
-                     (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Equals &&
-                      ForegroundTitle == evnt.ToMatchData.Title) ||
-                     (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Contains &&
-                      ForegroundTitle.Contains(evnt.ToMatchData.Title))) &&
-                    (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Any ||
-                     (evnt.FromMatchData.TitleMatchMode == StringMatchMode.Equals &&
-                      oldTitle == evnt.FromMatchData.Title) ||
-                     (evnt.FromMatchData.TitleMatchMode == StringMatchMode.Contains &&
-                      oldTitle.Contains(evnt.FromMatchData.Title))))
-                    eventPair.Action.Execute();
+                eventPair.Action.Execute();
             }
             foreach (var widget in App.WidgetViews.Where(x => x.Settings.ForceTopmost))
                 widget.ThisApp?.BringToFront();
+        }
+
+        private static bool IsForegroundValid(Win32App foreground, ForegroundMatchData fromData,
+            ForegroundMatchData toData)
+        {
+            var oldTitle = _foregroundTitle;
+            var oldFullscreen = _isForegroundFullscreen;
+            _foregroundTitle = foreground.GetTitle();
+            _isForegroundFullscreen = foreground.IsFullScreen();
+
+            if (_foregroundTitle == null)
+                _foregroundTitle = string.Empty;
+            if (oldTitle == null)
+                oldTitle = string.Empty;
+
+            bool isTitleFromValid;
+            bool isFullscreenFromValid;
+            bool isTitleToValid;
+            bool isFullscreenToValid;
+
+            switch (fromData.TitleMatchMode)
+            {
+                case StringMatchMode.Any:
+                    isTitleFromValid = true;
+                    break;
+                case StringMatchMode.Equals:
+                    isTitleFromValid = oldTitle == fromData.Title;
+                    break;
+                case StringMatchMode.Contains:
+                    isTitleFromValid = oldTitle.Contains(fromData.Title);
+                    break;
+                default:
+                    isTitleFromValid = false;
+                    break;
+            }
+            switch (toData.TitleMatchMode)
+            {
+                case StringMatchMode.Any:
+                    isTitleToValid = true;
+                    break;
+                case StringMatchMode.Equals:
+                    isTitleToValid = _foregroundTitle == toData.Title;
+                    break;
+                case StringMatchMode.Contains:
+                    isTitleToValid = _foregroundTitle.Contains(toData.Title);
+                    break;
+                default:
+                    isTitleToValid = false;
+                    break;
+            }
+            switch (fromData.Fullscreen)
+            {
+                case YesNoAny.Any:
+                    isFullscreenFromValid = true;
+                    break;
+                case YesNoAny.Yes:
+                    isFullscreenFromValid = oldFullscreen;
+                    break;
+                case YesNoAny.No:
+                    isFullscreenFromValid = !oldFullscreen;
+                    break;
+                default:
+                    isFullscreenFromValid = false;
+                    break;
+            }
+            switch (toData.Fullscreen)
+            {
+                case YesNoAny.Any:
+                    isFullscreenToValid = true;
+                    break;
+                case YesNoAny.Yes:
+                    isFullscreenToValid = _isForegroundFullscreen;
+                    break;
+                case YesNoAny.No:
+                    isFullscreenToValid = !_isForegroundFullscreen;
+                    break;
+                default:
+                    isFullscreenToValid = false;
+                    break;
+            }
+
+            return isTitleFromValid && isFullscreenFromValid && isTitleToValid && isFullscreenToValid;
         }
     }
 }
