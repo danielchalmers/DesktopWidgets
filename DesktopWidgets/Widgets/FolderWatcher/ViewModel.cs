@@ -52,7 +52,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             Next = new RelayCommand(NextExecute);
             Previous = new RelayCommand(PreviousExecute);
 
-            _resumeTimer = new DispatcherTimer {Interval = Settings.ResumeWaitDuration};
+            _resumeTimer = new DispatcherTimer();
             _resumeTimer.Tick += (sender, args) => { Unpause(); };
 
             _directoryWatcher = new DirectoryWatcher(Settings.DirectoryWatcherSettings, AddToFileQueue);
@@ -241,6 +241,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             base.OnRefresh();
             _directoryWatcher.SetSettings(Settings.DirectoryWatcherSettings);
+            _resumeTimer.Interval = Settings.ResumeWaitDuration;
         }
 
         private void TogglePlayPauseExecute()
