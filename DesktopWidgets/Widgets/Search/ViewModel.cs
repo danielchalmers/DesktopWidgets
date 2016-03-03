@@ -43,6 +43,8 @@ namespace DesktopWidgets.Widgets.Search
             var searchText = SearchText;
             SearchText = string.Empty;
             Process.Start($"{Settings.BaseUrl}{searchText}{Settings.URLSuffix}");
+
+            OnSpecialEvent();
         }
 
         private void OnKeyUpExecute(KeyEventArgs args)
