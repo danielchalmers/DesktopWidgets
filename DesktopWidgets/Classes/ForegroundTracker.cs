@@ -46,13 +46,15 @@ namespace DesktopWidgets.Classes
                     ((evnt.ToMatchData.Fullscreen == YesNoAny.Any) ||
                      (evnt.ToMatchData.Fullscreen == YesNoAny.Yes && IsForegroundFullscreen) ||
                      (evnt.ToMatchData.Fullscreen == YesNoAny.No && !IsForegroundFullscreen)) &&
-                    (string.IsNullOrWhiteSpace(evnt.ToMatchData.Title) ||
-                     (evnt.ToMatchData.TitleMatchMode == MatchMode.Equals && ForegroundTitle == evnt.ToMatchData.Title) ||
-                     (evnt.ToMatchData.TitleMatchMode == MatchMode.Contains &&
+                    (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Any ||
+                     (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Equals &&
+                      ForegroundTitle == evnt.ToMatchData.Title) ||
+                     (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Contains &&
                       ForegroundTitle.Contains(evnt.ToMatchData.Title))) &&
-                    (string.IsNullOrWhiteSpace(evnt.FromMatchData.Title) ||
-                     (evnt.FromMatchData.TitleMatchMode == MatchMode.Equals && oldTitle == evnt.FromMatchData.Title) ||
-                     (evnt.FromMatchData.TitleMatchMode == MatchMode.Contains &&
+                    (evnt.ToMatchData.TitleMatchMode == StringMatchMode.Any ||
+                     (evnt.FromMatchData.TitleMatchMode == StringMatchMode.Equals &&
+                      oldTitle == evnt.FromMatchData.Title) ||
+                     (evnt.FromMatchData.TitleMatchMode == StringMatchMode.Contains &&
                       oldTitle.Contains(evnt.FromMatchData.Title))))
                     eventPair.Action.Execute();
             }

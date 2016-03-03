@@ -117,8 +117,9 @@
         Any
     }
 
-    public enum MatchMode
+    public enum StringMatchMode
     {
+        Any,
         Equals,
         Contains
     }
