@@ -19,9 +19,5 @@ namespace DesktopWidgets.Widgets.Search
         [Category("General")]
         [DisplayName("URL Suffix")]
         public string URLSuffix { get; set; }
-
-        [Category("Behavior (Hideable)")]
-        [DisplayName("Hide On Search")]
-        public bool HideOnSearch { get; set; } = true;
     }
 }
