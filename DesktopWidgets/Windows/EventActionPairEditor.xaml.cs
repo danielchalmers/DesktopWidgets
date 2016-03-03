@@ -27,12 +27,16 @@ namespace DesktopWidgets.Windows
 
         private void btnSelectWidgetForEvent_OnClick(object sender, RoutedEventArgs e)
         {
-            ((WidgetEventBase) EventActionPair.Event).WidgetId = WidgetHelper.ChooseWidget();
+            var chosenWidget = WidgetHelper.ChooseWidget();
+            if (chosenWidget != null)
+                ((WidgetEventBase) EventActionPair.Event).WidgetId = chosenWidget;
         }
 
         private void btnSelectWidgetForAction_OnClick(object sender, RoutedEventArgs e)
         {
-            ((WidgetActionBase) EventActionPair.Action).WidgetId = WidgetHelper.ChooseWidget();
+            var chosenWidget = WidgetHelper.ChooseWidget();
+            if (chosenWidget != null)
+                ((WidgetActionBase) EventActionPair.Action).WidgetId = chosenWidget;
         }
     }
 }
