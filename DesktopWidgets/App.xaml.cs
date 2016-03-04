@@ -118,57 +118,42 @@ namespace DesktopWidgets
                 AppHelper.ShutdownApplication();
         }
 
-        public static void Mute(TimeSpan duration, bool triggerEvent = true)
+        public static void Mute(TimeSpan duration)
         {
             WidgetHelper.DismissWidgets();
             MediaPlayerStore.StopAll();
             Settings.Default.MuteEndTime = DateTime.Now + duration;
 
-            if (triggerEvent)
+            foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
             {
-                foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
-                {
-                    var evnt = eventPair.Event as MuteUnmuteEvent;
-                    if (evnt == null || eventPair.Disabled ||
-                        !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Mute))
-                        continue;
-                    eventPair.Action.Execute();
-                }
+                var evnt = eventPair.Event as MuteUnmuteEvent;
+                if (evnt == null || eventPair.Disabled ||
+                    !(evnt.Mode == MuteEventMode.Both || evnt.Mode == MuteEventMode.Mute))
+                    continue;
+                eventPair.Action.Execute();
             }
         }
 
-        public static void Unmute(bool triggerEvent = true)
+        public static void Unmute()
         {
             Settings.Default.MuteEndTime = DateTime.Now;
 
-            if (triggerEvent)
+            foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
             {
-                foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
-                {
-                    var evnt = eventPair.Event as MuteUnmuteEvent;
-                    if (evnt == null || eventPair.Disabled ||
-                        !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Unmute))
-                        continue;
-                    eventPair.Action.Execute();
-                }
+                var evnt = eventPair.Event as MuteUnmuteEvent;
+                if (evnt == null || eventPair.Disabled ||
+                    !(evnt.Mode == MuteEventMode.Both || evnt.Mode == MuteEventMode.Unmute))
+                    continue;
+                eventPair.Action.Execute();
             }
         }
 
         public static void ToggleMute(TimeSpan duration)
         {
             if (IsMuted)
-                Unmute(false);
+                Unmute();
             else
-                Mute(duration, false);
-
-            foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
-            {
-                var evnt = eventPair.Event as MuteUnmuteEvent;
-                if (evnt == null || eventPair.Disabled ||
-                    !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Toggle))
-                    continue;
-                eventPair.Action.Execute();
-            }
+                Mute(duration);
         }
     }
 }

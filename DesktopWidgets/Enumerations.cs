@@ -160,9 +160,8 @@
 
     public enum MuteEventMode
     {
-        Toggle,
         Mute,
         Unmute,
-        All
+        Both
     }
 }
