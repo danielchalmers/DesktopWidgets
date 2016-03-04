@@ -202,6 +202,8 @@
                             Visibility="{Binding Settings.ActionBarStyle.ShowReloadButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                     <Button Content="×" Click="btnDismiss_OnClick"
                             Visibility="{Binding Settings.ActionBarStyle.ShowDismissButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Button Content="🔇" Click="btnMute_OnClick"
+                            Visibility="{Binding Settings.ActionBarStyle.ShowMuteButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
                 <TextBlock Style="{StaticResource NameBoxStyle}"
                            DockPanel.Dock="{Binding Settings.ActionBarStyle.NameDock}" />

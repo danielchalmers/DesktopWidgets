@@ -61,6 +61,10 @@ namespace DesktopWidgets.WidgetBase.Styles
         [DisplayName("Dismiss Visible")]
         public bool ShowDismissButton { get; set; } = true;
 
+        [Category("Buttons")]
+        [DisplayName("Mute Visible")]
+        public bool ShowMuteButton { get; set; } = true;
+
         [Category("Name")]
         [DisplayName("Visible")]
         public bool ShowName { get; set; } = false;

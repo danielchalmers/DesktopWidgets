@@ -33,6 +33,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             EditWidget = new RelayCommand(EditWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
+            MuteWidget = new RelayCommand(MuteWidgetExecute);
+            MuteUnmuteWidget = new RelayCommand(MuteUnmuteWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
 
             Drop = new RelayCommand<DragEventArgs>(DropExecute);
@@ -134,6 +136,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public ICommand EditWidget { get; private set; }
         public ICommand ReloadWidget { get; private set; }
         public ICommand ToggleEnableWidget { get; private set; }
+        public ICommand MuteWidget { get; private set; }
+        public ICommand MuteUnmuteWidget { get; private set; }
         public ICommand ManageAllWidgets { get; private set; }
 
         public ICommand WidgetDockHorizontal { get; private set; }
@@ -536,6 +540,16 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public virtual void ExecuteSpecialAction()
         {
+        }
+
+        private void MuteWidgetExecute()
+        {
+            Id.Mute(Properties.Settings.Default.MuteDuration);
+        }
+
+        private void MuteUnmuteWidgetExecute()
+        {
+            Id.ToggleMute(Properties.Settings.Default.MuteDuration);
         }
     }
 }

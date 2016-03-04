@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
+using DesktopWidgets.Properties;
 using DesktopWidgets.WidgetBase.Settings;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -18,6 +19,7 @@ namespace DesktopWidgets.WindowViewModels
             NewWidget = new RelayCommand(NewWidgetExecute);
             EditWidget = new RelayCommand(EditWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
+            MuteUnmuteWidget = new RelayCommand(MuteUnmuteWidgetExecute);
             DisableWidget = new RelayCommand(DisableWidgetExecute);
             RemoveWidget = new RelayCommand(RemoveWidgetExecute);
             CloneWidget = new RelayCommand(CloneWidgetExecute);
@@ -47,6 +49,8 @@ namespace DesktopWidgets.WindowViewModels
         public ICommand EditWidget { get; private set; }
 
         public ICommand ReloadWidget { get; private set; }
+
+        public ICommand MuteUnmuteWidget { get; private set; }
 
         public ICommand DisableWidget { get; private set; }
 
@@ -82,6 +86,12 @@ namespace DesktopWidgets.WindowViewModels
         private void ReloadWidgetExecute()
         {
             SelectedWidget.Identifier.Reload();
+            DeselectAllExecute();
+        }
+
+        private void MuteUnmuteWidgetExecute()
+        {
+            SelectedWidget.Identifier.ToggleMute(Settings.Default.MuteDuration);
             DeselectAllExecute();
         }
 

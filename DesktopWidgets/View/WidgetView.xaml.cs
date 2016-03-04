@@ -493,5 +493,10 @@ namespace DesktopWidgets.View
         {
             ViewModel.ExecuteSpecialAction();
         }
+
+        private void btnMute_OnClick(object sender, RoutedEventArgs e)
+        {
+            Id.Mute(Properties.Settings.Default.MuteDuration);
+        }
     }
 }

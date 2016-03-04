@@ -830,4 +830,22 @@ namespace DesktopWidgets.Classes
             throw new NotImplementedException();
         }
     }
+
+    public class SelectedWidgetToMuteUnmuteNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            var settings = value as WidgetSettingsBase;
+            if (settings == null)
+                return DependencyProperty.UnsetValue;
+            return settings.IsMuted() ? "Unmute" : "Mute";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

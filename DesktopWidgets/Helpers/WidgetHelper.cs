@@ -342,5 +342,66 @@ namespace DesktopWidgets.Helpers
             dialog.ShowDialog();
             return dialog.SelectedItem?.Identifier;
         }
+
+        public static bool IsMuted(this WidgetId id)
+        {
+            return id.GetSettings()?.MuteEndTime > DateTime.Now;
+        }
+
+        public static bool IsMuted(this WidgetSettingsBase settings) => settings.MuteEndTime > DateTime.Now;
+
+        public static void Mute(this WidgetId id, TimeSpan duration, bool triggerEvent = true)
+        {
+            var settings = id.GetSettings();
+            id.GetView()?.Dismiss();
+            settings.MuteEndTime = DateTime.Now + duration;
+
+            if (triggerEvent)
+            {
+                foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+                {
+                    var evnt = eventPair.Event as WidgetMuteUnmuteEvent;
+                    if (evnt == null || eventPair.Disabled ||
+                        !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Mute))
+                        continue;
+                    eventPair.Action.Execute();
+                }
+            }
+        }
+
+        public static void Unmute(this WidgetId id, bool triggerEvent = true)
+        {
+            var settings = id.GetSettings();
+            settings.MuteEndTime = DateTime.Now;
+
+            if (triggerEvent)
+            {
+                foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+                {
+                    var evnt = eventPair.Event as WidgetMuteUnmuteEvent;
+                    if (evnt == null || eventPair.Disabled ||
+                        !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Unmute))
+                        continue;
+                    eventPair.Action.Execute();
+                }
+            }
+        }
+
+        public static void ToggleMute(this WidgetId id, TimeSpan duration)
+        {
+            if (id.IsMuted())
+                id.Unmute(false);
+            else
+                id.Mute(duration, false);
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetMuteUnmuteEvent;
+                if (evnt == null || eventPair.Disabled ||
+                    !(evnt.Mode == MuteEventMode.All || evnt.Mode == MuteEventMode.Toggle))
+                    continue;
+                eventPair.Action.Execute();
+            }
+        }
     }
 }

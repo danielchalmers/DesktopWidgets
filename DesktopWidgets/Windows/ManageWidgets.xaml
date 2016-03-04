@@ -20,6 +20,7 @@
     </Window.DataContext>
     <Window.Resources>
         <classes:SelectedWidgetToEnableDisableNameConverter x:Key="SelectedWidgetToEnableDisableNameConverter" />
+        <classes:SelectedWidgetToMuteUnmuteNameConverter x:Key="SelectedWidgetToMuteUnmuteNameConverter" />
         <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
         <classes:WidgetToNameConverter x:Key="WidgetToNameConverter" />
     </Window.Resources>
@@ -75,6 +76,9 @@
             <Button Visibility="Hidden" />
             <Button Content="Edit..." Command="{Binding EditWidget}" />
             <Button Content="Reload" Command="{Binding ReloadWidget}" />
+            <Button
+                Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToMuteUnmuteNameConverter}}"
+                Command="{Binding MuteUnmuteWidget}" />
             <Button
                 Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
                 Command="{Binding DisableWidget}" />

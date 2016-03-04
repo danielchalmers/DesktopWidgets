@@ -11,6 +11,7 @@ namespace DesktopWidgets.Classes
             "Hotkey",
             "Launch",
             "Mute / Unmute",
+            "Widget Mute / Unmute",
             "Foreground Changed",
             "Widget Special Event",
             "Widget Mouse Down",
@@ -34,6 +35,7 @@ namespace DesktopWidgets.Classes
             "Show Popup",
             "Speak Text",
             "Mute / Unmute",
+            "Widget Mute / Unmute",
             "Widget Special Action",
             "Widget Intro",
             "Widget Cancel Intro",
@@ -81,6 +83,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetHideEvent();
                 case "Mute / Unmute":
                     return new MuteUnmuteEvent();
+                case "Widget Mute / Unmute":
+                    return new WidgetMuteUnmuteEvent();
             }
             return null;
         }
@@ -119,6 +123,8 @@ namespace DesktopWidgets.Classes
                     return new SpeakTextAction();
                 case "Widget Special Action":
                     return new WidgetSpecialAction();
+                case "Widget Mute / Unmute":
+                    return new WidgetMuteUnmuteAction();
             }
             return null;
         }
@@ -157,6 +163,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Hide";
             if (evnt is MuteUnmuteEvent)
                 return "Mute / Unmute";
+            if (evnt is WidgetMuteUnmuteEvent)
+                return "Widget Mute / Unmute";
             return null;
         }
 
@@ -192,6 +200,8 @@ namespace DesktopWidgets.Classes
                 return "Speak Text";
             if (action is WidgetSpecialAction)
                 return "Widget Special Action";
+            if (action is WidgetMuteUnmuteAction)
+                return "Widget Mute / Unmute";
             return null;
         }
     }

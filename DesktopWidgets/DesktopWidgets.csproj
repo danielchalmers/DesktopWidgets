@@ -132,6 +132,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Actions\ActionBase.cs" />
+    <Compile Include="Actions\WidgetMuteUnmuteAction.cs" />
     <Compile Include="Actions\SpeakTextAction.cs" />
     <Compile Include="Actions\WidgetSpecialAction.cs" />
     <Compile Include="Actions\WriteFileAction.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Classes\ProcessFile.cs" />
     <Compile Include="Classes\SoundFile.cs" />
     <Compile Include="Classes\SpeechSettings.cs" />
+    <Compile Include="Events\WidgetMuteUnmuteEvent.cs" />
     <Compile Include="Events\MuteUnmuteEvent.cs" />
     <Compile Include="Helpers\CompressionHelper.cs" />
     <Compile Include="WidgetBase\WidgetPackageInfo.cs" />

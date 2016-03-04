@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:DesktopWidgets.WidgetBase"
-                    xmlns:classes="clr-namespace:DesktopWidgets.Classes">
+                    xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+                    xmlns:p="clr-namespace:DesktopWidgets.Properties">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
     <classes:NonAlwaysOnOpenModeToBoolConverter x:Key="NonAlwaysOnOpenModeToBoolConverter" />
     <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
@@ -33,5 +34,6 @@
         <Separator />
         <MenuItem Header="Dismiss" Command="{Binding DismissWidget}" />
         <MenuItem Header="Reload" Command="{Binding ReloadWidget}" />
+        <MenuItem Header="Mute" Command="{Binding MuteWidget}" />
     </CompositeCollection>
 </ResourceDictionary>

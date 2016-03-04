@@ -188,5 +188,8 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior")]
         [DisplayName("Ignore Mute")]
         public bool IgnoreMute { get; set; } = false;
+
+        [DisplayName("Mute End Time")]
+        public DateTime MuteEndTime { get; set; } = DateTime.MinValue;
     }
 }

@@ -201,7 +201,7 @@ namespace DesktopWidgets.Classes
             if (_settings.Disabled || _view.AnimationRunning)
                 return;
 
-            if (App.IsMuted && !_settings.IgnoreMute)
+            if ((App.IsMuted || _settings.IsMuted()) && !_settings.IgnoreMute)
             {
                 Hide(checkHideStatus: false, checkIdleStatus: false);
                 return;
@@ -301,7 +301,8 @@ namespace DesktopWidgets.Classes
 
         public void Show(bool animate = true, bool activate = false)
         {
-            if (_view.AnimationRunning || _view.IsVisible || (App.IsMuted && !_settings.IgnoreMute) ||
+            if (_view.AnimationRunning || _view.IsVisible ||
+                ((App.IsMuted || _settings.IsMuted()) && !_settings.IgnoreMute) ||
                 _settings.ForceHide)
                 return;
             if (animate && _settings.Style.AnimationTime != 0)
