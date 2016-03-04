@@ -531,7 +531,7 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             var timeSpan = (TimeSpan) value[0];
             var muteEndTime = (DateTime) value[1];
-            return muteEndTime > DateTime.Now ? "Unmute" : $"Mute for {timeSpan.ToReadableString()}";
+            return muteEndTime > DateTime.Now ? "Unmute" : $"Mute ({timeSpan.ToReadableString()})";
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
