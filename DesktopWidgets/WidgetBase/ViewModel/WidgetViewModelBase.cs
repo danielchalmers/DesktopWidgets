@@ -263,13 +263,20 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             if (!_settings.AutoDetectScreenBounds || View == null)
                 return;
-            var screen = ScreenHelper.GetScreen(View);
-            _settings.ScreenBounds = screen.Primary ? Rect.Empty : screen.ToRect(_settings.IgnoreAppBars);
+            _settings.ScreenBounds = GetActualScreenBounds();
         }
 
         public Rect GetScreenBounds()
         {
             return _settings.ScreenBounds == Rect.Empty ? SystemParameters.WorkArea : _settings.ScreenBounds;
+        }
+
+        public Rect GetActualScreenBounds()
+        {
+            if (!_settings.AutoDetectScreenBounds || View == null)
+                return GetScreenBounds();
+            var screen = ScreenHelper.GetScreen(View);
+            return screen.Primary ? Rect.Empty : screen.ToRect(_settings.IgnoreAppBars);
         }
 
         private void WidgetDockHorizontalExecute(HorizontalAlignment horizontalAlignment)
