@@ -61,7 +61,6 @@ namespace DesktopWidgets
             TrayIcon = (TaskbarIcon) Resources["TrayIcon"];
             AppInitHelper.InitializeExtra();
 
-            SystemEvents.SessionEnding += SystemEvents_OnSessionEnding;
             SystemEvents.SessionSwitch += SystemEventsOnSessionSwitch;
             SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
 
@@ -81,8 +80,10 @@ namespace DesktopWidgets
             }
         }
 
-        private void SystemEvents_OnSessionEnding(object sender, SessionEndingEventArgs e)
+        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
         {
+            base.OnSessionEnding(e);
+
             SettingsHelper.SaveSettings();
         }
 
