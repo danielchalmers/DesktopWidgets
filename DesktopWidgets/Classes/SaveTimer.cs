@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 
@@ -11,7 +12,12 @@ namespace DesktopWidgets.Classes
         public SaveTimer(TimeSpan waitTime)
         {
             _timer = new DispatcherTimer {Interval = waitTime};
-            _timer.Tick += delegate { SettingsHelper.SaveSettings(); };
+            _timer.Tick += Timer_OnTick;
+        }
+
+        private void Timer_OnTick(object sender, EventArgs eventArgs)
+        {
+            ThreadPool.QueueUserWorkItem(delegate { SettingsHelper.SaveSettings(); }, null);
         }
 
         public void DelaySave()
