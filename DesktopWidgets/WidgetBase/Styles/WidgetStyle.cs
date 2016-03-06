@@ -24,19 +24,19 @@ namespace DesktopWidgets.WidgetBase.Styles
         }
 
         [Category("Size")]
-        [DisplayName("Minimum Width (px)")]
+        [DisplayName("Min Width (px)")]
         public double MinWidth { get; set; } = double.NaN;
 
         [Category("Size")]
-        [DisplayName("Minimum Height (px)")]
+        [DisplayName("Min Height (px)")]
         public double MinHeight { get; set; } = double.NaN;
 
         [Category("Size")]
-        [DisplayName("Maximum Width (px)")]
+        [DisplayName("Max Width (px)")]
         public double MaxWidth { get; set; } = double.NaN;
 
         [Category("Size")]
-        [DisplayName("Maximum Height (px)")]
+        [DisplayName("Max Height (px)")]
         public double MaxHeight { get; set; } = double.NaN;
 
         [Category("Animation")]

@@ -17,7 +17,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         public string RootPath { get; set; }
 
         [Category("General")]
-        [DisplayName("Maximum File Size (bytes)")]
+        [DisplayName("Max File Size (bytes)")]
         public double FileFilterSize { get; set; } = 5242880;
 
         [Category("General")]
