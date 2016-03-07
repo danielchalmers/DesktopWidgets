@@ -124,5 +124,8 @@
     <Setting Name="WidgetPackagePublisherName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="AutoSaveInterval" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:10:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
