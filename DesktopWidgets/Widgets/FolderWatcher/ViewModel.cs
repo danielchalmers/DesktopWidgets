@@ -139,8 +139,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void AddToFileQueue(List<FileInfo> paths, DirectoryChange change)
         {
             Settings.FileHistory.AddRange(paths);
-            if (Settings.MaxFileHistory > 0 && Settings.FileHistory.Count > Settings.MaxFileHistory)
-                Settings.FileHistory.RemoveRange(0, Settings.FileHistory.Count - Settings.MaxFileHistory);
+            if (Settings.FileHistoryMax > 0 && Settings.FileHistory.Count > Settings.FileHistoryMax)
+                Settings.FileHistory.RemoveRange(0, Settings.FileHistory.Count - Settings.FileHistoryMax);
             UpdateNextPrevious();
             RaisePropertyChanged(nameof(Settings.FileHistory));
             if (!Settings.QueueFiles || !_isShowing)
