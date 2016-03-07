@@ -150,8 +150,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void CheckFile(bool playMedia = true)
         {
             if (Settings.CurrentFile == null || !File.Exists(Settings.CurrentFile.FullName))
-                return;
-            if (HandleFileImage())
+                FileType = FileType.None;
+            else if (HandleFileImage())
                 FileType = FileType.Image;
             else if (HandleFileMedia(playMedia))
                 FileType = FileType.Audio;
