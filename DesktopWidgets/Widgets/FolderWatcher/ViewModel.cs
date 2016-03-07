@@ -45,6 +45,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                     break;
             }
             IsPaused = Settings.Paused;
+
+            if (Settings.CurrentFile != null && !Settings.FileHistory.Contains(Settings.CurrentFile))
+                Settings.FileHistory.Add(Settings.CurrentFile);
             CurrentFile = Settings.CurrentFile;
 
             OpenFile = new RelayCommand(OpenFileExecute);
