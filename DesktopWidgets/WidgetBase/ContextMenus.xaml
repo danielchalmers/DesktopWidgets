@@ -32,8 +32,8 @@
             </MenuItem>
         </MenuItem>
         <Separator />
-        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}" />
         <MenuItem Header="Reload" Command="{Binding ReloadWidget}" />
+        <MenuItem Header="Dismiss" Command="{Binding DismissWidget}" />
         <MenuItem Header="Mute" Command="{Binding MuteWidget}" />
     </CompositeCollection>
 </ResourceDictionary>
