@@ -53,40 +53,39 @@ namespace DesktopWidgets.Classes
                         .Where(IsFileExtensionValid)
                         .ToList();
 
-                    var oldFiles = KnownFilePaths[folder]?.ToList();
+                    var oldFiles = KnownFilePaths[folder] == null
+                        ? new List<FileInfo>()
+                        : KnownFilePaths[folder].ToList();
                     KnownFilePaths[folder] = files;
 
-                    if (oldFiles != null)
+                    if (_settings.DetectModifiedFiles)
                     {
-                        if (_settings.DetectModifiedFiles)
-                        {
-                            var changedFiles =
-                                files.Where(
-                                    x =>
-                                        oldFiles.Any(
-                                            y => y.FullName == x.FullName && y.LastWriteTimeUtc != x.LastWriteTimeUtc))
-                                    .OrderBy(x => x.LastWriteTimeUtc)
-                                    .ToList();
-                            Application.Current.Dispatcher.Invoke(
-                                () =>
-                                {
-                                    if (changedFiles.Count > 0)
-                                        _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
-                                });
-                        }
-                        if (_settings.DetectNewFiles)
-                        {
-                            var newFiles =
-                                files.Where(x => oldFiles.All(y => y.FullName != x.FullName))
-                                    .OrderBy(x => x.LastWriteTimeUtc)
-                                    .ToList();
-                            Application.Current.Dispatcher.Invoke(
-                                () =>
-                                {
-                                    if (newFiles.Count > 0)
-                                        _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
-                                });
-                        }
+                        var changedFiles =
+                            files.Where(
+                                x =>
+                                    oldFiles.Any(
+                                        y => y.FullName == x.FullName && y.LastWriteTimeUtc != x.LastWriteTimeUtc))
+                                .OrderBy(x => x.LastWriteTimeUtc)
+                                .ToList();
+                        Application.Current.Dispatcher.Invoke(
+                            () =>
+                            {
+                                if (changedFiles.Count > 0)
+                                    _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
+                            });
+                    }
+                    if (_settings.DetectNewFiles)
+                    {
+                        var newFiles =
+                            files.Where(x => oldFiles.All(y => y.FullName != x.FullName))
+                                .OrderBy(x => x.LastWriteTimeUtc)
+                                .ToList();
+                        Application.Current.Dispatcher.Invoke(
+                            () =>
+                            {
+                                if (newFiles.Count > 0)
+                                    _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
+                            });
                     }
                 }
                 catch
