@@ -70,13 +70,13 @@ namespace DesktopWidgets.Helpers
 
         private static void StartScheduledTasks()
         {
-            if (Settings.Default.UpdateCheckIntervalMinutes > 0)
+            if (Settings.Default.UpdateCheckInterval.TotalMinutes > 0)
             {
                 App.UpdateScheduler = new TaskScheduler();
                 App.UpdateScheduler.ScheduleTask(() =>
                     UpdateHelper.CheckForUpdatesAsync(true),
                     Settings.Default.CheckForUpdates && UpdateHelper.IsUpdateable,
-                    TimeSpan.FromMinutes(Settings.Default.UpdateCheckIntervalMinutes));
+                    Settings.Default.UpdateCheckInterval);
                 App.UpdateScheduler.Start();
             }
         }
@@ -86,7 +86,7 @@ namespace DesktopWidgets.Helpers
             DelayedAction.RunAction(15000, delegate
             {
                 if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalMinutes >=
-                    Settings.Default.UpdateCheckIntervalMinutes)
+                    Settings.Default.UpdateCheckInterval.TotalMinutes)
                     App.UpdateScheduler?.RunTick();
             });
         }

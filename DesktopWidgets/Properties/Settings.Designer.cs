@@ -224,13 +224,13 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("180")]
-        public int UpdateCheckIntervalMinutes {
+        [global::System.Configuration.DefaultSettingValueAttribute("1.00:00:00")]
+        public global::System.TimeSpan UpdateCheckInterval {
             get {
-                return ((int)(this["UpdateCheckIntervalMinutes"]));
+                return ((global::System.TimeSpan)(this["UpdateCheckInterval"]));
             }
             set {
-                this["UpdateCheckIntervalMinutes"] = value;
+                this["UpdateCheckInterval"] = value;
             }
         }
         
