@@ -278,7 +278,7 @@ namespace DesktopWidgets.Helpers
                 WidgetSettingsBase settings = null;
                 try
                 {
-                    settings = Deserialise(CompressionHelper.Decompress(fileContent));
+                    settings = Deserialise(fileContent);
                 }
                 catch
                 {
@@ -320,7 +320,7 @@ namespace DesktopWidgets.Helpers
             var dialog = new WidgetPackageExport(settings);
             if (dialog.ShowDialog() != true)
                 return;
-            File.WriteAllText(dialog.Path, CompressionHelper.Compress(Serialise(settings)));
+            File.WriteAllText(dialog.Path, Serialise(settings));
             Popup.Show($"\"{settings.PackageInfo.Name}\" has been saved to \"{dialog.Path}\".");
         }
 
