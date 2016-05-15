@@ -50,20 +50,8 @@ namespace DesktopWidgets.WidgetBase.Styles
         public Dock ButtonDock { get; set; } = Dock.Bottom;
 
         [Category("Buttons")]
-        [DisplayName("Menu Visible")]
-        public bool ShowMenuButton { get; set; } = true;
-
-        [Category("Buttons")]
-        [DisplayName("Reload Visible")]
-        public bool ShowReloadButton { get; set; } = true;
-
-        [Category("Buttons")]
-        [DisplayName("Dismiss Visible")]
-        public bool ShowDismissButton { get; set; } = true;
-
-        [Category("Buttons")]
-        [DisplayName("Mute Visible")]
-        public bool ShowMuteButton { get; set; } = true;
+        [DisplayName("Visible")]
+        public bool ShowButtons { get; set; } = true;
 
         [Category("Name")]
         [DisplayName("Visible")]
