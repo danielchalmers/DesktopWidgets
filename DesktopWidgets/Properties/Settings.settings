@@ -119,7 +119,7 @@
       <Value Profile="(Default)">650</Value>
     </Setting>
     <Setting Name="DumpUnhandledErrors" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="WidgetPackagePublisherName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
