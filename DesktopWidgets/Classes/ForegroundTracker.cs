@@ -29,7 +29,8 @@ namespace DesktopWidgets.Classes
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as ForegroundChangedEvent;
-                if (evnt == null || !IsForegroundValid(foreground, evnt.FromMatchData, evnt.ToMatchData))
+                if (evnt == null || eventPair.Disabled ||
+                    !IsForegroundValid(foreground, evnt.FromMatchData, evnt.ToMatchData))
                     continue;
                 eventPair.Action.Execute();
             }
