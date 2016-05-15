@@ -29,7 +29,7 @@ namespace DesktopWidgets.Classes
 
         public static readonly List<string> AvailableActions = new List<string>
         {
-            "Open File",
+            "Run File",
             "Write File",
             "Play Sound",
             "Show Popup",
@@ -93,7 +93,7 @@ namespace DesktopWidgets.Classes
         {
             switch (name)
             {
-                case "Open File":
+                case "Run File":
                     return new OpenFileAction();
                 case "Play Sound":
                     return new PlaySoundAction();
@@ -171,7 +171,7 @@ namespace DesktopWidgets.Classes
         public static string GetNameFromAction(ActionBase action)
         {
             if (action is OpenFileAction)
-                return "Open File";
+                return "Run File";
             if (action is PlaySoundAction)
                 return "Play Sound";
             if (action is WidgetEnableAction)
