@@ -121,9 +121,9 @@ namespace DesktopWidgets
 
         public static void Mute(TimeSpan duration)
         {
-            WidgetHelper.DismissWidgets();
-            MediaPlayerStore.StopAll();
             Settings.Default.MuteEndTime = DateTime.Now + duration;
+            MediaPlayerStore.StopAll();
+            WidgetHelper.DismissWidgets();
 
             foreach (var eventPair in WidgetsSettingsStore.EventActionPairs)
             {
