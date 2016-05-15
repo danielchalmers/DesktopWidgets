@@ -27,21 +27,27 @@ namespace DesktopWidgets.Classes
         [DisplayName("Guid")]
         public Guid Guid { get; set; } = Guid.NewGuid();
 
+        [PropertyOrder(0)]
         [DisplayName("Key")]
         public Key Key { get; set; } = Key.None;
 
+        [PropertyOrder(1)]
         [DisplayName("Modifier Keys")]
         public ModifierKeys ModifierKeys { get; set; } = ModifierKeys.None;
 
+        [PropertyOrder(2)]
         [DisplayName("Allow Repetition")]
         public bool CanRepeat { get; set; } = true;
 
+        [PropertyOrder(3)]
         [DisplayName("Works If Foreground Is Fullscreen")]
         public bool WorksIfForegroundIsFullscreen { get; set; }
 
+        [PropertyOrder(4)]
         [DisplayName("Works If Muted")]
         public bool WorksIfMuted { get; set; }
 
+        [PropertyOrder(5)]
         [DisplayName("Disabled")]
         public bool Disabled { get; set; } = false;
     }

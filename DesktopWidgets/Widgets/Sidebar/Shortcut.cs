@@ -17,6 +17,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         [DisplayName("Guid")]
         public Guid Guid { get; set; } = Guid.NewGuid();
 
+        [PropertyOrder(0)]
         [DisplayName("Name")]
         public string Name { get; set; }
 
@@ -24,12 +25,15 @@ namespace DesktopWidgets.Widgets.Sidebar
         [DisplayName("Special Type")]
         public string SpecialType { get; set; }
 
+        [PropertyOrder(3)]
         [DisplayName("Icon Path")]
         public string IconPath { get; set; }
 
+        [PropertyOrder(1)]
         [DisplayName("Process File")]
         public ProcessFile ProcessFile { get; set; } = new ProcessFile();
 
+        [PropertyOrder(2)]
         [DisplayName("Hotkey")]
         public Hotkey Hotkey { get; set; } = new Hotkey();
 

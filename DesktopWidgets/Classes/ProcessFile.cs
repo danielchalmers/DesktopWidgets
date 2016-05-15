@@ -17,12 +17,15 @@ namespace DesktopWidgets.Classes
         {
         }
 
+        [PropertyOrder(2)]
         [DisplayName("Arguments")]
         public string Arguments { get; set; } = "";
 
+        [PropertyOrder(1)]
         [DisplayName("Start in Folder")]
         public string StartInFolder { get; set; } = "";
 
+        [PropertyOrder(3)]
         [DisplayName("Window Style")]
         public ProcessWindowStyle WindowStyle { get; set; } = ProcessWindowStyle.Normal;
     }

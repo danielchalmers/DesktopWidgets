@@ -16,6 +16,7 @@ namespace DesktopWidgets.Classes
         {
         }
 
+        [PropertyOrder(0)]
         [DisplayName("Path")]
         public string Path { get; set; } = "";
     }

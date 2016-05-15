@@ -9,9 +9,11 @@ namespace DesktopWidgets.WidgetBase
     [DisplayName("Widget Package Info")]
     public class WidgetPackageInfo
     {
+        [PropertyOrder(1)]
         [DisplayName("Publisher")]
         public string Publisher { get; set; } = "";
 
+        [PropertyOrder(0)]
         [DisplayName("Name")]
         public string Name { get; set; } = "";
 
