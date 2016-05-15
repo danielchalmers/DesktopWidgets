@@ -314,27 +314,29 @@ namespace DesktopWidgets.View
             UpdateLayout();
         }
 
+        private void SetAsAppBar(ABEdge edge) => AppBarFunctions.SetAppBar(this, edge, topMost: Settings.Topmost);
+
         private void SetAsAppBar()
         {
             switch (Settings.HorizontalAlignment)
             {
                 case HorizontalAlignment.Left:
-                    AppBarFunctions.SetAppBar(this, ABEdge.Left);
+                    SetAsAppBar(ABEdge.Left);
                     _isAppBar = true;
                     break;
                 case HorizontalAlignment.Right:
-                    AppBarFunctions.SetAppBar(this, ABEdge.Right);
+                    SetAsAppBar(ABEdge.Right);
                     _isAppBar = true;
                     break;
                 default:
                     switch (Settings.VerticalAlignment)
                     {
                         case VerticalAlignment.Top:
-                            AppBarFunctions.SetAppBar(this, ABEdge.Top);
+                            SetAsAppBar(ABEdge.Top);
                             _isAppBar = true;
                             break;
                         case VerticalAlignment.Bottom:
-                            AppBarFunctions.SetAppBar(this, ABEdge.Bottom);
+                            SetAsAppBar(ABEdge.Bottom);
                             _isAppBar = true;
                             break;
                     }
