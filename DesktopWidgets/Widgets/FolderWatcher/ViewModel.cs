@@ -152,8 +152,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void CheckFile(bool playMedia = true)
         {
-            if (Settings.CurrentFile == null || !File.Exists(Settings.CurrentFile.FullName))
+            if (Settings.CurrentFile == null)
                 FileType = FileType.None;
+            else if (!File.Exists(Settings.CurrentFile.FullName))
+            {
+                FileType = FileType.Warning;
+                CurrentFileContent = "File is missing.";
+            }
             else if (HandleFileImage())
                 FileType = FileType.Image;
             else if (HandleFileMedia(playMedia))

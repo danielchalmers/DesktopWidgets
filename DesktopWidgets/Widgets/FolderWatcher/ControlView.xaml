@@ -14,6 +14,7 @@
         <classes:TextFileTypeToVisibilityConverter x:Key="TextFileTypeToVisibilityConverter" />
         <classes:ImageFileTypeToVisibilityConverter x:Key="ImageFileTypeToVisibilityConverter" />
         <classes:OtherFileTypeToVisibilityConverter x:Key="OtherFileTypeToVisibilityConverter" />
+        <classes:WarningFileTypeToVisibilityConverter x:Key="WarningFileTypeToVisibilityConverter" />
         <classes:BoolToPauseTextConverter x:Key="BoolToPauseTextConverter" />
 
         <Grid x:Key="FrameTop">
@@ -87,5 +88,11 @@
                 Click here to open file
             </Hyperlink>
         </TextBlock>
+        <TextBox Style="{StaticResource InfoTextbox}"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 Text="{Binding CurrentFileContent}"
+                 Visibility="{Binding FileType, Converter={StaticResource WarningFileTypeToVisibilityConverter}}"
+                 FontSize="24" />
     </Grid>
 </UserControl>

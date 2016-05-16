@@ -97,6 +97,7 @@
     public enum FileType
     {
         None,
+        Warning,
         Text,
         Image,
         Audio,
