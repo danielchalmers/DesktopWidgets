@@ -18,8 +18,6 @@ namespace DesktopWidgets.Helpers
 
         public static void Launch(ProcessFile file)
         {
-            if (string.IsNullOrWhiteSpace(file.Path) || !File.Exists(file.Path))
-                return;
             Process.Start(new ProcessStartInfo
             {
                 FileName = file.Path,
