@@ -41,8 +41,8 @@
                             Value="{Binding UpdateIsRequired, Converter={StaticResource BooleanToCollapsedVisibilityConverter}}" />
                 </Style>
             </Grid.Resources>
-            <Button Grid.Column="0" Content="Ask Later" Click="btnRemindLater_Click" />
-            <Button Grid.Column="2" Content="No Thanks" Click="btnNo_Click" IsCancel="True" />
+            <Button Grid.Column="0" Content="Ask Later" Click="btnRemindLater_Click" IsCancel="True" />
+            <Button Grid.Column="2" Content="No Thanks" Click="btnNo_Click" />
             <Button Grid.Column="4" Content="Update Now" Click="btnOK_Click" IsDefault="True" IsEnabled="True"
                     HorizontalAlignment="Right" />
         </Grid>
