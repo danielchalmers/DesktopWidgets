@@ -7,12 +7,20 @@ namespace DesktopWidgets.Classes
 {
     public class SaveTimer
     {
+        private readonly DispatcherTimer _autoSaveTimer;
         private readonly DispatcherTimer _timer;
 
-        public SaveTimer(TimeSpan waitTime)
+        public SaveTimer(TimeSpan waitTime, TimeSpan autoSaveInterval)
         {
             _timer = new DispatcherTimer {Interval = waitTime};
             _timer.Tick += Timer_OnTick;
+
+            if (autoSaveInterval.TotalSeconds > 0)
+            {
+                _autoSaveTimer = new DispatcherTimer {Interval = autoSaveInterval};
+                _autoSaveTimer.Tick += Timer_OnTick;
+                _autoSaveTimer.Start();
+            }
         }
 
         private void Timer_OnTick(object sender, EventArgs eventArgs)

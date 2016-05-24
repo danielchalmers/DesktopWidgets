@@ -21,7 +21,7 @@ namespace DesktopWidgets.Helpers
 
             StartScheduledTasks();
 
-            App.SaveTimer = new SaveTimer(Settings.Default.SaveDelay);
+            App.SaveTimer = new SaveTimer(Settings.Default.SaveDelay, Settings.Default.AutoSaveInterval);
 
             ForegroundTracker.AddHook();
 
