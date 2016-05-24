@@ -79,6 +79,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 _currentFile = value;
                 Settings.CurrentFile = value;
                 RaisePropertyChanged(nameof(CurrentFile));
+                UpdateNextPrevious();
             }
         }
 
@@ -144,7 +145,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             Settings.FileHistory.AddRange(paths);
             if (Settings.FileHistoryMax > 0 && Settings.FileHistory.Count > Settings.FileHistoryMax)
                 Settings.FileHistory.RemoveRange(0, Settings.FileHistory.Count - Settings.FileHistoryMax);
-            UpdateNextPrevious();
             RaisePropertyChanged(nameof(Settings.FileHistory));
             if (!Settings.QueueFiles || !_isShowing)
                 HandleDirectoryChange();
@@ -294,7 +294,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 CurrentFile = Settings.FileHistory[HistoryIndex + 1];
                 CheckFile();
             }
-            UpdateNextPrevious();
         }
 
         private void PreviousExecute()
@@ -305,7 +304,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 CurrentFile = Settings.FileHistory[HistoryIndex - 1];
                 CheckFile();
             }
-            UpdateNextPrevious();
         }
 
         public override void ExecuteSpecialAction()
