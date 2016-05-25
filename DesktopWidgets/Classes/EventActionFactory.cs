@@ -10,9 +10,9 @@ namespace DesktopWidgets.Classes
         {
             "Hotkey",
             "Launch",
+            "Foreground Changed",
             "Mute / Unmute",
             "Widget Mute / Unmute",
-            "Foreground Changed",
             "Widget Special Event",
             "Widget Mouse Down",
             "Widget Mouse Up",
