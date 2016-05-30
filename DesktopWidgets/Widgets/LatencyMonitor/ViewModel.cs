@@ -15,7 +15,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 {
     public class ViewModel : WidgetViewModelBase
     {
-        private long _lastLatency;
+        private long _lastLatency = -1;
         private bool _scanLatency;
 
         public ViewModel(WidgetId id) : base(id)
@@ -42,7 +42,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                     var reply = GetLatency();
                     if (reply == null)
                         continue;
-                    Application.Current.Dispatcher.BeginInvoke(
+                    Application.Current.Dispatcher.Invoke(
                         DispatcherPriority.Background,
                         new Action(() =>
                         {
@@ -62,6 +62,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                 // ignored
                             }
                         }));
+                    _lastLatency = reply.RoundtripTime;
                     Thread.Sleep(Settings.PingInterval);
                 }
             }).Start();
@@ -73,8 +74,6 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                 return null;
             var ping = new Ping();
             var reply = ping.Send(Settings.HostAddress, Settings.Timeout);
-            if (reply != null)
-                _lastLatency = reply.RoundtripTime;
             return reply;
         }
 
@@ -96,7 +95,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             if (!Settings.ColorCoding)
                 return Settings.DefaultLatencyColor;
             return reply == null || reply.Status != IPStatus.Success || (reply.RoundtripTime > Settings.GoodLatencyMax) ||
-                   (Math.Abs(reply.RoundtripTime - _lastLatency) > Settings.GoodLatencySinceLast)
+                   (_lastLatency > 0 && Math.Abs(reply.RoundtripTime - _lastLatency) > Settings.GoodLatencySinceLast)
                 ? Settings.BadLatencyColor
                 : Settings.GoodLatencyColor;
         }
