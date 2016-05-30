@@ -388,5 +388,10 @@ namespace DesktopWidgets.Helpers
             else
                 id.Mute(duration);
         }
+
+        public static void Refresh(this WidgetId id)
+        {
+            id.GetView()?.UpdateUi();
+        }
     }
 }

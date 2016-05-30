@@ -23,6 +23,7 @@ namespace DesktopWidgets.Classes
             "Widget Show",
             "Widget Hide",
             "Widget Reload",
+            "Widget Refresh",
             "Widget Enable",
             "Widget Disable"
         };
@@ -42,6 +43,7 @@ namespace DesktopWidgets.Classes
             "Widget Dismiss",
             "Widget Hide",
             "Widget Reload",
+            "Widget Refresh",
             "Widget Enable",
             "Widget Disable",
             "Widget Toggle Enabled",
@@ -86,6 +88,8 @@ namespace DesktopWidgets.Classes
                     return new MuteUnmuteEvent();
                 case "Widget Mute / Unmute":
                     return new WidgetMuteUnmuteEvent();
+                case "Widget Refresh":
+                    return new WidgetRefreshEvent();
             }
             return null;
         }
@@ -128,6 +132,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetMuteUnmuteAction();
                 case "Widget Change Size":
                     return new WidgetChangeSizeAction();
+                case "Widget Refresh":
+                    return new WidgetRefreshAction();
             }
             return null;
         }
@@ -168,6 +174,8 @@ namespace DesktopWidgets.Classes
                 return "Mute / Unmute";
             if (evnt is WidgetMuteUnmuteEvent)
                 return "Widget Mute / Unmute";
+            if (evnt is WidgetRefreshEvent)
+                return "Widget Refresh";
             return null;
         }
 
@@ -207,6 +215,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Mute / Unmute";
             if (action is WidgetChangeSizeAction)
                 return "Widget Change Size";
+            if (action is WidgetRefreshAction)
+                return "Widget Refresh";
             return null;
         }
     }

@@ -136,6 +136,7 @@
     <Compile Include="Actions\SpeakTextAction.cs" />
     <Compile Include="Actions\WidgetSpecialAction.cs" />
     <Compile Include="Actions\WidgetChangeSizeAction.cs" />
+    <Compile Include="Actions\WidgetRefreshAction.cs" />
     <Compile Include="Actions\WriteFileAction.cs" />
     <Compile Include="Actions\MuteUnmuteAction.cs" />
     <Compile Include="Actions\PopupAction.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Classes\SpeechSettings.cs" />
     <Compile Include="Events\WidgetMuteUnmuteEvent.cs" />
     <Compile Include="Events\MuteUnmuteEvent.cs" />
+    <Compile Include="Events\WidgetRefreshEvent.cs" />
     <Compile Include="WidgetBase\WidgetPackageInfo.cs" />
     <Compile Include="Events\LaunchEvent.cs" />
     <Compile Include="Events\ForegroundChangedEvent.cs" />

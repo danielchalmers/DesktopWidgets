@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Events;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
@@ -386,6 +387,14 @@ namespace DesktopWidgets.View
 
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
                 ShowIntro();
+
+            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            {
+                var evnt = eventPair.Event as WidgetRefreshEvent;
+                if (evnt == null || eventPair.Disabled)
+                    continue;
+                eventPair.Action.Execute();
+            }
         }
 
         private void UpdateTimers()
