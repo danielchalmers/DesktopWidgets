@@ -4,6 +4,8 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Threading;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase;
@@ -13,6 +15,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 {
     public class ViewModel : WidgetViewModelBase
     {
+        private long _lastLatency;
         private bool _scanLatency;
 
         public ViewModel(WidgetId id) : base(id)
@@ -20,14 +23,14 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
                 return;
-            LatencyHistory = new ObservableCollection<string>();
+            LatencyHistory = new ObservableCollection<TextBlock>();
             _scanLatency = true;
             StartLatencyReader();
         }
 
         public Settings Settings { get; }
 
-        public ObservableCollection<string> LatencyHistory { get; }
+        public ObservableCollection<TextBlock> LatencyHistory { get; }
 
         private void StartLatencyReader()
         {
@@ -36,38 +39,66 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                 Thread.CurrentThread.IsBackground = true;
                 while (_scanLatency)
                 {
-                    var latencyText = GetLatencyText();
+                    var reply = GetLatency();
+                    if (reply == null)
+                        continue;
                     Application.Current.Dispatcher.BeginInvoke(
                         DispatcherPriority.Background,
                         new Action(() =>
                         {
-                            LatencyHistory.Add(latencyText);
-                            while (LatencyHistory.Count >= Settings.MaxHistory)
-                                LatencyHistory.RemoveAt(0);
+                            try
+                            {
+                                var latencyTextBlock = new TextBlock
+                                {
+                                    Text = GetLatencyText(reply),
+                                    Foreground = GetLatencyBrush(reply.RoundtripTime)
+                                };
+                                LatencyHistory.Add(latencyTextBlock);
+                                while (LatencyHistory.Count >= Settings.MaxHistory)
+                                    LatencyHistory.RemoveAt(0);
+                            }
+                            catch
+                            {
+                                // ignored
+                            }
                         }));
                     Thread.Sleep(Settings.PingInterval);
                 }
             }).Start();
         }
 
-        private string GetLatencyText()
+        private PingReply GetLatency()
         {
             if (string.IsNullOrWhiteSpace(Settings.HostAddress))
-                return string.Empty;
-            var latencyText = string.Empty;
+                return null;
             var ping = new Ping();
             var reply = ping.Send(Settings.HostAddress, Settings.Timeout);
             if (reply != null)
-            {
-                var stringBuilder = new StringBuilder();
-                if (Settings.ShowTime)
-                    stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}: ");
-                stringBuilder.Append($"{reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
-                if (Settings.ShowStatus)
-                    stringBuilder.Append($" ({reply.Status})");
-                latencyText = stringBuilder.ToString();
-            }
-            return latencyText;
+                _lastLatency = reply.RoundtripTime;
+            return reply;
+        }
+
+        private string GetLatencyText(PingReply reply)
+        {
+            if (reply == null)
+                return null;
+            var stringBuilder = new StringBuilder();
+            if (Settings.ShowTime)
+                stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}: ");
+            stringBuilder.Append($"{reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
+            if (Settings.ShowStatus)
+                stringBuilder.Append($" ({reply.Status})");
+            return stringBuilder.ToString();
+        }
+
+        private Brush GetLatencyBrush(long latency)
+        {
+            if (!Settings.ColorCoding)
+                return Settings.DefaultLatencyColor;
+            return (latency > Settings.GoodLatencyMax) ||
+                   (Math.Abs(latency - _lastLatency) > Settings.GoodLatencySinceLast)
+                ? Settings.BadLatencyColor
+                : Settings.GoodLatencyColor;
         }
 
         public override void OnClose()
