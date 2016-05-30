@@ -53,9 +53,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                     Text = GetLatencyText(reply),
                                     Foreground = GetLatencyBrush(reply.RoundtripTime)
                                 };
-                                LatencyHistory.Add(latencyTextBlock);
-                                while (LatencyHistory.Count >= Settings.MaxHistory)
+                                while (LatencyHistory.Count + 1 > Settings.MaxHistory)
                                     LatencyHistory.RemoveAt(0);
+                                LatencyHistory.Add(latencyTextBlock);
                             }
                             catch
                             {
