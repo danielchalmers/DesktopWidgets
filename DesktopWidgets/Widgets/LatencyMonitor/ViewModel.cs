@@ -51,7 +51,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                 var latencyTextBlock = new TextBlock
                                 {
                                     Text = GetLatencyText(reply),
-                                    Foreground = new SolidColorBrush(GetLatencyBrush(reply.RoundtripTime))
+                                    Foreground = new SolidColorBrush(GetLatencyBrush(reply))
                                 };
                                 while (LatencyHistory.Count + 1 > Settings.MaxHistory)
                                     LatencyHistory.RemoveAt(0);
@@ -91,12 +91,12 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             return stringBuilder.ToString();
         }
 
-        private Color GetLatencyBrush(long latency)
+        private Color GetLatencyBrush(PingReply reply)
         {
             if (!Settings.ColorCoding)
                 return Settings.DefaultLatencyColor;
-            return (latency > Settings.GoodLatencyMax) ||
-                   (Math.Abs(latency - _lastLatency) > Settings.GoodLatencySinceLast)
+            return reply == null || reply.Status != IPStatus.Success || (reply.RoundtripTime > Settings.GoodLatencyMax) ||
+                   (Math.Abs(reply.RoundtripTime - _lastLatency) > Settings.GoodLatencySinceLast)
                 ? Settings.BadLatencyColor
                 : Settings.GoodLatencyColor;
         }
