@@ -2,14 +2,17 @@
 using System.ComponentModel;
 using System.Windows;
 using DesktopWidgets.Classes;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.Actions
 {
     public abstract class ActionBase
     {
+        [PropertyOrder(0)]
         [DisplayName("Delay")]
         public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
 
+        [PropertyOrder(1)]
         [DisplayName("Show Errors")]
         public bool ShowErrors { get; set; } = false;
 
