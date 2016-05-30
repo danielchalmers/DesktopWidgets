@@ -146,6 +146,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             if (Settings.FileHistoryMax > 0 && Settings.FileHistory.Count > Settings.FileHistoryMax)
                 Settings.FileHistory.RemoveRange(0, Settings.FileHistory.Count - Settings.FileHistoryMax);
             RaisePropertyChanged(nameof(Settings.FileHistory));
+            UpdateNextPrevious();
             if (!Settings.QueueFiles || !_isShowing)
                 HandleDirectoryChange();
         }
