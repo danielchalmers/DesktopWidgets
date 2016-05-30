@@ -8,7 +8,7 @@ namespace DesktopWidgets.Actions
         [DisplayName("Widget")]
         public WidgetId WidgetId { get; set; }
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
         }

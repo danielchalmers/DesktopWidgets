@@ -1,6 +1,6 @@
 ﻿#region
 
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -31,7 +31,7 @@ namespace DesktopWidgets.Windows
             UpdateChangelog();
         }
 
-        public ObservableCollection<Page> Pages { get; } = new ObservableCollection<Page>
+        public IEnumerable<Page> Pages { get; } = new List<Page>
         {
             new General(),
             new About("Changelog"),

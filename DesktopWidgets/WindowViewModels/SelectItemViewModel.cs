@@ -23,7 +23,7 @@ namespace DesktopWidgets.WindowViewModels
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
-                    RaisePropertyChanged(nameof(SelectedItem));
+                    RaisePropertyChanged();
                 }
             }
         }

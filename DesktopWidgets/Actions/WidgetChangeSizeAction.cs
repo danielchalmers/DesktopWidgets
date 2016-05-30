@@ -17,7 +17,7 @@ namespace DesktopWidgets.Actions
         [DisplayName("Number Change Mode")]
         public NumberChangeMode NumberChangeMode { get; set; } = NumberChangeMode.Set;
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             var settings = WidgetId?.GetSettings();

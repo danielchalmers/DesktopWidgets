@@ -7,7 +7,7 @@ namespace DesktopWidgets.Actions
     {
         public IntroData IntroSettings { get; set; } = new IntroData();
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             WidgetId?.GetView()?.ShowIntro(IntroSettings);

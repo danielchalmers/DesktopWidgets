@@ -7,7 +7,7 @@ namespace DesktopWidgets.Actions
     {
         public SoundFile SoundFile { get; set; } = new SoundFile();
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             MediaPlayerStore.PlaySoundAsync(SoundFile);

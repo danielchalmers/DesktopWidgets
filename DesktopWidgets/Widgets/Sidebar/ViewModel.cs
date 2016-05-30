@@ -46,13 +46,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         }
 
         public Settings Settings { get; }
-
         public Dictionary<string, ImageSource> IconCache { get; set; }
-
         public ICommand Refresh { get; set; }
-
         public ICommand ShortcutFocus { get; set; }
-
         public ICommand ShortcutEdit { get; set; }
         public ICommand ShortcutMoveUp { get; set; }
         public ICommand ShortcutMoveDown { get; set; }
@@ -62,7 +58,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ICommand NewSeparator { get; set; }
         public ICommand ManageShortcut { get; set; }
         public ICommand ShortcutExecute { get; set; }
-
         private Shortcut SelectedShortcut { get; set; }
 
         public override void OnRefresh()

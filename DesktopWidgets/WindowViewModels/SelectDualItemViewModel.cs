@@ -31,7 +31,7 @@ namespace DesktopWidgets.WindowViewModels
                 if (_selectedItem1 != value)
                 {
                     _selectedItem1 = value;
-                    RaisePropertyChanged(nameof(SelectedItem1));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -44,7 +44,7 @@ namespace DesktopWidgets.WindowViewModels
                 if (_selectedItem2 != value)
                 {
                     _selectedItem2 = value;
-                    RaisePropertyChanged(nameof(SelectedItem2));
+                    RaisePropertyChanged();
                 }
             }
         }

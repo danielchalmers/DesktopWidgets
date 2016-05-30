@@ -24,13 +24,9 @@ namespace DesktopWidgets.View
         private readonly MouseChecker _mouseChecker;
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
-
         private DispatcherTimer _introTimer;
-
         private bool _isAppBar;
-
         private IntroData _lastIntroData;
-
         public Action CloseAction;
 
         public WidgetView(WidgetId id, WidgetViewModelBase viewModel, UserControl userControl, bool systemStartup)

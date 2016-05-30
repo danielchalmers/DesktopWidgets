@@ -28,7 +28,7 @@ namespace DesktopWidgets.WindowViewModels
                 if (_selectedPair != value)
                 {
                     _selectedPair = value;
-                    RaisePropertyChanged(nameof(SelectedPair));
+                    RaisePropertyChanged();
                 }
             }
         }

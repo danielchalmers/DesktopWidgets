@@ -10,7 +10,6 @@ namespace DesktopWidgets.Widgets.StopwatchClock
     public class ViewModel : ClockViewModelBase
     {
         private bool _isRunning;
-
         private DateTime _startTime;
 
         public ViewModel(WidgetId id) : base(id, false)
@@ -33,7 +32,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
                 if (_isRunning != value)
                 {
                     _isRunning = value;
-                    RaisePropertyChanged(nameof(IsRunning));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -46,7 +45,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
                 if (_startTime != value)
                 {
                     _startTime = value;
-                    RaisePropertyChanged(nameof(StartTime));
+                    RaisePropertyChanged();
                 }
             }
         }

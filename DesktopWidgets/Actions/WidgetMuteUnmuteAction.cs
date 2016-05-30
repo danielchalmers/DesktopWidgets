@@ -13,7 +13,7 @@ namespace DesktopWidgets.Actions
         [DisplayName("Mode")]
         public MuteMode Mode { get; set; } = MuteMode.Toggle;
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             switch (Mode)

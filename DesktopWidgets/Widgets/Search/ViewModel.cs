@@ -21,7 +21,6 @@ namespace DesktopWidgets.Widgets.Search
         }
 
         public Settings Settings { get; }
-
         public ICommand Go { get; set; }
         public ICommand OnKeyUp { get; set; }
 
@@ -33,7 +32,7 @@ namespace DesktopWidgets.Widgets.Search
                 if (_searchText != value)
                 {
                     _searchText = value;
-                    RaisePropertyChanged(nameof(SearchText));
+                    RaisePropertyChanged();
                 }
             }
         }

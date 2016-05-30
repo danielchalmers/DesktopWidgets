@@ -21,7 +21,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         private double _actualHeight;
         private double _actualWidth;
         private bool _isContextMenuOpen;
-
         private bool _keepActionBarOpen;
         private DispatcherTimer _onTopForceTimer;
 
@@ -62,7 +61,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (!_settings.IsDocked)
                     _settings.Left = value;
                 _settings.Left = value;
-                RaisePropertyChanged(nameof(Left));
+                RaisePropertyChanged();
             }
         }
 
@@ -74,7 +73,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (!_settings.IsDocked)
                     _settings.Top = value;
                 _settings.Top = value;
-                RaisePropertyChanged(nameof(Top));
+                RaisePropertyChanged();
             }
         }
 
@@ -84,7 +83,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             set
             {
                 _settings.Style.Width = value;
-                RaisePropertyChanged(nameof(Width));
+                RaisePropertyChanged();
             }
         }
 
@@ -94,7 +93,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             set
             {
                 _settings.Style.Height = value;
-                RaisePropertyChanged(nameof(Height));
+                RaisePropertyChanged();
             }
         }
 
@@ -114,7 +113,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (value > 0 && value.IsEqual(_actualWidth))
                 {
                     _actualWidth = value;
-                    RaisePropertyChanged(nameof(ActualWidth));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -127,7 +126,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (value > 0 && value.IsEqual(_actualHeight))
                 {
                     _actualHeight = value;
-                    RaisePropertyChanged(nameof(ActualHeight));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -160,7 +159,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (_isContextMenuOpen != value)
                 {
                     _isContextMenuOpen = value;
-                    RaisePropertyChanged(nameof(IsContextMenuOpen));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -173,7 +172,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (_keepActionBarOpen != value)
                 {
                     _keepActionBarOpen = value;
-                    RaisePropertyChanged(nameof(KeepActionBarOpen));
+                    RaisePropertyChanged();
                 }
             }
         }

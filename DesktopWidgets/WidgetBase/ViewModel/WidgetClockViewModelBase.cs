@@ -35,7 +35,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 if (_currentTime != value)
                 {
                     _currentTime = value;
-                    RaisePropertyChanged(nameof(CurrentTime));
+                    RaisePropertyChanged();
                 }
             }
         }

@@ -15,13 +15,9 @@ namespace DesktopWidgets.Widgets.Weather
         private string _description;
         private string _iconUrl;
         private int _lastZipCode;
-
         private bool _showHelp;
-
         private double _temperature;
-
         private double _temperatureMax;
-
         private double _temperatureMin;
         private DispatcherTimer _updateTimer;
 
@@ -48,7 +44,7 @@ namespace DesktopWidgets.Widgets.Weather
                 if (_showHelp != value)
                 {
                     _showHelp = value;
-                    RaisePropertyChanged(nameof(ShowHelp));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -62,7 +58,7 @@ namespace DesktopWidgets.Widgets.Weather
                 if (value.IsEqual(_temperature))
                 {
                     _temperature = value;
-                    RaisePropertyChanged(nameof(Temperature));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -75,7 +71,7 @@ namespace DesktopWidgets.Widgets.Weather
                 if (value.IsEqual(_temperatureMin))
                 {
                     _temperatureMin = value;
-                    RaisePropertyChanged(nameof(TemperatureMin));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -88,7 +84,7 @@ namespace DesktopWidgets.Widgets.Weather
                 if (value.IsEqual(_temperatureMax))
                 {
                     _temperatureMax = value;
-                    RaisePropertyChanged(nameof(TemperatureMax));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -101,7 +97,7 @@ namespace DesktopWidgets.Widgets.Weather
                 if (_description != value)
                 {
                     _description = value;
-                    RaisePropertyChanged(nameof(Description));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -114,7 +110,7 @@ namespace DesktopWidgets.Widgets.Weather
                 if (_iconUrl != value)
                 {
                     _iconUrl = value;
-                    RaisePropertyChanged(nameof(IconUrl));
+                    RaisePropertyChanged();
                 }
             }
         }

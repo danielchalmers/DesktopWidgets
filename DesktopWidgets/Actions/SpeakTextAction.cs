@@ -18,7 +18,7 @@ namespace DesktopWidgets.Actions
 
         public SpeechSettings SpeechSettings { get; set; } = new SpeechSettings();
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             var synthesizer = new SpeechSynthesizer

@@ -19,11 +19,8 @@ namespace DesktopWidgets.Widgets.RSSFeed
     public class ViewModel : WidgetViewModelBase
     {
         private ObservableCollection<FeedItem> _feedItems;
-
         private string _helpText;
-
         private string _lastFeedUrl;
-
         public DispatcherTimer UpdateTimer;
 
         public ViewModel(WidgetId id) : base(id)
@@ -52,7 +49,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
                 if (_helpText != value)
                 {
                     _helpText = value;
-                    RaisePropertyChanged(nameof(HelpText));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -65,7 +62,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
                 if (_feedItems != value)
                 {
                     _feedItems = value;
-                    RaisePropertyChanged(nameof(FeedItems));
+                    RaisePropertyChanged();
                 }
             }
         }

@@ -19,7 +19,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         private DirectoryWatcher _directoryWatcher;
         private string _imageUrl;
         private int _index;
-
         private bool _isPaused;
 
         public ViewModel(WidgetId id) : base(id)
@@ -56,7 +55,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         }
 
         public Settings Settings { get; }
-
         public ICommand TogglePlayPause { get; set; }
 
         public string ImageUrl
@@ -68,7 +66,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 {
                     _imageUrl = value;
                     Settings.ImageUrl = value;
-                    RaisePropertyChanged(nameof(ImageUrl));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -82,7 +80,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
                 {
                     _isPaused = value;
                     Settings.Freeze = value;
-                    RaisePropertyChanged(nameof(IsPaused));
+                    RaisePropertyChanged();
                 }
             }
         }

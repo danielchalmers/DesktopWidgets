@@ -14,7 +14,7 @@ namespace DesktopWidgets.Actions
         [DisplayName("Image")]
         public MessageBoxImage Image { get; set; }
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             MessageBox.Show(Text, Title, MessageBoxButton.OK, Image);

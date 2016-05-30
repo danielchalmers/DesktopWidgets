@@ -43,9 +43,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <classes:ScrollBarVisibilityConverter x:Key="ScrollBarVisibilityConverter" />
         <classes:MaxSizeConverter x:Key="MaxSizeConverter" />
-        <classes:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
         <classes:NotCollapsedVisibilityToBooleanConverter x:Key="NotCollapsedVisibilityToBooleanConverter" />
-        <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
         <classes:SizePaddingConverter x:Key="SizePaddingConverter" />
         <classes:ActionBarVisibilityConverter x:Key="ActionBarVisibilityConverter" />
         <classes:DockIsHorizontalToBooleanConverter x:Key="DockIsHorizontalToBooleanConverter" />
@@ -192,18 +190,15 @@
                 MouseDown="ActionBar_OnMouseDown">
             <DockPanel LastChildFill="True">
                 <StackPanel Orientation="{Binding Settings.ActionBarStyle.Orientation}"
-                            DockPanel.Dock="{Binding Settings.ActionBarStyle.ButtonDock}">
+                            DockPanel.Dock="{Binding Settings.ActionBarStyle.ButtonDock}"
+                            Visibility="{Binding Settings.ActionBarStyle.ShowButtons, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ActionBarButtonStyle}" />
                     </StackPanel.Resources>
-                    <Button Content="≡" Click="btnMenu_OnClick" ToolTip="Menu"
-                            Visibility="{Binding Settings.ActionBarStyle.ShowButtons, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <Button Content="⟳" Click="btnReload_OnClick" ToolTip="Reload"
-                            Visibility="{Binding Settings.ActionBarStyle.ShowButtons, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <Button Content="×" Click="btnDismiss_OnClick" ToolTip="Dismiss"
-                            Visibility="{Binding Settings.ActionBarStyle.ShowButtons, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    <Button Content="🔇" Click="btnMute_OnClick" ToolTip="Mute"
-                            Visibility="{Binding Settings.ActionBarStyle.ShowButtons, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Button Content="≡" Click="btnMenu_OnClick" ToolTip="Menu" />
+                    <Button Content="⟳" Click="btnReload_OnClick" ToolTip="Reload" />
+                    <Button Content="×" Click="btnDismiss_OnClick" ToolTip="Dismiss" />
+                    <Button Content="🔇" Click="btnMute_OnClick" ToolTip="Mute" />
                 </StackPanel>
                 <TextBlock Style="{StaticResource NameBoxStyle}"
                            DockPanel.Dock="{Binding Settings.ActionBarStyle.NameDock}" />

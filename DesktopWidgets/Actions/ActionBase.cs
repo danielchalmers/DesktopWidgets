@@ -33,7 +33,7 @@ namespace DesktopWidgets.Actions
             });
         }
 
-        public virtual void ExecuteAction()
+        protected virtual void ExecuteAction()
         {
         }
     }

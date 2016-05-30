@@ -22,7 +22,7 @@ namespace DesktopWidgets.Actions
         [DisplayName("New Line Mode")]
         public InsertMode NewLineMode { get; set; } = InsertMode.None;
 
-        public override void ExecuteAction()
+        protected override void ExecuteAction()
         {
             base.ExecuteAction();
             var writePath = FilePath.Path;

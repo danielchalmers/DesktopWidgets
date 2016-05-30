@@ -78,7 +78,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
                 _currentFile = value;
                 Settings.CurrentFile = value;
-                RaisePropertyChanged(nameof(CurrentFile));
+                RaisePropertyChanged();
                 UpdateNextPrevious();
             }
         }
@@ -89,7 +89,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             set
             {
                 _currentFileContent = value;
-                RaisePropertyChanged(nameof(CurrentFileContent));
+                RaisePropertyChanged();
             }
         }
 
@@ -101,7 +101,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (!Equals(_currentImage, value))
                 {
                     _currentImage = value;
-                    RaisePropertyChanged(nameof(CurrentImage));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -114,7 +114,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 if (_fileType != value)
                 {
                     _fileType = value;
-                    RaisePropertyChanged(nameof(FileType));
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             set
             {
                 Settings.Paused = value;
-                RaisePropertyChanged(nameof(IsPaused));
+                RaisePropertyChanged();
             }
         }
 

@@ -23,7 +23,7 @@ namespace DesktopWidgets.Widgets.Note
                 if (Settings.Text != value)
                 {
                     Settings.Text = value;
-                    RaisePropertyChanged(nameof(Text));
+                    RaisePropertyChanged();
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace DesktopWidgets.WindowViewModels
                 if (_selectedWidget != value)
                 {
                     _selectedWidget = value;
-                    RaisePropertyChanged(nameof(SelectedWidget));
+                    RaisePropertyChanged();
                 }
             }
         }
