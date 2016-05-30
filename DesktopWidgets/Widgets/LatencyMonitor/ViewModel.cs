@@ -93,11 +93,11 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
         private Color GetLatencyBrush(PingReply reply)
         {
             if (!Settings.ColorCoding)
-                return Settings.DefaultLatencyColor;
-            return reply == null || reply.Status != IPStatus.Success || (reply.RoundtripTime > Settings.GoodLatencyMax) ||
-                   (_lastLatency > 0 && Math.Abs(reply.RoundtripTime - _lastLatency) > Settings.GoodLatencySinceLast)
-                ? Settings.BadLatencyColor
-                : Settings.GoodLatencyColor;
+                return Settings.LatencyDefaultColor;
+            return reply == null || reply.Status != IPStatus.Success || (reply.RoundtripTime > Settings.LatencyGoodMax) ||
+                   (_lastLatency > 0 && Math.Abs(reply.RoundtripTime - _lastLatency) > Settings.LatencyGoodSinceLast)
+                ? Settings.LatencyBadColor
+                : Settings.LatencyGoodColor;
         }
 
         public override void OnClose()
