@@ -159,6 +159,11 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 FileType = FileType.Warning;
                 CurrentFileContent = "File is missing.";
             }
+            else if (Settings.CurrentFile.Length != new FileInfo(Settings.CurrentFile.FullName).Length)
+            {
+                FileType = FileType.Warning;
+                CurrentFileContent = "File has been modified.";
+            }
             else if (HandleFileImage())
                 FileType = FileType.Image;
             else if (HandleFileMedia(playMedia))
