@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows;
 using DesktopWidgets.Properties;
 
@@ -13,11 +12,12 @@ namespace DesktopWidgets.Helpers
                 ? $"\"{Environment.GetFolderPath(Environment.SpecialFolder.Programs)}\\Daniel Chalmers\\{Resources.AppName}.appref-ms\""
                 : Application.ResourceAssembly.Location;
 
-        public static void RestartApplication(IEnumerable<string> arguments)
+        public static void RestartApplication(IEnumerable<string> arguments = null)
         {
             var args = new List<string> {"restarting"};
-            args.AddRange(arguments);
-            Process.Start(AppPath, string.Join(",-", args));
+            if (arguments != null)
+                args.AddRange(arguments);
+            App.RestartArguments = args;
             ShutdownApplication();
         }
 

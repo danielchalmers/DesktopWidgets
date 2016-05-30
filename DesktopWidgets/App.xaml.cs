@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -34,6 +35,7 @@ namespace DesktopWidgets
         public static TaskScheduler UpdateScheduler;
         public static List<string> Arguments;
         public static bool IsWorkstationLocked;
+        public static IEnumerable<string> RestartArguments;
 
         public App()
         {
@@ -98,6 +100,9 @@ namespace DesktopWidgets
                 TrayIcon?.Dispose();
 
                 AppMutex?.ReleaseMutex();
+
+                if (RestartArguments != null)
+                    Process.Start(AppHelper.AppPath, string.Join(",-", RestartArguments));
             }
             catch
             {
