@@ -165,4 +165,18 @@
         Unmute,
         Both
     }
+
+    public enum SizeChangeMode
+    {
+        Width,
+        Height,
+        Both
+    }
+
+    public enum NumberChangeMode
+    {
+        Increase,
+        Decrease,
+        Set
+    }
 }

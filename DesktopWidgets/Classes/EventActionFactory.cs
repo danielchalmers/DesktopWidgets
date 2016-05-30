@@ -44,7 +44,8 @@ namespace DesktopWidgets.Classes
             "Widget Reload",
             "Widget Enable",
             "Widget Disable",
-            "Widget Toggle Enabled"
+            "Widget Toggle Enabled",
+            "Widget Change Size"
         };
 
         public static IEvent GetNewEventFromName(string name)
@@ -125,6 +126,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetSpecialAction();
                 case "Widget Mute / Unmute":
                     return new WidgetMuteUnmuteAction();
+                case "Widget Change Size":
+                    return new WidgetChangeSizeAction();
             }
             return null;
         }
@@ -202,6 +205,8 @@ namespace DesktopWidgets.Classes
                 return "Widget Special Action";
             if (action is WidgetMuteUnmuteAction)
                 return "Widget Mute / Unmute";
+            if (action is WidgetChangeSizeAction)
+                return "Widget Change Size";
             return null;
         }
     }
