@@ -19,7 +19,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Package Info")]
         public WidgetPackageInfo PackageInfo { get; set; }
 
-        [Category("Behavior (Idle)")]
         [DisplayName("Active Time End")]
         public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
 
