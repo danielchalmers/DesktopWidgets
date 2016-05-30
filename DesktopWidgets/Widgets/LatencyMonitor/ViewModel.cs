@@ -51,7 +51,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                 var latencyTextBlock = new TextBlock
                                 {
                                     Text = GetLatencyText(reply),
-                                    Foreground = GetLatencyBrush(reply.RoundtripTime)
+                                    Foreground = new SolidColorBrush(GetLatencyBrush(reply.RoundtripTime))
                                 };
                                 while (LatencyHistory.Count + 1 > Settings.MaxHistory)
                                     LatencyHistory.RemoveAt(0);
@@ -91,7 +91,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             return stringBuilder.ToString();
         }
 
-        private Brush GetLatencyBrush(long latency)
+        private Color GetLatencyBrush(long latency)
         {
             if (!Settings.ColorCoding)
                 return Settings.DefaultLatencyColor;

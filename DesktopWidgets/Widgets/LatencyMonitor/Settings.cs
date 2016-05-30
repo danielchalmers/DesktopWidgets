@@ -58,14 +58,14 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("Style")]
         [DisplayName("Default Latency Color")]
-        public Brush DefaultLatencyColor { get; set; } = Brushes.Black;
+        public Color DefaultLatencyColor { get; set; } = Colors.Black;
 
         [Category("Style")]
         [DisplayName("Good Latency Color")]
-        public Brush GoodLatencyColor { get; set; } = Brushes.LimeGreen;
+        public Color GoodLatencyColor { get; set; } = Colors.LimeGreen;
 
         [Category("Style")]
         [DisplayName("Bad Latency Color")]
-        public Brush BadLatencyColor { get; set; } = Brushes.Red;
+        public Color BadLatencyColor { get; set; } = Colors.Red;
     }
 }
