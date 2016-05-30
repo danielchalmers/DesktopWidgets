@@ -8,6 +8,7 @@
     <Grid>
         <ListBox ItemsSource="{Binding LatencyHistory}"
                  MaxWidth="{Binding Settings.Style.Width}" MaxHeight="{Binding Settings.Style.Height}"
+                 Opacity="{Binding Settings.Style.BackgroundOpacity}"
                  classes:ListBoxBehavior.ScrollOnNewItem="true" />
     </Grid>
 </UserControl>
