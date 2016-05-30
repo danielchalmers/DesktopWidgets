@@ -22,7 +22,8 @@ namespace DesktopWidgets.WidgetBase
             Widgets.Sidebar.Metadata.FriendlyName,
             Widgets.Calculator.Metadata.FriendlyName,
             Widgets.FolderWatcher.Metadata.FriendlyName,
-            Widgets.RSSFeed.Metadata.FriendlyName
+            Widgets.RSSFeed.Metadata.FriendlyName,
+            Widgets.LatencyMonitor.Metadata.FriendlyName
         }.OrderBy(x => x).ToList();
 
         public static string GetFriendlyName(this WidgetId id)
@@ -50,6 +51,8 @@ namespace DesktopWidgets.WidgetBase
                 return Widgets.FolderWatcher.Metadata.FriendlyName;
             if (settings is Widgets.RSSFeed.Settings)
                 return Widgets.RSSFeed.Metadata.FriendlyName;
+            if (settings is Widgets.LatencyMonitor.Settings)
+                return Widgets.LatencyMonitor.Metadata.FriendlyName;
             return null;
         }
 
@@ -79,6 +82,8 @@ namespace DesktopWidgets.WidgetBase
                     return new Widgets.FolderWatcher.Settings();
                 case Widgets.RSSFeed.Metadata.FriendlyName:
                     return new Widgets.RSSFeed.Settings();
+                case Widgets.LatencyMonitor.Metadata.FriendlyName:
+                    return new Widgets.LatencyMonitor.Settings();
                 default:
                     return null;
             }
@@ -109,6 +114,8 @@ namespace DesktopWidgets.WidgetBase
                 return new Widgets.FolderWatcher.ViewModel(id);
             if (settings is Widgets.RSSFeed.Settings)
                 return new Widgets.RSSFeed.ViewModel(id);
+            if (settings is Widgets.LatencyMonitor.Settings)
+                return new Widgets.LatencyMonitor.ViewModel(id);
             return null;
         }
 
@@ -137,6 +144,8 @@ namespace DesktopWidgets.WidgetBase
                 return new Widgets.FolderWatcher.ControlView();
             if (settings is Widgets.RSSFeed.Settings)
                 return new Widgets.RSSFeed.ControlView();
+            if (settings is Widgets.LatencyMonitor.Settings)
+                return new Widgets.LatencyMonitor.ControlView();
             return null;
         }
     }

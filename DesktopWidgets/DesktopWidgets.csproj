@@ -300,6 +300,12 @@
     <Compile Include="Widgets\RSSFeed\Metadata.cs" />
     <Compile Include="Widgets\RSSFeed\Settings.cs" />
     <Compile Include="Widgets\RSSFeed\ViewModel.cs" />
+    <Compile Include="Widgets\LatencyMonitor\ControlView.xaml.cs">
+      <DependentUpon>ControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\LatencyMonitor\Metadata.cs" />
+    <Compile Include="Widgets\LatencyMonitor\Settings.cs" />
+    <Compile Include="Widgets\LatencyMonitor\ViewModel.cs" />
     <Compile Include="Widgets\Weather\ControlView.xaml.cs">
       <DependentUpon>ControlView.xaml</DependentUpon>
     </Compile>
@@ -458,6 +464,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\RSSFeed\ControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Widgets\LatencyMonitor\ControlView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
