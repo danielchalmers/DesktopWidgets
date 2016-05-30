@@ -7,6 +7,7 @@
              mc:Ignorable="d">
     <Grid>
         <ListBox ItemsSource="{Binding LatencyHistory}"
-                 MaxWidth="{Binding Settings.Style.Width}" MaxHeight="{Binding Settings.Style.Height}" />
+                 MaxWidth="{Binding Settings.Style.Width}" MaxHeight="{Binding Settings.Style.Height}"
+                 classes:ListBoxBehavior.ScrollOnNewItem="true" />
     </Grid>
 </UserControl>

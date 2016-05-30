@@ -162,6 +162,7 @@
     <Compile Include="Classes\ForegroundMatchData.cs" />
     <Compile Include="Classes\ForegroundTracker.cs" />
     <Compile Include="Classes\FilePath.cs" />
+    <Compile Include="Classes\ListBoxBehavior.cs" />
     <Compile Include="Classes\ProcessFile.cs" />
     <Compile Include="Classes\SoundFile.cs" />
     <Compile Include="Classes\SpeechSettings.cs" />
