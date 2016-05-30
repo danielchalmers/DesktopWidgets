@@ -16,11 +16,12 @@
         <classes:OtherFileTypeToVisibilityConverter x:Key="OtherFileTypeToVisibilityConverter" />
         <classes:WarningFileTypeToVisibilityConverter x:Key="WarningFileTypeToVisibilityConverter" />
         <classes:BoolToPauseTextConverter x:Key="BoolToPauseTextConverter" />
+        <classes:FileToToolTipTextConverter x:Key="FileToToolTipTextConverter" />
 
         <Grid x:Key="FrameTop">
             <TextBlock TextTrimming="CharacterEllipsis"
                        TextAlignment="Center"
-                       ToolTip="{Binding CurrentFile.FullName}"
+                       ToolTip="{Binding CurrentFile, Converter={StaticResource FileToToolTipTextConverter}}"
                        Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"

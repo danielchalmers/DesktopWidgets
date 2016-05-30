@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -856,6 +857,29 @@ namespace DesktopWidgets.Classes
             if (settings == null)
                 return DependencyProperty.UnsetValue;
             return settings.IsMuted() ? "Unmute" : "Mute";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class FileToToolTipTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+                return DependencyProperty.UnsetValue;
+            var file = (FileInfo) value;
+            var stringBuilder = new StringBuilder();
+            stringBuilder.Append(file.FullName);
+            if (file.Exists)
+            {
+                stringBuilder.Append(Environment.NewLine);
+                stringBuilder.Append(file.LastWriteTime.ToString(CultureInfo.CurrentCulture));
+            }
+            return stringBuilder.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
