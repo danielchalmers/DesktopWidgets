@@ -13,7 +13,7 @@
         Title="Manage Widgets"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsHeight, Mode=TwoWay}"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsWidth, Mode=TwoWay}"
-        MinHeight="497" MinWidth="535"
+        MinHeight="537" MinWidth="535"
         ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <windowViewModels:ManageWidgetsViewModel />
