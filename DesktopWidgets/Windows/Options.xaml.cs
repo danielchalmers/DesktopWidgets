@@ -34,8 +34,8 @@ namespace DesktopWidgets.Windows
         public ObservableCollection<Page> Pages { get; } = new ObservableCollection<Page>
         {
             new General(),
-            new About("About", AssemblyInfo.CustomDescription),
-            new About("Changelog")
+            new About("Changelog"),
+            new About("About", AssemblyInfo.CustomDescription)
         };
 
         public Page CurrentPage

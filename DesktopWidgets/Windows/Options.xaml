@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesktopWidgets" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:DesktopWidgets"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:p="clr-namespace:DesktopWidgets.Properties" mc:Ignorable="d"
         Title="Options"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=OptionsWidth, Mode=TwoWay}"
@@ -46,7 +47,6 @@
 
         <Grid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Margin="15">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="5" />
@@ -60,10 +60,8 @@
                     <Setter Property="Width" Value="75" />
                 </Style>
             </Grid.Resources>
-            <CheckBox Grid.Column="0" Content="Advanced"
-                      IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}" />
-            <Button Grid.Column="2" Content="OK" Click="btnOK_Click" IsDefault="True" />
-            <Button Grid.Column="4" Content="Cancel" Click="btnCancel_Click" IsCancel="True" />
+            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" IsDefault="True" />
+            <Button Grid.Column="3" Content="Cancel" Click="btnCancel_Click" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>

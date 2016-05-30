@@ -11,8 +11,7 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
     <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10"
-                    Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="5,0,5,0" />
@@ -24,7 +23,8 @@
             </StackPanel.Resources>
             <Button Content="Import..." Click="btnImport_OnClick" />
             <Button Content="Export..." Click="btnExport_OnClick" />
-            <Button Content="Defaults..." Click="btnDefaults_OnClick" />
+            <Button Content="Defaults..." Click="btnDefaults_OnClick"
+                    Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 
         <xctk:PropertyGrid Style="{StaticResource PropertyGridCategorisedStyle}"
@@ -33,19 +33,32 @@
             <xctk:PropertyGrid.PropertyDefinitions>
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="RunOnStartup"
-                                         DisplayName="Run on Startup" />
+                                         DisplayName="Run on Startup"
+                                         DisplayOrder="0" />
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="CheckForUpdates"
-                                         DisplayName="Check for Updates" />
+                                         DisplayName="Check for Updates"
+                                         DisplayOrder="1" />
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="AutoUpdate"
-                                         DisplayName="Silent Auto-Update" />
+                                         DisplayName="Automatically Update"
+                                         DisplayOrder="2" />
+                <xctk:PropertyDefinition Category="General"
+                                         TargetProperties="EnableAdvancedMode"
+                                         DisplayName="Enable Advanced Mode"
+                                         DisplayOrder="3" />
 
                 <xctk:PropertyDefinition TargetProperties="ChangelogCache"
                                          IsBrowsable="False" />
                 <xctk:PropertyDefinition TargetProperties="MustUpgrade"
                                          IsBrowsable="False" />
                 <xctk:PropertyDefinition TargetProperties="Widgets"
+                                         IsBrowsable="False" />
+                <xctk:PropertyDefinition TargetProperties="BetaVersion"
+                                         IsBrowsable="False" />
+                <xctk:PropertyDefinition TargetProperties="DoubleComparisonTolerance"
+                                         IsBrowsable="False" />
+                <xctk:PropertyDefinition TargetProperties="ChangelogDownloadPages"
                                          IsBrowsable="False" />
             </xctk:PropertyGrid.PropertyDefinitions>
         </xctk:PropertyGrid>
