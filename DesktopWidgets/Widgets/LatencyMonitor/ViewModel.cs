@@ -39,31 +39,38 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                 Thread.CurrentThread.IsBackground = true;
                 while (_scanLatency)
                 {
-                    var reply = GetLatency();
-                    if (reply == null)
-                        continue;
-                    Application.Current.Dispatcher.Invoke(
-                        DispatcherPriority.Background,
-                        new Action(() =>
-                        {
-                            try
+                    try
+                    {
+                        var reply = GetLatency();
+                        if (reply == null)
+                            continue;
+                        Application.Current.Dispatcher.Invoke(
+                            DispatcherPriority.Background,
+                            new Action(() =>
                             {
-                                var latencyTextBlock = new TextBlock
+                                try
                                 {
-                                    Text = GetLatencyText(reply),
-                                    Foreground = new SolidColorBrush(GetLatencyBrush(reply))
-                                };
-                                while (LatencyHistory.Count + 1 > Settings.MaxHistory)
-                                    LatencyHistory.RemoveAt(0);
-                                LatencyHistory.Add(latencyTextBlock);
-                            }
-                            catch
-                            {
-                                // ignored
-                            }
-                        }));
-                    _lastLatency = reply.RoundtripTime;
-                    Thread.Sleep(Settings.PingInterval);
+                                    var latencyTextBlock = new TextBlock
+                                    {
+                                        Text = GetLatencyText(reply),
+                                        Foreground = new SolidColorBrush(GetLatencyBrush(reply))
+                                    };
+                                    while (LatencyHistory.Count + 1 > Settings.MaxHistory)
+                                        LatencyHistory.RemoveAt(0);
+                                    LatencyHistory.Add(latencyTextBlock);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
+                            }));
+                        _lastLatency = reply.RoundtripTime;
+                        Thread.Sleep(Settings.PingInterval);
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
                 }
             }).Start();
         }
