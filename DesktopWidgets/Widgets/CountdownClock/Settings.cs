@@ -16,6 +16,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
         [DisplayName("Date/Time")]
         public DateTime EndDateTime { get; set; } = DateTime.Now;
 
+        [Browsable(false)]
         [DisplayName("Last End Date/Time")]
         public DateTime LastEndDateTime { get; set; } = DateTime.Now;
 

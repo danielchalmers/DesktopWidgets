@@ -8,6 +8,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 {
     public class Settings : WidgetSettingsBase
     {
+        [Browsable(false)]
         [DisplayName("Shortcuts")]
         public ObservableCollection<Shortcut> Shortcuts { get; set; }
 
@@ -51,6 +52,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         [DisplayName("Allow Drag Drop Files")]
         public bool AllowDropFiles { get; set; } = true;
 
+        [Browsable(false)]
         [DisplayName("Default Shortcuts Mode")]
         public DefaultShortcutsMode DefaultShortcutsMode { get; set; } = DefaultShortcutsMode.Preset;
 

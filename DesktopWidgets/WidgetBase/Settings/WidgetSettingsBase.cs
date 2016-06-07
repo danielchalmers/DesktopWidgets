@@ -19,6 +19,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Package Info")]
         public WidgetPackageInfo PackageInfo { get; set; }
 
+        [Browsable(false)]
         [DisplayName("Active Time End")]
         public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
 
@@ -126,9 +127,11 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Show If Foreground Fullscreen")]
         public bool FullscreenActivation { get; set; } = false;
 
+        [Browsable(false)]
         [DisplayName("Scroll Horizontal Offset")]
         public double ScrollHorizontalOffset { get; set; }
 
+        [Browsable(false)]
         [DisplayName("Scroll Vertical Offset")]
         public double ScrollVerticalOffset { get; set; }
 
@@ -188,6 +191,7 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Ignore Mute")]
         public bool IgnoreMute { get; set; } = false;
 
+        [Browsable(false)]
         [DisplayName("Mute End Time")]
         public DateTime MuteEndTime { get; set; } = DateTime.MinValue;
 
