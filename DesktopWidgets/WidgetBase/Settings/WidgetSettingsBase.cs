@@ -33,10 +33,12 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Name")]
         public string Name { get; set; } = "Untitled";
 
-        [DisplayName("Left Position (px)")]
+        [Category("Style (Position)")]
+        [DisplayName("Left (px)")]
         public double Left { get; set; } = double.NaN;
 
-        [DisplayName("Top Position (px)")]
+        [Category("Style (Position)")]
+        [DisplayName("Top (px)")]
         public double Top { get; set; } = double.NaN;
 
         [Category("Behavior (Hideable)")]
