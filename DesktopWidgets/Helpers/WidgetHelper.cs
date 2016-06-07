@@ -393,5 +393,11 @@ namespace DesktopWidgets.Helpers
         {
             id.GetView()?.UpdateUi();
         }
+
+        public static void UnmuteWidgets()
+        {
+            foreach (var id in App.WidgetViews.Select(x => x.Id))
+                id.Unmute();
+        }
     }
 }

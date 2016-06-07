@@ -27,6 +27,7 @@
                     <MenuItem Header="Reload" Click="menuItemReloadWidgets_OnClick" />
                     <MenuItem Header="Dismiss" Click="menuItemDismissWidgets_OnClick" />
                     <MenuItem Header="Show" Click="menuItemShowWidgets_OnClick" />
+                    <MenuItem Header="Unmute" Click="menuItemUnmuteWidgets_OnClick" />
                 </CompositeCollection>
             </MenuItem.ItemsSource>
         </MenuItem>

@@ -62,5 +62,10 @@ namespace DesktopWidgets
             var dialog = new ManageEvents();
             dialog.Show();
         }
+
+        private void menuItemUnmuteWidgets_OnClick(object sender, RoutedEventArgs e)
+        {
+            WidgetHelper.UnmuteWidgets();
+        }
     }
 }
