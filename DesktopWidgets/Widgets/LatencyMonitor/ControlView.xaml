@@ -5,10 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:classes="clr-namespace:DesktopWidgets.Classes"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ListBoxBackgroundBrush"
+                         Color="{Binding Settings.ListBackgroundColor}"
+                         Opacity="{Binding Settings.ListBackgroundOpacity}" />
+    </UserControl.Resources>
     <Grid>
         <ListBox ItemsSource="{Binding LatencyHistory}"
                  MaxWidth="{Binding Settings.Style.Width}" MaxHeight="{Binding Settings.Style.Height}"
-                 Opacity="{Binding Settings.Style.BackgroundOpacity}"
+                 Background="{StaticResource ListBoxBackgroundBrush}"
                  classes:ListBoxBehavior.ScrollOnNewItem="true" />
     </Grid>
 </UserControl>

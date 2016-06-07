@@ -67,5 +67,13 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
         [Category("Style")]
         [DisplayName("Latency Bad Color")]
         public Color LatencyBadColor { get; set; } = Colors.Red;
+
+        [Category("Style")]
+        [DisplayName("List Background Color")]
+        public Color ListBackgroundColor { get; set; } = Colors.Transparent;
+
+        [Category("Style")]
+        [DisplayName("List Background Opacity")]
+        public double ListBackgroundOpacity { get; set; } = 1.0;
     }
 }
