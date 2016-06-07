@@ -513,12 +513,15 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public virtual void OnSpecialEvent()
         {
-            foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+            if (!_settings.IsMuted())
             {
-                var evnt = eventPair.Event as WidgetSpecialEvent;
-                if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
-                    continue;
-                eventPair.Action.Execute();
+                foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
+                {
+                    var evnt = eventPair.Event as WidgetSpecialEvent;
+                    if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                        continue;
+                    eventPair.Action.Execute();
+                }
             }
         }
 
