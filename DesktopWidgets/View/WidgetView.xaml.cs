@@ -463,6 +463,7 @@ namespace DesktopWidgets.View
         public new void Show()
         {
             Visibility = Visibility.Visible;
+            ThisApp?.BringToFront();
         }
 
         public new void Hide()
