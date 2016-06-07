@@ -22,8 +22,9 @@ namespace DesktopWidgets.Classes
             _settings = settings;
             _newFileAction = newFileAction;
             KnownFilePaths = new Dictionary<string, List<FileInfo>>();
-            _dirWatcherTimer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(_settings.CheckInterval)};
+            _dirWatcherTimer = new DispatcherTimer();
             _dirWatcherTimer.Tick += (sender, args) => CheckDirectoriesForNewFilesAsync();
+            UpdateTimerInterval();
         }
 
         public void CheckDirectoriesForNewFilesAsync()
@@ -32,6 +33,7 @@ namespace DesktopWidgets.Classes
         public void CheckDirectoriesForNewFiles()
         {
             var lastCheck = _settings.LastCheck;
+            Console.WriteLine(lastCheck.ToString());
             _settings.LastCheck = DateTime.Now;
             if (_isScanning ||
                 (_settings.TimeoutDuration.TotalSeconds > 0 && DateTime.Now - lastCheck >= _settings.TimeoutDuration))
@@ -124,6 +126,7 @@ namespace DesktopWidgets.Classes
         public void SetSettings(DirectoryWatcherSettings settings)
         {
             _settings = settings;
+            UpdateTimerInterval();
         }
 
         public void SetWatchPaths(IEnumerable<string> paths)
@@ -139,6 +142,16 @@ namespace DesktopWidgets.Classes
         public void Stop()
         {
             _dirWatcherTimer.Stop();
+        }
+
+        private void UpdateTimerInterval()
+        {
+            _dirWatcherTimer.Interval = TimeSpan.FromMilliseconds(_settings.CheckInterval);
+            if (_dirWatcherTimer.IsEnabled)
+            {
+                _dirWatcherTimer.Stop();
+                _dirWatcherTimer.Start();
+            }
         }
     }
 }
