@@ -25,6 +25,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
                 Settings.SyncMinute ||
                 Settings.SyncSecond)
                 Settings.EndDateTime = Settings.EndDateTime.SyncNext(
+                    CurrentTime,
                     Settings.SyncYear,
                     Settings.SyncMonth,
                     Settings.SyncDay,
