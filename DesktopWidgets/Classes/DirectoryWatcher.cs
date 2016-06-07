@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
@@ -11,9 +12,9 @@ namespace DesktopWidgets.Classes
     internal class DirectoryWatcher
     {
         private readonly DispatcherTimer _dirWatcherTimer;
+        private readonly Dictionary<string, bool> _isScanningDictionary;
         private readonly Action<List<FileInfo>, DirectoryChange> _newFileAction;
         public readonly Dictionary<string, List<FileInfo>> KnownFilePaths;
-        private bool _isScanning;
         private DirectoryWatcherSettings _settings;
 
         public DirectoryWatcher(DirectoryWatcherSettings settings,
@@ -22,95 +23,120 @@ namespace DesktopWidgets.Classes
             _settings = settings;
             _newFileAction = newFileAction;
             KnownFilePaths = new Dictionary<string, List<FileInfo>>();
+            _isScanningDictionary = new Dictionary<string, bool>();
             _dirWatcherTimer = new DispatcherTimer();
-            _dirWatcherTimer.Tick += (sender, args) => CheckDirectoriesForNewFilesAsync();
+            _dirWatcherTimer.Tick += (sender, args) => CheckDirectoriesForNewFiles();
             UpdateTimerInterval();
         }
 
         public void CheckDirectoriesForNewFilesAsync()
-            => new Task(CheckDirectoriesForNewFiles).Start();
+            => new Task(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                CheckDirectoriesForNewFiles();
+            }).Start();
 
         public void CheckDirectoriesForNewFiles()
         {
             var lastCheck = _settings.LastCheck;
-            Console.WriteLine(lastCheck.ToString());
             _settings.LastCheck = DateTime.Now;
-            if (_isScanning ||
-                (_settings.TimeoutDuration.TotalSeconds > 0 && DateTime.Now - lastCheck >= _settings.TimeoutDuration))
+            if (_settings.TimeoutDuration.TotalSeconds > 0 && DateTime.Now - lastCheck >= _settings.TimeoutDuration)
                 return;
-            _isScanning = true;
-            foreach (
-                var folder in
-                    _settings.WatchFolders.Where(
-                        folder => !string.IsNullOrWhiteSpace(folder) && Directory.Exists(folder)))
+            foreach (var folder in _settings.WatchFolders)
             {
-                try
+                new Task(() =>
                 {
-                    var dirInfo = new DirectoryInfo(folder);
-                    if (!KnownFilePaths.ContainsKey(folder))
-                        KnownFilePaths.Add(folder, null);
-                    var files = dirInfo.EnumerateFiles("*.*",
-                        _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                        .Where(IsFileLengthValid)
-                        .Where(IsFileExtensionValid)
-                        .ToList();
+                    Thread.CurrentThread.IsBackground = true;
+                    CheckDirectoryForNewFiles(folder);
+                }).Start();
+            }
+        }
 
-                    var oldFiles = KnownFilePaths[folder]?.ToList();
-                    KnownFilePaths[folder] = files;
+        private void CheckDirectoryForNewFiles(string folder)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(folder))
+                    return;
+                if (!_isScanningDictionary.ContainsKey(folder))
+                    _isScanningDictionary.Add(folder, false);
+                else if (_isScanningDictionary[folder])
+                    return;
+                _isScanningDictionary[folder] = true;
 
-                    if (oldFiles != null)
+                if (!Directory.Exists(folder))
+                {
+                    _isScanningDictionary[folder] = false;
+                    return;
+                }
+
+                var dirInfo = new DirectoryInfo(folder);
+                if (!KnownFilePaths.ContainsKey(folder))
+                    KnownFilePaths.Add(folder, null);
+                var files = dirInfo.EnumerateFiles("*.*",
+                    _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Where(IsFileLengthValid)
+                    .Where(IsFileExtensionValid)
+                    .ToList();
+
+                var oldFiles = KnownFilePaths[folder]?.ToList();
+                KnownFilePaths[folder] = files;
+
+                if (oldFiles != null)
+                {
+                    if (_settings.DetectModifiedFiles)
                     {
-                        if (_settings.DetectModifiedFiles)
-                        {
-                            var changedFiles =
-                                files.Where(
-                                    x =>
-                                        oldFiles.Any(
-                                            y => y.FullName == x.FullName && y.LastWriteTimeUtc != x.LastWriteTimeUtc))
-                                    .OrderBy(x => x.LastWriteTimeUtc)
-                                    .ToList();
-                            Application.Current.Dispatcher.Invoke(
-                                () =>
+                        var changedFiles =
+                            files.Where(
+                                x =>
+                                    oldFiles.Any(
+                                        y =>
+                                            y.FullName == x.FullName &&
+                                            y.LastWriteTimeUtc != x.LastWriteTimeUtc))
+                                .OrderBy(x => x.LastWriteTimeUtc)
+                                .ToList();
+                        Application.Current.Dispatcher.Invoke(
+                            () =>
+                            {
+                                try
                                 {
-                                    try
-                                    {
-                                        if (changedFiles.Count > 0)
-                                            _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
-                                    }
-                                    catch
-                                    {
-                                        // ignored
-                                    }
-                                });
-                        }
-                        if (_settings.DetectNewFiles)
-                        {
-                            var newFiles =
-                                files.Where(x => oldFiles.All(y => y.FullName != x.FullName))
-                                    .OrderBy(x => x.LastWriteTimeUtc)
-                                    .ToList();
-                            Application.Current.Dispatcher.Invoke(
-                                () =>
+                                    if (changedFiles.Count > 0)
+                                        _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
+                                }
+                                catch
                                 {
-                                    try
-                                    {
-                                        if (newFiles.Count > 0)
-                                            _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
-                                    }
-                                    catch
-                                    {
-                                        // ignored
-                                    }
-                                });
-                        }
+                                    // ignored
+                                }
+                            });
+                    }
+                    if (_settings.DetectNewFiles)
+                    {
+                        var newFiles =
+                            files.Where(x => oldFiles.All(y => y.FullName != x.FullName))
+                                .OrderBy(x => x.LastWriteTimeUtc)
+                                .ToList();
+                        Application.Current.Dispatcher.Invoke(
+                            () =>
+                            {
+                                try
+                                {
+                                    if (newFiles.Count > 0)
+                                        _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
+                                }
+                                catch
+                                {
+                                    // ignored
+                                }
+                            });
                     }
                 }
-                catch
-                {
-                    // ignored
-                }
+
+                _isScanningDictionary[folder] = false;
             }
-            _isScanning = false;
+            catch
+            {
+                // ignored
+            }
         }
 
         private bool IsFileLengthValid(FileInfo file)
