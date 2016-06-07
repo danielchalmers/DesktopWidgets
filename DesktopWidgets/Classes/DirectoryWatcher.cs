@@ -72,8 +72,15 @@ namespace DesktopWidgets.Classes
                             Application.Current.Dispatcher.Invoke(
                                 () =>
                                 {
-                                    if (changedFiles.Count > 0)
-                                        _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
+                                    try
+                                    {
+                                        if (changedFiles.Count > 0)
+                                            _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
+                                    }
+                                    catch
+                                    {
+                                        // ignored
+                                    }
                                 });
                         }
                         if (_settings.DetectNewFiles)
@@ -85,8 +92,15 @@ namespace DesktopWidgets.Classes
                             Application.Current.Dispatcher.Invoke(
                                 () =>
                                 {
-                                    if (newFiles.Count > 0)
-                                        _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
+                                    try
+                                    {
+                                        if (newFiles.Count > 0)
+                                            _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
+                                    }
+                                    catch
+                                    {
+                                        // ignored
+                                    }
                                 });
                         }
                     }
