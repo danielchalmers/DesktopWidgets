@@ -190,5 +190,9 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [DisplayName("Mute End Time")]
         public DateTime MuteEndTime { get; set; } = DateTime.MinValue;
+
+        [Category("Behavior (Hideable)")]
+        [DisplayName("Mouse Detection Offset")]
+        public Point MouseDetetcionOffset { get; set; } = new Point(0, 0);
     }
 }

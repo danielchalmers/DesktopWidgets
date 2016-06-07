@@ -54,7 +54,9 @@ namespace DesktopWidgets.Classes
         public bool IsRunning => _mouseCheckTimer.IsEnabled;
 
         private Point GetMouseLocation()
-            => new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            =>
+                new Point(Control.MousePosition.X - _settings.MouseDetetcionOffset.X,
+                    Control.MousePosition.Y - _settings.MouseDetetcionOffset.Y);
 
         public void UpdateIntervals()
         {
