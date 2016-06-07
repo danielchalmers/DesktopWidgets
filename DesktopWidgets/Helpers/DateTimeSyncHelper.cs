@@ -29,23 +29,23 @@ namespace DesktopWidgets.Helpers
                     : endDateTime.Second,
                 endDateTime.Kind);
 
-            if (syncYear && endDateTime < DateTime.Now)
-                endDateTime = endDateTime.AddYears(1);
-
-            if (syncMonth && endDateTime < DateTime.Now)
-                endDateTime = endDateTime.AddMonths(1);
-
-            if (syncDay && endDateTime < DateTime.Now)
-                endDateTime = endDateTime.AddDays(1);
-
-            if (syncHour && endDateTime < DateTime.Now)
-                endDateTime = endDateTime.AddHours(1);
+            if (syncSecond && endDateTime < DateTime.Now)
+                endDateTime = endDateTime.AddSeconds(1);
 
             if (syncMinute && endDateTime < DateTime.Now)
                 endDateTime = endDateTime.AddMinutes(1);
 
-            if (syncSecond && endDateTime < DateTime.Now)
-                endDateTime = endDateTime.AddSeconds(1);
+            if (syncHour && endDateTime < DateTime.Now)
+                endDateTime = endDateTime.AddHours(1);
+
+            if (syncDay && endDateTime < DateTime.Now)
+                endDateTime = endDateTime.AddDays(1);
+
+            if (syncMonth && endDateTime < DateTime.Now)
+                endDateTime = endDateTime.AddMonths(1);
+
+            if (syncYear && endDateTime < DateTime.Now)
+                endDateTime = endDateTime.AddYears(1);
 
             return endDateTime;
         }
