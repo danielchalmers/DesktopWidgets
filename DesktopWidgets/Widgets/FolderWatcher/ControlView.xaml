@@ -29,7 +29,7 @@
                        FontSize="{Binding Settings.FileNameFontSettings.FontSize}"
                        FontFamily="{Binding Settings.FileNameFontSettings.FontFamily}"
                        FontWeight="{Binding Settings.FileNameFontSettings.FontWeight}">
-                <Hyperlink NavigateUri="{Binding CurrentFile.FullName}">
+                <Hyperlink NavigateUri="{Binding CurrentFile.FullName}" IsEnabled="{Binding CurrentFile.Exists}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="RequestNavigate">
                             <command:EventToCommand Command="{Binding OpenFile}" />
