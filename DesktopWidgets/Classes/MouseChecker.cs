@@ -297,7 +297,9 @@ namespace DesktopWidgets.Classes
         }
 
         private bool IsHideable()
-            => _view.IsVisible && !_view.IsContextMenuOpen && !(_settings.StayOpenIfMouseFocus && IsShowable());
+            =>
+                _view.IsVisible && !_view.IsContextMenuOpen &&
+                !(_settings.StayOpenIfMouseFocus && (IsShowable() || IsMouseInWindowBounds()));
 
         private bool IsShowable() => _view.IsMouseOver || IsMouseInMouseBounds();
 
