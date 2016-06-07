@@ -243,7 +243,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private void OpenFileExecute()
         {
-            ProcessHelper.Launch(CurrentFile.FullName);
+            if (File.Exists(CurrentFile.FullName) || Directory.Exists(CurrentFile.FullName))
+                ProcessHelper.Launch(CurrentFile.FullName);
             View?.Dismiss();
         }
 
