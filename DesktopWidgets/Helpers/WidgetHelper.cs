@@ -119,7 +119,10 @@ namespace DesktopWidgets.Helpers
             {
                 var view = id.GetView();
                 if (view == null)
+                {
+                    id.LoadView();
                     return;
+                }
                 if (reload)
                     view.CloseAction = () => { id.LoadView(); };
                 view.CloseAnimation();
@@ -326,8 +329,8 @@ namespace DesktopWidgets.Helpers
 
         public static void ReloadWidgets()
         {
-            foreach (var id in App.WidgetViews.Select(x => x.Id).ToList())
-                id.Reload();
+            foreach (var widget in App.WidgetsSettingsStore.Widgets)
+                widget.Identifier.Reload();
         }
 
         public static void DismissWidgets()
