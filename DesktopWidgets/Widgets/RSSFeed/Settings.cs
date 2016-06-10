@@ -8,6 +8,11 @@ namespace DesktopWidgets.Widgets.RSSFeed
 {
     public class Settings : WidgetSettingsBase
     {
+        public Settings()
+        {
+            Style.FontSettings.FontSize = 16;
+        }
+
         [Category("Style")]
         [DisplayName("Max Headlines")]
         public int MaxHeadlines { get; set; } = 5;
