@@ -125,7 +125,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 ImageUrl = ((string[]) e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
-                Settings.Freeze = true;
+                IsPaused = true;
             }
         }
 
