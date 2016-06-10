@@ -6,6 +6,11 @@ namespace DesktopWidgets.Widgets.Weather
 {
     public class Settings : WidgetSettingsBase
     {
+        public Settings()
+        {
+            Style.FontSettings.FontSize = 16;
+        }
+
         [Category("Style")]
         [DisplayName("Unit Type")]
         public TemperatureUnitType UnitType { get; set; }
