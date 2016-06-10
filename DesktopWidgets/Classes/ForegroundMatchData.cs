@@ -10,7 +10,7 @@ namespace DesktopWidgets.Classes
         public string Title { get; set; }
 
         [DisplayName("Title Match Mode")]
-        public StringMatchMode TitleMatchMode { get; set; } = StringMatchMode.Any;
+        public StringMatchMode TitleMatchMode { get; set; } = StringMatchMode.Equals;
 
         [DisplayName("Fullscreen")]
         public YesNoAny Fullscreen { get; set; } = YesNoAny.Any;
