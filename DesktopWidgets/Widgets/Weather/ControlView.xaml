@@ -14,7 +14,7 @@
                    Visibility="{Binding ShowHelp, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <StackPanel Orientation="Horizontal"
                     Visibility="{Binding ShowHelp, Converter={StaticResource BoolToCollapsedVisibilityConverter}}">
-            <Image Source="{Binding IconUrl}" Width="50" Height="50"
+            <Image Source="{Binding IconUrl}" Width="50" Height="50" ToolTip="{Binding Description}"
                    Visibility="{Binding Settings.ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <StackPanel Margin="5">
                 <StackPanel.Resources>
