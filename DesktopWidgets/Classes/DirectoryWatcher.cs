@@ -54,10 +54,10 @@ namespace DesktopWidgets.Classes
 
         private void CheckDirectoryForNewFiles(string folder)
         {
+            if (string.IsNullOrWhiteSpace(folder))
+                return;
             try
             {
-                if (string.IsNullOrWhiteSpace(folder))
-                    return;
                 if (!_isScanningDictionary.ContainsKey(folder))
                     _isScanningDictionary.Add(folder, false);
                 else if (_isScanningDictionary[folder])
@@ -130,12 +130,15 @@ namespace DesktopWidgets.Classes
                             });
                     }
                 }
-
-                _isScanningDictionary[folder] = false;
             }
             catch
             {
                 // ignored
+            }
+            finally
+            {
+                if (_isScanningDictionary.ContainsKey(folder))
+                    _isScanningDictionary[folder] = false;
             }
         }
 
