@@ -134,28 +134,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         }
 
         public static Shortcut MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
-        {
-            var index = viewModel.Settings.Shortcuts.IndexOf(shortcut);
-            if (toEnd)
-            {
-                return viewModel.Settings.Shortcuts.Swap(index, 0) as Shortcut;
-            }
-            if (index == 0)
-                return viewModel.MoveDown(shortcut, true);
-            return viewModel.Settings.Shortcuts.Swap(index, index - 1) as Shortcut;
-        }
+            => viewModel.Settings.Shortcuts.MoveUp(shortcut, toEnd);
 
         public static Shortcut MoveDown(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
-        {
-            var index = viewModel.Settings.Shortcuts.IndexOf(shortcut);
-            if (toEnd)
-            {
-                return viewModel.Settings.Shortcuts.Swap(index, viewModel.Settings.Shortcuts.Count - 1) as Shortcut;
-            }
-            if (viewModel.Settings.Shortcuts.Count - 1 < index + 1)
-                return viewModel.MoveUp(shortcut, true);
-            return viewModel.Settings.Shortcuts.Swap(index, index + 1) as Shortcut;
-        }
+            => viewModel.Settings.Shortcuts.MoveDown(shortcut, toEnd);
 
         public static ImageSource GetShortcutIcon(this Shortcut shortcut)
         {

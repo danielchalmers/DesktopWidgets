@@ -23,6 +23,7 @@
         <classes:SelectedWidgetToMuteUnmuteNameConverter x:Key="SelectedWidgetToMuteUnmuteNameConverter" />
         <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
         <classes:WidgetToNameConverter x:Key="WidgetToNameConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -75,6 +76,10 @@
             <Button Content="Import..." Command="{Binding ImportWidget}" IsEnabled="True" />
             <Button Visibility="Hidden" />
             <Button Content="Edit..." Command="{Binding EditWidget}" />
+            <Button Content="Move Up" Command="{Binding MoveUpWidget}"
+                    Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Button Content="Move Down" Command="{Binding MoveDownWidget}"
+                    Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Button Content="Reload" Command="{Binding ReloadWidget}" />
             <Button
                 Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToMuteUnmuteNameConverter}}"

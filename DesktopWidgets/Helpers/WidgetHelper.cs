@@ -402,5 +402,17 @@ namespace DesktopWidgets.Helpers
             foreach (var id in App.WidgetViews.Select(x => x.Id))
                 id.Unmute();
         }
+
+        public static WidgetSettingsBase MoveUp(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            return settings == null ? null : App.WidgetsSettingsStore.Widgets.MoveUp(settings);
+        }
+
+        public static WidgetSettingsBase MoveDown(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            return settings == null ? null : App.WidgetsSettingsStore.Widgets.MoveDown(settings);
+        }
     }
 }

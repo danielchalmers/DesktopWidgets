@@ -18,6 +18,8 @@ namespace DesktopWidgets.WindowViewModels
             DeselectAll = new RelayCommand(DeselectAllExecute);
             NewWidget = new RelayCommand(NewWidgetExecute);
             EditWidget = new RelayCommand(EditWidgetExecute);
+            MoveUpWidget = new RelayCommand(MoveUpWidgetExecute);
+            MoveDownWidget = new RelayCommand(MoveDownWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
             MuteUnmuteWidget = new RelayCommand(MuteUnmuteWidgetExecute);
             DisableWidget = new RelayCommand(DisableWidgetExecute);
@@ -47,6 +49,10 @@ namespace DesktopWidgets.WindowViewModels
         public ICommand NewWidget { get; private set; }
 
         public ICommand EditWidget { get; private set; }
+
+        public ICommand MoveUpWidget { get; private set; }
+
+        public ICommand MoveDownWidget { get; private set; }
 
         public ICommand ReloadWidget { get; private set; }
 
@@ -81,6 +87,16 @@ namespace DesktopWidgets.WindowViewModels
         private void EditWidgetExecute()
         {
             SelectedWidget.Identifier.Edit();
+        }
+
+        private void MoveUpWidgetExecute()
+        {
+            SelectedWidget = SelectedWidget.Identifier.MoveUp();
+        }
+
+        private void MoveDownWidgetExecute()
+        {
+            SelectedWidget = SelectedWidget.Identifier.MoveDown();
         }
 
         private void ReloadWidgetExecute()
