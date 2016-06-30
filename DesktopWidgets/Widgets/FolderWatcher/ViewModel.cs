@@ -175,7 +175,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             else if (HandleFileMedia(playMedia))
                 FileType = FileType.Audio;
             else if (HandleFileContent())
-                FileType = FileType.Text;
+            {
+            }
             else
             {
                 FileType = FileType.Other;
@@ -206,7 +207,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
                 FileType = FileType.Warning;
                 CurrentFileContent = "Loading...";
-                new Task(() =>
+                Task.Run(() =>
                 {
                     var path = CurrentFile.FullName;
                     var image = ImageHelper.LoadBitmapImageFromPath(path);
@@ -219,7 +220,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                             CurrentImage = image;
                             FileType = FileType.Image;
                         }));
-                }).Start();
+                });
                 return true;
             }
             return false;
@@ -227,13 +228,30 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         private bool HandleFileContent()
         {
-            var isContent = Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
-                            Settings.ShowTextContentWhitelist.Any(
-                                x => x.EndsWith(CurrentFile.Extension, StringComparison.OrdinalIgnoreCase)) &&
-                            (Settings.ShowContentMaxSize <= 0 || CurrentFile.Length <= Settings.ShowContentMaxSize);
-            if (isContent)
-                new Task(() => { CurrentFileContent = File.ReadAllText(CurrentFile.FullName); }).Start();
-            return isContent;
+            if (Settings.ShowTextContentWhitelist != null && Settings.ShowTextContentWhitelist.Count > 0 &&
+                Settings.ShowTextContentWhitelist.Any(
+                    x => x.EndsWith(CurrentFile.Extension, StringComparison.OrdinalIgnoreCase)) &&
+                (Settings.ShowContentMaxSize <= 0 || CurrentFile.Length <= Settings.ShowContentMaxSize))
+            {
+                FileType = FileType.Warning;
+                CurrentFileContent = "Loading...";
+                Task.Run(() =>
+                {
+                    var path = CurrentFile.FullName;
+                    var content = File.ReadAllText(CurrentFile.FullName);
+                    Application.Current.Dispatcher.BeginInvoke(
+                        DispatcherPriority.Background,
+                        new Action(() =>
+                        {
+                            if (CurrentFile.FullName != path)
+                                return;
+                            CurrentFileContent = content;
+                            FileType = FileType.Text;
+                        }));
+                });
+                return true;
+            }
+            return false;
         }
 
         private bool HandleFileMedia(bool play)

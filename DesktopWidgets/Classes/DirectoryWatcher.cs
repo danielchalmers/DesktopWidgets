@@ -30,11 +30,11 @@ namespace DesktopWidgets.Classes
         }
 
         public void CheckDirectoriesForNewFilesAsync()
-            => new Task(() =>
+            => Task.Run(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
                 CheckDirectoriesForNewFiles();
-            }).Start();
+            });
 
         public void CheckDirectoriesForNewFiles()
         {
@@ -44,11 +44,11 @@ namespace DesktopWidgets.Classes
                 return;
             foreach (var folder in _settings.WatchFolders)
             {
-                new Task(() =>
+                Task.Run(() =>
                 {
                     Thread.CurrentThread.IsBackground = true;
                     CheckDirectoryForNewFiles(folder);
-                }).Start();
+                });
             }
         }
 
