@@ -268,7 +268,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (File.Exists(CurrentFile.FullName) || Directory.Exists(CurrentFile.FullName))
                 ProcessHelper.Launch(CurrentFile.FullName);
-            View?.Dismiss();
+            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                View?.Dismiss();
         }
 
         public override void OnClose()
