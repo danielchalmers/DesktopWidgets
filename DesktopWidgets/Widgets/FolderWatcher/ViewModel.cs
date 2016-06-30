@@ -327,5 +327,25 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             _isShowing = false;
             HandleDirectoryChange();
         }
+
+        public override void PreviewKeyDownExecute(KeyEventArgs e)
+        {
+            KeyDownExecute(e);
+            switch (e.Key)
+            {
+                case Key.Left:
+                    PreviousExecute();
+                    e.Handled = true;
+                    break;
+                case Key.Right:
+                    NextExecute();
+                    e.Handled = true;
+                    break;
+                case Key.Space:
+                    TogglePlayPauseExecute();
+                    e.Handled = true;
+                    break;
+            }
+        }
     }
 }
