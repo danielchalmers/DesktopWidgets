@@ -245,6 +245,8 @@
                             <ScrollViewer.MaxWidth>
                                 <MultiBinding Converter="{StaticResource MaxSizeConverter}">
                                     <Binding Path="MaxWidth" />
+                                    <Binding Path="ActualWidth" ElementName="FrameContainerLeft" />
+                                    <Binding Path="ActualWidth" ElementName="FrameContainerRight" />
                                     <Binding Path="BorderThickness.Left" RelativeSource="{RelativeSource Self}" />
                                     <Binding Path="BorderThickness.Right" RelativeSource="{RelativeSource Self}" />
                                     <Binding Path="Margin.Left" RelativeSource="{RelativeSource Self}" />
@@ -269,6 +271,8 @@
                             <ScrollViewer.MaxHeight>
                                 <MultiBinding Converter="{StaticResource MaxSizeConverter}">
                                     <Binding Path="MaxHeight" />
+                                    <Binding Path="ActualHeight" ElementName="FrameContainerTop" />
+                                    <Binding Path="ActualHeight" ElementName="FrameContainerBottom" />
                                     <Binding Path="BorderThickness.Top" RelativeSource="{RelativeSource Self}" />
                                     <Binding Path="BorderThickness.Bottom" RelativeSource="{RelativeSource Self}" />
                                     <Binding Path="Margin.Top" RelativeSource="{RelativeSource Self}" />
