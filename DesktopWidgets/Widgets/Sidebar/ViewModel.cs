@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
@@ -19,7 +21,9 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (Settings == null)
                 return;
             AllowDrop = Settings.AllowDropFiles;
+            IconCache = new Dictionary<string, ImageSource>();
 
+            Refresh = new RelayCommand(RefreshExecute);
             NewShortcut = new RelayCommand(NewShortcutExecute);
             NewSeparator = new RelayCommand(NewSeparatorExecute);
             ManageShortcut = new RelayCommand(ManageShortcutsExecute);
@@ -42,6 +46,8 @@ namespace DesktopWidgets.Widgets.Sidebar
         }
 
         public Settings Settings { get; }
+        public Dictionary<string, ImageSource> IconCache { get; set; }
+        public ICommand Refresh { get; set; }
         public ICommand ShortcutFocus { get; set; }
         public ICommand ShortcutEdit { get; set; }
         public ICommand ShortcutMoveUp { get; set; }
@@ -118,6 +124,11 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             var dialog = new ManageShortcuts(this);
             dialog.ShowDialog();
+        }
+
+        private void RefreshExecute()
+        {
+            this.ForceRefresh();
         }
 
         public override void DropExecute(DragEventArgs e)

@@ -60,6 +60,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         [DisplayName("Parse Shortcut Files")]
         public bool ParseShortcutFiles { get; set; } = false;
 
+        [Category("General")]
+        [DisplayName("Enable Icon Cache")]
+        public bool UseIconCache { get; set; } = true;
+
         [Category("Behavior")]
         [DisplayName("Keep Open With Modifier Key")]
         public ModifierKeys KeepOpenWithModifierKey { get; set; } = ModifierKeys.Control;

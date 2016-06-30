@@ -159,8 +159,15 @@
                         CommandParameter="{Binding Path=.}"
                         ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}">
                     <DockPanel LastChildFill="True">
-                        <Image Style="{StaticResource StyleImage}"
-                               Source="{Binding Converter={StaticResource ShortcutToImageConverter}}" />
+                        <Image Style="{StaticResource StyleImage}">
+                            <Image.Source>
+                                <MultiBinding Converter="{StaticResource ShortcutToImageConverter}">
+                                    <Binding Path="." />
+                                    <Binding Path="DataContext"
+                                             RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}" />
+                                </MultiBinding>
+                            </Image.Source>
+                        </Image>
                         <TextBlock Text="{Binding Path=Name}" Style="{StaticResource StyleTextBlock}" />
                     </DockPanel>
                     <Button.ToolTip>
