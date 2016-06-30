@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -169,7 +170,8 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 CurrentFileContent = "File has been modified.";
             }
             else if (HandleFileImage())
-                FileType = FileType.Image;
+            {
+            }
             else if (HandleFileMedia(playMedia))
                 FileType = FileType.Audio;
             else if (HandleFileContent())
@@ -202,7 +204,22 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             if (Settings.ShowImages && ImageHelper.IsSupported(CurrentFile.Extension))
             {
-                UpdateImage();
+                FileType = FileType.Warning;
+                CurrentFileContent = "Loading...";
+                new Task(() =>
+                {
+                    var path = CurrentFile.FullName;
+                    var image = ImageHelper.LoadBitmapImageFromPath(path);
+                    Application.Current.Dispatcher.BeginInvoke(
+                        DispatcherPriority.Background,
+                        new Action(() =>
+                        {
+                            if (CurrentFile.FullName != path)
+                                return;
+                            CurrentImage = image;
+                            FileType = FileType.Image;
+                        }));
+                }).Start();
                 return true;
             }
             return false;
@@ -227,17 +244,6 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 return true;
             }
             return false;
-        }
-
-        private void UpdateImage()
-        {
-            var bmi = new BitmapImage();
-            bmi.BeginInit();
-            bmi.CacheOption = BitmapCacheOption.OnLoad;
-            bmi.UriSource = new Uri(CurrentFile.FullName, UriKind.RelativeOrAbsolute);
-            bmi.EndInit();
-
-            CurrentImage = bmi;
         }
 
         private void OpenFileExecute()
