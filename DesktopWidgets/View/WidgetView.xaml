@@ -34,6 +34,12 @@
         <i:EventTrigger EventName="KeyUp">
             <command:EventToCommand Command="{Binding KeyUp}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
+        <i:EventTrigger EventName="PreviewKeyDown">
+            <command:EventToCommand Command="{Binding PreviewKeyDown}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
+        <i:EventTrigger EventName="PreviewKeyUp">
+            <command:EventToCommand Command="{Binding PreviewKeyUp}" PassEventArgsToCommand="True" />
+        </i:EventTrigger>
         <i:EventTrigger EventName="MouseDoubleClick">
             <command:EventToCommand Command="{Binding MouseDoubleClick}" PassEventArgsToCommand="True" />
         </i:EventTrigger>
@@ -177,7 +183,7 @@
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.Style.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
-                     IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}"
+                     IsOpen="{Binding IsContextMenuOpen, Mode=TwoWay}"
                      ItemsSource="{StaticResource WidgetMenuItems}" />
     </Window.Resources>
     <Window.Style>

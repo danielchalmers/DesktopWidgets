@@ -42,6 +42,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             MouseUp = new RelayCommand<MouseButtonEventArgs>(MouseUpExecute);
             KeyDown = new RelayCommand<KeyEventArgs>(KeyDownExecute);
             KeyUp = new RelayCommand<KeyEventArgs>(KeyUpExecute);
+            PreviewKeyDown = new RelayCommand<KeyEventArgs>(PreviewKeyDownExecute);
+            PreviewKeyUp = new RelayCommand<KeyEventArgs>(PreviewKeyUpExecute);
             MouseDoubleClick = new RelayCommand<MouseButtonEventArgs>(MouseDoubleClickExecute);
 
             WidgetDockHorizontal = new RelayCommand<HorizontalAlignment>(WidgetDockHorizontalExecute);
@@ -149,6 +151,8 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public ICommand MouseUp { get; set; }
         public ICommand KeyDown { get; set; }
         public ICommand KeyUp { get; set; }
+        public ICommand PreviewKeyDown { get; set; }
+        public ICommand PreviewKeyUp { get; set; }
         public ICommand MouseDoubleClick { get; set; }
 
         public bool IsContextMenuOpen
@@ -431,6 +435,29 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             if (_settings.DetectIdle)
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+        }
+
+        public virtual void PreviewKeyDownExecute(KeyEventArgs e)
+        {
+        }
+
+        public virtual void PreviewKeyUpExecute(KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Escape:
+                    DismissWidgetExecute();
+                    e.Handled = true;
+                    break;
+                case Key.F5:
+                    ReloadWidgetExecute();
+                    e.Handled = true;
+                    break;
+                case Key.Apps:
+                    IsContextMenuOpen = true;
+                    e.Handled = true;
+                    break;
+            }
         }
 
         public virtual void MouseDoubleClickExecute(MouseButtonEventArgs e)
