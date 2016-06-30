@@ -13,7 +13,6 @@ using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Widgets.RSSFeed;
 using DesktopWidgets.Widgets.Sidebar;
 using Settings = DesktopWidgets.Widgets.CountdownClock.Settings;
-using ViewModel = DesktopWidgets.Widgets.Sidebar.ViewModel;
 
 namespace DesktopWidgets.Classes
 {
@@ -203,21 +202,16 @@ namespace DesktopWidgets.Classes
         }
     }
 
-    public class ShortcutToImageConverter : IMultiValueConverter
+    public class ShortcutToImageConverter : IValueConverter
     {
-        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!ConverterHelper.IsValueValid(value))
                 return DependencyProperty.UnsetValue;
-            var shortcut = value[0] as Shortcut;
-            var viewModel = value[1] as ViewModel;
-            if (viewModel == null || shortcut == null)
-                return DependencyProperty.UnsetValue;
-
-            return shortcut.GetShortcutIcon(viewModel);
+            return (value as Shortcut)?.GetShortcutIcon();
         }
 
-        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

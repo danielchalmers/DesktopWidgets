@@ -93,20 +93,6 @@ namespace DesktopWidgets.Widgets.Sidebar
             viewModel.Add(new Shortcut {Name = "Separator", SpecialType = "Separator"}, false);
         }
 
-        public static void ClearIconCache(this ViewModel viewModel)
-        {
-            if (viewModel.Settings.UseIconCache)
-                foreach (var t in viewModel.Settings.Shortcuts)
-                    viewModel.IconCache.Remove(t.ProcessFile.Path);
-            else
-                viewModel.IconCache.Clear();
-        }
-
-        public static void ForceRefresh(this ViewModel viewModel)
-        {
-            viewModel.ClearIconCache();
-        }
-
         public static void Execute(this ViewModel viewModel, Shortcut shortcut, bool hide = true)
         {
             if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
@@ -171,7 +157,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             return viewModel.Settings.Shortcuts.Swap(index, index + 1) as Shortcut;
         }
 
-        private static ImageSource GetShortcutIcon(Shortcut shortcut)
+        public static ImageSource GetShortcutIcon(this Shortcut shortcut)
         {
             try
             {
@@ -196,16 +182,6 @@ namespace DesktopWidgets.Widgets.Sidebar
                 // ignored
             }
             return SystemIcons.Error.ToImageSource();
-        }
-
-        public static ImageSource GetShortcutIcon(this Shortcut shortcut, ViewModel viewModel)
-        {
-            if (!viewModel.Settings.UseIconCache)
-                return GetShortcutIcon(shortcut);
-
-            if (!viewModel.IconCache.ContainsKey(shortcut.ProcessFile.Path))
-                viewModel.IconCache.Add(shortcut.ProcessFile.Path, GetShortcutIcon(shortcut));
-            return viewModel.IconCache[shortcut.ProcessFile.Path];
         }
 
         public static IEnumerable<Shortcut> GetDefaultShortcuts(DefaultShortcutsMode mode)
