@@ -25,12 +25,28 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
         public bool ShowStatus { get; set; } = true;
 
         [Category("Style")]
+        [DisplayName("Show Download Usage")]
+        public bool ShowDownloadUsage { get; set; } = true;
+
+        [Category("Style")]
+        [DisplayName("Show Upload Usage")]
+        public bool ShowUploadUsage { get; set; } = true;
+
+        [Category("Style")]
         [DisplayName("Date/Time Format")]
         public string DateTimeFormat { get; set; } = "HH:mm:ss";
 
         [Category("Style")]
         [DisplayName("Latency Padding")]
         public int LatencyPadding { get; set; } = 4;
+
+        [Category("Style")]
+        [DisplayName("Download/Upload Padding")]
+        public int BandwidthPadding { get; set; } = 7;
+
+        [Category("Style")]
+        [DisplayName("Download/Upload Decimal Places")]
+        public int BandwidthDecimalPlaces { get; set; } = 1;
 
         [Category("General")]
         [DisplayName("Host URL")]

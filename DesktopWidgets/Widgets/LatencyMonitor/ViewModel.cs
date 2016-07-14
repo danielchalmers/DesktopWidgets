@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
@@ -15,7 +16,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 {
     public class ViewModel : WidgetViewModelBase
     {
-        private long _lastLatency = -1;
+        private long _lastDownloadUsage;
+        private long _lastLatency;
+        private long _lastUploadUsage;
         private bool _scanLatency;
 
         public ViewModel(WidgetId id) : base(id)
@@ -24,6 +27,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             if (Settings == null)
                 return;
             LatencyHistory = new ObservableCollection<TextBlock>();
+            _lastLatency = -1;
+            _lastDownloadUsage = GetDownloadedBytes();
+            _lastUploadUsage = GetUploadedBytes();
             _scanLatency = true;
             StartLatencyReader();
         }
@@ -44,6 +50,8 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                         var reply = GetLatency();
                         if (reply == null)
                             continue;
+                        var downloadedBytes = GetDownloadedBytes();
+                        var uploadedBytes = GetUploadedBytes();
                         Application.Current.Dispatcher.Invoke(
                             DispatcherPriority.Background,
                             new Action(() =>
@@ -52,7 +60,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                 {
                                     var latencyTextBlock = new TextBlock
                                     {
-                                        Text = GetLatencyText(reply),
+                                        Text =
+                                            GetLatencyText(reply, downloadedBytes - _lastDownloadUsage,
+                                                uploadedBytes - _lastUploadUsage),
                                         Foreground = new SolidColorBrush(GetLatencyBrush(reply))
                                     };
                                     while (LatencyHistory.Count + 1 > Settings.MaxHistory)
@@ -65,6 +75,8 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                 }
                             }));
                         _lastLatency = reply.RoundtripTime;
+                        _lastDownloadUsage = GetDownloadedBytes();
+                        _lastUploadUsage = GetUploadedBytes();
                         Thread.Sleep(Settings.PingInterval);
                     }
                     catch
@@ -84,14 +96,26 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             return reply;
         }
 
-        private string GetLatencyText(PingReply reply)
+        private long GetDownloadedBytes()
+            => NetworkInterface.GetAllNetworkInterfaces().Select(x => x.GetIPStatistics().BytesReceived).Sum();
+
+        private long GetUploadedBytes()
+            => NetworkInterface.GetAllNetworkInterfaces().Select(x => x.GetIPStatistics().BytesSent).Sum();
+
+        private string GetLatencyText(PingReply reply, long downloadUsage, long uploadUsage)
         {
             if (reply == null)
                 return null;
             var stringBuilder = new StringBuilder();
             if (Settings.ShowTime)
-                stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}: ");
-            stringBuilder.Append($"{reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
+                stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}:");
+            if (Settings.ShowDownloadUsage)
+                stringBuilder.Append(
+                    $" {StringHelper.BytesToString(downloadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')}");
+            if (Settings.ShowUploadUsage)
+                stringBuilder.Append(
+                    $" {StringHelper.BytesToString(uploadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')}");
+            stringBuilder.Append($" {reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
             if (Settings.ShowStatus)
                 stringBuilder.Append($" ({reply.Status})");
             return stringBuilder.ToString();
