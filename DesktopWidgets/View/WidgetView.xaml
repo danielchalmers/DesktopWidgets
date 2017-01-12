@@ -251,7 +251,7 @@
                                 </MultiBinding>
                             </ScrollViewer.Height>
                             <ScrollViewer.MaxWidth>
-                                <MultiBinding Converter="{StaticResource MaxSizeConverter}">
+                                <MultiBinding Converter="{StaticResource MaxSizeConverter}" ConverterParameter="width">
                                     <Binding Path="MaxWidth" />
                                     <Binding Path="ActualWidth" ElementName="FrameContainerLeft" />
                                     <Binding Path="ActualWidth" ElementName="FrameContainerRight" />
@@ -272,12 +272,12 @@
                                     <Binding Path="Settings.ActionBarStyle.Dock"
                                              Converter="{StaticResource DockIsHorizontalToBooleanConverter}" />
                                     <Binding Path="ActualWidth" ElementName="ActionBar" />
-                                    <Binding Path="Settings.ActionBarStyle.Margin.Left" />
-                                    <Binding Path="Settings.ActionBarStyle.Margin.Right" />
+                                    <Binding Path="Settings.ActionBarStyle.Dock" />
+                                    <Binding Path="Settings.ActionBarStyle.Offset" />
                                 </MultiBinding>
                             </ScrollViewer.MaxWidth>
                             <ScrollViewer.MaxHeight>
-                                <MultiBinding Converter="{StaticResource MaxSizeConverter}">
+                                <MultiBinding Converter="{StaticResource MaxSizeConverter}" ConverterParameter="height">
                                     <Binding Path="MaxHeight" />
                                     <Binding Path="ActualHeight" ElementName="FrameContainerTop" />
                                     <Binding Path="ActualHeight" ElementName="FrameContainerBottom" />
@@ -298,8 +298,8 @@
                                     <Binding Path="Settings.ActionBarStyle.Dock"
                                              Converter="{StaticResource DockIsVerticalToBooleanConverter}" />
                                     <Binding Path="ActualHeight" ElementName="ActionBar" />
-                                    <Binding Path="Settings.ActionBarStyle.Margin.Top" />
-                                    <Binding Path="Settings.ActionBarStyle.Margin.Bottom" />
+                                    <Binding Path="Settings.ActionBarStyle.Dock" />
+                                    <Binding Path="Settings.ActionBarStyle.Offset" />
                                 </MultiBinding>
                             </ScrollViewer.MaxHeight>
                         </ScrollViewer>

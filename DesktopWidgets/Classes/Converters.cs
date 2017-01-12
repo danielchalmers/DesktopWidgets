@@ -510,8 +510,16 @@ namespace DesktopWidgets.Classes
                 var condition1 = (bool) value[value.Length - 5];
                 var condition2 = (bool) value[value.Length - 4];
                 var actualSize = (double) value[value.Length - 3];
-                var size1 = (double) value[value.Length - 2];
-                var size2 = (double) value[value.Length - 1];
+                var actionBarDock = (Dock) value[value.Length - 2];
+                var actionBarOffset = (Point) value[value.Length - 1];
+
+                var actionBarMargin =
+                    (Thickness)
+                        new DockAndOffsetToMarginConverter().Convert(new object[] {actionBarDock, actionBarOffset}, null,
+                            null, null);
+
+                var size1 = (string) parameter == "width" ? actionBarMargin.Left : actionBarMargin.Top;
+                var size2 = (string) parameter == "width" ? actionBarMargin.Right : actionBarMargin.Bottom;
 
                 var baseReturn = baseAmount - total;
 
