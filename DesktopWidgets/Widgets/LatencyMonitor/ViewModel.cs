@@ -52,45 +52,44 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                         try
                         {
                             var reply = GetLatency(ping);
-                            if (reply == null)
+                            if (reply != null)
                             {
-                                continue;
-                            }
-                            var downloadedBytes = GetDownloadedBytes();
-                            var uploadedBytes = GetUploadedBytes();
-                            Application.Current.Dispatcher.Invoke(
-                                DispatcherPriority.Background,
-                                new Action(() =>
-                                {
-                                    try
+                                var downloadedBytes = GetDownloadedBytes();
+                                var uploadedBytes = GetUploadedBytes();
+                                Application.Current.Dispatcher.Invoke(
+                                    DispatcherPriority.Background,
+                                    new Action(() =>
                                     {
-                                        var latencyTextBlock = new TextBlock
+                                        try
                                         {
-                                            Text =
-                                                GetLatencyText(reply, downloadedBytes - _lastDownloadUsage,
-                                                    uploadedBytes - _lastUploadUsage),
-                                            Foreground = new SolidColorBrush(GetLatencyBrush(reply))
-                                        };
-                                        while (LatencyHistory.Count + 1 > Settings.MaxHistory)
-                                        {
-                                            LatencyHistory.RemoveAt(0);
+                                            var latencyTextBlock = new TextBlock
+                                            {
+                                                Text =
+                                                    GetLatencyText(reply, downloadedBytes - _lastDownloadUsage,
+                                                        uploadedBytes - _lastUploadUsage),
+                                                Foreground = new SolidColorBrush(GetLatencyBrush(reply))
+                                            };
+                                            while (LatencyHistory.Count + 1 > Settings.MaxHistory)
+                                            {
+                                                LatencyHistory.RemoveAt(0);
+                                            }
+                                            LatencyHistory.Add(latencyTextBlock);
                                         }
-                                        LatencyHistory.Add(latencyTextBlock);
-                                    }
-                                    catch
-                                    {
-                                        // ignored
-                                    }
-                                }));
-                            _lastLatency = reply.RoundtripTime;
-                            _lastDownloadUsage = GetDownloadedBytes();
-                            _lastUploadUsage = GetUploadedBytes();
-                            Thread.Sleep(Settings.PingInterval);
+                                        catch
+                                        {
+                                            // ignored
+                                        }
+                                    }));
+                                _lastLatency = reply.RoundtripTime;
+                                _lastDownloadUsage = GetDownloadedBytes();
+                                _lastUploadUsage = GetUploadedBytes();
+                            }
                         }
                         catch
                         {
                             // ignored
                         }
+                        Thread.Sleep(Settings.PingInterval);
                     }
                 }
             }).Start();
