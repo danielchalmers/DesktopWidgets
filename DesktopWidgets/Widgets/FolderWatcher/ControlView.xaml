@@ -53,10 +53,10 @@
                 </Grid.Resources>
                 <RepeatButton Grid.Column="0" Content="Previous" Command="{Binding Previous}"
                               IsEnabled="{Binding PreviousEnabled}" />
-                <Button Grid.Column="2"
+                <RepeatButton Grid.Column="2" Content="Next" Command="{Binding Next}" IsEnabled="{Binding NextEnabled}" />
+                <Button Grid.Column="4"
                         Content="{Binding IsPaused, Converter={StaticResource BoolToPauseTextConverter}}"
                         Command="{Binding TogglePlayPause}" />
-                <RepeatButton Grid.Column="4" Content="Next" Command="{Binding Next}" IsEnabled="{Binding NextEnabled}" />
             </Grid>
         </Grid>
     </UserControl.Resources>
