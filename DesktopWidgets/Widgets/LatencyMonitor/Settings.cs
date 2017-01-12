@@ -50,7 +50,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("General")]
         [DisplayName("Host URL")]
-        public string HostAddress { get; set; } = "";
+        public string HostAddress { get; set; } = "8.8.8.8";
 
         [Category("General")]
         [DisplayName("Max History")]
