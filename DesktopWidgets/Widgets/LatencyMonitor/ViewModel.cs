@@ -45,55 +45,58 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
-                while (_scanLatency)
+                using (var ping = new Ping())
                 {
-                    try
+                    while (_scanLatency)
                     {
-                        var reply = GetLatency();
-                        if (reply == null)
+                        try
                         {
-                            continue;
-                        }
-                        var downloadedBytes = GetDownloadedBytes();
-                        var uploadedBytes = GetUploadedBytes();
-                        Application.Current.Dispatcher.Invoke(
-                            DispatcherPriority.Background,
-                            new Action(() =>
+                            var reply = GetLatency(ping);
+                            if (reply == null)
                             {
-                                try
+                                continue;
+                            }
+                            var downloadedBytes = GetDownloadedBytes();
+                            var uploadedBytes = GetUploadedBytes();
+                            Application.Current.Dispatcher.Invoke(
+                                DispatcherPriority.Background,
+                                new Action(() =>
                                 {
-                                    var latencyTextBlock = new TextBlock
+                                    try
                                     {
-                                        Text =
-                                            GetLatencyText(reply, downloadedBytes - _lastDownloadUsage,
-                                                uploadedBytes - _lastUploadUsage),
-                                        Foreground = new SolidColorBrush(GetLatencyBrush(reply))
-                                    };
-                                    while (LatencyHistory.Count + 1 > Settings.MaxHistory)
-                                    {
-                                        LatencyHistory.RemoveAt(0);
+                                        var latencyTextBlock = new TextBlock
+                                        {
+                                            Text =
+                                                GetLatencyText(reply, downloadedBytes - _lastDownloadUsage,
+                                                    uploadedBytes - _lastUploadUsage),
+                                            Foreground = new SolidColorBrush(GetLatencyBrush(reply))
+                                        };
+                                        while (LatencyHistory.Count + 1 > Settings.MaxHistory)
+                                        {
+                                            LatencyHistory.RemoveAt(0);
+                                        }
+                                        LatencyHistory.Add(latencyTextBlock);
                                     }
-                                    LatencyHistory.Add(latencyTextBlock);
-                                }
-                                catch
-                                {
-                                    // ignored
-                                }
-                            }));
-                        _lastLatency = reply.RoundtripTime;
-                        _lastDownloadUsage = GetDownloadedBytes();
-                        _lastUploadUsage = GetUploadedBytes();
-                        Thread.Sleep(Settings.PingInterval);
-                    }
-                    catch
-                    {
-                        // ignored
+                                    catch
+                                    {
+                                        // ignored
+                                    }
+                                }));
+                            _lastLatency = reply.RoundtripTime;
+                            _lastDownloadUsage = GetDownloadedBytes();
+                            _lastUploadUsage = GetUploadedBytes();
+                            Thread.Sleep(Settings.PingInterval);
+                        }
+                        catch
+                        {
+                            // ignored
+                        }
                     }
                 }
             }).Start();
         }
 
-        private PingReply GetLatency()
+        private PingReply GetLatency(Ping ping)
         {
             if (string.IsNullOrWhiteSpace(Settings.HostAddress))
             {
@@ -101,7 +104,6 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             }
             try
             {
-                var ping = new Ping();
                 var reply = ping.Send(Settings.HostAddress, Settings.Timeout);
                 return reply;
             }
