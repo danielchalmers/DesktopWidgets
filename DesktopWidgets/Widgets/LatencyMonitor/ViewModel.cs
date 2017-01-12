@@ -56,7 +56,12 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                             {
                                 var downloadedBytes = GetDownloadedBytes();
                                 var uploadedBytes = GetUploadedBytes();
-                                Application.Current.Dispatcher.Invoke(
+                                var downloadDifference = downloadedBytes - _lastDownloadUsage;
+                                var uploadDifference = uploadedBytes - _lastUploadUsage;
+                                _lastLatency = reply.RoundtripTime;
+                                _lastDownloadUsage = GetDownloadedBytes();
+                                _lastUploadUsage = GetUploadedBytes();
+                                Application.Current.Dispatcher.BeginInvoke(
                                     DispatcherPriority.Background,
                                     new Action(() =>
                                     {
@@ -65,8 +70,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                             var latencyTextBlock = new TextBlock
                                             {
                                                 Text =
-                                                    GetLatencyText(reply, downloadedBytes - _lastDownloadUsage,
-                                                        uploadedBytes - _lastUploadUsage),
+                                                    GetLatencyText(reply, downloadDifference, uploadDifference),
                                                 Foreground = new SolidColorBrush(GetLatencyBrush(reply))
                                             };
                                             while (LatencyHistory.Count + 1 > Settings.MaxHistory)
@@ -80,9 +84,6 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                             // ignored
                                         }
                                     }));
-                                _lastLatency = reply.RoundtripTime;
-                                _lastDownloadUsage = GetDownloadedBytes();
-                                _lastUploadUsage = GetUploadedBytes();
                             }
                         }
                         catch
