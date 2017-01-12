@@ -23,14 +23,18 @@ namespace DesktopWidgets.Helpers
         public static void CheckForUpdatesAsync(bool auto)
         {
             if (auto && (App.IsMuted || !IsUpdateDay || FullScreenHelper.DoesAnyMonitorHaveFullscreenApp()))
+            {
                 return;
+            }
 
             UpdateCheckInfo updateInfo = null;
             var bw = new BackgroundWorker();
             bw.DoWork += delegate
             {
                 if (ApplicationDeployment.IsNetworkDeployed)
+                {
                     updateInfo = ApplicationDeployment.CurrentDeployment.CheckForDetailedUpdate(false);
+                }
             };
             bw.RunWorkerCompleted += (sender, args) => CheckForUpdates(updateInfo, auto);
             bw.RunWorkerAsync();
@@ -43,16 +47,20 @@ namespace DesktopWidgets.Helpers
                 if (!ApplicationDeployment.IsNetworkDeployed)
                 {
                     if (!auto)
+                    {
                         Popup.Show(
                             "This application was not installed via ClickOnce and cannot be updated automatically.");
+                    }
                     return;
                 }
 
                 if (info == null)
                 {
                     if (!auto)
+                    {
                         Popup.Show(
                             "An error occurred while trying to check for updates.", image: MessageBoxImage.Error);
+                    }
                     return;
                 }
 
@@ -63,15 +71,21 @@ namespace DesktopWidgets.Helpers
                       ForgetUpdateVersion.Major == info.AvailableVersion.Major))
                 {
                     if (auto && info.AvailableVersion == ForgetUpdateVersion)
+                    {
                         return;
+                    }
                     var ad = ApplicationDeployment.CurrentDeployment;
                     ad.UpdateCompleted += delegate
                     {
                         var args = new List<string>();
                         if (auto && Settings.Default.AutoUpdate)
+                        {
                             args.Add("updatingsilent");
+                        }
                         else
+                        {
                             args.Add("updating");
+                        }
                         AppHelper.RestartApplication(args);
                     };
                     if (auto && Settings.Default.AutoUpdate)
@@ -118,7 +132,9 @@ namespace DesktopWidgets.Helpers
                                         delegate(object sender, DeploymentProgressChangedEventArgs args)
                                         {
                                             if (args.State == DeploymentProgressState.DownloadingApplicationFiles)
+                                            {
                                                 progressDialog.CurrentProgress = args.ProgressPercentage;
+                                            }
                                         };
                                     progressDialog.Show();
                                     progressDialog.Activate();
@@ -139,14 +155,18 @@ namespace DesktopWidgets.Helpers
                 else
                 {
                     if (!auto)
+                    {
                         Popup.Show(
                             $"You have the latest version ({AssemblyInfo.Version}).");
+                    }
                 }
             }
             catch (Exception)
             {
                 if (!auto)
+                {
                     throw;
+                }
             }
         }
 

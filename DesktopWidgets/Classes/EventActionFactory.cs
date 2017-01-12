@@ -141,82 +141,154 @@ namespace DesktopWidgets.Classes
         public static string GetNameFromEvent(IEvent evnt)
         {
             if (evnt is WidgetMouseDownEvent)
+            {
                 return "Widget Mouse Down";
+            }
             if (evnt is WidgetMouseUpEvent)
+            {
                 return "Widget Mouse Up";
+            }
             if (evnt is WidgetEnableEvent)
+            {
                 return "Widget Enable";
+            }
             if (evnt is WidgetDisableEvent)
+            {
                 return "Widget Disable";
+            }
             if (evnt is WidgetIntroEvent)
+            {
                 return "Widget Intro";
+            }
             if (evnt is WidgetDismissEvent)
+            {
                 return "Widget Dismiss";
+            }
             if (evnt is WidgetSpecialEvent)
+            {
                 return "Widget Special Event";
+            }
             if (evnt is WidgetIntroEndEvent)
+            {
                 return "Widget Intro End";
+            }
             if (evnt is WidgetMouseDoubleClickEvent)
+            {
                 return "Widget Mouse Double Click";
+            }
             if (evnt is WidgetReloadEvent)
+            {
                 return "Widget Reload";
+            }
             if (evnt is ForegroundChangedEvent)
+            {
                 return "Foreground Changed";
+            }
             if (evnt is LaunchEvent)
+            {
                 return "Launch";
+            }
             if (evnt is HotkeyEvent)
+            {
                 return "Hotkey";
+            }
             if (evnt is WidgetShowEvent)
+            {
                 return "Widget Show";
+            }
             if (evnt is WidgetHideEvent)
+            {
                 return "Widget Hide";
+            }
             if (evnt is MuteUnmuteEvent)
+            {
                 return "Mute / Unmute";
+            }
             if (evnt is WidgetMuteUnmuteEvent)
+            {
                 return "Widget Mute / Unmute";
+            }
             if (evnt is WidgetRefreshEvent)
+            {
                 return "Widget Refresh";
+            }
             return null;
         }
 
         public static string GetNameFromAction(ActionBase action)
         {
             if (action is OpenFileAction)
+            {
                 return "Run File";
+            }
             if (action is PlaySoundAction)
+            {
                 return "Play Sound";
+            }
             if (action is WidgetEnableAction)
+            {
                 return "Widget Enable";
+            }
             if (action is WidgetDisableAction)
+            {
                 return "Widget Disable";
+            }
             if (action is WidgetIntroAction)
+            {
                 return "Widget Intro";
+            }
             if (action is WidgetDismissAction)
+            {
                 return "Widget Dismiss";
+            }
             if (action is WidgetHideAction)
+            {
                 return "Widget Hide";
+            }
             if (action is WidgetToggleEnabledAction)
+            {
                 return "Widget Toggle Enabled";
+            }
             if (action is WidgetCancelIntroAction)
+            {
                 return "Widget Cancel Intro";
+            }
             if (action is WidgetReloadAction)
+            {
                 return "Widget Reload";
+            }
             if (action is PopupAction)
+            {
                 return "Show Popup";
+            }
             if (action is MuteUnmuteAction)
+            {
                 return "Mute / Unmute";
+            }
             if (action is WriteFileAction)
+            {
                 return "Write File";
+            }
             if (action is SpeakTextAction)
+            {
                 return "Speak Text";
+            }
             if (action is WidgetSpecialAction)
+            {
                 return "Widget Special Action";
+            }
             if (action is WidgetMuteUnmuteAction)
+            {
                 return "Widget Mute / Unmute";
+            }
             if (action is WidgetChangeSizeAction)
+            {
                 return "Widget Change Size";
+            }
             if (action is WidgetRefreshAction)
+            {
                 return "Widget Refresh";
+            }
             return null;
         }
     }

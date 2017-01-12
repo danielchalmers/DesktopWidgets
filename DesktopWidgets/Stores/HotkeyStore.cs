@@ -16,7 +16,9 @@ namespace DesktopWidgets.Stores
         public static void RegisterHotkey(Hotkey hotkey, Action callback)
         {
             if (hotkey.Key == Key.None)
+            {
                 return;
+            }
 
             RemoveHotkey(hotkey);
             Hotkeys.Add(new Tuple<Hotkey, Action>(hotkey, callback));
@@ -41,7 +43,9 @@ namespace DesktopWidgets.Stores
                 var hotkey = hk.Item1;
                 Hotkeys.Remove(hk);
                 if (Hotkeys.All(x => x.Item1.Key != hotkey.Key && x.Item1.ModifierKeys != hotkey.ModifierKeys))
+                {
                     UnregisterHotkey(hotkey);
+                }
             }
         }
 

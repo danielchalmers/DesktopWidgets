@@ -36,22 +36,34 @@ namespace DesktopWidgets.Helpers
                 endDateTime.Kind);
 
             if (syncSecond && endDateTime < currentDateTime)
+            {
                 endDateTime = endDateTime.AddSeconds(1);
+            }
 
             if (syncMinute && endDateTime < currentDateTime)
+            {
                 endDateTime = endDateTime.AddMinutes(1);
+            }
 
             if (syncHour && endDateTime < currentDateTime)
+            {
                 endDateTime = endDateTime.AddHours(1);
+            }
 
             if (syncDay && endDateTime < currentDateTime)
+            {
                 endDateTime = endDateTime.AddDays(1);
+            }
 
             if (syncMonth && endDateTime < currentDateTime)
+            {
                 endDateTime = endDateTime.AddMonths(1);
+            }
 
             if (syncYear && endDateTime < currentDateTime)
+            {
                 endDateTime = endDateTime.AddYears(1);
+            }
 
             return endDateTime;
         }

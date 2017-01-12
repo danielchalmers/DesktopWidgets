@@ -66,7 +66,9 @@ namespace DesktopWidgets.Classes
         {
             List<Changelog> changelogData = null;
             if (_useCache && !string.IsNullOrWhiteSpace(Settings.Default.ChangelogCache))
+            {
                 changelogData = JsonConvert.DeserializeObject<List<Changelog>>(Settings.Default.ChangelogCache);
+            }
             if (!(changelogData != null && changelogData.Any(x => x.Version == AssemblyInfo.Version)))
             {
                 changelogData = ParseChangelogJson(DownloadAllChangelogPages()).ToList();
@@ -81,7 +83,9 @@ namespace DesktopWidgets.Classes
                     var change in
                         changelog.History.OrderBy(x => x)
                             .Where(c => !ChangelogBlacklist.Any(x => c.ToLower().Contains(x))))
+                {
                     stringBuilder.Append($"{Environment.NewLine} {change}");
+                }
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine();
             }

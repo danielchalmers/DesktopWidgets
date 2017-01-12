@@ -25,7 +25,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             LatencyHistory = new ObservableCollection<TextBlock>();
             _lastLatency = -1;
             _lastDownloadUsage = GetDownloadedBytes();
@@ -49,7 +51,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                     {
                         var reply = GetLatency();
                         if (reply == null)
+                        {
                             continue;
+                        }
                         var downloadedBytes = GetDownloadedBytes();
                         var uploadedBytes = GetUploadedBytes();
                         Application.Current.Dispatcher.Invoke(
@@ -66,7 +70,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
                                         Foreground = new SolidColorBrush(GetLatencyBrush(reply))
                                     };
                                     while (LatencyHistory.Count + 1 > Settings.MaxHistory)
+                                    {
                                         LatencyHistory.RemoveAt(0);
+                                    }
                                     LatencyHistory.Add(latencyTextBlock);
                                 }
                                 catch
@@ -90,7 +96,9 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
         private PingReply GetLatency()
         {
             if (string.IsNullOrWhiteSpace(Settings.HostAddress))
+            {
                 return null;
+            }
             var ping = new Ping();
             var reply = ping.Send(Settings.HostAddress, Settings.Timeout);
             return reply;
@@ -105,26 +113,38 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
         private string GetLatencyText(PingReply reply, long downloadUsage, long uploadUsage)
         {
             if (reply == null)
+            {
                 return null;
+            }
             var stringBuilder = new StringBuilder();
             if (Settings.ShowTime)
+            {
                 stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}:");
+            }
             if (Settings.ShowDownloadUsage)
+            {
                 stringBuilder.Append(
                     $" {StringHelper.BytesToString(downloadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')}");
+            }
             if (Settings.ShowUploadUsage)
+            {
                 stringBuilder.Append(
                     $" {StringHelper.BytesToString(uploadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')}");
+            }
             stringBuilder.Append($" {reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
             if (Settings.ShowStatus)
+            {
                 stringBuilder.Append($" ({reply.Status})");
+            }
             return stringBuilder.ToString();
         }
 
         private Color GetLatencyBrush(PingReply reply)
         {
             if (!Settings.ColorCoding)
+            {
                 return Settings.LatencyDefaultColor;
+            }
             return reply == null || reply.Status != IPStatus.Success || (reply.RoundtripTime > Settings.LatencyGoodMax) ||
                    (_lastLatency > 0 && Math.Abs(reply.RoundtripTime - _lastLatency) > Settings.LatencyGoodSinceLast)
                 ? Settings.LatencyBadColor

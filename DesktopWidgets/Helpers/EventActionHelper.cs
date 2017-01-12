@@ -25,7 +25,9 @@ namespace DesktopWidgets.Helpers
             dialog.ShowDialog();
 
             if (dialog.SelectedItem1 == null || dialog.SelectedItem2 == null)
+            {
                 return;
+            }
 
             var newPair = new EventActionPair
             {
@@ -58,7 +60,9 @@ namespace DesktopWidgets.Helpers
         {
             var pair = id.GetPair();
             if (pair == null)
+            {
                 return;
+            }
             pair.Disabled = !pair.Disabled;
             pair.Refresh();
         }
@@ -68,14 +72,18 @@ namespace DesktopWidgets.Helpers
             if (
                 Popup.Show("Are you sure you want to delete this event and action pair?", MessageBoxButton.YesNo,
                     MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+            {
                 return;
+            }
             foreach (
                 var pair in App.WidgetsSettingsStore.EventActionPairs.Where(x => x.Identifier.Guid == id.Guid).ToList())
             {
                 App.WidgetsSettingsStore.EventActionPairs.Remove(pair);
                 var hotkeyEvent = pair.Event as HotkeyEvent;
                 if (hotkeyEvent != null)
+                {
                     HotkeyStore.RemoveHotkey(hotkeyEvent.Hotkey);
+                }
             }
         }
 

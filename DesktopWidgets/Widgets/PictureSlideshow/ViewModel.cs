@@ -25,7 +25,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             IsPaused = Settings.Freeze;
             ImageUrl = Settings.ImageUrl;
             AllowDrop = Settings.AllowDropFiles;
@@ -49,7 +51,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             _directoryWatcher.CheckDirectoriesForNewFiles();
             NextImage();
             if (Settings.Recursive)
+            {
                 _directoryWatcher.CheckDirectoriesForNewFilesAsync();
+            }
 
             _changeTimer.Start();
         }
@@ -90,7 +94,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             if (Settings.Freeze || string.IsNullOrWhiteSpace(Settings.RootPath) ||
                 !_directoryWatcher.KnownFilePaths.ContainsKey(Settings.RootPath) ||
                 _directoryWatcher.KnownFilePaths[Settings.RootPath] == null)
+            {
                 return;
+            }
             var paths = _directoryWatcher.KnownFilePaths[Settings.RootPath];
             string newImagePath;
 
@@ -103,7 +109,9 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             else
             {
                 if (_index > _directoryWatcher.KnownFilePaths.Count - 1)
+                {
                     _index = 0;
+                }
                 newImagePath = paths[_index].FullName;
                 _index++;
             }

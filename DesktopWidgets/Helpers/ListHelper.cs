@@ -32,7 +32,9 @@ namespace DesktopWidgets.Helpers
         {
             var index = list.IndexOf(item);
             if (index == 0)
+            {
                 return list.MoveToBottom(item);
+            }
             return list.Swap(index, index - 1);
         }
 
@@ -40,7 +42,9 @@ namespace DesktopWidgets.Helpers
         {
             var index = list.IndexOf(item);
             if (list.Count - 1 < index + 1)
+            {
                 return list.MoveToTop(item);
+            }
             return list.Swap(index, index + 1);
         }
     }

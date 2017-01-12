@@ -86,15 +86,21 @@ namespace DesktopWidgets.Helpers
             if (msg && Popup.Show(
                 "Are you sure you want to reset ALL settings (including widgets)?\n\nThis cannot be undone.",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+            {
                 return;
+            }
             Settings.Default.Reset();
             Settings.Default.MustUpgrade = false;
             Settings.Default.Widgets = string.Empty;
             LoadWidgetsDataFromSettings();
             if (refresh)
+            {
                 WidgetHelper.LoadWidgetViews();
+            }
             if (msg)
+            {
                 Popup.Show("All settings have been restored to default.");
+            }
         }
 
         public static void ImportData()

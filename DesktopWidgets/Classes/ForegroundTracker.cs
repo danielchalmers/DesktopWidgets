@@ -31,11 +31,15 @@ namespace DesktopWidgets.Classes
                 var evnt = eventPair.Event as ForegroundChangedEvent;
                 if (evnt == null || eventPair.Disabled ||
                     !IsForegroundValid(foreground, evnt.FromMatchData, evnt.ToMatchData))
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
             foreach (var widget in App.WidgetViews.Where(x => x.Settings.ForceTopmost))
+            {
                 widget.ThisApp?.BringToFront();
+            }
         }
 
         private static bool IsForegroundValid(Win32App foreground, ForegroundMatchData fromData,
@@ -47,9 +51,13 @@ namespace DesktopWidgets.Classes
             _isForegroundFullscreen = foreground.IsFullScreen();
 
             if (_foregroundTitle == null)
+            {
                 _foregroundTitle = string.Empty;
+            }
             if (oldTitle == null)
+            {
                 oldTitle = string.Empty;
+            }
 
             bool isTitleFromValid;
             bool isFullscreenFromValid;

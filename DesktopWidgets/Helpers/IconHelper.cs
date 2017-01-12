@@ -27,10 +27,12 @@ namespace DesktopWidgets.Helpers
                 0, ref shinfo, (uint) Marshal.SizeOf(shinfo),
                 SHGFI_ICON | SHGFI_LARGEICON);
             using (var i = Icon.FromHandle(shinfo.hIcon))
+            {
                 return Imaging.CreateBitmapSourceFromHIcon(
                     i.Handle,
                     new Int32Rect(0, 0, i.Width, i.Height),
                     BitmapSizeOptions.FromEmptyOptions());
+            }
         }
 
         public static ImageSource ToImageSource(this Icon icon)

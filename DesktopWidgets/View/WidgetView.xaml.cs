@@ -52,7 +52,9 @@ namespace DesktopWidgets.View
             _mouseChecker = new MouseChecker(this, Settings);
 
             if (!systemStartup && Settings.ShowIntroOnLaunch)
+            {
                 _mouseChecker.QueueIntro = new IntroData {ExecuteFinishAction = false};
+            }
 
             DataContext = ViewModel;
 
@@ -182,7 +184,9 @@ namespace DesktopWidgets.View
             base.OnSourceInitialized(e);
 
             if (!HasLoaded)
+            {
                 return;
+            }
 
             var hwnd = new WindowInteropHelper(this).Handle;
             var widgetSrc = HwndSource.FromHwnd(hwnd);
@@ -192,10 +196,14 @@ namespace DesktopWidgets.View
             ThisApp = new Win32App(hwnd);
 
             if (Settings.Unclickable)
+            {
                 ThisApp.SetWindowExTransparent();
+            }
 
             if (Settings.IsAppBar)
+            {
                 SetAsAppBar();
+            }
 
             UpdateUi(false);
 
@@ -209,7 +217,9 @@ namespace DesktopWidgets.View
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (msg == SingleInstanceHelper.WM_SHOWAPP)
+            {
                 ShowIntro();
+            }
 
             return IntPtr.Zero;
         }
@@ -218,13 +228,17 @@ namespace DesktopWidgets.View
         {
             _mouseChecker.KeepOpenForIntro = false;
             if (Settings.OpenMode != OpenMode.AlwaysOpen)
+            {
                 _mouseChecker.Hide(checkIdleStatus: checkIdleStatus);
+            }
         }
 
         public void CancelIntro()
         {
             if (!_introTimer.IsEnabled && !_mouseChecker.KeepOpenForIntro)
+            {
                 return;
+            }
             HideIntro(false);
         }
 
@@ -232,7 +246,9 @@ namespace DesktopWidgets.View
         {
             _mouseChecker.QueueIntro = null;
             if (introData == null)
+            {
                 introData = new IntroData();
+            }
             if (App.IsWorkstationLocked || FullScreenHelper.DoesMonitorHaveFullscreenApp(ViewModel.GetScreenBounds()))
             {
                 _mouseChecker.QueueIntro = introData;
@@ -246,9 +262,13 @@ namespace DesktopWidgets.View
                 {
                     _introTimer.Stop();
                     if (_lastIntroData.HideOnFinish)
+                    {
                         HideIntro();
+                    }
                     if (_lastIntroData.ExecuteFinishAction)
+                    {
                         ViewModel.OnIntroEnd();
+                    }
                 };
             }
 
@@ -276,7 +296,9 @@ namespace DesktopWidgets.View
         public void HideUi(bool checkIdleStatus = true, bool checkHideStatus = true)
         {
             if (Settings.OpenMode != OpenMode.AlwaysOpen)
+            {
                 _mouseChecker.Hide(checkIdleStatus: checkIdleStatus, checkHideStatus: checkHideStatus);
+            }
         }
 
         public void Dismiss()
@@ -291,13 +313,17 @@ namespace DesktopWidgets.View
             VerticalAlignment? dockVerticalAlignment = null)
         {
             if (!IsVisible)
+            {
                 Refresh(resetContext, updateNonUi, false, updateOpacity);
+            }
             else
+            {
                 this.Animate(AnimationMode.Hide, false, null,
                     () => Refresh(resetContext, updateNonUi, true, updateOpacity),
                     isDocked,
                     dockHorizontalAlignment,
                     dockVerticalAlignment);
+            }
         }
 
         private void UpdatePositionAndLocation()
@@ -347,7 +373,9 @@ namespace DesktopWidgets.View
             var isVisible = IsVisible;
             Opacity = 0;
             if (!isVisible)
+            {
                 Show();
+            }
 
             if (resetContext)
             {
@@ -375,20 +403,28 @@ namespace DesktopWidgets.View
             ViewModel.OnRefresh();
 
             if (!isVisible)
+            {
                 Hide();
+            }
             if (updateOpacity)
+            {
                 Opacity = 1;
+            }
 
             IsRefreshing = false;
 
             if (showIntro && !_mouseChecker.KeepOpenForIntro)
+            {
                 ShowIntro();
+            }
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetRefreshEvent;
                 if (evnt == null || eventPair.Disabled)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -440,14 +476,18 @@ namespace DesktopWidgets.View
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
                 Settings.DragToMove)
+            {
                 DragMove();
+            }
         }
 
         private void ActionBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
                 Settings.DragActionBarToMove)
+            {
                 DragMove();
+            }
         }
 
         private void btnMenu_OnClick(object sender, RoutedEventArgs e)
@@ -494,7 +534,9 @@ namespace DesktopWidgets.View
         private void WidgetView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (!IsRefreshing && !_isAppBar)
+            {
                 Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action) ViewModel.UpdatePosition);
+            }
         }
 
         public void ExecuteSpecialAction()

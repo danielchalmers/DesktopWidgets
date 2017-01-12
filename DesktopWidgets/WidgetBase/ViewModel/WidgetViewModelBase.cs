@@ -61,7 +61,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             set
             {
                 if (!_settings.IsDocked)
+                {
                     _settings.Left = value;
+                }
                 _settings.Left = value;
                 RaisePropertyChanged();
             }
@@ -73,7 +75,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             set
             {
                 if (!_settings.IsDocked)
+                {
                     _settings.Top = value;
+                }
                 _settings.Top = value;
                 RaisePropertyChanged();
             }
@@ -265,7 +269,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public void SetScreenBounds()
         {
             if (!_settings.AutoDetectScreenBounds || View == null)
+            {
                 return;
+            }
             _settings.ScreenBounds = GetActualScreenBounds();
         }
 
@@ -277,7 +283,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public Rect GetActualScreenBounds()
         {
             if (!_settings.AutoDetectScreenBounds || View == null)
+            {
                 return GetScreenBounds();
+            }
             var screen = ScreenHelper.GetScreen(View);
             return screen.Primary ? Rect.Empty : screen.ToRect(_settings.IgnoreAppBars);
         }
@@ -345,7 +353,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                     (sender, args) =>
                     {
                         if (App.WidgetViews.Where(x => x.Id != Id).All(x => !x.IsMouseOver))
+                        {
                             View?.ThisApp?.BringToFront();
+                        }
                     };
             }
             _onTopForceTimer.Interval = TimeSpan.FromMilliseconds(_settings.ForceOnTopInterval);
@@ -377,7 +387,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         private void StartActionBarKeepOpen()
         {
             if (_actionBarHideTimer == null)
+            {
                 return;
+            }
             _actionBarHideTimer.Stop();
             _actionBarHideTimer.Start();
             KeepActionBarOpen = true;
@@ -390,7 +402,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public virtual void MouseMoveExecute(MouseEventArgs e)
         {
             if (_settings.DetectIdle && _settings.UseMouseMoveIdleDetection)
+            {
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+            }
 
             StartActionBarKeepOpen();
         }
@@ -398,43 +412,59 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public virtual void MouseDownExecute(MouseButtonEventArgs e)
         {
             if (_settings.DetectIdle)
+            {
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+            }
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetMouseDownEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 if (evnt.MouseButton == e.ChangedButton)
+                {
                     eventPair.Action.Execute();
+                }
             }
         }
 
         public virtual void MouseUpExecute(MouseButtonEventArgs e)
         {
             if (_settings.DetectIdle)
+            {
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+            }
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetMouseUpEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 if (evnt.MouseButton == e.ChangedButton)
+                {
                     eventPair.Action.Execute();
+                }
             }
         }
 
         public virtual void KeyDownExecute(KeyEventArgs e)
         {
             if (_settings.DetectIdle)
+            {
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+            }
         }
 
         public virtual void KeyUpExecute(KeyEventArgs e)
         {
             if (_settings.DetectIdle)
+            {
                 _settings.ActiveTimeEnd = DateTime.Now + _settings.IdleDuration;
+            }
         }
 
         public virtual void PreviewKeyDownExecute(KeyEventArgs e)
@@ -463,15 +493,21 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public virtual void MouseDoubleClickExecute(MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 LeftMouseDoubleClickExecute(e);
+            }
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetMouseDoubleClickEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 if (evnt.MouseButton == e.ChangedButton)
+                {
                     eventPair.Action.Execute();
+                }
             }
         }
 
@@ -493,7 +529,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 var evnt = eventPair.Event as WidgetIntroEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -504,7 +542,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 var evnt = eventPair.Event as WidgetIntroEndEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -533,7 +573,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 var evnt = eventPair.Event as WidgetDismissEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -546,7 +588,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 {
                     var evnt = eventPair.Event as WidgetSpecialEvent;
                     if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                    {
                         continue;
+                    }
                     eventPair.Action.Execute();
                 }
             }
@@ -558,7 +602,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 var evnt = eventPair.Event as WidgetHideEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -569,7 +615,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 var evnt = eventPair.Event as WidgetShowEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != Id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }

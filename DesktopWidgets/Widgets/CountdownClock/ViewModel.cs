@@ -10,7 +10,9 @@ namespace DesktopWidgets.Widgets.CountdownClock
         {
             Settings = guid.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             TickAction = OnTickAction;
         }
 
@@ -24,6 +26,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
                 Settings.SyncHour ||
                 Settings.SyncMinute ||
                 Settings.SyncSecond)
+            {
                 Settings.EndDateTime = Settings.EndDateTime.SyncNext(
                     CurrentTime,
                     Settings.SyncYear,
@@ -32,6 +35,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
                     Settings.SyncHour,
                     Settings.SyncMinute,
                     Settings.SyncSecond);
+            }
         }
 
         private void OnTickAction()

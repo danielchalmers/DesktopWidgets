@@ -19,9 +19,13 @@ namespace DesktopWidgets.Widgets.Sidebar
             Title = shortcut == null ? "New Shortcut" : "Edit Shortcut";
 
             if (shortcut == null)
+            {
                 NewShortcut = new Shortcut();
+            }
             else
+            {
                 NewShortcut = (Shortcut) shortcut.Clone();
+            }
 
             DataContext = NewShortcut;
         }

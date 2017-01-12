@@ -15,7 +15,9 @@ namespace DesktopWidgets.Widgets.Search
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             Go = new RelayCommand(GoExecute);
             OnKeyUp = new RelayCommand<KeyEventArgs>(OnKeyUpExecute);
         }
@@ -49,7 +51,9 @@ namespace DesktopWidgets.Widgets.Search
         private void OnKeyUpExecute(KeyEventArgs args)
         {
             if (args.Key == Key.Enter)
+            {
                 GoExecute();
+            }
         }
     }
 }

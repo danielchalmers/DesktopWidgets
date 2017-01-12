@@ -19,7 +19,9 @@ namespace DesktopWidgets.Windows
             InitializeComponent();
 
             if (string.IsNullOrWhiteSpace(Properties.Settings.Default.WidgetPackagePublisherName))
+            {
                 Properties.Settings.Default.WidgetPackagePublisherName = Environment.UserName;
+            }
 
             Settings = settings;
 
@@ -56,14 +58,18 @@ namespace DesktopWidgets.Windows
                 FileName = Settings.PackageInfo.Name
             };
             if (dialog.ShowDialog() != true)
+            {
                 return;
+            }
             Path = dialog.FileName;
         }
 
         private void btnOK_OnClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Path))
+            {
                 BrowsePath();
+            }
             if (string.IsNullOrWhiteSpace(Settings.PackageInfo.Name))
             {
                 Popup.Show("You must enter a widget name.", image: MessageBoxImage.Stop);

@@ -35,9 +35,15 @@ namespace DesktopWidgets.Classes
             DependencyPropertyChangedEventArgs e)
         {
             var listBox = d as ListBox;
-            if (listBox == null) return;
+            if (listBox == null)
+            {
+                return;
+            }
             bool oldValue = (bool) e.OldValue, newValue = (bool) e.NewValue;
-            if (newValue == oldValue) return;
+            if (newValue == oldValue)
+            {
+                return;
+            }
             if (newValue)
             {
                 listBox.Loaded += ListBox_Loaded;
@@ -50,7 +56,9 @@ namespace DesktopWidgets.Classes
                 listBox.Loaded -= ListBox_Loaded;
                 listBox.Unloaded -= ListBox_Unloaded;
                 if (Associations.ContainsKey(listBox))
+                {
                     Associations[listBox].Dispose();
+                }
                 var itemsSourcePropertyDescriptor = TypeDescriptor.GetProperties(listBox)["ItemsSource"];
                 itemsSourcePropertyDescriptor.RemoveValueChanged(listBox, ListBox_ItemsSourceChanged);
             }
@@ -60,7 +68,9 @@ namespace DesktopWidgets.Classes
         {
             var listBox = (ListBox) sender;
             if (Associations.ContainsKey(listBox))
+            {
                 Associations[listBox].Dispose();
+            }
             Associations[listBox] = new Capture(listBox);
         }
 
@@ -68,7 +78,9 @@ namespace DesktopWidgets.Classes
         {
             var listBox = (ListBox) sender;
             if (Associations.ContainsKey(listBox))
+            {
                 Associations[listBox].Dispose();
+            }
             listBox.Unloaded -= ListBox_Unloaded;
         }
 
@@ -76,7 +88,10 @@ namespace DesktopWidgets.Classes
         {
             var listBox = (ListBox) sender;
             var incc = listBox.Items as INotifyCollectionChanged;
-            if (incc == null) return;
+            if (incc == null)
+            {
+                return;
+            }
             listBox.Loaded -= ListBox_Loaded;
             Associations[listBox] = new Capture(listBox);
         }
@@ -99,7 +114,9 @@ namespace DesktopWidgets.Classes
             public void Dispose()
             {
                 if (_incc != null)
+                {
                     _incc.CollectionChanged -= incc_CollectionChanged;
+                }
             }
 
             private void incc_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

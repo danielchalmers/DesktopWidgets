@@ -19,7 +19,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             AllowDrop = Settings.AllowDropFiles;
             IconCache = new Dictionary<string, ImageSource>();
 
@@ -64,8 +66,12 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             base.OnRefresh();
             if (Settings?.Shortcuts != null)
+            {
                 foreach (var shortcut in Settings.Shortcuts.Where(x => x.Hotkey.Key != Key.None))
+                {
                     ReloadShortcutHotKey(shortcut);
+                }
+            }
         }
 
         public void ReloadShortcutHotKey(Shortcut shortcut)
@@ -134,7 +140,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         public override void DropExecute(DragEventArgs e)
         {
             if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
                 this.ProcessFiles((string[]) e.Data.GetData(DataFormats.FileDrop));
+            }
         }
     }
 }

@@ -30,7 +30,9 @@ namespace DesktopWidgets.Helpers
         public static void OpenFolder(string path)
         {
             if (File.Exists(path) || Directory.Exists(path))
+            {
                 Launch("explorer.exe", "/select," + path);
+            }
         }
     }
 }

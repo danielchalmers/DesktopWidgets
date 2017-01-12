@@ -30,7 +30,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             Settings = guid.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
 
             switch (Settings.ResumeOnStartMode)
             {
@@ -48,7 +50,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             IsPaused = Settings.Paused;
 
             if (Settings.CurrentFile != null && !Settings.FileHistory.Contains(Settings.CurrentFile))
+            {
                 Settings.FileHistory.Add(Settings.CurrentFile);
+            }
             CurrentFile = Settings.CurrentFile;
 
             OpenFile = new RelayCommand(OpenFileExecute);
@@ -145,11 +149,15 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         {
             Settings.FileHistory.AddRange(paths);
             if (Settings.FileHistoryMax > 0 && Settings.FileHistory.Count > Settings.FileHistoryMax)
+            {
                 Settings.FileHistory.RemoveRange(0, Settings.FileHistory.Count - Settings.FileHistoryMax);
+            }
             RaisePropertyChanged(nameof(Settings.FileHistory));
             UpdateNextPrevious();
             if (!Settings.QueueFiles || !_isShowing)
+            {
                 HandleDirectoryChange();
+            }
         }
 
         private void CheckFile(bool playMedia = true)
@@ -158,7 +166,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             CurrentFileContent = string.Empty;
             CurrentImage = null;
             if (Settings.CurrentFile == null)
+            {
                 return;
+            }
             if (!File.Exists(Settings.CurrentFile.FullName))
             {
                 FileType = FileType.Warning;
@@ -173,7 +183,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
             {
             }
             else if (HandleFileMedia(playMedia))
+            {
                 FileType = FileType.Audio;
+            }
             else if (HandleFileContent())
             {
             }
@@ -186,7 +198,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void HandleDirectoryChange()
         {
             if (IsPaused)
+            {
                 return;
+            }
             if (HistoryIndex == Settings.FileHistory.Count - 1)
             {
                 View?.HideUi();
@@ -216,7 +230,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                         new Action(() =>
                         {
                             if (CurrentFile.FullName != path)
+                            {
                                 return;
+                            }
                             CurrentImage = image;
                             FileType = FileType.Image;
                         }));
@@ -244,7 +260,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                         new Action(() =>
                         {
                             if (CurrentFile.FullName != path)
+                            {
                                 return;
+                            }
                             CurrentFileContent = content;
                             FileType = FileType.Text;
                         }));
@@ -267,9 +285,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void OpenFileExecute()
         {
             if (File.Exists(CurrentFile.FullName) || Directory.Exists(CurrentFile.FullName))
+            {
                 ProcessHelper.Launch(CurrentFile.FullName);
+            }
             if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+            {
                 View?.Dismiss();
+            }
         }
 
         public override void OnClose()
@@ -289,9 +311,13 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         private void TogglePlayPauseExecute()
         {
             if (IsPaused)
+            {
                 Unpause();
+            }
             else
+            {
                 Pause();
+            }
         }
 
         private void Pause()
@@ -315,7 +341,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
                 _resumeTimer?.Stop();
                 _resumeTimer?.Start();
                 if (!IsPaused)
+                {
                     Settings.ResumeOnNextStart = true;
+                }
                 IsPaused = true;
             }
         }

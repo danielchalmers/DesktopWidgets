@@ -19,12 +19,16 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         {
             _settings = id.GetSettings() as WidgetClockSettingsBase;
             if (_settings == null)
+            {
                 return;
+            }
             _clockUpdateTimer = new DispatcherTimer();
             _clockUpdateTimer.Tick += (sender, args) => UpdateCurrentTime();
             UpdateCurrentTime();
             if (startTicking)
+            {
                 StartClockUpdateTimer();
+            }
         }
 
         public DateTime CurrentTime
@@ -85,7 +89,9 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             {
                 var textBlock = View.GetMainElement() as TextBlock;
                 if (textBlock != null)
+                {
                     Clipboard.SetText(textBlock.Text);
+                }
             }
         }
     }

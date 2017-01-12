@@ -41,7 +41,9 @@ namespace DesktopWidgets.Classes
             var lastCheck = _settings.LastCheck;
             _settings.LastCheck = DateTime.Now;
             if (_settings.TimeoutDuration.TotalSeconds > 0 && DateTime.Now - lastCheck >= _settings.TimeoutDuration)
+            {
                 return;
+            }
             foreach (var folder in _settings.WatchFolders)
             {
                 Task.Run(() =>
@@ -55,13 +57,19 @@ namespace DesktopWidgets.Classes
         private void CheckDirectoryForNewFiles(string folder)
         {
             if (string.IsNullOrWhiteSpace(folder))
+            {
                 return;
+            }
             try
             {
                 if (!_isScanningDictionary.ContainsKey(folder))
+                {
                     _isScanningDictionary.Add(folder, false);
+                }
                 else if (_isScanningDictionary[folder])
+                {
                     return;
+                }
                 _isScanningDictionary[folder] = true;
 
                 if (!Directory.Exists(folder))
@@ -72,7 +80,9 @@ namespace DesktopWidgets.Classes
 
                 var dirInfo = new DirectoryInfo(folder);
                 if (!KnownFilePaths.ContainsKey(folder))
+                {
                     KnownFilePaths.Add(folder, null);
+                }
                 var files = dirInfo.EnumerateFiles("*.*",
                     _settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
                     .Where(IsFileLengthValid)
@@ -101,7 +111,9 @@ namespace DesktopWidgets.Classes
                                 try
                                 {
                                     if (changedFiles.Count > 0)
+                                    {
                                         _newFileAction?.Invoke(changedFiles, DirectoryChange.FileChanged);
+                                    }
                                 }
                                 catch
                                 {
@@ -121,7 +133,9 @@ namespace DesktopWidgets.Classes
                                 try
                                 {
                                     if (newFiles.Count > 0)
+                                    {
                                         _newFileAction?.Invoke(newFiles, DirectoryChange.NewFile);
+                                    }
                                 }
                                 catch
                                 {
@@ -138,7 +152,9 @@ namespace DesktopWidgets.Classes
             finally
             {
                 if (_isScanningDictionary.ContainsKey(folder))
+                {
                     _isScanningDictionary[folder] = false;
+                }
             }
         }
 

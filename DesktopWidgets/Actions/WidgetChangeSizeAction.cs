@@ -22,7 +22,9 @@ namespace DesktopWidgets.Actions
             base.ExecuteAction();
             var settings = WidgetId?.GetSettings();
             if (settings == null)
+            {
                 return;
+            }
             if (SizeChangeMode == SizeChangeMode.Both || SizeChangeMode == SizeChangeMode.Width)
             {
                 switch (NumberChangeMode)

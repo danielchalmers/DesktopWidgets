@@ -10,7 +10,9 @@ namespace DesktopWidgets.Widgets.Calculator
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
         }
 
         public Settings Settings { get; }

@@ -29,7 +29,9 @@ namespace DesktopWidgets.Classes
         private void Timer_OnTick(object sender, EventArgs eventArgs)
         {
             if (Application.Current.Windows.OfType<Options>().Any())
+            {
                 return;
+            }
             ThreadPool.QueueUserWorkItem(delegate { SettingsHelper.SaveSettings(); }, null);
         }
 

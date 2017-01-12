@@ -17,7 +17,9 @@ namespace DesktopWidgets.Helpers
             SettingsHelper.UpgradeSettings();
             SettingsHelper.LoadSettings();
             if (IsAppAlreadyRunning())
+            {
                 return false;
+            }
 
             StartScheduledTasks();
 
@@ -34,7 +36,9 @@ namespace DesktopWidgets.Helpers
             WidgetHelper.LoadWidgetViews(App.Arguments.Contains("-systemstartup"));
 
             if (!App.Arguments.Contains("-systemstartup") && App.WidgetsSettingsStore.Widgets.Count == 0)
+            {
                 new ManageWidgets().Show();
+            }
 
             CheckForUpdatesDelayed();
 
@@ -45,12 +49,16 @@ namespace DesktopWidgets.Helpers
                 {
                     if ((!evnt.SystemStartup || App.Arguments.Contains("-systemstartup")) &&
                         (evnt.Parameters.Count == 0 || !evnt.Parameters.Except(App.Arguments).Any()))
+                    {
                         eventPair.Action.Execute();
+                    }
                 }
 
                 var hotkeyEvent = eventPair.Event as HotkeyEvent;
                 if (hotkeyEvent != null)
+                {
                     HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, eventPair.Action.Execute);
+                }
             }
         }
 
@@ -87,7 +95,9 @@ namespace DesktopWidgets.Helpers
             {
                 if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalMinutes >=
                     Settings.Default.UpdateCheckInterval.TotalMinutes)
+                {
                     App.UpdateScheduler?.RunTick();
+                }
             });
         }
     }

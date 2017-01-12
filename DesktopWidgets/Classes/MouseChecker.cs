@@ -119,7 +119,9 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
+                            {
                                 yield return GetCenterBounds();
+                            }
                         }
                     }
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
@@ -144,7 +146,9 @@ namespace DesktopWidgets.Classes
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
+                            {
                                 yield return GetCenterBounds();
+                            }
                         }
                     }
                 }
@@ -169,7 +173,9 @@ namespace DesktopWidgets.Classes
                         if (_settings.HorizontalAlignment == HorizontalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
+                            {
                                 yield return GetCenterBounds();
+                            }
                         }
                     }
                     if (_settings.MouseBoundsDetectionAxis == MouseBoundsDetectionAxis.Both ||
@@ -191,7 +197,9 @@ namespace DesktopWidgets.Classes
                         if (_settings.VerticalAlignment == VerticalAlignment.Center)
                         {
                             if (_settings.CenterBoundsOnNonSidedDock)
+                            {
                                 yield return GetCenterBounds();
+                            }
                         }
                     }
                 }
@@ -201,7 +209,9 @@ namespace DesktopWidgets.Classes
         private void Update()
         {
             if (_settings.Disabled || _view.AnimationRunning)
+            {
                 return;
+            }
 
             if ((App.IsMuted || _settings.IsMuted()) && !_settings.IgnoreMute)
             {
@@ -267,14 +277,18 @@ namespace DesktopWidgets.Classes
                         else
                         {
                             if (_showTimer.IsEnabled == false)
+                            {
                                 _showTimer.Start();
+                            }
                         }
                     }
                 }
                 else
                 {
                     if (_showTimer.IsEnabled)
+                    {
                         _showTimer.Stop();
+                    }
                     if (IsHideable())
                     {
                         if (_settings.HideDelay == 0)
@@ -284,13 +298,17 @@ namespace DesktopWidgets.Classes
                         else
                         {
                             if (_hideTimer.IsEnabled == false)
+                            {
                                 _hideTimer.Start();
+                            }
                         }
                     }
                     else
                     {
                         if (_hideTimer.IsEnabled)
+                        {
                             _hideTimer.Stop();
+                        }
                     }
                 }
             }
@@ -308,13 +326,21 @@ namespace DesktopWidgets.Classes
             if (_view.AnimationRunning || _view.IsVisible ||
                 ((App.IsMuted || _settings.IsMuted()) && !_settings.IgnoreMute) ||
                 _settings.ForceHide)
+            {
                 return;
+            }
             if (animate && _settings.Style.AnimationTime != 0)
+            {
                 _view.Animate(AnimationMode.Show, activate);
+            }
             else
+            {
                 _view.Show();
+            }
             if (activate && _settings.ActivateOnShow)
+            {
                 _view.Activate();
+            }
 
             _view.ViewModel.OnShow();
         }
@@ -324,9 +350,13 @@ namespace DesktopWidgets.Classes
             KeepOpenForIntro = false;
             KeepOpenUntilIdle = false;
             if (_view.AnimationRunning || !_view.IsVisible)
+            {
                 return;
+            }
             if (checkHideStatus && !IsHideable())
+            {
                 return;
+            }
 
             if (checkIdleStatus && !_view.IsIdle)
             {
@@ -335,9 +365,13 @@ namespace DesktopWidgets.Classes
             }
 
             if (animate && _settings.Style.AnimationTime != 0)
+            {
                 _view.Animate(AnimationMode.Hide);
+            }
             else
+            {
                 _view.Hide();
+            }
 
             _view.ViewModel.OnHide();
         }

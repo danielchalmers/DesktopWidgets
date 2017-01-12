@@ -16,7 +16,9 @@ namespace DesktopWidgets.Helpers
         {
             var args = new List<string> {"restarting"};
             if (arguments != null)
+            {
                 args.AddRange(arguments);
+            }
             App.RestartArguments = args;
             ShutdownApplication();
         }

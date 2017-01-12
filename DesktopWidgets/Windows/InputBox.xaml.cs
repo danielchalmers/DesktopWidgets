@@ -25,7 +25,9 @@ namespace DesktopWidgets.Windows
             _allowEmptyData = allowEmptyData;
             IsDisplayData = !string.IsNullOrEmpty(displayData);
             if (IsDisplayData)
+            {
                 txtData.SelectAll();
+            }
             DataContext = this;
             txtData.Focus();
         }
@@ -56,7 +58,9 @@ namespace DesktopWidgets.Windows
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             if (!_allowEmptyData && string.IsNullOrWhiteSpace(InputData))
+            {
                 Cancelled = true;
+            }
             DialogResult = true;
         }
 
@@ -74,7 +78,9 @@ namespace DesktopWidgets.Windows
                 Filter = "Text file (*.txt)|*.txt|All files (*.*)|*.*"
             };
             if (dialog.ShowDialog() == true)
+            {
                 File.WriteAllText(dialog.FileName, InputData);
+            }
         }
 
         private void btnCopy_OnClick(object sender, RoutedEventArgs e)

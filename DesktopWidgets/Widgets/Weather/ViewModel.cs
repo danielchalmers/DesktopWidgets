@@ -25,7 +25,9 @@ namespace DesktopWidgets.Widgets.Weather
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             _updateTimer = new DispatcherTimer();
             UpdateTimerInterval();
             _updateTimer.Tick += (sender, args) => UpdateWeather();
@@ -193,7 +195,9 @@ namespace DesktopWidgets.Widgets.Weather
             base.OnRefresh();
             UpdateTimerInterval();
             if (_lastZipCode != Settings.ZipCode)
+            {
                 UpdateWeather();
+            }
         }
     }
 }

@@ -11,11 +11,17 @@ namespace DesktopWidgets.Helpers
         private static IEnumerable<Rect> GetSnapBounds(this Window window, bool useWidgetsBounds, bool useFullBounds)
         {
             foreach (var bounds in ScreenHelper.GetAllScreenBounds(useFullBounds))
+            {
                 yield return bounds;
+            }
             if (useWidgetsBounds)
+            {
                 foreach (var bounds in App.WidgetViews.Where(x => !x.Settings.Disabled && !x.Equals(window))
                     .Select(view => view.GetBounds()))
+                {
                     yield return bounds;
+                }
+            }
         }
 
         private static bool IsSnappable(double pos1, double pos2)
@@ -40,9 +46,13 @@ namespace DesktopWidgets.Helpers
             foreach (var pos in horizontal.Distinct())
             {
                 if (IsSnappable(pos, windowBounds.Left))
+                {
                     return pos;
+                }
                 if (IsSnappable(pos, windowBounds.Right))
+                {
                     return pos - windowBounds.Width;
+                }
             }
             return windowBounds.Left;
         }
@@ -57,9 +67,13 @@ namespace DesktopWidgets.Helpers
             foreach (var pos in vertical.Distinct())
             {
                 if (IsSnappable(pos, windowBounds.Top))
+                {
                     return pos;
+                }
                 if (IsSnappable(pos, windowBounds.Bottom))
+                {
                     return pos - windowBounds.Height;
+                }
             }
             return windowBounds.Top;
         }

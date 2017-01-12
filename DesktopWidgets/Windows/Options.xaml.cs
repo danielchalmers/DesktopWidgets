@@ -61,7 +61,9 @@ namespace DesktopWidgets.Windows
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             foreach (var be in Pages.SelectMany(BindingOperations.GetSourceUpdatingBindings))
+            {
                 be.UpdateSource();
+            }
             Settings.Default.Save();
             Close();
         }
@@ -79,7 +81,9 @@ namespace DesktopWidgets.Windows
                 foreach (
                     var about in
                         Pages.OfType<About>().Where(x => x.Title == "Changelog"))
+                {
                     about.txtAbout.Text = e;
+                }
             });
         }
     }

@@ -51,15 +51,23 @@ namespace DesktopWidgets
             if (ApplicationDeployment.IsNetworkDeployed &&
                 AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null &&
                 AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
+            {
                 Arguments =
                     AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData[0].Split(',').ToList();
+            }
             else if (e.Args.Length > 0)
+            {
                 Arguments = e.Args[0].Split(',').ToList();
+            }
             else
+            {
                 Arguments = new List<string>();
+            }
 
             if (!AppInitHelper.Initialize())
+            {
                 return;
+            }
             TrayIcon = (TaskbarIcon) Resources["TrayIcon"];
             AppInitHelper.InitializeExtra();
 
@@ -102,7 +110,9 @@ namespace DesktopWidgets
                 AppMutex?.ReleaseMutex();
 
                 if (RestartArguments != null)
+                {
                     Process.Start(AppHelper.AppPath, string.Join(",-", RestartArguments));
+                }
             }
             catch
             {
@@ -121,7 +131,9 @@ namespace DesktopWidgets
                 MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
             if (!SuccessfullyLoaded)
+            {
                 AppHelper.ShutdownApplication();
+            }
         }
 
         public static void Mute(TimeSpan duration)
@@ -135,7 +147,9 @@ namespace DesktopWidgets
                 var evnt = eventPair.Event as MuteUnmuteEvent;
                 if (evnt == null || eventPair.Disabled ||
                     !(evnt.Mode == MuteEventMode.Both || evnt.Mode == MuteEventMode.Mute))
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -149,7 +163,9 @@ namespace DesktopWidgets
                 var evnt = eventPair.Event as MuteUnmuteEvent;
                 if (evnt == null || eventPair.Disabled ||
                     !(evnt.Mode == MuteEventMode.Both || evnt.Mode == MuteEventMode.Unmute))
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -157,9 +173,13 @@ namespace DesktopWidgets
         public static void ToggleMute(TimeSpan duration)
         {
             if (IsMuted)
+            {
                 Unmute();
+            }
             else
+            {
                 Mute(duration);
+            }
         }
     }
 }

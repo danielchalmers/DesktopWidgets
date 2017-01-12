@@ -29,14 +29,18 @@ namespace DesktopWidgets.Windows
         {
             var chosenWidget = WidgetHelper.ChooseWidget();
             if (chosenWidget != null)
+            {
                 ((WidgetEventBase) EventActionPair.Event).WidgetId = chosenWidget;
+            }
         }
 
         private void btnSelectWidgetForAction_OnClick(object sender, RoutedEventArgs e)
         {
             var chosenWidget = WidgetHelper.ChooseWidget();
             if (chosenWidget != null)
+            {
                 ((WidgetActionBase) EventActionPair.Action).WidgetId = chosenWidget;
+            }
         }
     }
 }

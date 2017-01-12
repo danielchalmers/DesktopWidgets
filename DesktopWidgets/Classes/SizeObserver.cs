@@ -26,21 +26,31 @@ namespace DesktopWidgets.Classes
         {
             var elem = depObj as FrameworkElement;
             if (elem == null)
+            {
                 return;
+            }
 
             if (e.NewValue is bool == false)
+            {
                 return;
+            }
 
             if ((bool) e.NewValue)
+            {
                 elem.SizeChanged += OnSizeChanged;
+            }
             else
+            {
                 elem.SizeChanged -= OnSizeChanged;
+            }
         }
 
         private static void OnSizeChanged(object sender, RoutedEventArgs e)
         {
             if (!ReferenceEquals(sender, e.OriginalSource))
+            {
                 return;
+            }
 
             var elem = e.OriginalSource as FrameworkElement;
             if (elem != null)

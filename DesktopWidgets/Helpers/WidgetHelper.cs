@@ -42,7 +42,9 @@ namespace DesktopWidgets.Helpers
                 new SelectItem(WidgetFactory.AvailableWidgets, "New Widget");
             dialog.ShowDialog();
             if (dialog.SelectedItem == null)
+            {
                 return;
+            }
             AddNewWidget((string) dialog.SelectedItem);
         }
 
@@ -52,7 +54,9 @@ namespace DesktopWidgets.Helpers
             try
             {
                 foreach (var view in App.WidgetViews.Where(view => view.Id == id).ToList())
+                {
                     view.Close();
+                }
 
                 widgetView = new WidgetView(id, id.GetNewViewModel(), id.GetNewControlView(), systemStartup);
                 App.WidgetViews.Add(widgetView);
@@ -83,7 +87,9 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             if (settings == null || settings.Disabled)
+            {
                 return;
+            }
             settings.Disabled = true;
             id.CloseView();
 
@@ -91,7 +97,9 @@ namespace DesktopWidgets.Helpers
             {
                 var evnt = eventPair.Event as WidgetDisableEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -100,7 +108,9 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             if (settings == null || !settings.Disabled)
+            {
                 return;
+            }
             settings.Disabled = false;
             id.LoadView();
 
@@ -108,7 +118,9 @@ namespace DesktopWidgets.Helpers
             {
                 var evnt = eventPair.Event as WidgetEnableEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -124,7 +136,9 @@ namespace DesktopWidgets.Helpers
                     return;
                 }
                 if (reload)
+                {
                     view.CloseAction = () => { id.LoadView(); };
+                }
                 view.CloseAnimation();
             }
             catch (Exception ex)
@@ -138,25 +152,35 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             if (settings == null)
+            {
                 return;
+            }
             if (settings.Disabled)
+            {
                 id.Enable();
+            }
             else
+            {
                 id.Disable();
+            }
         }
 
         public static void Reload(this WidgetId id)
         {
             var settings = id.GetSettings();
             if (settings == null || settings.Disabled)
+            {
                 return;
+            }
             id.CloseView(true);
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
                 var evnt = eventPair.Event as WidgetReloadEvent;
                 if (evnt == null || eventPair.Disabled || evnt.WidgetId?.Guid != id?.Guid)
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -165,10 +189,14 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             if (settings == null)
+            {
                 return;
+            }
             if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?\n\nThis cannot be undone.",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+            {
                 return;
+            }
 
             App.WidgetsSettingsStore.Widgets.Remove(settings);
             var view = id.GetView();
@@ -183,43 +211,59 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             if (settings == null)
+            {
                 return;
+            }
             var view = id.GetView();
             var name = id.GetName();
             var previousHorizontalAlignment = settings.HorizontalAlignment;
             var previousVerticalAlignment = settings.VerticalAlignment;
             var previousIsDocked = settings.IsDocked;
             if (dismiss)
+            {
                 view?.Dismiss();
+            }
             new WidgetEditor(name, settings).ShowDialog();
             if (view != null && !view.IsClosed)
+            {
                 view.UpdateUi(isDocked: previousIsDocked, dockHorizontalAlignment: previousHorizontalAlignment,
                     dockVerticalAlignment: previousVerticalAlignment);
+            }
         }
 
         public static void LoadWidgetViews(bool systemStartup = false)
         {
             if (App.WidgetViews != null)
+            {
                 foreach (var view in App.WidgetViews.Where(x => !x.IsClosed).ToList())
+                {
                     view?.Close();
+                }
+            }
             App.WidgetViews = new ObservableCollection<WidgetView>();
 
             foreach (
                 var id in
                     App.WidgetsSettingsStore.Widgets.Where(x => !x.Disabled).Select(settings => settings.Identifier))
+            {
                 id.LoadView(systemStartup);
+            }
         }
 
         public static void ShowAllWidgetIntros()
         {
             foreach (var view in App.WidgetViews)
+            {
                 view.ShowIntro();
+            }
         }
 
         public static void RefreshWidgets()
         {
             foreach (var view in App.WidgetViews)
+            {
                 view.UpdateUi();
+            }
         }
 
         public static WidgetId Clone(this WidgetId id)
@@ -273,7 +317,9 @@ namespace DesktopWidgets.Helpers
                 Multiselect = true
             };
             if (dialog.ShowDialog() != true)
+            {
                 return;
+            }
             foreach (var fileName in dialog.FileNames)
             {
                 var fileContent = File.ReadAllText(fileName);
@@ -298,7 +344,9 @@ namespace DesktopWidgets.Helpers
                     Popup.Show(GetImportConfirmText(settings.PackageInfo), MessageBoxButton.YesNo,
                         MessageBoxImage.Question) ==
                     MessageBoxResult.No)
+                {
                     return;
+                }
 
                 if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
                 {
@@ -318,11 +366,15 @@ namespace DesktopWidgets.Helpers
         {
             var settings = SettingsHelper.CloneObject(widget) as WidgetSettingsBase;
             if (settings == null)
+            {
                 return;
+            }
             settings.PackageInfo = new WidgetPackageInfo {Name = settings.Name};
             var dialog = new WidgetPackageExport(settings);
             if (dialog.ShowDialog() != true)
+            {
                 return;
+            }
             File.WriteAllText(dialog.Path, Serialise(settings));
             Popup.Show($"\"{settings.PackageInfo.Name}\" has been saved to \"{dialog.Path}\".");
         }
@@ -330,13 +382,17 @@ namespace DesktopWidgets.Helpers
         public static void ReloadWidgets()
         {
             foreach (var widget in App.WidgetsSettingsStore.Widgets)
+            {
                 widget.Identifier.Reload();
+            }
         }
 
         public static void DismissWidgets()
         {
             foreach (var view in App.WidgetViews)
+            {
                 view.Dismiss();
+            }
         }
 
         public static WidgetId ChooseWidget()
@@ -364,7 +420,9 @@ namespace DesktopWidgets.Helpers
                 var evnt = eventPair.Event as WidgetMuteUnmuteEvent;
                 if (evnt == null || eventPair.Disabled ||
                     !(evnt.Mode == MuteEventMode.Both || evnt.Mode == MuteEventMode.Mute))
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -379,7 +437,9 @@ namespace DesktopWidgets.Helpers
                 var evnt = eventPair.Event as WidgetMuteUnmuteEvent;
                 if (evnt == null || eventPair.Disabled ||
                     !(evnt.Mode == MuteEventMode.Both || evnt.Mode == MuteEventMode.Unmute))
+                {
                     continue;
+                }
                 eventPair.Action.Execute();
             }
         }
@@ -387,9 +447,13 @@ namespace DesktopWidgets.Helpers
         public static void ToggleMute(this WidgetId id, TimeSpan duration)
         {
             if (id.IsMuted())
+            {
                 id.Unmute();
+            }
             else
+            {
                 id.Mute(duration);
+            }
         }
 
         public static void Refresh(this WidgetId id)
@@ -400,7 +464,9 @@ namespace DesktopWidgets.Helpers
         public static void UnmuteWidgets()
         {
             foreach (var id in App.WidgetViews.Select(x => x.Id))
+            {
                 id.Unmute();
+            }
         }
 
         public static WidgetSettingsBase MoveUp(this WidgetId id)

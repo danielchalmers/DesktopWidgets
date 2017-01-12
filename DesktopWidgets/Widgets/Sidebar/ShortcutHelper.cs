@@ -27,16 +27,22 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             var root = Path.GetPathRoot(path);
             if (path == root)
+            {
                 return root;
+            }
             if (File.Exists(path))
+            {
                 return Path.GetFileNameWithoutExtension(path);
+            }
             return path;
         }
 
         public static void ProcessFile(this ViewModel viewModel, string filepath, string name = "", bool msg = true)
         {
             if (viewModel.Settings.ParseShortcutFiles && Path.GetExtension(filepath) == ".lnk")
+            {
                 filepath = FileSystemHelper.GetShortcutTargetFile(filepath);
+            }
             viewModel.Add(new Shortcut
             {
                 Name = name == "" ? GetNameFromPath(filepath) : name,
@@ -49,19 +55,27 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (files.Length >= 5 && msg &&
                 Popup.Show($"You are attempting to add {files.Length} shortcuts. Are you sure?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+            {
                 return;
+            }
             foreach (var file in files)
+            {
                 viewModel.ProcessFile(file);
+            }
         }
 
         public static void Add(this ViewModel viewModel, Shortcut shortcut, bool msg = true)
         {
             if (msg && viewModel.Settings.Shortcuts.Any(x => x.ProcessFile.Path == shortcut.ProcessFile.Path))
+            {
                 if (
                     Popup.Show(
                         "A shortcut with this path already exists.\n\nAre you sure you want to add this shortcut?",
                         MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
+                {
                     return;
+                }
+            }
             viewModel.Settings.Shortcuts.Add(shortcut);
         }
 
@@ -76,15 +90,21 @@ namespace DesktopWidgets.Widgets.Sidebar
             dialog.ShowDialog();
             if (string.IsNullOrWhiteSpace(dialog.NewShortcut?.Name) &&
                 string.IsNullOrWhiteSpace(dialog.NewShortcut?.ProcessFile.Path))
+            {
                 return;
+            }
             if (!File.Exists(dialog.NewShortcut.ProcessFile.Path) &&
                 !Directory.Exists(dialog.NewShortcut.ProcessFile.Path) &&
                 !LinkHelper.IsHyperlink(dialog.NewShortcut.ProcessFile.Path))
+            {
                 if (Popup.Show(
                     "That path does not exist. Do you want to add this shortcut anyway?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
+                {
                     return;
+                }
+            }
             viewModel.Add(dialog.NewShortcut);
         }
 
@@ -96,10 +116,16 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void ClearIconCache(this ViewModel viewModel)
         {
             if (viewModel.Settings.UseIconCache)
+            {
                 foreach (var t in viewModel.Settings.Shortcuts)
+                {
                     viewModel.IconCache.Remove(t.ProcessFile.Path);
+                }
+            }
             else
+            {
                 viewModel.IconCache.Clear();
+            }
         }
 
         public static void ForceRefresh(this ViewModel viewModel)
@@ -110,7 +136,9 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void Execute(this ViewModel viewModel, Shortcut shortcut, bool hide = true)
         {
             if (viewModel.Settings.HideOnExecute && hide && viewModel.Settings.OpenMode != OpenMode.AlwaysOpen)
+            {
                 viewModel.View?.HideUi();
+            }
             if (File.Exists(shortcut.ProcessFile.Path) || Directory.Exists(shortcut.ProcessFile.Path) ||
                 LinkHelper.IsHyperlink(shortcut.ProcessFile.Path))
             {
@@ -121,7 +149,9 @@ namespace DesktopWidgets.Widgets.Sidebar
                 if (Popup.Show(
                     $"This file does not exist. Do you want to remove \"{GetName(shortcut)}\"?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+                {
                     return;
+                }
                 viewModel.Remove(shortcut);
             }
         }
@@ -131,7 +161,9 @@ namespace DesktopWidgets.Widgets.Sidebar
             var dialog = new ShortcutProperties(shortcut);
             dialog.ShowDialog();
             if (dialog.NewShortcut == null)
+            {
                 return;
+            }
             viewModel.Settings.Shortcuts[viewModel.Settings.Shortcuts.IndexOf(shortcut)] = dialog.NewShortcut;
             viewModel.ReloadShortcutHotKey(dialog.NewShortcut);
         }
@@ -141,10 +173,14 @@ namespace DesktopWidgets.Widgets.Sidebar
             if (msg &&
                 Popup.Show($"Are you sure you want to remove \"{GetName(shortcut)}\"?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+            {
                 return;
+            }
             viewModel.Settings.Shortcuts.Remove(shortcut);
             if (shortcut.Hotkey.Key != Key.None)
+            {
                 HotkeyStore.RemoveHotkey(shortcut.Hotkey.Guid);
+            }
         }
 
         public static Shortcut MoveUp(this ViewModel viewModel, Shortcut shortcut, bool toEnd = false)
@@ -170,11 +206,17 @@ namespace DesktopWidgets.Widgets.Sidebar
                     return bmi;
                 }
                 if (File.Exists(shortcut.ProcessFile.Path) || Directory.Exists(shortcut.ProcessFile.Path))
+                {
                     return IconHelper.GetPathIcon(shortcut.ProcessFile.Path);
+                }
                 if (shortcut.SpecialType == "Help")
+                {
                     return SystemIcons.Information.ToImageSource();
+                }
                 if (LinkHelper.IsHyperlink(shortcut.ProcessFile.Path))
+                {
                     return IconHelper.Extract("shell32.dll", 13, true).ToImageSource();
+                }
             }
             catch
             {
@@ -186,10 +228,14 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static ImageSource GetShortcutIcon(this Shortcut shortcut, ViewModel viewModel)
         {
             if (!viewModel.Settings.UseIconCache)
+            {
                 return GetShortcutIcon(shortcut);
+            }
 
             if (!viewModel.IconCache.ContainsKey(shortcut.ProcessFile.Path))
+            {
                 viewModel.IconCache.Add(shortcut.ProcessFile.Path, GetShortcutIcon(shortcut));
+            }
             return viewModel.IconCache[shortcut.ProcessFile.Path];
         }
 
@@ -243,7 +289,9 @@ namespace DesktopWidgets.Widgets.Sidebar
                                     ProcessFile = new ProcessFile(file),
                                     Name = Path.GetFileNameWithoutExtension(file)
                                 }))
+                    {
                         yield return shortcut;
+                    }
                     break;
             }
         }
@@ -252,12 +300,18 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             var dataList = new List<string>();
             if (!string.IsNullOrWhiteSpace(shortcut.ProcessFile.Path))
+            {
                 dataList.Add(shortcut.ProcessFile.Path);
+            }
             if (!string.IsNullOrWhiteSpace(shortcut.ProcessFile.Arguments))
+            {
                 dataList.Add(shortcut.ProcessFile.Arguments);
+            }
             var dataStr = string.Join(", ", dataList);
             if (!string.IsNullOrWhiteSpace(dataStr))
+            {
                 dataStr = $" ({dataStr})";
+            }
 
             return $"{shortcut.Name}{dataStr}";
         }

@@ -29,7 +29,9 @@ namespace DesktopWidgets.Actions
         {
             if (!WorksIfMuted && App.IsMuted ||
                 (!WorksIfForegroundIsFullscreen && FullScreenHelper.DoesAnyMonitorHaveFullscreenApp()))
+            {
                 return;
+            }
             DelayedAction.RunAction((int) Delay.TotalMilliseconds, () =>
             {
                 try
@@ -39,8 +41,10 @@ namespace DesktopWidgets.Actions
                 catch (Exception ex)
                 {
                     if (ShowErrors)
+                    {
                         Popup.ShowAsync($"{GetType().Name} failed to execute.\n\n{ex.Message}",
                             image: MessageBoxImage.Error);
+                    }
                 }
             });
         }

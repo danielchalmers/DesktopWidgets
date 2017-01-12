@@ -71,7 +71,9 @@ namespace DesktopWidgets.WindowViewModels
         private void MouseDoubleClickExecute(MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
+            {
                 SelectedWidget?.Identifier?.GetView()?.ShowIntro(new IntroData {ExecuteFinishAction = true});
+            }
         }
 
         private void DeselectAllExecute()

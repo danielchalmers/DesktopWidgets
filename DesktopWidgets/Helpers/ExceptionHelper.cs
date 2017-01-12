@@ -15,12 +15,16 @@ namespace DesktopWidgets.Helpers
             try
             {
                 if (!Settings.Default.DumpUnhandledErrors)
+                {
                     return;
+                }
                 var serialised = JsonConvert.SerializeObject(ex, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
                 var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
                 var path = Path.Combine(ExceptionDumpPath, $"error-{timestamp}.json");
                 if (!Directory.Exists(ExceptionDumpPath))
+                {
                     Directory.CreateDirectory(ExceptionDumpPath);
+                }
                 File.WriteAllText(path, serialised);
             }
             catch

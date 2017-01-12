@@ -27,7 +27,9 @@ namespace DesktopWidgets.Widgets.RSSFeed
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             NavigateHyperlink = new RelayCommand<RequestNavigateEventArgs>(NavigateHyperlinkExecute);
             FeedItems = new ObservableCollection<FeedItem>();
             UpdateTimer = new DispatcherTimer {Interval = Settings.RefreshInterval};
@@ -119,7 +121,9 @@ namespace DesktopWidgets.Widgets.RSSFeed
                                     item.PublishDate.LocalDateTime, item.Categories)));
                     if (prevFeed.Count > 0 &&
                         FeedItems.Any(y => !prevFeed.Any(x => x.Title == y.Title && x.Hyperlink == y.Hyperlink)))
+                    {
                         OnSpecialEvent();
+                    }
                     HelpText = "";
                 }
             });
@@ -142,7 +146,9 @@ namespace DesktopWidgets.Widgets.RSSFeed
             base.OnRefresh();
             UpdateTimer.Interval = Settings.RefreshInterval;
             if (_lastFeedUrl != Settings.RssFeedUrl)
+            {
                 UpdateFeed();
+            }
         }
     }
 }

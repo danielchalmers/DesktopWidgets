@@ -16,7 +16,9 @@ namespace DesktopWidgets.Widgets.StopwatchClock
         {
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
+            {
                 return;
+            }
             StartStopCommand = new RelayCommand(StartStop);
             StartTime = CurrentTime;
         }
@@ -53,9 +55,13 @@ namespace DesktopWidgets.Widgets.StopwatchClock
         private void StartStop()
         {
             if (IsRunning)
+            {
                 Stop();
+            }
             else
+            {
                 Start();
+            }
         }
 
         private void Start()

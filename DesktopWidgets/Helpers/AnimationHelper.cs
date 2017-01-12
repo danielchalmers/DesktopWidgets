@@ -66,7 +66,9 @@ namespace DesktopWidgets.Helpers
                 else
                 {
                     if (focus && view.Settings.RefocusMainElementOnShow)
+                    {
                         view.FocusMainElement();
+                    }
                 }
                 aendAction?.Invoke();
                 view.AnimationRunning = false;
@@ -111,7 +113,9 @@ namespace DesktopWidgets.Helpers
                     {
                         counter++;
                         if (counter == 2)
+                        {
                             finishAction();
+                        }
                     };
                     var trans = new ScaleTransform();
                     view.RenderTransform = trans;

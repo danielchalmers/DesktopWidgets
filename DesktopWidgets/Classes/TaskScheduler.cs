@@ -32,7 +32,9 @@ namespace DesktopWidgets.Classes
         public void RunTick()
         {
             if (_condition)
+            {
                 _action?.Invoke();
+            }
         }
     }
 }

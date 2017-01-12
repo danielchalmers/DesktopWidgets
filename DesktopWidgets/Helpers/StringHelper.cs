@@ -8,7 +8,9 @@ namespace DesktopWidgets.Helpers
         public static bool Contains(this string source, string value, bool caseInsensitive)
         {
             if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(value))
+            {
                 return false;
+            }
             return caseInsensitive
                 ? source.IndexOf(value, 0, StringComparison.CurrentCultureIgnoreCase) != -1
                 : source.Contains(value);
@@ -29,7 +31,9 @@ namespace DesktopWidgets.Helpers
                     text = text.Substring(indexEnd + endString.Length);
                 }
                 else
+                {
                     exit = true;
+                }
             }
             return matched;
         }
@@ -39,7 +43,9 @@ namespace DesktopWidgets.Helpers
         {
             string[] suf = {"B", "KB", "MB", "GB", "TB", "PB", "EB"}; //Longs run out around EB
             if (byteCount == 0)
+            {
                 return "0" + suf[0];
+            }
             var bytes = Math.Abs(byteCount);
             var place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
             var num = Math.Round(bytes/Math.Pow(1024, place), decimalPlaces);
