@@ -49,7 +49,7 @@ namespace DesktopWidgets.WidgetBase.Styles
 
         [Category("Animation")]
         [DisplayName("Duration (ms)")]
-        public int AnimationTime { get; set; } = 250;
+        public int AnimationTime { get; set; } = 100;
 
         [Category("Background Image")]
         [DisplayName("Path")]
