@@ -42,11 +42,11 @@
         <Grid x:Key="FrameBottom">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MinWidth="50" />
                     <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MinWidth="50" />
                     <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MinWidth="50" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="{x:Type Button}" />
