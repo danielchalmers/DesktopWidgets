@@ -58,7 +58,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("General")]
         [DisplayName("Timeout")]
-        public int Timeout { get; set; } = 5000;
+        public int Timeout { get; set; } = 4000;
 
         [Category("General")]
         [DisplayName("Latency Good Max")]
