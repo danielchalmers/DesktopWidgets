@@ -8,7 +8,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="MainElement" Grid.Row="0" AcceptsReturn="True" Text="{Binding Text, Mode=TwoWay}"
+        <TextBox x:Name="MainElement" Grid.Row="0" AcceptsReturn="True"
+                 Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
     </Grid>
 </UserControl>
