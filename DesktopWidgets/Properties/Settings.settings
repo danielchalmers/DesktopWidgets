@@ -127,5 +127,8 @@
     <Setting Name="AutoSaveInterval" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:10:00</Value>
     </Setting>
+    <Setting Name="PropertyGridIsCategorized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

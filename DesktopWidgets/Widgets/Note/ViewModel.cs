@@ -11,7 +11,6 @@ namespace DesktopWidgets.Widgets.Note
             Settings = id.GetSettings() as Settings;
             if (Settings == null)
             {
-                return;
             }
         }
 

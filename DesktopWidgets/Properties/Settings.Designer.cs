@@ -501,5 +501,17 @@ namespace DesktopWidgets.Properties {
                 this["AutoSaveInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PropertyGridIsCategorized {
+            get {
+                return ((bool)(this["PropertyGridIsCategorized"]));
+            }
+            set {
+                this["PropertyGridIsCategorized"] = value;
+            }
+        }
     }
 }

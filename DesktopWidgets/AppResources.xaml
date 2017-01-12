@@ -25,7 +25,8 @@
     </Style>
     <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridCategorisedStyle"
            BasedOn="{StaticResource PropertyGridBaseStyle}">
-        <Setter Property="IsCategorized" Value="True" />
+        <Setter Property="IsCategorized"
+                Value="{Binding PropertyGridIsCategorized, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
         <Setter Property="ShowSortOptions" Value="True" />
         <Setter Property="IsMiscCategoryLabelHidden" Value="False" />
         <Setter Property="ShowSearchBox" Value="True" />
