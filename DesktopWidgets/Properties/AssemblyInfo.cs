@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Daniel Chalmers Software")]
 [assembly: AssemblyProduct("DesktopWidgets")]
-[assembly: AssemblyCopyright("© Daniel Chalmers 2016")]
+[assembly: AssemblyCopyright("© Daniel Chalmers 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: Guid("D7E6B136-3765-4938-8ACA-EED3473CE3A0")]
