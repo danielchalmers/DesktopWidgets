@@ -525,5 +525,17 @@ namespace DesktopWidgets.Properties {
                 this["OptionsGeneralFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WidgetEditorFilter {
+            get {
+                return ((string)(this["WidgetEditorFilter"]));
+            }
+            set {
+                this["WidgetEditorFilter"] = value;
+            }
+        }
     }
 }
