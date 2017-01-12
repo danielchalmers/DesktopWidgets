@@ -24,6 +24,10 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         public bool ShowFileName { get; set; } = true;
 
         [Category("Style")]
+        [DisplayName("Show File Date/Time")]
+        public bool ShowFileDateTime { get; set; } = false;
+
+        [Category("Style")]
         [DisplayName("File Name Font Settings")]
         public FontSettings FileNameFontSettings { get; set; } = new FontSettings();
 
