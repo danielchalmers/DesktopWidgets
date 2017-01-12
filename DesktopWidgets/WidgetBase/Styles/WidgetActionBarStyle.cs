@@ -27,8 +27,8 @@ namespace DesktopWidgets.WidgetBase.Styles
         [DisplayName("Dock")]
         public Dock Dock { get; set; } = Dock.Right;
 
-        [DisplayName("Margin")]
-        public Thickness Margin { get; set; } = new Thickness(10, 0, 0, 0);
+        [DisplayName("Offset")]
+        public Point Offset { get; set; } = new Point(10, 0);
 
         [DisplayName("Orientation")]
         public Orientation Orientation { get; set; } = Orientation.Vertical;

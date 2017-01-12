@@ -953,4 +953,39 @@ namespace DesktopWidgets.Classes
             throw new NotImplementedException();
         }
     }
+
+    public class DockAndOffsetToMarginConverter : IMultiValueConverter
+    {
+        public object Convert(object[] value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (!ConverterHelper.IsValueValid(value))
+            {
+                return DependencyProperty.UnsetValue;
+            }
+            if (value.Length != 2)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+            var dock = (Dock) value[0];
+            var offset = (Point) value[1];
+            switch (dock)
+            {
+                case Dock.Left:
+                    return new Thickness(0, 0, offset.X, offset.Y);
+                case Dock.Top:
+                    return new Thickness(0, 0, offset.Y, offset.X);
+                case Dock.Right:
+                    return new Thickness(offset.X, offset.Y, 0, 0);
+                case Dock.Bottom:
+                    return new Thickness(offset.Y, offset.X, 0, 0);
+                default:
+                    return new Thickness(0);
+            }
+        }
+
+        public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

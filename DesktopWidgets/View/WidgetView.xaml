@@ -54,6 +54,7 @@
         <classes:ActionBarVisibilityConverter x:Key="ActionBarVisibilityConverter" />
         <classes:DockIsHorizontalToBooleanConverter x:Key="DockIsHorizontalToBooleanConverter" />
         <classes:DockIsVerticalToBooleanConverter x:Key="DockIsVerticalToBooleanConverter" />
+        <classes:DockAndOffsetToMarginConverter x:Key="DockAndOffsetToMarginConverter" />
 
         <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.Style.BackgroundColor}"
                          Opacity="{Binding Settings.Style.BackgroundOpacity}" />
@@ -124,7 +125,14 @@
             <Setter Property="CornerRadius" Value="{Binding Settings.ActionBarStyle.CornerRadius}" />
             <Setter Property="Width" Value="{Binding Settings.ActionBarStyle.Width}" />
             <Setter Property="Height" Value="{Binding Settings.ActionBarStyle.Height}" />
-            <Setter Property="Margin" Value="{Binding Settings.ActionBarStyle.Margin}" />
+            <Setter Property="Margin">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource DockAndOffsetToMarginConverter}">
+                        <Binding Path="Settings.ActionBarStyle.Dock" />
+                        <Binding Path="Settings.ActionBarStyle.Offset" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
             <Setter Property="HorizontalAlignment" Value="{Binding Settings.ActionBarStyle.HorizontalAlignment}" />
             <Setter Property="VerticalAlignment" Value="{Binding Settings.ActionBarStyle.VerticalAlignment}" />
             <Setter Property="Visibility">
