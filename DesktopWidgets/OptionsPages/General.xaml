@@ -29,7 +29,8 @@
 
         <xctk:PropertyGrid Style="{StaticResource PropertyGridCategorisedStyle}"
                            SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
-                           AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}">
+                           AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}"
+                           Filter="{Binding OptionsGeneralFilter, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
             <xctk:PropertyGrid.PropertyDefinitions>
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="RunOnStartup"

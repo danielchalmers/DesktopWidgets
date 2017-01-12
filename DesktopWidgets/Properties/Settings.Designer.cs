@@ -513,5 +513,17 @@ namespace DesktopWidgets.Properties {
                 this["PropertyGridIsCategorized"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OptionsGeneralFilter {
+            get {
+                return ((string)(this["OptionsGeneralFilter"]));
+            }
+            set {
+                this["OptionsGeneralFilter"] = value;
+            }
+        }
     }
 }
