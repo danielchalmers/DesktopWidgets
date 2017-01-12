@@ -43,9 +43,9 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
