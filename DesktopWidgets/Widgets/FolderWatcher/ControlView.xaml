@@ -40,7 +40,7 @@
             </TextBlock>
         </Grid>
         <Grid x:Key="FrameBottom">
-            <Grid>
+            <Grid Height="30">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MinWidth="50" />
                     <ColumnDefinition Width="5" />
