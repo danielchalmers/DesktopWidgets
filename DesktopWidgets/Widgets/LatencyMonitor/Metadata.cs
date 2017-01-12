@@ -2,6 +2,6 @@
 {
     public static class Metadata
     {
-        public const string FriendlyName = "Latency Monitor";
+        public const string FriendlyName = "Network Monitor";
     }
 }
