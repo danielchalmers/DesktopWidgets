@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using DesktopWidgets.Events;
@@ -295,6 +296,14 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             var previousAlignment = _settings.HorizontalAlignment;
             var previousIsDocked = _settings.IsDocked;
             _settings.HorizontalAlignment = horizontalAlignment;
+            if (horizontalAlignment == HorizontalAlignment.Left && _settings.ActionBarStyle.Dock == Dock.Left)
+            {
+                _settings.ActionBarStyle.Dock = Dock.Right;
+            }
+            if (horizontalAlignment == HorizontalAlignment.Right && _settings.ActionBarStyle.Dock == Dock.Right)
+            {
+                _settings.ActionBarStyle.Dock = Dock.Left;
+            }
             _settings.IsDocked = true;
             if (View != null)
             {
@@ -309,6 +318,14 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             var previousAlignment = _settings.VerticalAlignment;
             var previousIsDocked = _settings.IsDocked;
             _settings.VerticalAlignment = verticalAlignment;
+            if (verticalAlignment == VerticalAlignment.Top && _settings.ActionBarStyle.Dock == Dock.Top)
+            {
+                _settings.ActionBarStyle.Dock = Dock.Bottom;
+            }
+            if (verticalAlignment == VerticalAlignment.Bottom && _settings.ActionBarStyle.Dock == Dock.Bottom)
+            {
+                _settings.ActionBarStyle.Dock = Dock.Top;
+            }
             _settings.IsDocked = true;
             if (View != null)
             {
