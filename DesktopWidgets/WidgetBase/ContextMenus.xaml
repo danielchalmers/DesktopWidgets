@@ -7,7 +7,6 @@
     <classes:NonAlwaysOnOpenModeToBoolConverter x:Key="NonAlwaysOnOpenModeToBoolConverter" />
     <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
         <MenuItem Header="Edit..." Command="{Binding EditWidget}" />
-        <Separator />
         <MenuItem Header="Dock">
             <MenuItem Header="None" Command="{Binding WidgetUndock}" />
             <MenuItem Header="Horizontal">
