@@ -26,11 +26,11 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("Style")]
         [DisplayName("Show Download Usage")]
-        public bool ShowDownloadUsage { get; set; } = true;
+        public bool ShowDownloadUsage { get; set; } = false;
 
         [Category("Style")]
         [DisplayName("Show Upload Usage")]
-        public bool ShowUploadUsage { get; set; } = true;
+        public bool ShowUploadUsage { get; set; } = false;
 
         [Category("Style")]
         [DisplayName("Date/Time Format")]
