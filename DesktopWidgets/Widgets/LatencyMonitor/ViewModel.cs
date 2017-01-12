@@ -99,9 +99,16 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             {
                 return null;
             }
-            var ping = new Ping();
-            var reply = ping.Send(Settings.HostAddress, Settings.Timeout);
-            return reply;
+            try
+            {
+                var ping = new Ping();
+                var reply = ping.Send(Settings.HostAddress, Settings.Timeout);
+                return reply;
+            }
+            catch (PingException)
+            {
+                return null;
+            }
         }
 
         private long GetDownloadedBytes()
