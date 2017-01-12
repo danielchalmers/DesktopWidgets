@@ -8,6 +8,7 @@
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:p="clr-namespace:DesktopWidgets.Properties"
         mc:Ignorable="d"
         classes:SizeObserver.Observe="True"
         classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
@@ -212,7 +213,14 @@
                     <Button Content="≡" Click="btnMenu_OnClick" ToolTip="Menu" />
                     <Button Content="⟳" Click="btnReload_OnClick" ToolTip="Reload" />
                     <Button Content="×" Click="btnDismiss_OnClick" ToolTip="Dismiss" />
-                    <Button Content="🔇" Click="btnMute_OnClick" ToolTip="Mute" />
+                    <Button Content="🔇" Click="btnMute_OnClick">
+                        <Button.ToolTip>
+                            <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                                <Binding Path="MuteDuration" Source="{x:Static p:Settings.Default}" />
+                                <Binding Path="Settings.MuteEndTime" />
+                            </MultiBinding>
+                        </Button.ToolTip>
+                    </Button>
                 </StackPanel>
                 <TextBlock Style="{StaticResource NameBoxStyle}"
                            DockPanel.Dock="{Binding Settings.ActionBarStyle.NameDock}" />
