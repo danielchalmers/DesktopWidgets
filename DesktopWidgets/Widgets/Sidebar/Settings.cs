@@ -18,7 +18,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         [Category("Shortcut Style")]
         [DisplayName("Tooltip Type")]
-        public ToolTipType ToolTipType { get; set; } = ToolTipType.None;
+        public ToolTipType ToolTipType { get; set; } = ToolTipType.Path;
 
         [Category("Shortcut Style")]
         [DisplayName("Horizontal Alignment")]
