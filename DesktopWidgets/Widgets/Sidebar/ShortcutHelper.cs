@@ -54,7 +54,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public static void ProcessFiles(this ViewModel viewModel, string[] files, bool msg = true)
         {
             if (files.Length >= 5 && msg &&
-                Popup.Show($"You are attempting to add {files.Length} shortcuts. Are you sure?",
+                Popup.Show($"You are attempting to add {files.Length} shortcuts.\n\nAre you sure?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
@@ -99,7 +99,7 @@ namespace DesktopWidgets.Widgets.Sidebar
                 !LinkHelper.IsHyperlink(dialog.NewShortcut.ProcessFile.Path))
             {
                 if (Popup.Show(
-                    "That path does not exist. Do you want to add this shortcut anyway?",
+                    "This path does not exist.\n\nDo you want to add this shortcut anyway?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
                 {
@@ -147,8 +147,8 @@ namespace DesktopWidgets.Widgets.Sidebar
             catch (Win32Exception)
             {
                 if (Popup.Show(
-                    $"This file does not exist. Do you want to remove \"{GetName(shortcut)}\"?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+                    $"This file does not exist.\n\nDo you want to remove \"{GetName(shortcut)}\"?",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 {
                     return;
                 }
@@ -172,7 +172,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             if (msg &&
                 Popup.Show($"Are you sure you want to remove \"{GetName(shortcut)}\"?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
             }

@@ -193,7 +193,7 @@ namespace DesktopWidgets.Helpers
                 return;
             }
             if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?\n\nThis cannot be undone.",
-                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
             }
@@ -351,7 +351,7 @@ namespace DesktopWidgets.Helpers
                 if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
                 {
                     Popup.Show(
-                        $"This widget requires a higher version.\n\nSupported version: {settings.PackageInfo.AppVersion}\nCurrent version: {AssemblyInfo.Version}",
+                        $"This widget requires a newer version.\n\nSupported version: {settings.PackageInfo.AppVersion}\nCurrent version: {AssemblyInfo.Version}",
                         image: MessageBoxImage.Error);
                     return;
                 }

@@ -49,7 +49,8 @@ namespace DesktopWidgets.Helpers
                     if (!auto)
                     {
                         Popup.Show(
-                            "This application was not installed via ClickOnce and cannot be updated automatically.");
+                            "This application was not installed via ClickOnce and cannot be updated automatically.",
+                            image: MessageBoxImage.Error);
                     }
                     return;
                 }
@@ -143,8 +144,8 @@ namespace DesktopWidgets.Helpers
                                 catch (DeploymentDownloadException dde)
                                 {
                                     Popup.Show(
-                                        "Cannot download the latest version of this application.\n\nPlease check your network connection, or try again later.\n\nError: " +
-                                        dde, image: MessageBoxImage.Error);
+                                        $"Failed to download the latest version.\nPlease check your network connection, or try again later.\n\nError: {dde}",
+                                        image: MessageBoxImage.Error);
                                 }
                                 break;
                         }
@@ -156,8 +157,7 @@ namespace DesktopWidgets.Helpers
                 {
                     if (!auto)
                     {
-                        Popup.Show(
-                            $"You have the latest version ({AssemblyInfo.Version}).");
+                        Popup.Show($"You have the latest version ({AssemblyInfo.Version}).");
                     }
                 }
             }

@@ -28,7 +28,7 @@ namespace DesktopWidgets.Actions
             var writePath = FilePath.Path;
             if (string.IsNullOrWhiteSpace(writePath) || !File.Exists(writePath))
             {
-                Popup.Show($"Path \"{writePath}\" does not exist!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Popup.Show($"File \"{writePath}\" does not exist.", image: MessageBoxImage.Error);
                 return;
             }
             var writeText = UseClipboard ? Clipboard.GetText() : WriteText;

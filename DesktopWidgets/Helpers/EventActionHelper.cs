@@ -71,7 +71,7 @@ namespace DesktopWidgets.Helpers
         {
             if (
                 Popup.Show("Are you sure you want to delete this event and action pair?", MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
+                    MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
             }

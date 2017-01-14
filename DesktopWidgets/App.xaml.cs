@@ -126,8 +126,8 @@ namespace DesktopWidgets
             var exception = e.Exception.Message;
             Popup.Show(
                 SuccessfullyLoaded
-                    ? $"An unhandled exception occurred:\n\n{exception}"
-                    : $"A critical unhandled exception occurred:\n\n{exception}\n\n{DesktopWidgets.Properties.Resources.AppName} will now exit.",
+                    ? $"An exception occurred:\n\n{exception}"
+                    : $"A critical exception occurred:\n\n{exception}\n\n{DesktopWidgets.Properties.Resources.AppName} will now exit.",
                 MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
             if (!SuccessfullyLoaded)

@@ -1,6 +1,5 @@
 ﻿#region
 
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -110,7 +109,7 @@ namespace DesktopWidgets.Helpers
             if (dialog.Cancelled == false &&
                 Popup.Show(
                     "Are you sure you want to overwrite all current widgets?\n\nThis cannot be undone.",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.Yes)
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -125,8 +124,8 @@ namespace DesktopWidgets.Helpers
                 catch
                 {
                     Popup.Show(
-                        $"Import failed. Data may be corrupt.{Environment.NewLine}{Environment.NewLine}No changes have been made.",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                        "Import failed.\nData may be corrupt.\n\nNo changes have been made.",
+                        image: MessageBoxImage.Error);
                     return;
                 }
                 Settings.Default.Widgets = dialog.InputData;
