@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Select Item"
         Width="300" MinHeight="350" SizeToContent="Height"
-        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -17,7 +18,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding ItemsList}"
+        <ListBox x:Name="ItemsListBox"
+                 Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                 ItemsSource="{Binding ItemsList}"
                  SelectedItem="{Binding SelectedItem}" Margin="15" />
 
         <Grid Grid.Column="0" Grid.Row="1" Margin="15,0,15,15">

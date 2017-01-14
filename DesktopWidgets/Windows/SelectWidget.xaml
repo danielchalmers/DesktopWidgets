@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         Title="Select Widget"
         Width="300" MinHeight="350" SizeToContent="Height"
-        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=lsWidgets}">
     <Window.Resources>
         <classes:WidgetToNameConverter x:Key="WidgetToNameConverter" />
     </Window.Resources>

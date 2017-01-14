@@ -11,7 +11,8 @@
         MinWidth="450"
         MinHeight="350"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=NavigationFrame}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15" />
@@ -42,7 +43,8 @@
         </ListBox>
 
         <ScrollViewer Grid.Column="3" Grid.Row="1" VerticalScrollBarVisibility="Visible">
-            <Frame NavigationUIVisibility="Hidden" Margin="0,0,10,0" Content="{Binding CurrentPage}" />
+            <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" Margin="0,0,10,0"
+                   Content="{Binding CurrentPage}" />
         </ScrollViewer>
 
         <Grid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="2" Margin="15">

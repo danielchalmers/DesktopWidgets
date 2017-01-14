@@ -13,7 +13,8 @@
         MinWidth="300"
         MinHeight="300"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=PropertyGrid}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

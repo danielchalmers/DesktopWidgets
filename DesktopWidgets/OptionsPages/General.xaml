@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-      mc:Ignorable="d" Title="Options">
+      mc:Ignorable="d" Title="Options"
+      FocusManager.FocusedElement="{Binding ElementName=SettingsPropertyGrid}">
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
@@ -27,7 +28,8 @@
                     Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 
-        <xctk:PropertyGrid Style="{StaticResource PropertyGridCategorisedStyle}"
+        <xctk:PropertyGrid x:Name="SettingsPropertyGrid"
+                           Style="{StaticResource PropertyGridCategorisedStyle}"
                            SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
                            AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}"
                            Filter="{Binding OptionsGeneralFilter, Source={x:Static p:Settings.Default}, Mode=TwoWay}">

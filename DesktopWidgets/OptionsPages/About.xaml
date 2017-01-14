@@ -7,8 +7,8 @@
       xmlns:properties="clr-namespace:DesktopWidgets.Properties"
       xmlns:classes="clr-namespace:DesktopWidgets.Classes"
       mc:Ignorable="d"
-      Title="About">
-
+      Title="About"
+      FocusManager.FocusedElement="{Binding ElementName=txtAbout}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

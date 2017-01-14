@@ -29,7 +29,6 @@ namespace DesktopWidgets.Windows
                 txtData.SelectAll();
             }
             DataContext = this;
-            txtData.Focus();
         }
 
         public bool Cancelled { get; private set; }

@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="Widget Package Exporter"
         Width="400" SizeToContent="Height"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=NameTextBox}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -41,7 +42,7 @@
                 </Style>
             </Grid.Resources>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" />
+            <TextBlock x:Name="NameTextBox" Grid.Row="0" Grid.Column="0" Text="Name:" />
             <TextBox Grid.Row="0" Grid.Column="1"
                      VerticalAlignment="Center" Height="23"
                      Text="{Binding Path=Settings.PackageInfo.Name, Mode=TwoWay}" />

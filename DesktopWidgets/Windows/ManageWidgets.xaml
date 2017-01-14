@@ -14,7 +14,8 @@
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsHeight, Mode=TwoWay}"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsWidth, Mode=TwoWay}"
         MinHeight="537" MinWidth="535"
-        ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
     <Window.DataContext>
         <windowViewModels:ManageWidgetsViewModel />
     </Window.DataContext>
@@ -36,7 +37,8 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="15" ItemsSource="{Binding Path=Widgets, Source={x:Static local:App.WidgetsSettingsStore}}"
+        <ListBox x:Name="ItemsListBox"
+                 Margin="15" ItemsSource="{Binding Path=Widgets, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedWidget}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDown">

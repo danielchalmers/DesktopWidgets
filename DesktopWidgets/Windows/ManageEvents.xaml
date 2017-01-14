@@ -14,7 +14,8 @@
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsHeight, Mode=TwoWay}"
         MinHeight="497" MinWidth="535"
-        ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
     <Window.DataContext>
         <windowViewModels:ManageEventsViewModel />
     </Window.DataContext>
@@ -34,7 +35,8 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ListBox Margin="15"
+        <ListBox x:Name="ItemsListBox"
+                 Margin="15"
                  ItemsSource="{Binding Path=EventActionPairs, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedPair}">
             <i:Interaction.Triggers>

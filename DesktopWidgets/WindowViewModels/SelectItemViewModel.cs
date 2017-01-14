@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using GalaSoft.MvvmLight;
 
 namespace DesktopWidgets.WindowViewModels
@@ -11,11 +12,7 @@ namespace DesktopWidgets.WindowViewModels
         public SelectItemViewModel(IEnumerable<object> items)
         {
             ItemsList = new ObservableCollection<object>(items);
-
-            if (ItemsList.Count > 0)
-            {
-                SelectedItem = ItemsList[0];
-            }
+            SelectedItem = ItemsList.FirstOrDefault();
         }
 
         public ObservableCollection<object> ItemsList { get; set; }
