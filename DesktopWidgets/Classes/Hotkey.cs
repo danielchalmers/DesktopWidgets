@@ -50,5 +50,10 @@ namespace DesktopWidgets.Classes
         [PropertyOrder(5)]
         [DisplayName("Disabled")]
         public bool Disabled { get; set; } = false;
+
+        public override string ToString()
+        {
+            return ModifierKeys == ModifierKeys.None ? Key.ToString() : $"{ModifierKeys}+{Key}";
+        }
     }
 }

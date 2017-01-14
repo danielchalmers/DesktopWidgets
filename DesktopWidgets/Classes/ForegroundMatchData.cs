@@ -14,5 +14,10 @@ namespace DesktopWidgets.Classes
 
         [DisplayName("Fullscreen")]
         public YesNoAny Fullscreen { get; set; } = YesNoAny.Any;
+
+        public override string ToString()
+        {
+            return Title;
+        }
     }
 }

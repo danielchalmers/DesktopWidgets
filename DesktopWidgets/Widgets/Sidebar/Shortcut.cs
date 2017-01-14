@@ -41,5 +41,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             return MemberwiseClone();
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

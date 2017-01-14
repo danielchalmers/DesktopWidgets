@@ -9,5 +9,10 @@ namespace DesktopWidgets.Classes
     {
         public int Rate { get; set; } = 0;
         public int Volume { get; set; } = 100;
+
+        public override string ToString()
+        {
+            return $"Rate: {Rate}, Volume: {Volume}";
+        }
     }
 }

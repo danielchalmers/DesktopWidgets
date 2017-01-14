@@ -41,5 +41,10 @@ namespace DesktopWidgets.WidgetBase.Styles
 
         [DisplayName("Vertical Alignment")]
         public VerticalAlignment VerticalAlignment { get; set; }
+
+        public override string ToString()
+        {
+            return BackgroundColor.ToString();
+        }
     }
 }

@@ -48,5 +48,10 @@ namespace DesktopWidgets.Classes
         [Browsable(false)]
         [DisplayName("Last Check")]
         public DateTime LastCheck { get; set; } = DateTime.Now;
+
+        public override string ToString()
+        {
+            return WatchFolders.Count > 0 ? string.Join(", ", WatchFolders) : "None";
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace DesktopWidgets.Classes
 
         [DisplayName("Font Weight")]
         public FontWeight FontWeight { get; set; } = FontWeights.Normal;
+
+        public override string ToString()
+        {
+            return $"{FontFamily}, {FontSize}pt., {FontWeight}";
+        }
     }
 }

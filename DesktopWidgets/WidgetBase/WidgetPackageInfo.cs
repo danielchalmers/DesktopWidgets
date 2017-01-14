@@ -24,5 +24,10 @@ namespace DesktopWidgets.WidgetBase
         [Browsable(false)]
         [DisplayName("App Version")]
         public Version AppVersion { get; set; } = AssemblyInfo.ActualVersion;
+
+        public override string ToString()
+        {
+            return $"{Name} - {Publisher}";
+        }
     }
 }

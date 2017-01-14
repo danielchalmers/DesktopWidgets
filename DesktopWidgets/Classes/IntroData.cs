@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.Classes
@@ -26,5 +27,10 @@ namespace DesktopWidgets.Classes
         [PropertyOrder(4)]
         [DisplayName("Trigger End Event")]
         public bool ExecuteFinishAction { get; set; } = true;
+
+        public override string ToString()
+        {
+            return TimeSpan.FromMilliseconds(Duration).ToString();
+        }
     }
 }
