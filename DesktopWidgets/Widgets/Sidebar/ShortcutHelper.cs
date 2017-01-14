@@ -270,10 +270,10 @@ namespace DesktopWidgets.Widgets.Sidebar
             };
             yield return new Shortcut
             {
-                Name = "Command Prompt",
+                Name = "Paint",
                 ProcessFile =
                     new ProcessFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),
-                        "cmd.exe"))
+                        "mspaint.exe"))
             };
         }
 
