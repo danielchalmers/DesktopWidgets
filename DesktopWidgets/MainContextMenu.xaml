@@ -19,26 +19,26 @@
             </MenuItem.Header>
         </MenuItem>
         <Separator />
-        <MenuItem Header="New Widget..." Click="menuItemNewWidget_OnClick" />
-        <MenuItem Header="Manage Widgets..." Click="menuItemManageWidgets_OnClick" />
-        <MenuItem Header="All Widgets">
+        <MenuItem Header="_New Widget..." Click="menuItemNewWidget_OnClick" />
+        <MenuItem Header="Manage _Widgets..." Click="menuItemManageWidgets_OnClick" />
+        <MenuItem Header="_All Widgets">
             <MenuItem.ItemsSource>
                 <CompositeCollection>
-                    <MenuItem Header="Reload" Click="menuItemReloadWidgets_OnClick" />
-                    <MenuItem Header="Dismiss" Click="menuItemDismissWidgets_OnClick" />
-                    <MenuItem Header="Show" Click="menuItemShowWidgets_OnClick" />
-                    <MenuItem Header="Unmute" Click="menuItemUnmuteWidgets_OnClick" />
+                    <MenuItem Header="_Reload" Click="menuItemReloadWidgets_OnClick" />
+                    <MenuItem Header="_Dismiss" Click="menuItemDismissWidgets_OnClick" />
+                    <MenuItem Header="_Show" Click="menuItemShowWidgets_OnClick" />
+                    <MenuItem Header="_Unmute" Click="menuItemUnmuteWidgets_OnClick" />
                 </CompositeCollection>
             </MenuItem.ItemsSource>
         </MenuItem>
         <Separator />
-        <MenuItem Header="Manage Events..." Click="menuItemManageEvents_OnClick" />
-        <MenuItem Header="Options..." Click="menuItemOptions_OnClick" />
+        <MenuItem Header="Manage _Events..." Click="menuItemManageEvents_OnClick" />
+        <MenuItem Header="_Options..." Click="menuItemOptions_OnClick" />
         <Separator />
-        <MenuItem Header="Check for Updates..." Click="menuItemCheckForUpdates_OnClick"
+        <MenuItem Header="Check for _Updates..." Click="menuItemCheckForUpdates_OnClick"
                   IsEnabled="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}}" />
         <Separator />
-        <MenuItem Header="Exit" Click="menuItemExit_OnClick" />
+        <MenuItem Header="E_xit" Click="menuItemExit_OnClick" />
     </x:Array>
     <ContextMenu x:Shared="False" x:Key="MainContextMenu" ItemsSource="{StaticResource MainMenuItems}" />
 </ResourceDictionary>
