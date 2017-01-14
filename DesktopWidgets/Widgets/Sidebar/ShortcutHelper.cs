@@ -239,56 +239,72 @@ namespace DesktopWidgets.Widgets.Sidebar
             return viewModel.IconCache[shortcut.ProcessFile.Path];
         }
 
+        private static IEnumerable<Shortcut> GetDefaultPresetShortcuts()
+        {
+            yield return new Shortcut
+            {
+                Name = "Help",
+                ProcessFile = new ProcessFile(Resources.Website),
+                SpecialType = "Help"
+            };
+            yield return new Shortcut
+            {
+                Name = "File Explorer",
+                ProcessFile =
+                    new ProcessFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows),
+                        "explorer.exe"))
+            };
+            yield return new Shortcut
+            {
+                Name = "Notepad",
+                ProcessFile =
+                    new ProcessFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows),
+                        "notepad.exe"))
+            };
+            yield return new Shortcut
+            {
+                Name = "Calculator",
+                ProcessFile =
+                    new ProcessFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),
+                        "calc.exe"))
+            };
+            yield return new Shortcut
+            {
+                Name = "Command Prompt",
+                ProcessFile =
+                    new ProcessFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System),
+                        "cmd.exe"))
+            };
+        }
+
+        private static IEnumerable<Shortcut> GetTaskbarShortcuts()
+        {
+            var taskbarPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                Resources.TaskBarPath);
+            foreach (var shortcut in Directory.EnumerateFiles(taskbarPath)
+                .Where(file => Path.GetFileName(file) != Resources.WindowsFolderDataFile)
+                .Select(file => new Shortcut
+                {
+                    ProcessFile = new ProcessFile(file),
+                    Name = Path.GetFileNameWithoutExtension(file)
+                }))
+            {
+                yield return shortcut;
+            }
+        }
+
         public static IEnumerable<Shortcut> GetDefaultShortcuts(DefaultShortcutsMode mode)
         {
             switch (mode)
             {
                 case DefaultShortcutsMode.Preset:
-                    yield return new Shortcut
+                    foreach (var shortcut in GetDefaultPresetShortcuts())
                     {
-                        Name = "Help",
-                        ProcessFile = new ProcessFile(Resources.Website),
-                        SpecialType = "Help"
-                    };
-                    yield return new Shortcut
-                    {
-                        Name = "File Explorer",
-                        ProcessFile =
-                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.Windows) +
-                                            "\\explorer.exe")
-                    };
-                    yield return new Shortcut
-                    {
-                        Name = "Notepad",
-                        ProcessFile =
-                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.Windows) +
-                                            "\\notepad.exe")
-                    };
-                    yield return new Shortcut
-                    {
-                        Name = "Calculator",
-                        ProcessFile =
-                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\calc.exe")
-                    };
-                    yield return new Shortcut
-                    {
-                        Name = "Command Prompt",
-                        ProcessFile =
-                            new ProcessFile(Environment.GetFolderPath(Environment.SpecialFolder.System) + "\\cmd.exe")
-                    };
+                        yield return shortcut;
+                    }
                     break;
                 case DefaultShortcutsMode.Taskbar:
-                    var taskbarPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                      Resources.TaskBarPath;
-                    foreach (var shortcut in Directory.GetFiles(taskbarPath)
-                        .Where(file => Path.GetFileName(file) != Resources.WindowsFolderDataFile)
-                        .Select(
-                            file =>
-                                new Shortcut
-                                {
-                                    ProcessFile = new ProcessFile(file),
-                                    Name = Path.GetFileNameWithoutExtension(file)
-                                }))
+                    foreach (var shortcut in GetTaskbarShortcuts())
                     {
                         yield return shortcut;
                     }
