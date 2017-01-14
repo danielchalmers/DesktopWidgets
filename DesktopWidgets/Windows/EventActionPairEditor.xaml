@@ -13,7 +13,8 @@
         MinWidth="300"
         MinHeight="300"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=PropertyGrid1}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,7 +34,8 @@
             <TextBlock Grid.Column="0" Text="Name:" />
             <TextBox Grid.Column="2" Text="{Binding EventActionPair.Name}" />
         </Grid>
-        <xctk:PropertyGrid Grid.Row="2"
+        <xctk:PropertyGrid x:Name="PropertyGrid1"
+                           Grid.Row="2"
                            Style="{StaticResource PropertyGridNonCategorisedStyle}"
                            ShowTitle="True"
                            SelectedObject="{Binding EventActionPair.Event}">
