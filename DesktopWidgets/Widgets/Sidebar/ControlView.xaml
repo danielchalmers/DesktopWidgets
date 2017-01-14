@@ -115,9 +115,9 @@
         </Grid>
 
         <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="SidebarMenuItems">
-            <MenuItem Header="New Shortcut..." Command="{Binding NewShortcut}" />
-            <MenuItem Header="New Separator..." Command="{Binding NewSeparator}" />
-            <MenuItem Header="Manage Shortcuts..." Command="{Binding ManageShortcut}" />
+            <MenuItem Header="New _Shortcut..." Command="{Binding NewShortcut}" />
+            <MenuItem Header="New S_eparator..." Command="{Binding NewSeparator}" />
+            <MenuItem Header="_Manage Shortcuts..." Command="{Binding ManageShortcut}" />
         </x:Array>
         <ContextMenu x:Key="WidgetContextMenu" IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
             <ContextMenu.ItemsSource>
@@ -136,14 +136,14 @@
             <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                 <ContextMenu.ItemsSource>
                     <CompositeCollection>
-                        <MenuItem Header="Edit..." Command="{Binding ShortcutEdit}" />
+                        <MenuItem Header="_Edit..." Command="{Binding ShortcutEdit}" />
                         <Separator />
-                        <MenuItem Header="Move Up" Command="{Binding ShortcutMoveUp}" />
-                        <MenuItem Header="Move Down" Command="{Binding ShortcutMoveDown}" />
+                        <MenuItem Header="Move _Up" Command="{Binding ShortcutMoveUp}" />
+                        <MenuItem Header="Move _Down" Command="{Binding ShortcutMoveDown}" />
                         <Separator />
-                        <MenuItem Header="Remove..." Command="{Binding ShortcutRemove}" />
+                        <MenuItem Header="_Remove..." Command="{Binding ShortcutRemove}" />
                         <Separator />
-                        <MenuItem Header="Open Folder" Command="{Binding ShortcutOpenFolder}" />
+                        <MenuItem Header="Open _Folder" Command="{Binding ShortcutOpenFolder}" />
                         <Separator />
                         <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
                         <Separator />
