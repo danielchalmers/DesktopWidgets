@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -139,12 +140,11 @@ namespace DesktopWidgets.Widgets.Sidebar
             {
                 viewModel.View?.HideUi();
             }
-            if (File.Exists(shortcut.ProcessFile.Path) || Directory.Exists(shortcut.ProcessFile.Path) ||
-                LinkHelper.IsHyperlink(shortcut.ProcessFile.Path))
+            try
             {
                 ProcessHelper.Launch(shortcut.ProcessFile);
             }
-            else
+            catch (Win32Exception)
             {
                 if (Popup.Show(
                     $"This file does not exist. Do you want to remove \"{GetName(shortcut)}\"?",
