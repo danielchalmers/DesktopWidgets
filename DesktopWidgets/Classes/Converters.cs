@@ -52,7 +52,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return settings.Disabled ? "_Enable" : "_Disable";
+            return settings.Disabled ? "En_able" : "Disa_ble";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -432,7 +432,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "_Enable" : "_Disable";
+            return (bool) value ? "En_able" : "Disa_ble";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
