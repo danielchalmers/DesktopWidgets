@@ -22,9 +22,9 @@
                     <Setter Property="Height" Value="23" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Import..." Click="btnImport_OnClick" />
-            <Button Content="Export..." Click="btnExport_OnClick" />
-            <Button Content="Defaults..." Click="btnDefaults_OnClick"
+            <Button Content="_Import..." Click="btnImport_OnClick" />
+            <Button Content="_Export..." Click="btnExport_OnClick" />
+            <Button Content="_Defaults..." Click="btnDefaults_OnClick"
                     Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 
