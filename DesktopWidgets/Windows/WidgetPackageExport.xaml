@@ -74,8 +74,8 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" Content="OK" Click="btnOK_OnClick" IsDefault="True" />
-            <Button Grid.Column="3" Content="Cancel" Click="btnCancel_OnClick" IsCancel="True" />
+            <Button Grid.Column="1" Content="_OK" Click="btnOK_OnClick" IsDefault="True" />
+            <Button Grid.Column="3" Content="_Cancel" Click="btnCancel_OnClick" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>

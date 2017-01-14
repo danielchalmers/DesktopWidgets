@@ -60,8 +60,8 @@
                     <Setter Property="Width" Value="75" />
                 </Style>
             </Grid.Resources>
-            <Button Grid.Column="1" Content="OK" Click="btnOK_Click" IsDefault="True" />
-            <Button Grid.Column="3" Content="Cancel" Click="btnCancel_Click" IsCancel="True" />
+            <Button Grid.Column="1" Content="_OK" Click="btnOK_Click" IsDefault="True" />
+            <Button Grid.Column="3" Content="_Cancel" Click="btnCancel_Click" IsCancel="True" />
         </Grid>
     </Grid>
 </Window>

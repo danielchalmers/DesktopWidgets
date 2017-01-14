@@ -106,7 +106,7 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" Content="OK" IsDefault="True" IsCancel="True" Click="btnOK_Click" />
+            <Button Grid.Column="1" Content="_OK" IsDefault="True" IsCancel="True" Click="btnOK_Click" />
         </Grid>
     </Grid>
 </Window>

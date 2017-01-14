@@ -61,7 +61,7 @@
                 </xctk:EditorTemplateDefinition>
             </xctk:PropertyGrid.EditorDefinitions>
         </xctk:PropertyGrid>
-        <Button Grid.Row="6" Grid.Column="0" Content="OK" Width="75" Height="23"
+        <Button Grid.Row="6" Grid.Column="0" Content="_OK" Width="75" Height="23"
                 HorizontalAlignment="Right"
                 IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
     </Grid>
