@@ -11,6 +11,11 @@ namespace DesktopWidgets.WindowViewModels
         public SelectItemViewModel(IEnumerable<object> items)
         {
             ItemsList = new ObservableCollection<object>(items);
+
+            if (ItemsList.Count > 0)
+            {
+                SelectedItem = ItemsList[0];
+            }
         }
 
         public ObservableCollection<object> ItemsList { get; set; }
