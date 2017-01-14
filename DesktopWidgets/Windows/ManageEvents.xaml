@@ -38,7 +38,8 @@
         <ListBox x:Name="ItemsListBox"
                  Margin="15"
                  ItemsSource="{Binding Path=EventActionPairs, Source={x:Static local:App.WidgetsSettingsStore}}"
-                 SelectedItem="{Binding SelectedPair}">
+                 SelectedItem="{Binding SelectedPair}"
+                 SelectedIndex="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDown">
                     <command:EventToCommand Command="{Binding DeselectAll}"

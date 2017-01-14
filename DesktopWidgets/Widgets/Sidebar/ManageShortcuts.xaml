@@ -28,7 +28,8 @@
 
         <ListBox Margin="15" MouseDown="listBox_MouseDown"
                  ItemsSource="{Binding ViewModel.Settings.Shortcuts}"
-                 SelectedItem="{Binding SelectedShortcut}">
+                 SelectedItem="{Binding SelectedShortcut}"
+                 SelectedIndex="0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=., Converter={StaticResource ShortcutToManageNameConverter}}" />
