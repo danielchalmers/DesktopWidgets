@@ -100,7 +100,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
             if (string.IsNullOrWhiteSpace(Settings.RssFeedUrl))
             {
-                HelpText = "Enter an RSS URL";
+                HelpText = "Enter a feed URL";
                 return;
             }
             HelpText = "Loading...";
