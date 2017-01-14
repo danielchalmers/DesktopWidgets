@@ -170,7 +170,7 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar.
+        ///   Looks up a localized string similar to Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar.
         /// </summary>
         public static string TaskBarPath {
             get {

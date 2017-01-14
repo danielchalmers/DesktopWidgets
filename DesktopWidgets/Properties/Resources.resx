@@ -152,7 +152,7 @@
     <value>Widget package (*.widget)|*.widget|All files (*.*)|*.*</value>
   </data>
   <data name="TaskBarPath" xml:space="preserve">
-    <value>\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar</value>
+    <value>Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar</value>
   </data>
   <data name="Website" xml:space="preserve">
     <value>https://danielchalmers.github.io/DesktopWidgets/</value>
