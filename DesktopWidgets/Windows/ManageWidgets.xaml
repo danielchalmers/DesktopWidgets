@@ -75,25 +75,25 @@
                                 Value="{Binding SelectedWidget, Converter={StaticResource NotNullToBoolConverter}}" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="New..." Command="{Binding NewWidget}" IsEnabled="True" />
-                <Button Content="Import..." Command="{Binding ImportWidget}" IsEnabled="True" />
+                <Button Content="_New..." Command="{Binding NewWidget}" IsEnabled="True" />
+                <Button Content="_Import..." Command="{Binding ImportWidget}" IsEnabled="True" />
                 <Button Visibility="Hidden" />
-                <Button Content="Edit..." Command="{Binding EditWidget}" />
-                <Button Content="Move Up" Command="{Binding MoveUpWidget}"
+                <Button Content="_Edit..." Command="{Binding EditWidget}" />
+                <Button Content="Move _Up" Command="{Binding MoveUpWidget}"
                         Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Content="Move Down" Command="{Binding MoveDownWidget}"
+                <Button Content="Move _Down" Command="{Binding MoveDownWidget}"
                         Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Content="Reload" Command="{Binding ReloadWidget}" />
+                <Button Content="Re_load" Command="{Binding ReloadWidget}" />
                 <Button
                     Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToMuteUnmuteNameConverter}}"
                     Command="{Binding MuteUnmuteWidget}" />
                 <Button
                     Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
                     Command="{Binding DisableWidget}" />
-                <Button Content="Remove..." Command="{Binding RemoveWidget}" />
+                <Button Content="_Remove..." Command="{Binding RemoveWidget}" />
                 <Button Visibility="Hidden" />
-                <Button Content="Clone" Command="{Binding CloneWidget}" />
-                <Button Content="Export..." Command="{Binding ExportWidget}" />
+                <Button Content="_Clone" Command="{Binding CloneWidget}" />
+                <Button Content="Ex_port..." Command="{Binding ExportWidget}" />
             </StackPanel>
         </ScrollViewer>
 

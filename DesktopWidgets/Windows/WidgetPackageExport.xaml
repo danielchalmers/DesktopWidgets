@@ -58,7 +58,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0" Height="23"
                          VerticalAlignment="Center" Text="{Binding Path=Path, Mode=TwoWay}" />
-                <Button Grid.Column="2" Content="Browse..." Width="75" Height="23"
+                <Button Grid.Column="2" Content="_Browse..." Width="75" Height="23"
                         Click="btnBrowse_OnClick" />
             </Grid>
         </Grid>

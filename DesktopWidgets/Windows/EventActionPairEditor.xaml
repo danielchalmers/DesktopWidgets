@@ -41,7 +41,7 @@
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
-                            <Button Content="Select Widget..." Click="btnSelectWidgetForEvent_OnClick" />
+                            <Button Content="_Select Widget..." Click="btnSelectWidgetForEvent_OnClick" />
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
@@ -55,7 +55,7 @@
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
-                            <Button Content="Select Widget..." Click="btnSelectWidgetForAction_OnClick" />
+                            <Button Content="_Select Widget..." Click="btnSelectWidgetForAction_OnClick" />
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>

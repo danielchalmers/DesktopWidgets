@@ -71,15 +71,15 @@
                                 Value="{Binding SelectedPair, Converter={StaticResource NotNullToBoolConverter}}" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="New..." Command="{Binding NewPair}" IsEnabled="True" />
+                <Button Content="_New..." Command="{Binding NewPair}" IsEnabled="True" />
                 <Button Visibility="Hidden" />
-                <Button Content="Edit..." Command="{Binding EditPair}" />
+                <Button Content="_Edit..." Command="{Binding EditPair}" />
                 <Button
                     Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
                     Command="{Binding ToggleEnablePair}" />
-                <Button Content="Remove..." Command="{Binding RemovePair}" />
+                <Button Content="_Remove..." Command="{Binding RemovePair}" />
                 <Button Visibility="Hidden" />
-                <Button Content="Clone" Command="{Binding ClonePair}" />
+                <Button Content="_Clone" Command="{Binding ClonePair}" />
             </StackPanel>
         </ScrollViewer>
 

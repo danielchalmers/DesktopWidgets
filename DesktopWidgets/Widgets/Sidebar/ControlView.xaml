@@ -110,7 +110,7 @@
 
         <Grid x:Key="FrameBottom">
             <StackPanel>
-                <Button Content="New Shortcut..." Command="{Binding NewShortcut}" />
+                <Button Content="_New Shortcut..." Command="{Binding NewShortcut}" />
             </StackPanel>
         </Grid>
 

@@ -52,7 +52,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return settings.Disabled ? "Enable" : "Disable";
+            return settings.Disabled ? "_Enable" : "_Disable";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -161,7 +161,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "Stop" : "Start";
+            return (bool) value ? "_Stop" : "St_art";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -432,7 +432,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "Enable" : "Disable";
+            return (bool) value ? "_Enable" : "_Disable";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -716,7 +716,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "Resume" : "Pause";
+            return (bool) value ? "_Resume" : "_Pause";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -906,7 +906,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return pair.Disabled ? "Enable" : "Disable";
+            return pair.Disabled ? "_Enable" : "_Disable";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -928,7 +928,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return settings.IsMuted() ? "Unmute" : "Mute";
+            return settings.IsMuted() ? "_Unmute" : "_Mute";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -46,14 +46,14 @@
                     <Setter Property="IsEnabled" Value="{Binding SelectedItems.Count, ElementName=lsShortcuts}" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="New..." Click="btnAdd_Click" IsEnabled="True" />
-            <Button Content="Edit..." Click="btnOptions_Click" />
-            <Button Content="Browse..." Click="btnMoveBrowse_Click" />
-            <Button Content="Remove..." Click="btnRemove_Click" />
-            <Button Content="Move Up" Click="btnMoveUp_Click" Margin="0,30,0,15" />
-            <Button Content="Move Down" Click="btnMoveDown_Click" />
-            <Button Content="Move Top" Click="btnMoveTop_Click" />
-            <Button Content="Move Bottom" Click="btnMoveBottom_Click" />
+            <Button Content="_New..." Click="btnAdd_Click" IsEnabled="True" />
+            <Button Content="_Edit..." Click="btnOptions_Click" />
+            <Button Content="_Browse..." Click="btnMoveBrowse_Click" />
+            <Button Content="_Remove..." Click="btnRemove_Click" />
+            <Button Content="Move _Up" Click="btnMoveUp_Click" Margin="0,30,0,15" />
+            <Button Content="Move _Down" Click="btnMoveDown_Click" />
+            <Button Content="Move _Top" Click="btnMoveTop_Click" />
+            <Button Content="Move Botto_m" Click="btnMoveBottom_Click" />
         </StackPanel>
 
         <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">
