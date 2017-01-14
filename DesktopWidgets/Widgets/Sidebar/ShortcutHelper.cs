@@ -281,6 +281,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             var taskbarPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 Resources.TaskBarPath);
+            if (!Directory.Exists(taskbarPath))
+            {
+                yield break;
+            }
             foreach (var shortcut in Directory.EnumerateFiles(taskbarPath)
                 .Where(file => Path.GetFileName(file) != Resources.WindowsFolderDataFile)
                 .Select(file => new Shortcut
