@@ -103,5 +103,9 @@ namespace DesktopWidgets.Widgets.FolderWatcher
         [Browsable(false)]
         [DisplayName("Resume On Start")]
         public bool ResumeOnNextStart { get; set; } = false;
+
+        [Category("Style")]
+        [DisplayName("Buttons Height")]
+        public double ButtonsHeight { get; set; } = 30;
     }
 }

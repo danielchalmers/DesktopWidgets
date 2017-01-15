@@ -57,7 +57,7 @@
             </StackPanel>
         </Grid>
         <Grid x:Key="FrameBottom">
-            <Grid Height="30">
+            <Grid Height="{Binding Settings.ButtonsHeight}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MinWidth="50" />
                     <ColumnDefinition Width="5" />
