@@ -24,6 +24,7 @@
             x:Key="SelectedEventActionPairToEnableDisableNameConverter" />
         <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
         <classes:EventActionPairToNameConverter x:Key="EventActionPairToNameConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -77,6 +78,10 @@
                 <Button Content="_New..." Command="{Binding NewPair}" IsEnabled="True" />
                 <Button Visibility="Hidden" />
                 <Button Content="_Edit..." Command="{Binding EditPair}" />
+                <Button Content="Move _Up" Command="{Binding MoveUpPair}"
+                        Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Button Content="Move _Down" Command="{Binding MoveDownPair}"
+                        Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button
                     Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
                     Command="{Binding ToggleEnablePair}" />

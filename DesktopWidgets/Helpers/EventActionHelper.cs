@@ -56,6 +56,18 @@ namespace DesktopWidgets.Helpers
             pair?.Refresh();
         }
 
+        public static EventActionPair MoveUp(this EventActionId id)
+        {
+            var pair = id.GetPair();
+            return pair == null ? null : App.WidgetsSettingsStore.EventActionPairs.MoveUp(pair);
+        }
+
+        public static EventActionPair MoveDown(this EventActionId id)
+        {
+            var pair = id.GetPair();
+            return pair == null ? null : App.WidgetsSettingsStore.EventActionPairs.MoveDown(pair);
+        }
+
         public static void ToggleEnableDisable(this EventActionId id)
         {
             var pair = id.GetPair();

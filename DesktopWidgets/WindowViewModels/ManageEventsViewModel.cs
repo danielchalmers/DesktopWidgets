@@ -15,6 +15,8 @@ namespace DesktopWidgets.WindowViewModels
             DeselectAll = new RelayCommand(DeselectAllExecute);
             NewPair = new RelayCommand(NewPairExecute);
             EditPair = new RelayCommand(EditPairExecute);
+            MoveUpPair = new RelayCommand(MoveUpPairExecute);
+            MoveDownPair = new RelayCommand(MoveDownPairExecute);
             ToggleEnablePair = new RelayCommand(ToggleEnablePairExecute);
             RemovePair = new RelayCommand(RemovePairExecute);
             ClonePair = new RelayCommand(ClonePairExecute);
@@ -36,6 +38,8 @@ namespace DesktopWidgets.WindowViewModels
         public ICommand DeselectAll { get; private set; }
         public ICommand NewPair { get; private set; }
         public ICommand EditPair { get; private set; }
+        public ICommand MoveUpPair { get; private set; }
+        public ICommand MoveDownPair { get; private set; }
         public ICommand ToggleEnablePair { get; private set; }
         public ICommand RemovePair { get; private set; }
         public ICommand ClonePair { get; private set; }
@@ -53,6 +57,16 @@ namespace DesktopWidgets.WindowViewModels
         private void EditPairExecute()
         {
             SelectedPair.Identifier.Edit();
+        }
+
+        private void MoveUpPairExecute()
+        {
+            SelectedPair = SelectedPair.Identifier.MoveUp();
+        }
+
+        private void MoveDownPairExecute()
+        {
+            SelectedPair = SelectedPair.Identifier.MoveDown();
         }
 
         private void ToggleEnablePairExecute()
