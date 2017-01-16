@@ -33,6 +33,7 @@ namespace DesktopWidgets.Classes
         {
             "Run File",
             "Write File",
+            "Tray Icon Balloon",
             "Play Sound",
             "Show Popup",
             "Speak Text",
@@ -137,6 +138,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetChangeSizeAction();
                 case "Widget Refresh":
                     return new WidgetRefreshAction();
+                case "Tray Icon Balloon":
+                    return new TrayIconBalloonAction();
             }
             return null;
         }
@@ -295,6 +298,10 @@ namespace DesktopWidgets.Classes
             if (action is WidgetRefreshAction)
             {
                 return "Widget Refresh";
+            }
+            if (action is TrayIconBalloonAction)
+            {
+                return "Tray Icon Balloon";
             }
             return null;
         }
