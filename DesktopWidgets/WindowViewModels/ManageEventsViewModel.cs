@@ -57,6 +57,7 @@ namespace DesktopWidgets.WindowViewModels
         private void EditPairExecute()
         {
             SelectedPair.Identifier.Edit();
+            RaisePropertyChanged(nameof(SelectedPair));
         }
 
         private void MoveUpPairExecute()
