@@ -51,7 +51,7 @@ namespace DesktopWidgets.WindowViewModels
 
         private void NewPairExecute()
         {
-            EventActionHelper.New();
+            SelectedPair = EventActionHelper.New();
         }
 
         private void EditPairExecute()
@@ -72,7 +72,7 @@ namespace DesktopWidgets.WindowViewModels
         private void ToggleEnablePairExecute()
         {
             SelectedPair.Identifier.ToggleEnableDisable();
-            DeselectAllExecute();
+            RaisePropertyChanged(nameof(SelectedPair));
         }
 
         private void RemovePairExecute()
@@ -83,8 +83,7 @@ namespace DesktopWidgets.WindowViewModels
 
         private void ClonePairExecute()
         {
-            SelectedPair.Identifier.Clone();
-            DeselectAllExecute();
+            SelectedPair = SelectedPair.Identifier.Clone();
         }
     }
 }

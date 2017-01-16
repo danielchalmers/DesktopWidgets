@@ -14,7 +14,7 @@ namespace DesktopWidgets.Helpers
             App.WidgetsSettingsStore.EventActionPairs.Add(pair);
         }
 
-        public static void New()
+        public static EventActionPair New()
         {
             var dialog = new SelectDualItem(
                 EventActionFactory.AvailableEvents,
@@ -26,7 +26,7 @@ namespace DesktopWidgets.Helpers
 
             if (dialog.SelectedItem1 == null || dialog.SelectedItem2 == null)
             {
-                return;
+                return null;
             }
 
             var newPair = new EventActionPair
@@ -37,6 +37,8 @@ namespace DesktopWidgets.Helpers
             newPair.Add();
 
             newPair.Edit();
+
+            return newPair;
         }
 
         private static EventActionPair GetPair(this EventActionId id)
@@ -109,7 +111,7 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static EventActionId Clone(this EventActionId id)
+        public static EventActionPair Clone(this EventActionId id)
         {
             var newPair = SettingsHelper.CloneObject(id.GetPair()) as EventActionPair;
             if (newPair != null)
@@ -117,7 +119,7 @@ namespace DesktopWidgets.Helpers
                 newPair.Identifier.GenerateNewGuid();
                 newPair.Add();
             }
-            return newPair?.Identifier;
+            return newPair;
         }
     }
 }
