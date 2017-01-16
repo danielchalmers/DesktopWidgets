@@ -10,6 +10,7 @@ namespace DesktopWidgets.Classes
         {
             "Hotkey",
             "Launch",
+            "Tray Icon Click",
             "Foreground Changed",
             "Mute / Unmute",
             "Widget Mute / Unmute",
@@ -90,6 +91,8 @@ namespace DesktopWidgets.Classes
                     return new WidgetMuteUnmuteEvent();
                 case "Widget Refresh":
                     return new WidgetRefreshEvent();
+                case "Tray Icon Click":
+                    return new TrayIconClickEvent();
             }
             return null;
         }
@@ -211,6 +214,10 @@ namespace DesktopWidgets.Classes
             if (evnt is WidgetRefreshEvent)
             {
                 return "Widget Refresh";
+            }
+            if (evnt is TrayIconClickEvent)
+            {
+                return "Tray Icon Click";
             }
             return null;
         }
