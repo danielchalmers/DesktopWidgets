@@ -83,7 +83,7 @@ namespace DesktopWidgets.WindowViewModels
 
         private void NewWidgetExecute()
         {
-            WidgetHelper.NewWidget();
+            SelectedWidget = WidgetHelper.NewWidget();
         }
 
         private void EditWidgetExecute()
@@ -104,30 +104,29 @@ namespace DesktopWidgets.WindowViewModels
         private void ReloadWidgetExecute()
         {
             SelectedWidget.Identifier.Reload();
-            DeselectAllExecute();
         }
 
         private void MuteUnmuteWidgetExecute()
         {
             SelectedWidget.Identifier.ToggleMute(Settings.Default.MuteDuration);
-            DeselectAllExecute();
+            RaisePropertyChanged(nameof(SelectedWidget));
         }
 
         private void DisableWidgetExecute()
         {
             SelectedWidget.Identifier.ToggleEnable();
-            DeselectAllExecute();
+            RaisePropertyChanged(nameof(SelectedWidget));
         }
 
         private void RemoveWidgetExecute()
         {
             SelectedWidget.Identifier.Remove(true);
+            DeselectAllExecute();
         }
 
         private void CloneWidgetExecute()
         {
-            SelectedWidget.Identifier.Clone();
-            DeselectAllExecute();
+            SelectedWidget = SelectedWidget.Identifier.Clone();
         }
 
         private void ExportWidgetExecute()

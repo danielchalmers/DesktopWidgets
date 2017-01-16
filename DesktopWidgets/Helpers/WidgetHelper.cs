@@ -36,16 +36,16 @@ namespace DesktopWidgets.Helpers
             return $"{name} ({id.GetFriendlyName()})";
         }
 
-        public static void NewWidget()
+        public static WidgetSettingsBase NewWidget()
         {
             var dialog =
                 new SelectItem(WidgetFactory.AvailableWidgets, "New Widget");
             dialog.ShowDialog();
             if (dialog.SelectedItem == null)
             {
-                return;
+                return null;
             }
-            AddNewWidget((string) dialog.SelectedItem);
+            return AddNewWidget((string) dialog.SelectedItem);
         }
 
         private static void LoadView(this WidgetId id, bool systemStartup = false)
@@ -70,17 +70,19 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        private static void AddNewWidget(string type)
+        private static WidgetSettingsBase AddNewWidget(string type)
         {
             var newWidget = WidgetFactory.GetNewSettingsFromFriendlyName(type);
             App.WidgetsSettingsStore.Widgets.Add(newWidget);
             newWidget.Identifier.LoadView();
+            return newWidget;
         }
 
-        private static void AddNewWidget(WidgetSettingsBase settings)
+        private static WidgetSettingsBase AddNewWidget(WidgetSettingsBase settings)
         {
             App.WidgetsSettingsStore.Widgets.Add(settings);
             settings.Identifier.LoadView();
+            return settings;
         }
 
         public static void Disable(this WidgetId id)
@@ -266,7 +268,7 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static WidgetId Clone(this WidgetId id)
+        public static WidgetSettingsBase Clone(this WidgetId id)
         {
             var newWidget = SettingsHelper.CloneObject(id.GetSettings()) as WidgetSettingsBase;
             if (newWidget != null)
@@ -274,7 +276,7 @@ namespace DesktopWidgets.Helpers
                 newWidget.Identifier.GenerateNewGuid();
                 AddNewWidget(newWidget);
             }
-            return newWidget?.Identifier;
+            return newWidget;
         }
 
         private static WidgetSettingsBase Deserialise(string settingsData)
