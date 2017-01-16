@@ -89,6 +89,7 @@ namespace DesktopWidgets.WindowViewModels
         private void EditWidgetExecute()
         {
             SelectedWidget.Identifier.Edit();
+            RaisePropertyChanged(nameof(SelectedWidget));
         }
 
         private void MoveUpWidgetExecute()
