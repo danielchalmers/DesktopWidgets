@@ -13,5 +13,9 @@ namespace DesktopWidgets.Widgets.Note
 
         [DisplayName("Saved Text")]
         public string Text { get; set; }
+
+        [Category("Style")]
+        [DisplayName("Read Only")]
+        public bool ReadOnly { get; set; }
     }
 }
