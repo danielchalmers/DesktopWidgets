@@ -6,7 +6,7 @@
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
         mc:Ignorable="d"
         Height="400" Width="500"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen"
         Title="{Binding Title}"
         FocusManager.FocusedElement="{Binding ElementName=txtData}">
     <Window.Resources>
