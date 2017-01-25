@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="Edit Shortcut"
         Height="400" Width="450"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
         <Grid.RowDefinitions>
