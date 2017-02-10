@@ -43,11 +43,8 @@ namespace DesktopWidgets
         }
 
         public static bool IsMuted => Settings.Default.MuteEndTime > DateTime.Now;
-
-        protected override void OnStartup(StartupEventArgs e)
+        private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            base.OnStartup(e);
-
             if (ApplicationDeployment.IsNetworkDeployed &&
                 AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData != null &&
                 AppDomain.CurrentDomain.SetupInformation.ActivationArguments.ActivationData.Length > 0)
@@ -72,7 +69,7 @@ namespace DesktopWidgets
             AppInitHelper.InitializeExtra();
 
             SystemEvents.SessionSwitch += SystemEventsOnSessionSwitch;
-            SystemEvents.DisplaySettingsChanged += (sender, args) => WidgetHelper.RefreshWidgets();
+            SystemEvents.DisplaySettingsChanged += (s, args) => WidgetHelper.RefreshWidgets();
 
             UpdateHelper.HandleUpdate();
         }
@@ -97,12 +94,10 @@ namespace DesktopWidgets
             SettingsHelper.SaveSettings();
         }
 
-        protected override void OnExit(ExitEventArgs e)
+        private void App_OnExit(object sender, ExitEventArgs e)
         {
             try
             {
-                base.OnExit(e);
-
                 SettingsHelper.SaveSettings();
 
                 TrayIcon?.Dispose();
