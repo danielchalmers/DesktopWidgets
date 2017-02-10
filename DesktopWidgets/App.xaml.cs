@@ -98,15 +98,17 @@ namespace DesktopWidgets
                 TrayIcon?.Dispose();
 
                 AppMutex?.ReleaseMutex();
-
-                if (RestartArguments != null)
-                {
-                    Process.Start(AppHelper.AppPath, string.Join(",-", RestartArguments));
-                }
             }
             catch
             {
                 // ignored
+            }
+            finally
+            {
+                if (RestartArguments != null)
+                {
+                    Process.Start(AppHelper.AppPath, string.Join(",-", RestartArguments));
+                }
             }
         }
 
