@@ -41,12 +41,6 @@
                  ItemsSource="{Binding Path=EventActionPairs, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedPair}"
                  SelectedIndex="0">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseDown">
-                    <command:EventToCommand Command="{Binding DeselectAll}"
-                                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>
