@@ -87,13 +87,6 @@ namespace DesktopWidgets
             }
         }
 
-        protected override void OnSessionEnding(SessionEndingCancelEventArgs e)
-        {
-            base.OnSessionEnding(e);
-
-            SettingsHelper.SaveSettings();
-        }
-
         private void App_OnExit(object sender, ExitEventArgs e)
         {
             try
