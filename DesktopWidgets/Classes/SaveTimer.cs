@@ -40,5 +40,11 @@ namespace DesktopWidgets.Classes
             _timer.Stop();
             _timer.Start();
         }
+
+        public void Stop()
+        {
+            _timer?.Stop();
+            _autoSaveTimer?.Stop();
+        }
     }
 }

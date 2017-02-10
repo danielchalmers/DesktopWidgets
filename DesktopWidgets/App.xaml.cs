@@ -98,6 +98,8 @@ namespace DesktopWidgets
         {
             try
             {
+                SaveTimer?.Stop();
+
                 SettingsHelper.SaveSettings();
 
                 TrayIcon?.Dispose();
