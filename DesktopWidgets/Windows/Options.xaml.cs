@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Helpers;
 using DesktopWidgets.OptionsPages;
 using DesktopWidgets.Properties;
 
@@ -34,8 +35,8 @@ namespace DesktopWidgets.Windows
         public IEnumerable<Page> Pages { get; } = new List<Page>
         {
             new General(),
-            new About("Changelog"),
-            new About("About", AssemblyInfo.CustomDescription)
+            new About("Changelog", string.Empty),
+            new About("About", AboutHelper.AboutText)
         };
 
         public Page CurrentPage

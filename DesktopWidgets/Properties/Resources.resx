@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="About" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\About.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="AppName" xml:space="preserve">
     <value>DesktopWidgets</value>
   </data>
@@ -135,9 +131,6 @@
   </data>
   <data name="GitHubMainPage" xml:space="preserve">
     <value>https://github.com/danielchalmers/DesktopWidgets</value>
-  </data>
-  <data name="IconCredit" xml:space="preserve">
-    <value>Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)</value>
   </data>
   <data name="OpenWeatherMapAPIKey" xml:space="preserve">
     <value>16ef0da0f3d3cf8813b68caff516db23</value>

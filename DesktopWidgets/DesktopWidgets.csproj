@@ -171,6 +171,7 @@
     <Compile Include="Events\WidgetMuteUnmuteEvent.cs" />
     <Compile Include="Events\MuteUnmuteEvent.cs" />
     <Compile Include="Events\WidgetRefreshEvent.cs" />
+    <Compile Include="Helpers\AboutHelper.cs" />
     <Compile Include="WidgetBase\WidgetPackageInfo.cs" />
     <Compile Include="Events\LaunchEvent.cs" />
     <Compile Include="Events\ForegroundChangedEvent.cs" />
@@ -363,6 +364,7 @@
     <Compile Include="Windows\WidgetPackageExport.xaml.cs">
       <DependentUpon>WidgetPackageExport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowViewModels\AboutViewModel.cs" />
     <Compile Include="WindowViewModels\ManageEventsViewModel.cs" />
     <Compile Include="WindowViewModels\ManageWidgetsViewModel.cs" />
     <Compile Include="WindowViewModels\SelectDualItemViewModel.cs" />
@@ -581,9 +583,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\About.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.2">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.2 %28x86 and x64%29</ProductName>
@@ -602,6 +601,9 @@
       <Progid>DesktopWidgets</Progid>
       <DefaultIcon>icon.ico</DefaultIcon>
     </FileAssociation>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

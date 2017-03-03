@@ -1,6 +1,7 @@
 ﻿#region
 
 using System.Windows.Controls;
+using DesktopWidgets.WindowViewModels;
 
 #endregion
 
@@ -11,11 +12,10 @@ namespace DesktopWidgets.OptionsPages
     /// </summary>
     public partial class About : Page
     {
-        public About(string title, string contents = "")
+        public About(string title, string text)
         {
             InitializeComponent();
-            Title = title;
-            txtAbout.Text = contents;
+            DataContext = new AboutViewModel(title, text);
         }
     }
 }

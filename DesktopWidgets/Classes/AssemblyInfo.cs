@@ -15,17 +15,6 @@ namespace DesktopWidgets.Classes
         public static string Copyright { get; } = GetAssemblyAttribute<AssemblyCopyrightAttribute>(a => a.Copyright);
         public static string Title { get; } = GetAssemblyAttribute<AssemblyTitleAttribute>(a => a.Title);
 
-        public static string Description { get; } =
-            GetAssemblyAttribute<AssemblyDescriptionAttribute>(a => a.Description);
-
-        public static string CustomDescription { get; } =
-            string.Format(Resources.About,
-                Title, Version, Copyright,
-                Resources.GitHubMainPage,
-                Resources.GitHubCommits,
-                Resources.GitHubIssues,
-                Resources.IconCredit);
-
         public static string Guid { get; } = GetAssemblyAttribute<GuidAttribute>(a => a.Value);
 
         private static string GetAssemblyAttribute<T>(Func<T, string> value)

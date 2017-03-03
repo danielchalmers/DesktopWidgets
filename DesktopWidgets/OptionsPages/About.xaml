@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:DesktopWidgets.Properties"
       xmlns:classes="clr-namespace:DesktopWidgets.Classes"
       mc:Ignorable="d"
-      Title="About"
+      Title="{Binding Title}"
       FocusManager.FocusedElement="{Binding ElementName=txtAbout}">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,8 +16,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Text="{x:Static properties:Resources.AppName}" FontSize="24" VerticalAlignment="Center"
-                   HorizontalAlignment="Left" />
-        <TextBox x:Name="txtAbout" Grid.Row="2" VerticalAlignment="Center" Style="{StaticResource InfoTextbox}" />
+                   Text="{x:Static properties:Resources.AppName}"
+                   FontSize="24"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" />
+        <TextBox Grid.Row="2"
+                 x:Name="txtAbout"
+                 Text="{Binding Text, Mode=OneWay}"
+                 Style="{StaticResource InfoTextbox}"
+                 VerticalAlignment="Center" />
     </Grid>
 </Page>

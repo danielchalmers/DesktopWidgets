@@ -61,25 +61,6 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} ({1})
-        ///
-        ///
-        ///Source Code: {3}
-        ///Changes: {4}
-        ///Issues: {5}
-        ///
-        ///Icon made by {6}
-        ///
-        ///
-        ///{2}.
-        /// </summary>
-        public static string About {
-            get {
-                return ResourceManager.GetString("About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to DesktopWidgets.
         /// </summary>
         public static string AppName {
@@ -121,15 +102,6 @@ namespace DesktopWidgets.Properties {
         public static string GitHubMainPage {
             get {
                 return ResourceManager.GetString("GitHubMainPage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Freepik (http://www.freepik.com) from www.flaticon.com is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/).
-        /// </summary>
-        public static string IconCredit {
-            get {
-                return ResourceManager.GetString("IconCredit", resourceCulture);
             }
         }
         
