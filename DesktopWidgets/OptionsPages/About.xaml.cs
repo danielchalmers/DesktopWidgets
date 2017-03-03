@@ -12,10 +12,10 @@ namespace DesktopWidgets.OptionsPages
     /// </summary>
     public partial class About : Page
     {
-        public About(string title, string text)
+        public About(string title, string text, bool showLicensesButton)
         {
             InitializeComponent();
-            DataContext = new AboutViewModel(title, text);
+            DataContext = new AboutViewModel(title, text, showLicensesButton);
         }
     }
 }

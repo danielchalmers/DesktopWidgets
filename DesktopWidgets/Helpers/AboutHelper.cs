@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
@@ -39,7 +41,7 @@ namespace DesktopWidgets.Helpers
             "Freepik (http://www.freepik.com) from www.flaticon.com" +
             " is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)";
 
-        private static Dictionary<string, string> Libraries => new Dictionary<string, string>
+        private static Dictionary<string, string> Libraries { get; } = new Dictionary<string, string>
         {
             {"Common Service Locator", "commonservicelocator.codeplex.com"},
             {"Extended WPF Toolkit", "wpftoolkit.codeplex.com"},
@@ -49,5 +51,12 @@ namespace DesktopWidgets.Helpers
             {"NHotkey", "github.com/thomaslevesque/NHotkey"},
             {"WpfAppBar", "github.com/PhilipRieck/WpfAppBar"}
         };
+
+        public static string LicensesDirectory { get; } = Path.Combine(
+            Path.GetDirectoryName(
+                Assembly.GetExecutingAssembly()
+                    .Location),
+            "Resources",
+            "Licenses");
     }
 }

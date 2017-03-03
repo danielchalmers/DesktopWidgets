@@ -35,8 +35,8 @@ namespace DesktopWidgets.Windows
         public IEnumerable<Page> Pages { get; } = new List<Page>
         {
             new General(),
-            new About("Changelog", string.Empty),
-            new About("About", AboutHelper.AboutText)
+            new About("Changelog", string.Empty, false),
+            new About("About", AboutHelper.AboutText, true)
         };
 
         public Page CurrentPage
@@ -77,15 +77,17 @@ namespace DesktopWidgets.Windows
 
         private void UpdateChangelog()
         {
-            new ChangelogDownloader().GetChangelog(e =>
-            {
-                foreach (
-                    var about in
-                        Pages.OfType<About>().Where(x => x.Title == "Changelog"))
+            new ChangelogDownloader().GetChangelog(
+                e =>
                 {
-                    about.txtAbout.Text = e;
-                }
-            });
+                    foreach (
+                        var about in
+                            Pages.OfType<About>()
+                                .Where(x => x.Title == "Changelog"))
+                    {
+                        about.txtAbout.Text = e;
+                    }
+                });
         }
     }
 }
