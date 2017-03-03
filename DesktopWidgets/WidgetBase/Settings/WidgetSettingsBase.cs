@@ -5,7 +5,7 @@ using DesktopWidgets.WidgetBase.Styles;
 
 namespace DesktopWidgets.WidgetBase.Settings
 {
-    public class WidgetSettingsBase
+    public abstract class WidgetSettingsBase
     {
         [Browsable(false)]
         [DisplayName("Disabled")]

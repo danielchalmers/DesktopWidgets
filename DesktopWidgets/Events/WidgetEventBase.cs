@@ -3,7 +3,7 @@ using DesktopWidgets.WidgetBase;
 
 namespace DesktopWidgets.Events
 {
-    internal class WidgetEventBase : IEvent
+    internal abstract class WidgetEventBase : IEvent
     {
         [DisplayName("Widget")]
         public WidgetId WidgetId { get; set; }

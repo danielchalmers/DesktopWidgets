@@ -5,7 +5,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.WidgetBase.Styles
 {
-    public class BorderStyleBase
+    public abstract class BorderStyleBase
     {
         [DisplayName("Padding")]
         public Thickness Padding { get; set; }

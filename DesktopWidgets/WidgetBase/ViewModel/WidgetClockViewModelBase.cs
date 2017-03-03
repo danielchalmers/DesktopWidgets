@@ -8,7 +8,7 @@ using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.WidgetBase.ViewModel
 {
-    public class ClockViewModelBase : WidgetViewModelBase
+    public abstract class ClockViewModelBase : WidgetViewModelBase
     {
         private readonly WidgetClockSettingsBase _settings;
         private DispatcherTimer _clockUpdateTimer;

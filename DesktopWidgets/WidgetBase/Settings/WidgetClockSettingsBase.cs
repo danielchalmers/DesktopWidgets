@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace DesktopWidgets.WidgetBase.Settings
 {
-    public class WidgetClockSettingsBase : WidgetSettingsBase
+    public abstract class WidgetClockSettingsBase : WidgetSettingsBase
     {
         protected WidgetClockSettingsBase()
         {
