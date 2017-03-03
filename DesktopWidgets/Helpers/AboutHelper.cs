@@ -14,13 +14,11 @@ namespace DesktopWidgets.Helpers
 
                 stringBuilder.AppendLine($"{AssemblyInfo.Title} ({AssemblyInfo.Version})");
                 stringBuilder.AppendLine();
-                stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"Project: {Resources.GitHubMainPage}");
                 stringBuilder.AppendLine($"Changes: {Resources.GitHubCommits}");
                 stringBuilder.AppendLine($"Issues: {Resources.GitHubIssues}");
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"Icon made by {IconCredits}");
-                stringBuilder.AppendLine();
                 stringBuilder.AppendLine();
                 stringBuilder.Append(AssemblyInfo.Copyright);
 
