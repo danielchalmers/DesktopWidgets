@@ -76,8 +76,6 @@ namespace DesktopWidgets.Helpers
             SaveWidgetsDataToSettings();
 
             Settings.Default.Save();
-
-            RegistryHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
         }
 
         public static void ResetSettings(bool msg = true, bool refresh = true)

@@ -70,8 +70,17 @@ namespace DesktopWidgets
 
             SystemEvents.SessionSwitch += SystemEventsOnSessionSwitch;
             SystemEvents.DisplaySettingsChanged += (s, args) => WidgetHelper.RefreshWidgets();
+            Settings.Default.PropertyChanged += Settings_OnPropertyChanged;
 
             UpdateHelper.HandleUpdate();
+        }
+
+        private void Settings_OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Settings.Default.RunOnStartup))
+            {
+                RegistryHelper.SetRunOnStartup(Settings.Default.RunOnStartup);
+            }
         }
 
         private void SystemEventsOnSessionSwitch(object sender, SessionSwitchEventArgs e)
