@@ -8,9 +8,13 @@
     <UserControl.Resources>
         <classes:BoolToPauseTextConverter x:Key="BoolToPauseTextConverter" />
         <Grid x:Key="FrameBottom">
-            <Button Content="{Binding IsPaused, Converter={StaticResource BoolToPauseTextConverter}}" Height="30"
+            <Button Content="{Binding IsPaused, Converter={StaticResource BoolToPauseTextConverter}}"
+                    Height="30"
                     Command="{Binding TogglePlayPause}" />
         </Grid>
     </UserControl.Resources>
-    <Image Source="{Binding ImageUrl}" Stretch="Uniform" MaxWidth="{Binding Width}" MaxHeight="{Binding Height}" />
+    <Image Source="{Binding ImageUrl}"
+           Stretch="Uniform"
+           MaxWidth="{Binding Width}"
+           MaxHeight="{Binding Height}" />
 </UserControl>

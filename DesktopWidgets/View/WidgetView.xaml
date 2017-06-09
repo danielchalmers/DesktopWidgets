@@ -14,35 +14,45 @@
         classes:SizeObserver.ObservedWidth="{Binding ActualWidth, Mode=OneWayToSource}"
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
         Closing="WidgetView_OnClosing"
-        LocationChanged="WidgetView_OnLocationChanged" AllowDrop="{Binding AllowDrop}"
+        LocationChanged="WidgetView_OnLocationChanged"
+        AllowDrop="{Binding AllowDrop}"
         SizeChanged="WidgetView_OnSizeChanged">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Drop">
-            <command:EventToCommand Command="{Binding Drop}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding Drop}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="MouseMove">
-            <command:EventToCommand Command="{Binding MouseMove}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding MouseMove}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="MouseDown">
-            <command:EventToCommand Command="{Binding MouseDown}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding MouseDown}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="MouseUp">
-            <command:EventToCommand Command="{Binding MouseUp}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding MouseUp}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="KeyDown">
-            <command:EventToCommand Command="{Binding KeyDown}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding KeyDown}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="KeyUp">
-            <command:EventToCommand Command="{Binding KeyUp}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding KeyUp}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="PreviewKeyDown">
-            <command:EventToCommand Command="{Binding PreviewKeyDown}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding PreviewKeyDown}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="PreviewKeyUp">
-            <command:EventToCommand Command="{Binding PreviewKeyUp}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding PreviewKeyUp}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
         <i:EventTrigger EventName="MouseDoubleClick">
-            <command:EventToCommand Command="{Binding MouseDoubleClick}" PassEventArgsToCommand="True" />
+            <command:EventToCommand Command="{Binding MouseDoubleClick}"
+                                    PassEventArgsToCommand="True" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
@@ -57,37 +67,61 @@
         <classes:DockIsVerticalToBooleanConverter x:Key="DockIsVerticalToBooleanConverter" />
         <classes:DockAndOffsetToMarginConverter x:Key="DockAndOffsetToMarginConverter" />
 
-        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{Binding Settings.Style.BackgroundColor}"
+        <SolidColorBrush x:Key="WindowBackgroundBrush"
+                         Color="{Binding Settings.Style.BackgroundColor}"
                          Opacity="{Binding Settings.Style.BackgroundOpacity}" />
-        <ImageBrush x:Key="WindowBackgroundImageBrush" ImageSource="{Binding Settings.Style.BackgroundImagePath}"
+        <ImageBrush x:Key="WindowBackgroundImageBrush"
+                    ImageSource="{Binding Settings.Style.BackgroundImagePath}"
                     Opacity="{Binding Settings.Style.BackgroundImageOpacity}" />
-        <SolidColorBrush x:Key="WindowForegroundBrush" Color="{Binding Settings.Style.TextColor}" />
-        <SolidColorBrush x:Key="WindowBorderBrush" Color="{Binding Settings.Style.BorderColor}"
+        <SolidColorBrush x:Key="WindowForegroundBrush"
+                         Color="{Binding Settings.Style.TextColor}" />
+        <SolidColorBrush x:Key="WindowBorderBrush"
+                         Color="{Binding Settings.Style.BorderColor}"
                          Opacity="{Binding Settings.Style.BorderOpacity}" />
 
-        <SolidColorBrush x:Key="ActionBarBackgroundBrush" Color="{Binding Settings.ActionBarStyle.BackgroundColor}"
+        <SolidColorBrush x:Key="ActionBarBackgroundBrush"
+                         Color="{Binding Settings.ActionBarStyle.BackgroundColor}"
                          Opacity="{Binding Settings.ActionBarStyle.BackgroundOpacity}" />
-        <SolidColorBrush x:Key="ActionBarForegroundBrush" Color="{Binding Settings.ActionBarStyle.TextColor}" />
+        <SolidColorBrush x:Key="ActionBarForegroundBrush"
+                         Color="{Binding Settings.ActionBarStyle.TextColor}" />
 
-        <Style x:Key="WidgetWindowStyle" TargetType="{x:Type Window}">
-            <Setter Property="WindowStyle" Value="None" />
-            <Setter Property="ResizeMode" Value="NoResize" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="AllowsTransparency" Value="True" />
-            <Setter Property="ShowInTaskbar" Value="False" />
-            <Setter Property="SizeToContent" Value="WidthAndHeight" />
-            <Setter Property="ShowActivated" Value="False" />
-            <Setter Property="Topmost" Value="{Binding Settings.Topmost}" />
-            <Setter Property="Left" Value="{Binding Left, Mode=TwoWay}" />
-            <Setter Property="Top" Value="{Binding Top, Mode=TwoWay}" />
-            <Setter Property="Focusable" Value="False" />
+        <Style x:Key="WidgetWindowStyle"
+               TargetType="{x:Type Window}">
+            <Setter Property="WindowStyle"
+                    Value="None" />
+            <Setter Property="ResizeMode"
+                    Value="NoResize" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="AllowsTransparency"
+                    Value="True" />
+            <Setter Property="ShowInTaskbar"
+                    Value="False" />
+            <Setter Property="SizeToContent"
+                    Value="WidthAndHeight" />
+            <Setter Property="ShowActivated"
+                    Value="False" />
+            <Setter Property="Topmost"
+                    Value="{Binding Settings.Topmost}" />
+            <Setter Property="Left"
+                    Value="{Binding Left, Mode=TwoWay}" />
+            <Setter Property="Top"
+                    Value="{Binding Top, Mode=TwoWay}" />
+            <Setter Property="Focusable"
+                    Value="False" />
         </Style>
-        <Style x:Key="WidgetBorderStyle" TargetType="{x:Type Border}">
-            <Setter Property="HorizontalAlignment" Value="{Binding Settings.Style.HorizontalAlignment}" />
-            <Setter Property="VerticalAlignment" Value="{Binding Settings.Style.VerticalAlignment}" />
-            <Setter Property="Background" Value="{StaticResource WindowBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource WindowBorderBrush}" />
-            <Setter Property="CornerRadius" Value="{Binding Settings.Style.CornerRadius}" />
+        <Style x:Key="WidgetBorderStyle"
+               TargetType="{x:Type Border}">
+            <Setter Property="HorizontalAlignment"
+                    Value="{Binding Settings.Style.HorizontalAlignment}" />
+            <Setter Property="VerticalAlignment"
+                    Value="{Binding Settings.Style.VerticalAlignment}" />
+            <Setter Property="Background"
+                    Value="{StaticResource WindowBackgroundBrush}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource WindowBorderBrush}" />
+            <Setter Property="CornerRadius"
+                    Value="{Binding Settings.Style.CornerRadius}" />
             <Setter Property="BorderThickness">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource SettingsToThicknessConverter}">
@@ -96,36 +130,58 @@
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Focusable"
+                    Value="False" />
         </Style>
-        <Style x:Key="WidgetBorderContainerStyle" TargetType="{x:Type Border}">
-            <Setter Property="Background" Value="{StaticResource WindowBackgroundImageBrush}" />
-            <Setter Property="Focusable" Value="False" />
+        <Style x:Key="WidgetBorderContainerStyle"
+               TargetType="{x:Type Border}">
+            <Setter Property="Background"
+                    Value="{StaticResource WindowBackgroundImageBrush}" />
+            <Setter Property="Focusable"
+                    Value="False" />
         </Style>
-        <Style x:Key="ScrollViewerContainerStyle" TargetType="{x:Type ScrollViewer}">
-            <Setter Property="MinWidth" Value="{Binding Settings.Style.MinWidth}" />
-            <Setter Property="MinHeight" Value="{Binding Settings.Style.MinHeight}" />
+        <Style x:Key="ScrollViewerContainerStyle"
+               TargetType="{x:Type ScrollViewer}">
+            <Setter Property="MinWidth"
+                    Value="{Binding Settings.Style.MinWidth}" />
+            <Setter Property="MinHeight"
+                    Value="{Binding Settings.Style.MinHeight}" />
             <Setter Property="VerticalScrollBarVisibility"
                     Value="{Binding Path=Settings.Style.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
             <Setter Property="HorizontalScrollBarVisibility"
                     Value="{Binding Path=Settings.Style.ScrollBarVisibility, Converter={StaticResource ScrollBarVisibilityConverter}}" />
-            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Focusable"
+                    Value="False" />
         </Style>
-        <Style x:Key="UserControlStyle" TargetType="{x:Type UserControl}">
-            <Setter Property="Foreground" Value="{StaticResource WindowForegroundBrush}" />
-            <Setter Property="FontSize" Value="{Binding Settings.Style.FontSettings.FontSize}" />
-            <Setter Property="FontFamily" Value="{Binding Settings.Style.FontSettings.FontFamily}" />
-            <Setter Property="FontWeight" Value="{Binding Settings.Style.FontSettings.FontWeight}" />
-            <Setter Property="Focusable" Value="False" />
-            <Setter Property="Padding" Value="{Binding Settings.Style.Padding}" />
+        <Style x:Key="UserControlStyle"
+               TargetType="{x:Type UserControl}">
+            <Setter Property="Foreground"
+                    Value="{StaticResource WindowForegroundBrush}" />
+            <Setter Property="FontSize"
+                    Value="{Binding Settings.Style.FontSettings.FontSize}" />
+            <Setter Property="FontFamily"
+                    Value="{Binding Settings.Style.FontSettings.FontFamily}" />
+            <Setter Property="FontWeight"
+                    Value="{Binding Settings.Style.FontSettings.FontWeight}" />
+            <Setter Property="Focusable"
+                    Value="False" />
+            <Setter Property="Padding"
+                    Value="{Binding Settings.Style.Padding}" />
         </Style>
-        <Style x:Key="ActionBarStyle" TargetType="{x:Type Border}">
-            <Setter Property="Focusable" Value="False" />
-            <Setter Property="Background" Value="{StaticResource ActionBarBackgroundBrush}" />
-            <Setter Property="Padding" Value="{Binding Settings.ActionBarStyle.Padding}" />
-            <Setter Property="CornerRadius" Value="{Binding Settings.ActionBarStyle.CornerRadius}" />
-            <Setter Property="Width" Value="{Binding Settings.ActionBarStyle.Width}" />
-            <Setter Property="Height" Value="{Binding Settings.ActionBarStyle.Height}" />
+        <Style x:Key="ActionBarStyle"
+               TargetType="{x:Type Border}">
+            <Setter Property="Focusable"
+                    Value="False" />
+            <Setter Property="Background"
+                    Value="{StaticResource ActionBarBackgroundBrush}" />
+            <Setter Property="Padding"
+                    Value="{Binding Settings.ActionBarStyle.Padding}" />
+            <Setter Property="CornerRadius"
+                    Value="{Binding Settings.ActionBarStyle.CornerRadius}" />
+            <Setter Property="Width"
+                    Value="{Binding Settings.ActionBarStyle.Width}" />
+            <Setter Property="Height"
+                    Value="{Binding Settings.ActionBarStyle.Height}" />
             <Setter Property="Margin">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource DockAndOffsetToMarginConverter}">
@@ -134,23 +190,29 @@
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
-            <Setter Property="HorizontalAlignment" Value="{Binding Settings.ActionBarStyle.HorizontalAlignment}" />
-            <Setter Property="VerticalAlignment" Value="{Binding Settings.ActionBarStyle.VerticalAlignment}" />
+            <Setter Property="HorizontalAlignment"
+                    Value="{Binding Settings.ActionBarStyle.HorizontalAlignment}" />
+            <Setter Property="VerticalAlignment"
+                    Value="{Binding Settings.ActionBarStyle.VerticalAlignment}" />
             <Setter Property="Visibility">
                 <Setter.Value>
                     <MultiBinding Converter="{StaticResource ActionBarVisibilityConverter}">
                         <Binding Path="Settings.ActionBarStyle.VisibilityMode" />
-                        <Binding Path="IsMouseOver" RelativeSource="{RelativeSource AncestorType={x:Type Window}}" />
+                        <Binding Path="IsMouseOver"
+                                 RelativeSource="{RelativeSource AncestorType={x:Type Window}}" />
                         <Binding Path="KeepActionBarOpen" />
                     </MultiBinding>
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <Trigger Property="Visibility" Value="Visible">
+                <Trigger Property="Visibility"
+                         Value="Visible">
                     <Trigger.EnterActions>
                         <BeginStoryboard>
                             <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0"
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                 From="0.0"
+                                                 To="1.0"
                                                  Duration="0:0:0.2" />
                             </Storyboard>
                         </BeginStoryboard>
@@ -158,37 +220,63 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="ActionBarButtonStyle" TargetType="{x:Type Button}"
+        <Style x:Key="ActionBarButtonStyle"
+               TargetType="{x:Type Button}"
                BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
-            <Setter Property="Width" Value="{Binding Settings.ActionBarStyle.ButtonSize}" />
-            <Setter Property="Height" Value="{Binding Settings.ActionBarStyle.ButtonSize}" />
-            <Setter Property="Margin" Value="{Binding Settings.ActionBarStyle.ButtonMargin}" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{StaticResource ActionBarForegroundBrush}" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="FontSize" Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontSize}" />
-            <Setter Property="FontFamily" Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontFamily}" />
-            <Setter Property="FontWeight" Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontWeight}" />
+            <Setter Property="Width"
+                    Value="{Binding Settings.ActionBarStyle.ButtonSize}" />
+            <Setter Property="Height"
+                    Value="{Binding Settings.ActionBarStyle.ButtonSize}" />
+            <Setter Property="Margin"
+                    Value="{Binding Settings.ActionBarStyle.ButtonMargin}" />
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource ActionBarForegroundBrush}" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Padding"
+                    Value="0" />
+            <Setter Property="FontSize"
+                    Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontSize}" />
+            <Setter Property="FontFamily"
+                    Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontFamily}" />
+            <Setter Property="FontWeight"
+                    Value="{Binding Settings.ActionBarStyle.ButtonFontSettings.FontWeight}" />
         </Style>
-        <Style x:Key="NameBoxStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Focusable" Value="True" />
-            <Setter Property="Foreground" Value="{StaticResource ActionBarForegroundBrush}" />
-            <Setter Property="FontFamily" Value="{Binding Settings.ActionBarStyle.FontSettings.FontFamily}" />
-            <Setter Property="FontSize" Value="{Binding Settings.ActionBarStyle.FontSettings.FontSize}" />
-            <Setter Property="FontWeight" Value="{Binding Settings.ActionBarStyle.FontSettings.FontWeight}" />
-            <Setter Property="TextAlignment" Value="Center" />
-            <Setter Property="Text" Value="{Binding Settings.Name}" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
+        <Style x:Key="NameBoxStyle"
+               TargetType="{x:Type TextBlock}">
+            <Setter Property="Focusable"
+                    Value="True" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource ActionBarForegroundBrush}" />
+            <Setter Property="FontFamily"
+                    Value="{Binding Settings.ActionBarStyle.FontSettings.FontFamily}" />
+            <Setter Property="FontSize"
+                    Value="{Binding Settings.ActionBarStyle.FontSettings.FontSize}" />
+            <Setter Property="FontWeight"
+                    Value="{Binding Settings.ActionBarStyle.FontSettings.FontWeight}" />
+            <Setter Property="TextAlignment"
+                    Value="Center" />
+            <Setter Property="Text"
+                    Value="{Binding Settings.Name}" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
             <Setter Property="Visibility"
                     Value="{Binding Settings.ActionBarStyle.ShowName, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Style>
-        <Style x:Key="FrameStyle" TargetType="{x:Type Border}">
-            <Setter Property="Visibility" Value="Collapsed" />
-            <Setter Property="Padding" Value="{Binding Settings.Style.FramePadding}" />
+        <Style x:Key="FrameStyle"
+               TargetType="{x:Type Border}">
+            <Setter Property="Visibility"
+                    Value="Collapsed" />
+            <Setter Property="Padding"
+                    Value="{Binding Settings.Style.FramePadding}" />
         </Style>
         <ContextMenu x:Key="WidgetContextMenu"
                      Visibility="{Binding Settings.Style.ShowContextMenu, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -208,15 +296,24 @@
                             DockPanel.Dock="{Binding Settings.ActionBarStyle.ButtonDock}"
                             Visibility="{Binding Settings.ActionBarStyle.ShowButtons, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <StackPanel.Resources>
-                        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ActionBarButtonStyle}" />
+                        <Style TargetType="{x:Type Button}"
+                               BasedOn="{StaticResource ActionBarButtonStyle}" />
                     </StackPanel.Resources>
-                    <Button Content="≡" Click="btnMenu_OnClick" ToolTip="Menu" />
-                    <Button Content="⟳" Click="btnReload_OnClick" ToolTip="Reload" />
-                    <Button Content="×" Click="btnDismiss_OnClick" ToolTip="Dismiss" />
-                    <Button Content="🔇" Click="btnMute_OnClick">
+                    <Button Content="≡"
+                            Click="btnMenu_OnClick"
+                            ToolTip="Menu" />
+                    <Button Content="⟳"
+                            Click="btnReload_OnClick"
+                            ToolTip="Reload" />
+                    <Button Content="×"
+                            Click="btnDismiss_OnClick"
+                            ToolTip="Dismiss" />
+                    <Button Content="🔇"
+                            Click="btnMute_OnClick">
                         <Button.ToolTip>
                             <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
-                                <Binding Path="MuteDuration" Source="{x:Static p:Settings.Default}" />
+                                <Binding Path="MuteDuration"
+                                         Source="{x:Static p:Settings.Default}" />
                                 <Binding Path="Settings.MuteEndTime" />
                             </MultiBinding>
                         </Button.ToolTip>
@@ -226,94 +323,144 @@
                            DockPanel.Dock="{Binding Settings.ActionBarStyle.NameDock}" />
             </DockPanel>
         </Border>
-        <Border x:Name="ContainerBorder1" Style="{StaticResource WidgetBorderStyle}" MouseDown="Widget_OnMouseDown">
-            <Border x:Name="ContainerBorder2" Style="{StaticResource WidgetBorderContainerStyle}">
+        <Border x:Name="ContainerBorder1"
+                Style="{StaticResource WidgetBorderStyle}"
+                MouseDown="Widget_OnMouseDown">
+            <Border x:Name="ContainerBorder2"
+                    Style="{StaticResource WidgetBorderContainerStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" x:Name="FrameContainerLeft" Style="{StaticResource FrameStyle}" />
+                    <Border Grid.Column="0"
+                            x:Name="FrameContainerLeft"
+                            Style="{StaticResource FrameStyle}" />
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Border Grid.Row="0" x:Name="FrameContainerTop" Style="{StaticResource FrameStyle}" />
-                        <ScrollViewer Grid.Row="1" x:Name="MainContentContainer"
+                        <Border Grid.Row="0"
+                                x:Name="FrameContainerTop"
+                                Style="{StaticResource FrameStyle}" />
+                        <ScrollViewer Grid.Row="1"
+                                      x:Name="MainContentContainer"
                                       Style="{StaticResource ScrollViewerContainerStyle}">
                             <ScrollViewer.Width>
                                 <MultiBinding Converter="{StaticResource SizePaddingConverter}">
                                     <Binding Path="Width" />
-                                    <Binding Path="Content.Padding.Left" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="Content.Padding.Right" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Content.Padding.Left"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Content.Padding.Right"
+                                             RelativeSource="{RelativeSource Self}" />
                                 </MultiBinding>
                             </ScrollViewer.Width>
                             <ScrollViewer.Height>
                                 <MultiBinding Converter="{StaticResource SizePaddingConverter}">
                                     <Binding Path="Height" />
-                                    <Binding Path="Content.Padding.Top" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="Content.Padding.Bottom" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Content.Padding.Top"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Content.Padding.Bottom"
+                                             RelativeSource="{RelativeSource Self}" />
                                 </MultiBinding>
                             </ScrollViewer.Height>
                             <ScrollViewer.MaxWidth>
-                                <MultiBinding Converter="{StaticResource MaxSizeConverter}" ConverterParameter="width">
+                                <MultiBinding Converter="{StaticResource MaxSizeConverter}"
+                                              ConverterParameter="width">
                                     <Binding Path="MaxWidth" />
-                                    <Binding Path="ActualWidth" ElementName="FrameContainerLeft" />
-                                    <Binding Path="ActualWidth" ElementName="FrameContainerRight" />
-                                    <Binding Path="BorderThickness.Left" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="BorderThickness.Right" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="Margin.Left" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="Margin.Right" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="BorderThickness.Left" ElementName="ContainerBorder1" />
-                                    <Binding Path="BorderThickness.Right" ElementName="ContainerBorder1" />
-                                    <Binding Path="Margin.Left" ElementName="ContainerBorder1" />
-                                    <Binding Path="Margin.Right" ElementName="ContainerBorder1" />
-                                    <Binding Path="BorderThickness.Left" ElementName="ContainerBorder2" />
-                                    <Binding Path="BorderThickness.Right" ElementName="ContainerBorder2" />
-                                    <Binding Path="Margin.Left" ElementName="ContainerBorder2" />
-                                    <Binding Path="Margin.Right" ElementName="ContainerBorder2" />
-                                    <Binding Path="Visibility" ElementName="ActionBar"
+                                    <Binding Path="ActualWidth"
+                                             ElementName="FrameContainerLeft" />
+                                    <Binding Path="ActualWidth"
+                                             ElementName="FrameContainerRight" />
+                                    <Binding Path="BorderThickness.Left"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="BorderThickness.Right"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Margin.Left"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Margin.Right"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="BorderThickness.Left"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="BorderThickness.Right"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="Margin.Left"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="Margin.Right"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="BorderThickness.Left"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="BorderThickness.Right"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="Margin.Left"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="Margin.Right"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="Visibility"
+                                             ElementName="ActionBar"
                                              Converter="{StaticResource NotCollapsedVisibilityToBooleanConverter}" />
                                     <Binding Path="Settings.ActionBarStyle.Dock"
                                              Converter="{StaticResource DockIsHorizontalToBooleanConverter}" />
-                                    <Binding Path="ActualWidth" ElementName="ActionBar" />
+                                    <Binding Path="ActualWidth"
+                                             ElementName="ActionBar" />
                                     <Binding Path="Settings.ActionBarStyle.Dock" />
                                     <Binding Path="Settings.ActionBarStyle.Offset" />
                                 </MultiBinding>
                             </ScrollViewer.MaxWidth>
                             <ScrollViewer.MaxHeight>
-                                <MultiBinding Converter="{StaticResource MaxSizeConverter}" ConverterParameter="height">
+                                <MultiBinding Converter="{StaticResource MaxSizeConverter}"
+                                              ConverterParameter="height">
                                     <Binding Path="MaxHeight" />
-                                    <Binding Path="ActualHeight" ElementName="FrameContainerTop" />
-                                    <Binding Path="ActualHeight" ElementName="FrameContainerBottom" />
-                                    <Binding Path="BorderThickness.Top" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="BorderThickness.Bottom" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="Margin.Top" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="Margin.Bottom" RelativeSource="{RelativeSource Self}" />
-                                    <Binding Path="BorderThickness.Top" ElementName="ContainerBorder1" />
-                                    <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder1" />
-                                    <Binding Path="Margin.Top" ElementName="ContainerBorder1" />
-                                    <Binding Path="Margin.Bottom" ElementName="ContainerBorder1" />
-                                    <Binding Path="BorderThickness.Top" ElementName="ContainerBorder2" />
-                                    <Binding Path="BorderThickness.Bottom" ElementName="ContainerBorder2" />
-                                    <Binding Path="Margin.Top" ElementName="ContainerBorder2" />
-                                    <Binding Path="Margin.Bottom" ElementName="ContainerBorder2" />
-                                    <Binding Path="Visibility" ElementName="ActionBar"
+                                    <Binding Path="ActualHeight"
+                                             ElementName="FrameContainerTop" />
+                                    <Binding Path="ActualHeight"
+                                             ElementName="FrameContainerBottom" />
+                                    <Binding Path="BorderThickness.Top"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="BorderThickness.Bottom"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Margin.Top"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Margin.Bottom"
+                                             RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="BorderThickness.Top"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="BorderThickness.Bottom"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="Margin.Top"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="Margin.Bottom"
+                                             ElementName="ContainerBorder1" />
+                                    <Binding Path="BorderThickness.Top"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="BorderThickness.Bottom"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="Margin.Top"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="Margin.Bottom"
+                                             ElementName="ContainerBorder2" />
+                                    <Binding Path="Visibility"
+                                             ElementName="ActionBar"
                                              Converter="{StaticResource NotCollapsedVisibilityToBooleanConverter}" />
                                     <Binding Path="Settings.ActionBarStyle.Dock"
                                              Converter="{StaticResource DockIsVerticalToBooleanConverter}" />
-                                    <Binding Path="ActualHeight" ElementName="ActionBar" />
+                                    <Binding Path="ActualHeight"
+                                             ElementName="ActionBar" />
                                     <Binding Path="Settings.ActionBarStyle.Dock" />
                                     <Binding Path="Settings.ActionBarStyle.Offset" />
                                 </MultiBinding>
                             </ScrollViewer.MaxHeight>
                         </ScrollViewer>
-                        <Border Grid.Row="2" x:Name="FrameContainerBottom" Style="{StaticResource FrameStyle}" />
+                        <Border Grid.Row="2"
+                                x:Name="FrameContainerBottom"
+                                Style="{StaticResource FrameStyle}" />
                     </Grid>
-                    <Border Grid.Column="2" x:Name="FrameContainerRight" Style="{StaticResource FrameStyle}" />
+                    <Border Grid.Column="2"
+                            x:Name="FrameContainerRight"
+                            Style="{StaticResource FrameStyle}" />
                 </Grid>
             </Border>
         </Border>

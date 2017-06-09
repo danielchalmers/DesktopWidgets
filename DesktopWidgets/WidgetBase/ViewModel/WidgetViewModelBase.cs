@@ -200,7 +200,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 case HorizontalAlignment.Left:
                     return monitorRect.Left + _settings.DockOffset.X;
                 case HorizontalAlignment.Center:
-                    return monitorRect.Right/2 - ActualWidth/2 + _settings.DockOffset.X;
+                    return monitorRect.Right / 2 - ActualWidth / 2 + _settings.DockOffset.X;
                 case HorizontalAlignment.Right:
                     return monitorRect.Right - ActualWidth - _settings.DockOffset.X;
             }
@@ -221,7 +221,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 case VerticalAlignment.Top:
                     return monitorRect.Top + _settings.DockOffset.Y;
                 case VerticalAlignment.Center:
-                    return monitorRect.Bottom/2 - ActualHeight/2 + _settings.DockOffset.Y;
+                    return monitorRect.Bottom / 2 - ActualHeight / 2 + _settings.DockOffset.Y;
                 case VerticalAlignment.Bottom:
                     return monitorRect.Bottom - ActualHeight - _settings.DockOffset.Y;
             }

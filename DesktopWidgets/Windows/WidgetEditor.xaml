@@ -20,9 +20,18 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid x:Name="PropertyGrid" Style="{StaticResource PropertyGridCategorisedStyle}" Margin="15"
+        <xctk:PropertyGrid x:Name="PropertyGrid"
+                           Style="{StaticResource PropertyGridCategorisedStyle}"
+                           Margin="15"
                            Filter="{Binding WidgetEditorFilter, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-        <Button Grid.Row="1" Content="_OK" Margin="15,0,15,15" Width="75" Height="23" HorizontalAlignment="Right"
-                IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
+        <Button Grid.Row="1"
+                Content="_OK"
+                Margin="15,0,15,15"
+                Width="75"
+                Height="23"
+                HorizontalAlignment="Right"
+                IsDefault="True"
+                IsCancel="True"
+                Click="btnOK_OnClick" />
     </Grid>
 </Window>

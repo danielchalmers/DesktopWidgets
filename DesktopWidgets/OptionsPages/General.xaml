@@ -6,25 +6,37 @@
       xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-      mc:Ignorable="d" Title="Options"
+      mc:Ignorable="d"
+      Title="Options"
       FocusManager.FocusedElement="{Binding ElementName=SettingsPropertyGrid}">
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
     <DockPanel LastChildFill="True">
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+        <StackPanel DockPanel.Dock="Top"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,10">
             <StackPanel.Resources>
                 <Style TargetType="Button">
-                    <Setter Property="Margin" Value="5,0,5,0" />
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="VerticalAlignment" Value="Stretch" />
-                    <Setter Property="Width" Value="75" />
-                    <Setter Property="Height" Value="23" />
+                    <Setter Property="Margin"
+                            Value="5,0,5,0" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Stretch" />
+                    <Setter Property="VerticalAlignment"
+                            Value="Stretch" />
+                    <Setter Property="Width"
+                            Value="75" />
+                    <Setter Property="Height"
+                            Value="23" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="_Import..." Click="btnImport_OnClick" />
-            <Button Content="_Export..." Click="btnExport_OnClick" />
-            <Button Content="_Defaults..." Click="btnDefaults_OnClick"
+            <Button Content="_Import..."
+                    Click="btnImport_OnClick" />
+            <Button Content="_Export..."
+                    Click="btnExport_OnClick" />
+            <Button Content="_Defaults..."
+                    Click="btnDefaults_OnClick"
                     Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 

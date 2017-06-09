@@ -141,7 +141,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                this.ProcessFiles((string[]) e.Data.GetData(DataFormats.FileDrop));
+                this.ProcessFiles((string[])e.Data.GetData(DataFormats.FileDrop));
             }
         }
     }

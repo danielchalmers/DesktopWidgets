@@ -29,7 +29,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var enabled = (bool) value[0];
+            var enabled = (bool)value[0];
             return enabled ? value[1] : new Thickness(0);
         }
 
@@ -110,7 +110,7 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             }
             var dateTime = System.Convert.ToDateTime(value[0]);
-            var format = (List<string>) value[1];
+            var format = (List<string>)value[1];
             return dateTime.ParseCustomFormat(format);
         }
 
@@ -130,7 +130,7 @@ namespace DesktopWidgets.Classes
             }
             var currentTime = System.Convert.ToDateTime(value[0]);
             var startTime = System.Convert.ToDateTime(value[1]);
-            var format = (List<string>) value[2];
+            var format = (List<string>)value[2];
             return (startTime - currentTime).ParseCustomFormat(format);
         }
 
@@ -144,7 +144,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return !string.IsNullOrEmpty((string) value);
+            return !string.IsNullOrEmpty((string)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -161,7 +161,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "_Stop" : "St_art";
+            return (bool)value ? "_Stop" : "St_art";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -178,7 +178,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var newValue = (ShortcutContentMode) value;
+            var newValue = (ShortcutContentMode)value;
             return newValue == ShortcutContentMode.Icon || newValue == ShortcutContentMode.Both
                 ? Visibility.Visible
                 : Visibility.Collapsed;
@@ -198,7 +198,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var newValue = (ShortcutContentMode) value;
+            var newValue = (ShortcutContentMode)value;
             return newValue == ShortcutContentMode.Text || newValue == ShortcutContentMode.Both
                 ? Visibility.Visible
                 : Visibility.Collapsed;
@@ -218,7 +218,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return ((ScrollBarVisibility) value).ToWindowsScrollBarVisibility();
+            return ((ScrollBarVisibility)value).ToWindowsScrollBarVisibility();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -259,7 +259,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return ((ImageScalingMode) value).ToBitmapScalingMode();
+            return ((ImageScalingMode)value).ToBitmapScalingMode();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -276,7 +276,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            switch ((IconPosition) value)
+            switch ((IconPosition)value)
             {
                 default:
                 case IconPosition.Right:
@@ -300,7 +300,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            switch ((IconPosition) value)
+            switch ((IconPosition)value)
             {
                 default:
                 case IconPosition.Left:
@@ -432,7 +432,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "En_able" : "Disa_ble";
+            return (bool)value ? "En_able" : "Disa_ble";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -449,7 +449,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? Visibility.Collapsed : Visibility.Visible;
+            return (bool)value ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -485,7 +485,7 @@ namespace DesktopWidgets.Classes
             }
             try
             {
-                var baseAmount = (double) value[0];
+                var baseAmount = (double)value[0];
                 var total = 0.0;
                 var ignoreNext = false;
                 foreach (var val in value.ToList().GetRange(1, value.Length - 6))
@@ -496,30 +496,30 @@ namespace DesktopWidgets.Classes
                     }
                     if (val is bool)
                     {
-                        if (!(bool) val)
+                        if (!(bool)val)
                         {
                             ignoreNext = true;
                         }
                     }
                     else
                     {
-                        total += (double) val;
+                        total += (double)val;
                     }
                 }
 
-                var condition1 = (bool) value[value.Length - 5];
-                var condition2 = (bool) value[value.Length - 4];
-                var actualSize = (double) value[value.Length - 3];
-                var actionBarDock = (Dock) value[value.Length - 2];
-                var actionBarOffset = (Point) value[value.Length - 1];
+                var condition1 = (bool)value[value.Length - 5];
+                var condition2 = (bool)value[value.Length - 4];
+                var actualSize = (double)value[value.Length - 3];
+                var actionBarDock = (Dock)value[value.Length - 2];
+                var actionBarOffset = (Point)value[value.Length - 1];
 
                 var actionBarMargin =
                     (Thickness)
-                        new DockAndOffsetToMarginConverter().Convert(new object[] {actionBarDock, actionBarOffset}, null,
+                        new DockAndOffsetToMarginConverter().Convert(new object[] { actionBarDock, actionBarOffset }, null,
                             null, null);
 
-                var size1 = (string) parameter == "width" ? actionBarMargin.Left : actionBarMargin.Top;
-                var size2 = (string) parameter == "width" ? actionBarMargin.Right : actionBarMargin.Bottom;
+                var size1 = (string)parameter == "width" ? actionBarMargin.Left : actionBarMargin.Top;
+                var size2 = (string)parameter == "width" ? actionBarMargin.Right : actionBarMargin.Bottom;
 
                 var baseReturn = baseAmount - total;
 
@@ -552,7 +552,7 @@ namespace DesktopWidgets.Classes
             }
             try
             {
-                var baseAmount = (double) value[0];
+                var baseAmount = (double)value[0];
                 var total = 0.0;
                 var ignoreNext = false;
                 foreach (var val in value.ToList().GetRange(1, value.Length - 1))
@@ -563,14 +563,14 @@ namespace DesktopWidgets.Classes
                     }
                     if (val is bool)
                     {
-                        if (!(bool) val)
+                        if (!(bool)val)
                         {
                             ignoreNext = true;
                         }
                     }
                     else
                     {
-                        total += (double) val;
+                        total += (double)val;
                     }
                 }
                 return baseAmount + total;
@@ -595,8 +595,8 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var timeSpan = (TimeSpan) value[0];
-            var muteEndTime = (DateTime) value[1];
+            var timeSpan = (TimeSpan)value[0];
+            var muteEndTime = (DateTime)value[1];
             return muteEndTime > DateTime.Now ? "_Unmute" : $"_Mute ({timeSpan.ToReadableString()})";
         }
 
@@ -614,7 +614,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (Visibility) value != Visibility.Collapsed;
+            return (Visibility)value != Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -631,7 +631,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (OpenMode) value != OpenMode.AlwaysOpen;
+            return (OpenMode)value != OpenMode.AlwaysOpen;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -648,7 +648,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (FileType) value == FileType.Text ? Visibility.Visible : Visibility.Collapsed;
+            return (FileType)value == FileType.Text ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -665,7 +665,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (FileType) value == FileType.Image ? Visibility.Visible : Visibility.Collapsed;
+            return (FileType)value == FileType.Image ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -682,7 +682,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (FileType) value == FileType.Other ? Visibility.Visible : Visibility.Collapsed;
+            return (FileType)value == FileType.Other ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -699,7 +699,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (FileType) value == FileType.Warning ? Visibility.Visible : Visibility.Collapsed;
+            return (FileType)value == FileType.Warning ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -716,7 +716,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return (bool) value ? "_Resume" : "_Pause";
+            return (bool)value ? "_Resume" : "_Pause";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -737,7 +737,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            return ((DateTime) value[0] + (TimeSpan) value[2]).ToString((string) value[1]);
+            return ((DateTime)value[0] + (TimeSpan)value[2]).ToString((string)value[1]);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -758,11 +758,11 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var items = (ObservableCollection<FeedItem>) value[0];
-            var max = (int) value[1];
-            var titleWhitelist = (List<string>) value[2];
-            var titleBlacklist = (List<string>) value[3];
-            var categoryWhitelist = (List<string>) value[4];
+            var items = (ObservableCollection<FeedItem>)value[0];
+            var max = (int)value[1];
+            var titleWhitelist = (List<string>)value[2];
+            var titleBlacklist = (List<string>)value[3];
+            var categoryWhitelist = (List<string>)value[4];
 
             var newitems = items.Where(x => (categoryWhitelist == null || categoryWhitelist.Count == 0 ||
                                              categoryWhitelist.Any(y => x.Categories.Any(z => z.Name == y))) &&
@@ -783,7 +783,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.IsNullOrEmpty((string) value) ? Visibility.Visible : Visibility.Collapsed;
+            return string.IsNullOrEmpty((string)value) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -796,7 +796,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.IsNullOrEmpty((string) value) ? Visibility.Collapsed : Visibility.Visible;
+            return string.IsNullOrEmpty((string)value) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -817,9 +817,9 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var visMode = (TitlebarVisibilityMode) value[0];
-            var isMouseOver = (bool) value[1];
-            var keepOpen = (bool) value[2];
+            var visMode = (TitlebarVisibilityMode)value[0];
+            var isMouseOver = (bool)value[1];
+            var keepOpen = (bool)value[2];
             switch (visMode)
             {
                 case TitlebarVisibilityMode.AlwaysVisible:
@@ -869,7 +869,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var dock = (Dock) value;
+            var dock = (Dock)value;
             return dock == Dock.Top || dock == Dock.Bottom;
         }
 
@@ -883,7 +883,7 @@ namespace DesktopWidgets.Classes
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var dock = (Dock) value;
+            var dock = (Dock)value;
             return dock == Dock.Left || dock == Dock.Right;
         }
 
@@ -945,7 +945,7 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var file = (FileInfo) value;
+            var file = (FileInfo)value;
             var stringBuilder = new StringBuilder();
             stringBuilder.Append(file.FullName);
             if (file.Exists)
@@ -974,8 +974,8 @@ namespace DesktopWidgets.Classes
             {
                 return DependencyProperty.UnsetValue;
             }
-            var dock = (Dock) value[0];
-            var offset = (Point) value[1];
+            var dock = (Dock)value[0];
+            var offset = (Point)value[1];
             switch (dock)
             {
                 case Dock.Left:

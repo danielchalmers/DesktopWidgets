@@ -24,7 +24,7 @@ namespace DesktopWidgets.Helpers
             var shinfo = new SHFILEINFO();
             NativeMethods.SHGetFileInfo(
                 path,
-                0, ref shinfo, (uint) Marshal.SizeOf(shinfo),
+                0, ref shinfo, (uint)Marshal.SizeOf(shinfo),
                 SHGFI_ICON | SHGFI_LARGEICON);
             using (var i = Icon.FromHandle(shinfo.hIcon))
             {

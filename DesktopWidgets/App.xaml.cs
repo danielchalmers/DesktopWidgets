@@ -65,7 +65,7 @@ namespace DesktopWidgets
             {
                 return;
             }
-            TrayIcon = (TaskbarIcon) Resources["TrayIcon"];
+            TrayIcon = (TaskbarIcon)Resources["TrayIcon"];
             AppInitHelper.InitializeExtra();
 
             SystemEvents.SessionSwitch += SystemEventsOnSessionSwitch;

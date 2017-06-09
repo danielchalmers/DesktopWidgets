@@ -6,8 +6,16 @@
         xmlns:local="clr-namespace:DesktopWidgets"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         mc:Ignorable="d"
-        Title="{x:Static p:Resources.AppName}" Height="1" Width="1" AllowsTransparency="True" Background="Transparent"
+        Title="{x:Static p:Resources.AppName}"
+        Height="1"
+        Width="1"
+        AllowsTransparency="True"
+        Background="Transparent"
         WindowStyle="None"
-        ShowInTaskbar="True" WindowStartupLocation="Manual" Top="0" Left="0" Visibility="Hidden">
+        ShowInTaskbar="True"
+        WindowStartupLocation="Manual"
+        Top="0"
+        Left="0"
+        Visibility="Hidden">
     <Grid />
 </Window>

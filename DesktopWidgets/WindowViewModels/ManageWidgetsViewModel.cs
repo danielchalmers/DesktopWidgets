@@ -72,7 +72,7 @@ namespace DesktopWidgets.WindowViewModels
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                SelectedWidget?.Identifier?.GetView()?.ShowIntro(new IntroData {ExecuteFinishAction = true});
+                SelectedWidget?.Identifier?.GetView()?.ShowIntro(new IntroData { ExecuteFinishAction = true });
             }
         }
 

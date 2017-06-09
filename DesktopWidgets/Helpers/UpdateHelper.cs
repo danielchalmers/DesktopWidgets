@@ -130,7 +130,7 @@ namespace DesktopWidgets.Helpers
                                 {
                                     var progressDialog = new UpdateProgress(info.AvailableVersion);
                                     ad.UpdateProgressChanged +=
-                                        delegate(object sender, DeploymentProgressChangedEventArgs args)
+                                        delegate (object sender, DeploymentProgressChangedEventArgs args)
                                         {
                                             if (args.State == DeploymentProgressState.DownloadingApplicationFiles)
                                             {

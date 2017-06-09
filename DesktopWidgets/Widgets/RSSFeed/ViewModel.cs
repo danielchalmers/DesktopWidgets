@@ -32,7 +32,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
             }
             NavigateHyperlink = new RelayCommand<RequestNavigateEventArgs>(NavigateHyperlinkExecute);
             FeedItems = new ObservableCollection<FeedItem>();
-            UpdateTimer = new DispatcherTimer {Interval = Settings.RefreshInterval};
+            UpdateTimer = new DispatcherTimer { Interval = Settings.RefreshInterval };
             UpdateTimer.Tick += (sender, args) => UpdateFeed();
 
             UpdateFeed();

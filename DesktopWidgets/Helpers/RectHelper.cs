@@ -13,7 +13,7 @@ namespace DesktopWidgets.Helpers
 
         public static Rectangle ToRectangle(this Rect rect)
         {
-            return new Rectangle((int) rect.X, (int) rect.Y, (int) rect.Width, (int) rect.Height);
+            return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);
         }
 
         public static IEnumerable<Rect> GetCorners(this Rect rect, int size)

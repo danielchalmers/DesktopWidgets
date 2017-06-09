@@ -36,12 +36,12 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
             _random = new Random();
 
-            _changeTimer = new DispatcherTimer {Interval = Settings.ChangeInterval};
+            _changeTimer = new DispatcherTimer { Interval = Settings.ChangeInterval };
             _changeTimer.Tick += (sender, args) => NextImage();
 
             _directoryWatcher = new DirectoryWatcher(new DirectoryWatcherSettings
             {
-                WatchFolders = new List<string> {Settings.RootPath},
+                WatchFolders = new List<string> { Settings.RootPath },
                 FileExtensionWhitelist = ImageHelper.SupportedExtensions,
                 MaxSize = Settings.FileFilterSize,
                 Recursive = Settings.Recursive,
@@ -132,7 +132,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         {
             if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                ImageUrl = ((string[]) e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
+                ImageUrl = ((string[])e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
                 IsPaused = true;
             }
         }
@@ -141,7 +141,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         {
             base.OnRefresh();
             _changeTimer.Interval = Settings.ChangeInterval;
-            _directoryWatcher.SetWatchPaths(new List<string> {Settings.RootPath});
+            _directoryWatcher.SetWatchPaths(new List<string> { Settings.RootPath });
         }
 
         private void TogglePlayPauseExecute()

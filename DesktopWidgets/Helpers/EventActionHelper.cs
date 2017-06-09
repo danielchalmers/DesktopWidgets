@@ -31,8 +31,8 @@ namespace DesktopWidgets.Helpers
 
             var newPair = new EventActionPair
             {
-                Event = EventActionFactory.GetNewEventFromName((string) dialog.SelectedItem1),
-                Action = EventActionFactory.GetNewActionFromName((string) dialog.SelectedItem2)
+                Event = EventActionFactory.GetNewEventFromName((string)dialog.SelectedItem1),
+                Action = EventActionFactory.GetNewActionFromName((string)dialog.SelectedItem2)
             };
             newPair.Add();
 

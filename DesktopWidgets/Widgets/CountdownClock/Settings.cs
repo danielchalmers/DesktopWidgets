@@ -10,7 +10,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
     {
         public Settings()
         {
-            DateTimeFormat = new List<string> {"{dd}d {hh}h {mm}m"};
+            DateTimeFormat = new List<string> { "{dd}d {hh}h {mm}m" };
         }
 
         [Category("End")]

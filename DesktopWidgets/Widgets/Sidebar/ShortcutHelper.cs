@@ -111,7 +111,7 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void NewSeparator(this ViewModel viewModel)
         {
-            viewModel.Add(new Shortcut {Name = "Separator", SpecialType = "Separator"}, false);
+            viewModel.Add(new Shortcut { Name = "Separator", SpecialType = "Separator" }, false);
         }
 
         public static void ClearIconCache(this ViewModel viewModel)

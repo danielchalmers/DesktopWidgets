@@ -11,7 +11,10 @@
         <classes:BoolToStartStopTextConverter x:Key="BoolToStartStopTextConverter" />
     </UserControl.Resources>
     <StackPanel>
-        <TextBlock x:Name="MainElement" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock x:Name="MainElement"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
             <TextBlock.Text>
                 <MultiBinding Converter="{StaticResource DateTimeToElapsedTimeTextConverter}">
                     <Binding Path="CurrentTime" />

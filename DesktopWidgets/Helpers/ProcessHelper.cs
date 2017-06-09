@@ -13,7 +13,7 @@ namespace DesktopWidgets.Helpers
         public static void Launch(string path, string args = "", string startIn = "",
             ProcessWindowStyle style = ProcessWindowStyle.Normal)
         {
-            Launch(new ProcessFile {Path = path, Arguments = args, StartInFolder = startIn, WindowStyle = style});
+            Launch(new ProcessFile { Path = path, Arguments = args, StartInFolder = startIn, WindowStyle = style });
         }
 
         public static void Launch(ProcessFile file)

@@ -8,38 +8,61 @@
                     xmlns:classes="clr-namespace:DesktopWidgets.Classes"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
-    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridBaseStyle">
-        <Setter Property="Background" Value="{x:Static SystemColors.WindowBrush}" />
+    <Style TargetType="{x:Type xctk:PropertyGrid}"
+           x:Key="PropertyGridBaseStyle">
+        <Setter Property="Background"
+                Value="{x:Static SystemColors.WindowBrush}" />
         <Setter Property="NameColumnWidth"
                 Value="{Binding Source={x:Static p:Settings.Default}, Path=PropertyGridNameColumnWidth}" />
-        <Setter Property="ShowAdvancedOptions" Value="False" />
-        <Setter Property="ShowSummary" Value="False" />
-        <Setter Property="ShowTitle" Value="False" />
+        <Setter Property="ShowAdvancedOptions"
+                Value="False" />
+        <Setter Property="ShowSummary"
+                Value="False" />
+        <Setter Property="ShowTitle"
+                Value="False" />
     </Style>
-    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridNonCategorisedStyle"
+    <Style TargetType="{x:Type xctk:PropertyGrid}"
+           x:Key="PropertyGridNonCategorisedStyle"
            BasedOn="{StaticResource PropertyGridBaseStyle}">
-        <Setter Property="IsCategorized" Value="False" />
-        <Setter Property="ShowSortOptions" Value="False" />
-        <Setter Property="IsMiscCategoryLabelHidden" Value="True" />
-        <Setter Property="ShowSearchBox" Value="False" />
+        <Setter Property="IsCategorized"
+                Value="False" />
+        <Setter Property="ShowSortOptions"
+                Value="False" />
+        <Setter Property="IsMiscCategoryLabelHidden"
+                Value="True" />
+        <Setter Property="ShowSearchBox"
+                Value="False" />
     </Style>
-    <Style TargetType="{x:Type xctk:PropertyGrid}" x:Key="PropertyGridCategorisedStyle"
+    <Style TargetType="{x:Type xctk:PropertyGrid}"
+           x:Key="PropertyGridCategorisedStyle"
            BasedOn="{StaticResource PropertyGridBaseStyle}">
         <Setter Property="IsCategorized"
                 Value="{Binding PropertyGridIsCategorized, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
-        <Setter Property="ShowSortOptions" Value="True" />
-        <Setter Property="IsMiscCategoryLabelHidden" Value="False" />
-        <Setter Property="ShowSearchBox" Value="True" />
+        <Setter Property="ShowSortOptions"
+                Value="True" />
+        <Setter Property="IsMiscCategoryLabelHidden"
+                Value="False" />
+        <Setter Property="ShowSearchBox"
+                Value="True" />
     </Style>
-    <Style x:Key="InfoTextbox" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="IsReadOnly" Value="True" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Height" Value="Auto" />
+    <Style x:Key="InfoTextbox"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="IsReadOnly"
+                Value="True" />
+        <Setter Property="TextWrapping"
+                Value="Wrap" />
+        <Setter Property="Height"
+                Value="Auto" />
     </Style>
-    <tb:TaskbarIcon x:Key="TrayIcon" IconSource="icon.ico" ToolTipText="{x:Static p:Resources.AppName}"
+    <tb:TaskbarIcon x:Key="TrayIcon"
+                    IconSource="icon.ico"
+                    ToolTipText="{x:Static p:Resources.AppName}"
                     ContextMenu="{StaticResource MainContextMenu}"
-                    TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick" TrayLeftMouseUp="TrayIcon_OnTrayLeftMouseUp"
+                    TrayMouseDoubleClick="TrayIcon_OnTrayMouseDoubleClick"
+                    TrayLeftMouseUp="TrayIcon_OnTrayLeftMouseUp"
                     TrayBalloonTipClicked="TrayIcon_OnTrayBalloonTipClicked" />
 </ResourceDictionary>

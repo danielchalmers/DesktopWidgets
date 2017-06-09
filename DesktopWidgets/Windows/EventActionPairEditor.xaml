@@ -31,8 +31,10 @@
                 <ColumnDefinition Width="15" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Name:" />
-            <TextBox Grid.Column="2" Text="{Binding EventActionPair.Name}" />
+            <TextBlock Grid.Column="0"
+                       Text="Name:" />
+            <TextBox Grid.Column="2"
+                     Text="{Binding EventActionPair.Name}" />
         </Grid>
         <xctk:PropertyGrid x:Name="PropertyGrid1"
                            Grid.Row="2"
@@ -43,7 +45,8 @@
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
-                            <Button Content="_Select Widget..." Click="btnSelectWidgetForEvent_OnClick" />
+                            <Button Content="_Select Widget..."
+                                    Click="btnSelectWidgetForEvent_OnClick" />
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
@@ -57,14 +60,21 @@
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
-                            <Button Content="_Select Widget..." Click="btnSelectWidgetForAction_OnClick" />
+                            <Button Content="_Select Widget..."
+                                    Click="btnSelectWidgetForAction_OnClick" />
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
             </xctk:PropertyGrid.EditorDefinitions>
         </xctk:PropertyGrid>
-        <Button Grid.Row="6" Grid.Column="0" Content="_OK" Width="75" Height="23"
+        <Button Grid.Row="6"
+                Grid.Column="0"
+                Content="_OK"
+                Width="75"
+                Height="23"
                 HorizontalAlignment="Right"
-                IsDefault="True" IsCancel="True" Click="btnOK_OnClick" />
+                IsDefault="True"
+                IsCancel="True"
+                Click="btnOK_OnClick" />
     </Grid>
 </Window>

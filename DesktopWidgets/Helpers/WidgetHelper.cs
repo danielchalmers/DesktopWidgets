@@ -45,7 +45,7 @@ namespace DesktopWidgets.Helpers
             {
                 return null;
             }
-            return AddNewWidget((string) dialog.SelectedItem);
+            return AddNewWidget((string)dialog.SelectedItem);
         }
 
         private static void LoadView(this WidgetId id, bool systemStartup = false)
@@ -371,7 +371,7 @@ namespace DesktopWidgets.Helpers
             {
                 return;
             }
-            settings.PackageInfo = new WidgetPackageInfo {Name = settings.Name};
+            settings.PackageInfo = new WidgetPackageInfo { Name = settings.Name };
             var dialog = new WidgetPackageExport(settings);
             if (dialog.ShowDialog() != true)
             {

@@ -14,7 +14,7 @@ namespace DesktopWidgets.Helpers
 
         public static void RestartApplication(IEnumerable<string> arguments = null)
         {
-            var args = new List<string> {"restarting"};
+            var args = new List<string> { "restarting" };
             if (arguments != null)
             {
                 args.AddRange(arguments);

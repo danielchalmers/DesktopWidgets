@@ -32,21 +32,21 @@ namespace DesktopWidgets.Actions
             {
                 return;
             }
-            DelayedAction.RunAction((int) Delay.TotalMilliseconds, () =>
-            {
-                try
-                {
-                    ExecuteAction();
-                }
-                catch (Exception ex)
-                {
-                    if (ShowErrors)
-                    {
-                        Popup.ShowAsync($"{GetType().Name} failed to execute.\n\n{ex.Message}",
-                            image: MessageBoxImage.Error);
-                    }
-                }
-            });
+            DelayedAction.RunAction((int)Delay.TotalMilliseconds, () =>
+           {
+               try
+               {
+                   ExecuteAction();
+               }
+               catch (Exception ex)
+               {
+                   if (ShowErrors)
+                   {
+                       Popup.ShowAsync($"{GetType().Name} failed to execute.\n\n{ex.Message}",
+                           image: MessageBoxImage.Error);
+                   }
+               }
+           });
         }
 
         protected virtual void ExecuteAction()

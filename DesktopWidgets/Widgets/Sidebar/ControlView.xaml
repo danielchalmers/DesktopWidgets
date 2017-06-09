@@ -15,8 +15,10 @@
         <Color x:Key="ButtonHoverColor">#E8E8E8</Color>
         <Color x:Key="ButtonMouseDownColor">#D8D8D8</Color>
         <Color x:Key="ButtonTextColor">Black</Color>
-        <SolidColorBrush x:Key="ButtonBrush" Color="{StaticResource ButtonColor}" />
-        <SolidColorBrush x:Key="ButtonTextBrush" Color="{StaticResource ButtonTextColor}" />
+        <SolidColorBrush x:Key="ButtonBrush"
+                         Color="{StaticResource ButtonColor}" />
+        <SolidColorBrush x:Key="ButtonTextBrush"
+                         Color="{StaticResource ButtonTextColor}" />
 
         <classes:ShowIconContentToVisibilityConverter x:Key="ShowIconContentToVisibilityConverter" />
         <classes:ShowTextContentToVisibilityConverter x:Key="ShowTextContentToVisibilityConverter" />
@@ -28,22 +30,33 @@
         <classes:PositionToOrientationConverter x:Key="PositionToOrientationConverter" />
         <classes:TextToVisibilityConverter x:Key="TextToVisibilityConverter" />
 
-        <Style TargetType="{x:Type TextBlock}" x:Key="StyleTextBlock">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="Margin" Value="4" />
+        <Style TargetType="{x:Type TextBlock}"
+               x:Key="StyleTextBlock">
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="TextAlignment"
+                    Value="Left" />
+            <Setter Property="TextWrapping"
+                    Value="Wrap" />
+            <Setter Property="Margin"
+                    Value="4" />
             <Setter Property="Visibility"
                     Value="{Binding Path=DataContext.Settings.ShortcutContentMode, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource ShowTextContentToVisibilityConverter}}" />
             <Setter Property="DockPanel.Dock"
                     Value="{Binding Path=DataContext.Settings.IconPosition, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource IconPositionTextToDockConverter}}" />
         </Style>
-        <Style TargetType="{x:Type Image}" x:Key="StyleImage">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Stretch" Value="UniformToFill" />
-            <Setter Property="Margin" Value="4" />
+        <Style TargetType="{x:Type Image}"
+               x:Key="StyleImage">
+            <Setter Property="HorizontalAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Stretch"
+                    Value="UniformToFill" />
+            <Setter Property="Margin"
+                    Value="4" />
             <Setter Property="Height"
                     Value="{Binding Path=DataContext.Settings.ButtonHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
             <Setter Property="Visibility"
@@ -53,17 +66,23 @@
             <Setter Property="DockPanel.Dock"
                     Value="{Binding Path=DataContext.Settings.IconPosition, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource IconPositionIconToDockConverter}}" />
         </Style>
-        <Style TargetType="{x:Type Button}" x:Key="StyleButton">
-            <Setter Property="Background" Value="{StaticResource ButtonBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource ButtonTextBrush}" />
+        <Style TargetType="{x:Type Button}"
+               x:Key="StyleButton">
+            <Setter Property="Background"
+                    Value="{StaticResource ButtonBrush}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource ButtonTextBrush}" />
             <Setter Property="AllowDrop"
                     Value="{Binding Path=DataContext.Settings.AllowDropFiles, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
-            <Setter Property="Margin" Value="4,1,4,1" />
+            <Setter Property="Margin"
+                    Value="4,1,4,1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -74,7 +93,8 @@
                         <Storyboard>
                             <ColorAnimation To="{StaticResource ButtonMouseDownColor}"
                                             Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                                            FillBehavior="HoldEnd"
+                                            Duration="{StaticResource ButtonAnimationDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -83,7 +103,8 @@
                         <Storyboard>
                             <ColorAnimation To="{StaticResource ButtonHoverColor}"
                                             Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                                            FillBehavior="HoldEnd"
+                                            Duration="{StaticResource ButtonAnimationDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -92,7 +113,8 @@
                         <Storyboard>
                             <ColorAnimation To="{StaticResource ButtonHoverColor}"
                                             Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                                            FillBehavior="HoldEnd"
+                                            Duration="{StaticResource ButtonAnimationDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -101,7 +123,8 @@
                         <Storyboard>
                             <ColorAnimation To="{StaticResource ButtonColor}"
                                             Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
-                                            FillBehavior="HoldEnd" Duration="{StaticResource ButtonAnimationDuration}" />
+                                            FillBehavior="HoldEnd"
+                                            Duration="{StaticResource ButtonAnimationDuration}" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -110,16 +133,23 @@
 
         <Grid x:Key="FrameBottom">
             <StackPanel>
-                <Button Content="_New Shortcut..." Command="{Binding NewShortcut}" />
+                <Button Content="_New Shortcut..."
+                        Command="{Binding NewShortcut}" />
             </StackPanel>
         </Grid>
 
-        <x:Array x:Shared="False" Type="{x:Type sys:Object}" x:Key="SidebarMenuItems">
-            <MenuItem Header="New _Shortcut..." Command="{Binding NewShortcut}" />
-            <MenuItem Header="New S_eparator..." Command="{Binding NewSeparator}" />
-            <MenuItem Header="_Manage Shortcuts..." Command="{Binding ManageShortcut}" />
+        <x:Array x:Shared="False"
+                 Type="{x:Type sys:Object}"
+                 x:Key="SidebarMenuItems">
+            <MenuItem Header="New _Shortcut..."
+                      Command="{Binding NewShortcut}" />
+            <MenuItem Header="New S_eparator..."
+                      Command="{Binding NewSeparator}" />
+            <MenuItem Header="_Manage Shortcuts..."
+                      Command="{Binding ManageShortcut}" />
         </x:Array>
-        <ContextMenu x:Key="WidgetContextMenu" IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
+        <ContextMenu x:Key="WidgetContextMenu"
+                     IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
             <ContextMenu.ItemsSource>
                 <CompositeCollection>
                     <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
@@ -129,21 +159,28 @@
             </ContextMenu.ItemsSource>
         </ContextMenu>
     </UserControl.Resources>
-    <ItemsControl AllowDrop="True" ItemsSource="{Binding Path=Settings.Shortcuts}" Focusable="False"
+    <ItemsControl AllowDrop="True"
+                  ItemsSource="{Binding Path=Settings.Shortcuts}"
+                  Focusable="False"
                   HorizontalAlignment="{Binding Settings.ButtonHorizontalAlignment}"
                   VerticalAlignment="{Binding Settings.ButtonVerticalAlignment}">
         <ItemsControl.ContextMenu>
             <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                 <ContextMenu.ItemsSource>
                     <CompositeCollection>
-                        <MenuItem Header="_Edit..." Command="{Binding ShortcutEdit}" />
+                        <MenuItem Header="_Edit..."
+                                  Command="{Binding ShortcutEdit}" />
                         <Separator />
-                        <MenuItem Header="Move _Up" Command="{Binding ShortcutMoveUp}" />
-                        <MenuItem Header="Move _Down" Command="{Binding ShortcutMoveDown}" />
+                        <MenuItem Header="Move _Up"
+                                  Command="{Binding ShortcutMoveUp}" />
+                        <MenuItem Header="Move _Down"
+                                  Command="{Binding ShortcutMoveDown}" />
                         <Separator />
-                        <MenuItem Header="_Remove..." Command="{Binding ShortcutRemove}" />
+                        <MenuItem Header="_Remove..."
+                                  Command="{Binding ShortcutRemove}" />
                         <Separator />
-                        <MenuItem Header="Open _Folder" Command="{Binding ShortcutOpenFolder}" />
+                        <MenuItem Header="Open _Folder"
+                                  Command="{Binding ShortcutOpenFolder}" />
                         <Separator />
                         <CollectionContainer Collection="{StaticResource SidebarMenuItems}" />
                         <Separator />
@@ -153,7 +190,8 @@
             </ContextMenu>
         </ItemsControl.ContextMenu>
         <ItemsControl.Resources>
-            <DataTemplate x:Key="ShortcutTemplate" DataType="{x:Type sidebar:Shortcut}">
+            <DataTemplate x:Key="ShortcutTemplate"
+                          DataType="{x:Type sidebar:Shortcut}">
                 <Button Style="{StaticResource StyleButton}"
                         Command="{Binding DataContext.ShortcutExecute, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                         CommandParameter="{Binding Path=.}"
@@ -168,7 +206,8 @@
                                 </MultiBinding>
                             </Image.Source>
                         </Image>
-                        <TextBlock Text="{Binding Path=Name}" Style="{StaticResource StyleTextBlock}" />
+                        <TextBlock Text="{Binding Path=Name}"
+                                   Style="{StaticResource StyleTextBlock}" />
                     </DockPanel>
                     <Button.ToolTip>
                         <MultiBinding Converter="{StaticResource ShortcutToToolTipConverter}">
@@ -179,26 +218,34 @@
                     </Button.ToolTip>
                 </Button>
             </DataTemplate>
-            <DataTemplate x:Key="SeparatorTemplate" DataType="{x:Type sidebar:Shortcut}">
-                <Border Height="2" Background="Gray" CornerRadius="4" Margin="1,0,1,0" Focusable="False" />
+            <DataTemplate x:Key="SeparatorTemplate"
+                          DataType="{x:Type sidebar:Shortcut}">
+                <Border Height="2"
+                        Background="Gray"
+                        CornerRadius="4"
+                        Margin="1,0,1,0"
+                        Focusable="False" />
             </DataTemplate>
         </ItemsControl.Resources>
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="{x:Type sidebar:Shortcut}">
-                <ContentControl Content="{Binding}" Focusable="False">
+                <ContentControl Content="{Binding}"
+                                Focusable="False">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
-                            <command:EventToCommand
-                                Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                CommandParameter="{Binding}" />
+                            <command:EventToCommand Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                    CommandParameter="{Binding}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <ContentControl.Style>
                         <Style TargetType="{x:Type ContentControl}">
-                            <Setter Property="ContentTemplate" Value="{StaticResource ShortcutTemplate}" />
+                            <Setter Property="ContentTemplate"
+                                    Value="{StaticResource ShortcutTemplate}" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding SpecialType}" Value="Separator">
-                                    <Setter Property="ContentTemplate" Value="{StaticResource SeparatorTemplate}" />
+                                <DataTrigger Binding="{Binding SpecialType}"
+                                             Value="Separator">
+                                    <Setter Property="ContentTemplate"
+                                            Value="{StaticResource SeparatorTemplate}" />
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -208,8 +255,7 @@
         </ItemsControl.ItemTemplate>
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel
-                    Orientation="{Binding Path=DataContext.Settings, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource PositionToOrientationConverter}}" />
+                <StackPanel Orientation="{Binding Path=DataContext.Settings, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource PositionToOrientationConverter}}" />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
     </ItemsControl>

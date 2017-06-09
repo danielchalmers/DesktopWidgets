@@ -8,9 +8,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="MainElement" Grid.Row="0" AcceptsReturn="True"
+        <TextBox x:Name="MainElement"
+                 Grid.Row="0"
+                 AcceptsReturn="True"
                  Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  IsReadOnly="{Binding Settings.ReadOnly}"
-                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto" />
     </Grid>
 </UserControl>

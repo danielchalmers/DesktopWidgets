@@ -16,7 +16,7 @@ namespace DesktopWidgets.Classes
                 action?.Invoke();
                 return;
             }
-            var timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(delay)};
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(delay) };
             timer.Tick += (sender, args) =>
             {
                 action?.Invoke();

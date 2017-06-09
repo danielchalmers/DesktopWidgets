@@ -16,7 +16,7 @@ namespace DesktopWidgets.Helpers
                 return path;
             }
             var shell = new WshShell();
-            var link = (IWshShortcut) shell.CreateShortcut(path);
+            var link = (IWshShortcut)shell.CreateShortcut(path);
             return File.Exists(link.TargetPath) ? link.TargetPath : path;
         }
     }

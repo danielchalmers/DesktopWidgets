@@ -42,7 +42,8 @@
                 </StackPanel.Resources>
                 <TextBlock ToolTip="{Binding CurrentFile, Converter={StaticResource FileToToolTipTextConverter}}"
                            Visibility="{Binding Settings.ShowFileName, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Hyperlink NavigateUri="{Binding CurrentFile.FullName}" IsEnabled="{Binding CurrentFile.Exists}">
+                    <Hyperlink NavigateUri="{Binding CurrentFile.FullName}"
+                               IsEnabled="{Binding CurrentFile.Exists}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="RequestNavigate">
                                 <command:EventToCommand Command="{Binding OpenFile}" />
@@ -51,35 +52,44 @@
                         <TextBlock Text="{Binding CurrentFile.Name}" />
                     </Hyperlink>
                 </TextBlock>
-                <TextBlock
-                    Visibility="{Binding Settings.ShowFileDateTime, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Text="{Binding CurrentFile.LastWriteTime}" />
+                <TextBlock Visibility="{Binding Settings.ShowFileDateTime, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           Text="{Binding CurrentFile.LastWriteTime}" />
             </StackPanel>
         </Grid>
         <Grid x:Key="FrameBottom">
             <Grid Height="{Binding Settings.ButtonsHeight}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" MinWidth="50" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="50" />
                     <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="*" MinWidth="50" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="50" />
                     <ColumnDefinition Width="5" />
-                    <ColumnDefinition Width="*" MinWidth="50" />
+                    <ColumnDefinition Width="*"
+                                      MinWidth="50" />
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="{x:Type Button}" />
                 </Grid.Resources>
-                <RepeatButton Grid.Column="0" Content="Previous" Command="{Binding Previous}"
+                <RepeatButton Grid.Column="0"
+                              Content="Previous"
+                              Command="{Binding Previous}"
                               IsEnabled="{Binding PreviousEnabled}" />
-                <RepeatButton Grid.Column="2" Content="Next" Command="{Binding Next}" IsEnabled="{Binding NextEnabled}" />
+                <RepeatButton Grid.Column="2"
+                              Content="Next"
+                              Command="{Binding Next}"
+                              IsEnabled="{Binding NextEnabled}" />
                 <Button Grid.Column="4"
                         Content="{Binding IsPaused, Converter={StaticResource BoolToPauseTextConverter}}"
                         Command="{Binding TogglePlayPause}" />
             </Grid>
         </Grid>
     </UserControl.Resources>
-    <Grid MaxWidth="{Binding Width}" MaxHeight="{Binding Height}">
+    <Grid MaxWidth="{Binding Width}"
+          MaxHeight="{Binding Height}">
         <Image Visibility="{Binding FileType, Converter={StaticResource ImageFileTypeToVisibilityConverter}}"
-               Source="{Binding CurrentImage}" Stretch="Uniform">
+               Source="{Binding CurrentImage}"
+               Stretch="Uniform">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseLeftButtonUp">
                     <command:EventToCommand Command="{Binding OpenFile}" />
@@ -94,10 +104,11 @@
                  FontSize="{Binding Settings.ContentFontSettings.FontSize}"
                  FontFamily="{Binding Settings.ContentFontSettings.FontFamily}"
                  FontWeight="{Binding Settings.ContentFontSettings.FontWeight}" />
-        <TextBlock
-            HorizontalAlignment="Center" VerticalAlignment="Center"
-            Visibility="{Binding FileType, Converter={StaticResource OtherFileTypeToVisibilityConverter}}">
-            <Hyperlink FontSize="24" NavigateUri="{Binding CurrentFile.FullName}">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Visibility="{Binding FileType, Converter={StaticResource OtherFileTypeToVisibilityConverter}}">
+            <Hyperlink FontSize="24"
+                       NavigateUri="{Binding CurrentFile.FullName}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="RequestNavigate">
                         <command:EventToCommand Command="{Binding OpenFile}" />

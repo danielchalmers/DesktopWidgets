@@ -16,13 +16,13 @@ namespace DesktopWidgets.Classes
         public static readonly DependencyProperty ScrollOnNewItemProperty =
             DependencyProperty.RegisterAttached(
                 "ScrollOnNewItem",
-                typeof (bool),
-                typeof (ListBoxBehavior),
+                typeof(bool),
+                typeof(ListBoxBehavior),
                 new UIPropertyMetadata(false, OnScrollOnNewItemChanged));
 
         public static bool GetScrollOnNewItem(DependencyObject obj)
         {
-            return (bool) obj.GetValue(ScrollOnNewItemProperty);
+            return (bool)obj.GetValue(ScrollOnNewItemProperty);
         }
 
         public static void SetScrollOnNewItem(DependencyObject obj, bool value)
@@ -39,7 +39,7 @@ namespace DesktopWidgets.Classes
             {
                 return;
             }
-            bool oldValue = (bool) e.OldValue, newValue = (bool) e.NewValue;
+            bool oldValue = (bool)e.OldValue, newValue = (bool)e.NewValue;
             if (newValue == oldValue)
             {
                 return;
@@ -66,7 +66,7 @@ namespace DesktopWidgets.Classes
 
         private static void ListBox_ItemsSourceChanged(object sender, EventArgs e)
         {
-            var listBox = (ListBox) sender;
+            var listBox = (ListBox)sender;
             if (Associations.ContainsKey(listBox))
             {
                 Associations[listBox].Dispose();
@@ -76,7 +76,7 @@ namespace DesktopWidgets.Classes
 
         private static void ListBox_Unloaded(object sender, RoutedEventArgs e)
         {
-            var listBox = (ListBox) sender;
+            var listBox = (ListBox)sender;
             if (Associations.ContainsKey(listBox))
             {
                 Associations[listBox].Dispose();
@@ -86,7 +86,7 @@ namespace DesktopWidgets.Classes
 
         private static void ListBox_Loaded(object sender, RoutedEventArgs e)
         {
-            var listBox = (ListBox) sender;
+            var listBox = (ListBox)sender;
             var incc = listBox.Items as INotifyCollectionChanged;
             if (incc == null)
             {

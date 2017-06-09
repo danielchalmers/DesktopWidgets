@@ -30,7 +30,7 @@ namespace DesktopWidgets.Windows
             var chosenWidget = WidgetHelper.ChooseWidget();
             if (chosenWidget != null)
             {
-                ((WidgetEventBase) EventActionPair.Event).WidgetId = chosenWidget;
+                ((WidgetEventBase)EventActionPair.Event).WidgetId = chosenWidget;
             }
         }
 
@@ -39,7 +39,7 @@ namespace DesktopWidgets.Windows
             var chosenWidget = WidgetHelper.ChooseWidget();
             if (chosenWidget != null)
             {
-                ((WidgetActionBase) EventActionPair.Action).WidgetId = chosenWidget;
+                ((WidgetActionBase)EventActionPair.Action).WidgetId = chosenWidget;
             }
         }
     }

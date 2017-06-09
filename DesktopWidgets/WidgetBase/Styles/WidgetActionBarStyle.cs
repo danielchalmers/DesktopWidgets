@@ -35,7 +35,7 @@ namespace DesktopWidgets.WidgetBase.Styles
 
         [Category("Buttons")]
         [DisplayName("Font Settings")]
-        public FontSettings ButtonFontSettings { get; set; } = new FontSettings {FontSize = 16};
+        public FontSettings ButtonFontSettings { get; set; } = new FontSettings { FontSize = 16 };
 
         [Category("Buttons")]
         [DisplayName("Size (px)")]

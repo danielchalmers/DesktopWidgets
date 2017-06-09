@@ -16,10 +16,10 @@
         <classes:RSSFeedItemsConverter x:Key="RssFeedItemsConverter" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock Text="{Binding HelpText}" TextAlignment="Center"
+        <TextBlock Text="{Binding HelpText}"
+                   TextAlignment="Center"
                    Visibility="{Binding HelpText, Converter={StaticResource StringNotEmptyToVisibilityConverter}}" />
-        <ItemsControl
-            Visibility="{Binding HelpText, Converter={StaticResource StringEmptyToVisibilityConverter}}">
+        <ItemsControl Visibility="{Binding HelpText, Converter={StaticResource StringEmptyToVisibilityConverter}}">
             <ItemsControl.ItemsSource>
                 <MultiBinding Converter="{StaticResource RssFeedItemsConverter}">
                     <Binding Path="FeedItems" />
@@ -36,22 +36,19 @@
                             <Hyperlink NavigateUri="{Binding Hyperlink}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="RequestNavigate">
-                                        <command:EventToCommand
-                                            Command="{Binding DataContext.NavigateHyperlink, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                            PassEventArgsToCommand="True" />
+                                        <command:EventToCommand Command="{Binding DataContext.NavigateHyperlink, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                                                PassEventArgsToCommand="True" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <TextBlock Text="{Binding Title}" />
                             </Hyperlink>
                         </TextBlock>
-                        <TextBlock
-                            Visibility="{Binding DataContext.Settings.ShowPublishDate, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                            FontSize="{Binding DataContext.Settings.FileNameFontSettings.FontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                            FontFamily="{Binding DataContext.Settings.FileNameFontSettings.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                            FontWeight="{Binding DataContext.Settings.FileNameFontSettings.FontWeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                        <TextBlock Visibility="{Binding DataContext.Settings.ShowPublishDate, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                   FontSize="{Binding DataContext.Settings.FileNameFontSettings.FontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                   FontFamily="{Binding DataContext.Settings.FileNameFontSettings.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                   FontWeight="{Binding DataContext.Settings.FileNameFontSettings.FontWeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
                             <TextBlock.Text>
-                                <MultiBinding
-                                    Converter="{StaticResource DateTimeOffsetFormatToStringConverter}">
+                                <MultiBinding Converter="{StaticResource DateTimeOffsetFormatToStringConverter}">
                                     <Binding Path="PublishDate" />
                                     <Binding Path="DataContext.Settings.PublishDateFormat"
                                              RelativeSource="{RelativeSource AncestorType={x:Type UserControl}}" />

@@ -73,7 +73,7 @@ namespace DesktopWidgets.Classes
         {
             var viewBounds = _view.GetBounds();
             return new Rect(viewBounds.Left - _settings.MouseBounds, viewBounds.Top - _settings.MouseBounds,
-                viewBounds.Width + _settings.MouseBounds*2, viewBounds.Height + _settings.MouseBounds*2);
+                viewBounds.Width + _settings.MouseBounds * 2, viewBounds.Height + _settings.MouseBounds * 2);
         }
 
         private bool IsMouseInMouseBounds() => GetValidBounds().Any(checkRect => checkRect.Contains(GetMouseLocation()));

@@ -44,12 +44,12 @@ namespace DesktopWidgets.Stores
 
         public static void PlaySoundAsync(SoundFile soundFile)
         {
-            new Thread(delegate() { Play(soundFile); }).Start();
+            new Thread(delegate () { Play(soundFile); }).Start();
         }
 
         public static void PlaySoundAsync(string path, double volume = 1)
         {
-            new Thread(delegate() { Play(path, volume); }).Start();
+            new Thread(delegate () { Play(path, volume); }).Start();
         }
 
         public static void Play(SoundFile soundFile) => Play(soundFile.Path, soundFile.Volume);
@@ -61,7 +61,7 @@ namespace DesktopWidgets.Stores
                 return;
             }
             var player = GetAvailablePlayer();
-            player.settings.volume = (int) (volume*100);
+            player.settings.volume = (int)(volume * 100);
             player.URL = path;
         }
 

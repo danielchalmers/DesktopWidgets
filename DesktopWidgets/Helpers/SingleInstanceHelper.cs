@@ -13,8 +13,8 @@ namespace DesktopWidgets.Helpers
         public static void ShowFirstInstance()
         {
             NativeMethods.SendNotifyMessage(
-                (IntPtr) HWND_BROADCAST,
-                (uint) WM_SHOWAPP,
+                (IntPtr)HWND_BROADCAST,
+                (uint)WM_SHOWAPP,
                 UIntPtr.Zero,
                 IntPtr.Zero);
         }

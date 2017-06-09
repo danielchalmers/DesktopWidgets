@@ -24,7 +24,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             }
             else
             {
-                NewShortcut = (Shortcut) shortcut.Clone();
+                NewShortcut = (Shortcut)shortcut.Clone();
             }
 
             DataContext = NewShortcut;

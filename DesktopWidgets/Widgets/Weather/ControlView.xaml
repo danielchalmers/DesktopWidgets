@@ -10,20 +10,24 @@
         <classes:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock Text="Enter a zip code" TextAlignment="Center"
+        <TextBlock Text="Enter a zip code"
+                   TextAlignment="Center"
                    Visibility="{Binding ShowHelp, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <StackPanel Orientation="Horizontal"
                     Visibility="{Binding ShowHelp, Converter={StaticResource BoolToCollapsedVisibilityConverter}}">
-            <Image Source="{Binding IconUrl}" Width="50" Height="50" ToolTip="{Binding Description}"
+            <Image Source="{Binding IconUrl}"
+                   Width="50"
+                   Height="50"
+                   ToolTip="{Binding Description}"
                    Visibility="{Binding Settings.ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <StackPanel Margin="5">
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock">
-                        <Setter Property="TextAlignment" Value="Center" />
+                        <Setter Property="TextAlignment"
+                                Value="Center" />
                     </Style>
                 </StackPanel.Resources>
-                <TextBlock
-                    Visibility="{Binding Settings.ShowTemperature, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Visibility="{Binding Settings.ShowTemperature, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}°">
                             <Binding Path="Temperature" />
@@ -32,8 +36,7 @@
                 </TextBlock>
                 <TextBlock Text="{Binding Description}"
                            Visibility="{Binding Settings.ShowDescription, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <TextBlock
-                    Visibility="{Binding Settings.ShowTempMinMax, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock Visibility="{Binding Settings.ShowTempMinMax, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}° to {1}°">
                             <Binding Path="TemperatureMin" />

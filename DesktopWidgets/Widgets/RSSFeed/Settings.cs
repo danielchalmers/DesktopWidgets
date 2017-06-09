@@ -43,7 +43,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         [Category("Style")]
         [DisplayName("Publish Date Font Settings")]
-        public FontSettings PublishDateFontSettings { get; set; } = new FontSettings {FontSize = 11};
+        public FontSettings PublishDateFontSettings { get; set; } = new FontSettings { FontSize = 11 };
 
         [Category("Style")]
         [DisplayName("Publish Date Format")]

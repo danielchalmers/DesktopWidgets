@@ -5,34 +5,48 @@
                     xmlns:p="clr-namespace:DesktopWidgets.Properties">
     <classes:BoolToEnableDisableNameConverter x:Key="BoolToEnableDisableNameConverter" />
     <classes:NonAlwaysOnOpenModeToBoolConverter x:Key="NonAlwaysOnOpenModeToBoolConverter" />
-    <CompositeCollection x:Shared="False" x:Key="WidgetMenuItems">
-        <MenuItem Header="_Edit..." Command="{Binding EditWidget}" />
+    <CompositeCollection x:Shared="False"
+                         x:Key="WidgetMenuItems">
+        <MenuItem Header="_Edit..."
+                  Command="{Binding EditWidget}" />
         <MenuItem Header="Doc_k">
-            <MenuItem Header="_None" Command="{Binding WidgetUndock}" />
+            <MenuItem Header="_None"
+                      Command="{Binding WidgetUndock}" />
             <MenuItem Header="_Horizontal">
-                <MenuItem Header="_Center" Command="{Binding WidgetDockHorizontal}"
+                <MenuItem Header="_Center"
+                          Command="{Binding WidgetDockHorizontal}"
                           CommandParameter="{x:Static HorizontalAlignment.Center}" />
-                <MenuItem Header="_Left" Command="{Binding WidgetDockHorizontal}"
+                <MenuItem Header="_Left"
+                          Command="{Binding WidgetDockHorizontal}"
                           CommandParameter="{x:Static HorizontalAlignment.Left}" />
-                <MenuItem Header="_Right" Command="{Binding WidgetDockHorizontal}"
+                <MenuItem Header="_Right"
+                          Command="{Binding WidgetDockHorizontal}"
                           CommandParameter="{x:Static HorizontalAlignment.Right}" />
-                <MenuItem Header="_Stretch" Command="{Binding WidgetDockHorizontal}"
+                <MenuItem Header="_Stretch"
+                          Command="{Binding WidgetDockHorizontal}"
                           CommandParameter="{x:Static HorizontalAlignment.Stretch}" />
             </MenuItem>
             <MenuItem Header="_Vertical">
-                <MenuItem Header="_Center" Command="{Binding WidgetDockVertical}"
+                <MenuItem Header="_Center"
+                          Command="{Binding WidgetDockVertical}"
                           CommandParameter="{x:Static VerticalAlignment.Center}" />
-                <MenuItem Header="_Top" Command="{Binding WidgetDockVertical}"
+                <MenuItem Header="_Top"
+                          Command="{Binding WidgetDockVertical}"
                           CommandParameter="{x:Static VerticalAlignment.Top}" />
-                <MenuItem Header="_Bottom" Command="{Binding WidgetDockVertical}"
+                <MenuItem Header="_Bottom"
+                          Command="{Binding WidgetDockVertical}"
                           CommandParameter="{x:Static VerticalAlignment.Bottom}" />
-                <MenuItem Header="_Stretch" Command="{Binding WidgetDockVertical}"
+                <MenuItem Header="_Stretch"
+                          Command="{Binding WidgetDockVertical}"
                           CommandParameter="{x:Static VerticalAlignment.Stretch}" />
             </MenuItem>
         </MenuItem>
         <Separator />
-        <MenuItem Header="_Reload" Command="{Binding ReloadWidget}" />
-        <MenuItem Header="_Dismiss" Command="{Binding DismissWidget}" />
-        <MenuItem Header="_Mute" Command="{Binding MuteWidget}" />
+        <MenuItem Header="_Reload"
+                  Command="{Binding ReloadWidget}" />
+        <MenuItem Header="_Dismiss"
+                  Command="{Binding DismissWidget}" />
+        <MenuItem Header="_Mute"
+                  Command="{Binding MuteWidget}" />
     </CompositeCollection>
 </ResourceDictionary>

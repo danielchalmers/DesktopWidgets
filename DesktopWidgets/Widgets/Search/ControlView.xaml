@@ -10,15 +10,18 @@
     <UserControl.Resources>
         <classes:StringToIsNotNullOrEmptyConverter x:Key="StringToIsNotNullOrEmptyConverter" />
         <Grid x:Key="FrameRight">
-            <Button Content="Go" Command="{Binding Go}"
+            <Button Content="Go"
+                    Command="{Binding Go}"
                     IsEnabled="{Binding SearchText, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}"
                     Width="32" />
         </Grid>
     </UserControl.Resources>
-    <TextBox x:Name="MainElement" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <TextBox x:Name="MainElement"
+             Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="KeyUp">
-                <command:EventToCommand Command="{Binding OnKeyUp}" PassEventArgsToCommand="True"
+                <command:EventToCommand Command="{Binding OnKeyUp}"
+                                        PassEventArgsToCommand="True"
                                         IsEnabled="{Binding SearchText, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}" />
             </i:EventTrigger>
         </i:Interaction.Triggers>

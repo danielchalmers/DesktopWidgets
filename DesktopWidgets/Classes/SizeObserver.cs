@@ -8,7 +8,7 @@ namespace DesktopWidgets.Classes
 
         public static bool GetObserve(FrameworkElement elem)
         {
-            return (bool) elem.GetValue(ObserveProperty);
+            return (bool)elem.GetValue(ObserveProperty);
         }
 
         public static void SetObserve(
@@ -18,7 +18,7 @@ namespace DesktopWidgets.Classes
         }
 
         public static readonly DependencyProperty ObserveProperty =
-            DependencyProperty.RegisterAttached("Observe", typeof (bool), typeof (SizeObserver),
+            DependencyProperty.RegisterAttached("Observe", typeof(bool), typeof(SizeObserver),
                 new UIPropertyMetadata(false, OnObserveChanged));
 
         private static void OnObserveChanged(
@@ -35,7 +35,7 @@ namespace DesktopWidgets.Classes
                 return;
             }
 
-            if ((bool) e.NewValue)
+            if ((bool)e.NewValue)
             {
                 elem.SizeChanged += OnSizeChanged;
             }
@@ -66,7 +66,7 @@ namespace DesktopWidgets.Classes
 
         public static double GetObservedWidth(DependencyObject obj)
         {
-            return (double) obj.GetValue(ObservedWidthProperty);
+            return (double)obj.GetValue(ObservedWidthProperty);
         }
 
         public static void SetObservedWidth(DependencyObject obj, double value)
@@ -76,7 +76,7 @@ namespace DesktopWidgets.Classes
 
         // Using a DependencyProperty as the backing store for ObservedWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObservedWidthProperty =
-            DependencyProperty.RegisterAttached("ObservedWidth", typeof (double), typeof (SizeObserver),
+            DependencyProperty.RegisterAttached("ObservedWidth", typeof(double), typeof(SizeObserver),
                 new UIPropertyMetadata(0.0));
 
         #endregion
@@ -85,7 +85,7 @@ namespace DesktopWidgets.Classes
 
         public static double GetObservedHeight(DependencyObject obj)
         {
-            return (double) obj.GetValue(ObservedHeightProperty);
+            return (double)obj.GetValue(ObservedHeightProperty);
         }
 
         public static void SetObservedHeight(DependencyObject obj, double value)
@@ -95,7 +95,7 @@ namespace DesktopWidgets.Classes
 
         // Using a DependencyProperty as the backing store for ObservedHeight.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ObservedHeightProperty =
-            DependencyProperty.RegisterAttached("ObservedHeight", typeof (double), typeof (SizeObserver),
+            DependencyProperty.RegisterAttached("ObservedHeight", typeof(double), typeof(SizeObserver),
                 new UIPropertyMetadata(0.0));
 
         #endregion

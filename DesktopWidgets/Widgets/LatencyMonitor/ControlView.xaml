@@ -12,7 +12,8 @@
     </UserControl.Resources>
     <Grid>
         <ListBox ItemsSource="{Binding LatencyHistory}"
-                 MaxWidth="{Binding Settings.Style.Width}" MaxHeight="{Binding Settings.Style.Height}"
+                 MaxWidth="{Binding Settings.Style.Width}"
+                 MaxHeight="{Binding Settings.Style.Height}"
                  Background="{StaticResource ListBoxBackgroundBrush}"
                  classes:ListBoxBehavior.ScrollOnNewItem="true" />
     </Grid>

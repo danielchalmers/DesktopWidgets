@@ -8,7 +8,8 @@
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         mc:Ignorable="d"
         Title="Edit Shortcut"
-        Height="400" Width="450"
+        Height="400"
+        Width="450"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
@@ -17,7 +18,8 @@
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid Grid.Row="0" Style="{StaticResource PropertyGridNonCategorisedStyle}"
+        <xctk:PropertyGrid Grid.Row="0"
+                           Style="{StaticResource PropertyGridNonCategorisedStyle}"
                            SelectedObject="{Binding}" />
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -30,8 +32,14 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" Content="_OK" Click="btnOK_Click" IsDefault="True" />
-            <Button Grid.Column="3" Content="_Cancel" Click="btnCancel_Click" IsCancel="True" />
+            <Button Grid.Column="1"
+                    Content="_OK"
+                    Click="btnOK_Click"
+                    IsDefault="True" />
+            <Button Grid.Column="3"
+                    Content="_Cancel"
+                    Click="btnCancel_Click"
+                    IsCancel="True" />
         </Grid>
     </Grid>
 </Window>

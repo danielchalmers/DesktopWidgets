@@ -53,7 +53,7 @@ namespace DesktopWidgets.View
 
             if (!systemStartup && Settings.ShowIntroOnLaunch)
             {
-                _mouseChecker.QueueIntro = new IntroData {ExecuteFinishAction = false};
+                _mouseChecker.QueueIntro = new IntroData { ExecuteFinishAction = false };
             }
 
             DataContext = ViewModel;
@@ -87,7 +87,7 @@ namespace DesktopWidgets.View
 
         private void SetupWidgetControl()
         {
-            UserControl.Style = (Style) Resources["UserControlStyle"];
+            UserControl.Style = (Style)Resources["UserControlStyle"];
             MainContentContainer.Content = UserControl;
             var contextMenu = (ContextMenu)
                 (UserControl.TryFindResource("WidgetContextMenu") ?? TryFindResource("WidgetContextMenu"));
@@ -535,7 +535,7 @@ namespace DesktopWidgets.View
         {
             if (!IsRefreshing && !_isAppBar)
             {
-                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action) ViewModel.UpdatePosition);
+                Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)ViewModel.UpdatePosition);
             }
         }
 

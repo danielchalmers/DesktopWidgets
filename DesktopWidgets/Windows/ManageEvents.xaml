@@ -13,15 +13,16 @@
         Title="Manage Events"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsHeight, Mode=TwoWay}"
-        MinHeight="497" MinWidth="535"
-        ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
+        MinHeight="497"
+        MinWidth="535"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
     <Window.DataContext>
         <windowViewModels:ManageEventsViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <classes:SelectedEventActionPairToEnableDisableNameConverter
-            x:Key="SelectedEventActionPairToEnableDisableNameConverter" />
+        <classes:SelectedEventActionPairToEnableDisableNameConverter x:Key="SelectedEventActionPairToEnableDisableNameConverter" />
         <classes:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
         <classes:EventActionPairToNameConverter x:Key="EventActionPairToNameConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -54,38 +55,54 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ScrollViewer Grid.Row="0" Grid.Column="1" Margin="0,15,15,15"
+        <ScrollViewer Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="0,15,15,15"
                       VerticalScrollBarVisibility="Hidden"
                       HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
                 <StackPanel.Resources>
                     <Style TargetType="Button">
-                        <Setter Property="Height" Value="30" />
-                        <Setter Property="Margin" Value="0,0,0,10" />
-                        <Setter Property="Padding" Value="15,0,15,0" />
-                        <Setter Property="HorizontalAlignment" Value="Stretch" />
-                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="Height"
+                                Value="30" />
+                        <Setter Property="Margin"
+                                Value="0,0,0,10" />
+                        <Setter Property="Padding"
+                                Value="15,0,15,0" />
+                        <Setter Property="HorizontalAlignment"
+                                Value="Stretch" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Stretch" />
                         <Setter Property="IsEnabled"
                                 Value="{Binding SelectedPair, Converter={StaticResource NotNullToBoolConverter}}" />
                     </Style>
                 </StackPanel.Resources>
-                <Button Content="_New..." Command="{Binding NewPair}" IsEnabled="True" />
+                <Button Content="_New..."
+                        Command="{Binding NewPair}"
+                        IsEnabled="True" />
                 <Button Visibility="Hidden" />
-                <Button Content="_Edit..." Command="{Binding EditPair}" />
-                <Button Content="Move _Up" Command="{Binding MoveUpPair}"
+                <Button Content="_Edit..."
+                        Command="{Binding EditPair}" />
+                <Button Content="Move _Up"
+                        Command="{Binding MoveUpPair}"
                         Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Content="Move _Down" Command="{Binding MoveDownPair}"
+                <Button Content="Move _Down"
+                        Command="{Binding MoveDownPair}"
                         Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button
-                    Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
-                    Command="{Binding ToggleEnablePair}" />
-                <Button Content="_Remove..." Command="{Binding RemovePair}" />
+                <Button Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
+                        Command="{Binding ToggleEnablePair}" />
+                <Button Content="_Remove..."
+                        Command="{Binding RemovePair}" />
                 <Button Visibility="Hidden" />
-                <Button Content="_Clone" Command="{Binding ClonePair}" />
+                <Button Content="_Clone"
+                        Command="{Binding ClonePair}" />
             </StackPanel>
         </ScrollViewer>
 
-        <Grid Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,15,15">
+        <Grid Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Margin="15,0,15,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
@@ -94,7 +111,11 @@
                 <RowDefinition Height="23" />
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="1" Content="_OK" Click="btnOK_Click" IsDefault="True" IsCancel="True" />
+            <Button Grid.Column="1"
+                    Content="_OK"
+                    Click="btnOK_Click"
+                    IsDefault="True"
+                    IsCancel="True" />
         </Grid>
     </Grid>
 </Window>
