@@ -6,8 +6,7 @@
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     xmlns:p="clr-namespace:DesktopWidgets.Properties"
                     xmlns:classes="clr-namespace:DesktopWidgets.Classes"
-                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-                    xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <classes:TimeSpanToMuteTextConverter x:Key="TimeSpanToMuteTextConverter" />
     <x:Array x:Shared="False"
              Type="{x:Type sys:Object}"
@@ -46,10 +45,6 @@
                   Click="menuItemManageEvents_OnClick" />
         <MenuItem Header="_Options..."
                   Click="menuItemOptions_OnClick" />
-        <Separator />
-        <MenuItem Header="Check for _Updates..."
-                  Click="menuItemCheckForUpdates_OnClick"
-                  IsEnabled="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}}" />
         <Separator />
         <MenuItem Header="E_xit"
                   Click="menuItemExit_OnClick" />

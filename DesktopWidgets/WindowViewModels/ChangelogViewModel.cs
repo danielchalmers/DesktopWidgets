@@ -1,4 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Windows.Input;
+using DesktopWidgets.Helpers;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace DesktopWidgets.WindowViewModels
 {
@@ -10,6 +13,7 @@ namespace DesktopWidgets.WindowViewModels
         {
             Title = title;
             Text = text;
+            CheckForUpdates = new RelayCommand(CheckForUpdatesExecute);
         }
 
         public string Title { get; }
@@ -17,6 +21,13 @@ namespace DesktopWidgets.WindowViewModels
         {
             get { return _text; }
             set { Set(ref _text, value); }
+        }
+
+        public ICommand CheckForUpdates { get; }
+
+        private void CheckForUpdatesExecute()
+        {
+            UpdateHelper.CheckForUpdatesAsync(false);
         }
     }
 }
