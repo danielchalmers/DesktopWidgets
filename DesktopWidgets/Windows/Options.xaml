@@ -52,14 +52,11 @@
             </ListBox.Resources>
         </ListBox>
 
-        <ScrollViewer Grid.Column="3"
-                      Grid.Row="1"
-                      VerticalScrollBarVisibility="Visible">
-            <Frame x:Name="NavigationFrame"
-                   NavigationUIVisibility="Hidden"
-                   Margin="0,0,10,0"
-                   Content="{Binding CurrentPage}" />
-        </ScrollViewer>
+        <Frame Grid.Column="3"
+               Grid.Row="1"
+               x:Name="NavigationFrame"
+               NavigationUIVisibility="Hidden"
+               Content="{Binding CurrentPage}" />
 
         <Grid Grid.Column="0"
               Grid.ColumnSpan="5"
