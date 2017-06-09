@@ -22,10 +22,6 @@
             </MenuItem.Header>
         </MenuItem>
         <Separator />
-        <MenuItem Header="_New Widget..."
-                  Click="menuItemNewWidget_OnClick" />
-        <MenuItem Header="Manage _Widgets..."
-                  Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="_All Widgets">
             <MenuItem.ItemsSource>
                 <CompositeCollection>
@@ -40,7 +36,10 @@
                 </CompositeCollection>
             </MenuItem.ItemsSource>
         </MenuItem>
-        <Separator />
+        <MenuItem Header="_New Widget..."
+                  Click="menuItemNewWidget_OnClick" />
+        <MenuItem Header="Manage _Widgets..."
+                  Click="menuItemManageWidgets_OnClick" />
         <MenuItem Header="Manage _Events..."
                   Click="menuItemManageEvents_OnClick" />
         <MenuItem Header="_Options..."
