@@ -139,9 +139,20 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public override void DropExecute(DragEventArgs e)
         {
-            if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (AllowDrop)
             {
-                this.ProcessFiles((string[])e.Data.GetData(DataFormats.FileDrop));
+                if (e.Data.GetDataPresent(DataFormats.Text))
+                {
+                    var text = (string)e.Data.GetData(DataFormats.Text);
+                    if (LinkHelper.IsHyperlink(text))
+                    {
+                        this.ProcessFile(text);
+                    }
+                }
+                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    this.ProcessFiles((string[])e.Data.GetData(DataFormats.FileDrop));
+                }
             }
         }
     }
