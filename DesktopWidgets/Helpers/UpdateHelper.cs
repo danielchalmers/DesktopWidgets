@@ -49,7 +49,7 @@ namespace DesktopWidgets.Helpers
                     if (!auto)
                     {
                         Popup.Show(
-                            "This application was not installed via ClickOnce and cannot be updated automatically.",
+                            $"{Resources.AppName} was not installed via ClickOnce and cannot be updated automatically.",
                             image: MessageBoxImage.Error);
                     }
                     return;
