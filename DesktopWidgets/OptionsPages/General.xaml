@@ -35,8 +35,8 @@
                     Click="btnImport_OnClick" />
             <Button Content="_Export..."
                     Click="btnExport_OnClick" />
-            <Button Content="_Defaults..."
-                    Click="btnDefaults_OnClick"
+            <Button Content="_Reset..."
+                    Click="btnReset_OnClick"
                     Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 

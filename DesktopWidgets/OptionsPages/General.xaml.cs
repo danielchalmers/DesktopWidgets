@@ -24,7 +24,7 @@ namespace DesktopWidgets.OptionsPages
             SettingsHelper.ExportData();
         }
 
-        private void btnDefaults_OnClick(object sender, RoutedEventArgs e)
+        private void btnReset_OnClick(object sender, RoutedEventArgs e)
         {
             SettingsHelper.ResetSettings();
         }
