@@ -8,6 +8,7 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.OptionsPages;
 using DesktopWidgets.Properties;
+using DesktopWidgets.WindowViewModels;
 
 namespace DesktopWidgets.Windows
 {
@@ -31,8 +32,8 @@ namespace DesktopWidgets.Windows
         public IEnumerable<Page> Pages { get; } = new List<Page>
         {
             new General(),
-            new About("Changelog", string.Empty, false),
-            new About("About", AboutHelper.AboutText, true)
+            new OptionsPages.Changelog(new ChangelogViewModel("Changelog", string.Empty)),
+            new About(new AboutViewModel("About", AboutHelper.AboutText))
         };
 
         public Page CurrentPage
@@ -76,12 +77,9 @@ namespace DesktopWidgets.Windows
             new ChangelogDownloader().GetChangelog(
                 e =>
                 {
-                    foreach (
-                        var about in
-                            Pages.OfType<About>()
-                                .Where(x => x.Title == "Changelog"))
+                    foreach (var changelogPage in Pages.OfType<OptionsPages.Changelog>())
                     {
-                        about.txtAbout.Text = e;
+                        ((ChangelogViewModel)(changelogPage.DataContext)).Text = e;
                     }
                 });
         }

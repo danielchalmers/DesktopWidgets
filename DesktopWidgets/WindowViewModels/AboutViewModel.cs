@@ -8,18 +8,24 @@ namespace DesktopWidgets.WindowViewModels
 {
     public class AboutViewModel : ViewModelBase
     {
-        public AboutViewModel(string title, string text, bool showLicensesButton)
+        private string _text;
+
+        public AboutViewModel(string title, string text)
         {
             Title = title;
             Text = text;
-            ShowLicensesButton = showLicensesButton;
             ViewLicenses = new RelayCommand(ViewLicensesExecute);
         }
 
         public string Title { get; }
-        public string Text { get; }
+
+        public string Text
+        {
+            get { return _text; }
+            set { Set(ref _text, value); }
+        }
+
         public ICommand ViewLicenses { get; }
-        public bool ShowLicensesButton { get; set; }
 
         private void ViewLicensesExecute()
         {

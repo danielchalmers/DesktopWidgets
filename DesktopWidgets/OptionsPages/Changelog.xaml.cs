@@ -4,11 +4,11 @@ using DesktopWidgets.WindowViewModels;
 namespace DesktopWidgets.OptionsPages
 {
     /// <summary>
-    ///     Interaction logic for About.xaml
+    ///     Interaction logic for Changelog.xaml
     /// </summary>
-    public partial class About : Page
+    public partial class Changelog : Page
     {
-        public About(AboutViewModel viewModel)
+        public Changelog(ChangelogViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
