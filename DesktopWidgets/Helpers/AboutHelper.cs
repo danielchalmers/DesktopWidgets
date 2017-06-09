@@ -22,7 +22,7 @@ namespace DesktopWidgets.Helpers
                 stringBuilder.AppendLine($"Changes: {Resources.GitHubCommits}");
                 stringBuilder.AppendLine($"Issues: {Resources.GitHubIssues}");
                 stringBuilder.AppendLine();
-                stringBuilder.AppendLine($"Icon made by {IconCredits}");
+                stringBuilder.AppendLine($"Icon by Freepik (freepik.com) from flaticon.com");
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine("Libraries:");
                 foreach (var library in Libraries
@@ -36,10 +36,6 @@ namespace DesktopWidgets.Helpers
                 return stringBuilder.ToString();
             }
         }
-
-        private static string IconCredits { get; } =
-            "Freepik (http://www.freepik.com) from www.flaticon.com" +
-            " is licensed under CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/)";
 
         private static Dictionary<string, string> Libraries { get; } = new Dictionary<string, string>
         {
