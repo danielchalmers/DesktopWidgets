@@ -11,7 +11,7 @@ namespace DesktopWidgets.Stores
 {
     internal static class HotkeyStore
     {
-        private static readonly List<Tuple<Hotkey, Action>> Hotkeys = new List<Tuple<Hotkey, Action>>();
+        private static readonly List<(Hotkey, Action)> Hotkeys = new List<(Hotkey, Action)>();
 
         public static void RegisterHotkey(Hotkey hotkey, Action callback)
         {
@@ -21,7 +21,7 @@ namespace DesktopWidgets.Stores
             }
 
             RemoveHotkey(hotkey);
-            Hotkeys.Add(new Tuple<Hotkey, Action>(hotkey, callback));
+            Hotkeys.Add((hotkey, callback));
 
             try
             {
