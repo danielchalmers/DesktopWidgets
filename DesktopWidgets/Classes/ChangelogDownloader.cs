@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,8 +8,6 @@ using System.Windows;
 using DesktopWidgets.ApiClasses;
 using DesktopWidgets.Properties;
 using Newtonsoft.Json;
-
-#endregion
 
 namespace DesktopWidgets.Classes
 {

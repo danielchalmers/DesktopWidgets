@@ -1,6 +1,4 @@
-﻿#region
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -10,8 +8,6 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.OptionsPages;
 using DesktopWidgets.Properties;
-
-#endregion
 
 namespace DesktopWidgets.Windows
 {

@@ -1,10 +1,6 @@
-﻿#region
-
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using DesktopWidgets.Classes;
-
-#endregion
 
 namespace DesktopWidgets.Helpers
 {

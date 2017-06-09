@@ -1,8 +1,4 @@
-﻿#region
-
-using DesktopWidgets.Classes;
-
-#endregion
+﻿using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Helpers
 {

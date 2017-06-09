@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -11,8 +9,6 @@ using DesktopWidgets.Properties;
 using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase.Settings;
 using HorizontalAlignment = System.Windows.HorizontalAlignment;
-
-#endregion
 
 namespace DesktopWidgets.Classes
 {

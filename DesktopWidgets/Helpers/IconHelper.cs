@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -9,8 +7,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DesktopWidgets.Classes;
-
-#endregion
 
 namespace DesktopWidgets.Helpers
 {

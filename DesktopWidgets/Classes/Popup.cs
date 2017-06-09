@@ -1,10 +1,6 @@
-﻿#region
-
-using System.Threading;
+﻿using System.Threading;
 using System.Windows;
 using DesktopWidgets.Properties;
-
-#endregion
 
 namespace DesktopWidgets.Classes
 {

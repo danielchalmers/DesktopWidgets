@@ -1,9 +1,5 @@
-﻿#region
-
-using IWshRuntimeLibrary;
+﻿using IWshRuntimeLibrary;
 using File = System.IO.File;
-
-#endregion
 
 namespace DesktopWidgets.Helpers
 {

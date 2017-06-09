@@ -1,6 +1,4 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -14,8 +12,6 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.Properties;
 using DesktopWidgets.Stores;
-
-#endregion
 
 namespace DesktopWidgets.Widgets.Sidebar
 {

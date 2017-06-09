@@ -1,6 +1,4 @@
-﻿#region
-
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
@@ -9,8 +7,6 @@ using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
 using DesktopWidgets.Windows;
 using Newtonsoft.Json;
-
-#endregion
 
 namespace DesktopWidgets.Helpers
 {

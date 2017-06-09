@@ -1,9 +1,5 @@
-﻿#region
-
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using DesktopWidgets.WindowViewModels;
-
-#endregion
 
 namespace DesktopWidgets.OptionsPages
 {

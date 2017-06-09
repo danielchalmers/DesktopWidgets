@@ -1,10 +1,6 @@
-﻿#region
-
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using DesktopWidgets.Helpers;
-
-#endregion
 
 namespace DesktopWidgets.OptionsPages
 {

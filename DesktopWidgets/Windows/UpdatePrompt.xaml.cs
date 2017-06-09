@@ -1,11 +1,7 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows;
 using DesktopWidgets.Classes;
-
-#endregion
 
 namespace DesktopWidgets.Windows
 {

@@ -1,11 +1,7 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.ComponentModel;
 using DesktopWidgets.Classes;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
-
-#endregion
 
 namespace DesktopWidgets.Widgets.Sidebar
 {

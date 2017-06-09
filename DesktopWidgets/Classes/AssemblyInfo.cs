@@ -1,11 +1,6 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using DesktopWidgets.Properties;
-
-#endregion
 
 namespace DesktopWidgets.Classes
 {
