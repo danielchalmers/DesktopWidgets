@@ -23,6 +23,7 @@ namespace DesktopWidgets.Helpers
                 stringBuilder.AppendLine($"Issues: {Resources.GitHubIssues}");
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"Icon by Freepik (freepik.com) from flaticon.com");
+                stringBuilder.AppendLine($"Weather from OpenWeatherMap (openweathermap.org)");
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine("Libraries:");
                 foreach (var library in Libraries
