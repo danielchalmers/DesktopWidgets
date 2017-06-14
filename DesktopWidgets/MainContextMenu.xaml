@@ -13,7 +13,8 @@
              x:Key="MainMenuItems">
         <MenuItem Click="menuItemMute_OnClick">
             <MenuItem.Header>
-                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}"
+                              ConverterParameter="True">
                     <Binding Path="MuteDuration"
                              Source="{x:Static p:Settings.Default}" />
                     <Binding Path="MuteEndTime"

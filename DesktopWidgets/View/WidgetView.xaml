@@ -311,7 +311,8 @@
                     <Button Content="🔇"
                             Click="btnMute_OnClick">
                         <Button.ToolTip>
-                            <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}">
+                            <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}"
+                                          ConverterParameter="False">
                                 <Binding Path="MuteDuration"
                                          Source="{x:Static p:Settings.Default}" />
                                 <Binding Path="Settings.MuteEndTime" />
