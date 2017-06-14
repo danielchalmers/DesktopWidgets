@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using DesktopWidgets.Helpers;
+using System;
 using System.Threading;
-using System.Windows;
 using System.Windows.Threading;
-using DesktopWidgets.Helpers;
-using DesktopWidgets.Windows;
 
 namespace DesktopWidgets.Classes
 {
@@ -28,10 +25,6 @@ namespace DesktopWidgets.Classes
 
         private void Timer_OnTick(object sender, EventArgs eventArgs)
         {
-            if (Application.Current.Windows.OfType<Options>().Any())
-            {
-                return;
-            }
             ThreadPool.QueueUserWorkItem(delegate { SettingsHelper.SaveSettings(); }, null);
         }
 

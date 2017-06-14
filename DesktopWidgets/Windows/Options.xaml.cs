@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using DesktopWidgets.Classes;
+using DesktopWidgets.Helpers;
+using DesktopWidgets.OptionsPages;
+using DesktopWidgets.WindowViewModels;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using DesktopWidgets.Classes;
-using DesktopWidgets.Helpers;
-using DesktopWidgets.OptionsPages;
-using DesktopWidgets.Properties;
-using DesktopWidgets.WindowViewModels;
 
 namespace DesktopWidgets.Windows
 {
@@ -23,7 +21,6 @@ namespace DesktopWidgets.Windows
         {
             InitializeComponent();
 
-            Settings.Default.Save();
             DataContext = this;
 
             UpdateChangelog();
@@ -58,17 +55,6 @@ namespace DesktopWidgets.Windows
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var be in Pages.SelectMany(BindingOperations.GetSourceUpdatingBindings))
-            {
-                be.UpdateSource();
-            }
-            Settings.Default.Save();
-            Close();
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            Settings.Default.Reload();
             Close();
         }
 
