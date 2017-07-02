@@ -9,6 +9,7 @@
         xmlns:command="http://www.galasoft.ch/mvvmlight"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
         xmlns:windowViewModels="clr-namespace:DesktopWidgets.WindowViewModels"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="Manage Events"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsWidth, Mode=TwoWay}"
@@ -41,7 +42,9 @@
                  Margin="15"
                  ItemsSource="{Binding Path=EventActionPairs, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedPair}"
-                 SelectedIndex="0">
+                 SelectedIndex="0"
+                 dd:DragDrop.IsDragSource="True"
+                 dd:DragDrop.IsDropTarget="True">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock>

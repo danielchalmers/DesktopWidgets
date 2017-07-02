@@ -7,6 +7,7 @@
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         xmlns:properties="clr-namespace:DesktopWidgets.Properties"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+        xmlns:dd="urn:gong-wpf-dragdrop"
         mc:Ignorable="d"
         Title="Manage Shortcuts"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageShortcutsHeight, Mode=TwoWay}"
@@ -32,7 +33,9 @@
                  MouseDown="listBox_MouseDown"
                  ItemsSource="{Binding ViewModel.Settings.Shortcuts}"
                  SelectedItem="{Binding SelectedShortcut}"
-                 SelectedIndex="0">
+                 SelectedIndex="0"
+                 dd:DragDrop.IsDragSource="True"
+                 dd:DragDrop.IsDropTarget="True">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=., Converter={StaticResource ShortcutToManageNameConverter}}" />

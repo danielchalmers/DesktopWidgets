@@ -8,6 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:sidebar="clr-namespace:DesktopWidgets.Widgets.Sidebar"
+             xmlns:dd="urn:gong-wpf-dragdrop"
              mc:Ignorable="d">
     <UserControl.Resources>
         <Duration x:Key="ButtonAnimationDuration">0:0:0.050</Duration>
@@ -163,7 +164,9 @@
                   ItemsSource="{Binding Path=Settings.Shortcuts}"
                   Focusable="False"
                   HorizontalAlignment="{Binding Settings.ButtonHorizontalAlignment}"
-                  VerticalAlignment="{Binding Settings.ButtonVerticalAlignment}">
+                  VerticalAlignment="{Binding Settings.ButtonVerticalAlignment}"
+                  dd:DragDrop.IsDragSource="True"
+                  dd:DragDrop.IsDropTarget="True">
         <ItemsControl.ContextMenu>
             <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                 <ContextMenu.ItemsSource>

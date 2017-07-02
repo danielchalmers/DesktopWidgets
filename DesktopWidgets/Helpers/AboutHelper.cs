@@ -42,6 +42,7 @@ namespace DesktopWidgets.Helpers
         {
             {"Common Service Locator", "commonservicelocator.codeplex.com"},
             {"Extended WPF Toolkit", "wpftoolkit.codeplex.com"},
+            {"Gong DragDrop", "github.com/punker76/gong-wpf-dragdrop"},
             {"NotifyIcon", "hardcodet.net/projects/wpf-notifyicon"},
             {"MVVM Light", "galasoft.ch/mvvm"},
             {"Json.NET", "newtonsoft.com/json"},
