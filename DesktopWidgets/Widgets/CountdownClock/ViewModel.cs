@@ -1,4 +1,5 @@
-﻿using DesktopWidgets.Helpers;
+﻿using System;
+using DesktopWidgets.Helpers;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.ViewModel;
 
@@ -13,7 +14,6 @@ namespace DesktopWidgets.Widgets.CountdownClock
             {
                 return;
             }
-            TickAction = OnTickAction;
         }
 
         public Settings Settings { get; }
@@ -38,8 +38,9 @@ namespace DesktopWidgets.Widgets.CountdownClock
             }
         }
 
-        private void OnTickAction()
+        protected override void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            base.UpdateTimer_Tick(sender, e);
             if (CurrentTime >= Settings.EndDateTime && Settings.LastEndDateTime != Settings.EndDateTime)
             {
                 Settings.LastEndDateTime = Settings.EndDateTime;

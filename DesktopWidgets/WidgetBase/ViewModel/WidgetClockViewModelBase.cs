@@ -13,7 +13,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         private readonly WidgetClockSettingsBase _settings;
         private DispatcherTimer _clockUpdateTimer;
         private DateTime _currentTime;
-        public Action TickAction;
 
         public ClockViewModelBase(WidgetId id, bool startTicking = true) : base(id)
         {
@@ -23,7 +22,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                 return;
             }
             _clockUpdateTimer = new DispatcherTimer();
-            _clockUpdateTimer.Tick += (sender, args) => UpdateCurrentTime();
+            _clockUpdateTimer.Tick += UpdateTimer_Tick;
             UpdateCurrentTime();
             if (startTicking)
             {
@@ -63,7 +62,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public void UpdateCurrentTime()
         {
             CurrentTime = DateTime.Now + _settings.TimeOffset;
-            TickAction?.Invoke();
             SyncClockUpdateInterval();
         }
 
@@ -96,6 +94,11 @@ namespace DesktopWidgets.WidgetBase.ViewModel
                     Clipboard.SetText(textBlock.Text);
                 }
             }
+        }
+
+        protected virtual void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateCurrentTime();
         }
     }
 }
