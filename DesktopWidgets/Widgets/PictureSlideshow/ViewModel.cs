@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -133,8 +134,14 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                ImageUrl = ((string[])e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
-                IsPaused = true;
+                var imagePath = ((string[])e.Data.GetData(DataFormats.FileDrop))
+                    .Where(path => ImageHelper.IsSupported(Path.GetExtension(path)))
+                    .FirstOrDefault();
+                if (imagePath != null)
+                {
+                    ImageUrl = imagePath;
+                    IsPaused = true;
+                }
             }
         }
 
