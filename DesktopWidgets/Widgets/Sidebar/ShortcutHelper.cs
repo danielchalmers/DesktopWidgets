@@ -71,7 +71,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             {
                 if (
                     Popup.Show(
-                        "A shortcut with this path already exists.\n\nAre you sure you want to add this shortcut?",
+                        $"\"{shortcut.ProcessFile.Path}\" has already been added.\n\nDo you want to add it again?",
                         MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
                 {
                     return;
