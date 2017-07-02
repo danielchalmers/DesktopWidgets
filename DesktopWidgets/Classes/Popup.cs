@@ -25,9 +25,11 @@ namespace DesktopWidgets.Classes
         public static void ShowAsync(string text, MessageBoxButton button = MessageBoxButton.OK,
             MessageBoxImage image = MessageBoxImage.Information, MessageBoxResult defaultButton = MessageBoxResult.OK)
         {
-            new Thread(
-                new ThreadStart(delegate { MessageBox.Show(text, Resources.AppName, button, image, defaultButton); }))
-                .Start();
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                MessageBox.Show(text, Resources.AppName, button, image, defaultButton);
+            }).Start();
         }
     }
 }
