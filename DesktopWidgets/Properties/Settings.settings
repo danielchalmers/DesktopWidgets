@@ -26,12 +26,6 @@
     <Setting Name="MouseBoundsPollingInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="ManageShortcutsHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">550</Value>
-    </Setting>
-    <Setting Name="ManageShortcutsWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">500</Value>
-    </Setting>
     <Setting Name="UpdateDays" Type="System.String" Scope="User">
       <Value Profile="(Default)">All</Value>
     </Setting>

@@ -255,9 +255,6 @@
     <Compile Include="Widgets\CountdownClock\Metadata.cs" />
     <Compile Include="Widgets\CountdownClock\Settings.cs" />
     <Compile Include="Widgets\RSSFeed\FeedItem.cs" />
-    <Compile Include="Widgets\Sidebar\ManageShortcuts.xaml.cs">
-      <DependentUpon>ManageShortcuts.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Widgets\Sidebar\Shortcut.cs" />
     <Compile Include="Widgets\Sidebar\ShortcutHelper.cs" />
     <Compile Include="Widgets\Sidebar\ShortcutProperties.xaml.cs">
@@ -456,10 +453,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Widgets\Sidebar\ControlView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Widgets\Sidebar\ManageShortcuts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

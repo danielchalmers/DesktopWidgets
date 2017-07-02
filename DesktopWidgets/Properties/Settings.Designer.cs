@@ -121,30 +121,6 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("550")]
-        public double ManageShortcutsHeight {
-            get {
-                return ((double)(this["ManageShortcutsHeight"]));
-            }
-            set {
-                this["ManageShortcutsHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public double ManageShortcutsWidth {
-            get {
-                return ((double)(this["ManageShortcutsWidth"]));
-            }
-            set {
-                this["ManageShortcutsWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("All")]
         public string UpdateDays {
             get {

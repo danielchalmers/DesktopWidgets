@@ -146,8 +146,6 @@
                       Command="{Binding NewShortcut}" />
             <MenuItem Header="New S_eparator..."
                       Command="{Binding NewSeparator}" />
-            <MenuItem Header="_Manage Shortcuts..."
-                      Command="{Binding ManageShortcut}" />
         </x:Array>
         <ContextMenu x:Key="WidgetContextMenu"
                      IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
