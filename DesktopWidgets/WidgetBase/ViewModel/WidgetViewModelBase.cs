@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using DesktopWidgets.Classes;
 using DesktopWidgets.Events;
 using DesktopWidgets.Helpers;
 using DesktopWidgets.View;
@@ -32,7 +33,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             DismissWidget = new RelayCommand(DismissWidgetExecute);
             EditWidget = new RelayCommand(EditWidgetExecute);
             ReloadWidget = new RelayCommand(ReloadWidgetExecute);
-            ToggleEnableWidget = new RelayCommand(ToggleEnableWidgetExecute);
+            DisableWidget = new RelayCommand(DisableWidgetExecute);
             MuteWidget = new RelayCommand(MuteWidgetExecute);
             MuteUnmuteWidget = new RelayCommand(MuteUnmuteWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
@@ -138,7 +139,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public ICommand DismissWidget { get; private set; }
         public ICommand EditWidget { get; private set; }
         public ICommand ReloadWidget { get; private set; }
-        public ICommand ToggleEnableWidget { get; private set; }
+        public ICommand DisableWidget { get; private set; }
         public ICommand MuteWidget { get; private set; }
         public ICommand MuteUnmuteWidget { get; private set; }
         public ICommand ManageAllWidgets { get; private set; }
@@ -253,9 +254,15 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             Id.Reload();
         }
 
-        private void ToggleEnableWidgetExecute()
+        private void DisableWidgetExecute()
         {
-            Id.ToggleEnable();
+            if (Popup.Show($"Do you want to disable \"{Id?.GetName()}\"?\n" +
+                "You can re-enable this widget later in Manage Widgets.",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) != MessageBoxResult.Yes)
+            {
+                return;
+            }
+            Id.Disable();
         }
 
         private void ManageAllWidgetsExecute()

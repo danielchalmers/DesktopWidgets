@@ -48,5 +48,7 @@
                   Command="{Binding DismissWidget}" />
         <MenuItem Header="_Mute"
                   Command="{Binding MuteWidget}" />
+        <MenuItem Header="D_isable"
+                  Command="{Binding DisableWidget}" />
     </CompositeCollection>
 </ResourceDictionary>
