@@ -57,7 +57,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             }
             foreach (var file in files)
             {
-                viewModel.ProcessFile(file);
+                viewModel.ProcessFile(file, msg: msg);
             }
         }
 
