@@ -31,6 +31,10 @@ namespace DesktopWidgets.Widgets.Sidebar
             {
                 return Path.GetFileNameWithoutExtension(path);
             }
+            if (Directory.Exists(path))
+            {
+                return Path.GetFileName(path);
+            }
             return path;
         }
 
