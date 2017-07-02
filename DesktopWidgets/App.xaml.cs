@@ -14,7 +14,6 @@ using DesktopWidgets.Properties;
 using DesktopWidgets.Stores;
 using DesktopWidgets.View;
 using DesktopWidgets.WidgetBase;
-using DesktopWidgets.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
 
@@ -27,7 +26,6 @@ namespace DesktopWidgets
     {
         public static bool SuccessfullyLoaded;
         public static Mutex AppMutex;
-        public static HelperWindow HelperWindow;
         public static TaskbarIcon TrayIcon;
         public static WidgetsSettingsStore WidgetsSettingsStore;
         public static ObservableCollection<WidgetView> WidgetViews;

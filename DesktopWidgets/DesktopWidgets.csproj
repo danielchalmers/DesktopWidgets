@@ -384,9 +384,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AssemblyInfo.cs" />
-    <Compile Include="Windows\HelperWindow.xaml.cs">
-      <DependentUpon>HelperWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Popup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -495,10 +492,6 @@
     <Page Include="Windows\WidgetEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\HelperWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\InputBox.xaml">
       <Generator>MSBuild:Compile</Generator>

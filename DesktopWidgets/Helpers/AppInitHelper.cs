@@ -13,7 +13,6 @@ namespace DesktopWidgets.Helpers
     {
         public static bool Initialize()
         {
-            App.HelperWindow = new HelperWindow();
             SettingsHelper.UpgradeSettings();
             SettingsHelper.LoadSettings();
             if (IsAppAlreadyRunning())
