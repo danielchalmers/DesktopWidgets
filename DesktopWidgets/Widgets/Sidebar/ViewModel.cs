@@ -32,8 +32,6 @@ namespace DesktopWidgets.Widgets.Sidebar
             ShortcutFocus = new RelayCommand<Shortcut>(ShortcutFocusExecute);
 
             ShortcutEdit = new RelayCommand(ShortcutEditExecute);
-            ShortcutMoveUp = new RelayCommand(ShortcutMoveUpExecute);
-            ShortcutMoveDown = new RelayCommand(ShortcutMoveDownExecute);
             ShortcutRemove = new RelayCommand(ShortcutRemoveExecute);
             ShortcutOpenFolder = new RelayCommand(ShortcutOpenFolderExecute);
             ShortcutExecute = new RelayCommand<Shortcut>(ShortcutExecuteExecute);
@@ -51,8 +49,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ICommand Refresh { get; set; }
         public ICommand ShortcutFocus { get; set; }
         public ICommand ShortcutEdit { get; set; }
-        public ICommand ShortcutMoveUp { get; set; }
-        public ICommand ShortcutMoveDown { get; set; }
         public ICommand ShortcutRemove { get; set; }
         public ICommand ShortcutOpenFolder { get; set; }
         public ICommand NewShortcut { get; set; }
@@ -92,16 +88,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         private void ShortcutEditExecute()
         {
             this.OpenProperties(SelectedShortcut);
-        }
-
-        private void ShortcutMoveUpExecute()
-        {
-            this.MoveUp(SelectedShortcut);
-        }
-
-        private void ShortcutMoveDownExecute()
-        {
-            this.MoveDown(SelectedShortcut);
         }
 
         private void ShortcutRemoveExecute()

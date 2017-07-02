@@ -171,15 +171,8 @@
                     <CompositeCollection>
                         <MenuItem Header="_Edit..."
                                   Command="{Binding ShortcutEdit}" />
-                        <Separator />
-                        <MenuItem Header="Move _Up"
-                                  Command="{Binding ShortcutMoveUp}" />
-                        <MenuItem Header="Move _Down"
-                                  Command="{Binding ShortcutMoveDown}" />
-                        <Separator />
                         <MenuItem Header="_Remove..."
                                   Command="{Binding ShortcutRemove}" />
-                        <Separator />
                         <MenuItem Header="Open _Folder"
                                   Command="{Binding ShortcutOpenFolder}" />
                         <Separator />
