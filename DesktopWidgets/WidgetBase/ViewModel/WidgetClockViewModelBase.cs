@@ -46,14 +46,17 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         private void SyncClockUpdateInterval()
         {
-            var newTime = _settings.UpdateInterval > 0
+            var newInterval = TimeSpan.FromMilliseconds(_settings.UpdateInterval > 0
                 ? _settings.UpdateInterval
-                : 1000 - DateTime.Now.Millisecond;
-            _clockUpdateTimer.Interval = TimeSpan.FromMilliseconds(newTime);
-            if (_clockUpdateTimer.IsEnabled)
+                : 1000 - DateTime.Now.Millisecond);
+            if (_clockUpdateTimer.Interval != newInterval)
             {
-                _clockUpdateTimer.Stop();
-                _clockUpdateTimer.Start();
+                _clockUpdateTimer.Interval = newInterval;
+                if (_clockUpdateTimer.IsEnabled)
+                {
+                    _clockUpdateTimer.Stop();
+                    _clockUpdateTimer.Start();
+                }
             }
         }
 
