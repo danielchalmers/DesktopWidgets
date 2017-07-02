@@ -49,8 +49,8 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public static void ProcessFiles(this ViewModel viewModel, string[] files, bool msg = true, int position = -1)
         {
-            if (files.Length >= 5 && msg &&
-                Popup.Show($"You are attempting to add {files.Length} shortcuts.\n\nAre you sure?",
+            if (files.Length >= 10 && msg &&
+                Popup.Show($"Are you sure you want to add {files.Length} shortcuts?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
