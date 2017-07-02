@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:classes="clr-namespace:DesktopWidgets.Classes"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d">
     <UserControl.Resources>
         <classes:BoolToPauseTextConverter x:Key="BoolToPauseTextConverter" />
@@ -13,8 +15,19 @@
                     Command="{Binding TogglePlayPause}" />
         </Grid>
     </UserControl.Resources>
-    <Image Source="{Binding ImageUrl}"
-           Stretch="Uniform"
-           MaxWidth="{Binding Width}"
-           MaxHeight="{Binding Height}" />
+    <!--Transparent background because null color doesn't accept mouse events-->
+    <Grid AllowDrop="True"
+          Background="Transparent">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Drop">
+                <command:EventToCommand Command="{Binding Drop}"
+                                        PassEventArgsToCommand="True" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Image Source="{Binding ImageUrl}"
+               Stretch="Uniform"
+               MaxWidth="{Binding Width}"
+               MaxHeight="{Binding Height}">
+        </Image>
+    </Grid>
 </UserControl>

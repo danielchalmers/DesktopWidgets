@@ -158,13 +158,21 @@
             </ContextMenu.ItemsSource>
         </ContextMenu>
     </UserControl.Resources>
+    <!--Transparent background because null color doesn't accept mouse events-->
     <ItemsControl AllowDrop="True"
+                  Background="Transparent"
                   ItemsSource="{Binding Path=Settings.Shortcuts}"
                   Focusable="False"
                   HorizontalAlignment="{Binding Settings.ButtonHorizontalAlignment}"
                   VerticalAlignment="{Binding Settings.ButtonVerticalAlignment}"
                   dd:DragDrop.IsDragSource="True"
                   dd:DragDrop.IsDropTarget="True">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Drop">
+                <command:EventToCommand Command="{Binding Drop}"
+                                        PassEventArgsToCommand="True" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <ItemsControl.ContextMenu>
             <ContextMenu IsOpen="{Binding IsContextMenuOpen, Mode=OneWayToSource}">
                 <ContextMenu.ItemsSource>
@@ -189,7 +197,8 @@
                 <Button Style="{StaticResource StyleButton}"
                         Command="{Binding DataContext.ShortcutExecute, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                         CommandParameter="{Binding Path=.}"
-                        ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}">
+                        ToolTipService.IsEnabled="{Binding Path=ToolTip, RelativeSource={RelativeSource Self}, Converter={StaticResource TextToVisibilityConverter}}"
+                        AllowDrop="True">
                     <DockPanel LastChildFill="True">
                         <Image Style="{StaticResource StyleImage}">
                             <Image.Source>

@@ -37,7 +37,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             MuteUnmuteWidget = new RelayCommand(MuteUnmuteWidgetExecute);
             ManageAllWidgets = new RelayCommand(ManageAllWidgetsExecute);
 
-            Drop = new RelayCommand<DragEventArgs>(DropExecute);
             MouseMove = new RelayCommand<MouseEventArgs>(MouseMoveExecute);
             MouseDown = new RelayCommand<MouseButtonEventArgs>(MouseDownExecute);
             MouseUp = new RelayCommand<MouseButtonEventArgs>(MouseUpExecute);
@@ -148,7 +147,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
         public ICommand WidgetDockVertical { get; private set; }
         public ICommand WidgetUndock { get; private set; }
 
-        public ICommand Drop { get; set; }
         public ICommand MouseMove { get; set; }
         public ICommand MouseDown { get; set; }
         public ICommand MouseUp { get; set; }
@@ -408,10 +406,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             _actionBarHideTimer.Stop();
             _actionBarHideTimer.Start();
             KeepActionBarOpen = true;
-        }
-
-        public virtual void DropExecute(DragEventArgs e)
-        {
         }
 
         public virtual void MouseMoveExecute(MouseEventArgs e)

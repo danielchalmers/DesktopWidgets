@@ -15,13 +15,8 @@
         classes:SizeObserver.ObservedHeight="{Binding ActualHeight, Mode=OneWayToSource}"
         Closing="WidgetView_OnClosing"
         LocationChanged="WidgetView_OnLocationChanged"
-        AllowDrop="{Binding AllowDrop}"
         SizeChanged="WidgetView_OnSizeChanged">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Drop">
-            <command:EventToCommand Command="{Binding Drop}"
-                                    PassEventArgsToCommand="True" />
-        </i:EventTrigger>
         <i:EventTrigger EventName="MouseMove">
             <command:EventToCommand Command="{Binding MouseMove}"
                                     PassEventArgsToCommand="True" />

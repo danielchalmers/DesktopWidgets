@@ -35,6 +35,8 @@ namespace DesktopWidgets.Widgets.Sidebar
             ShortcutOpenFolder = new RelayCommand(ShortcutOpenFolderExecute);
             ShortcutExecute = new RelayCommand<Shortcut>(ShortcutExecuteExecute);
 
+            Drop = new RelayCommand<DragEventArgs>(DropExecute);
+
             if (Settings.DefaultShortcutsMode != DefaultShortcutsMode.DontChange)
             {
                 Settings.Shortcuts =
@@ -53,6 +55,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ICommand NewShortcut { get; set; }
         public ICommand NewSeparator { get; set; }
         public ICommand ShortcutExecute { get; set; }
+        public ICommand Drop { get; set; }
         private Shortcut SelectedShortcut { get; set; }
 
         public override void OnRefresh()
@@ -114,7 +117,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             this.ForceRefresh();
         }
 
-        public override void DropExecute(DragEventArgs e)
+        public void DropExecute(DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Text))
             {

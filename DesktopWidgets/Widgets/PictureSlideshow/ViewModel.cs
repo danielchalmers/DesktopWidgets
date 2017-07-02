@@ -32,6 +32,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             ImageUrl = Settings.ImageUrl;
 
             TogglePlayPause = new RelayCommand(TogglePlayPauseExecute);
+            Drop = new RelayCommand<DragEventArgs>(DropExecute);
 
             _random = new Random();
 
@@ -59,6 +60,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         public Settings Settings { get; }
         public ICommand TogglePlayPause { get; set; }
+        public ICommand Drop { get; set; }
 
         public string ImageUrl
         {
@@ -127,7 +129,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             _changeTimer = null;
         }
 
-        public override void DropExecute(DragEventArgs e)
+        public void DropExecute(DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
