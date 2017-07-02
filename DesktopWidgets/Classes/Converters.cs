@@ -91,8 +91,8 @@ namespace DesktopWidgets.Classes
 
             var ts = settings.EndDateTime - val;
             return ts.TotalSeconds > 0 || settings.EndContinueCounting
-                ? ts.ParseCustomFormat(settings.DateTimeFormat)
-                : TimeSpan.FromSeconds(0).ParseCustomFormat(settings.DateTimeFormat);
+                ? ts.ToString(settings.Format)
+                : TimeSpan.FromSeconds(0).ToString(settings.Format);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -110,8 +110,8 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             }
             var dateTime = System.Convert.ToDateTime(value[0]);
-            var format = (List<string>)value[1];
-            return dateTime.ParseCustomFormat(format);
+            var format = (string)value[1];
+            return dateTime.ToString(format);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -130,8 +130,8 @@ namespace DesktopWidgets.Classes
             }
             var currentTime = System.Convert.ToDateTime(value[0]);
             var startTime = System.Convert.ToDateTime(value[1]);
-            var format = (List<string>)value[2];
-            return (currentTime - startTime).ParseCustomFormat(format);
+            var format = (string)value[2];
+            return (currentTime - startTime).ToString(format);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)

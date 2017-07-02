@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace DesktopWidgets.WidgetBase.Settings
@@ -17,7 +16,7 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Style")]
         [DisplayName("Date/Time Format")]
-        public List<string> DateTimeFormat { get; set; } = new List<string> { "{hh}:{mm} {tt}" };
+        public string Format { get; set; } = "hh':'mm' 'tt";
 
         [Category("General")]
         [DisplayName("Date/Time Offset")]

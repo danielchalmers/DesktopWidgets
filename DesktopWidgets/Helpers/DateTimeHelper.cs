@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DesktopWidgets.Helpers
 {
@@ -23,21 +21,5 @@ namespace DesktopWidgets.Helpers
 
             return formatted;
         }
-
-        private static string ParseCustomFormat(this DateTime dateTime, string format)
-            =>
-                StringHelper.ExtractFromString(format, "{", "}")
-                    .Aggregate(format, (current, v) => current.Replace("{" + v + "}", dateTime.ToString(v)));
-
-        private static string ParseCustomFormat(this TimeSpan dateTime, string format)
-            =>
-                StringHelper.ExtractFromString(format, "{", "}")
-                    .Aggregate(format, (current, v) => current.Replace("{" + v + "}", dateTime.ToString(v)));
-
-        public static string ParseCustomFormat(this DateTime dateTime, IEnumerable<string> format)
-            => string.Join(Environment.NewLine, format.Select(v => dateTime.ParseCustomFormat(v)));
-
-        public static string ParseCustomFormat(this TimeSpan dateTime, IEnumerable<string> format)
-            => string.Join(Environment.NewLine, format.Select(v => dateTime.ParseCustomFormat(v)));
     }
 }
