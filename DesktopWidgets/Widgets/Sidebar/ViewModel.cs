@@ -9,11 +9,12 @@ using DesktopWidgets.Stores;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.ViewModel;
 using GalaSoft.MvvmLight.Command;
+using GongSolutions.Wpf.DragDrop;
 using DataFormats = System.Windows.Forms.DataFormats;
 
 namespace DesktopWidgets.Widgets.Sidebar
 {
-    public class ViewModel : WidgetViewModelBase
+    public class ViewModel : WidgetViewModelBase, IDropTarget
     {
         public ViewModel(WidgetId id) : base(id)
         {
@@ -35,8 +36,6 @@ namespace DesktopWidgets.Widgets.Sidebar
             ShortcutOpenFolder = new RelayCommand(ShortcutOpenFolderExecute);
             ShortcutExecute = new RelayCommand<Shortcut>(ShortcutExecuteExecute);
 
-            Drop = new RelayCommand<DragEventArgs>(DropExecute);
-
             if (Settings.DefaultShortcutsMode != DefaultShortcutsMode.DontChange)
             {
                 Settings.Shortcuts =
@@ -55,7 +54,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ICommand NewShortcut { get; set; }
         public ICommand NewSeparator { get; set; }
         public ICommand ShortcutExecute { get; set; }
-        public ICommand Drop { get; set; }
         private Shortcut SelectedShortcut { get; set; }
 
         public override void OnRefresh()
@@ -117,19 +115,40 @@ namespace DesktopWidgets.Widgets.Sidebar
             this.ForceRefresh();
         }
 
-        public void DropExecute(DragEventArgs e)
+        public void DragOver(IDropInfo dropInfo)
         {
-            if (e.Data.GetDataPresent(DataFormats.Text))
+            dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
+
+            if (dropInfo.Data is IDataObject dataObject && dataObject.GetDataPresent(DataFormats.FileDrop))
             {
-                var text = (string)e.Data.GetData(DataFormats.Text);
-                if (LinkHelper.IsHyperlink(text))
+                dropInfo.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                dropInfo.Effects = DragDropEffects.Move;
+            }
+        }
+
+        public void Drop(IDropInfo dropInfo)
+        {
+            if (dropInfo.Data is DataObject data)
+            {
+                if (data.ContainsText())
                 {
-                    this.ProcessFile(text);
+                    var text = data.GetText();
+                    if (LinkHelper.IsHyperlink(text))
+                    {
+                        this.ProcessFile(text, position: dropInfo.InsertIndex);
+                    }
+                }
+                else if (data.ContainsFileDropList())
+                {
+                    this.ProcessFiles(data.GetData(DataFormats.FileDrop) as string[], position: dropInfo.InsertIndex);
                 }
             }
-            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            else
             {
-                this.ProcessFiles((string[])e.Data.GetData(DataFormats.FileDrop));
+                GongSolutions.Wpf.DragDrop.DragDrop.DefaultDropHandler.Drop(dropInfo);
             }
         }
     }

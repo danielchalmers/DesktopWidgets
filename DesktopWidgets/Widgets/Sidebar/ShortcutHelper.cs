@@ -34,7 +34,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             return path;
         }
 
-        public static void ProcessFile(this ViewModel viewModel, string filepath, string name = "", bool msg = true)
+        public static void ProcessFile(this ViewModel viewModel, string filepath, string name = "", bool msg = true, int position = -1)
         {
             if (viewModel.Settings.ParseShortcutFiles && Path.GetExtension(filepath) == ".lnk")
             {
@@ -44,10 +44,10 @@ namespace DesktopWidgets.Widgets.Sidebar
             {
                 Name = name == "" ? GetNameFromPath(filepath) : name,
                 ProcessFile = new ProcessFile(filepath)
-            }, msg);
+            }, msg, position);
         }
 
-        public static void ProcessFiles(this ViewModel viewModel, string[] files, bool msg = true)
+        public static void ProcessFiles(this ViewModel viewModel, string[] files, bool msg = true, int position = -1)
         {
             if (files.Length >= 5 && msg &&
                 Popup.Show($"You are attempting to add {files.Length} shortcuts.\n\nAre you sure?",
@@ -57,11 +57,15 @@ namespace DesktopWidgets.Widgets.Sidebar
             }
             foreach (var file in files)
             {
-                viewModel.ProcessFile(file, msg: msg);
+                viewModel.ProcessFile(file, msg: msg, position: position);
+                if (position > -1)
+                {
+                    position++;
+                }
             }
         }
 
-        public static void Add(this ViewModel viewModel, Shortcut shortcut, bool msg = true)
+        public static void Add(this ViewModel viewModel, Shortcut shortcut, bool msg = true, int position = -1)
         {
             if (msg && viewModel.Settings.Shortcuts.Any(x => x.ProcessFile.Path == shortcut.ProcessFile.Path))
             {
@@ -73,7 +77,14 @@ namespace DesktopWidgets.Widgets.Sidebar
                     return;
                 }
             }
-            viewModel.Settings.Shortcuts.Add(shortcut);
+            if (position > -1 && position < viewModel.Settings.Shortcuts.Count)
+            {
+                viewModel.Settings.Shortcuts.Insert(position, shortcut);
+            }
+            else
+            {
+                viewModel.Settings.Shortcuts.Add(shortcut);
+            }
         }
 
         public static void OpenFolder(this Shortcut shortcut)
