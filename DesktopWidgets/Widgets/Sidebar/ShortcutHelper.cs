@@ -106,7 +106,8 @@ namespace DesktopWidgets.Widgets.Sidebar
                 !LinkHelper.IsHyperlink(dialog.NewShortcut.ProcessFile.Path))
             {
                 if (Popup.Show(
-                    "This path does not exist.\n\nDo you want to add this shortcut anyway?",
+                    $"Couldn't find \"{dialog.NewShortcut.ProcessFile.Path}\".\n\n" +
+                    "Do you want to add this shortcut anyway?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
                 {
