@@ -131,7 +131,7 @@ namespace DesktopWidgets.Classes
             var currentTime = System.Convert.ToDateTime(value[0]);
             var startTime = System.Convert.ToDateTime(value[1]);
             var format = (List<string>)value[2];
-            return (startTime - currentTime).ParseCustomFormat(format);
+            return (currentTime - startTime).ParseCustomFormat(format);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
