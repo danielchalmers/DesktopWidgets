@@ -48,10 +48,6 @@ namespace DesktopWidgets.Widgets.Sidebar
         [DisplayName("Hide on Shortcut Launch")]
         public bool HideOnExecute { get; set; } = true;
 
-        [Category("General")]
-        [DisplayName("Allow Drag Drop Files")]
-        public bool AllowDropFiles { get; set; } = true;
-
         [Browsable(false)]
         [DisplayName("Default Shortcuts Mode")]
         public DefaultShortcutsMode DefaultShortcutsMode { get; set; } = DefaultShortcutsMode.Preset;

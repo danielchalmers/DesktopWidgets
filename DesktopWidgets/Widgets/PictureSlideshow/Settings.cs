@@ -37,10 +37,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
         public string ImageUrl { get; set; }
 
         [Category("General")]
-        [DisplayName("Allow Dropping Images")]
-        public bool AllowDropFiles { get; set; } = true;
-
-        [Category("General")]
         [DisplayName("Freeze")]
         public bool Freeze { get; set; }
     }

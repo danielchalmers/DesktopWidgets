@@ -30,7 +30,6 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
             }
             IsPaused = Settings.Freeze;
             ImageUrl = Settings.ImageUrl;
-            AllowDrop = Settings.AllowDropFiles;
 
             TogglePlayPause = new RelayCommand(TogglePlayPauseExecute);
 
@@ -130,7 +129,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         public override void DropExecute(DragEventArgs e)
         {
-            if (AllowDrop && e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 ImageUrl = ((string[])e.Data.GetData(DataFormats.FileDrop)).FirstOrDefault();
                 IsPaused = true;

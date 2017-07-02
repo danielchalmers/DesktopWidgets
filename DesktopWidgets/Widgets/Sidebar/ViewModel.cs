@@ -22,7 +22,6 @@ namespace DesktopWidgets.Widgets.Sidebar
             {
                 return;
             }
-            AllowDrop = Settings.AllowDropFiles;
             IconCache = new Dictionary<string, ImageSource>();
 
             Refresh = new RelayCommand(RefreshExecute);
@@ -117,20 +116,17 @@ namespace DesktopWidgets.Widgets.Sidebar
 
         public override void DropExecute(DragEventArgs e)
         {
-            if (AllowDrop)
+            if (e.Data.GetDataPresent(DataFormats.Text))
             {
-                if (e.Data.GetDataPresent(DataFormats.Text))
+                var text = (string)e.Data.GetData(DataFormats.Text);
+                if (LinkHelper.IsHyperlink(text))
                 {
-                    var text = (string)e.Data.GetData(DataFormats.Text);
-                    if (LinkHelper.IsHyperlink(text))
-                    {
-                        this.ProcessFile(text);
-                    }
+                    this.ProcessFile(text);
                 }
-                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                {
-                    this.ProcessFiles((string[])e.Data.GetData(DataFormats.FileDrop));
-                }
+            }
+            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                this.ProcessFiles((string[])e.Data.GetData(DataFormats.FileDrop));
             }
         }
     }

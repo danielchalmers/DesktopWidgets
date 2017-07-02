@@ -52,8 +52,6 @@ namespace DesktopWidgets.WidgetBase.ViewModel
             WidgetUndock = new RelayCommand(WidgetUndockExecute);
         }
 
-        public bool AllowDrop { get; set; }
-
         public WidgetView View { get; set; }
 
         public double Left
