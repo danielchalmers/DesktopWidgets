@@ -21,7 +21,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         [Category("General")]
         [DisplayName("ZIP Code")]
-        public int ZipCode { get; set; }
+        public string ZipCode { get; set; }
 
         [Category("Style")]
         [DisplayName("Show Icon")]

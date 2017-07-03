@@ -14,7 +14,7 @@ namespace DesktopWidgets.Widgets.Weather
     {
         private string _description;
         private string _iconUrl;
-        private int _lastZipCode;
+        private string _lastZipCode;
         private bool _showHelp;
         private double _temperature;
         private double _temperatureMax;
@@ -156,7 +156,7 @@ namespace DesktopWidgets.Widgets.Weather
         {
             _lastZipCode = Settings.ZipCode;
 
-            if (Settings.ZipCode == 0)
+            if (string.IsNullOrEmpty(Settings.ZipCode))
             {
                 ShowHelp = true;
                 return;
