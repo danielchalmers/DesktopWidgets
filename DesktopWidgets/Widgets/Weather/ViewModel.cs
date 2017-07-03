@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Threading;
 using DesktopWidgets.ApiClasses;
 using DesktopWidgets.Helpers;
@@ -30,10 +31,10 @@ namespace DesktopWidgets.Widgets.Weather
             }
             _updateTimer = new DispatcherTimer();
             UpdateTimerInterval();
-            _updateTimer.Tick += (sender, args) => UpdateWeather();
-
-            UpdateWeather();
+            _updateTimer.Tick += async (sender, args) => await UpdateWeatherAsync();
             _updateTimer.Start();
+
+            Task.Run(async () => await UpdateWeatherAsync());
         }
 
         public Settings Settings { get; }
@@ -103,7 +104,7 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
-        private void DownloadWeatherData(Action<OpenWeatherMapApiResult> finishAction)
+        private async Task<OpenWeatherMapApiResult> GetWeatherDataAsync()
         {
             string unitType;
             switch (Settings.UnitType)
@@ -122,23 +123,21 @@ namespace DesktopWidgets.Widgets.Weather
 
             try
             {
-                using (var wc = new WebClient())
+                using (var webClient = new WebClient())
                 {
-                    wc.DownloadStringCompleted +=
-                        (sender, args) =>
-                            finishAction(JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(args.Result));
-                    wc.DownloadStringAsync(
-                        new Uri(
-                            $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Settings.ApiKey}"));
+                    var result = await webClient.DownloadStringTaskAsync(
+                        new Uri($"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Settings.ApiKey}"));
+                    return JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(result);
                 }
             }
             catch
             {
                 // ignored
             }
+            return null;
         }
 
-        private void UpdateWeather()
+        private async Task UpdateWeatherAsync()
         {
             _lastZipCode = Settings.ZipCode;
             _lastApiKey = Settings.ApiKey;
@@ -149,17 +148,15 @@ namespace DesktopWidgets.Widgets.Weather
                 return;
             }
 
-            DownloadWeatherData(data =>
+            var weatherData = await GetWeatherDataAsync();
+            if (weatherData?.main?.temp != null && weatherData.weather.Count > 0)
             {
-                if (data?.main?.temp != null && data.weather.Count > 0)
-                {
-                    Temperature = data.main.temp;
-                    Description = data.weather[0].description;
-                    TemperatureMin = data.main.temp_min;
-                    TemperatureMax = data.main.temp_max;
-                    IconUrl = $"{Resources.OpenWeatherMapDomain}img/w/{data.weather[0].icon}.png";
-                }
-            });
+                Temperature = weatherData.main.temp;
+                Description = weatherData.weather[0].description;
+                TemperatureMin = weatherData.main.temp_min;
+                TemperatureMax = weatherData.main.temp_max;
+                IconUrl = $"{Resources.OpenWeatherMapDomain}img/w/{weatherData.weather[0].icon}.png";
+            }
         }
 
         private void UpdateTimerInterval()
@@ -183,7 +180,7 @@ namespace DesktopWidgets.Widgets.Weather
             if (_lastZipCode != Settings.ZipCode ||
                 _lastApiKey != Settings.ApiKey)
             {
-                UpdateWeather();
+                Task.Run(async () => await UpdateWeatherAsync());
             }
         }
     }
