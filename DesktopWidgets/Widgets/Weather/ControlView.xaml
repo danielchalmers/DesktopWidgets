@@ -10,7 +10,7 @@
         <classes:BoolToCollapsedVisibilityConverter x:Key="BoolToCollapsedVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock Text="Enter a zip code"
+        <TextBlock Text="Enter a ZIP Code"
                    TextAlignment="Center"
                    Visibility="{Binding ShowHelp, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <StackPanel Orientation="Horizontal"

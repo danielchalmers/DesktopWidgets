@@ -20,7 +20,7 @@ namespace DesktopWidgets.Widgets.Weather
         public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromHours(1);
 
         [Category("General")]
-        [DisplayName("Zip Code")]
+        [DisplayName("ZIP Code")]
         public int ZipCode { get; set; }
 
         [Category("Style")]
