@@ -23,6 +23,10 @@ namespace DesktopWidgets.Widgets.Weather
         [DisplayName("ZIP Code")]
         public string ZipCode { get; set; }
 
+        [Category("General")]
+        [DisplayName("API Key")]
+        public string ApiKey { get; set; }
+
         [Category("Style")]
         [DisplayName("Show Icon")]
         public bool ShowIcon { get; set; } = true;

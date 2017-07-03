@@ -15,6 +15,7 @@ namespace DesktopWidgets.Widgets.Weather
         private string _description;
         private string _iconUrl;
         private string _lastZipCode;
+        private string _lastApiKey;
         private double _temperature;
         private double _temperatureMax;
         private double _temperatureMin;
@@ -128,7 +129,7 @@ namespace DesktopWidgets.Widgets.Weather
                             finishAction(JsonConvert.DeserializeObject<OpenWeatherMapApiResult>(args.Result));
                     wc.DownloadStringAsync(
                         new Uri(
-                            $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Resources.OpenWeatherMapAPIKey}"));
+                            $"{Resources.OpenWeatherMapDomain}data/2.5/weather?zip={Settings.ZipCode}&units={unitType}&appid={Settings.ApiKey}"));
                 }
             }
             catch
@@ -140,8 +141,10 @@ namespace DesktopWidgets.Widgets.Weather
         private void UpdateWeather()
         {
             _lastZipCode = Settings.ZipCode;
+            _lastApiKey = Settings.ApiKey;
 
-            if (string.IsNullOrEmpty(Settings.ZipCode))
+            if (string.IsNullOrEmpty(Settings.ZipCode) ||
+                string.IsNullOrEmpty(Settings.ApiKey))
             {
                 return;
             }
@@ -177,7 +180,8 @@ namespace DesktopWidgets.Widgets.Weather
         {
             base.OnRefresh();
             UpdateTimerInterval();
-            if (_lastZipCode != Settings.ZipCode)
+            if (_lastZipCode != Settings.ZipCode ||
+                _lastApiKey != Settings.ApiKey)
             {
                 UpdateWeather();
             }

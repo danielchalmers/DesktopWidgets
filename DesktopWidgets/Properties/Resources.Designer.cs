@@ -106,15 +106,6 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 16ef0da0f3d3cf8813b68caff516db23.
-        /// </summary>
-        public static string OpenWeatherMapAPIKey {
-            get {
-                return ResourceManager.GetString("OpenWeatherMapAPIKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://api.openweathermap.org/.
         /// </summary>
         public static string OpenWeatherMapDomain {

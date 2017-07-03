@@ -132,9 +132,6 @@
   <data name="GitHubMainPage" xml:space="preserve">
     <value>https://github.com/danielchalmers/DesktopWidgets</value>
   </data>
-  <data name="OpenWeatherMapAPIKey" xml:space="preserve">
-    <value>16ef0da0f3d3cf8813b68caff516db23</value>
-  </data>
   <data name="OpenWeatherMapDomain" xml:space="preserve">
     <value>http://api.openweathermap.org/</value>
   </data>
