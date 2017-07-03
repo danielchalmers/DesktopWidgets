@@ -23,6 +23,11 @@
                    HorizontalAlignment="Center"
                    Text="Enter a ZIP Code" />
 
+        <TextBlock x:Key="WeatherDataFailHelp"
+                   x:Shared="False"
+                   HorizontalAlignment="Center"
+                   Text="Failed to get weather" />
+
         <StackPanel x:Key="WeatherContent"
                     x:Shared="False"
                     Orientation="Horizontal">
@@ -65,6 +70,11 @@
                     <Setter Property="Content"
                             Value="{StaticResource WeatherContent}" />
                     <Style.Triggers>
+                        <DataTrigger Binding="{Binding DidWeatherDataFail}"
+                                     Value="True">
+                            <Setter Property="Content"
+                                    Value="{StaticResource WeatherDataFailHelp}" />
+                        </DataTrigger>
                         <DataTrigger Binding="{Binding Settings.ZipCode, Converter={StaticResource StringToIsNotNullOrEmptyConverter}}"
                                      Value="False">
                             <Setter Property="Content"

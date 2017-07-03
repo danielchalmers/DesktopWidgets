@@ -20,6 +20,7 @@ namespace DesktopWidgets.Widgets.Weather
         private double _temperature;
         private double _temperatureMax;
         private double _temperatureMin;
+        private bool _didWeatherDataFail;
         private DispatcherTimer _updateTimer;
 
         public ViewModel(WidgetId id) : base(id)
@@ -104,6 +105,19 @@ namespace DesktopWidgets.Widgets.Weather
             }
         }
 
+        public bool DidWeatherDataFail
+        {
+            get { return _didWeatherDataFail; }
+            set
+            {
+                if (_didWeatherDataFail != value)
+                {
+                    _didWeatherDataFail = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         private async Task<OpenWeatherMapApiResult> GetWeatherDataAsync()
         {
             string unitType;
@@ -149,7 +163,8 @@ namespace DesktopWidgets.Widgets.Weather
             }
 
             var weatherData = await GetWeatherDataAsync();
-            if (weatherData?.main?.temp != null && weatherData.weather.Count > 0)
+            DidWeatherDataFail = (weatherData?.main?.temp == null || weatherData.weather.Count == 0);
+            if (!DidWeatherDataFail)
             {
                 Temperature = weatherData.main.temp;
                 Description = weatherData.weather[0].description;
