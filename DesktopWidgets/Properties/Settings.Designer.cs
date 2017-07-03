@@ -387,7 +387,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int ChangelogDownloadPages {
             get {
                 return ((int)(this["ChangelogDownloadPages"]));

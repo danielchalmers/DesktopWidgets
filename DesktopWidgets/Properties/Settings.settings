@@ -96,7 +96,7 @@
       <Value Profile="(Default)">1E-09</Value>
     </Setting>
     <Setting Name="ChangelogDownloadPages" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">4</Value>
+      <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="ManageEventsWidth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">500</Value>
