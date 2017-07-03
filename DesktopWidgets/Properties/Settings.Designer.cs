@@ -468,7 +468,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("00:10:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:30:00")]
         public global::System.TimeSpan AutoSaveInterval {
             get {
                 return ((global::System.TimeSpan)(this["AutoSaveInterval"]));
