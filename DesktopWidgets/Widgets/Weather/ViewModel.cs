@@ -15,7 +15,6 @@ namespace DesktopWidgets.Widgets.Weather
         private string _description;
         private string _iconUrl;
         private string _lastZipCode;
-        private bool _showHelp;
         private double _temperature;
         private double _temperatureMax;
         private double _temperatureMin;
@@ -37,20 +36,6 @@ namespace DesktopWidgets.Widgets.Weather
         }
 
         public Settings Settings { get; }
-
-        public bool ShowHelp
-        {
-            get { return _showHelp; }
-            set
-            {
-                if (_showHelp != value)
-                {
-                    _showHelp = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
 
         public double Temperature
         {
@@ -158,10 +143,8 @@ namespace DesktopWidgets.Widgets.Weather
 
             if (string.IsNullOrEmpty(Settings.ZipCode))
             {
-                ShowHelp = true;
                 return;
             }
-            ShowHelp = false;
 
             DownloadWeatherData(data =>
             {
