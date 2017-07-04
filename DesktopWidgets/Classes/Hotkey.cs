@@ -32,19 +32,19 @@ namespace DesktopWidgets.Classes
         public Key Key { get; set; } = Key.None;
 
         [PropertyOrder(1)]
-        [DisplayName("Modifier Keys")]
+        [DisplayName("Modifier Key")]
         public ModifierKeys ModifierKeys { get; set; } = ModifierKeys.None;
 
         [PropertyOrder(2)]
-        [DisplayName("Allow Repetition")]
+        [DisplayName("Trigger Repeatedly If Held Down")]
         public bool CanRepeat { get; set; } = true;
 
         [PropertyOrder(3)]
-        [DisplayName("Works If Foreground Is Fullscreen")]
+        [DisplayName("Trigger If Foreground Is Fullscreen")]
         public bool WorksIfForegroundIsFullscreen { get; set; }
 
         [PropertyOrder(4)]
-        [DisplayName("Works If Muted")]
+        [DisplayName("Trigger If Muted")]
         public bool WorksIfMuted { get; set; }
 
         [PropertyOrder(5)]
