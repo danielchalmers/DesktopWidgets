@@ -14,15 +14,15 @@ namespace DesktopWidgets.Actions
         public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
 
         [PropertyOrder(1)]
-        [DisplayName("Works If Foreground Is Fullscreen")]
+        [DisplayName("Trigger If Foreground Is Fullscreen")]
         public bool WorksIfForegroundIsFullscreen { get; set; }
 
         [PropertyOrder(2)]
-        [DisplayName("Works If Muted")]
+        [DisplayName("Trigger If Muted")]
         public bool WorksIfMuted { get; set; }
 
         [PropertyOrder(3)]
-        [DisplayName("Show Errors")]
+        [DisplayName("Show Error Popups")]
         public bool ShowErrors { get; set; } = false;
 
         public void Execute()
