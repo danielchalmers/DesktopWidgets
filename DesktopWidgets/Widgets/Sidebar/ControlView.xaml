@@ -131,13 +131,6 @@
             </Style.Triggers>
         </Style>
 
-        <Grid x:Key="FrameBottom">
-            <StackPanel>
-                <Button Content="_New Shortcut..."
-                        Command="{Binding NewShortcut}" />
-            </StackPanel>
-        </Grid>
-
         <x:Array x:Shared="False"
                  Type="{x:Type sys:Object}"
                  x:Key="SidebarMenuItems">
