@@ -41,7 +41,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Vertical;
 
         [Category("Shortcut Style")]
-        [DisplayName("Height")]
+        [DisplayName("Image Size")]
         public int ButtonHeight { get; set; } = 32;
 
         [Category("Behavior (Hideable)")]
