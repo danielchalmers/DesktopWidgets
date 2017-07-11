@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using DesktopWidgets.WidgetBase.Settings;
 
 namespace DesktopWidgets.Widgets.Sidebar
@@ -47,6 +48,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         [Category("Shortcut Style")]
         [DisplayName("Margin")]
         public Thickness ButtonMargin { get; set; } = new Thickness(1);
+
+        [Category("Shortcut Style")]
+        [DisplayName("Text Color")]
+        public Color ButtonTextColor { get; set; } = Colors.Black;
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide on Shortcut Launch")]

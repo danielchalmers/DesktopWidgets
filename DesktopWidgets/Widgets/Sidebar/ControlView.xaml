@@ -20,7 +20,7 @@
                          Color="{StaticResource ButtonColor}"
                          Opacity="0.3" />
         <SolidColorBrush x:Key="ButtonTextBrush"
-                         Color="{StaticResource ButtonTextColor}" />
+                         Color="{Binding Path=DataContext.Settings.ButtonTextColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
 
         <classes:ShowIconContentToVisibilityConverter x:Key="ShowIconContentToVisibilityConverter" />
         <classes:ShowTextContentToVisibilityConverter x:Key="ShowTextContentToVisibilityConverter" />
