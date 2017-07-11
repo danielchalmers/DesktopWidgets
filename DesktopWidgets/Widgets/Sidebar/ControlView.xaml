@@ -74,8 +74,6 @@
                     Value="{StaticResource ButtonBrush}" />
             <Setter Property="Foreground"
                     Value="{StaticResource ButtonTextBrush}" />
-            <Setter Property="AllowDrop"
-                    Value="{Binding Path=DataContext.Settings.AllowDropFiles, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
             <Setter Property="Margin"
                     Value="4,1,4,1" />
             <Setter Property="Template">
