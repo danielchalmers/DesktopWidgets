@@ -13,11 +13,12 @@
     <UserControl.Resources>
         <Duration x:Key="ButtonAnimationDuration">0:0:0.050</Duration>
         <Color x:Key="ButtonColor">Transparent</Color>
-        <Color x:Key="ButtonHoverColor">#E8E8E8</Color>
-        <Color x:Key="ButtonMouseDownColor">#D8D8D8</Color>
+        <Color x:Key="ButtonHoverColor">#D3D3D3</Color>
+        <Color x:Key="ButtonMouseDownColor">#BABABA</Color>
         <Color x:Key="ButtonTextColor">Black</Color>
         <SolidColorBrush x:Key="ButtonBrush"
-                         Color="{StaticResource ButtonColor}" />
+                         Color="{StaticResource ButtonColor}"
+                         Opacity="0.3" />
         <SolidColorBrush x:Key="ButtonTextBrush"
                          Color="{StaticResource ButtonTextColor}" />
 
