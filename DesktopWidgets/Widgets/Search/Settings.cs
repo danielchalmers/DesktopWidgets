@@ -14,7 +14,7 @@ namespace DesktopWidgets.Widgets.Search
 
         [Category("General")]
         [DisplayName("URL Prefix")]
-        public string BaseUrl { get; set; } = "http://";
+        public string BaseUrl { get; set; } = "https://www.google.com/search?q=";
 
         [Category("General")]
         [DisplayName("URL Suffix")]
