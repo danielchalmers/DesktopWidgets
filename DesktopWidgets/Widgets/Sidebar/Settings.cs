@@ -44,6 +44,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         [DisplayName("Image Size")]
         public int ButtonHeight { get; set; } = 32;
 
+        [Category("Shortcut Style")]
+        [DisplayName("Margin")]
+        public Thickness ButtonMargin { get; set; } = new Thickness(1);
+
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide on Shortcut Launch")]
         public bool HideOnExecute { get; set; } = true;
