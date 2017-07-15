@@ -14,7 +14,7 @@
         Title="Manage Events"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsHeight, Mode=TwoWay}"
-        MinHeight="497"
+        MinHeight="537"
         MinWidth="535"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
