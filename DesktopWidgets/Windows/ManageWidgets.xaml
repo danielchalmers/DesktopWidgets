@@ -97,12 +97,6 @@
                 <Button Visibility="Hidden" />
                 <Button Content="_Edit..."
                         Command="{Binding EditWidget}" />
-                <Button Content="Move _Up"
-                        Command="{Binding MoveUpWidget}"
-                        Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Content="Move _Down"
-                        Command="{Binding MoveDownWidget}"
-                        Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Content="Re_load"
                         Command="{Binding ReloadWidget}" />
                 <Button Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToMuteUnmuteNameConverter}}"

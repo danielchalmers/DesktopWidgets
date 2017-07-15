@@ -86,12 +86,6 @@
                 <Button Visibility="Hidden" />
                 <Button Content="_Edit..."
                         Command="{Binding EditPair}" />
-                <Button Content="Move _Up"
-                        Command="{Binding MoveUpPair}"
-                        Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Button Content="Move _Down"
-                        Command="{Binding MoveDownPair}"
-                        Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
                         Command="{Binding ToggleEnablePair}" />
                 <Button Content="_Remove..."
