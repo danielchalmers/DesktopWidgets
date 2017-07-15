@@ -8,6 +8,9 @@
       mc:Ignorable="d"
       Title="{Binding Title}"
       FocusManager.FocusedElement="{Binding ElementName=ChangelogTextBox}">
+    <Page.Resources>
+        <BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -29,7 +32,7 @@
         <Button Grid.Row="4"
                 Content="_Check for Updates"
                 Command="{Binding CheckForUpdates}"
-                IsEnabled="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}}"
+                Visibility="{Binding Source={x:Static helpers:UpdateHelper.IsUpdateable}, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Height="23" />
     </Grid>
 </Page>
