@@ -27,7 +27,7 @@ namespace DesktopWidgets.Helpers
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine("Libraries:");
                 foreach (var library in Libraries
-                    .Select(x => $"  {x.Key}: {x.Value}"))
+                    .Select(x => $"{x.Key}: {x.Value}"))
                 {
                     stringBuilder.AppendLine(library);
                 }
