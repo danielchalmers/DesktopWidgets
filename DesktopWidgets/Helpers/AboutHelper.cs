@@ -41,7 +41,7 @@ namespace DesktopWidgets.Helpers
         private static Dictionary<string, string> Libraries { get; } = new Dictionary<string, string>
         {
             {"Common Service Locator", "commonservicelocator.codeplex.com"},
-            {"Extended WPF Toolkit", "wpftoolkit.codeplex.com"},
+            {"Extended WPF Toolkit", "github.com/xceedsoftware/wpftoolkit"},
             {"Gong DragDrop", "github.com/punker76/gong-wpf-dragdrop"},
             {"NotifyIcon", "hardcodet.net/projects/wpf-notifyicon"},
             {"MVVM Light", "galasoft.ch/mvvm"},
