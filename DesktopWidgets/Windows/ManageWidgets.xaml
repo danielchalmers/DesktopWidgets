@@ -66,52 +66,48 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ScrollViewer Grid.Row="0"
-                      Grid.Column="1"
-                      Margin="0,15,15,15"
-                      VerticalScrollBarVisibility="Hidden"
-                      HorizontalScrollBarVisibility="Disabled">
-            <StackPanel>
-                <StackPanel.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Height"
-                                Value="30" />
-                        <Setter Property="Margin"
-                                Value="0,0,0,10" />
-                        <Setter Property="Padding"
-                                Value="15,0,15,0" />
-                        <Setter Property="HorizontalAlignment"
-                                Value="Stretch" />
-                        <Setter Property="VerticalAlignment"
-                                Value="Stretch" />
-                        <Setter Property="IsEnabled"
-                                Value="{Binding SelectedWidget, Converter={StaticResource NotNullToBoolConverter}}" />
-                    </Style>
-                </StackPanel.Resources>
-                <Button Content="_New..."
-                        Command="{Binding NewWidget}"
-                        IsEnabled="True" />
-                <Button Content="_Import..."
-                        Command="{Binding ImportWidget}"
-                        IsEnabled="True" />
-                <Button Visibility="Hidden" />
-                <Button Content="_Edit..."
-                        Command="{Binding EditWidget}" />
-                <Button Content="Re_load"
-                        Command="{Binding ReloadWidget}" />
-                <Button Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToMuteUnmuteNameConverter}}"
-                        Command="{Binding MuteUnmuteWidget}" />
-                <Button Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
-                        Command="{Binding DisableWidget}" />
-                <Button Content="_Remove..."
-                        Command="{Binding RemoveWidget}" />
-                <Button Visibility="Hidden" />
-                <Button Content="_Clone"
-                        Command="{Binding CloneWidget}" />
-                <Button Content="Ex_port..."
-                        Command="{Binding ExportWidget}" />
-            </StackPanel>
-        </ScrollViewer>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,15,15,15">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height"
+                            Value="30" />
+                    <Setter Property="Margin"
+                            Value="0,0,0,10" />
+                    <Setter Property="Padding"
+                            Value="15,0,15,0" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Stretch" />
+                    <Setter Property="VerticalAlignment"
+                            Value="Stretch" />
+                    <Setter Property="IsEnabled"
+                            Value="{Binding SelectedWidget, Converter={StaticResource NotNullToBoolConverter}}" />
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="_New..."
+                    Command="{Binding NewWidget}"
+                    IsEnabled="True" />
+            <Button Content="_Import..."
+                    Command="{Binding ImportWidget}"
+                    IsEnabled="True" />
+            <Button Visibility="Hidden" />
+            <Button Content="_Edit..."
+                    Command="{Binding EditWidget}" />
+            <Button Content="Re_load"
+                    Command="{Binding ReloadWidget}" />
+            <Button Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToMuteUnmuteNameConverter}}"
+                    Command="{Binding MuteUnmuteWidget}" />
+            <Button Content="{Binding SelectedWidget, Converter={StaticResource SelectedWidgetToEnableDisableNameConverter}}"
+                    Command="{Binding DisableWidget}" />
+            <Button Content="_Remove..."
+                    Command="{Binding RemoveWidget}" />
+            <Button Visibility="Hidden" />
+            <Button Content="_Clone"
+                    Command="{Binding CloneWidget}" />
+            <Button Content="Ex_port..."
+                    Command="{Binding ExportWidget}" />
+        </StackPanel>
 
         <Grid Row="1"
               Grid.Column="0"
