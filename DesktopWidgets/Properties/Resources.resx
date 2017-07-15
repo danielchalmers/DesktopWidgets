@@ -124,13 +124,13 @@
     <value>https://api.github.com/repos/danielchalmers/DesktopWidgets/commits</value>
   </data>
   <data name="GitHubCommits" xml:space="preserve">
-    <value>https://github.com/danielchalmers/DesktopWidgets/commits</value>
+    <value>github.com/danielchalmers/DesktopWidgets/commits</value>
   </data>
   <data name="GitHubIssues" xml:space="preserve">
-    <value>https://github.com/danielchalmers/DesktopWidgets/issues</value>
+    <value>github.com/danielchalmers/DesktopWidgets/issues</value>
   </data>
   <data name="GitHubMainPage" xml:space="preserve">
-    <value>https://github.com/danielchalmers/DesktopWidgets</value>
+    <value>github.com/danielchalmers/DesktopWidgets</value>
   </data>
   <data name="OpenWeatherMapDomain" xml:space="preserve">
     <value>http://api.openweathermap.org/</value>
@@ -145,7 +145,7 @@
     <value>Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar</value>
   </data>
   <data name="Website" xml:space="preserve">
-    <value>https://danielchalmers.github.io/DesktopWidgets/</value>
+    <value>danielchalmers.github.io/DesktopWidgets/</value>
   </data>
   <data name="WindowsFolderDataFile" xml:space="preserve">
     <value>desktop.ini</value>
