@@ -61,7 +61,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("550")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ManageWidgetsHeight {
             get {
                 return ((double)(this["ManageWidgetsHeight"]));
@@ -73,7 +73,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ManageWidgetsWidth {
             get {
                 return ((double)(this["ManageWidgetsWidth"]));
@@ -396,7 +396,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ManageEventsWidth {
             get {
                 return ((double)(this["ManageEventsWidth"]));
@@ -408,7 +408,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("550")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ManageEventsHeight {
             get {
                 return ((double)(this["ManageEventsHeight"]));
