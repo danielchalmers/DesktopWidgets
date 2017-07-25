@@ -27,7 +27,7 @@ namespace DesktopWidgets.WidgetBase
 
         public override string ToString()
         {
-            return $"{Name} - {Publisher}";
+            return $"\"{Name}\" by {Publisher}";
         }
     }
 }

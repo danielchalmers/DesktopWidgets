@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Events;
@@ -298,17 +297,6 @@ namespace DesktopWidgets.Helpers
             return JsonConvert.SerializeObject(settings, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
         }
 
-        private static string GetImportConfirmText(WidgetPackageInfo packageInfo)
-        {
-            var importText = new StringBuilder();
-            importText.AppendLine("Do you want to import this widget?");
-            importText.AppendLine();
-            importText.AppendLine($"Publisher: {packageInfo.Publisher}");
-            importText.AppendLine($"Name: {packageInfo.Name}");
-            importText.AppendLine($"Publish Date: {packageInfo.PublishDateTime}");
-            return importText.ToString();
-        }
-
         public static void Import()
         {
             var dialog = new OpenFileDialog
@@ -338,12 +326,13 @@ namespace DesktopWidgets.Helpers
 
                 if (settings?.PackageInfo == null)
                 {
-                    Popup.Show("Import failed. Widget may be corrupt.", image: MessageBoxImage.Error);
+                    Popup.Show("Failed to import widget.\n" +
+                        "Package may be corrupted.", image: MessageBoxImage.Error);
                     return;
                 }
 
                 if (
-                    Popup.Show(GetImportConfirmText(settings.PackageInfo), MessageBoxButton.YesNo,
+                    Popup.Show($"Do you want to import {settings.PackageInfo}?", MessageBoxButton.YesNo,
                         MessageBoxImage.Question) ==
                     MessageBoxResult.No)
                 {
@@ -353,7 +342,8 @@ namespace DesktopWidgets.Helpers
                 if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
                 {
                     Popup.Show(
-                        $"This widget requires a newer version.\n\nSupported version: {settings.PackageInfo.AppVersion}\nCurrent version: {AssemblyInfo.Version}",
+                        $"This widget was created for {AssemblyInfo.Title} {settings.PackageInfo.AppVersion}.\n\n" +
+                        $"Update {AssemblyInfo.Title} to continue.",
                         image: MessageBoxImage.Error);
                     return;
                 }
@@ -378,7 +368,7 @@ namespace DesktopWidgets.Helpers
                 return;
             }
             File.WriteAllText(dialog.Path, Serialise(settings));
-            Popup.Show($"\"{settings.PackageInfo.Name}\" has been saved to \"{dialog.Path}\".");
+            Popup.Show($"\"{settings.PackageInfo.Name}\" has been exported to {dialog.Path}.");
         }
 
         public static void ReloadWidgets()
