@@ -67,7 +67,7 @@
                          Opacity="{Binding Settings.Style.BackgroundOpacity}" />
         <ImageBrush x:Key="WindowBackgroundImageBrush"
                     ImageSource="{Binding Settings.Style.BackgroundImagePath}"
-                    Opacity="{Binding Settings.Style.BackgroundImageOpacity}"
+                    Opacity="{Binding Settings.Style.BackgroundOpacity}"
                     Stretch="{Binding Settings.Style.BackgroundImageStretch}" />
         <SolidColorBrush x:Key="WindowForegroundBrush"
                          Color="{Binding Settings.Style.TextColor}" />

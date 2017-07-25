@@ -56,10 +56,6 @@ namespace DesktopWidgets.WidgetBase.Styles
         public string BackgroundImagePath { get; set; }
 
         [Category("Background Image")]
-        [DisplayName("Opacity")]
-        public double BackgroundImageOpacity { get; set; } = 1.0;
-
-        [Category("Background Image")]
         [DisplayName("Stretch")]
         public Stretch BackgroundImageStretch { get; set; } = Stretch.Fill;
 
