@@ -89,10 +89,18 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             }
 
-            var ts = settings.EndDateTime - val;
-            return ts.TotalSeconds > 0 || settings.EndContinueCounting
-                ? ts.ToString(settings.Format)
-                : TimeSpan.FromSeconds(0).ToString(settings.Format);
+            var elapsed = settings.EndDateTime - val;
+            var displayedElapsed = elapsed.TotalSeconds > 0 || settings.EndContinueCounting
+                    ? elapsed
+                    : TimeSpan.FromSeconds(0);
+            try
+            {
+                return displayedElapsed.ToString(settings.Format);
+            }
+            catch (FormatException)
+            {
+                return "Bad format";
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -111,7 +119,14 @@ namespace DesktopWidgets.Classes
             }
             var dateTime = System.Convert.ToDateTime(value[0]);
             var format = (string)value[1];
-            return dateTime.ToString(format);
+            try
+            {
+                return dateTime.ToString(format);
+            }
+            catch (FormatException)
+            {
+                return "Bad format";
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -131,7 +146,15 @@ namespace DesktopWidgets.Classes
             var currentTime = System.Convert.ToDateTime(value[0]);
             var startTime = System.Convert.ToDateTime(value[1]);
             var format = (string)value[2];
-            return (currentTime - startTime).ToString(format);
+            var elasped = (currentTime - startTime);
+            try
+            {
+                return elasped.ToString(format);
+            }
+            catch (FormatException)
+            {
+                return "Bad format";
+            }
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
