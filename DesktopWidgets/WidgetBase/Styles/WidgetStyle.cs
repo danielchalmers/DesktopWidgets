@@ -59,6 +59,10 @@ namespace DesktopWidgets.WidgetBase.Styles
         [DisplayName("Opacity")]
         public double BackgroundImageOpacity { get; set; } = 1.0;
 
+        [Category("Background Image")]
+        [DisplayName("Stretch")]
+        public Stretch BackgroundImageStretch { get; set; } = Stretch.Fill;
+
         [DisplayName("Context Menu Enabled")]
         public bool ShowContextMenu { get; set; } = true;
 
