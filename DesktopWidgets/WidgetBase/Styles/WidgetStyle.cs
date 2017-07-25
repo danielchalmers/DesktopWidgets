@@ -12,13 +12,13 @@ namespace DesktopWidgets.WidgetBase.Styles
         public WidgetStyle()
         {
             FontSettings.FontSize = 14;
-            Padding = new Thickness(5);
+            Padding = new Thickness(3);
             TextColor = Colors.Black;
             BackgroundColor = Colors.White;
             BackgroundOpacity = 0.95;
             Width = double.NaN;
             Height = double.NaN;
-            CornerRadius = new CornerRadius(4);
+            CornerRadius = new CornerRadius(5);
             HorizontalAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;
         }
@@ -95,7 +95,7 @@ namespace DesktopWidgets.WidgetBase.Styles
 
         [Category("Border")]
         [DisplayName("Opacity")]
-        public double BorderOpacity { get; set; } = 0.5;
+        public double BorderOpacity { get; set; } = 0.25;
 
         [Category("Border")]
         [DisplayName("Thickness")]
