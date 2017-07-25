@@ -108,12 +108,19 @@
         </Style>
         <Style x:Key="WidgetBorderStyle"
                TargetType="{x:Type Border}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={StaticResource WindowBackgroundImageBrush}, Path=ImageSource}"
+                             Value="{x:Null}">
+                    <Setter Property="Background"
+                            Value="{StaticResource WindowBackgroundBrush}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Background"
+                    Value="{StaticResource WindowBackgroundImageBrush}" />
             <Setter Property="HorizontalAlignment"
                     Value="{Binding Settings.Style.HorizontalAlignment}" />
             <Setter Property="VerticalAlignment"
                     Value="{Binding Settings.Style.VerticalAlignment}" />
-            <Setter Property="Background"
-                    Value="{StaticResource WindowBackgroundBrush}" />
             <Setter Property="BorderBrush"
                     Value="{StaticResource WindowBorderBrush}" />
             <Setter Property="CornerRadius"
@@ -131,8 +138,6 @@
         </Style>
         <Style x:Key="WidgetBorderContainerStyle"
                TargetType="{x:Type Border}">
-            <Setter Property="Background"
-                    Value="{StaticResource WindowBackgroundImageBrush}" />
             <Setter Property="Focusable"
                     Value="False" />
         </Style>
