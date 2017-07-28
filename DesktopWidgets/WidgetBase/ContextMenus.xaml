@@ -42,10 +42,10 @@
             </MenuItem>
         </MenuItem>
         <Separator />
-        <MenuItem Header="_Reload"
-                  Command="{Binding ReloadWidget}" />
         <MenuItem Header="_Dismiss"
                   Command="{Binding DismissWidget}" />
+        <MenuItem Header="_Reload"
+                  Command="{Binding ReloadWidget}" />
         <MenuItem Header="_Mute"
                   Command="{Binding MuteWidget}" />
         <MenuItem Header="D_isable"
