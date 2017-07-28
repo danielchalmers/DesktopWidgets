@@ -25,43 +25,16 @@ namespace DesktopWidgets.Windows
 
         private Version _updateVersion;
 
-
         public UpdatePrompt(Version updateVersion, bool isRequired)
         {
             InitializeComponent();
 
             UpdateIsRequired = isRequired;
 
-            if (!isRequired)
-            {
-                if (updateVersion.Major != AssemblyInfo.Version.Major)
-                {
-                    UpdateSubText =
-                        $"A new major release, {AssemblyInfo.Title} {updateVersion.Major}.{updateVersion.Minor} is now available!";
-                }
-                else
-                {
-                    if (updateVersion.Major == AssemblyInfo.Version.Major &&
-                        updateVersion.Minor == AssemblyInfo.Version.Minor &&
-                        updateVersion.Build == AssemblyInfo.Version.Build &&
-                        updateVersion.Revision != AssemblyInfo.Version.Revision)
-                    {
-                        UpdateSubText =
-                            $"{AssemblyInfo.Title} {updateVersion} is now available!";
-                    }
-                    else
-                    {
-                        UpdateSubText =
-                            $"{AssemblyInfo.Title} {updateVersion.Major}.{updateVersion.Minor}.{updateVersion.Build} is now available!";
-                    }
-                }
-                UpdateSubText += "\nDo you want to update to the latest version?";
-            }
-            else
-            {
-                UpdateSubText =
-                    "A mandatory update is available.\nPress \"Update Now\" to update to the latest version.";
-            }
+            UpdateText =
+                (UpdateIsRequired ? "An important update, " : "") +
+                $"{AssemblyInfo.Title} {updateVersion} is out!";
+
             DataContext = this;
 
             new ChangelogDownloader().GetChangelog(x => { ChangelogText = x; }, false);
@@ -93,7 +66,7 @@ namespace DesktopWidgets.Windows
             }
         }
 
-        public string UpdateSubText
+        public string UpdateText
         {
             get { return _updateSubText; }
             set
@@ -101,7 +74,7 @@ namespace DesktopWidgets.Windows
                 if (_updateSubText != value)
                 {
                     _updateSubText = value;
-                    RaisePropertyChanged(nameof(UpdateSubText));
+                    RaisePropertyChanged(nameof(UpdateText));
                 }
             }
         }

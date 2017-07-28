@@ -26,14 +26,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0"
-                    Margin="15,5,0,0">
-            <TextBlock Text="Update Available"
-                       FontSize="18"
-                       FontWeight="Medium" />
-            <TextBlock Text="{Binding UpdateSubText}"
-                       Margin="0,5,0,0" />
-        </StackPanel>
+        <TextBlock Grid.Row="0"
+                   Text="{Binding UpdateText}"
+                   FontSize="16"
+                   FontWeight="Medium"
+                   Margin="15,5,0,0" />
 
         <TextBox x:Name="ChangelogTextBox"
                  Grid.Row="1"
