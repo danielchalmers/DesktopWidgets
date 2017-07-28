@@ -51,8 +51,8 @@ namespace DesktopWidgets.Classes
 
         private Point GetMouseLocation()
             =>
-                new Point(Control.MousePosition.X - _settings.MouseDetetcionOffset.X,
-                    Control.MousePosition.Y - _settings.MouseDetetcionOffset.Y);
+                new Point(Control.MousePosition.X - _settings.MouseDetectionOffset.X,
+                    Control.MousePosition.Y - _settings.MouseDetectionOffset.Y);
 
         public void UpdateIntervals()
         {

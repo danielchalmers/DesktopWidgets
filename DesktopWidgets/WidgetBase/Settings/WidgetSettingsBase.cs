@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using DesktopWidgets.WidgetBase.Styles;
+using Newtonsoft.Json;
 
 namespace DesktopWidgets.WidgetBase.Settings
 {
@@ -199,6 +200,8 @@ namespace DesktopWidgets.WidgetBase.Settings
 
         [Category("Behavior (Hideable)")]
         [DisplayName("Mouse Detection Offset")]
-        public Point MouseDetetcionOffset { get; set; } = new Point(0, 0);
+        // Property had typo but JSON name needs to stay or value will be reset.
+        [JsonProperty("MouseDetetcionOffset")]
+        public Point MouseDetectionOffset { get; set; } = new Point(0, 0);
     }
 }
