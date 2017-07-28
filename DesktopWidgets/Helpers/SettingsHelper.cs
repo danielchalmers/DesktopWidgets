@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class SettingsHelper
+    public static class SettingsHelper
     {
         public static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {

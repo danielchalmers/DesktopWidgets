@@ -9,7 +9,7 @@ using NHotkey.Wpf;
 
 namespace DesktopWidgets.Stores
 {
-    internal static class HotkeyStore
+    public static class HotkeyStore
     {
         private static readonly List<(Hotkey, Action)> Hotkeys = new List<(Hotkey, Action)>();
 

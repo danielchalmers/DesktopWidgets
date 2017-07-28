@@ -6,7 +6,7 @@ using System.Windows.Interop;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class ScreenHelper
+    public static class ScreenHelper
     {
         public static Rect ToRect(this Screen screen, bool useFullBounds)
         {

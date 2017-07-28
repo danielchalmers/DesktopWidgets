@@ -4,7 +4,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class ProcessHelper
+    public static class ProcessHelper
     {
         public static void Launch(string path, string args = "", string startIn = "",
             ProcessWindowStyle style = ProcessWindowStyle.Normal)

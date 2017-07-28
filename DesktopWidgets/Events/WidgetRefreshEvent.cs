@@ -1,6 +1,6 @@
 ﻿namespace DesktopWidgets.Events
 {
-    internal class WidgetRefreshEvent : WidgetEventBase
+    public class WidgetRefreshEvent : WidgetEventBase
     {
     }
 }

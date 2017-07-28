@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace DesktopWidgets.Classes
 {
-    internal static class AssemblyInfo
+    public static class AssemblyInfo
     {
         public static Version Version { get; } = Assembly.GetExecutingAssembly().GetName().Version;
         public static string Copyright { get; } = GetAssemblyAttribute<AssemblyCopyrightAttribute>(a => a.Copyright);

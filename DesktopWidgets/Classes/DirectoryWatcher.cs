@@ -9,7 +9,7 @@ using System.Windows.Threading;
 
 namespace DesktopWidgets.Classes
 {
-    internal class DirectoryWatcher
+    public class DirectoryWatcher
     {
         private readonly DispatcherTimer _dirWatcherTimer;
         private readonly Dictionary<string, bool> _isScanningDictionary;

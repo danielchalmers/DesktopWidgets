@@ -2,10 +2,8 @@
 
 namespace DesktopWidgets.Classes
 {
-    internal class SizeObserver
+    public class SizeObserver
     {
-        #region "Observe"
-
         public static bool GetObserve(FrameworkElement elem)
         {
             return (bool)elem.GetValue(ObserveProperty);
@@ -60,10 +58,6 @@ namespace DesktopWidgets.Classes
             }
         }
 
-        #endregion
-
-        #region "ObservedWidth"
-
         public static double GetObservedWidth(DependencyObject obj)
         {
             return (double)obj.GetValue(ObservedWidthProperty);
@@ -79,10 +73,6 @@ namespace DesktopWidgets.Classes
             DependencyProperty.RegisterAttached("ObservedWidth", typeof(double), typeof(SizeObserver),
                 new UIPropertyMetadata(0.0));
 
-        #endregion
-
-        #region "ObservedHeight"
-
         public static double GetObservedHeight(DependencyObject obj)
         {
             return (double)obj.GetValue(ObservedHeightProperty);
@@ -97,7 +87,5 @@ namespace DesktopWidgets.Classes
         public static readonly DependencyProperty ObservedHeightProperty =
             DependencyProperty.RegisterAttached("ObservedHeight", typeof(double), typeof(SizeObserver),
                 new UIPropertyMetadata(0.0));
-
-        #endregion
     }
 }

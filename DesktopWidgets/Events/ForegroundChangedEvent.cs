@@ -3,7 +3,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Events
 {
-    internal class ForegroundChangedEvent : IEvent
+    public class ForegroundChangedEvent : IEvent
     {
         [DisplayName("From")]
         public ForegroundMatchData FromMatchData { get; set; } = new ForegroundMatchData();

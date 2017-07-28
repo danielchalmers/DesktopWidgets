@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace DesktopWidgets.Classes
 {
-    internal class ChangelogDownloader
+    public class ChangelogDownloader
     {
         private static readonly List<string> ChangelogBlacklist = new List<string>
         {

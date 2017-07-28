@@ -5,7 +5,7 @@ using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Classes
 {
-    internal static class NativeMethods
+    public static class NativeMethods
     {
         internal const uint WINEVENT_OUTOFCONTEXT = 0;
         internal const uint EVENT_SYSTEM_FOREGROUND = 3;

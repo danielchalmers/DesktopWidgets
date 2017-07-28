@@ -5,7 +5,7 @@ using DesktopWidgets.Properties;
 
 namespace DesktopWidgets.Actions
 {
-    internal class WidgetMuteUnmuteAction : WidgetActionBase
+    public class WidgetMuteUnmuteAction : WidgetActionBase
     {
         [DisplayName("Duration")]
         public TimeSpan Duration { get; set; } = Settings.Default.MuteDuration;

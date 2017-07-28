@@ -5,7 +5,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Actions
 {
-    internal class PopupAction : ActionBase
+    public class PopupAction : ActionBase
     {
         public FilePath FilePath { get; set; } = new FilePath();
 

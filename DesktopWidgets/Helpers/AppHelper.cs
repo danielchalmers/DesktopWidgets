@@ -5,7 +5,7 @@ using DesktopWidgets.Properties;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class AppHelper
+    public static class AppHelper
     {
         public static readonly string AppPath =
             UpdateHelper.IsUpdateable

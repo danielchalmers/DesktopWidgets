@@ -5,7 +5,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class FullScreenHelper
+    public static class FullScreenHelper
     {
         private static bool DoesMonitorHaveFullscreenApp(Screen screen) => Win32Helper.GetForegroundApp()
             .IsFullScreen(screen);

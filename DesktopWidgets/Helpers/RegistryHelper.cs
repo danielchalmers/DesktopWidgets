@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class RegistryHelper
+    public static class RegistryHelper
     {
         public static void SetRunOnStartup(bool runOnStartup)
         {

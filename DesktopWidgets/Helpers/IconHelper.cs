@@ -10,7 +10,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class IconHelper
+    public static class IconHelper
     {
         private const uint SHGFI_ICON = 0x100;
         private const uint SHGFI_LARGEICON = 0x0;

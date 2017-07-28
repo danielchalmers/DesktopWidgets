@@ -1,6 +1,6 @@
 ﻿namespace DesktopWidgets.Events
 {
-    internal class WidgetIntroEndEvent : WidgetEventBase
+    public class WidgetIntroEndEvent : WidgetEventBase
     {
     }
 }

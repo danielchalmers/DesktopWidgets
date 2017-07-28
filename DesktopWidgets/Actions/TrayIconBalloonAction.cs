@@ -7,7 +7,7 @@ using Hardcodet.Wpf.TaskbarNotification;
 
 namespace DesktopWidgets.Actions
 {
-    internal class TrayIconBalloonAction : ActionBase
+    public class TrayIconBalloonAction : ActionBase
     {
         public FilePath FilePath { get; set; } = new FilePath();
 

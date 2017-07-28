@@ -6,7 +6,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Actions
 {
-    internal class WriteFileAction : ActionBase
+    public class WriteFileAction : ActionBase
     {
         public FilePath FilePath { get; set; } = new FilePath();
 

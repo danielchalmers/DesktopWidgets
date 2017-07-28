@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace DesktopWidgets.Events
 {
-    internal class LaunchEvent : IEvent
+    public class LaunchEvent : IEvent
     {
         [DisplayName("System Start")]
         public bool SystemStartup { get; set; } = false;

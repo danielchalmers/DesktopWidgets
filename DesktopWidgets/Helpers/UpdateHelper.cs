@@ -10,7 +10,7 @@ using Hardcodet.Wpf.TaskbarNotification;
 
 namespace DesktopWidgets.Helpers
 {
-    internal static class UpdateHelper
+    public static class UpdateHelper
     {
         public static bool IsUpdateable => ApplicationDeployment.IsNetworkDeployed;
         private static Version ForgetUpdateVersion => Settings.Default.ForgetUpdateVersion ?? new Version(0, 0, 0, 0);

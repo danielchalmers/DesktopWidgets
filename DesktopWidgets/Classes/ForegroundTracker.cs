@@ -5,7 +5,7 @@ using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Classes
 {
-    internal static class ForegroundTracker
+    public static class ForegroundTracker
     {
         private static NativeMethods.WinEventDelegate _winEventDelegate;
         private static IntPtr m_hhook;

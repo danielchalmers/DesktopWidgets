@@ -6,7 +6,7 @@ using DesktopWidgets.Classes;
 
 namespace DesktopWidgets.Actions
 {
-    internal class SpeakTextAction : ActionBase
+    public class SpeakTextAction : ActionBase
     {
         public FilePath FilePath { get; set; } = new FilePath();
 
