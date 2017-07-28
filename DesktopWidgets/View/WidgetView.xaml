@@ -303,12 +303,12 @@
                     <Button Content="≡"
                             Click="btnMenu_OnClick"
                             ToolTip="Menu" />
-                    <Button Content="⟳"
-                            Click="btnReload_OnClick"
-                            ToolTip="Reload" />
                     <Button Content="×"
                             Click="btnDismiss_OnClick"
                             ToolTip="Dismiss" />
+                    <Button Content="⟳"
+                            Click="btnReload_OnClick"
+                            ToolTip="Reload" />
                     <Button Content="🔇"
                             Click="btnMute_OnClick">
                         <Button.ToolTip>
