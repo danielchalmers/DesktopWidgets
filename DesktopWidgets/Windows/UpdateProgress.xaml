@@ -4,13 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
-        xmlns:p="clr-namespace:DesktopWidgets.Properties"
+        xmlns:properties="clr-namespace:DesktopWidgets.Properties"
         mc:Ignorable="d"
-        Title="Software Update"
         Width="450"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
         SizeToContent="Height">
+    <Window.Title>
+        <MultiBinding StringFormat="{}{0} Update">
+            <Binding Source="{x:Static properties:Resources.AppName}" />
+        </MultiBinding>
+    </Window.Title>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
