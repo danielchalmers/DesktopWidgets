@@ -79,7 +79,7 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to github.com/danielchalmers/DesktopWidgets/commits.
+        ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets/commits.
         /// </summary>
         public static string GitHubCommits {
             get {
@@ -88,7 +88,7 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to github.com/danielchalmers/DesktopWidgets/issues.
+        ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets/issues.
         /// </summary>
         public static string GitHubIssues {
             get {
@@ -97,7 +97,7 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to github.com/danielchalmers/DesktopWidgets.
+        ///   Looks up a localized string similar to https://github.com/danielchalmers/DesktopWidgets.
         /// </summary>
         public static string GitHubMainPage {
             get {
@@ -142,7 +142,7 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to danielchalmers.github.io/DesktopWidgets/.
+        ///   Looks up a localized string similar to https://danielchalmers.github.io/DesktopWidgets/.
         /// </summary>
         public static string Website {
             get {
