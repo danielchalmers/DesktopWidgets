@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
@@ -72,6 +74,8 @@ namespace DesktopWidgets.Helpers
             SaveWidgetsDataToSettings();
 
             Settings.Default.Save();
+
+            Backup();
         }
 
         public static void ResetSettings(bool msg = true, bool refresh = true)
@@ -129,11 +133,28 @@ namespace DesktopWidgets.Helpers
             }
         }
 
+        public static string GetExportedData()
+        {
+            return JsonConvert.SerializeObject(App.WidgetsSettingsStore, JsonSerializerSettings);
+        }
+
         public static void ExportData()
         {
-            var dialog = new InputBox("Export Widgets",
-                JsonConvert.SerializeObject(App.WidgetsSettingsStore, JsonSerializerSettings));
+            var dialog = new InputBox("Export Widgets", GetExportedData());
             dialog.ShowDialog();
+        }
+
+        private static void Backup()
+        {
+            if (!(Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime))
+            {
+                return;
+            }
+            Settings.Default.LastBackupDateTime = DateTime.Now;
+            var directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
+            var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json";
+            Directory.CreateDirectory(directory);
+            File.WriteAllText(Path.Combine(directory, filename), GetExportedData());
         }
     }
 }

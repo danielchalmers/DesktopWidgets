@@ -128,5 +128,11 @@
     <Setting Name="WidgetEditorFilter" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="BackupInterval" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">7.00:00:00</Value>
+    </Setting>
+    <Setting Name="LastBackupDateTime" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

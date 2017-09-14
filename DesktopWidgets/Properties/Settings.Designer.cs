@@ -513,5 +513,28 @@ namespace DesktopWidgets.Properties {
                 this["WidgetEditorFilter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7.00:00:00")]
+        public global::System.TimeSpan BackupInterval {
+            get {
+                return ((global::System.TimeSpan)(this["BackupInterval"]));
+            }
+            set {
+                this["BackupInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime LastBackupDateTime {
+            get {
+                return ((global::System.DateTime)(this["LastBackupDateTime"]));
+            }
+            set {
+                this["LastBackupDateTime"] = value;
+            }
+        }
     }
 }
