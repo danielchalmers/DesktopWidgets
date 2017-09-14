@@ -8,7 +8,7 @@ namespace DesktopWidgets.Helpers
     public static class ExceptionHelper
     {
         private static readonly string ExceptionDumpPath =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName, "Errors");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
 
         public static void SaveException(Exception ex)
         {
