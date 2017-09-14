@@ -6,6 +6,7 @@ namespace DesktopWidgets.Helpers
 {
     public static class ImageHelper
     {
+        // https://msdn.microsoft.com/en-us/library/ee719654(v=VS.85).aspx#wpfc_codecs.
         public static readonly List<string> SupportedExtensions = new List<string>
         {
             ".bmp",
@@ -14,7 +15,9 @@ namespace DesktopWidgets.Helpers
             ".jpg",
             ".jpeg",
             ".png",
-            ".tiff"
+            ".tiff",
+            ".wmp",
+            ".dds"
         };
 
         public static bool IsSupported(string extension)
