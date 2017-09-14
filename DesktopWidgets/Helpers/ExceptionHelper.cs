@@ -19,8 +19,7 @@ namespace DesktopWidgets.Helpers
                     return;
                 }
                 var serialised = JsonConvert.SerializeObject(ex, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
-                var timestamp = DateTime.Now.ToString("yyyyMMddHHmmssfff");
-                var path = Path.Combine(ExceptionDumpPath, $"error-{timestamp}.json");
+                var path = Path.Combine(ExceptionDumpPath, $"error-{Guid.NewGuid()}.json");
                 if (!Directory.Exists(ExceptionDumpPath))
                 {
                     Directory.CreateDirectory(ExceptionDumpPath);
