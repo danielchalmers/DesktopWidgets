@@ -516,7 +516,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("7.00:00:00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3.00:00:00")]
         public global::System.TimeSpan BackupInterval {
             get {
                 return ((global::System.TimeSpan)(this["BackupInterval"]));
