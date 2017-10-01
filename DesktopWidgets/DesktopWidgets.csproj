@@ -590,36 +590,36 @@
     </FileAssociation>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Licenses\GongSolutions.WPF.DragDrop.txt">
+    <None Include="Resources\Licenses\GongSolutions.WPF.DragDrop.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Licenses\WpfAppBar.txt">
+    </None>
+    <None Include="Resources\Licenses\WpfAppBar.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Licenses\Common Service Locator.txt">
+    <None Include="Resources\Licenses\Common Service Locator.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Licenses\Extended WPF Toolkit.txt">
+    </None>
+    <None Include="Resources\Licenses\Extended WPF Toolkit.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Licenses\Json.NET.txt">
+    </None>
+    <None Include="Resources\Licenses\Json.NET.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Licenses\MVVM Light.txt">
+    </None>
+    <None Include="Resources\Licenses\MVVM Light.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Licenses\NotifyIcon.txt">
+    <None Include="Resources\Licenses\NotifyIcon.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Licenses\NHotkey.txt">
+    <None Include="Resources\Licenses\NHotkey.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
