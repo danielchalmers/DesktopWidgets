@@ -256,7 +256,7 @@ namespace DesktopWidgets.Widgets.Sidebar
             yield return new Shortcut
             {
                 Name = "Help",
-                ProcessFile = new ProcessFile(Resources.Website),
+                ProcessFile = new ProcessFile(Resources.GitHubMainPage),
                 SpecialType = "Help"
             };
             yield return new Shortcut

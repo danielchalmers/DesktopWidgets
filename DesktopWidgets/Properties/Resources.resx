@@ -144,9 +144,6 @@
   <data name="TaskBarPath" xml:space="preserve">
     <value>Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar</value>
   </data>
-  <data name="Website" xml:space="preserve">
-    <value>https://danielchalmers.github.io/DesktopWidgets/</value>
-  </data>
   <data name="WindowsFolderDataFile" xml:space="preserve">
     <value>desktop.ini</value>
   </data>
