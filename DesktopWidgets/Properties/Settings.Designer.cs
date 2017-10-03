@@ -296,7 +296,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        [global::System.Configuration.DefaultSettingValueAttribute("650")]
         public double OptionsWidth {
             get {
                 return ((double)(this["OptionsWidth"]));
@@ -308,7 +308,7 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("550")]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
         public double OptionsHeight {
             get {
                 return ((double)(this["OptionsHeight"]));

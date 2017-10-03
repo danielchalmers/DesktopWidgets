@@ -72,10 +72,10 @@
       <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="OptionsWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">600</Value>
+      <Value Profile="(Default)">650</Value>
     </Setting>
     <Setting Name="OptionsHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">550</Value>
+      <Value Profile="(Default)">600</Value>
     </Setting>
     <Setting Name="ChangelogCache" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
