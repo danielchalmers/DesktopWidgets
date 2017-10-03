@@ -210,10 +210,10 @@
             </DataTemplate>
             <DataTemplate x:Key="SeparatorTemplate"
                           DataType="{x:Type sidebar:Shortcut}">
-                <Border Height="2"
-                        Background="Gray"
+                <Border Height="3"
+                        Background="Black"
+                        Opacity="0.5"
                         CornerRadius="4"
-                        Margin="1,0,1,0"
                         Focusable="False" />
             </DataTemplate>
         </ItemsControl.Resources>
