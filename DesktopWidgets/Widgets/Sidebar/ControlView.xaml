@@ -214,7 +214,8 @@
                         Background="Black"
                         Opacity="0.5"
                         CornerRadius="2"
-                        Focusable="False" />
+                        Focusable="False"
+                        PreviewMouseDown="SeparatorBorder_PreviewMouseDown" />
             </DataTemplate>
         </ItemsControl.Resources>
         <ItemsControl.ItemTemplate>

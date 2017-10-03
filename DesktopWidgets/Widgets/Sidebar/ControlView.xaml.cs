@@ -11,5 +11,10 @@ namespace DesktopWidgets.Widgets.Sidebar
         {
             InitializeComponent();
         }
+
+        private void SeparatorBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
