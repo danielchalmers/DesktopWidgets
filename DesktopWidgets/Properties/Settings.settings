@@ -48,7 +48,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UpdateCheckInterval" Type="System.TimeSpan" Scope="User">
-      <Value Profile="(Default)">1.00:00:00</Value>
+      <Value Profile="(Default)">3.00:00:00</Value>
     </Setting>
     <Setting Name="AllowMultiInstance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
