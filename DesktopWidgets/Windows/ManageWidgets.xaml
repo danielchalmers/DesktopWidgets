@@ -74,7 +74,7 @@
                     <Setter Property="Height"
                             Value="30" />
                     <Setter Property="Margin"
-                            Value="0,0,0,10" />
+                            Value="0,0,0,5" />
                     <Setter Property="Padding"
                             Value="15,0,15,0" />
                     <Setter Property="HorizontalAlignment"
