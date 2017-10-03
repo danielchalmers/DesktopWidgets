@@ -169,6 +169,7 @@
     <Compile Include="OptionsPages\Changelog.xaml.cs">
       <DependentUpon>Changelog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PropertyGrid.cs" />
     <Compile Include="WidgetBase\WidgetPackageInfo.cs" />
     <Compile Include="Events\LaunchEvent.cs" />
     <Compile Include="Events\ForegroundChangedEvent.cs" />

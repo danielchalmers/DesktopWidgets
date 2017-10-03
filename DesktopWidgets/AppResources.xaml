@@ -7,8 +7,9 @@
                     xmlns:p="clr-namespace:DesktopWidgets.Properties"
                     xmlns:classes="clr-namespace:DesktopWidgets.Classes"
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                    xmlns:controls="clr-namespace:DesktopWidgets.Controls"
                     xmlns:helpers="clr-namespace:DesktopWidgets.Helpers">
-    <Style TargetType="{x:Type xctk:PropertyGrid}"
+    <Style TargetType="{x:Type controls:PropertyGrid}"
            x:Key="PropertyGridBaseStyle">
         <Setter Property="Background"
                 Value="{x:Static SystemColors.WindowBrush}" />
@@ -21,7 +22,7 @@
         <Setter Property="ShowTitle"
                 Value="False" />
     </Style>
-    <Style TargetType="{x:Type xctk:PropertyGrid}"
+    <Style TargetType="{x:Type controls:PropertyGrid}"
            x:Key="PropertyGridNonCategorisedStyle"
            BasedOn="{StaticResource PropertyGridBaseStyle}">
         <Setter Property="IsCategorized"
@@ -33,7 +34,7 @@
         <Setter Property="ShowSearchBox"
                 Value="False" />
     </Style>
-    <Style TargetType="{x:Type xctk:PropertyGrid}"
+    <Style TargetType="{x:Type controls:PropertyGrid}"
            x:Key="PropertyGridCategorisedStyle"
            BasedOn="{StaticResource PropertyGridBaseStyle}">
         <Setter Property="IsCategorized"

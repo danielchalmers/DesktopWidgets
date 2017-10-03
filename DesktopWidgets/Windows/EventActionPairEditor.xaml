@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DesktopWidgets.Windows"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:controls="clr-namespace:DesktopWidgets.Controls"
         mc:Ignorable="d"
         Title="Event and Action Editor"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=EventActionPairEditorWidth, Mode=TwoWay}"
@@ -36,12 +37,12 @@
             <TextBox Grid.Column="2"
                      Text="{Binding EventActionPair.Name}" />
         </Grid>
-        <xctk:PropertyGrid x:Name="PropertyGrid1"
-                           Grid.Row="2"
-                           Style="{StaticResource PropertyGridNonCategorisedStyle}"
-                           ShowTitle="True"
-                           SelectedObject="{Binding EventActionPair.Event}">
-            <xctk:PropertyGrid.EditorDefinitions>
+        <controls:PropertyGrid x:Name="PropertyGrid1"
+                               Grid.Row="2"
+                               Style="{StaticResource PropertyGridNonCategorisedStyle}"
+                               ShowTitle="True"
+                               SelectedObject="{Binding EventActionPair.Event}">
+            <controls:PropertyGrid.EditorDefinitions>
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
@@ -50,13 +51,13 @@
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
-            </xctk:PropertyGrid.EditorDefinitions>
-        </xctk:PropertyGrid>
-        <xctk:PropertyGrid Grid.Row="4"
-                           Style="{StaticResource PropertyGridNonCategorisedStyle}"
-                           ShowTitle="True"
-                           SelectedObject="{Binding EventActionPair.Action}">
-            <xctk:PropertyGrid.EditorDefinitions>
+            </controls:PropertyGrid.EditorDefinitions>
+        </controls:PropertyGrid>
+        <controls:PropertyGrid Grid.Row="4"
+                               Style="{StaticResource PropertyGridNonCategorisedStyle}"
+                               ShowTitle="True"
+                               SelectedObject="{Binding EventActionPair.Action}">
+            <controls:PropertyGrid.EditorDefinitions>
                 <xctk:EditorTemplateDefinition TargetProperties="WidgetId">
                     <xctk:EditorTemplateDefinition.EditingTemplate>
                         <DataTemplate>
@@ -65,8 +66,8 @@
                         </DataTemplate>
                     </xctk:EditorTemplateDefinition.EditingTemplate>
                 </xctk:EditorTemplateDefinition>
-            </xctk:PropertyGrid.EditorDefinitions>
-        </xctk:PropertyGrid>
+            </controls:PropertyGrid.EditorDefinitions>
+        </controls:PropertyGrid>
         <Button Grid.Row="6"
                 Grid.Column="0"
                 Content="_OK"

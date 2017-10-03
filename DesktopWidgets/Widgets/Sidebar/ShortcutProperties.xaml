@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:controls="clr-namespace:DesktopWidgets.Controls"
         xmlns:classes="clr-namespace:DesktopWidgets.Classes"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         mc:Ignorable="d"
@@ -18,9 +19,9 @@
             <RowDefinition Height="15" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <xctk:PropertyGrid Grid.Row="0"
-                           Style="{StaticResource PropertyGridNonCategorisedStyle}"
-                           SelectedObject="{Binding}" />
+        <controls:PropertyGrid Grid.Row="0"
+                               Style="{StaticResource PropertyGridNonCategorisedStyle}"
+                               SelectedObject="{Binding}" />
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

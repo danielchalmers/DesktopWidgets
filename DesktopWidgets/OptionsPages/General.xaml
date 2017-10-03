@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:DesktopWidgets.OptionsPages"
       xmlns:p="clr-namespace:DesktopWidgets.Properties"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:controls="clr-namespace:DesktopWidgets.Controls"
       mc:Ignorable="d"
       Title="Options"
       FocusManager.FocusedElement="{Binding ElementName=SettingsPropertyGrid}">
@@ -40,12 +41,12 @@
                     Visibility="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </StackPanel>
 
-        <xctk:PropertyGrid x:Name="SettingsPropertyGrid"
-                           Style="{StaticResource PropertyGridCategorisedStyle}"
-                           SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
-                           AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}"
-                           Filter="{Binding OptionsGeneralFilter, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
-            <xctk:PropertyGrid.PropertyDefinitions>
+        <controls:PropertyGrid x:Name="SettingsPropertyGrid"
+                               Style="{StaticResource PropertyGridCategorisedStyle}"
+                               SelectedObject="{Binding Source={x:Static p:Settings.Default}}"
+                               AutoGenerateProperties="{Binding Source={x:Static p:Settings.Default}, Path=EnableAdvancedMode}"
+                               Filter="{Binding OptionsGeneralFilter, Source={x:Static p:Settings.Default}, Mode=TwoWay}">
+            <controls:PropertyGrid.PropertyDefinitions>
                 <xctk:PropertyDefinition Category="General"
                                          TargetProperties="RunOnStartup"
                                          DisplayName="Run on Startup"
@@ -75,7 +76,7 @@
                                          IsBrowsable="False" />
                 <xctk:PropertyDefinition TargetProperties="ChangelogDownloadPages"
                                          IsBrowsable="False" />
-            </xctk:PropertyGrid.PropertyDefinitions>
-        </xctk:PropertyGrid>
+            </controls:PropertyGrid.PropertyDefinitions>
+        </controls:PropertyGrid>
     </DockPanel>
 </Page>
