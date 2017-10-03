@@ -213,7 +213,7 @@
                 <Border Height="{Binding Path=DataContext.Settings.SeparatorHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                         Background="Black"
                         Opacity="0.5"
-                        CornerRadius="4"
+                        CornerRadius="2"
                         Focusable="False" />
             </DataTemplate>
         </ItemsControl.Resources>
