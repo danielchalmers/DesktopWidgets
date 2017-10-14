@@ -6,8 +6,8 @@
         xmlns:controls="clr-namespace:DesktopWidgets.Controls"
         mc:Ignorable="d"
         Title="Edit Shortcut"
-        Height="400"
-        Width="450"
+        Width="550"
+        SizeToContent="Height"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
