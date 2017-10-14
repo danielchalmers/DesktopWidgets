@@ -28,5 +28,10 @@ namespace DesktopWidgets.Classes
         [PropertyOrder(3)]
         [DisplayName("Window Style")]
         public ProcessWindowStyle WindowStyle { get; set; } = ProcessWindowStyle.Normal;
+
+        public override string ToString()
+        {
+            return string.Join(" ", Path, Arguments);
+        }
     }
 }
