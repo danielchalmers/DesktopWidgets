@@ -88,6 +88,7 @@ namespace DesktopWidgets.Helpers
             {
                 return;
             }
+            Backup();
             Settings.Default.Reset();
             Settings.Default.MustUpgrade = false;
             Settings.Default.Widgets = string.Empty;
@@ -98,7 +99,9 @@ namespace DesktopWidgets.Helpers
             }
             if (msg)
             {
-                Popup.Show("All settings have been restored to default.");
+                Popup.Show(
+                    "All settings have been restored to default.\n\n" +
+                    "You can find a backup of your previous data in \"My Documents\".");
             }
         }
 
