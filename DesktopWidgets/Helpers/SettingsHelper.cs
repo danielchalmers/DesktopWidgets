@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
@@ -105,39 +104,55 @@ namespace DesktopWidgets.Helpers
 
         public static void ImportData()
         {
+            // Prompt user for JSON data to use for importing.
             var dialog = new InputBox("Import Widgets");
             dialog.ShowDialog();
-            if (dialog.Cancelled == false &&
-                Popup.Show(
-                    "Are you sure you want to overwrite ALL widgets, events, and actions?",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+            if (dialog.Cancelled)
             {
-                try
-                {
-                    // Test import data before overwriting existing data.
-                    foreach (
-                        var id in
-                            JsonConvert.DeserializeObject<WidgetsSettingsStore>(dialog.InputData, JsonSerializerSettings)
-                                .Widgets.Select(x => x.Identifier.Guid))
-                    {
-                    }
-                }
-                catch
-                {
-                    Popup.Show(
-                        "Import failed.\nData may be corrupt.\n\nNo changes have been made.",
-                        image: MessageBoxImage.Error);
-                    return;
-                }
-                Backup();
-                Settings.Default.Widgets = dialog.InputData;
-                Settings.Default.Save();
-                LoadWidgetsDataFromSettings();
-                WidgetHelper.LoadWidgetViews();
-                Popup.Show(
-                    "Import was successful.\n\n" +
-                    "You can find a backup of your previous data in \"My Documents\".");
+                return;
             }
+
+            // Prompt user to confirm decision.
+            if (Popup.Show(
+                    "Are you sure you want to overwrite ALL widgets, events, and actions?",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning,
+                    MessageBoxResult.Yes)
+                    != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            // Test new data before overwriting existing data.
+            try
+            {
+                var newWidgets = JsonConvert.DeserializeObject<WidgetsSettingsStore>(dialog.InputData, JsonSerializerSettings);
+                foreach (var widget in newWidgets.Widgets)
+                {
+                    var id = widget.Identifier.Guid;
+                }
+            }
+            catch
+            {
+                Popup.Show(
+                    "Import failed.\nData may be corrupt.\n\nNo changes have been made.",
+                    image: MessageBoxImage.Error);
+                return;
+            }
+
+            // Backup old data before overwriting.
+            Backup();
+
+            // Replace widget store.
+            Settings.Default.Widgets = dialog.InputData;
+            Settings.Default.Save();
+            LoadWidgetsDataFromSettings();
+            WidgetHelper.LoadWidgetViews();
+
+            // Let user know the import worked.
+            Popup.Show(
+                "Import was successful.\n\n" +
+                "You can find a backup of your previous data in \"My Documents\".");
         }
 
         public static string GetExportedData()
