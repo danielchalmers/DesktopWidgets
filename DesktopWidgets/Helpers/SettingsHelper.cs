@@ -75,7 +75,10 @@ namespace DesktopWidgets.Helpers
 
             Settings.Default.Save();
 
-            Backup();
+            if (Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime)
+            {
+                Backup();
+            }
         }
 
         public static void ResetSettings(bool msg = true, bool refresh = true)
@@ -146,10 +149,6 @@ namespace DesktopWidgets.Helpers
 
         private static void Backup()
         {
-            if (!(Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime))
-            {
-                return;
-            }
             Settings.Default.LastBackupDateTime = DateTime.Now;
             var directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
             var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json";
