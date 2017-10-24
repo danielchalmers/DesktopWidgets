@@ -452,6 +452,10 @@ namespace DesktopWidgets.View
                 ViewModel?.OnClose();
                 ViewModel = null;
                 SaveScrollPosition();
+                if (_currentAppBarEdge != ABEdge.None)
+                {
+                    SetAsAppBar(ABEdge.None);
+                }
             }
             catch
             {
