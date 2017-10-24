@@ -25,7 +25,7 @@ namespace DesktopWidgets.View
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
         private DispatcherTimer _introTimer;
-        private ABEdge _currentAppBarEdge;
+        private ABEdge _currentAppBarEdge = ABEdge.None;
         private IntroData _lastIntroData;
         public Action CloseAction;
 
