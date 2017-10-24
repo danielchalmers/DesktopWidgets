@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:p="clr-namespace:DesktopWidgets.Properties"
         mc:Ignorable="d"
-        Title="Widget Package Exporter"
-        Width="400"
+        Title="Widget Exporter"
+        Width="350"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
         FocusManager.FocusedElement="{Binding ElementName=NameTextBox}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -21,13 +22,16 @@
               IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="31"
-                               SharedSizeGroup="optionsHeight" />
                 <RowDefinition Height="Auto"
                                SharedSizeGroup="optionsHeight" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="Auto"
+                               SharedSizeGroup="optionsHeight" />
+                <RowDefinition Height="5" />
                 <RowDefinition Height="Auto"
                                SharedSizeGroup="optionsHeight" />
             </Grid.RowDefinitions>
@@ -35,18 +39,10 @@
                 <Style TargetType="TextBlock">
                     <Setter Property="VerticalAlignment"
                             Value="Center" />
-                    <Setter Property="HorizontalAlignment"
-                            Value="Left" />
-                    <Setter Property="Margin"
-                            Value="0,0,15,0" />
-                    <Setter Property="Padding"
-                            Value="0" />
                 </Style>
                 <Style TargetType="TextBox">
                     <Setter Property="VerticalAlignment"
                             Value="Center" />
-                    <Setter Property="HorizontalAlignment"
-                            Value="Stretch" />
                     <Setter Property="Height"
                             Value="23" />
                 </Style>
@@ -55,30 +51,31 @@
             <TextBlock x:Name="NameTextBox"
                        Grid.Row="0"
                        Grid.Column="0"
-                       Text="Name:" />
+                       Text="Name:"
+                       HorizontalAlignment="Right" />
             <TextBox Grid.Row="0"
-                     Grid.Column="1"
-                     VerticalAlignment="Center"
+                     Grid.Column="2"
                      Height="23"
                      Text="{Binding Path=Settings.PackageInfo.Name, Mode=TwoWay}" />
-            <TextBlock Grid.Row="1"
-                       Grid.Column="0"
-                       Text="Publisher:" />
-            <TextBox Grid.Row="1"
-                     Grid.Column="1"
-                     Height="23"
-                     VerticalAlignment="Center"
-                     Text="{Binding Source={x:Static p:Settings.Default}, Path=WidgetPackagePublisherName, Mode=TwoWay}" />
             <TextBlock Grid.Row="2"
                        Grid.Column="0"
-                       Text="Path:" />
-            <Grid Grid.Row="2"
-                  Grid.Column="1"
+                       Text="Publisher:"
+                       HorizontalAlignment="Right" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="2"
+                     Height="23"
+                     Text="{Binding Source={x:Static p:Settings.Default}, Path=WidgetPackagePublisherName, Mode=TwoWay}" />
+            <TextBlock Grid.Row="4"
+                       Grid.Column="0"
+                       Text="Path:"
+                       HorizontalAlignment="Right" />
+            <Grid Grid.Row="4"
+                  Grid.Column="2"
                   Height="23"
                   VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0"
