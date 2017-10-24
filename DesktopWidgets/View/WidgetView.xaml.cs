@@ -100,14 +100,10 @@ namespace DesktopWidgets.View
         {
             if (Settings.Style.ShowLeftFrame)
             {
-                if (FrameContainerLeft.Child == null)
+                if (FrameContainerLeft.Child == null && (UserControl.TryFindResource("FrameLeft") is Grid frameLeft))
                 {
-                    var frameLeft = UserControl.TryFindResource("FrameLeft") as Grid;
-                    if (frameLeft != null)
-                    {
-                        FrameContainerLeft.Child = frameLeft;
-                        FrameContainerLeft.Visibility = Visibility.Visible;
-                    }
+                    FrameContainerLeft.Child = frameLeft;
+                    FrameContainerLeft.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -117,14 +113,10 @@ namespace DesktopWidgets.View
 
             if (Settings.Style.ShowRightFrame)
             {
-                if (FrameContainerRight.Child == null)
+                if (FrameContainerRight.Child == null && (UserControl.TryFindResource("FrameRight") is Grid frameRight))
                 {
-                    var frameRight = UserControl.TryFindResource("FrameRight") as Grid;
-                    if (frameRight != null)
-                    {
-                        FrameContainerRight.Child = frameRight;
-                        FrameContainerRight.Visibility = Visibility.Visible;
-                    }
+                    FrameContainerRight.Child = frameRight;
+                    FrameContainerRight.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -134,14 +126,10 @@ namespace DesktopWidgets.View
 
             if (Settings.Style.ShowTopFrame)
             {
-                if (FrameContainerTop.Child == null)
+                if (FrameContainerTop.Child == null && (UserControl.TryFindResource("FrameTop") is Grid frameTop))
                 {
-                    var frameTop = UserControl.TryFindResource("FrameTop") as Grid;
-                    if (frameTop != null)
-                    {
-                        FrameContainerTop.Child = frameTop;
-                        FrameContainerTop.Visibility = Visibility.Visible;
-                    }
+                    FrameContainerTop.Child = frameTop;
+                    FrameContainerTop.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -151,14 +139,10 @@ namespace DesktopWidgets.View
 
             if (Settings.Style.ShowBottomFrame)
             {
-                if (FrameContainerBottom.Child == null)
+                if (FrameContainerBottom.Child == null && (UserControl.TryFindResource("FrameBottom") is Grid frameBottom))
                 {
-                    var frameBottom = UserControl.TryFindResource("FrameBottom") as Grid;
-                    if (frameBottom != null)
-                    {
-                        FrameContainerBottom.Child = frameBottom;
-                        FrameContainerBottom.Visibility = Visibility.Visible;
-                    }
+                    FrameContainerBottom.Child = frameBottom;
+                    FrameContainerBottom.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -203,8 +187,6 @@ namespace DesktopWidgets.View
             UpdateUi(false);
 
             ViewModel.OnUiLoad();
-
-            //FocusMainElement();
 
             HasSourceLoaded = true;
         }
@@ -302,7 +284,10 @@ namespace DesktopWidgets.View
             ViewModel.OnDismiss();
         }
 
-        public void UpdateUi(bool resetContext = true, bool updateNonUi = true, bool updateOpacity = true,
+        public void UpdateUi(
+            bool resetContext = true,
+            bool updateNonUi = true,
+            bool updateOpacity = true,
             bool? isDocked = null,
             HorizontalAlignment? dockHorizontalAlignment = null,
             VerticalAlignment? dockVerticalAlignment = null)
@@ -374,9 +359,7 @@ namespace DesktopWidgets.View
 
             if (resetContext)
             {
-                //UpdateLayout();
                 DataContext = null;
-                //UpdateLayout();
                 DataContext = ViewModel;
             }
 
@@ -445,13 +428,19 @@ namespace DesktopWidgets.View
             try
             {
                 IsClosed = true;
+
                 _introTimer?.Stop();
                 _introTimer = null;
+
                 _mouseChecker?.Dispose();
+
                 HotkeyStore.RemoveHotkey(Id.Guid);
+
                 ViewModel?.OnClose();
                 ViewModel = null;
+
                 SaveScrollPosition();
+
                 if (_currentAppBarEdge != ABEdge.None)
                 {
                     SetAsAppBar(ABEdge.None);
@@ -479,8 +468,10 @@ namespace DesktopWidgets.View
 
         private void Widget_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
-                Settings.DragToMove)
+            if (
+                Mouse.LeftButton == MouseButtonState.Pressed
+                && !Settings.IsDocked
+                && Settings.DragToMove)
             {
                 DragMove();
             }
@@ -488,8 +479,10 @@ namespace DesktopWidgets.View
 
         private void ActionBar_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed && !Settings.IsDocked &&
-                Settings.DragActionBarToMove)
+            if (
+                Mouse.LeftButton == MouseButtonState.Pressed
+                && !Settings.IsDocked
+                && Settings.DragActionBarToMove)
             {
                 DragMove();
             }
