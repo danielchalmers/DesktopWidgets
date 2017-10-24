@@ -106,7 +106,7 @@ namespace DesktopWidgets.Helpers
             dialog.ShowDialog();
             if (dialog.Cancelled == false &&
                 Popup.Show(
-                    "Are you sure you want to overwrite all current widgets?\n\nThis cannot be undone.",
+                    "Are you sure you want to overwrite ALL widgets, events, and actions?",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
             {
                 try
