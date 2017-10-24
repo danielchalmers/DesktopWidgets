@@ -33,7 +33,9 @@
                  Margin="15"
                  TextWrapping="Wrap"
                  AcceptsReturn="True"
-                 IsReadOnly="{Binding IsDisplayData}" />
+                 IsReadOnly="{Binding IsDisplayData}"
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto" />
 
         <Grid Row="1"
               Column="0"
