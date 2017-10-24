@@ -134,6 +134,9 @@ namespace DesktopWidgets.Helpers
                 Settings.Default.Save();
                 LoadWidgetsDataFromSettings();
                 WidgetHelper.LoadWidgetViews();
+                Popup.Show(
+                    "Import was successful.\n\n" +
+                    "You can find a backup of your previous data in \"My Documents\".");
             }
         }
 
