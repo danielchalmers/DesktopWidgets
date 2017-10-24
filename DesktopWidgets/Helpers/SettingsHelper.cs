@@ -129,6 +129,7 @@ namespace DesktopWidgets.Helpers
                         image: MessageBoxImage.Error);
                     return;
                 }
+                Backup();
                 Settings.Default.Widgets = dialog.InputData;
                 Settings.Default.Save();
                 LoadWidgetsDataFromSettings();
