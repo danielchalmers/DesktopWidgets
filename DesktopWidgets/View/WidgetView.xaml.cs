@@ -25,7 +25,7 @@ namespace DesktopWidgets.View
         public readonly WidgetSettingsBase Settings;
         public readonly UserControl UserControl;
         private DispatcherTimer _introTimer;
-        private bool _isAppBar;
+        private ABEdge _currentAppBarEdge;
         private IntroData _lastIntroData;
         public Action CloseAction;
 
@@ -200,11 +200,6 @@ namespace DesktopWidgets.View
                 ThisApp.SetWindowExTransparent();
             }
 
-            if (Settings.IsAppBar)
-            {
-                SetAsAppBar();
-            }
-
             UpdateUi(false);
 
             ViewModel.OnUiLoad();
@@ -337,34 +332,34 @@ namespace DesktopWidgets.View
             UpdateLayout();
         }
 
-        private void SetAsAppBar(ABEdge edge) => AppBarFunctions.SetAppBar(this, edge, topMost: Settings.Topmost);
-
-        private void SetAsAppBar()
+        private void SetAsAppBar(ABEdge edge)
         {
-            switch (Settings.HorizontalAlignment)
+            _currentAppBarEdge = edge;
+            AppBarFunctions.SetAppBar(this, edge, topMost: Settings.Topmost);
+        }
+
+        private ABEdge GetAppBarEdge()
+        {
+            if (Settings.IsAppBar && Settings.IsDocked)
             {
-                case HorizontalAlignment.Left:
-                    SetAsAppBar(ABEdge.Left);
-                    _isAppBar = true;
-                    break;
-                case HorizontalAlignment.Right:
-                    SetAsAppBar(ABEdge.Right);
-                    _isAppBar = true;
-                    break;
-                default:
-                    switch (Settings.VerticalAlignment)
-                    {
-                        case VerticalAlignment.Top:
-                            SetAsAppBar(ABEdge.Top);
-                            _isAppBar = true;
-                            break;
-                        case VerticalAlignment.Bottom:
-                            SetAsAppBar(ABEdge.Bottom);
-                            _isAppBar = true;
-                            break;
-                    }
-                    break;
+                switch (Settings.HorizontalAlignment)
+                {
+                    case HorizontalAlignment.Left:
+                        return ABEdge.Left;
+                    case HorizontalAlignment.Right:
+                        return ABEdge.Right;
+                    default:
+                        switch (Settings.VerticalAlignment)
+                        {
+                            case VerticalAlignment.Top:
+                                return ABEdge.Top;
+                            case VerticalAlignment.Bottom:
+                                return ABEdge.Bottom;
+                        }
+                        break;
+                }
             }
+            return ABEdge.None;
         }
 
         private void Refresh(bool resetContext, bool updateNonUi, bool showIntro, bool updateOpacity)
@@ -389,7 +384,13 @@ namespace DesktopWidgets.View
 
             SetupFrame();
 
-            if (!_isAppBar)
+            var appBarEdge = GetAppBarEdge();
+            if (appBarEdge != _currentAppBarEdge)
+            {
+                SetAsAppBar(appBarEdge);
+            }
+
+            if (_currentAppBarEdge == ABEdge.None)
             {
                 UpdatePositionAndLocation();
             }
@@ -533,7 +534,7 @@ namespace DesktopWidgets.View
 
         private void WidgetView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!IsRefreshing && !_isAppBar)
+            if (!IsRefreshing && _currentAppBarEdge == ABEdge.None)
             {
                 Dispatcher.BeginInvoke(DispatcherPriority.Background, (Action)ViewModel.UpdatePosition);
             }
