@@ -18,7 +18,7 @@
         <Color x:Key="ButtonTextColor">Black</Color>
         <SolidColorBrush x:Key="ButtonBrush"
                          Color="{StaticResource ButtonColor}"
-                         Opacity="0.3" />
+                         Opacity="0.5" />
         <SolidColorBrush x:Key="ButtonTextBrush"
                          Color="{Binding Path=DataContext.Settings.ButtonTextColor, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
 
