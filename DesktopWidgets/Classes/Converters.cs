@@ -878,7 +878,7 @@ namespace DesktopWidgets.Classes
             var eventName = EventActionFactory.GetNameFromEvent(pair.Event);
             var actionName = EventActionFactory.GetNameFromAction(pair.Action);
             var name = pair.Name;
-            var idName = $"{eventName} -> {actionName}";
+            var idName = $"{eventName} → {actionName}";
 
             return string.IsNullOrWhiteSpace(name) ? idName : $"{name} ({idName})";
         }
