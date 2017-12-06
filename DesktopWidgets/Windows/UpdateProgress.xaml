@@ -20,10 +20,10 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
-                   Margin="15"
+                   Margin="12"
                    Text="{Binding HelpText}" />
         <ProgressBar Grid.Row="1"
-                     Margin="15,0,15,15"
+                     Margin="12,0,12,12"
                      Value="{Binding CurrentProgress}"
                      Height="23" />
     </Grid>

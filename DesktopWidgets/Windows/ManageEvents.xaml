@@ -12,8 +12,8 @@
         Title="Manage Events"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsWidth, Mode=TwoWay}"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageEventsHeight, Mode=TwoWay}"
-        MinHeight="537"
-        MinWidth="535"
+        MinHeight="444"
+        MinWidth="480"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
@@ -37,7 +37,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="ItemsListBox"
-                 Margin="15"
+                 Margin="12"
                  ItemsSource="{Binding Path=EventActionPairs, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedPair}"
                  SelectedIndex="0"
@@ -58,15 +58,15 @@
         </ListBox>
         <StackPanel Grid.Row="0"
                     Grid.Column="1"
-                    Margin="0,15,15,15">
+                    Margin="0,12,12,12">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Height"
-                            Value="30" />
+                            Value="32" />
                     <Setter Property="Margin"
-                            Value="0,0,0,5" />
+                            Value="0,0,0,4" />
                     <Setter Property="Padding"
-                            Value="15,0,15,0" />
+                            Value="16,0,16,0" />
                     <Setter Property="HorizontalAlignment"
                             Value="Stretch" />
                     <Setter Property="VerticalAlignment"
@@ -74,18 +74,24 @@
                     <Setter Property="IsEnabled"
                             Value="{Binding SelectedPair, Converter={StaticResource NotNullToBoolConverter}}" />
                 </Style>
+                <Style TargetType="Separator">
+                    <Setter Property="Margin"
+                            Value="0,4,0,8" />
+                    <Setter Property="Visibility"
+                            Value="Hidden" />
+                </Style>
             </StackPanel.Resources>
             <Button Content="_New..."
                     Command="{Binding NewPair}"
                     IsEnabled="True" />
-            <Button Visibility="Hidden" />
+            <Separator />
             <Button Content="_Edit..."
                     Command="{Binding EditPair}" />
             <Button Content="{Binding SelectedPair, Converter={StaticResource SelectedEventActionPairToEnableDisableNameConverter}}"
                     Command="{Binding ToggleEnablePair}" />
             <Button Content="_Remove..."
                     Command="{Binding RemovePair}" />
-            <Button Visibility="Hidden" />
+            <Separator />
             <Button Content="_Clone"
                     Command="{Binding ClonePair}" />
         </StackPanel>
@@ -93,7 +99,7 @@
         <Grid Row="1"
               Grid.Column="0"
               Grid.ColumnSpan="2"
-              Margin="15,0,15,15">
+              Margin="12,0,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />

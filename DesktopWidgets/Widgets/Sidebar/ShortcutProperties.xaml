@@ -10,10 +10,10 @@
         SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
-    <Grid Margin="15">
+    <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <controls:PropertyGrid Grid.Row="0"
@@ -23,7 +23,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="4" />
                 <ColumnDefinition Width="75" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>

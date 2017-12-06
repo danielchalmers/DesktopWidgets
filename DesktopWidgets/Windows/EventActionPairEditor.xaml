@@ -15,20 +15,20 @@
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=PropertyGrid1}">
-    <Grid Margin="15">
+    <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="0.5*" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="0.5*" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="12" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0"

@@ -30,7 +30,7 @@
                  Grid.Row="0"
                  x:Name="txtData"
                  Text="{Binding InputData}"
-                 Margin="15"
+                 Margin="12"
                  TextWrapping="Wrap"
                  AcceptsReturn="True"
                  IsReadOnly="{Binding IsDisplayData}"
@@ -40,7 +40,7 @@
         <Grid Row="1"
               Column="0"
               ColumnSpan="2"
-              Margin="15,0,15,15">
+              Margin="12,0,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -65,7 +65,7 @@
             <Button Grid.Column="1"
                     Content="Save As..."
                     Click="btnSave_OnClick"
-                    Margin="5,0,0,0" />
+                    Margin="4,0,0,0" />
             <Button Grid.Column="3"
                     Content="_OK"
                     Click="btnOK_Click"
@@ -77,7 +77,7 @@
                     Click="btnCancel_Click"
                     IsCancel="True"
                     Visibility="{Binding IsDisplayData, Converter={StaticResource BoolToCollapsedVisibilityConverter}}"
-                    Margin="5,0,0,0" />
+                    Margin="4,0,0,0" />
         </Grid>
     </Grid>
 </Window>

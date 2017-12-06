@@ -14,8 +14,8 @@
         Title="Manage Widgets"
         Height="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsHeight, Mode=TwoWay}"
         Width="{Binding Source={x:Static p:Settings.Default}, Path=ManageWidgetsWidth, Mode=TwoWay}"
-        MinHeight="537"
-        MinWidth="535"
+        MinHeight="444"
+        MinWidth="480"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
@@ -41,7 +41,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="ItemsListBox"
-                 Margin="15"
+                 Margin="12"
                  ItemsSource="{Binding Path=Widgets, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedWidget}"
                  SelectedIndex="0"
@@ -68,21 +68,27 @@
         </ListBox>
         <StackPanel Grid.Row="0"
                     Grid.Column="1"
-                    Margin="0,15,15,15">
+                    Margin="0,12,12,12">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Height"
-                            Value="30" />
+                            Value="32" />
                     <Setter Property="Margin"
-                            Value="0,0,0,5" />
+                            Value="0,0,0,4" />
                     <Setter Property="Padding"
-                            Value="15,0,15,0" />
+                            Value="16,0,16,0" />
                     <Setter Property="HorizontalAlignment"
                             Value="Stretch" />
                     <Setter Property="VerticalAlignment"
                             Value="Stretch" />
                     <Setter Property="IsEnabled"
                             Value="{Binding SelectedWidget, Converter={StaticResource NotNullToBoolConverter}}" />
+                </Style>
+                <Style TargetType="Separator">
+                    <Setter Property="Margin"
+                            Value="0,4,0,8" />
+                    <Setter Property="Visibility"
+                            Value="Hidden" />
                 </Style>
             </StackPanel.Resources>
             <Button Content="_New..."
@@ -91,7 +97,7 @@
             <Button Content="_Import..."
                     Command="{Binding ImportWidget}"
                     IsEnabled="True" />
-            <Button Visibility="Hidden" />
+            <Separator />
             <Button Content="_Edit..."
                     Command="{Binding EditWidget}" />
             <Button Content="Re_load"
@@ -102,7 +108,7 @@
                     Command="{Binding DisableWidget}" />
             <Button Content="_Remove..."
                     Command="{Binding RemoveWidget}" />
-            <Button Visibility="Hidden" />
+            <Separator />
             <Button Content="_Clone"
                     Command="{Binding CloneWidget}" />
             <Button Content="Ex_port..."
@@ -112,7 +118,7 @@
         <Grid Row="1"
               Grid.Column="0"
               Grid.ColumnSpan="2"
-              Margin="15,0,15,15">
+              Margin="12,0,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />

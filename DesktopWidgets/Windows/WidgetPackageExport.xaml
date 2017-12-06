@@ -11,10 +11,10 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         FocusManager.FocusedElement="{Binding ElementName=NameTextBox}">
-    <Grid Margin="15">
+    <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -22,16 +22,16 @@
               IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="8" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"
                                SharedSizeGroup="optionsHeight" />
-                <RowDefinition Height="5" />
+                <RowDefinition Height="4" />
                 <RowDefinition Height="Auto"
                                SharedSizeGroup="optionsHeight" />
-                <RowDefinition Height="5" />
+                <RowDefinition Height="4" />
                 <RowDefinition Height="Auto"
                                SharedSizeGroup="optionsHeight" />
             </Grid.RowDefinitions>
@@ -75,7 +75,7 @@
                   VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="4" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0"
@@ -94,7 +94,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="4" />
                 <ColumnDefinition Width="75" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>

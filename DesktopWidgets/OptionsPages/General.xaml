@@ -16,11 +16,11 @@
         <StackPanel DockPanel.Dock="Top"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
-                    Margin="0,0,0,10">
+                    Margin="0,0,0,8">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin"
-                            Value="5,0,5,0" />
+                            Value="4,0,4,0" />
                     <Setter Property="HorizontalAlignment"
                             Value="Stretch" />
                     <Setter Property="VerticalAlignment"

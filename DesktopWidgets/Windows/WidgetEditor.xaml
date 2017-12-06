@@ -21,11 +21,11 @@
         </Grid.RowDefinitions>
         <controls:PropertyGrid x:Name="PropertyGrid"
                                Style="{StaticResource PropertyGridCategorisedStyle}"
-                               Margin="15"
+                               Margin="12"
                                Filter="{Binding WidgetEditorFilter, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
         <Button Grid.Row="1"
                 Content="_OK"
-                Margin="15,0,15,15"
+                Margin="12,0,12,12"
                 Width="75"
                 Height="23"
                 HorizontalAlignment="Right"

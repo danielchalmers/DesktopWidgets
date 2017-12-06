@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Width="450"
+        Width="440"
         Height="400"
         FocusManager.FocusedElement="{Binding ElementName=ChangelogTextBox}">
     <Window.Title>
@@ -30,23 +30,23 @@
                    Text="{Binding UpdateText}"
                    FontSize="16"
                    FontWeight="Medium"
-                   Margin="15,5,0,0" />
+                   Margin="12,4,0,0" />
 
         <TextBox x:Name="ChangelogTextBox"
                  Grid.Row="1"
                  Text="{Binding ChangelogText}"
                  IsReadOnly="True"
-                 Margin="15"
+                 Margin="12"
                  TextWrapping="Wrap"
                  HorizontalScrollBarVisibility="Auto"
                  VerticalScrollBarVisibility="Visible" />
 
         <Grid Grid.Row="2"
-              Margin="15,0,15,15"
+              Margin="12,0,12,12"
               Height="23">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="4" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

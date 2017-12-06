@@ -26,15 +26,15 @@
                  Grid.ColumnSpan="2"
                  ItemsSource="{Binding ItemsList}"
                  SelectedItem="{Binding SelectedItem}"
-                 Margin="15" />
+                 Margin="12" />
 
         <Grid Grid.Column="0"
               Grid.Row="1"
-              Margin="15,0,15,15">
+              Margin="12,0,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="75" />
-                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="4" />
                 <ColumnDefinition Width="75" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>

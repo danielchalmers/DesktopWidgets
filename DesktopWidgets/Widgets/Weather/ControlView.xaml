@@ -36,7 +36,7 @@
                    Height="50"
                    ToolTip="{Binding Description}"
                    Visibility="{Binding Settings.ShowIcon, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <StackPanel Margin="5">
+            <StackPanel Margin="4">
                 <StackPanel.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="TextAlignment"
