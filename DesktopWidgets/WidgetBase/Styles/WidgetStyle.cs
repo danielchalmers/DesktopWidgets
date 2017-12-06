@@ -83,7 +83,7 @@ namespace DesktopWidgets.WidgetBase.Styles
 
         [Category("Frame")]
         [DisplayName("Padding")]
-        public Thickness FramePadding { get; set; } = new Thickness(5);
+        public Thickness FramePadding { get; set; } = new Thickness(4);
 
         [Category("Border")]
         [DisplayName("Visible")]
