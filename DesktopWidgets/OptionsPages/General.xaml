@@ -20,7 +20,7 @@
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin"
-                            Value="4,0,4,0" />
+                            Value="2,0,2,0" />
                     <Setter Property="HorizontalAlignment"
                             Value="Stretch" />
                     <Setter Property="VerticalAlignment"
