@@ -8,7 +8,7 @@
         Title="Edit Shortcut"
         Width="550"
         SizeToContent="Height"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="15">
         <Grid.RowDefinitions>

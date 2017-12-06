@@ -11,7 +11,7 @@
         MinHeight="350"
         SizeToContent="Height"
         MaxHeight="450"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=lsWidgets}">
     <Window.Resources>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Height="400"
         Width="500"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         Title="{Binding Title}"
         FocusManager.FocusedElement="{Binding ElementName=txtData}">

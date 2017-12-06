@@ -9,7 +9,7 @@
         Width="350"
         SizeToContent="Height"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         FocusManager.FocusedElement="{Binding ElementName=NameTextBox}">
     <Grid Margin="15">
         <Grid.RowDefinitions>

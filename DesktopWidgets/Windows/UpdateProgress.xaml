@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Width="450"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         SizeToContent="Height">
     <Window.Title>
         <MultiBinding StringFormat="{}{0} Update">

@@ -8,7 +8,7 @@
         Width="300"
         MinHeight="350"
         SizeToContent="Height"
-        ResizeMode="CanMinimize"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=ItemsListBox}">
     <Grid>
