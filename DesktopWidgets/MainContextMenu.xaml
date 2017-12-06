@@ -8,18 +8,6 @@
     <x:Array x:Shared="False"
              Type="{x:Type sys:Object}"
              x:Key="MainMenuItems">
-        <MenuItem Click="menuItemMute_OnClick">
-            <MenuItem.Header>
-                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}"
-                              ConverterParameter="True">
-                    <Binding Path="MuteDuration"
-                             Source="{x:Static p:Settings.Default}" />
-                    <Binding Path="MuteEndTime"
-                             Source="{x:Static p:Settings.Default}" />
-                </MultiBinding>
-            </MenuItem.Header>
-        </MenuItem>
-        <Separator />
         <MenuItem Header="_All Widgets">
             <MenuItem.ItemsSource>
                 <CompositeCollection>
@@ -43,6 +31,17 @@
         <MenuItem Header="_Options..."
                   Click="menuItemOptions_OnClick" />
         <Separator />
+        <MenuItem Click="menuItemMute_OnClick">
+            <MenuItem.Header>
+                <MultiBinding Converter="{StaticResource TimeSpanToMuteTextConverter}"
+                              ConverterParameter="True">
+                    <Binding Path="MuteDuration"
+                             Source="{x:Static p:Settings.Default}" />
+                    <Binding Path="MuteEndTime"
+                             Source="{x:Static p:Settings.Default}" />
+                </MultiBinding>
+            </MenuItem.Header>
+        </MenuItem>
         <MenuItem Header="E_xit"
                   Click="menuItemExit_OnClick" />
     </x:Array>
