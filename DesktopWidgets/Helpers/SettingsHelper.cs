@@ -83,7 +83,8 @@ namespace DesktopWidgets.Helpers
         public static void ResetSettings(bool msg = true, bool refresh = true)
         {
             if (msg && Popup.Show(
-                "Are you sure you want to reset ALL settings (including widgets)?\n\nThis cannot be undone.",
+                $"Are you sure you want to reset {AssemblyInfo.Title} to factory settings?\n" +
+                "This will delete all options, widgets, and events/actions!",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
             {
                 return;
