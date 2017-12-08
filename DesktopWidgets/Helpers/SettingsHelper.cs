@@ -174,7 +174,7 @@ namespace DesktopWidgets.Helpers
         {
             Settings.Default.LastBackupDateTime = DateTime.Now;
             var directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
-            var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.json";
+            var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.txt";
             Directory.CreateDirectory(directory);
             File.WriteAllText(Path.Combine(directory, filename), GetExportedData());
         }
