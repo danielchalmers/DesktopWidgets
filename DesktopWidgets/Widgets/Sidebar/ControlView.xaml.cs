@@ -12,8 +12,9 @@ namespace DesktopWidgets.Widgets.Sidebar
             InitializeComponent();
         }
 
-        private void SeparatorBorder_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void SeparatorBorder_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            // Don't move sidebar while dragging seperator.
             e.Handled = true;
         }
     }

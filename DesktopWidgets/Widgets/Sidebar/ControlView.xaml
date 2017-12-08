@@ -215,7 +215,7 @@
                         Opacity="0.5"
                         CornerRadius="2"
                         Focusable="False"
-                        PreviewMouseDown="SeparatorBorder_PreviewMouseDown" />
+                        MouseDown="SeparatorBorder_MouseDown" />
             </DataTemplate>
         </ItemsControl.Resources>
         <ItemsControl.ItemTemplate>
@@ -223,7 +223,7 @@
                 <ContentControl Content="{Binding}"
                                 Focusable="False">
                     <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseDown">
+                        <i:EventTrigger EventName="PreviewMouseDown">
                             <command:EventToCommand Command="{Binding DataContext.ShortcutFocus, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                                     CommandParameter="{Binding}" />
                         </i:EventTrigger>
