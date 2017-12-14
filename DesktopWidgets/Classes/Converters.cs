@@ -93,14 +93,8 @@ namespace DesktopWidgets.Classes
             var displayedElapsed = elapsed.TotalSeconds > 0 || settings.EndContinueCounting
                     ? elapsed
                     : TimeSpan.FromSeconds(0);
-            try
-            {
-                return displayedElapsed.ToString(settings.Format);
-            }
-            catch (FormatException)
-            {
-                return "Bad format";
-            }
+
+            return displayedElapsed.ToMultilineString(settings.DateTimeFormat);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -118,15 +112,9 @@ namespace DesktopWidgets.Classes
                 return DependencyProperty.UnsetValue;
             }
             var dateTime = System.Convert.ToDateTime(value[0]);
-            var format = (string)value[1];
-            try
-            {
-                return dateTime.ToString(format);
-            }
-            catch (FormatException)
-            {
-                return "Bad format";
-            }
+            var formatLines = (List<string>)value[1];
+
+            return dateTime.ToMultilineString(formatLines);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)
@@ -145,16 +133,10 @@ namespace DesktopWidgets.Classes
             }
             var currentTime = System.Convert.ToDateTime(value[0]);
             var startTime = System.Convert.ToDateTime(value[1]);
-            var format = (string)value[2];
+            var format = (List<string>)value[2];
             var elasped = (currentTime - startTime);
-            try
-            {
-                return elasped.ToString(format);
-            }
-            catch (FormatException)
-            {
-                return "Bad format";
-            }
+
+            return elasped.ToMultilineString(format);
         }
 
         public object[] ConvertBack(object value, Type[] targetType, object parameter, CultureInfo culture)

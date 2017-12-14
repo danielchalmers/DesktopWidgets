@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using DesktopWidgets.WidgetBase.Settings;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
@@ -9,7 +10,7 @@ namespace DesktopWidgets.Widgets.CountdownClock
     {
         public Settings()
         {
-            Format = "dd'd 'hh'h 'mm'm'";
+            DateTimeFormat = new List<string> { "dd'd 'hh'h 'mm'm'" };
         }
 
         [Category("End")]

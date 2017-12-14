@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace DesktopWidgets.Helpers
 {
@@ -20,6 +22,48 @@ namespace DesktopWidgets.Helpers
             }
 
             return formatted;
+        }
+
+        public static string ToMultilineString(this DateTime dateTime, List<string> formatLines)
+        {
+            var formatted = new StringBuilder();
+            foreach (var formatLine in formatLines)
+            {
+                try
+                {
+                    formatted.Append(dateTime.ToString(formatLine));
+                }
+                catch (FormatException)
+                {
+                    formatted.Append("Bad format");
+                }
+                if (formatLines.IndexOf(formatLine) < formatLines.Count - 1)
+                {
+                    formatted.AppendLine();
+                }
+            }
+            return formatted.ToString();
+        }
+
+        public static string ToMultilineString(this TimeSpan timeSpan, List<string> formatLines)
+        {
+            var formatted = new StringBuilder();
+            foreach (var formatLine in formatLines)
+            {
+                try
+                {
+                    formatted.Append(timeSpan.ToString(formatLine));
+                }
+                catch (FormatException)
+                {
+                    formatted.Append("Bad format");
+                }
+                if (formatLines.IndexOf(formatLine) < formatLines.Count - 1)
+                {
+                    formatted.AppendLine();
+                }
+            }
+            return formatted.ToString();
         }
     }
 }
