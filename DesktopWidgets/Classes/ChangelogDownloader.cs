@@ -86,7 +86,7 @@ namespace DesktopWidgets.Classes
                 stringBuilder.AppendLine();
             }
 
-            stringBuilder.Append($"You can view the full changelog at {Resources.GitHubCommits}");
+            stringBuilder.Append($"View the full changelog at {Resources.GitHubCommits}");
             return stringBuilder.ToString();
         }
 
