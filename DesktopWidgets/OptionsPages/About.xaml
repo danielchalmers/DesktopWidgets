@@ -24,6 +24,7 @@
                  x:Name="AboutTextBox"
                  Text="{Binding Text, Mode=OneWay}"
                  Style="{StaticResource InfoTextbox}"
+                 VerticalScrollBarVisibility="Auto"
                  VerticalAlignment="Center" />
         <Button Grid.Row="4"
                 Content="_Licenses"
