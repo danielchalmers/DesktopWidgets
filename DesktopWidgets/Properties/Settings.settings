@@ -122,12 +122,6 @@
     <Setting Name="PropertyGridIsCategorized" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="OptionsGeneralFilter" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="WidgetEditorFilter" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="BackupInterval" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">3.00:00:00</Value>
     </Setting>
