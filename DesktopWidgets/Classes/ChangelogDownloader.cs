@@ -54,7 +54,7 @@ namespace DesktopWidgets.Classes
             }
             catch
             {
-                _updateText = "Changelog could not be downloaded.";
+                _updateText = "Changelog failed to download.";
             }
         }
 
