@@ -144,10 +144,10 @@ namespace DesktopWidgets.Classes
 
     public class Changelog
     {
-        public Changelog(Version version, DateTime publishDateTime, List<string> history)
+        public Changelog(Version version, DateTime publishDate, List<string> history)
         {
             Version = version;
-            PublishDate = publishDateTime;
+            PublishDate = publishDate;
             History = history;
         }
 
