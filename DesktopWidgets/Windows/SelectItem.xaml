@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="Select Item"
         Width="300"
-        MinHeight="350"
+        MinHeight="336"
         SizeToContent="Height"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
