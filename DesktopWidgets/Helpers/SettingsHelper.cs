@@ -27,6 +27,8 @@ namespace DesktopWidgets.Helpers
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
+        private static string BackupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
+
         public static object CloneObject(object obj)
         {
             return
@@ -102,7 +104,7 @@ namespace DesktopWidgets.Helpers
             {
                 Popup.Show(
                     "All settings have been restored to default.\n\n" +
-                    "You can find a backup of your previous data in \"My Documents\".");
+                    $"Backup created in \"{BackupDirectory}\".");
             }
         }
 
@@ -156,7 +158,7 @@ namespace DesktopWidgets.Helpers
             // Let user know the import worked.
             Popup.Show(
                 "Import was successful.\n\n" +
-                "You can find a backup of your previous data in \"My Documents\".");
+                $"Backup created in \"{BackupDirectory}\".");
         }
 
         public static string GetExportedData()
@@ -173,10 +175,9 @@ namespace DesktopWidgets.Helpers
         private static void Backup()
         {
             Settings.Default.LastBackupDateTime = DateTime.Now;
-            var directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
             var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.txt";
-            Directory.CreateDirectory(directory);
-            File.WriteAllText(Path.Combine(directory, filename), GetExportedData());
+            Directory.CreateDirectory(BackupDirectory);
+            File.WriteAllText(Path.Combine(BackupDirectory, filename), GetExportedData());
         }
     }
 }
