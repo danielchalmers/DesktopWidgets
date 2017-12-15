@@ -78,7 +78,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public FileInfo CurrentFile
         {
-            get { return _currentFile; }
+            get => _currentFile;
             set
             {
                 _currentFile = value;
@@ -90,7 +90,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public string CurrentFileContent
         {
-            get { return _currentFileContent; }
+            get => _currentFileContent;
             set
             {
                 _currentFileContent = value;
@@ -100,7 +100,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public BitmapImage CurrentImage
         {
-            get { return _currentImage; }
+            get => _currentImage;
             set
             {
                 if (!Equals(_currentImage, value))
@@ -113,7 +113,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public FileType FileType
         {
-            get { return _fileType; }
+            get => _fileType;
             set
             {
                 if (_fileType != value)
@@ -126,7 +126,7 @@ namespace DesktopWidgets.Widgets.FolderWatcher
 
         public bool IsPaused
         {
-            get { return Settings.Paused; }
+            get => Settings.Paused;
             set
             {
                 Settings.Paused = value;

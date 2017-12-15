@@ -28,7 +28,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         public bool IsRunning
         {
-            get { return _isRunning; }
+            get => _isRunning;
             set
             {
                 if (_isRunning != value)
@@ -41,7 +41,7 @@ namespace DesktopWidgets.Widgets.StopwatchClock
 
         public DateTime StartTime
         {
-            get { return _startTime; }
+            get => _startTime;
             set
             {
                 if (_startTime != value)

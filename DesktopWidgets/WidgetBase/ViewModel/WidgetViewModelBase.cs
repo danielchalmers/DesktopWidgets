@@ -56,7 +56,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double Left
         {
-            get { return _settings.Left; }
+            get => _settings.Left;
             set
             {
                 if (!_settings.IsDocked)
@@ -70,7 +70,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double Top
         {
-            get { return _settings.Top; }
+            get => _settings.Top;
             set
             {
                 if (!_settings.IsDocked)
@@ -84,7 +84,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double Width
         {
-            get { return _settings.Style.Width; }
+            get => _settings.Style.Width;
             set
             {
                 _settings.Style.Width = value;
@@ -94,7 +94,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double Height
         {
-            get { return _settings.Style.Height; }
+            get => _settings.Style.Height;
             set
             {
                 _settings.Style.Height = value;
@@ -112,7 +112,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double ActualWidth
         {
-            get { return _actualWidth; }
+            get => _actualWidth;
             set
             {
                 if (value > 0 && value.IsEqual(_actualWidth))
@@ -125,7 +125,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public double ActualHeight
         {
-            get { return _actualHeight; }
+            get => _actualHeight;
             set
             {
                 if (value > 0 && value.IsEqual(_actualHeight))
@@ -159,7 +159,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public bool IsContextMenuOpen
         {
-            get { return _isContextMenuOpen; }
+            get => _isContextMenuOpen;
             set
             {
                 if (_isContextMenuOpen != value)
@@ -172,7 +172,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public bool KeepActionBarOpen
         {
-            get { return _keepActionBarOpen; }
+            get => _keepActionBarOpen;
             set
             {
                 if (_keepActionBarOpen != value)

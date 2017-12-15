@@ -42,7 +42,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         public double Temperature
         {
-            get { return _temperature; }
+            get => _temperature;
             set
             {
                 if (value.IsEqual(_temperature))
@@ -55,7 +55,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         public double TemperatureMin
         {
-            get { return _temperatureMin; }
+            get => _temperatureMin;
             set
             {
                 if (value.IsEqual(_temperatureMin))
@@ -68,7 +68,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         public double TemperatureMax
         {
-            get { return _temperatureMax; }
+            get => _temperatureMax;
             set
             {
                 if (value.IsEqual(_temperatureMax))
@@ -81,7 +81,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         public string Description
         {
-            get { return _description; }
+            get => _description;
             set
             {
                 if (_description != value)
@@ -94,7 +94,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         public string IconUrl
         {
-            get { return _iconUrl; }
+            get => _iconUrl;
             set
             {
                 if (_iconUrl != value)
@@ -107,7 +107,7 @@ namespace DesktopWidgets.Widgets.Weather
 
         public bool DidWeatherDataFail
         {
-            get { return _didWeatherDataFail; }
+            get => _didWeatherDataFail;
             set
             {
                 if (_didWeatherDataFail != value)

@@ -28,7 +28,7 @@ namespace DesktopWidgets.Widgets.Search
 
         public string SearchText
         {
-            get { return _searchText; }
+            get => _searchText;
             set
             {
                 if (_searchText != value)

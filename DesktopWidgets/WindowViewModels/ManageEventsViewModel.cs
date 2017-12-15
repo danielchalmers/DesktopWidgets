@@ -24,7 +24,7 @@ namespace DesktopWidgets.WindowViewModels
 
         public EventActionPair SelectedPair
         {
-            get { return _selectedPair; }
+            get => _selectedPair;
             set
             {
                 if (_selectedPair != value)

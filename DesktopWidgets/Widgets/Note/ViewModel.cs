@@ -18,7 +18,7 @@ namespace DesktopWidgets.Widgets.Note
 
         public string Text
         {
-            get { return Settings.Text; }
+            get => Settings.Text;
             set
             {
                 if (Settings.Text != value)

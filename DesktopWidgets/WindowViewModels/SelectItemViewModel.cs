@@ -19,7 +19,7 @@ namespace DesktopWidgets.WindowViewModels
 
         public object SelectedItem
         {
-            get { return _selectedItem; }
+            get => _selectedItem;
             set
             {
                 if (_selectedItem != value)

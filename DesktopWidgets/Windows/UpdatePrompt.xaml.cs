@@ -42,7 +42,7 @@ namespace DesktopWidgets.Windows
 
         public bool UpdateIsRequired
         {
-            get { return _updateIsRequired; }
+            get => _updateIsRequired;
             set
             {
                 if (_updateIsRequired != value)
@@ -55,7 +55,7 @@ namespace DesktopWidgets.Windows
 
         public Version UpdateVersion
         {
-            get { return _updateVersion; }
+            get => _updateVersion;
             set
             {
                 if (_updateVersion != value)
@@ -68,7 +68,7 @@ namespace DesktopWidgets.Windows
 
         public string UpdateText
         {
-            get { return _updateSubText; }
+            get => _updateSubText;
             set
             {
                 if (_updateSubText != value)
@@ -81,7 +81,7 @@ namespace DesktopWidgets.Windows
 
         public string ChangelogText
         {
-            get { return _changelogText; }
+            get => _changelogText;
             set
             {
                 if (_changelogText != value)

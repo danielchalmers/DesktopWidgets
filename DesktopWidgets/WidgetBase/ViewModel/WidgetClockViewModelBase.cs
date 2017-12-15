@@ -32,7 +32,7 @@ namespace DesktopWidgets.WidgetBase.ViewModel
 
         public DateTime CurrentTime
         {
-            get { return _currentTime; }
+            get => _currentTime;
             set
             {
                 if (_currentTime != value)

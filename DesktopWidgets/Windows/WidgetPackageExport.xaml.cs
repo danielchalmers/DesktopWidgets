@@ -32,7 +32,7 @@ namespace DesktopWidgets.Windows
 
         public string Path
         {
-            get { return _path; }
+            get => _path;
             set
             {
                 if (_path != value)

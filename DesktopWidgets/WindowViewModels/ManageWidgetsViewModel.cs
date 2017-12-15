@@ -31,7 +31,7 @@ namespace DesktopWidgets.WindowViewModels
 
         public WidgetSettingsBase SelectedWidget
         {
-            get { return _selectedWidget; }
+            get => _selectedWidget;
             set
             {
                 if (_selectedWidget != value)

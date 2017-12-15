@@ -32,7 +32,7 @@ namespace DesktopWidgets.Windows
 
         public string InputData
         {
-            get { return _inputData; }
+            get => _inputData;
             set
             {
                 if (_inputData != value)

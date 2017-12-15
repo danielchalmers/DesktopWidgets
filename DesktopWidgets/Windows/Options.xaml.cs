@@ -35,7 +35,7 @@ namespace DesktopWidgets.Windows
 
         public Page CurrentPage
         {
-            get { return _currentPage; }
+            get => _currentPage;
             set
             {
                 if (!Equals(_currentPage, value))

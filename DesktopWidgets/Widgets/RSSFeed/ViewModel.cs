@@ -45,7 +45,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         public string HelpText
         {
-            get { return _helpText; }
+            get => _helpText;
             set
             {
                 if (_helpText != value)
@@ -58,7 +58,7 @@ namespace DesktopWidgets.Widgets.RSSFeed
 
         public ObservableCollection<FeedItem> FeedItems
         {
-            get { return _feedItems; }
+            get => _feedItems;
             set
             {
                 if (_feedItems != value)

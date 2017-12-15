@@ -26,7 +26,7 @@ namespace DesktopWidgets.Windows
 
         public double CurrentProgress
         {
-            get { return _currentProgress; }
+            get => _currentProgress;
             set
             {
                 if (value.IsEqual(_currentProgress))

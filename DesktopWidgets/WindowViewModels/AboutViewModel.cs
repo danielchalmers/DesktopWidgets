@@ -21,8 +21,8 @@ namespace DesktopWidgets.WindowViewModels
 
         public string Text
         {
-            get { return _text; }
-            set { Set(ref _text, value); }
+            get => _text;
+            set => Set(ref _text, value);
         }
 
         public ICommand ViewLicenses { get; }

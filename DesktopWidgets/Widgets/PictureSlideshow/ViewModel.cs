@@ -65,7 +65,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         public string ImageUrl
         {
-            get { return _imageUrl; }
+            get => _imageUrl;
             set
             {
                 if (_imageUrl != value)
@@ -79,7 +79,7 @@ namespace DesktopWidgets.Widgets.PictureSlideshow
 
         public bool IsPaused
         {
-            get { return _isPaused; }
+            get => _isPaused;
             set
             {
                 if (_isPaused != value)

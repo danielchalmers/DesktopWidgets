@@ -17,10 +17,11 @@ namespace DesktopWidgets.WindowViewModels
         }
 
         public string Title { get; }
+
         public string Text
         {
-            get { return _text; }
-            set { Set(ref _text, value); }
+            get => _text;
+            set => Set(ref _text, value);
         }
 
         public ICommand CheckForUpdates { get; }

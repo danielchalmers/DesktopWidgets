@@ -25,7 +25,7 @@ namespace DesktopWidgets.WindowViewModels
 
         public object SelectedItem1
         {
-            get { return _selectedItem1; }
+            get => _selectedItem1;
             set
             {
                 if (_selectedItem1 != value)
@@ -38,7 +38,7 @@ namespace DesktopWidgets.WindowViewModels
 
         public object SelectedItem2
         {
-            get { return _selectedItem2; }
+            get => _selectedItem2;
             set
             {
                 if (_selectedItem2 != value)
