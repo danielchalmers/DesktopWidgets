@@ -193,11 +193,13 @@ namespace DesktopWidgets.Helpers
             {
                 return;
             }
-            if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?\n\nThis cannot be undone.",
+            if (msg && Popup.Show($"Are you sure you want to delete \"{settings.Name}\"?",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
             }
+
+            id.Backup();
 
             App.WidgetsSettingsStore.Widgets.Remove(settings);
             var view = id.GetView();
@@ -354,7 +356,7 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static void Export(WidgetSettingsBase widget)
+        public static void Export(WidgetSettingsBase widget, bool msg = true)
         {
             var settings = SettingsHelper.CloneObject(widget) as WidgetSettingsBase;
             if (settings == null)
@@ -368,7 +370,10 @@ namespace DesktopWidgets.Helpers
                 return;
             }
             File.WriteAllText(dialog.Path, Serialise(settings));
-            Popup.Show($"\"{settings.PackageInfo.Name}\" has been exported to {dialog.Path}.");
+            if (msg)
+            {
+                Popup.Show($"\"{settings.PackageInfo.Name}\" has been exported to {dialog.Path}.");
+            }
         }
 
         public static void ReloadWidgets()
@@ -471,6 +476,14 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             return settings == null ? null : App.WidgetsSettingsStore.Widgets.MoveDown(settings);
+        }
+
+        public static void Backup(this WidgetId id)
+        {
+            var settings = id.GetSettings();
+            var filename = $"{settings.Name}-{settings.Identifier.Guid}{Resources.PackageExtension}";
+            Directory.CreateDirectory(SettingsHelper.BackupDirectory);
+            File.WriteAllText(Path.Combine(SettingsHelper.BackupDirectory, filename), Serialise(settings));
         }
     }
 }

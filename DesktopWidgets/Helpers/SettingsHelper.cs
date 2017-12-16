@@ -27,7 +27,7 @@ namespace DesktopWidgets.Helpers
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
-        private static string BackupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
+        public static string BackupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
 
         public static object CloneObject(object obj)
         {
