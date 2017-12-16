@@ -41,7 +41,7 @@
         </Grid.ColumnDefinitions>
 
         <ListBox x:Name="ItemsListBox"
-                 Margin="12"
+                 Margin="12,12,8,12"
                  ItemsSource="{Binding Path=Widgets, Source={x:Static local:App.WidgetsSettingsStore}}"
                  SelectedItem="{Binding SelectedWidget}"
                  SelectedIndex="0"
