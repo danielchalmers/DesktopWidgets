@@ -326,28 +326,35 @@ namespace DesktopWidgets.Helpers
                     // ignored
                 }
 
-                if (settings?.PackageInfo == null)
+                if (settings == null)
                 {
                     Popup.Show("Failed to import widget.\n" +
                         "Package may be corrupted.", image: MessageBoxImage.Error);
                     return;
                 }
 
-                if (
-                    Popup.Show($"Do you want to import {settings.PackageInfo}?", MessageBoxButton.YesNo,
-                        MessageBoxImage.Question) ==
-                    MessageBoxResult.No)
+                if (settings.PackageInfo == null)
                 {
-                    return;
+                    if (Popup.Show($"Do you want to import {fileName}?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        return;
+                    }
                 }
-
-                if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
+                else
                 {
-                    Popup.Show(
-                        $"This widget was created for {AssemblyInfo.Title} {settings.PackageInfo.AppVersion}.\n\n" +
-                        $"Update {AssemblyInfo.Title} to continue.",
-                        image: MessageBoxImage.Error);
-                    return;
+                    if (Popup.Show($"Do you want to import {settings.PackageInfo}?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                    {
+                        return;
+                    }
+
+                    if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
+                    {
+                        Popup.Show(
+                            $"This widget was created for {AssemblyInfo.Title} {settings.PackageInfo.AppVersion}.\n\n" +
+                            $"Update {AssemblyInfo.Title} to continue.",
+                            image: MessageBoxImage.Error);
+                        return;
+                    }
                 }
 
                 settings.Identifier.GenerateNewGuid();
