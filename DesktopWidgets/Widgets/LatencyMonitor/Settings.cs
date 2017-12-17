@@ -8,8 +8,11 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
     {
         public Settings()
         {
-            Style.Width = 225;
-            Style.Height = 210;
+            Style.Width = double.NaN;
+            Style.Height = double.NaN;
+            Style.MinWidth = 150;
+            Style.MinHeight = 200;
+            Style.FontSettings.FontFamily = new FontFamily("Consolas");
         }
 
         [Category("General")]
@@ -22,7 +25,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("Style")]
         [DisplayName("Show Status")]
-        public bool ShowStatus { get; set; } = true;
+        public bool ShowStatus { get; set; } = false;
 
         [Category("Style")]
         [DisplayName("Show Download Usage")]
@@ -42,11 +45,11 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("Style")]
         [DisplayName("Download/Upload Padding")]
-        public int BandwidthPadding { get; set; } = 7;
+        public int BandwidthPadding { get; set; } = 6;
 
         [Category("Style")]
         [DisplayName("Download/Upload Decimal Places")]
-        public int BandwidthDecimalPlaces { get; set; } = 1;
+        public int BandwidthDecimalPlaces { get; set; } = 0;
 
         [Category("General")]
         [DisplayName("Host URL")]
@@ -54,7 +57,7 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
 
         [Category("General")]
         [DisplayName("Max History")]
-        public int MaxHistory { get; set; } = 99;
+        public int MaxHistory { get; set; } = 10;
 
         [Category("General")]
         [DisplayName("Timeout")]
