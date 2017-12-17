@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
-using System.IO;
 using System.Windows;
+using DesktopWidgets.Helpers;
 using Microsoft.Win32;
 
 namespace DesktopWidgets.Windows
@@ -74,7 +74,7 @@ namespace DesktopWidgets.Windows
             };
             if (dialog.ShowDialog() == true)
             {
-                File.WriteAllText(dialog.FileName, InputData);
+                FileSystemHelper.WriteTextToFile(dialog.FileName, InputData);
             }
         }
 

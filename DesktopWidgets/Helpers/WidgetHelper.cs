@@ -380,13 +380,12 @@ namespace DesktopWidgets.Helpers
 
         public static void Export(this WidgetSettingsBase settings, string path)
         {
-            File.WriteAllText(path, Serialise(settings));
+            FileSystemHelper.WriteTextToFile(path, Serialise(settings));
         }
 
         public static void Backup(this WidgetSettingsBase settings)
         {
             var filename = $"{settings.Name}-{settings.Identifier.Guid}{Resources.PackageExtension}";
-            Directory.CreateDirectory(SettingsHelper.BackupDirectory);
             settings.Export(Path.Combine(SettingsHelper.BackupDirectory, filename));
         }
 

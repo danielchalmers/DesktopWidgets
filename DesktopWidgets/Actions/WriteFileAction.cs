@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using DesktopWidgets.Classes;
+using DesktopWidgets.Helpers;
 
 namespace DesktopWidgets.Actions
 {
@@ -44,10 +45,10 @@ namespace DesktopWidgets.Actions
             switch (FileWriteMode)
             {
                 case FileWriteMode.Overwrite:
-                    File.WriteAllText(writePath, writeText);
+                    FileSystemHelper.WriteTextToFile(writePath, writeText);
                     break;
                 case FileWriteMode.Append:
-                    File.AppendAllText(writePath, writeText);
+                    FileSystemHelper.AppendTextToFile(writePath, writeText);
                     break;
             }
         }

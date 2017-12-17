@@ -20,11 +20,7 @@ namespace DesktopWidgets.Helpers
                 }
                 var serialised = JsonConvert.SerializeObject(ex, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
                 var path = Path.Combine(ExceptionDumpPath, $"error-{Guid.NewGuid()}.json");
-                if (!Directory.Exists(ExceptionDumpPath))
-                {
-                    Directory.CreateDirectory(ExceptionDumpPath);
-                }
-                File.WriteAllText(path, serialised);
+                FileSystemHelper.WriteTextToFile(path, serialised);
             }
             catch
             {

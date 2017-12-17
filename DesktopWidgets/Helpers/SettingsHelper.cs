@@ -27,7 +27,7 @@ namespace DesktopWidgets.Helpers
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
-        public static string BackupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
+        public static readonly string BackupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
 
         public static object CloneObject(object obj)
         {
@@ -176,8 +176,7 @@ namespace DesktopWidgets.Helpers
         {
             Settings.Default.LastBackupDateTime = DateTime.Now;
             var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.txt";
-            Directory.CreateDirectory(BackupDirectory);
-            File.WriteAllText(Path.Combine(BackupDirectory, filename), GetExportedData());
+            FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), GetExportedData());
         }
     }
 }

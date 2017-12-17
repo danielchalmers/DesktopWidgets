@@ -1,4 +1,5 @@
-﻿using IWshRuntimeLibrary;
+﻿using System.IO;
+using IWshRuntimeLibrary;
 using File = System.IO.File;
 
 namespace DesktopWidgets.Helpers
@@ -14,6 +15,20 @@ namespace DesktopWidgets.Helpers
             var shell = new WshShell();
             var link = (IWshShortcut)shell.CreateShortcut(path);
             return File.Exists(link.TargetPath) ? link.TargetPath : path;
+        }
+
+        public static void WriteTextToFile(string path, string content)
+        {
+            var fileInfo = new FileInfo(path);
+            fileInfo.Directory.Create();
+            File.WriteAllText(path, content);
+        }
+
+        public static void AppendTextToFile(string path, string content)
+        {
+            var fileInfo = new FileInfo(path);
+            fileInfo.Directory.Create();
+            File.AppendAllText(path, content);
         }
     }
 }
