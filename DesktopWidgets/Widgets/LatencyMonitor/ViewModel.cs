@@ -208,13 +208,13 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             }
             else
             {
-                return bytes.ToString("0B"); // Byte.
+                return bytes.ToString() + "B"; // Byte.
             }
 
             // Divide by 1024 to get fractional value.
             readable = Math.Round(readable / 1024, decimalPlaces);
 
-            return readable.ToString("0") + suffix;
+            return readable.ToString() + suffix;
         }
     }
 }
