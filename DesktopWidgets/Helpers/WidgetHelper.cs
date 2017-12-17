@@ -199,7 +199,7 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
-            id.Backup();
+            settings.Backup();
 
             App.WidgetsSettingsStore.Widgets.Remove(settings);
             var view = id.GetView();
@@ -299,88 +299,95 @@ namespace DesktopWidgets.Helpers
             return JsonConvert.SerializeObject(settings, SettingsHelper.JsonSerializerSettingsAllTypeHandling);
         }
 
-        public static void Import()
+        public static WidgetSettingsBase DeserialiseWidgetFromPath(string path)
+        {
+            WidgetSettingsBase settings = null;
+            try
+            {
+                settings = Deserialise(File.ReadAllText(path));
+            }
+            catch
+            {
+                // ignored
+            }
+            return settings;
+        }
+
+        public static void ImportDialog()
         {
             var dialog = new OpenFileDialog
             {
                 CheckFileExists = true,
                 CheckPathExists = true,
-                Filter = Resources.PackageExtensionFilter,
-                Multiselect = true
+                Multiselect = true,
+                Filter = Resources.PackageExtensionFilter
             };
+
             if (dialog.ShowDialog() != true)
             {
                 return;
             }
-            foreach (var fileName in dialog.FileNames)
+
+            foreach (var path in dialog.FileNames)
             {
-                var fileContent = File.ReadAllText(fileName);
-
-                WidgetSettingsBase settings = null;
-                try
-                {
-                    settings = Deserialise(fileContent);
-                }
-                catch
-                {
-                    // ignored
-                }
-
-                if (settings == null)
-                {
-                    Popup.Show("Failed to import widget.\n" +
-                        "Package may be corrupted.", image: MessageBoxImage.Error);
-                    return;
-                }
-
-                if (settings.PackageInfo == null)
-                {
-                    if (Popup.Show($"Do you want to import {fileName}?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    if (Popup.Show($"Do you want to import {settings.PackageInfo}?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                    {
-                        return;
-                    }
-
-                    if (settings.PackageInfo.AppVersion > AssemblyInfo.Version)
-                    {
-                        Popup.Show(
-                            $"This widget was created for {AssemblyInfo.Title} {settings.PackageInfo.AppVersion}.\n\n" +
-                            $"Update {AssemblyInfo.Title} to continue.",
-                            image: MessageBoxImage.Error);
-                        return;
-                    }
-                }
-
-                settings.Identifier.GenerateNewGuid();
-                settings.Disabled = false;
-                AddNewWidget(settings);
+                Import(path);
             }
         }
 
-        public static void Export(WidgetSettingsBase widget, bool msg = true)
+        public static void Import(string path)
         {
-            var settings = SettingsHelper.CloneObject(widget) as WidgetSettingsBase;
+            var settings = DeserialiseWidgetFromPath(path);
+
             if (settings == null)
             {
+                Popup.Show(
+                    "Failed to import widget.\n" +
+                    "Selected file must be a valid widget package.",
+                    image: MessageBoxImage.Error);
                 return;
             }
-            settings.PackageInfo = new WidgetPackageInfo { Name = settings.Name };
-            var dialog = new WidgetPackageExport(settings);
+
+            if (settings.MinimumAppVersion > AssemblyInfo.Version)
+            {
+                Popup.Show(
+                    $"This widget requires at least {AssemblyInfo.Title} {settings.MinimumAppVersion}.\n\n" +
+                    $"Please update {AssemblyInfo.Title} and try again.",
+                    image: MessageBoxImage.Error);
+                return;
+            }
+
+            settings.Identifier.GenerateNewGuid();
+            settings.Disabled = false;
+
+            AddNewWidget(settings);
+        }
+
+        public static void ExportDialog(this WidgetSettingsBase settings)
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = Resources.PackageExtensionFilter,
+                FileName = settings.Name
+            };
+
             if (dialog.ShowDialog() != true)
             {
                 return;
             }
-            File.WriteAllText(dialog.Path, Serialise(settings));
-            if (msg)
-            {
-                Popup.Show($"\"{settings.PackageInfo.Name}\" has been exported to {dialog.Path}.");
-            }
+
+            settings.Export(dialog.FileName);
+        }
+
+        public static void Export(this WidgetSettingsBase settings, string path)
+        {
+            File.WriteAllText(path, Serialise(settings));
+        }
+
+        public static void Backup(this WidgetSettingsBase settings)
+        {
+            var filename = $"{settings.Name}-{settings.Identifier.Guid}{Resources.PackageExtension}";
+            Directory.CreateDirectory(SettingsHelper.BackupDirectory);
+            settings.Export(Path.Combine(SettingsHelper.BackupDirectory, filename));
         }
 
         public static void ReloadWidgets()
@@ -483,14 +490,6 @@ namespace DesktopWidgets.Helpers
         {
             var settings = id.GetSettings();
             return settings == null ? null : App.WidgetsSettingsStore.Widgets.MoveDown(settings);
-        }
-
-        public static void Backup(this WidgetId id)
-        {
-            var settings = id.GetSettings();
-            var filename = $"{settings.Name}-{settings.Identifier.Guid}{Resources.PackageExtension}";
-            Directory.CreateDirectory(SettingsHelper.BackupDirectory);
-            File.WriteAllText(Path.Combine(SettingsHelper.BackupDirectory, filename), Serialise(settings));
         }
     }
 }

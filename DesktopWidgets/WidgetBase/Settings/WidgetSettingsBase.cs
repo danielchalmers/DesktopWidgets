@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
+using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Styles;
 using Newtonsoft.Json;
 
@@ -17,8 +18,16 @@ namespace DesktopWidgets.WidgetBase.Settings
         public WidgetId Identifier { get; set; } = new WidgetId();
 
         [Browsable(false)]
-        [DisplayName("Package Info")]
-        public WidgetPackageInfo PackageInfo { get; set; }
+        [DisplayName("Creator")]
+        public string Creator { get; set; } = Environment.UserName;
+
+        [Browsable(false)]
+        [DisplayName("Creation Time")]
+        public DateTime CreationTime { get; set; } = DateTime.Now;
+
+        [Browsable(false)]
+        [DisplayName("Minimum App Version")]
+        public Version MinimumAppVersion { get; set; } = AssemblyInfo.Version;
 
         [Browsable(false)]
         [DisplayName("Active Time End")]

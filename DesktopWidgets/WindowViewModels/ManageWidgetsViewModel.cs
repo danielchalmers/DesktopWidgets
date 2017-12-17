@@ -132,12 +132,12 @@ namespace DesktopWidgets.WindowViewModels
 
         private void ExportWidgetExecute()
         {
-            WidgetHelper.Export(SelectedWidget);
+            SelectedWidget.ExportDialog();
         }
 
         private void ImportWidgetExecute()
         {
-            WidgetHelper.Import();
+            WidgetHelper.ImportDialog();
         }
     }
 }

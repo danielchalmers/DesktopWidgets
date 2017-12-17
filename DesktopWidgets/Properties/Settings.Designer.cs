@@ -456,18 +456,6 @@ namespace DesktopWidgets.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string WidgetPackagePublisherName {
-            get {
-                return ((string)(this["WidgetPackagePublisherName"]));
-            }
-            set {
-                this["WidgetPackagePublisherName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("00:30:00")]
         public global::System.TimeSpan AutoSaveInterval {
             get {
