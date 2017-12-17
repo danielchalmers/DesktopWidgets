@@ -128,19 +128,19 @@ namespace DesktopWidgets.Widgets.LatencyMonitor
             var stringBuilder = new StringBuilder();
             if (Settings.ShowTime)
             {
-                stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}:");
+                stringBuilder.Append($"{DateTime.Now.ToString(Settings.DateTimeFormat)}: ");
             }
             if (Settings.ShowDownloadUsage)
             {
                 stringBuilder.Append(
-                    $" {BytesToReadableString(downloadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')}");
+                    $"{BytesToReadableString(downloadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')} ");
             }
             if (Settings.ShowUploadUsage)
             {
                 stringBuilder.Append(
-                    $" {BytesToReadableString(uploadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')}");
+                    $"{BytesToReadableString(uploadUsage, Settings.BandwidthDecimalPlaces).PadLeft(Settings.BandwidthPadding, ' ')} ");
             }
-            stringBuilder.Append($" {reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
+            stringBuilder.Append($"{reply.RoundtripTime.ToString().PadLeft(Settings.LatencyPadding, '0')}ms");
             if (Settings.ShowStatus)
             {
                 stringBuilder.Append($" ({reply.Status})");
