@@ -205,7 +205,6 @@
     <Compile Include="Stores\HotkeyStore.cs" />
     <Compile Include="Stores\MediaPlayerStore.cs" />
     <Compile Include="Helpers\DateTimeSyncHelper.cs" />
-    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Classes\DirectoryWatcher.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="Helpers\AppInitHelper.cs" />
