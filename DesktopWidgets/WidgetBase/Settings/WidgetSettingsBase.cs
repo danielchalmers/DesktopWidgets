@@ -4,6 +4,7 @@ using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Styles;
 using Newtonsoft.Json;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.WidgetBase.Settings
 {
@@ -33,15 +34,23 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Active Time End")]
         public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
 
+        [PropertyOrder(0)]
         [Category("Style")]
         public WidgetStyle Style { get; set; } = new WidgetStyle();
 
+        [PropertyOrder(1)]
         [Category("Style")]
         public WidgetActionBarStyle ActionBarStyle { get; set; } = new WidgetActionBarStyle();
 
+        [PropertyOrder(0)]
         [Category("General")]
         [DisplayName("Name")]
         public string Name { get; set; } = "Untitled";
+
+        [PropertyOrder(1)]
+        [Category("General")]
+        [DisplayName("Screen Bounds")]
+        public Rect ScreenBounds { get; set; } = Rect.Empty;
 
         [Category("Style (Position)")]
         [DisplayName("Left (px)")]
@@ -58,10 +67,6 @@ namespace DesktopWidgets.WidgetBase.Settings
         [Category("Behavior (Hideable)")]
         [DisplayName("Hide Delay (ms)")]
         public int HideDelay { get; set; } = 0;
-
-        [Category("General")]
-        [DisplayName("Screen Bounds")]
-        public Rect ScreenBounds { get; set; } = Rect.Empty;
 
         [Category("Behavior")]
         [DisplayName("Stay On Top")]
