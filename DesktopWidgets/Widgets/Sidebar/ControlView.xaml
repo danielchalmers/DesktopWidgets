@@ -210,12 +210,29 @@
             </DataTemplate>
             <DataTemplate x:Key="SeparatorTemplate"
                           DataType="{x:Type sidebar:Shortcut}">
-                <Border Height="{Binding Path=DataContext.Settings.SeparatorHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                        Background="Black"
+                <Border Background="Black"
                         Opacity="0.5"
                         CornerRadius="2"
                         Focusable="False"
-                        MouseDown="SeparatorBorder_MouseDown" />
+                        MouseDown="SeparatorBorder_MouseDown">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Height"
+                                    Value="{Binding Path=DataContext.Settings.SeparatorHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+                            <Setter Property="Width"
+                                    Value="NaN" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=DataContext.Settings, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Converter={StaticResource PositionToOrientationConverter}}"
+                                             Value="Horizontal">
+                                    <Setter Property="Height"
+                                            Value="NaN" />
+                                    <Setter Property="Width"
+                                            Value="{Binding Path=DataContext.Settings.SeparatorHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
             </DataTemplate>
         </ItemsControl.Resources>
         <ItemsControl.ItemTemplate>
