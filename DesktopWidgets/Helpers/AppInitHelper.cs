@@ -59,6 +59,13 @@ namespace DesktopWidgets.Helpers
                     HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, eventPair.Action.Execute);
                 }
             }
+
+            if (App.Arguments.Contains("show-backup-help"))
+            {
+                Popup.Show(
+                    $"Backups may be available in {SettingsHelper.BackupDirectory}.\n\n" +
+                    $"Restore them by copying their contents and importing through the \"Import\" dialog in Options.");
+            }
         }
 
         private static bool IsAppAlreadyRunning()

@@ -145,7 +145,7 @@ namespace DesktopWidgets
                     {
                         // Delete the bad user.config file and restart so a new one will be upgraded or regenerated.
                         SettingsHelper.DeleteConfigFile(configException);
-                        AppHelper.RestartApplication();
+                        AppHelper.RestartApplication(new List<string> { "show-backup-help" });
                     }
                     else
                     {
