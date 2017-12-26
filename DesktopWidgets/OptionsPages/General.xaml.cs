@@ -16,12 +16,12 @@ namespace DesktopWidgets.OptionsPages
 
         private void btnImport_OnClick(object sender, RoutedEventArgs e)
         {
-            SettingsHelper.ImportData();
+            SettingsHelper.ImportWithDialog();
         }
 
         private void btnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            SettingsHelper.ExportData();
+            SettingsHelper.ExportWithDialog();
         }
 
         private void btnReset_OnClick(object sender, RoutedEventArgs e)

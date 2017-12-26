@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.IO;
 using System.Windows;
 using DesktopWidgets.Classes;
@@ -72,6 +73,11 @@ namespace DesktopWidgets.Helpers
 
         public static void SaveSettings()
         {
+            if (!App.SuccessfullyLoaded)
+            {
+                return;
+            }
+
             SaveWidgetsDataToSettings();
 
             Settings.Default.Save();
@@ -82,7 +88,7 @@ namespace DesktopWidgets.Helpers
             }
         }
 
-        public static void ResetSettings(bool msg = true, bool refresh = true)
+        public static void ResetSettings(bool msg = true)
         {
             if (msg && Popup.Show(
                 "All options, widgets, events, and actions will be deleted.\n\n" +
@@ -96,19 +102,43 @@ namespace DesktopWidgets.Helpers
             Settings.Default.MustUpgrade = false;
             Settings.Default.Widgets = string.Empty;
             LoadWidgetsDataFromSettings();
-            if (refresh)
-            {
-                WidgetHelper.LoadWidgetViews();
-            }
+            WidgetHelper.LoadWidgetViews();
             if (msg)
             {
                 Popup.Show(
-                    "All settings have been restored to default.\n\n" +
-                    $"Backup created in \"{BackupDirectory}\".");
+                "All settings have been restored to default.\n\n" +
+                $"Backup created in \"{BackupDirectory}\".");
             }
         }
 
-        public static void ImportData()
+        private static bool ImportData(string data)
+        {
+            // Test new data before overwriting existing data.
+            try
+            {
+                var newWidgets = JsonConvert.DeserializeObject<WidgetsSettingsStore>(data, JsonSerializerSettings);
+                foreach (var widget in newWidgets.Widgets)
+                {
+                    var id = widget.Identifier.Guid;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+            // Backup old data before overwriting.
+            Backup();
+
+            // Replace widget store.
+            Settings.Default.Widgets = data;
+            Settings.Default.Save();
+            LoadWidgetsDataFromSettings();
+            WidgetHelper.LoadWidgetViews();
+            return true;
+        }
+
+        public static void ImportWithDialog()
         {
             // Prompt user for JSON data to use for importing.
             var dialog = new InputBox("Import Widgets");
@@ -129,31 +159,14 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
-            // Test new data before overwriting existing data.
-            try
-            {
-                var newWidgets = JsonConvert.DeserializeObject<WidgetsSettingsStore>(dialog.InputData, JsonSerializerSettings);
-                foreach (var widget in newWidgets.Widgets)
-                {
-                    var id = widget.Identifier.Guid;
-                }
-            }
-            catch
+            if (!ImportData(dialog.InputData))
             {
                 Popup.Show(
-                    "Import failed.\nData may be corrupt.\n\nNo changes have been made.",
+                    "Import failed.\n" +
+                    "Data may be corrupt.\n\n" +
+                    "No changes have been made.",
                     image: MessageBoxImage.Error);
-                return;
             }
-
-            // Backup old data before overwriting.
-            Backup();
-
-            // Replace widget store.
-            Settings.Default.Widgets = dialog.InputData;
-            Settings.Default.Save();
-            LoadWidgetsDataFromSettings();
-            WidgetHelper.LoadWidgetViews();
 
             // Let user know the import worked.
             Popup.Show(
@@ -161,22 +174,32 @@ namespace DesktopWidgets.Helpers
                 $"Backup created in \"{BackupDirectory}\".");
         }
 
-        public static string GetExportedData()
+        private static string GetExportData()
         {
             return JsonConvert.SerializeObject(App.WidgetsSettingsStore, JsonSerializerSettings);
         }
 
-        public static void ExportData()
+        public static void ExportWithDialog()
         {
-            var dialog = new InputBox("Export Widgets", GetExportedData());
+            var dialog = new InputBox("Export Widgets", GetExportData());
             dialog.ShowDialog();
         }
 
         private static void Backup()
         {
+            if (!App.SuccessfullyLoaded)
+            {
+                return;
+            }
+
             Settings.Default.LastBackupDateTime = DateTime.Now;
             var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.txt";
-            FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), GetExportedData());
+            FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), GetExportData());
+        }
+
+        public static void DeleteConfigFile(ConfigurationErrorsException configurationErrorsException)
+        {
+            File.Delete(((ConfigurationErrorsException)configurationErrorsException.InnerException).Filename);
         }
     }
 }
