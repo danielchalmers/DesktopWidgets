@@ -42,7 +42,7 @@ namespace DesktopWidgets.Widgets.Sidebar
         public ShortcutOrientation ShortcutOrientation { get; set; } = ShortcutOrientation.Vertical;
 
         [Category("Shortcut Style")]
-        [DisplayName("Separator Height")]
+        [DisplayName("Separator Size")]
         public int SeparatorHeight { get; set; } = 3;
 
         [Category("Shortcut Style")]
