@@ -116,7 +116,7 @@ namespace DesktopWidgets
             {
                 if (RestartArguments != null)
                 {
-                    Process.Start(AppHelper.AppPath, string.Join(",-", RestartArguments));
+                    Process.Start(AppHelper.AppPath, string.Join(",", RestartArguments));
                 }
             }
         }
