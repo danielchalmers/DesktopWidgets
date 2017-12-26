@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace DesktopWidgets
         }
 
         public static bool IsMuted => Settings.Default.MuteEndTime > DateTime.Now;
+
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
             if (ApplicationDeployment.IsNetworkDeployed &&
@@ -121,17 +123,43 @@ namespace DesktopWidgets
 
         private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            ExceptionHelper.SaveException(e.Exception);
-            var exception = e.Exception.Message;
-            Popup.Show(
-                SuccessfullyLoaded
-                    ? $"An exception occurred:\n\n{exception}"
-                    : $"A critical exception occurred:\n\n{exception}\n\n{DesktopWidgets.Properties.Resources.AppName} will now exit.",
-                MessageBoxButton.OK, MessageBoxImage.Error);
             e.Handled = true;
-            if (!SuccessfullyLoaded)
+
+            ExceptionHelper.SaveException(e.Exception);
+
+            if (SuccessfullyLoaded)
             {
-                AppHelper.ShutdownApplication();
+                Popup.Show($"An exception occurred:\n{e.Exception.Message}", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                if (e.Exception is ConfigurationErrorsException configException)
+                {
+                    var revert = Popup.Show(
+                        $"Failed to load settings with error:\n" +
+                        $"\"{e.Exception.Message}\".\n\n" +
+                        $"Attempt to revert to last known configuration?",
+                        MessageBoxButton.YesNo, MessageBoxImage.Error, MessageBoxResult.Yes) == MessageBoxResult.Yes;
+
+                    if (revert)
+                    {
+                        // Delete the bad user.config file and restart so a new one will be upgraded or regenerated.
+                        SettingsHelper.DeleteConfigFile(configException);
+                        AppHelper.RestartApplication();
+                    }
+                    else
+                    {
+                        Popup.Show($"{DesktopWidgets.Properties.Resources.AppName} will now exit.", MessageBoxButton.OK, MessageBoxImage.Error);
+                        AppHelper.ShutdownApplication();
+                    }
+                }
+                else
+                {
+                    Popup.Show($"A critical exception occurred:\n" +
+                        $"{e.Exception.Message}" +
+                        $"{DesktopWidgets.Properties.Resources.AppName} will now exit.", MessageBoxButton.OK, MessageBoxImage.Error);
+                    AppHelper.ShutdownApplication();
+                }
             }
         }
 
