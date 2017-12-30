@@ -64,7 +64,7 @@ namespace DesktopWidgets.Helpers
             {
                 Popup.Show(
                     $"Backups may be available in {SettingsHelper.BackupDirectory}.\n\n" +
-                    $"Restore them by copying their contents and importing through the \"Import\" dialog in Options.");
+                    $"Restore them through \"Import\" in Options.");
             }
         }
 

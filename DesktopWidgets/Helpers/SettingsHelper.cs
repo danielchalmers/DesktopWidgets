@@ -7,7 +7,7 @@ using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
 using DesktopWidgets.WidgetBase;
 using DesktopWidgets.WidgetBase.Settings;
-using DesktopWidgets.Windows;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 
 namespace DesktopWidgets.Helpers
@@ -140,10 +140,14 @@ namespace DesktopWidgets.Helpers
 
         public static void ImportWithDialog()
         {
-            // Prompt user for JSON data to use for importing.
-            var dialog = new InputBox("Import Widgets");
-            dialog.ShowDialog();
-            if (dialog.Cancelled)
+            var dialog = new OpenFileDialog
+            {
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Filter = Resources.StoreExportExtensionFilter
+            };
+
+            if (dialog.ShowDialog() != true)
             {
                 return;
             }
@@ -159,7 +163,8 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
-            if (!ImportData(dialog.InputData))
+            var dataToImport = File.ReadAllText(dialog.FileName);
+            if (!ImportData(dataToImport))
             {
                 Popup.Show(
                     "Import failed.\n" +
@@ -181,8 +186,18 @@ namespace DesktopWidgets.Helpers
 
         public static void ExportWithDialog()
         {
-            var dialog = new InputBox("Export Widgets", GetExportData());
-            dialog.ShowDialog();
+            var dialog = new SaveFileDialog
+            {
+                Filter = Resources.StoreExportExtensionFilter,
+                FileName = $"{Resources.AppName} export {DateTime.Now.ToString("yyMMddHHmmss")}"
+            };
+
+            if (dialog.ShowDialog() != true)
+            {
+                return;
+            }
+
+            File.WriteAllText(dialog.FileName, GetExportData());
         }
 
         private static void Backup()

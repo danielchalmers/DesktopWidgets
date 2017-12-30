@@ -141,6 +141,12 @@
   <data name="PackageExtensionFilter" xml:space="preserve">
     <value>Widget package (*.widget)|*.widget|All files (*.*)|*.*</value>
   </data>
+  <data name="StoreExportExtension" xml:space="preserve">
+    <value>.widgetstore</value>
+  </data>
+  <data name="StoreExportExtensionFilter" xml:space="preserve">
+    <value>Widget store (*.widgetstore)|*.widgetstore|All files (*.*)|*.*</value>
+  </data>
   <data name="TaskBarPath" xml:space="preserve">
     <value>Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar</value>
   </data>

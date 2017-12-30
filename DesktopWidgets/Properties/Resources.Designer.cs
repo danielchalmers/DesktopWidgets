@@ -133,6 +133,24 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .widgetstore.
+        /// </summary>
+        public static string StoreExportExtension {
+            get {
+                return ResourceManager.GetString("StoreExportExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Widget store (*.widgetstore)|*.widgetstore|All files (*.*)|*.*.
+        /// </summary>
+        public static string StoreExportExtensionFilter {
+            get {
+                return ResourceManager.GetString("StoreExportExtensionFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar.
         /// </summary>
         public static string TaskBarPath {

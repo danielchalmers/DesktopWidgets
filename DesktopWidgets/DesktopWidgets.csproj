@@ -329,9 +329,6 @@
     <Compile Include="Windows\WidgetEditor.xaml.cs">
       <DependentUpon>WidgetEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\InputBox.xaml.cs">
-      <DependentUpon>InputBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\ManageWidgets.xaml.cs">
       <DependentUpon>ManageWidgets.xaml</DependentUpon>
     </Compile>
@@ -493,10 +490,6 @@
     <Page Include="Windows\WidgetEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\InputBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\ManageWidgets.xaml">
       <Generator>MSBuild:Compile</Generator>
