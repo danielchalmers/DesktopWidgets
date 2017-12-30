@@ -42,8 +42,7 @@ namespace DesktopWidgets.Helpers
 
             foreach (var eventPair in App.WidgetsSettingsStore.EventActionPairs)
             {
-                var evnt = eventPair.Event as LaunchEvent;
-                if (evnt != null)
+                if (eventPair.Event is LaunchEvent evnt)
                 {
                     if ((!evnt.SystemStartup || App.Arguments.Contains("-systemstartup")) &&
                         (evnt.Parameters.Count == 0 || !evnt.Parameters.Except(App.Arguments).Any()))
@@ -52,8 +51,7 @@ namespace DesktopWidgets.Helpers
                     }
                 }
 
-                var hotkeyEvent = eventPair.Event as HotkeyEvent;
-                if (hotkeyEvent != null)
+                if (eventPair.Event is HotkeyEvent hotkeyEvent)
                 {
                     HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, eventPair.Action.Execute);
                 }
@@ -69,10 +67,11 @@ namespace DesktopWidgets.Helpers
 
         private static bool IsAppAlreadyRunning()
         {
-            bool isNewInstance;
-            App.AppMutex = new Mutex(true, AssemblyInfo.Guid, out isNewInstance);
-            if (App.Arguments.Contains("-restarting") || App.Arguments.Contains("-multiinstance") ||
-                Settings.Default.AllowMultiInstance || isNewInstance)
+            App.AppMutex = new Mutex(true, AssemblyInfo.Guid, out var isNewInstance);
+            if (App.Arguments.Contains("-restarting") ||
+                App.Arguments.Contains("-multiinstance") ||
+                Settings.Default.AllowMultiInstance ||
+                isNewInstance)
             {
                 return false;
             }
@@ -98,8 +97,7 @@ namespace DesktopWidgets.Helpers
         {
             DelayedAction.RunAction(15000, delegate
             {
-                if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalMinutes >=
-                    Settings.Default.UpdateCheckInterval.TotalMinutes)
+                if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalMinutes >= Settings.Default.UpdateCheckInterval.TotalMinutes)
                 {
                     App.UpdateScheduler?.RunTick();
                 }

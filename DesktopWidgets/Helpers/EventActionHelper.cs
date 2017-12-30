@@ -83,18 +83,15 @@ namespace DesktopWidgets.Helpers
 
         public static void Remove(this EventActionId id)
         {
-            if (
-                Popup.Show("Are you sure you want to delete this event and action pair?", MessageBoxButton.YesNo,
+            if (Popup.Show("Are you sure you want to delete this event and action pair?", MessageBoxButton.YesNo,
                     MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.No)
             {
                 return;
             }
-            foreach (
-                var pair in App.WidgetsSettingsStore.EventActionPairs.Where(x => x.Identifier.Guid == id.Guid).ToList())
+            foreach (var pair in App.WidgetsSettingsStore.EventActionPairs.Where(x => x.Identifier.Guid == id.Guid).ToList())
             {
                 App.WidgetsSettingsStore.EventActionPairs.Remove(pair);
-                var hotkeyEvent = pair.Event as HotkeyEvent;
-                if (hotkeyEvent != null)
+                if (pair.Event is HotkeyEvent hotkeyEvent)
                 {
                     HotkeyStore.RemoveHotkey(hotkeyEvent.Hotkey);
                 }
@@ -103,8 +100,7 @@ namespace DesktopWidgets.Helpers
 
         private static void Refresh(this EventActionPair pair)
         {
-            var hotkeyEvent = pair.Event as HotkeyEvent;
-            if (hotkeyEvent != null)
+            if (pair.Event is HotkeyEvent hotkeyEvent)
             {
                 hotkeyEvent.Hotkey.Disabled = pair.Disabled;
                 HotkeyStore.RegisterHotkey(hotkeyEvent.Hotkey, pair.Action.Execute);
