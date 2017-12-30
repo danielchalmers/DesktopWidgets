@@ -61,9 +61,9 @@ namespace DesktopWidgets.Helpers
             App.WidgetsSettingsStore.EventActionPairs.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
         }
 
-        private static void SaveWidgetsDataToSettings()
+        private static void SaveWidgetsDataToSettings(string serializedWidgetStore = null)
         {
-            Settings.Default.Widgets = JsonConvert.SerializeObject(App.WidgetsSettingsStore, JsonSerializerSettings);
+            Settings.Default.Widgets = serializedWidgetStore ?? GetExportData();
         }
 
         public static void LoadSettings()
@@ -78,11 +78,13 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
-            SaveWidgetsDataToSettings();
+            var serializedWidgetStore = GetExportData();
+
+            SaveWidgetsDataToSettings(serializedWidgetStore);
 
             if (Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime)
             {
-                Backup();
+                Backup(serializedWidgetStore);
             }
 
             Settings.Default.Save();
@@ -200,7 +202,7 @@ namespace DesktopWidgets.Helpers
             File.WriteAllText(dialog.FileName, GetExportData());
         }
 
-        private static void Backup()
+        private static void Backup(string serializedWidgetStore = null)
         {
             if (!App.SuccessfullyLoaded)
             {
@@ -209,7 +211,7 @@ namespace DesktopWidgets.Helpers
 
             Settings.Default.LastBackupDateTime = DateTime.Now;
             var filename = $"backup-{DateTime.Now.ToString("yyMMddHHmmss")}{Resources.StoreExportExtension}";
-            FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), GetExportData());
+            FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), serializedWidgetStore ?? GetExportData());
         }
 
         public static void DeleteConfigFile(ConfigurationErrorsException configurationErrorsException)
