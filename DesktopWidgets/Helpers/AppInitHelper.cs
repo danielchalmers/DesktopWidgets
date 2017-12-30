@@ -95,13 +95,16 @@ namespace DesktopWidgets.Helpers
 
         private static void CheckForUpdatesDelayed()
         {
-            DelayedAction.RunAction(15000, delegate
+            if (Settings.Default.CheckForUpdatesOnStartupDelay.TotalMilliseconds > 0)
             {
-                if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalMinutes >= Settings.Default.UpdateCheckInterval.TotalMinutes)
+                DelayedAction.RunAction((int)Settings.Default.CheckForUpdatesOnStartupDelay.TotalMilliseconds, delegate
                 {
-                    App.UpdateScheduler?.RunTick();
-                }
-            });
+                    if ((DateTime.Now - Settings.Default.LastUpdateCheck).TotalMinutes >= Settings.Default.UpdateCheckInterval.TotalMinutes)
+                    {
+                        App.UpdateScheduler?.RunTick();
+                    }
+                });
+            }
         }
     }
 }

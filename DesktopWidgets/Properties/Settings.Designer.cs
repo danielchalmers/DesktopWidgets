@@ -500,5 +500,17 @@ namespace DesktopWidgets.Properties {
                 this["LastBackupDateTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:15")]
+        public global::System.TimeSpan CheckForUpdatesOnStartupDelay {
+            get {
+                return ((global::System.TimeSpan)(this["CheckForUpdatesOnStartupDelay"]));
+            }
+            set {
+                this["CheckForUpdatesOnStartupDelay"] = value;
+            }
+        }
     }
 }
