@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using DesktopWidgets.Classes;
 using DesktopWidgets.Properties;
@@ -208,9 +209,29 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
+            DeleteOldBackups(Settings.Default.MaxBackupAge);
+
             Settings.Default.LastBackupDateTime = DateTime.Now;
-            var filename = $"backup-{DateTime.Now.ToString("yyMMddHHmmss")}{Resources.StoreExportExtension}";
+            var filename = $"{Resources.BackupPrefix}{DateTime.Now.ToString(Resources.BackupDateFormat)}{Resources.StoreExportExtension}";
             FileSystemHelper.WriteTextToFile(Path.Combine(AppDocumentsDirectory, filename), serializedWidgetStore ?? GetSerializedWidgetStore());
+        }
+
+        private static void DeleteOldBackups(TimeSpan maxAge)
+        {
+            if (maxAge.TotalSeconds < 0)
+            {
+                return;
+            }
+
+            foreach (var backup in Directory.EnumerateFiles(AppDocumentsDirectory).Select(x => new FileInfo(x)))
+            {
+                if (backup.Name.StartsWith(Resources.BackupPrefix) &&
+                    backup.Extension == Resources.StoreExportExtension &&
+                    (DateTime.Now - backup.CreationTime) >= maxAge)
+                {
+                    backup.Delete();
+                }
+            }
         }
 
         public static void DeleteConfigFile(ConfigurationErrorsException configurationErrorsException)

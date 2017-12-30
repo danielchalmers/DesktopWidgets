@@ -70,6 +70,24 @@ namespace DesktopWidgets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to yyMMddHHmmss.
+        /// </summary>
+        public static string BackupDateFormat {
+            get {
+                return ResourceManager.GetString("BackupDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to backup-.
+        /// </summary>
+        public static string BackupPrefix {
+            get {
+                return ResourceManager.GetString("BackupPrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://api.github.com/repos/danielchalmers/DesktopWidgets/commits.
         /// </summary>
         public static string GitHubApiCommits {

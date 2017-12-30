@@ -512,5 +512,17 @@ namespace DesktopWidgets.Properties {
                 this["CheckForUpdatesOnStartupDelay"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30.00:00:00")]
+        public global::System.TimeSpan MaxBackupAge {
+            get {
+                return ((global::System.TimeSpan)(this["MaxBackupAge"]));
+            }
+            set {
+                this["MaxBackupAge"] = value;
+            }
+        }
     }
 }

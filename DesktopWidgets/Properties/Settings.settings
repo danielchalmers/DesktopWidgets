@@ -128,5 +128,8 @@
     <Setting Name="CheckForUpdatesOnStartupDelay" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:00:15</Value>
     </Setting>
+    <Setting Name="MaxBackupAge" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">30.00:00:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

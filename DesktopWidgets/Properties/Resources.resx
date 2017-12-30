@@ -120,6 +120,12 @@
   <data name="AppName" xml:space="preserve">
     <value>DesktopWidgets</value>
   </data>
+  <data name="BackupDateFormat" xml:space="preserve">
+    <value>yyMMddHHmmss</value>
+  </data>
+  <data name="BackupPrefix" xml:space="preserve">
+    <value>backup-</value>
+  </data>
   <data name="GitHubApiCommits" xml:space="preserve">
     <value>https://api.github.com/repos/danielchalmers/DesktopWidgets/commits</value>
   </data>
