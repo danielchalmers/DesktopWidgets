@@ -386,7 +386,7 @@ namespace DesktopWidgets.Helpers
         public static void Backup(this WidgetSettingsBase settings)
         {
             var filename = $"{settings.Name}-{settings.Identifier.Guid}{Resources.PackageExtension}";
-            settings.Export(Path.Combine(SettingsHelper.BackupDirectory, filename));
+            settings.Export(Path.Combine(SettingsHelper.AppDocumentsDirectory, filename));
         }
 
         public static void ReloadWidgets()

@@ -13,7 +13,6 @@ namespace DesktopWidgets.Helpers
     {
         public static bool Initialize()
         {
-            SettingsHelper.UpgradeSettings();
             SettingsHelper.LoadSettings();
             if (IsAppAlreadyRunning())
             {
@@ -63,7 +62,7 @@ namespace DesktopWidgets.Helpers
             if (App.Arguments.Contains("show-backup-help"))
             {
                 Popup.Show(
-                    $"Backups may be available in {SettingsHelper.BackupDirectory}.\n\n" +
+                    $"Backups may be available in {SettingsHelper.AppDocumentsDirectory}.\n\n" +
                     $"Restore them through \"Import\" in Options.");
             }
         }

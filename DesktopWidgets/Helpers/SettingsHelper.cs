@@ -14,7 +14,9 @@ namespace DesktopWidgets.Helpers
 {
     public static class SettingsHelper
     {
-        public static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
+        public static readonly string AppDocumentsDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
+
+        private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Auto,
             ObjectCreationHandling = ObjectCreationHandling.Replace,
@@ -28,47 +30,16 @@ namespace DesktopWidgets.Helpers
             MissingMemberHandling = MissingMemberHandling.Ignore
         };
 
-        public static readonly string BackupDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Resources.AppName);
-
         public static object CloneObject(object obj)
         {
-            return
-                JsonConvert.DeserializeObject(
-                    JsonConvert.SerializeObject(obj, JsonSerializerSettingsAllTypeHandling),
-                    JsonSerializerSettingsAllTypeHandling);
-        }
-
-        public static void UpgradeSettings()
-        {
-            // Upgrade settings from old version.
-            if (Settings.Default.MustUpgrade)
-            {
-                Settings.Default.Upgrade();
-                Settings.Default.MustUpgrade = false;
-                Settings.Default.Save();
-            }
-        }
-
-        private static void LoadWidgetsDataFromSettings()
-        {
-            App.WidgetsSettingsStore =
-                JsonConvert.DeserializeObject<WidgetsSettingsStore>(Settings.Default.Widgets, JsonSerializerSettings) ??
-                new WidgetsSettingsStore
-                {
-                    Widgets = new ObservableCollection<WidgetSettingsBase>()
-                };
-            App.WidgetsSettingsStore.Widgets.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
-            App.WidgetsSettingsStore.EventActionPairs.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
-        }
-
-        private static void SaveWidgetsDataToSettings(string serializedWidgetStore = null)
-        {
-            Settings.Default.Widgets = serializedWidgetStore ?? GetExportData();
+            return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(obj, JsonSerializerSettingsAllTypeHandling), JsonSerializerSettingsAllTypeHandling);
         }
 
         public static void LoadSettings()
         {
-            LoadWidgetsDataFromSettings();
+            UpgradeSettingsIfRequired();
+
+            LoadWidgetStoreFromSettings();
         }
 
         public static void SaveSettings()
@@ -78,66 +49,84 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
-            var serializedWidgetStore = GetExportData();
+            var serializedWidgetStore = GetSerializedWidgetStore();
 
-            SaveWidgetsDataToSettings(serializedWidgetStore);
-
-            if (Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime)
+            if (ShouldBackup())
             {
                 Backup(serializedWidgetStore);
             }
 
+            Settings.Default.Widgets = serializedWidgetStore;
+
             Settings.Default.Save();
         }
 
-        public static void ResetSettings(bool msg = true)
+        public static void ResetSettings()
         {
-            if (msg && Popup.Show(
+            if (Popup.Show(
                 "All options, widgets, events, and actions will be deleted.\n\n" +
                 $"Are you sure you want to reset {AssemblyInfo.Title}?",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
             {
                 return;
             }
+
             Backup();
+
             Settings.Default.Reset();
             Settings.Default.MustUpgrade = false;
             Settings.Default.Widgets = string.Empty;
-            LoadWidgetsDataFromSettings();
+
+            LoadWidgetStoreFromSettings();
+
             WidgetHelper.LoadWidgetViews();
-            if (msg)
-            {
-                Popup.Show(
+
+            Popup.Show(
                 "All settings have been restored to default.\n\n" +
-                $"Backup created in \"{BackupDirectory}\".");
+                $"Backup created in \"{AppDocumentsDirectory}\".");
+        }
+
+        private static void UpgradeSettingsIfRequired()
+        {
+            if (Settings.Default.MustUpgrade)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.MustUpgrade = false;
+                Settings.Default.Save();
             }
         }
 
-        private static bool ImportData(string data)
+        private static void LoadWidgetStoreFromSettings()
         {
-            // Test new data before overwriting existing data.
-            try
+            App.WidgetsSettingsStore = GetDeserializedWidgetStoreFromSettings() ?? new WidgetsSettingsStore { Widgets = new ObservableCollection<WidgetSettingsBase>() };
+            App.WidgetsSettingsStore.Widgets.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
+            App.WidgetsSettingsStore.EventActionPairs.CollectionChanged += (sender, args) => App.SaveTimer.DelaySave();
+        }
+
+        private static string GetSerializedWidgetStore()
+        {
+            return JsonConvert.SerializeObject(App.WidgetsSettingsStore, JsonSerializerSettings);
+        }
+
+        private static WidgetsSettingsStore GetDeserializedWidgetStoreFromSettings()
+        {
+            return JsonConvert.DeserializeObject<WidgetsSettingsStore>(Settings.Default.Widgets, JsonSerializerSettings);
+        }
+
+        public static void ExportWithDialog()
+        {
+            var dialog = new SaveFileDialog
             {
-                var newWidgets = JsonConvert.DeserializeObject<WidgetsSettingsStore>(data, JsonSerializerSettings);
-                foreach (var widget in newWidgets.Widgets)
-                {
-                    var id = widget.Identifier.Guid;
-                }
-            }
-            catch
+                Filter = Resources.StoreExportExtensionFilter,
+                FileName = $"{Resources.AppName} export {DateTime.Now.ToString("yyMMddHHmmss")}"
+            };
+
+            if (dialog.ShowDialog() != true)
             {
-                return false;
+                return;
             }
 
-            // Backup old data before overwriting.
-            Backup();
-
-            // Replace widget store.
-            Settings.Default.Widgets = data;
-            Settings.Default.Save();
-            LoadWidgetsDataFromSettings();
-            WidgetHelper.LoadWidgetViews();
-            return true;
+            File.WriteAllText(dialog.FileName, GetSerializedWidgetStore());
         }
 
         public static void ImportWithDialog()
@@ -154,7 +143,6 @@ namespace DesktopWidgets.Helpers
                 return;
             }
 
-            // Prompt user to confirm decision.
             if (Popup.Show(
                     "Are you sure you want to overwrite ALL widgets, events, and actions?",
                     MessageBoxButton.YesNo,
@@ -175,32 +163,42 @@ namespace DesktopWidgets.Helpers
                     image: MessageBoxImage.Error);
             }
 
-            // Let user know the import worked.
             Popup.Show(
                 "Import was successful.\n\n" +
-                $"Backup created in \"{BackupDirectory}\".");
+                $"Backup created in \"{AppDocumentsDirectory}\".");
         }
 
-        private static string GetExportData()
+        private static bool ImportData(string data)
         {
-            return JsonConvert.SerializeObject(App.WidgetsSettingsStore, JsonSerializerSettings);
-        }
-
-        public static void ExportWithDialog()
-        {
-            var dialog = new SaveFileDialog
+            // Test new data before overwriting existing data.
+            try
             {
-                Filter = Resources.StoreExportExtensionFilter,
-                FileName = $"{Resources.AppName} export {DateTime.Now.ToString("yyMMddHHmmss")}"
-            };
-
-            if (dialog.ShowDialog() != true)
+                var newWidgets = JsonConvert.DeserializeObject<WidgetsSettingsStore>(data, JsonSerializerSettings);
+                foreach (var widget in newWidgets.Widgets)
+                {
+                    var id = widget.Identifier.Guid;
+                }
+            }
+            catch
             {
-                return;
+                return false;
             }
 
-            File.WriteAllText(dialog.FileName, GetExportData());
+            // Backup before overwriting.
+            Backup();
+
+            // Replace widget store.
+            Settings.Default.Widgets = data;
+            Settings.Default.Save();
+
+            // Load new widget store.
+            LoadWidgetStoreFromSettings();
+            WidgetHelper.LoadWidgetViews();
+
+            return true;
         }
+
+        private static bool ShouldBackup() => Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime;
 
         private static void Backup(string serializedWidgetStore = null)
         {
@@ -211,7 +209,7 @@ namespace DesktopWidgets.Helpers
 
             Settings.Default.LastBackupDateTime = DateTime.Now;
             var filename = $"backup-{DateTime.Now.ToString("yyMMddHHmmss")}{Resources.StoreExportExtension}";
-            FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), serializedWidgetStore ?? GetExportData());
+            FileSystemHelper.WriteTextToFile(Path.Combine(AppDocumentsDirectory, filename), serializedWidgetStore ?? GetSerializedWidgetStore());
         }
 
         public static void DeleteConfigFile(ConfigurationErrorsException configurationErrorsException)
