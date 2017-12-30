@@ -208,7 +208,7 @@ namespace DesktopWidgets.Helpers
             }
 
             Settings.Default.LastBackupDateTime = DateTime.Now;
-            var filename = $"backup-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.txt";
+            var filename = $"backup-{DateTime.Now.ToString("yyMMddHHmmss")}{Resources.StoreExportExtension}";
             FileSystemHelper.WriteTextToFile(Path.Combine(BackupDirectory, filename), GetExportData());
         }
 
