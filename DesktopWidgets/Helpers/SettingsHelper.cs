@@ -64,7 +64,7 @@ namespace DesktopWidgets.Helpers
         public static void ResetSettings()
         {
             if (Popup.Show(
-                "All options, widgets, events, and actions will be deleted.\n\n" +
+                "This will delete all options, widgets, events, and actions!\n\n" +
                 $"Are you sure you want to reset {AssemblyInfo.Title}?",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No) == MessageBoxResult.No)
             {
@@ -144,7 +144,8 @@ namespace DesktopWidgets.Helpers
             }
 
             if (Popup.Show(
-                    "Are you sure you want to overwrite ALL widgets, events, and actions?",
+                    "This will overwrite all widgets, events, and actions!\n\n" +
+                    $"Are you sure you want to import \"{dialog.FileName}\"?",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning,
                     MessageBoxResult.Yes)
