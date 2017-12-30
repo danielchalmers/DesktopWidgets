@@ -80,12 +80,12 @@ namespace DesktopWidgets.Helpers
 
             SaveWidgetsDataToSettings();
 
-            Settings.Default.Save();
-
             if (Settings.Default.BackupInterval.TotalSeconds > 0 && DateTime.Now - Settings.Default.BackupInterval > Settings.Default.LastBackupDateTime)
             {
                 Backup();
             }
+
+            Settings.Default.Save();
         }
 
         public static void ResetSettings(bool msg = true)
