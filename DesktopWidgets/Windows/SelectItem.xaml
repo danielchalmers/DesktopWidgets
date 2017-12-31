@@ -26,7 +26,8 @@
                  Grid.ColumnSpan="2"
                  ItemsSource="{Binding ItemsList}"
                  SelectedItem="{Binding SelectedItem}"
-                 Margin="12" />
+                 Margin="12"
+                 MouseDoubleClick="ItemsListBox_MouseDoubleClick" />
 
         <Grid Grid.Column="0"
               Grid.Row="1"

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using DesktopWidgets.WindowViewModels;
 
 namespace DesktopWidgets.Windows
@@ -30,6 +31,15 @@ namespace DesktopWidgets.Windows
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
+        }
+
+        private void ItemsListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                SelectedItem = _viewModel.SelectedItem;
+                DialogResult = true;
+            }
         }
     }
 }
