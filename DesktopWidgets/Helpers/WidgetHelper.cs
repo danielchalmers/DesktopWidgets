@@ -341,8 +341,8 @@ namespace DesktopWidgets.Helpers
             if (settings == null)
             {
                 Popup.Show(
-                    "Failed to import widget.\n" +
-                    "Selected file must be a valid widget package.",
+                    "Import failed.\n\n" +
+                    "Please select a valid widget and try again.",
                     image: MessageBoxImage.Error);
                 return;
             }

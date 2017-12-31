@@ -165,9 +165,8 @@ namespace DesktopWidgets.Helpers
             else
             {
                 Popup.Show(
-                    "Import failed.\n" +
-                    "Data may be corrupt.\n\n" +
-                    "No changes have been made.",
+                    "Import failed.\n\n" +
+                    "Please select a valid widget store and try again.",
                     image: MessageBoxImage.Error);
             }
         }
