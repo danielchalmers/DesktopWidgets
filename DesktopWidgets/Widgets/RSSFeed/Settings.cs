@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using DesktopWidgets.Classes;
 using DesktopWidgets.WidgetBase.Settings;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace DesktopWidgets.Widgets.RSSFeed
 {
@@ -21,19 +22,23 @@ namespace DesktopWidgets.Widgets.RSSFeed
         [DisplayName("Refresh Interval")]
         public TimeSpan RefreshInterval { get; set; } = TimeSpan.FromHours(1);
 
-        [Category("Feed")]
+        [PropertyOrder(0)]
+        [Category("General")]
         [DisplayName("URL")]
         public string RssFeedUrl { get; set; }
 
-        [Category("Feed (Filter)")]
+        [PropertyOrder(1)]
+        [Category("General")]
         [DisplayName("Title Whitelist")]
         public List<string> TitleWhitelist { get; set; } = new List<string>();
 
-        [Category("Feed (Filter)")]
+        [PropertyOrder(2)]
+        [Category("General")]
         [DisplayName("Title Blacklist")]
         public List<string> TitleBlacklist { get; set; } = new List<string>();
 
-        [Category("Feed (Filter)")]
+        [PropertyOrder(3)]
+        [Category("General")]
         [DisplayName("Category Whitelist")]
         public List<string> CategoryWhitelist { get; set; } = new List<string>();
 
