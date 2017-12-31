@@ -16,7 +16,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"
                               SharedSizeGroup="SelectPanel" />
-            <ColumnDefinition Width="12" />
+            <ColumnDefinition Width="4" />
             <ColumnDefinition Width="0.5*"
                               SharedSizeGroup="SelectPanel" />
         </Grid.ColumnDefinitions>
