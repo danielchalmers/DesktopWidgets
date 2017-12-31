@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Select Items"
-        Width="500"
+        MinWidth="350"
         MinHeight="350"
-        SizeToContent="Height"
+        SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=ItemsListBox1}">
-    <Grid Margin="12">
+    <Grid Margin="12"
+          Grid.IsSharedSizeScope="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*"
+                              SharedSizeGroup="SelectPanel" />
             <ColumnDefinition Width="12" />
-            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*"
+                              SharedSizeGroup="SelectPanel" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
