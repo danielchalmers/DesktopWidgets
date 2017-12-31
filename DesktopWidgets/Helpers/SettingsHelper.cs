@@ -156,7 +156,13 @@ namespace DesktopWidgets.Helpers
             }
 
             var dataToImport = File.ReadAllText(dialog.FileName);
-            if (!ImportData(dataToImport))
+            if (ImportData(dataToImport))
+            {
+                Popup.Show(
+                    "Import was successful.\n\n" +
+                    $"Backup created in \"{AppDocumentsDirectory}\".");
+            }
+            else
             {
                 Popup.Show(
                     "Import failed.\n" +
@@ -164,10 +170,6 @@ namespace DesktopWidgets.Helpers
                     "No changes have been made.",
                     image: MessageBoxImage.Error);
             }
-
-            Popup.Show(
-                "Import was successful.\n\n" +
-                $"Backup created in \"{AppDocumentsDirectory}\".");
         }
 
         private static bool ImportData(string data)
