@@ -34,20 +34,20 @@ namespace DesktopWidgets.WidgetBase.Settings
         [DisplayName("Active Time End")]
         public DateTime ActiveTimeEnd { get; set; } = DateTime.Now;
 
-        [PropertyOrder(0)]
+        [PropertyOrder(-100)]
         [Category("Style")]
         public WidgetStyle Style { get; set; } = new WidgetStyle();
 
-        [PropertyOrder(1)]
+        [PropertyOrder(-99)]
         [Category("Style")]
         public WidgetActionBarStyle ActionBarStyle { get; set; } = new WidgetActionBarStyle();
 
-        [PropertyOrder(0)]
+        [PropertyOrder(-100)]
         [Category("General")]
         [DisplayName("Name")]
         public string Name { get; set; } = "Untitled";
 
-        [PropertyOrder(1)]
+        [PropertyOrder(-99)]
         [Category("General")]
         [DisplayName("Screen Bounds")]
         public Rect ScreenBounds { get; set; } = Rect.Empty;
